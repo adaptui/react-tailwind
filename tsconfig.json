@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "esnext", "dom.iterable"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+  "include": ["src"]
+}

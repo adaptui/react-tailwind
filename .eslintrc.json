@@ -1,0 +1,21 @@
+{
+  "plugins": ["prettier"],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "prettier/flowtype",
+    "prettier/@typescript-eslint"
+  ],
+  "rules": {
+    "no-console": "off",
+    "testing-library/prefer-explicit-assert": ["error"],
+    "testing-library/consistent-data-testid": [
+      2,
+      {
+        "testIdPattern": "^testid(-.*\\w)?$"
+      }
+    ]
+  }
+}
