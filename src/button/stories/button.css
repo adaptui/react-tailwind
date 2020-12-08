@@ -3,29 +3,3 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
-
-@layer components {
-  .storybook-button {
-    @apply font-sans font-bold inline-block rounded-3xl;
-  }
-
-  .storybook-button--primary {
-    @apply text-white bg-blue-500;
-  }
-
-  .storybook-button--secondary {
-    @apply text-gray-500 shadow;
-  }
-
-  .storybook-button--small {
-    @apply text-xs px-2 py-1;
-  }
-
-  .storybook-button--medium {
-    @apply text-sm px-4 py-2;
-  }
-
-  .storybook-button--large {
-    @apply text-base px-6 py-3;
-  }
-}
