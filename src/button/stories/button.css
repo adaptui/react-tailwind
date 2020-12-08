@@ -1,30 +1,31 @@
-.storybook-button {
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  border: 0;
-  border-radius: 3em;
-  cursor: pointer;
-  display: inline-block;
-  line-height: 1;
-}
-.storybook-button--primary {
-  color: white;
-  background-color: #1ea7fd;
-}
-.storybook-button--secondary {
-  color: #333;
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-}
-.storybook-button--small {
-  font-size: 12px;
-  padding: 10px 16px;
-}
-.storybook-button--medium {
-  font-size: 14px;
-  padding: 11px 20px;
-}
-.storybook-button--large {
-  font-size: 16px;
-  padding: 12px 24px;
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+@layer components {
+  .storybook-button {
+    @apply font-sans font-bold inline-block rounded-3xl;
+  }
+
+  .storybook-button--primary {
+    @apply text-white bg-blue-500;
+  }
+
+  .storybook-button--secondary {
+    @apply text-gray-500 shadow;
+  }
+
+  .storybook-button--small {
+    @apply text-xs px-2 py-1;
+  }
+
+  .storybook-button--medium {
+    @apply text-sm px-4 py-2;
+  }
+
+  .storybook-button--large {
+    @apply text-base px-6 py-3;
+  }
 }
