@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Button as AriaButton } from "reakit";
+
 export interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
@@ -36,9 +38,9 @@ export const Button: React.FC<ButtonProps> = ({
   const mode = primary
     ? "storybook-button--primary"
     : "storybook-button--secondary";
+
   return (
-    <button
-      type="button"
+    <AriaButton
       className={["storybook-button", `storybook-button--${size}`, mode].join(
         " ",
       )}
@@ -46,6 +48,6 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {label}
-    </button>
+    </AriaButton>
   );
 };
