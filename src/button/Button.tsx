@@ -1,8 +1,7 @@
 import React from "react";
 import { Button as AriaButton } from "reakit";
-import theme from "../theme";
 
-import { theme } from "../theme";
+import theme from "../theme";
 
 export interface ButtonProps {
   /**
