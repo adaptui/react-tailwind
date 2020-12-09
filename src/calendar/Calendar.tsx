@@ -1,14 +1,15 @@
 import * as React from "react";
+import classNames from "classnames";
 import {
   CalendarCell,
   CalendarGrid,
   CalendarHeader,
   CalendarButton,
+  useCalendarState,
   CalendarWeekTitle,
   CalendarCellButton,
-  Calendar as CalendarWrapper,
   CalendarInitialState,
-  useCalendarState,
+  Calendar as CalendarWrapper,
 } from "@renderlesskit/react";
 
 import {
@@ -17,27 +18,25 @@ import {
   DoubleChevronLeft,
   DoubleChevronRight,
 } from "./Icons";
+import theme from "../theme";
 
 export const Calendar: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
 
   return (
-    <CalendarWrapper
-      {...state}
-      className="calendar p-3 rounded-md bg-white shadow-lg w-max"
-    >
+    <CalendarWrapper {...state} className={theme.calendar.base}>
       <div className="flex justify-between">
         <CalendarButton
           {...state}
           goto="previousYear"
-          className="text-gray-700 w-16px"
+          className={theme.calendar.button}
         >
           <DoubleChevronLeft />
         </CalendarButton>
         <CalendarButton
           {...state}
           goto="previousMonth"
-          className="text-gray-700 w-16px"
+          className={theme.calendar.button}
         >
           <ChevronLeft />
         </CalendarButton>
@@ -48,14 +47,14 @@ export const Calendar: React.FC<CalendarInitialState> = props => {
         <CalendarButton
           {...state}
           goto="nextMonth"
-          className="text-gray-700 w-16px"
+          className={theme.calendar.button}
         >
           <ChevronRight />
         </CalendarButton>
         <CalendarButton
           {...state}
           goto="nextYear"
-          className="text-gray-700 w-16px"
+          className={theme.calendar.button}
         >
           <DoubleChevronRight />
         </CalendarButton>
@@ -68,7 +67,7 @@ export const Calendar: React.FC<CalendarInitialState> = props => {
               return (
                 <CalendarWeekTitle
                   {...state}
-                  className="text-gray-500 font-light calendar__cell"
+                  className={theme.calendar.weekTitle}
                   as="th"
                   scope="col"
                   key={dayIndex}
@@ -89,7 +88,7 @@ export const Calendar: React.FC<CalendarInitialState> = props => {
                   as="td"
                   date={day}
                   key={dayIndex}
-                  className="calendar__cell"
+                  className={theme.calendar.cell}
                 >
                   <CalendarCellButton className="p-2" {...state} date={day} />
                 </CalendarCell>

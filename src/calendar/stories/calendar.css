@@ -4,14 +4,16 @@
 
 @import "tailwindcss/utilities";
 
-@layer components {
-  .calendar .calendar__cell {
+@layer utilities {
+  .wh32-minmax {
     height: 32px;
     width: 32px;
     max-height: 32px;
     max-width: 32px;
-    @apply text-center rounded-lg text-sm;
   }
+}
+
+@layer components {
   .calendar .calendar__cell[data-is-range-selection] {
     @apply bg-blue-100 rounded-none text-gray-800 !important;
   }
