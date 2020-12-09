@@ -3,7 +3,8 @@ import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 
 import "./button.css";
-import { Button, ButtonProps } from "../../index";
+import { Button, ButtonProps } from "../index";
+import { ClockIcon } from "../../icons";
 
 export default {
   title: "Button",
@@ -13,7 +14,11 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
+const Template: Story<ButtonProps> = args => (
+  <Button leftIcon={<ClockIcon />} leftIconStyles="mr-2 flex" {...args}>
+    Button
+  </Button>
+);
 
 export const ExtraSmall = Template.bind({});
 ExtraSmall.args = { size: "extra-small" };

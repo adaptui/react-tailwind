@@ -9,6 +9,10 @@ const theme = {
       large: "text-lg py-3 px-5",
     },
   },
+  icon: {
+    base:
+      "w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle",
+  },
 };
 
 export default theme;

@@ -8,6 +8,12 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
+      spacing: {
+        em: "1em",
+      },
+      lineHeight: {
+        em: "1em",
+      },
     },
   },
   variants: {
