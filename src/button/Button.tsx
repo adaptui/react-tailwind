@@ -9,10 +9,6 @@ export interface ButtonProps {
    * How large should the button be?
    */
   size?: "extra-small" | "small" | "medium" | "large";
-  /**
-   * Button contents
-   */
-  children: string;
 }
 
 /**
