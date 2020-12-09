@@ -1,14 +1,12 @@
 const theme = {
   button: {
-    base: "font-sans font-bold inline-block rounded-3xl",
-    variants: {
-      primary: "text-white bg-blue-500",
-      secondary: "text-gray-500 shadow",
-    },
+    base:
+      "font-sans font-medium bg-blue-500 text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none",
     size: {
-      small: "text-xs px-2 py-1",
-      medium: "text-sm px-4 py-2",
-      large: "text-base px-6 py-3",
+      "extra-small": "font-semibold text-xs py-1.5 px-2",
+      small: "text-sm py-2 px-3",
+      medium: "text-base py-2.5 px-4",
+      large: "text-lg py-3 px-5",
     },
   },
 };

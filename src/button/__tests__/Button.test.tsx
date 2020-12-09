@@ -13,13 +13,13 @@ const axe = configureAxe({
 
 describe("Testing Button", () => {
   it("should render properly", () => {
-    render(<Button label="Hello world" />);
+    render(<Button children="Hello world" />);
 
     expect(screen.getByRole("button")).toHaveTextContent(/hello world/i);
   });
 
   it("should not have axe violations", async () => {
-    const { container } = render(<Button label="ally" />);
+    const { container } = render(<Button children="ally" />);
     const results = await axe(container);
 
     expect(results).toHaveNoViolations();
