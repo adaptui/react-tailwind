@@ -1,5 +1,6 @@
 import React from "react";
 import { Button as AriaButton } from "reakit";
+import classnames from "classnames";
 
 import theme from "../theme";
 
@@ -40,11 +41,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <AriaButton
-      className={[
+      className={classnames(
         theme.button.base,
         theme.button.size[size],
         theme.button.variants[mode],
-      ].join(" ")}
+      )}
       style={{ backgroundColor }}
       {...props}
     >
