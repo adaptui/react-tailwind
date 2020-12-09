@@ -19,7 +19,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "isolatedModules": true,
     "declaration": true,
     "sourceMap": true,
     "declarationDir": "dist/types"
