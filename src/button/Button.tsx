@@ -1,4 +1,8 @@
 import React from "react";
+import { Button as AriaButton } from "reakit";
+import classnames from "classnames";
+
+import theme from "../theme";
 
 export interface ButtonProps {
   /**
@@ -33,19 +37,19 @@ export const Button: React.FC<ButtonProps> = ({
   label,
   ...props
 }) => {
-  const mode = primary
-    ? "storybook-button--primary"
-    : "storybook-button--secondary";
+  const mode = primary ? "primary" : "secondary";
+
   return (
-    <button
-      type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(
-        " ",
+    <AriaButton
+      className={classnames(
+        theme.button.base,
+        theme.button.size[size],
+        theme.button.variants[mode],
       )}
       style={{ backgroundColor }}
       {...props}
     >
       {label}
-    </button>
+    </AriaButton>
   );
 };
