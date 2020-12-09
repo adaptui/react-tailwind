@@ -20,9 +20,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "noEmit": true,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "declarationDir": "dist/types"
   },
   "include": ["src"]
 }
