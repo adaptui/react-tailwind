@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Button as AriaButton } from "reakit";
+import theme from "../theme";
 
 export interface ButtonProps {
   /**
@@ -35,11 +36,15 @@ export const Button: React.FC<ButtonProps> = ({
   label,
   ...props
 }) => {
-  const mode = primary ? "button--primary" : "button--secondary";
+  const mode = primary ? "primary" : "secondary";
 
   return (
     <AriaButton
-      className={["button", `button--${size}`, mode].join(" ")}
+      className={[
+        theme.button.base,
+        theme.button.size[size],
+        theme.button.variants[mode],
+      ].join(" ")}
       style={{ backgroundColor }}
       {...props}
     >
