@@ -1,14 +1,14 @@
-import React from "react";
-import cx from "classnames";
 import {
-  Button as AriaButton,
-  ButtonProps as AriaButtonProps,
   Role,
   RoleProps,
+  Button as AriaButton,
+  ButtonProps as AriaButtonProps,
 } from "reakit";
+import React from "react";
 
 import theme from "../theme";
-import { __DEV__ } from "../utils";
+import { Spinner } from "../spinner";
+import { ocx, __DEV__ } from "../utils";
 
 export interface ButtonProps extends AriaButtonProps {
   /**
@@ -20,17 +20,21 @@ export interface ButtonProps extends AriaButtonProps {
    */
   leftIcon?: React.ReactElement;
   /**
-   * Props to pass to the leftIcon
-   */
-  leftIconProps?: ButtonIconProps;
-  /**
    * If added, the button will show an icon before the button's label.
    */
   rightIcon?: React.ReactElement;
   /**
-   * Props to pass to the rightIcon
+   * If `true`, the button will show a spinner.
    */
-  rightIconProps?: ButtonIconProps;
+  isLoading?: boolean;
+  /**
+   * If added, the button will show this spinner components
+   */
+  spinner?: React.ReactElement;
+  /**
+   * If `true`, the button will be disabled.
+   */
+  isDisabled?: boolean;
 }
 
 /**
@@ -43,26 +47,52 @@ export const Button: React.FC<ButtonProps> = React.forwardRef<
   const {
     size = "md",
     leftIcon,
-    leftIconProps,
     rightIcon,
-    rightIconProps,
+    isLoading,
+    spinner,
+    isDisabled,
+    className,
     children,
     ...rest
   } = props;
-  const buttonStyles = cx(theme.button.base, theme.button.size[size]);
+  const _isDisabled = isDisabled || isLoading;
+
+  const buttonStyles = ocx(
+    theme.button.base,
+    theme.button.size[size],
+    className,
+  );
+
+  const ButtonWithIcons = () => (
+    <>
+      {leftIcon && (
+        <ButtonIcon className={theme.button.leftIcon}>{leftIcon}</ButtonIcon>
+      )}
+      {children}
+      {rightIcon && (
+        <ButtonIcon className={theme.button.rightIcon}>{rightIcon}</ButtonIcon>
+      )}
+    </>
+  );
+
+  const ButtonSpinner = () => {
+    if (spinner) return <>{spinner}</>;
+    return <Spinner className={theme.button.spinner} />;
+  };
 
   return (
-    <AriaButton className={buttonStyles} ref={ref} {...rest}>
-      {leftIcon && <ButtonIcon {...leftIconProps}>{leftIcon}</ButtonIcon>}
-      {children}
-      {rightIcon && <ButtonIcon {...rightIconProps}>{rightIcon}</ButtonIcon>}
+    <AriaButton
+      ref={ref}
+      className={buttonStyles}
+      disabled={_isDisabled}
+      // Pointer Events auto from Reakit makes the pointer events style hidden
+      style={{ pointerEvents: undefined }}
+      {...rest}
+    >
+      {!isLoading ? <ButtonWithIcons /> : <ButtonSpinner />}
     </AriaButton>
   );
 });
-
-if (__DEV__) {
-  Button.displayName = "Button";
-}
 
 export interface ButtonIconProps extends RoleProps {}
 

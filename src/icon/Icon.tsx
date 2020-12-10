@@ -2,7 +2,7 @@ import * as React from "react";
 import { Role, RoleProps } from "reakit";
 
 import theme from "../theme";
-import { __DEV__ } from "../utils";
+import { ocx, __DEV__ } from "../utils";
 
 const fallbackIcon = {
   path: (
@@ -40,6 +40,7 @@ export const Icon = React.forwardRef<React.Ref<any>, IconProps>(
       viewBox,
       focusable = false,
       children,
+      className,
       ...rest
     } = props;
 
@@ -48,7 +49,7 @@ export const Icon = React.forwardRef<React.Ref<any>, IconProps>(
     const shared: any = {
       ref,
       focusable,
-      className: iconStyles,
+      className: ocx(iconStyles, className),
     };
 
     const _viewBox = viewBox ?? fallbackIcon.viewBox;

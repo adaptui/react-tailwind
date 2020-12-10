@@ -11,6 +11,9 @@ import {
   PhotographIcon,
   WheelIcon,
 } from "../../icons";
+import { Spinner } from "../../spinner";
+import theme from "../../theme";
+import { ocx } from "../../utils";
 
 export default {
   title: "Button",
@@ -32,11 +35,7 @@ export const IButton = IStory.bind({});
 IButton.args = { size: "md" };
 
 const LIStory: Story<ButtonProps> = args => (
-  <Button
-    leftIcon={<ClockIcon />}
-    leftIconProps={{ className: "flex mr-2" }}
-    {...args}
-  >
+  <Button leftIcon={<ClockIcon />} {...args}>
     Button
   </Button>
 );
@@ -45,11 +44,7 @@ export const LIButton = LIStory.bind({});
 LIButton.args = { size: "md" };
 
 const RIStory: Story<ButtonProps> = args => (
-  <Button
-    rightIcon={<ArrowNarrowRightIcon />}
-    rightIconProps={{ className: "flex ml-2" }}
-    {...args}
-  >
+  <Button rightIcon={<ArrowNarrowRightIcon />} {...args}>
     Button
   </Button>
 );
@@ -58,16 +53,41 @@ export const RIButton = RIStory.bind({});
 RIButton.args = { size: "md" };
 
 const BIStory: Story<ButtonProps> = args => (
-  <Button
-    leftIcon={<PhotographIcon />}
-    leftIconProps={{ className: "flex mr-2" }}
-    rightIcon={<CrossIcon />}
-    rightIconProps={{ className: "flex ml-2" }}
-    {...args}
-  >
+  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
     Button
   </Button>
 );
 
 export const BIButton = BIStory.bind({});
 BIButton.args = { size: "md" };
+
+const LStory: Story<ButtonProps> = args => (
+  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
+    Button
+  </Button>
+);
+
+export const LButton = LStory.bind({});
+LButton.args = { size: "md", isLoading: true };
+
+const CLStory: Story<ButtonProps> = args => (
+  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
+    Button
+  </Button>
+);
+
+const CustomSpinner = () => {
+  return (
+    <>
+      Loading
+      <Spinner className={ocx(theme.button.spinner, "ml-2")} />
+    </>
+  );
+};
+
+export const CLButton = CLStory.bind({});
+CLButton.args = {
+  size: "md",
+  isLoading: true,
+  spinner: <CustomSpinner />,
+};

@@ -9683,7 +9683,7 @@ lodash.uniq@4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.0.1, lodash@^4.11.2, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.2.1:
+lodash@^4.0.1, lodash@^4.11.2, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.2.1:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -13326,6 +13326,20 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
+tailwind-override-cli@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/tailwind-override-cli/-/tailwind-override-cli-0.0.5.tgz#cf5b53d04492c628138faf209de425573f7705f1"
+  integrity sha512-GlmtD1jiazex5gfjDT06HnQ9hwD2RJJDb33PHm2pOp9Zj36ukI/Lh3miq/17Z0bz3RMWxily/32Vg+lp2oLewA==
+  dependencies:
+    css "^3.0.0"
+    lodash "^4.17.12"
+    yargs "^16.0.3"
+
+tailwind-override@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/tailwind-override/-/tailwind-override-0.0.5.tgz#e3b3bc9c0e678776961920880dc5c9a406798f12"
+  integrity sha512-UCTLkYrJKuCP3SAMR6F2fpF5hVGYsyOLoU/wJmI1EOqlmu+gVM/MY5HI73etSHseftZySvT8+1Z5T5CLmNVaMg==
+
 "tailwindcss@npm:@tailwindcss/postcss7-compat":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@tailwindcss/postcss7-compat/-/postcss7-compat-2.0.1.tgz#901b02546e537e85beddbc13443226f46929efc8"
@@ -14538,7 +14552,7 @@ yargs@^15.0.1, yargs@^15.1.0, yargs@^15.3.1, yargs@^15.4.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.0.0:
+yargs@^16.0.0, yargs@^16.0.3:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.2.0.tgz#1c82bf0f6b6a66eafce7ef30e376f49a12477f66"
   integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==
