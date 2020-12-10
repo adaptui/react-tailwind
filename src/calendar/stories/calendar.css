@@ -31,14 +31,11 @@
     @apply bg-gray-100;
   }
 
-  .calendar [data-weekend] {
-    @apply text-red-600;
-  }
   .calendar.calendar [aria-selected="true"] {
     @apply bg-blue-400 text-white;
   }
   .calendar.calendar [aria-disabled="true"] {
-    @apply text-gray-500;
+    @apply text-gray-400;
   }
   .calendar.calendar span {
     outline: none;

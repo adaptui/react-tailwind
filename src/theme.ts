@@ -15,7 +15,7 @@ const theme = {
     base: "calendar p-3 rounded-md bg-white shadow-lg w-max",
     cell: "calendar__cell text-center rounded-lg text-sm wh32-minmax",
     weekTitle: `calendar__cell text-center rounded-lg text-sm wh32-minmax text-gray-500 font-light`,
-    button: "text-gray-700 w-16px",
+    button: "text-gray-600 w-16px",
   },
 };
 
