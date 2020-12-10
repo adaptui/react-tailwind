@@ -17,6 +17,15 @@ const theme = {
     weekTitle: `calendar__cell text-center rounded-lg text-sm wh32-minmax text-gray-500 font-light`,
     button: "text-gray-600 w-16px",
   },
+  datepicker: {
+    base:
+      "datepicker bg-white w-max rounded-md shadow-sm relative inline-block border border-gray-300",
+    container: "flex gap-4 justify-between p-2 pr-4 pl-4 rounded-md",
+    segment_field: "flex justify-between gap-1",
+    segment: "focus:text-blue-500 focus:outline-none font-mono font-normal",
+    trigger:
+      "text-gray-700 focus:outline-none focus:text-blue-500 relative inline-block",
+  },
 };
 
 export default theme;

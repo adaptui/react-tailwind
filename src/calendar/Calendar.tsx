@@ -1,14 +1,12 @@
 import * as React from "react";
-import classNames from "classnames";
 import {
   CalendarCell,
   CalendarGrid,
   CalendarHeader,
   CalendarButton,
-  useCalendarState,
   CalendarWeekTitle,
   CalendarCellButton,
-  CalendarInitialState,
+  CalendarStateReturn,
   Calendar as CalendarWrapper,
 } from "@renderlesskit/react";
 
@@ -20,9 +18,7 @@ import {
 } from "./Icons";
 import theme from "../theme";
 
-export const Calendar: React.FC<CalendarInitialState> = props => {
-  const state = useCalendarState(props);
-
+export const Calendar: React.FC<CalendarStateReturn> = state => {
   return (
     <CalendarWrapper {...state} className={theme.calendar.base}>
       <div className="flex justify-between">

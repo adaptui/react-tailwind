@@ -2,7 +2,7 @@ import React from "react";
 import { Story, Meta } from "@storybook/react";
 
 import "./calendar.css";
-import { CalendarInitialState } from "@renderlesskit/react";
+import { useCalendarState } from "@renderlesskit/react";
 import { Calendar } from "../Calendar";
 
 export default {
@@ -11,7 +11,10 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<CalendarInitialState> = args => <Calendar {...args} />;
+const Template: Story = () => {
+  const state = useCalendarState();
+  return <Calendar {...state} />;
+};
 
 export const Default = Template.bind({});
 Default.args = {};
