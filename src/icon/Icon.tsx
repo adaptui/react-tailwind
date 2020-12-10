@@ -29,7 +29,6 @@ export interface IconProps
   /**
    * For use with icon library like `react-icons` where the `viewBox` will be
    * managed from the external library
-   * @type React.ReactElement
    */
   as?: React.ReactElement;
 }

@@ -4,30 +4,70 @@ import { Story, Meta } from "@storybook/react/types-6-0";
 
 import "./button.css";
 import { Button, ButtonProps } from "../index";
-import { ClockIcon } from "../../icons";
+import {
+  ClockIcon,
+  ArrowNarrowRightIcon,
+  CrossIcon,
+  PhotographIcon,
+  WheelIcon,
+} from "../../icons";
 
 export default {
   title: "Button",
   component: Button,
-  argTypes: {
-    backgroundColor: { control: "color" },
-  },
 } as Meta;
 
-const Template: Story<ButtonProps> = args => (
-  <Button leftIcon={<ClockIcon />} leftIconStyles="mr-2 flex" {...args}>
+const DStory: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
+
+export const Default = DStory.bind({});
+Default.args = { size: "md" };
+
+const IStory: Story<ButtonProps> = args => (
+  <Button {...args}>
+    <WheelIcon />
+  </Button>
+);
+
+export const IButton = IStory.bind({});
+IButton.args = { size: "md" };
+
+const LIStory: Story<ButtonProps> = args => (
+  <Button
+    leftIcon={<ClockIcon />}
+    leftIconProps={{ className: "flex mr-2" }}
+    {...args}
+  >
     Button
   </Button>
 );
 
-export const ExtraSmall = Template.bind({});
-ExtraSmall.args = { size: "extra-small" };
+export const LIButton = LIStory.bind({});
+LIButton.args = { size: "md" };
 
-export const Small = Template.bind({});
-Small.args = { size: "small" };
+const RIStory: Story<ButtonProps> = args => (
+  <Button
+    rightIcon={<ArrowNarrowRightIcon />}
+    rightIconProps={{ className: "flex ml-2" }}
+    {...args}
+  >
+    Button
+  </Button>
+);
 
-export const Medium = Template.bind({});
-Medium.args = { size: "medium" };
+export const RIButton = RIStory.bind({});
+RIButton.args = { size: "md" };
 
-export const Large = Template.bind({});
-Large.args = { size: "large" };
+const BIStory: Story<ButtonProps> = args => (
+  <Button
+    leftIcon={<PhotographIcon />}
+    leftIconProps={{ className: "flex mr-2" }}
+    rightIcon={<CrossIcon />}
+    rightIconProps={{ className: "flex ml-2" }}
+    {...args}
+  >
+    Button
+  </Button>
+);
+
+export const BIButton = BIStory.bind({});
+BIButton.args = { size: "md" };

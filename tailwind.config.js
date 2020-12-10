@@ -6,13 +6,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter"],
       },
       spacing: {
         em: "1em",
       },
       lineHeight: {
         em: "1em",
+      },
+      minWidth: {
+        ...defaultTheme.spacing,
       },
     },
   },

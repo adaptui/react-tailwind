@@ -1,24 +1,36 @@
 import React from "react";
 import cx from "classnames";
-import { Button as AriaButton, Role, RoleProps } from "reakit";
+import {
+  Button as AriaButton,
+  ButtonProps as AriaButtonProps,
+  Role,
+  RoleProps,
+} from "reakit";
 
 import theme from "../theme";
 import { __DEV__ } from "../utils";
 
-export interface ButtonProps {
+export interface ButtonProps extends AriaButtonProps {
   /**
    * How large should the button be?
    */
-  size?: "extra-small" | "small" | "medium" | "large";
+  size?: "xs" | "sm" | "md" | "lg";
   /**
    * If added, the button will show an icon before the button's label.
-   * @type React.ReactElement
    */
   leftIcon?: React.ReactElement;
   /**
-   * Tailwind utilities to style the left icon
+   * Props to pass to the leftIcon
    */
-  leftIconStyles?: string;
+  leftIconProps?: ButtonIconProps;
+  /**
+   * If added, the button will show an icon before the button's label.
+   */
+  rightIcon?: React.ReactElement;
+  /**
+   * Props to pass to the rightIcon
+   */
+  rightIconProps?: ButtonIconProps;
 }
 
 /**
@@ -29,9 +41,11 @@ export const Button: React.FC<ButtonProps> = React.forwardRef<
   ButtonProps
 >((props, ref) => {
   const {
-    size = "medium",
+    size = "md",
     leftIcon,
-    leftIconStyles,
+    leftIconProps,
+    rightIcon,
+    rightIconProps,
     children,
     ...rest
   } = props;
@@ -39,10 +53,9 @@ export const Button: React.FC<ButtonProps> = React.forwardRef<
 
   return (
     <AriaButton className={buttonStyles} ref={ref} {...rest}>
-      {leftIcon && (
-        <ButtonIcon className={leftIconStyles}>{leftIcon}</ButtonIcon>
-      )}
+      {leftIcon && <ButtonIcon {...leftIconProps}>{leftIcon}</ButtonIcon>}
       {children}
+      {rightIcon && <ButtonIcon {...rightIconProps}>{rightIcon}</ButtonIcon>}
     </AriaButton>
   );
 });
@@ -51,7 +64,9 @@ if (__DEV__) {
   Button.displayName = "Button";
 }
 
-export const ButtonIcon: React.FC<RoleProps> = props => {
+export interface ButtonIconProps extends RoleProps {}
+
+export const ButtonIcon: React.FC<ButtonIconProps> = props => {
   const { children, ...rest } = props;
 
   const _children = React.isValidElement(children)

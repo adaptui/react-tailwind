@@ -3,7 +3,7 @@ import { Icon, IconProps } from "./Icon";
 
 import { __DEV__ } from "../utils";
 
-interface CreateIconOptions {
+export interface CreateIconOptions {
   /**
    * The icon `svg` viewBox
    * @default "0 0 24 24"
