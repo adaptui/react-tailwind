@@ -9,7 +9,7 @@ import {
   DatePicker as DatePickerWrapper,
 } from "@renderlesskit/react";
 
-import { Calendar } from "../calendar";
+import { StatelessCalendar } from "../calendar";
 import { CalendarIcon } from "../calendar/Icons";
 import theme from "../theme";
 
@@ -38,7 +38,7 @@ export const DatePicker: React.FC<DatePickerStateReturn> = state => {
         </div>
       </DatePickerWrapper>
       <DatePickerContent {...state}>
-        <Calendar {...state.calendar} />
+        <StatelessCalendar {...state.calendar} />
       </DatePickerContent>
     </>
   );

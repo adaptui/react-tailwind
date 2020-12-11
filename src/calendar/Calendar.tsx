@@ -8,6 +8,8 @@ import {
   CalendarCellButton,
   CalendarStateReturn,
   Calendar as CalendarWrapper,
+  CalendarInitialState,
+  useCalendarState,
 } from "@renderlesskit/react";
 
 import {
@@ -18,7 +20,7 @@ import {
 } from "./Icons";
 import theme from "../theme";
 
-export const Calendar: React.FC<CalendarStateReturn> = state => {
+export const StatelessCalendar: React.FC<CalendarStateReturn> = state => {
   return (
     <CalendarWrapper {...state} className={theme.calendar.base}>
       <div className="flex justify-between">
@@ -95,4 +97,10 @@ export const Calendar: React.FC<CalendarStateReturn> = state => {
       </CalendarGrid>
     </CalendarWrapper>
   );
+};
+
+export const Calendar: React.FC<CalendarInitialState> = props => {
+  const state = useCalendarState(props);
+
+  return <StatelessCalendar {...state} />;
 };
