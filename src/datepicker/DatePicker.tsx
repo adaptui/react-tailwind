@@ -1,45 +1,37 @@
 import * as React from "react";
 
-import {
-  DatePickerSegment,
-  DatePickerContent,
-  DatePickerTrigger,
-  DatePickerStateReturn,
-  DatePickerSegmentField,
-  DatePicker as DatePickerWrapper,
-} from "@renderlesskit/react";
-
-import { StatelessCalendar } from "../calendar";
+import CDatePicker from "./CompundDatePicker";
 import { CalendarIcon } from "../calendar/Icons";
-import theme from "../theme";
 
-export const DatePicker: React.FC<DatePickerStateReturn> = state => {
+export const DatePicker: React.FC = () => {
   return (
     <>
-      <DatePickerWrapper className={theme.datepicker.base} {...state}>
-        <div className={theme.datepicker.container}>
-          <DatePickerSegmentField
-            {...state}
-            className={theme.datepicker.segment_field}
-          >
-            {state.segments.map((segment, i) => (
-              <DatePickerSegment
-                key={i}
-                segment={segment}
-                {...state}
-                className={theme.datepicker.segment}
-              />
-            ))}
-          </DatePickerSegmentField>
-
-          <DatePickerTrigger className={theme.datepicker.trigger} {...state}>
+      <CDatePicker>
+        <CDatePicker.Field>
+          <CDatePicker.SegmentInput />
+          <CDatePicker.Trigger>
             <CalendarIcon />
-          </DatePickerTrigger>
-        </div>
-      </DatePickerWrapper>
-      <DatePickerContent {...state}>
-        <StatelessCalendar {...state.calendar} />
-      </DatePickerContent>
+          </CDatePicker.Trigger>
+        </CDatePicker.Field>
+        <CDatePicker.Content />
+      </CDatePicker>
+    </>
+  );
+};
+
+export const DatePickerRange: React.FC = () => {
+  return (
+    <>
+      <CDatePicker isRange={true}>
+        <CDatePicker.Field>
+          <CDatePicker.RangeStartSegmentInput /> -
+          <CDatePicker.RangeEndSegmentInput />
+          <CDatePicker.Trigger>
+            <CalendarIcon />
+          </CDatePicker.Trigger>
+        </CDatePicker.Field>
+        <CDatePicker.Content />
+      </CDatePicker>
     </>
   );
 };

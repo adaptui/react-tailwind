@@ -1,8 +1,7 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import { DatePicker } from "../DatePicker";
-import { useDatePickerState } from "@renderlesskit/react";
+import { DatePicker, DatePickerRange } from "../DatePicker";
 
 export default {
   title: "DatePicker",
@@ -11,13 +10,15 @@ export default {
 } as Meta;
 
 const Template: Story = () => {
-  const state = useDatePickerState({
-    gutter: 0,
-    unstable_offset: [-19, 10],
-    formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
-  });
-  return <DatePicker {...state} />;
+  return <DatePicker />;
+};
+
+const Template2: Story = () => {
+  return <DatePickerRange />;
 };
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const Range = Template2.bind({});
+Range.args = {};
