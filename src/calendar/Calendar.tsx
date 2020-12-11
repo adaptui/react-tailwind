@@ -2,97 +2,181 @@ import * as React from "react";
 import {
   CalendarCell,
   CalendarGrid,
-  CalendarHeader,
+  CalendarHeader as RenderlessCalendarHeader,
   CalendarButton,
   CalendarWeekTitle,
   CalendarCellButton,
-  CalendarStateReturn,
-  Calendar as CalendarWrapper,
+  Calendar as RenderlessCalendar,
+  useCalendarState,
+  CalendarInitialState,
 } from "@renderlesskit/react";
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  DoubleChevronLeft,
-  DoubleChevronRight,
-} from "./Icons";
 import theme from "../theme";
+import { CalendarProvider, useCalendarContext } from "./helpers";
 
-export const Calendar: React.FC<CalendarStateReturn> = state => {
+export interface CalendarProps extends CalendarInitialState {}
+
+export const Calendar: React.FC<CalendarProps> = props => {
+  const { children } = props;
+  const ctx = useCalendarState(props);
+  const context = React.useMemo(() => ctx, [ctx]);
+
   return (
-    <CalendarWrapper {...state} className={theme.calendar.base}>
-      <div className="flex justify-between">
-        <CalendarButton
-          {...state}
-          goto="previousYear"
-          className={theme.calendar.button}
-        >
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton
-          {...state}
-          goto="previousMonth"
-          className={theme.calendar.button}
-        >
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader
-          className="text-gray-700 font-bold text-sm"
-          {...state}
-        />
-        <CalendarButton
-          {...state}
-          goto="nextMonth"
-          className={theme.calendar.button}
-        >
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton
-          {...state}
-          goto="nextYear"
-          className={theme.calendar.button}
-        >
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
+    <CalendarProvider value={context}>
+      <RenderlessCalendar {...ctx} className={theme.calendar.base}>
+        {children}
+      </RenderlessCalendar>
+    </CalendarProvider>
+  );
+};
 
-      <CalendarGrid {...state} as="table" className="p-4 mt-2">
-        <thead>
-          <tr className="text-center">
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  className={theme.calendar.weekTitle}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr.slice(0, 2)}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell
-                  {...state}
-                  as="td"
-                  date={day}
-                  key={dayIndex}
-                  className={theme.calendar.cell}
-                >
-                  <CalendarCellButton className="p-2" {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </CalendarWrapper>
+export const CalendarHeader: React.FC<{}> = props => {
+  return <div className={theme.calendar.header.base} {...props}></div>;
+};
+
+export const CalendarPreviousYearButton: React.FC<{}> = props => {
+  const state = useCalendarContext();
+
+  return (
+    <CalendarButton
+      {...state}
+      goto="previousYear"
+      className={theme.calendar.header.button}
+      {...props}
+    />
+  );
+};
+
+export const CalendarPreviousMonthButton: React.FC<{}> = props => {
+  const state = useCalendarContext();
+
+  return (
+    <CalendarButton
+      {...state}
+      goto="previousMonth"
+      className={theme.calendar.header.button}
+      {...props}
+    />
+  );
+};
+
+export const CalendarTitle: React.FC<{}> = props => {
+  const state = useCalendarContext();
+
+  return (
+    <RenderlessCalendarHeader
+      {...state}
+      className={theme.calendar.header.title}
+      {...props}
+    />
+  );
+};
+
+export const CalendarNextMonthButton: React.FC<{}> = props => {
+  const state = useCalendarContext();
+
+  return (
+    <CalendarButton
+      {...state}
+      goto="nextMonth"
+      className={theme.calendar.header.button}
+      {...props}
+    />
+  );
+};
+
+export const CalendarNextYearButton: React.FC<{}> = props => {
+  const state = useCalendarContext();
+
+  return (
+    <CalendarButton
+      {...state}
+      goto="nextYear"
+      className={theme.calendar.header.button}
+      {...props}
+    />
+  );
+};
+
+export const CalendarTable: React.FC<{}> = props => {
+  const state = useCalendarContext();
+
+  return (
+    <CalendarGrid {...state} className={theme.calendar.table.base} {...props} />
+  );
+};
+
+export const CalendarTableHead: React.FC<{}> = props => {
+  return <thead className={theme.calendar.table.head.base} {...props} />;
+};
+
+export const CalendarTableHeadRow: React.FC<{}> = props => {
+  return <tr className={theme.calendar.table.head.row} {...props} />;
+};
+
+export const CalendarTableHeadHeader: React.FC<any> = props => {
+  const { dayIndex, ...rest } = props;
+  const state = useCalendarContext();
+
+  return (
+    <CalendarWeekTitle
+      {...state}
+      className={theme.calendar.table.head.header.base}
+      as="th"
+      scope="col"
+      dayIndex={dayIndex}
+      {...rest}
+    />
+  );
+};
+
+export const CalendarTableHeadHeaderAbbr: React.FC<any> = props => {
+  const { day, ...rest } = props;
+
+  return (
+    <abbr
+      title={day.title}
+      className={theme.calendar.table.head.header.abbr}
+      {...rest}
+    >
+      {day.abbr.slice(0, 2)}
+    </abbr>
+  );
+};
+
+export const CalendarTableBody: React.FC<{}> = props => {
+  return <tbody className={theme.calendar.table.body.base} {...props} />;
+};
+
+export const CalendarTableBodyRow: React.FC<{}> = props => {
+  return <tr className={theme.calendar.table.body.row} {...props} />;
+};
+
+export const CalendarTableBodyData: React.FC<any> = props => {
+  const { day, dayIndex, ...rest } = props;
+  const state = useCalendarContext();
+
+  return (
+    <CalendarCell
+      as="td"
+      date={day}
+      className={theme.calendar.table.body.data.base}
+      {...state}
+      {...rest}
+    />
+  );
+};
+
+export const CalendarTableBodyDataButton: React.FC<any> = props => {
+  const { day, ...rest } = props;
+  const state = useCalendarContext();
+
+  return (
+    <CalendarCellButton
+      date={day}
+      className={theme.calendar.table.body.data.button}
+      {...state}
+      {...rest}
+    />
   );
 };
