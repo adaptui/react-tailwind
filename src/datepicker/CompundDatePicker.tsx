@@ -15,28 +15,27 @@ import {
 import theme from "../theme";
 import { StatelessCalendar } from "../calendar";
 
-/*
-<DatePicker>
-  <DatePicker.Field>
-    <DatePicker.SegmentInput />
-    <DatePicker.Trigger>
-      <CalendarIcon />
-    </DatePicker.Trigger>
-  </DatePicker.Field>
-  <DatePicker.Content />
-</DatePicker>;
-*/
-
-type _DatePickerStateReturn = DatePickerStateReturn & {
-  isRange: false;
-};
-type _DateRangePickerStateReturn = DateRangePickerStateReturn & {
-  isRange: true;
-};
+export type withRange<T, K> = T & { isRange: K };
 
 const DatePickerContext = React.createContext<
-  _DatePickerStateReturn | _DateRangePickerStateReturn | null
->(null);
+  | withRange<DatePickerStateReturn, false>
+  | withRange<DateRangePickerStateReturn, true>
+  | undefined
+>(undefined);
+
+export type CompoundDateRangePickerProps = Partial<
+  withRange<DateRangePickerInitialState, true>
+>;
+export type CompoundDateNormalPickerProps = Partial<
+  withRange<DatePickerInitialState, false>
+>;
+
+export type DatePickerCompoundProps = (
+  | CompoundDateNormalPickerProps
+  | CompoundDateRangePickerProps
+) & {
+  children?: React.ReactNode;
+};
 
 function useDatePickerContext() {
   const context = React.useContext(DatePickerContext);
@@ -48,22 +47,34 @@ function useDatePickerContext() {
   return context;
 }
 
-type DatePickerCompoundProps = DatePickerInitialState &
-  DateRangePickerInitialState & {
-    Field?: React.FC<{}>;
-    Trigger?: React.FC<{}>;
-    SegmentInput?: React.FC<{}>;
-    Content?: React.FC<{}>;
-    children: React.ReactNode;
-    isRange?: boolean;
-  };
+/*
+  What is happening here is that we need to set the isRange to `false or true` inorder to narrow the type. 
+  we cannot do an undefined check here to narrow it down.
 
-const DatePicker = (props: DatePickerCompoundProps) => {
-  return props.isRange ? (
-    <DatePickerRange {...props} />
-  ) : (
-    <DatePickerNormal {...props} />
-  );
+  And if we do parameter destructuring, it will cause the isRange to be removed from the props object 
+  and typescript cannot do type narrowing by captured variables
+  @see https://github.com/microsoft/TypeScript/issues/12184
+  @see https://stackoverflow.com/a/61181442/10629172
+
+  We faced a similar issue in our Accordion component too
+  @see renderlesskit-react/blob/8f5cbba8b8cf422fac533b0bd1be27ecf1034dfa/src/accordion/AccordionState.ts#L46-L51
+*/
+function isUndefinedDiscrimination(
+  props: CompoundDateNormalPickerProps | CompoundDateRangePickerProps,
+): props is CompoundDateNormalPickerProps {
+  return props.isRange === false || props.isRange === undefined;
+}
+
+const DatePicker = (props: Partial<DatePickerCompoundProps>) => {
+  if (props.isRange === true) {
+    return <DatePickerRange {...props} />;
+  }
+
+  if (isUndefinedDiscrimination(props)) {
+    return <DatePickerNormal {...props} />;
+  }
+
+  return null;
 };
 
 const DatePickerNormal: React.FC<DatePickerInitialState> = props => {
@@ -74,6 +85,7 @@ const DatePickerNormal: React.FC<DatePickerInitialState> = props => {
     </DatePickerContext.Provider>
   );
 };
+
 const DatePickerRange: React.FC<DateRangePickerInitialState> = props => {
   const state = useDateRangePickerState(props);
   return (
