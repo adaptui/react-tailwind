@@ -11,9 +11,9 @@ import {
   useDateRangePickerState,
   DateRangePickerStateReturn,
   DateRangePickerInitialState,
+  CalendarStateReturn,
 } from "@renderlesskit/react";
 import theme from "../theme";
-import { StatelessCalendar } from "../calendar";
 
 export type withRange<T, K> = T & { isRange: K };
 
@@ -195,11 +195,13 @@ const DatePickerTrigger: React.FC = props => {
   );
 };
 
-const DatePickerContent: React.FC = () => {
+const DatePickerContent: React.FC<{
+  children: (state: CalendarStateReturn) => JSX.Element;
+}> = ({ children }) => {
   const state = useDatePickerContext();
   return (
     <Content {...state}>
-      <StatelessCalendar {...state.calendar} />
+      {typeof children === "function" ? children(state.calendar) : children}
     </Content>
   );
 };

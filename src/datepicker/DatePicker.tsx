@@ -1,7 +1,7 @@
 import * as React from "react";
 import { format } from "date-fns";
+import { CalendarStateReturn } from "@renderlesskit/react";
 
-import { CalendarIcon } from "../calendar/Icons";
 import {
   DatePicker,
   DatePickerField,
@@ -14,6 +14,62 @@ import {
   DatePickerEndSegmentInput,
   DatePickerStartSegmentInput,
 } from "./CompundDatePicker";
+
+import {
+  CalendarHeader,
+  CalendarNextMonthButton,
+  CalendarNextYearButton,
+  CalendarPreviousMonthButton,
+  CalendarPreviousYearButton,
+  CalendarTable,
+  CalendarTableBody,
+  CalendarTableBodyContents,
+  CalendarTableHead,
+  CalendarTableHeadColumns,
+  CalendarTableHeadRow,
+  CalendarTitle,
+  StatelessCalendar,
+} from "../calendar";
+
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+  CalendarIcon,
+} from "../calendar/Icons";
+
+const Calendar = (state: CalendarStateReturn) => {
+  return (
+    <StatelessCalendar state={state}>
+      <CalendarHeader>
+        <CalendarPreviousYearButton>
+          <DoubleChevronLeft />
+        </CalendarPreviousYearButton>
+        <CalendarPreviousMonthButton>
+          <ChevronLeft />
+        </CalendarPreviousMonthButton>
+        <CalendarTitle />
+        <CalendarNextMonthButton>
+          <ChevronRight />
+        </CalendarNextMonthButton>
+        <CalendarNextYearButton>
+          <DoubleChevronRight />
+        </CalendarNextYearButton>
+      </CalendarHeader>
+      <CalendarTable>
+        <CalendarTableHead>
+          <CalendarTableHeadRow>
+            <CalendarTableHeadColumns />
+          </CalendarTableHeadRow>
+        </CalendarTableHead>
+        <CalendarTableBody>
+          <CalendarTableBodyContents />
+        </CalendarTableBody>
+      </CalendarTable>
+    </StatelessCalendar>
+  );
+};
 
 const CustomInput: React.FC = () => {
   const state = useDatePickerContext();
@@ -43,7 +99,7 @@ export const CustomInputDatePicker: React.FC<CompoundDateNormalPickerProps> = pr
       <DatePickerField>
         <CustomInput />
       </DatePickerField>
-      <DatePickerContent />
+      <DatePickerContent>{state => <Calendar {...state} />}</DatePickerContent>
     </DatePicker>
   );
 };
@@ -57,7 +113,7 @@ export const CDatePicker: React.FC<CompoundDateNormalPickerProps> = props => {
           <CalendarIcon />
         </DatePickerTrigger>
       </DatePickerField>
-      <DatePickerContent />
+      <DatePickerContent>{state => <Calendar {...state} />}</DatePickerContent>
     </DatePicker>
   );
 };
@@ -72,7 +128,7 @@ export const CDateRangePicker: React.FC<CompoundDateRangePickerProps> = props =>
           <CalendarIcon />
         </DatePickerTrigger>
       </DatePickerField>
-      <DatePickerContent />
+      <DatePickerContent>{state => <Calendar {...state} />}</DatePickerContent>
     </DatePicker>
   );
 };

@@ -13,9 +13,31 @@ const theme = {
   },
   calendar: {
     base: "calendar p-3 rounded-md bg-white shadow-lg w-max",
-    cell: "calendar__cell text-center rounded-lg text-sm wh32-minmax",
-    weekTitle: `calendar__cell text-center rounded-lg text-sm wh32-minmax text-gray-500 font-light`,
-    button: "text-gray-600 w-16px",
+    header: {
+      base: "flex justify-between",
+      title: "text-sm font-bold text-gray-700",
+      button: "text-gray-600 w-16px",
+    },
+    table: {
+      base: "p-4 mt-2",
+      head: {
+        base: "",
+        row: "text-center",
+        header: {
+          base:
+            "calendar__cell text-center rounded-lg text-sm wh32-minmax text-gray-500 font-light",
+          abbr: "",
+        },
+      },
+      body: {
+        base: "",
+        row: "",
+        data: {
+          base: "calendar__cell text-center rounded-lg text-sm wh32-minmax",
+          button: "p-2",
+        },
+      },
+    },
   },
   datepicker: {
     base:
