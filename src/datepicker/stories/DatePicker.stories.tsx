@@ -1,21 +1,21 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import { DatePicker, DateRangePicker } from "../DatePicker";
+import { CDatePicker, CDateRangePicker } from "../DatePicker";
 
 export default {
   title: "DatePicker",
-  component: DatePicker,
+  component: CDatePicker,
   argTypes: {},
 } as Meta;
 
 const Template: Story = () => {
-  return <DatePicker />;
+  return <CDatePicker />;
 };
 
 const Template2: Story = () => {
   return (
-    <DateRangePicker defaultValue={{ start: "10-5-2020", end: "11-5-2020" }} />
+    <CDateRangePicker defaultValue={{ start: "10-5-2020", end: "11-5-2020" }} />
   );
 };
 

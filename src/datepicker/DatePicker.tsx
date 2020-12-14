@@ -1,36 +1,43 @@
 import * as React from "react";
 
 import { CalendarIcon } from "../calendar/Icons";
-import CDatePicker, {
+import {
+  DatePicker,
+  DatePickerField,
+  DatePickerTrigger,
+  DatePickerContent,
+  DatePickerSegmentInput,
   CompoundDateRangePickerProps,
   CompoundDateNormalPickerProps,
+  DatePickerEndSegmentInput,
+  DatePickerStartSegmentInput,
 } from "./CompundDatePicker";
 
-export const DatePicker: React.FC<CompoundDateNormalPickerProps> = props => {
+export const CDatePicker: React.FC<CompoundDateNormalPickerProps> = props => {
   return (
-    <CDatePicker {...props}>
-      <CDatePicker.Field>
-        <CDatePicker.SegmentInput />
-        <CDatePicker.Trigger>
+    <DatePicker {...props}>
+      <DatePickerField>
+        <DatePickerSegmentInput />
+        <DatePickerTrigger>
           <CalendarIcon />
-        </CDatePicker.Trigger>
-      </CDatePicker.Field>
-      <CDatePicker.Content />
-    </CDatePicker>
+        </DatePickerTrigger>
+      </DatePickerField>
+      <DatePickerContent />
+    </DatePicker>
   );
 };
 
-export const DateRangePicker: React.FC<CompoundDateRangePickerProps> = props => {
+export const CDateRangePicker: React.FC<CompoundDateRangePickerProps> = props => {
   return (
-    <CDatePicker isRange={true} {...props}>
-      <CDatePicker.Field>
-        <CDatePicker.RangeStartSegmentInput /> -
-        <CDatePicker.RangeEndSegmentInput />
-        <CDatePicker.Trigger>
+    <DatePicker isRange={true} {...props}>
+      <DatePickerField>
+        <DatePickerStartSegmentInput /> -
+        <DatePickerEndSegmentInput />
+        <DatePickerTrigger>
           <CalendarIcon />
-        </CDatePicker.Trigger>
-      </CDatePicker.Field>
-      <CDatePicker.Content />
-    </CDatePicker>
+        </DatePickerTrigger>
+      </DatePickerField>
+      <DatePickerContent />
+    </DatePicker>
   );
 };

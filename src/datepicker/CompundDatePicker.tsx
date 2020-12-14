@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
-  DatePickerContent,
+  DatePickerContent as Content,
   DatePickerSegment,
-  DatePickerTrigger,
+  DatePickerTrigger as Trigger,
   useDatePickerState,
   DatePickerStateReturn,
   DatePickerInitialState,
@@ -95,7 +95,7 @@ const DatePickerRange: React.FC<DateRangePickerInitialState> = props => {
   );
 };
 
-const Field: React.FC = props => {
+const DatePickerField: React.FC = props => {
   const state = useDatePickerContext();
   return (
     <DatePickerWrapper className={theme.datepicker.base} {...state}>
@@ -104,7 +104,7 @@ const Field: React.FC = props => {
   );
 };
 
-const RangeStartSegmentInput: React.FC = () => {
+const DatePickerStartSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
 
   if (state.isRange === false) {
@@ -132,7 +132,7 @@ const RangeStartSegmentInput: React.FC = () => {
   );
 };
 
-const RangeEndSegmentInput: React.FC = () => {
+const DatePickerEndSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
 
   if (state.isRange === false) {
@@ -160,7 +160,7 @@ const RangeEndSegmentInput: React.FC = () => {
   );
 };
 
-const SegmentInput: React.FC = () => {
+const DatePickerSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
 
   if (state.isRange === true) {
@@ -184,29 +184,31 @@ const SegmentInput: React.FC = () => {
   );
 };
 
-const Trigger: React.FC = props => {
+const DatePickerTrigger: React.FC = props => {
   const state = useDatePickerContext();
   return (
-    <DatePickerTrigger className={theme.datepicker.trigger} {...state}>
+    <Trigger className={theme.datepicker.trigger} {...state}>
       {props.children}
-    </DatePickerTrigger>
+    </Trigger>
   );
 };
 
-const Content: React.FC = () => {
+const DatePickerContent: React.FC = () => {
   const state = useDatePickerContext();
   return (
-    <DatePickerContent {...state}>
+    <Content {...state}>
       <StatelessCalendar {...state.calendar} />
-    </DatePickerContent>
+    </Content>
   );
 };
 
-DatePicker.Field = Field;
-DatePicker.Content = Content;
-DatePicker.Trigger = Trigger;
-DatePicker.SegmentInput = SegmentInput;
-DatePicker.RangeEndSegmentInput = RangeEndSegmentInput;
-DatePicker.RangeStartSegmentInput = RangeStartSegmentInput;
-
-export default DatePicker;
+export {
+  DatePicker,
+  DatePickerField,
+  DatePickerTrigger,
+  DatePickerContent,
+  DatePickerSegmentField,
+  DatePickerSegmentInput,
+  DatePickerEndSegmentInput,
+  DatePickerStartSegmentInput,
+};
