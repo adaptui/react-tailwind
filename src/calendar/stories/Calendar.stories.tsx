@@ -2,18 +2,63 @@ import React from "react";
 import { Story, Meta } from "@storybook/react";
 
 import "./calendar.css";
-import { useCalendarState } from "@renderlesskit/react";
-import { Calendar } from "../Calendar";
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "../Icons";
+import {
+  Calendar,
+  CalendarHeader,
+  CalendarNextMonthButton,
+  CalendarNextYearButton,
+  CalendarPreviousMonthButton,
+  CalendarPreviousYearButton,
+  CalendarTable,
+  CalendarTableBody,
+  CalendarTableBodyContents,
+  CalendarTableHead,
+  CalendarTableHeadColumns,
+  CalendarTableHeadRow,
+  CalendarTitle,
+} from "../Calendar";
 
 export default {
   title: "Calendar",
   component: Calendar,
-  argTypes: {},
 } as Meta;
 
 const Template: Story = () => {
-  const state = useCalendarState();
-  return <Calendar {...state} />;
+  return (
+    <Calendar>
+      <CalendarHeader>
+        <CalendarPreviousYearButton>
+          <DoubleChevronLeft />
+        </CalendarPreviousYearButton>
+        <CalendarPreviousMonthButton>
+          <ChevronLeft />
+        </CalendarPreviousMonthButton>
+        <CalendarTitle />
+        <CalendarNextMonthButton>
+          <ChevronRight />
+        </CalendarNextMonthButton>
+        <CalendarNextYearButton>
+          <DoubleChevronRight />
+        </CalendarNextYearButton>
+      </CalendarHeader>
+      <CalendarTable>
+        <CalendarTableHead>
+          <CalendarTableHeadRow>
+            <CalendarTableHeadColumns />
+          </CalendarTableHeadRow>
+        </CalendarTableHead>
+        <CalendarTableBody>
+          <CalendarTableBodyContents />
+        </CalendarTableBody>
+      </CalendarTable>
+    </Calendar>
+  );
 };
 
 export const Default = Template.bind({});

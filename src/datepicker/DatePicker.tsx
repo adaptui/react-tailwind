@@ -7,11 +7,64 @@ import {
   DatePickerStateReturn,
   DatePickerSegmentField,
   DatePicker as DatePickerWrapper,
+  CalendarStateReturn,
+  CalendarHeader,
 } from "@renderlesskit/react";
 
-import { StatelessCalendar } from "../calendar";
-import { CalendarIcon } from "../calendar/Icons";
+import {
+  CalendarNextMonthButton,
+  CalendarNextYearButton,
+  CalendarPreviousMonthButton,
+  CalendarPreviousYearButton,
+  CalendarTable,
+  CalendarTableBody,
+  CalendarTableBodyContents,
+  CalendarTableHead,
+  CalendarTableHeadColumns,
+  CalendarTableHeadRow,
+  CalendarTitle,
+  StatelessCalendar,
+} from "../calendar";
+import {
+  CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "../calendar/Icons";
 import theme from "../theme";
+
+const Calendar = (state: CalendarStateReturn) => {
+  return (
+    <StatelessCalendar state={state}>
+      <CalendarHeader>
+        <CalendarPreviousYearButton>
+          <DoubleChevronLeft />
+        </CalendarPreviousYearButton>
+        <CalendarPreviousMonthButton>
+          <ChevronLeft />
+        </CalendarPreviousMonthButton>
+        <CalendarTitle />
+        <CalendarNextMonthButton>
+          <ChevronRight />
+        </CalendarNextMonthButton>
+        <CalendarNextYearButton>
+          <DoubleChevronRight />
+        </CalendarNextYearButton>
+      </CalendarHeader>
+      <CalendarTable>
+        <CalendarTableHead>
+          <CalendarTableHeadRow>
+            <CalendarTableHeadColumns />
+          </CalendarTableHeadRow>
+        </CalendarTableHead>
+        <CalendarTableBody>
+          <CalendarTableBodyContents />
+        </CalendarTableBody>
+      </CalendarTable>
+    </StatelessCalendar>
+  );
+};
 
 export const DatePicker: React.FC<DatePickerStateReturn> = state => {
   return (
@@ -38,7 +91,7 @@ export const DatePicker: React.FC<DatePickerStateReturn> = state => {
         </div>
       </DatePickerWrapper>
       <DatePickerContent {...state}>
-        <StatelessCalendar {...state.calendar} />
+        <Calendar {...state.calendar} />
       </DatePickerContent>
     </>
   );
