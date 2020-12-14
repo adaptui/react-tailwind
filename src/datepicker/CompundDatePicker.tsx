@@ -109,7 +109,7 @@ const DatePickerStartSegmentInput: React.FC = () => {
 
   if (state.isRange === false) {
     throw new Error(
-      "RangeStartSegmentInput can only be used while isRange is true",
+      "DatePickerStartSegmentInput can only be used while isRange is true",
     );
   }
 
@@ -137,7 +137,7 @@ const DatePickerEndSegmentInput: React.FC = () => {
 
   if (state.isRange === false) {
     throw new Error(
-      "RangeEndSegmentInput can only be used while isRange is true",
+      "DatePickerEndSegmentInput can only be used while isRange is true",
     );
   }
 
@@ -164,7 +164,9 @@ const DatePickerSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
 
   if (state.isRange === true) {
-    throw new Error("SegmentInput can only be used while isRange is false");
+    throw new Error(
+      "DatePickerSegmentInput can only be used while isRange is false",
+    );
   }
 
   return (
@@ -203,6 +205,7 @@ const DatePickerContent: React.FC = () => {
 };
 
 export {
+  useDatePickerContext,
   DatePicker,
   DatePickerField,
   DatePickerTrigger,
