@@ -1,16 +1,13 @@
-import {
-  Role,
-  RoleProps,
-  Button as AriaButton,
-  ButtonProps as AriaButtonProps,
-} from "reakit";
+import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
 
 import theme from "../theme";
+import { ocx } from "../utils";
 import { Spinner } from "../spinner";
-import { ocx, __DEV__ } from "../utils";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
-export interface ButtonProps extends AriaButtonProps {
+export type ButtonProps = AriaButtonProps & {
   /**
    * How large should the button be?
    */
@@ -35,15 +32,12 @@ export interface ButtonProps extends AriaButtonProps {
    * If `true`, the button will be disabled.
    */
   isDisabled?: boolean;
-}
+};
 
-/**
- * Primary UI component for user interaction
- */
-export const Button: React.FC<ButtonProps> = React.forwardRef<
-  HTMLButtonElement,
-  ButtonProps
->((props, ref) => {
+function ButtonComponent(
+  props: PropsWithAs<ButtonProps, "button">,
+  ref: React.Ref<HTMLButtonElement>,
+) {
   const {
     size = "md",
     leftIcon,
@@ -92,11 +86,19 @@ export const Button: React.FC<ButtonProps> = React.forwardRef<
       {!isLoading ? <ButtonWithIcons /> : <ButtonSpinner />}
     </AriaButton>
   );
-});
+}
 
-export interface ButtonIconProps extends RoleProps {}
+/**
+ * Primary UI component for user interaction
+ */
+export const Button = forwardRefWithAs<ButtonProps, "button">(ButtonComponent);
 
-export const ButtonIcon: React.FC<ButtonIconProps> = props => {
+export type ButtonIconProps = BoxProps & {};
+
+function ButtonIconComponent(
+  props: PropsWithAs<ButtonIconProps, "span">,
+  ref: React.Ref<HTMLSpanElement>,
+) {
   const { children, ...rest } = props;
 
   const _children = React.isValidElement(children)
@@ -107,12 +109,15 @@ export const ButtonIcon: React.FC<ButtonIconProps> = props => {
     : children;
 
   return (
-    <Role as="span" {...rest}>
+    <Box as="span" ref={ref} {...rest}>
       {_children}
-    </Role>
+    </Box>
   );
-};
-
-if (__DEV__) {
-  ButtonIcon.displayName = "ButtonIcon";
 }
+
+/**
+ * Button Icon to hold icons within the Button
+ */
+export const ButtonIcon = forwardRefWithAs<ButtonIconProps, "span">(
+  ButtonIconComponent,
+);

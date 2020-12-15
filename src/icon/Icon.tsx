@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Role, RoleProps } from "reakit";
 
 import theme from "../theme";
-import { ocx, __DEV__ } from "../utils";
+import { ocx } from "../utils";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 const fallbackIcon = {
   path: (
@@ -23,57 +24,48 @@ const fallbackIcon = {
   viewBox: "0 0 24 24",
 };
 
-export interface IconProps
-  extends Omit<React.SVGAttributes<SVGElement>, keyof RoleProps>,
-    RoleProps {
+export type IconProps = React.SVGAttributes<SVGElement> & BoxProps & {};
+
+function IconComponent(
+  props: PropsWithAs<IconProps, "svg">,
+  ref: React.Ref<HTMLOrSVGElement>,
+) {
+  const {
+    as: element = "svg",
+    viewBox,
+    focusable = false,
+    children,
+    className,
+    ...rest
+  } = props;
+
+  const iconStyles = theme.icon.base;
+
+  const shared: any = {
+    ref,
+    focusable,
+    className: ocx(iconStyles, className),
+  };
+
+  const _viewBox = viewBox ?? fallbackIcon.viewBox;
+
   /**
-   * For use with icon library like `react-icons` where the `viewBox` will be
-   * managed from the external library
+   * If you're using an icon library like `react-icons`.
+   * Note: anyone passing the `as` prop, should manage the `viewBox` from the external component
    */
-  as?: React.ElementType<any>;
+  if (element && typeof element !== "string") {
+    return <Box as={element} {...shared} {...rest} />;
+  }
+
+  const _path = (children ?? fallbackIcon.path) as React.ReactNode;
+
+  return (
+    <Box as={element} viewBox={_viewBox} {...shared} {...rest}>
+      {_path}
+    </Box>
+  );
 }
 
-export const Icon = React.forwardRef<React.Ref<any>, IconProps>(
-  (props, ref) => {
-    const {
-      as: element,
-      viewBox,
-      focusable = false,
-      children,
-      className,
-      ...rest
-    } = props;
-
-    const iconStyles = theme.icon.base;
-
-    const shared: any = {
-      ref,
-      focusable,
-      className: ocx(iconStyles, className),
-    };
-
-    const _viewBox = viewBox ?? fallbackIcon.viewBox;
-
-    /**
-     * If you're using an icon library like `react-icons`.
-     * Note: anyone passing the `as` prop, should manage the `viewBox` from the external component
-     */
-    if (element && typeof element !== "string") {
-      return <Role as={element} {...shared} {...rest} />;
-    }
-
-    const _path = (children ?? fallbackIcon.path) as React.ReactNode;
-
-    return (
-      <Role as="svg" viewBox={_viewBox} {...shared} {...rest}>
-        {_path}
-      </Role>
-    );
-  },
-);
-
-if (__DEV__) {
-  Icon.displayName = "Icon";
-}
+export const Icon = forwardRefWithAs<IconProps, "svg">(IconComponent);
 
 export default Icon;

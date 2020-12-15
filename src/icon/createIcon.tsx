@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Icon, IconProps } from "./Icon";
 
-import { __DEV__ } from "../utils";
+import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export interface CreateIconOptions {
   /**
@@ -25,7 +25,7 @@ export interface CreateIconOptions {
   /**
    * Default props automatically passed to the component; overwriteable
    */
-  defaultProps?: IconProps;
+  defaultProps?: PropsWithAs<IconProps, "svg">;
 }
 
 export function createIcon(options: CreateIconOptions) {
@@ -33,19 +33,19 @@ export function createIcon(options: CreateIconOptions) {
     viewBox = "0 0 24 24",
     d: pathDefinition,
     path,
-    displayName,
     defaultProps = {},
   } = options;
 
-  const Comp = React.forwardRef<React.Ref<any>, IconProps>((props, ref) => (
-    <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
-      {path ?? <path fill="currentColor" d={pathDefinition} />}
-    </Icon>
-  ));
-
-  if (__DEV__) {
-    Comp.displayName = displayName;
+  function IconComponent(
+    props: PropsWithAs<IconProps, "svg">,
+    ref: React.Ref<HTMLOrSVGElement>,
+  ) {
+    return (
+      <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
+        {path ?? <path fill="currentColor" d={pathDefinition} />}
+      </Icon>
+    );
   }
 
-  return Comp;
+  return forwardRefWithAs<IconProps, "svg">(IconComponent);
 }

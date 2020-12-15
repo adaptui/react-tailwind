@@ -20,7 +20,11 @@ export default {
   component: Button,
 } as Meta;
 
-const DStory: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
+const DStory: Story<ButtonProps> = args => (
+  <Button as="a" {...args}>
+    Button
+  </Button>
+);
 
 export const Default = DStory.bind({});
 Default.args = { size: "md" };

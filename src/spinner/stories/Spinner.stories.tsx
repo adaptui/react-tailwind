@@ -13,4 +13,9 @@ export default {
 const Template: Story<SpinnerProps> = args => <Spinner {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { size: "md", stroke: "visible" };
+Default.args = { size: "md" };
+
+const VisibleStroke: Story<SpinnerProps> = args => <Spinner {...args} />;
+
+export const StrokeVisible = VisibleStroke.bind({});
+StrokeVisible.args = { size: "md", stroke: "visible" };
