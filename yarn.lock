@@ -13367,6 +13367,11 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
+tailwind-override@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/tailwind-override/-/tailwind-override-0.0.6.tgz#9f899caed319b426d275599021eca50d0facaa6c"
+  integrity sha512-MldOzhjV9VNoAINLxewh8xVo9zQ6QEDYPvHwdPKf3+Mh2qXzNtRX/sAPnuR1nLGkFar7MVjBbpuFklv963t6vA==
+
 "tailwindcss@npm:@tailwindcss/postcss7-compat":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@tailwindcss/postcss7-compat/-/postcss7-compat-2.0.1.tgz#901b02546e537e85beddbc13443226f46929efc8"

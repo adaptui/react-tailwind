@@ -17,7 +17,7 @@ export default {
   component: Icon,
 } as Meta;
 
-export const Default = () => <Icon />;
+export const Default = () => <Icon as="svg" />;
 export const ArrowNarrowRight = () => <ArrowNarrowRightIcon />;
 export const Clock = () => <ClockIcon />;
 export const Cross = () => <CrossIcon />;

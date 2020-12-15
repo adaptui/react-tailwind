@@ -18,7 +18,7 @@ const theme = {
   },
   spinner: {
     base:
-      "inline-block border-2 border-solid border-current rounded-full  animate-spin text-blue-500",
+      "inline-block border-2 border-solid border-current rounded-full animate-spin text-blue-500",
     stroke: {
       transparent: "border-b-transparent border-l-transparent",
       visible: "border-b-gray-200 border-l-gray-200",

@@ -1,15 +1,17 @@
+import * as React from "react";
 import { Role, RoleProps } from "reakit";
 
-import { __DEV__ } from "../utils";
+import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
-export interface BoxProps extends RoleProps {}
+export type BoxProps = RoleProps & {};
 
-/**
- * Box is the most abstract component on top of which other chakra
- * components are built. It renders a `div` element by default.
- */
-export const Box: React.FC<BoxProps> = props => <Role {...props} />;
-
-if (__DEV__) {
-  Box.displayName = "Box";
+function BoxComponent(
+  props: PropsWithAs<BoxProps, "div">,
+  ref: React.Ref<HTMLDivElement>,
+) {
+  return <Role ref={ref} {...props} />;
 }
+
+export const Box = forwardRefWithAs<BoxProps, "div">(BoxComponent);
+
+export default Box;

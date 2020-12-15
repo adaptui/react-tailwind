@@ -30,7 +30,7 @@ export interface IconProps
    * For use with icon library like `react-icons` where the `viewBox` will be
    * managed from the external library
    */
-  as?: React.ReactElement;
+  as?: React.ElementType<any>;
 }
 
 export const Icon = React.forwardRef<React.Ref<any>, IconProps>(
