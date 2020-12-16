@@ -58,8 +58,8 @@ function TagComponent(
   } = props;
   const tagStyles = ocx(theme.tag.base, theme.tag.size[size], className);
 
-  console.log(suffix, closable);
-  if (!closable && !(suffix instanceof CrossIcon)) {
+  // TODO: Clean this up
+  if (!closable && suffix.type.displayName !== (CrossIcon as any).displayName) {
     console.warn(
       "Tag: `suffix` will not be visible because `closable` is set to false, please set `closable` to true",
     );
