@@ -32,7 +32,7 @@ const theme = {
     },
   },
   badge: {
-    base: "text-xs rounded-full",
+    base: "font-sans text-xs rounded-full",
     variants: {
       primary: "text-white bg-gray-800",
       secondary: "text-white bg-blue-500",

@@ -1,7 +1,8 @@
 import React from "react";
-import classnames from "classnames";
 
 import theme from "../theme";
+import { ocx } from "../utils";
+import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export interface BadgeProps {
   /**
@@ -14,22 +15,30 @@ export interface BadgeProps {
   size?: "small" | "medium" | "large";
 }
 
-export const Badge: React.FC<BadgeProps> = ({
-  variant = "primary",
-  size = "medium",
-  children,
-  ...props
-}) => {
+function BadgeComponent(
+  props: PropsWithAs<BadgeProps, "span">,
+  ref: React.Ref<HTMLButtonElement>,
+) {
+  const {
+    variant = "primary",
+    size = "medium",
+    children,
+    className,
+    ...rest
+  } = props;
+
+  const badgeStyles = ocx(
+    theme.badge.base,
+    theme.badge.size[size],
+    theme.badge.variants[variant],
+    className,
+  );
+
   return (
-    <span
-      className={classnames(
-        theme.badge.base,
-        theme.badge.size[size],
-        theme.badge.variants[variant],
-      )}
-      {...props}
-    >
+    <span ref={ref} className={badgeStyles} {...rest}>
       {children}
     </span>
   );
-};
+}
+
+export const Badge = forwardRefWithAs<BadgeProps, "span">(BadgeComponent);
