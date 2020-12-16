@@ -1,4 +1,8 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
+import { overrideTailwindClasses } from "tailwind-override";
+
+import tailwindProperties from "../../tailwindProperties.json";
 
 export interface CreateContextOptions {
   /**
@@ -50,3 +54,11 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
     Context,
   ] as CreateContextReturn<ContextType>;
 }
+
+/**
+ * Override base styles with those that come after like the css rules
+ */
+export const ocx = (...classNames: any[]) =>
+  overrideTailwindClasses(cx(...classNames), {
+    tailwindProperties: tailwindProperties,
+  });
