@@ -1,7 +1,7 @@
 import { cx } from "@renderlesskit/react";
 import { overrideTailwindClasses } from "tailwind-override";
 
-import tailwindProperties from "../../tailwindProperties.json";
+import { tailwindProperties } from "./tailwindProperties";
 
 /**
  * Override base styles with those that come after like the css rules
