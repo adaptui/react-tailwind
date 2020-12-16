@@ -32,13 +32,19 @@ const theme = {
     },
   },
   badge: {
-    base: "font-sans text-xs rounded-full",
+    base: "font-sans font-medium text-xs rounded-full",
     variants: {
       primary: "text-white bg-gray-800",
       secondary: "text-white bg-blue-500",
       violet: "text-white bg-purple-500",
       red: "text-white bg-red-600",
       outline: "bg-white text-gray-800 border border-gray-800",
+    },
+    tertiaryVariants: {
+      "primary-tertiary": "text-gray-700 bg-gray-50",
+      "secondary-tertiary": "text-blue-700 bg-blue-50",
+      "violet-tertiary": "text-purple-700 bg-purple-50",
+      "red-tertiary": "text-red-700 bg-red-50",
     },
     size: {
       small: "text-xs px-2 py-1",

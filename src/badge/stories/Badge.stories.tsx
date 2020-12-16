@@ -17,6 +17,12 @@ Primary.args = {
   variant: "primary",
 };
 
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+  variant: "primary",
+  tertiary: true,
+};
+
 export const Small = Template.bind({});
 Small.args = {
   size: "small",

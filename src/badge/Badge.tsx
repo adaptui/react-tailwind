@@ -4,15 +4,22 @@ import theme from "../theme";
 import { ocx } from "../utils";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
+type VariantsSolid = "primary" | "secondary" | "violet" | "red";
+type VariantsTertiary = `${VariantsSolid}-tertiary`;
+
 export interface BadgeProps {
   /**
    * badge variants
    */
-  variant?: "primary" | "secondary" | "violet" | "red" | "outline";
+  variant?: VariantsSolid | "outline";
   /**
    * How large should the button be?
    */
   size?: "small" | "medium" | "large";
+  /**
+   * Is tertiary variant?
+   */
+  tertiary?: boolean;
 }
 
 function BadgeComponent(
@@ -21,6 +28,7 @@ function BadgeComponent(
 ) {
   const {
     variant = "primary",
+    tertiary = false,
     size = "medium",
     children,
     className,
@@ -30,7 +38,9 @@ function BadgeComponent(
   const badgeStyles = ocx(
     theme.badge.base,
     theme.badge.size[size],
-    theme.badge.variants[variant],
+    tertiary
+      ? theme.badge.tertiaryVariants[`${variant}-tertiary` as VariantsTertiary]
+      : theme.badge.variants[variant],
     className,
   );
 
