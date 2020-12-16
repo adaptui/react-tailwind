@@ -1,6 +1,7 @@
 import React from "react";
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from "@storybook/react/types-6-0";
+import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
 import "./button.css";
 import {
@@ -138,18 +139,30 @@ GroupStyled.args = {
   variant: "secondary",
 };
 
-const BGLDefault: Story<ButtonGroupProps> = args => (
-  <ButtonGroup {...args}>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
-    <Button>Button 3</Button>
-    <Button>Button 4</Button>
-    <Button>Button 5</Button>
-  </ButtonGroup>
-);
+const BGLDefault: Story<ButtonGroupProps> = args => {
+  const tab = useTabState();
+  return (
+    <>
+      <TabList as={ButtonGroup} {...args} {...tab} aria-label="My tabs">
+        <Tab as={Button} {...tab}>
+          Tab 1
+        </Tab>
+        <Tab as={Button} {...tab}>
+          Tab 2
+        </Tab>
+        <Tab as={Button} {...tab}>
+          Tab 3
+        </Tab>
+      </TabList>
+      <TabPanel {...tab}>Tab 1</TabPanel>
+      <TabPanel {...tab}>Tab 2</TabPanel>
+      <TabPanel {...tab}>Tab 3</TabPanel>
+    </>
+  );
+};
 
-export const GroupOverflow = BGLDefault.bind({});
-GroupOverflow.args = {
+export const TabExample = BGLDefault.bind({});
+TabExample.args = {
   isAttached: true,
   size: "lg",
   variant: "secondary",

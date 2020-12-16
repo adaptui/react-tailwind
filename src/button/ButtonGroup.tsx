@@ -9,7 +9,7 @@ export type ButtonGroupProps = BoxProps & {
   /**
    * Button will look collapsed together.
    */
-  isAttached: boolean;
+  isAttached?: boolean;
   /**
    * How large should the button be?
    */
