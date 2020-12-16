@@ -30,7 +30,7 @@ export const Default = DStory.bind({});
 Default.args = { size: "md", variant: "primary" };
 
 const IStory: Story<ButtonProps> = args => (
-  <Button {...args}>
+  <Button aria-label="settings" {...args}>
     <WheelIcon />
   </Button>
 );
@@ -116,8 +116,8 @@ const BGCDefault: Story<ButtonGroupProps> = args => (
   </ButtonGroup>
 );
 
-export const GroupCollapseDefault = BGCDefault.bind({});
-GroupCollapseDefault.args = {
+export const GroupCollapse = BGCDefault.bind({});
+GroupCollapse.args = {
   isAttached: true,
   size: "md",
   variant: "primary",
@@ -131,8 +131,25 @@ const BGSDefault: Story<ButtonGroupProps> = args => (
   </ButtonGroup>
 );
 
-export const GroupStyledDefault = BGSDefault.bind({});
-GroupStyledDefault.args = {
+export const GroupStyled = BGSDefault.bind({});
+GroupStyled.args = {
+  isAttached: true,
+  size: "lg",
+  variant: "secondary",
+};
+
+const BGLDefault: Story<ButtonGroupProps> = args => (
+  <ButtonGroup {...args}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+    <Button>Button 3</Button>
+    <Button>Button 4</Button>
+    <Button>Button 5</Button>
+  </ButtonGroup>
+);
+
+export const GroupOverflow = BGLDefault.bind({});
+GroupOverflow.args = {
   isAttached: true,
   size: "lg",
   variant: "secondary",
