@@ -3,17 +3,17 @@ import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 
 import "./button.css";
-import { Button, ButtonProps } from "../index";
 import {
   ClockIcon,
-  ArrowNarrowRightIcon,
   CrossIcon,
-  PhotographIcon,
   WheelIcon,
+  PhotographIcon,
+  ArrowNarrowRightIcon,
 } from "../../icons";
-import { Spinner } from "../../spinner";
 import theme from "../../theme";
 import { ocx } from "../../utils";
+import { Spinner } from "../../spinner";
+import { Button, ButtonProps, ButtonGroup, ButtonGroupProps } from "../index";
 
 export default {
   title: "Button",
@@ -95,4 +95,45 @@ CLButton.args = {
   variant: "primary",
   isLoading: true,
   spinner: <CustomSpinner />,
+};
+
+const BGDefault: Story<ButtonGroupProps> = args => (
+  <ButtonGroup className="space-x-4" {...args}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+    <Button>Button 3</Button>
+  </ButtonGroup>
+);
+
+export const GroupDefault = BGDefault.bind({});
+GroupDefault.args = {};
+
+const BGCDefault: Story<ButtonGroupProps> = args => (
+  <ButtonGroup {...args}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+    <Button>Button 3</Button>
+  </ButtonGroup>
+);
+
+export const GroupCollapseDefault = BGCDefault.bind({});
+GroupCollapseDefault.args = {
+  isAttached: true,
+  size: "md",
+  variant: "primary",
+};
+
+const BGSDefault: Story<ButtonGroupProps> = args => (
+  <ButtonGroup {...args}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+    <Button>Button 3</Button>
+  </ButtonGroup>
+);
+
+export const GroupStyledDefault = BGSDefault.bind({});
+GroupStyledDefault.args = {
+  isAttached: true,
+  size: "lg",
+  variant: "secondary",
 };

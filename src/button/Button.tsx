@@ -6,6 +6,7 @@ import { ocx } from "../utils";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { useButtonGroup } from "./ButtonGroup";
 
 export type ButtonProps = AriaButtonProps & {
   /**
@@ -43,8 +44,8 @@ function ButtonComponent(
   ref: React.Ref<HTMLButtonElement>,
 ) {
   const {
-    size = "md",
-    variant = "primary",
+    size,
+    variant,
     leftIcon,
     rightIcon,
     isLoading,
@@ -55,11 +56,16 @@ function ButtonComponent(
     ...rest
   } = props;
   const _isDisabled = isDisabled || isLoading;
+  const group = useButtonGroup();
+
+  const _size = size || group?.size || "md";
+  const _variant = variant || group?.variant || "primary";
 
   const buttonStyles = ocx(
     theme.button.base,
-    theme.button.size[size],
-    theme.button.variant[variant],
+    theme.button.size[_size],
+    theme.button.variant[_variant],
+    group ? theme.button.group : "",
     className,
   );
 
@@ -80,18 +86,28 @@ function ButtonComponent(
     return <Spinner className={theme.button.spinner} />;
   };
 
-  return (
+  const ButtonComp = () => (
     <AriaButton
       ref={ref}
       className={buttonStyles}
       disabled={_isDisabled}
-      // Pointer Events auto from Reakit makes the pointer events style hidden
-      style={{ pointerEvents: undefined }}
       {...rest}
     >
       {!isLoading ? <ButtonWithIcons /> : <ButtonSpinner />}
     </AriaButton>
   );
+
+  if (_isDisabled) {
+    return (
+      // Pointer Events auto from Reakit makes the pointer events style hidden
+      // https://material-ui.com/components/buttons/#limitations
+      <Box as="span" className={theme.button.span}>
+        <ButtonComp />
+      </Box>
+    );
+  }
+
+  return <ButtonComp />;
 }
 
 /**
