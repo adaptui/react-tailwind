@@ -1,10 +1,15 @@
 const theme = {
   button: {
     base:
-      "font-sans font-semibold bg-blue-500 text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
+      "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
     leftIcon: "flex mr-2",
     rightIcon: "flex ml-2",
     spinner: "w-em h-em text-white",
+    variant: {
+      primary: "bg-gray-800",
+      secondary: "bg-gray-100 text-gray-800",
+      link: "text-gray-800",
+    },
     size: {
       xs: "h-6 min-w-6 text-xs px-2",
       sm: "h-8 min-w-8 text-sm px-3",

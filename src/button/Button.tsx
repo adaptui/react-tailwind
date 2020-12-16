@@ -13,6 +13,10 @@ export type ButtonProps = AriaButtonProps & {
    */
   size?: "xs" | "sm" | "md" | "lg";
   /**
+   * How the button should be styled?
+   */
+  variant?: "primary" | "secondary" | "link";
+  /**
    * If added, the button will show an icon before the button's label.
    */
   leftIcon?: React.ReactElement;
@@ -40,6 +44,7 @@ function ButtonComponent(
 ) {
   const {
     size = "md",
+    variant = "primary",
     leftIcon,
     rightIcon,
     isLoading,
@@ -54,6 +59,7 @@ function ButtonComponent(
   const buttonStyles = ocx(
     theme.button.base,
     theme.button.size[size],
+    theme.button.variant[variant],
     className,
   );
 

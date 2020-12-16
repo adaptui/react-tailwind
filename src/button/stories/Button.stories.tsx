@@ -27,7 +27,7 @@ const DStory: Story<ButtonProps> = args => (
 );
 
 export const Default = DStory.bind({});
-Default.args = { size: "md" };
+Default.args = { size: "md", variant: "primary" };
 
 const IStory: Story<ButtonProps> = args => (
   <Button {...args}>
@@ -36,7 +36,7 @@ const IStory: Story<ButtonProps> = args => (
 );
 
 export const IButton = IStory.bind({});
-IButton.args = { size: "md" };
+IButton.args = { size: "md", variant: "primary" };
 
 const LIStory: Story<ButtonProps> = args => (
   <Button leftIcon={<ClockIcon />} {...args}>
@@ -45,7 +45,7 @@ const LIStory: Story<ButtonProps> = args => (
 );
 
 export const LIButton = LIStory.bind({});
-LIButton.args = { size: "md" };
+LIButton.args = { size: "md", variant: "primary" };
 
 const RIStory: Story<ButtonProps> = args => (
   <Button rightIcon={<ArrowNarrowRightIcon />} {...args}>
@@ -54,7 +54,7 @@ const RIStory: Story<ButtonProps> = args => (
 );
 
 export const RIButton = RIStory.bind({});
-RIButton.args = { size: "md" };
+RIButton.args = { size: "md", variant: "primary" };
 
 const BIStory: Story<ButtonProps> = args => (
   <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
@@ -63,7 +63,7 @@ const BIStory: Story<ButtonProps> = args => (
 );
 
 export const BIButton = BIStory.bind({});
-BIButton.args = { size: "md" };
+BIButton.args = { size: "md", variant: "primary" };
 
 const LStory: Story<ButtonProps> = args => (
   <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
@@ -72,7 +72,7 @@ const LStory: Story<ButtonProps> = args => (
 );
 
 export const LButton = LStory.bind({});
-LButton.args = { size: "md", isLoading: true };
+LButton.args = { size: "md", variant: "primary", isLoading: true };
 
 const CLStory: Story<ButtonProps> = args => (
   <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
@@ -92,6 +92,7 @@ const CustomSpinner = () => {
 export const CLButton = CLStory.bind({});
 CLButton.args = {
   size: "md",
+  variant: "primary",
   isLoading: true,
   spinner: <CustomSpinner />,
 };
