@@ -3,22 +3,17 @@ import { Story, Meta } from "@storybook/react/types-6-0";
 
 import "./tag.css";
 import { Tag, TagGroup, TagProps } from "../index";
-import {
-  ClockIcon,
-  CrossIcon,
-  PhotographIcon,
-  ArrowNarrowRightIcon,
-} from "../../icons";
+import { ClockIcon, PhotographIcon } from "../../icons";
 
 export default {
   title: "Tag",
   component: Tag,
 } as Meta;
 
-const DStory: Story<TagProps> = args => <Tag {...args}>Tag</Tag>;
+const Component: Story<TagProps> = args => <Tag {...args}>Tag</Tag>;
 
-export const Default = DStory.bind({});
-Default.args = { size: "md", closable: true, onClose: () => alert(1) };
+export const Default = Component.bind({});
+Default.args = { size: "md", onClose: () => alert(1) };
 
 export const GroupArrowNavigation = () => {
   return (
@@ -48,6 +43,7 @@ export const TagsExample = () => {
       {tags.map(tag => (
         <Tag
           closable
+          key={tag}
           id={tag}
           onClose={id => setTags(tags.filter(t => t !== id))}
         >
@@ -58,35 +54,18 @@ export const TagsExample = () => {
   );
 };
 
-const LIStory: Story<TagProps> = args => (
-  <Tag prefix={<ClockIcon />} {...args}>
-    Tag
-  </Tag>
-);
+export const PrefixIcon = Default.bind({});
+PrefixIcon.args = { prefix: <ClockIcon /> };
 
-export const LIButton = LIStory.bind({});
-LIButton.args = { size: "md" };
+export const SuffixIcon = Default.bind({});
+SuffixIcon.args = { closable: true, suffix: <PhotographIcon /> };
 
-const RIStory: Story<TagProps> = args => (
-  <Tag suffix={<ArrowNarrowRightIcon />} {...args}>
-    Tag
-  </Tag>
-);
+export const PrefixSuffixIcon = Default.bind({});
+PrefixSuffixIcon.args = {
+  closable: true,
+  prefix: <ClockIcon />,
+  suffix: <PhotographIcon />,
+};
 
-export const RIButton = RIStory.bind({});
-RIButton.args = { size: "md" };
-
-const BIStory: Story<TagProps> = args => (
-  <Tag closable onClose={() => alert(1)}>
-    Tag
-  </Tag>
-);
-
-export const BIButton = BIStory.bind({});
-BIButton.args = { size: "md" };
-
-export const LStory: Story<TagProps> = args => (
-  <Tag prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
-    Tag
-  </Tag>
-);
+export const Closable = Default.bind({});
+Closable.args = { closable: true, onClose: () => alert("Removed") };

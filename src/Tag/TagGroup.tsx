@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Box } from "../box";
 import { Composite, useCompositeState } from "reakit";
-import { TagsContext } from ".";
+
+import { Box } from "../box";
+import { TagsContext } from "./Tag";
 
 export type TagGroupProps = {
   allowArrowNavigation?: boolean;

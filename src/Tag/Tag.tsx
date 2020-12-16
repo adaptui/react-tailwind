@@ -31,11 +31,12 @@ export type TagProps = {
    */
   size?: "xs" | "sm" | "md" | "lg";
   /**
-   * If added, the button will show an icon before the button's label.
+   * If added, tag will show prefix the content before the tag's label
    */
   prefix?: React.ReactElement;
   /**
-   * If added, the button will show an icon before the button's label.
+   * If added, tag will show suffix after the tag's label.
+   * NOTE: This will only show if closable is set to `true`
    */
   suffix?: React.ReactElement;
 };
@@ -56,6 +57,13 @@ function TagComponent(
     ...rest
   } = props;
   const tagStyles = ocx(theme.tag.base, theme.tag.size[size], className);
+
+  console.log(suffix, closable);
+  if (!closable && !(suffix instanceof CrossIcon)) {
+    console.warn(
+      "Tag: `suffix` will not be visible because `closable` is set to false, please set `closable` to true",
+    );
+  }
 
   const TagWithPrefixSuffix = () => (
     <>
