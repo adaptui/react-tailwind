@@ -1,23 +1,32 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import { DatePicker } from "../DatePicker";
-import { useDatePickerState } from "@renderlesskit/react";
+import {
+  CDatePicker,
+  CDateRangePicker,
+  CustomInputDatePicker,
+} from "../DatePicker";
 
 export default {
   title: "DatePicker",
-  component: DatePicker,
+  component: CDatePicker,
   argTypes: {},
 } as Meta;
 
 const Template: Story = () => {
-  const state = useDatePickerState({
-    gutter: 0,
-    unstable_offset: [-19, 10],
-    formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
-  });
-  return <DatePicker {...state} />;
+  return <CDatePicker />;
 };
+
+const Template2: Story = () => {
+  return (
+    <CDateRangePicker defaultValue={{ start: "10-5-2020", end: "11-5-2020" }} />
+  );
+};
+
+export const CustomInput = () => <CustomInputDatePicker />;
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const Range = Template2.bind({});
+Range.args = {};

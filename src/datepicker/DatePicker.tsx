@@ -1,17 +1,22 @@
 import * as React from "react";
+import { format } from "date-fns";
+import { CalendarStateReturn } from "@renderlesskit/react";
 
 import {
-  DatePickerSegment,
-  DatePickerContent,
+  DatePicker,
+  DatePickerField,
   DatePickerTrigger,
-  DatePickerStateReturn,
-  DatePickerSegmentField,
-  DatePicker as DatePickerWrapper,
-  CalendarStateReturn,
-  CalendarHeader,
-} from "@renderlesskit/react";
+  DatePickerContent,
+  useDatePickerContext,
+  DatePickerSegmentInput,
+  CompoundDateRangePickerProps,
+  CompoundDateNormalPickerProps,
+  DatePickerEndSegmentInput,
+  DatePickerStartSegmentInput,
+} from "./CompundDatePicker";
 
 import {
+  CalendarHeader,
   CalendarNextMonthButton,
   CalendarNextYearButton,
   CalendarPreviousMonthButton,
@@ -25,14 +30,14 @@ import {
   CalendarTitle,
   StatelessCalendar,
 } from "../calendar";
+
 import {
-  CalendarIcon,
   ChevronLeft,
   ChevronRight,
   DoubleChevronLeft,
   DoubleChevronRight,
+  CalendarIcon,
 } from "../calendar/Icons";
-import theme from "../theme";
 
 const Calendar = (state: CalendarStateReturn) => {
   return (
@@ -66,33 +71,64 @@ const Calendar = (state: CalendarStateReturn) => {
   );
 };
 
-export const DatePicker: React.FC<DatePickerStateReturn> = state => {
-  return (
-    <>
-      <DatePickerWrapper className={theme.datepicker.base} {...state}>
-        <div className={theme.datepicker.container}>
-          <DatePickerSegmentField
-            {...state}
-            className={theme.datepicker.segment_field}
-          >
-            {state.segments.map((segment, i) => (
-              <DatePickerSegment
-                key={i}
-                segment={segment}
-                {...state}
-                className={theme.datepicker.segment}
-              />
-            ))}
-          </DatePickerSegmentField>
+const CustomInput: React.FC = () => {
+  const state = useDatePickerContext();
+  if (state.isRange === false) {
+    return (
+      <input
+        className="outline-none"
+        type="date"
+        onClick={e => {
+          e.preventDefault();
+          state.toggle();
+        }}
+        value={format(new Date(state.dateValue), "yyyy-MM-dd")}
+        onChange={e => {
+          state.selectDate(e.target.value);
+        }}
+      />
+    );
+  }
 
-          <DatePickerTrigger className={theme.datepicker.trigger} {...state}>
-            <CalendarIcon />
-          </DatePickerTrigger>
-        </div>
-      </DatePickerWrapper>
-      <DatePickerContent {...state}>
-        <Calendar {...state.calendar} />
-      </DatePickerContent>
-    </>
+  return null;
+};
+
+export const CustomInputDatePicker: React.FC<CompoundDateNormalPickerProps> = props => {
+  return (
+    <DatePicker {...props}>
+      <DatePickerField>
+        <CustomInput />
+      </DatePickerField>
+      <DatePickerContent>{state => <Calendar {...state} />}</DatePickerContent>
+    </DatePicker>
+  );
+};
+
+export const CDatePicker: React.FC<CompoundDateNormalPickerProps> = props => {
+  return (
+    <DatePicker {...props}>
+      <DatePickerField>
+        <DatePickerSegmentInput />
+        <DatePickerTrigger>
+          <CalendarIcon />
+        </DatePickerTrigger>
+      </DatePickerField>
+      <DatePickerContent>{state => <Calendar {...state} />}</DatePickerContent>
+    </DatePicker>
+  );
+};
+
+export const CDateRangePicker: React.FC<CompoundDateRangePickerProps> = props => {
+  return (
+    <DatePicker isRange={true} {...props}>
+      <DatePickerField>
+        <DatePickerStartSegmentInput /> -
+        <DatePickerEndSegmentInput />
+        <DatePickerTrigger>
+          <CalendarIcon />
+        </DatePickerTrigger>
+      </DatePickerField>
+      <DatePickerContent>{state => <Calendar {...state} />}</DatePickerContent>
+    </DatePicker>
   );
 };
