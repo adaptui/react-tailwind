@@ -4,7 +4,7 @@ const theme = {
       "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
     leftIcon: "flex mr-2",
     rightIcon: "flex ml-2",
-    spinner: "w-em h-em text-white",
+    spinner: "w-em h-em text-current",
     variant: {
       primary: "bg-gray-800",
       secondary: "bg-gray-100 text-gray-800",
