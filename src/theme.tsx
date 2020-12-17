@@ -32,17 +32,17 @@ const theme = {
     },
   },
   badge: {
-    base: "font-sans font-medium text-xs rounded-full",
+    base: "font-sans font-medium text-xs rounded-full py-1",
     variants: {
       primary: "text-white bg-gray-800",
-      secondary: "text-white bg-blue-500",
+      secondary: "text-gray-700 bg-gray-50",
       outline: "bg-white text-gray-800 border border-gray-800",
     },
     size: {
-      xs: "text-xs px-2 py-1",
-      sm: "text-sm px-3 py-1",
-      md: "text-base px-4 py-1",
-      lg: "text-lg px-5 py-1",
+      xs: "text-xs px-2",
+      sm: "text-sm px-3",
+      md: "text-base px-4",
+      lg: "text-lg px-5",
     },
   },
 };
