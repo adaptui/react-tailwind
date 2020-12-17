@@ -4,6 +4,7 @@ import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 import theme from "../theme";
 import { ocx } from "../utils";
 import { CrossIcon } from "../icons";
+import { Box, BoxProps } from "../box";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export const TagsContext = React.createContext<CompositeStateReturn | null>(
@@ -13,7 +14,7 @@ export const useTagsContext = () => {
   return React.useContext(TagsContext);
 };
 
-export type TagProps = {
+export type TagProps = Omit<BoxProps, "prefix"> & {
   /**
    * id for the tag
    */
@@ -78,9 +79,9 @@ function TagComponent(
   );
 
   return (
-    <span ref={ref} className={tagStyles} {...rest}>
+    <Box as="span" ref={ref} className={tagStyles} {...rest}>
       <TagWithPrefixSuffix />
-    </span>
+    </Box>
   );
 }
 
