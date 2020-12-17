@@ -21,95 +21,72 @@ export default {
   component: Button,
 } as Meta;
 
-const DStory: Story<ButtonProps> = args => (
-  <Button as="a" {...args}>
-    Button
-  </Button>
-);
+const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 
-export const Default = DStory.bind({});
+export const Default = Base.bind({});
 Default.args = { size: "md", variant: "primary" };
 
-const IStory: Story<ButtonProps> = args => (
+const IconButton: Story<ButtonProps> = args => (
   <Button aria-label="settings" {...args}>
     <WheelIcon />
   </Button>
 );
 
-export const IButton = IStory.bind({});
-IButton.args = { size: "md", variant: "primary" };
+export const Icon = IconButton.bind({});
+Icon.args = { size: "md", variant: "primary" };
 
-const LIStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<ClockIcon />} {...args}>
+const LeftIconButton: Story<ButtonProps> = args => (
+  <Button prefix={<ClockIcon />} {...args}>
     Button
   </Button>
 );
 
-export const LIButton = LIStory.bind({});
-LIButton.args = { size: "md", variant: "primary" };
+export const LeftIcon = LeftIconButton.bind({});
+LeftIcon.args = { size: "md", variant: "primary" };
 
-const RIStory: Story<ButtonProps> = args => (
-  <Button rightIcon={<ArrowNarrowRightIcon />} {...args}>
+const RightIconButton: Story<ButtonProps> = args => (
+  <Button suffix={<ArrowNarrowRightIcon />} {...args}>
     Button
   </Button>
 );
 
-export const RIButton = RIStory.bind({});
-RIButton.args = { size: "md", variant: "primary" };
+export const RightIcon = RightIconButton.bind({});
+RightIcon.args = { size: "md", variant: "primary" };
 
-const BIStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
+const BothSideIconButton: Story<ButtonProps> = args => (
+  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
     Button
   </Button>
 );
 
-export const BIButton = BIStory.bind({});
-BIButton.args = { size: "md", variant: "primary" };
+export const BothSideIcon = BothSideIconButton.bind({});
+BothSideIcon.args = { size: "md", variant: "primary" };
 
-const LStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
+const LoadingIconButton: Story<ButtonProps> = args => (
+  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
     Button
   </Button>
 );
 
-export const LButton = LStory.bind({});
-LButton.args = { size: "md", variant: "primary", isLoading: true };
+export const LoadingIcon = LoadingIconButton.bind({});
+LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
 
-const CLStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
-    Button
-  </Button>
+const CustomSpinner = () => (
+  <>
+    Loading
+    <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
+  </>
 );
 
-const CustomSpinner = () => {
-  return (
-    <>
-      Loading
-      <Spinner className={ocx(theme.button.spinner, "ml-2")} />
-    </>
-  );
-};
-
-export const CLButton = CLStory.bind({});
-CLButton.args = {
+export const CustomLaodingElement = LoadingIconButton.bind({});
+CustomLaodingElement.args = {
   size: "md",
   variant: "primary",
   isLoading: true,
   spinner: <CustomSpinner />,
 };
 
-const BGDefault: Story<ButtonGroupProps> = args => (
-  <ButtonGroup className="space-x-4" {...args}>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
-    <Button>Button 3</Button>
-  </ButtonGroup>
-);
-
-export const GroupDefault = BGDefault.bind({});
-GroupDefault.args = {};
-
-const BGCDefault: Story<ButtonGroupProps> = args => (
+const ButtonGroupBase: Story<ButtonGroupProps> = args => (
   <ButtonGroup {...args}>
     <Button>Button 1</Button>
     <Button>Button 2</Button>
@@ -117,29 +94,24 @@ const BGCDefault: Story<ButtonGroupProps> = args => (
   </ButtonGroup>
 );
 
-export const GroupCollapse = BGCDefault.bind({});
-GroupCollapse.args = {
+export const GroupDefault = ButtonGroupBase.bind({});
+GroupDefault.args = { className: "space-x-4" };
+
+export const GroupCollapsed = ButtonGroupBase.bind({});
+GroupCollapsed.args = {
   isAttached: true,
   size: "md",
   variant: "primary",
 };
 
-const BGSDefault: Story<ButtonGroupProps> = args => (
-  <ButtonGroup {...args}>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
-    <Button>Button 3</Button>
-  </ButtonGroup>
-);
-
-export const GroupStyled = BGSDefault.bind({});
-GroupStyled.args = {
+export const GroupSecondary = ButtonGroupBase.bind({});
+GroupSecondary.args = {
   isAttached: true,
   size: "lg",
   variant: "secondary",
 };
 
-const BGLDefault: Story<ButtonGroupProps> = args => {
+const ButtonGroupExample: Story<ButtonGroupProps> = args => {
   const tab = useTabState();
   return (
     <>
@@ -161,8 +133,8 @@ const BGLDefault: Story<ButtonGroupProps> = args => {
   );
 };
 
-export const TabExample = BGLDefault.bind({});
-TabExample.args = {
+export const TabListAsGroup = ButtonGroupExample.bind({});
+TabListAsGroup.args = {
   isAttached: true,
   size: "lg",
   variant: "secondary",

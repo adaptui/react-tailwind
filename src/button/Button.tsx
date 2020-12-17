@@ -8,7 +8,7 @@ import { Box, BoxProps } from "../box";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 import { useButtonGroup } from "./ButtonGroup";
 
-export type ButtonProps = AriaButtonProps & {
+export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    */
@@ -20,11 +20,11 @@ export type ButtonProps = AriaButtonProps & {
   /**
    * If added, the button will show an icon before the button's label.
    */
-  leftIcon?: React.ReactElement;
+  prefix?: React.ReactElement;
   /**
    * If added, the button will show an icon before the button's label.
    */
-  rightIcon?: React.ReactElement;
+  suffix?: React.ReactElement;
   /**
    * If `true`, the button will show a spinner.
    */
@@ -46,8 +46,8 @@ function ButtonComponent(
   const {
     size,
     variant,
-    leftIcon,
-    rightIcon,
+    prefix,
+    suffix,
     isLoading,
     spinner,
     isDisabled,
@@ -57,10 +57,8 @@ function ButtonComponent(
   } = props;
   const _isDisabled = isDisabled || isLoading;
   const group = useButtonGroup();
-
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
-
   const buttonStyles = ocx(
     theme.button.base,
     theme.button.size[_size],
@@ -71,12 +69,12 @@ function ButtonComponent(
 
   const ButtonWithIcons = () => (
     <>
-      {leftIcon && (
-        <ButtonIcon className={theme.button.leftIcon}>{leftIcon}</ButtonIcon>
+      {prefix && (
+        <ButtonIcon className={theme.button.prefix}>{prefix}</ButtonIcon>
       )}
       {children}
-      {rightIcon && (
-        <ButtonIcon className={theme.button.rightIcon}>{rightIcon}</ButtonIcon>
+      {suffix && (
+        <ButtonIcon className={theme.button.suffix}>{suffix}</ButtonIcon>
       )}
     </>
   );

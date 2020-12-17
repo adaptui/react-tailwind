@@ -2,8 +2,8 @@ const theme = {
   button: {
     base:
       "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
-    leftIcon: "flex mr-2",
-    rightIcon: "flex ml-2",
+    prefix: "flex mr-2",
+    suffix: "flex ml-2",
     spinner: "w-em h-em text-current",
     group: "focus:z-1",
     span: "inline-block cursor-not-allowed",

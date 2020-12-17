@@ -49,7 +49,13 @@ function ButtonGroupComponent(
 
   return (
     <ButtonGroupProvider value={context}>
-      <Box role="group" className={buttonGroupStyles} ref={ref} {...rest} />
+      <Box
+        role="group"
+        aria-label="Button group"
+        className={buttonGroupStyles}
+        ref={ref}
+        {...rest}
+      />
     </ButtonGroupProvider>
   );
 }
