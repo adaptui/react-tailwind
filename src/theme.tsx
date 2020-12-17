@@ -42,6 +42,20 @@ const theme = {
       xl: "h-12 w-12",
     },
   },
+  badge: {
+    base: "font-sans font-medium text-xs rounded-full py-1",
+    variants: {
+      primary: "text-white bg-gray-800",
+      secondary: "text-gray-700 bg-gray-50",
+      outline: "bg-white text-gray-800 border border-gray-800",
+    },
+    size: {
+      xs: "text-xs px-2",
+      sm: "text-sm px-3",
+      md: "text-base px-4",
+      lg: "text-lg px-5",
+    }
+  },
   tag: {
     base:
       "font-sans font-semibold bg-gray-100 text-gray-800 inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
