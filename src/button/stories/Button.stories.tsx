@@ -1,97 +1,141 @@
 import React from "react";
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from "@storybook/react/types-6-0";
+import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
 import "./button.css";
-import { Button, ButtonProps } from "../index";
 import {
   ClockIcon,
-  ArrowNarrowRightIcon,
   CrossIcon,
-  PhotographIcon,
   WheelIcon,
+  PhotographIcon,
+  ArrowNarrowRightIcon,
 } from "../../icons";
-import { Spinner } from "../../spinner";
 import theme from "../../theme";
 import { ocx } from "../../utils";
+import { Spinner } from "../../spinner";
+import { Button, ButtonProps, ButtonGroup, ButtonGroupProps } from "../index";
 
 export default {
   title: "Button",
   component: Button,
 } as Meta;
 
-const DStory: Story<ButtonProps> = args => (
-  <Button as="a" {...args}>
-    Button
-  </Button>
-);
+const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 
-export const Default = DStory.bind({});
-Default.args = { size: "md" };
+export const Default = Base.bind({});
+Default.args = { size: "md", variant: "primary" };
 
-const IStory: Story<ButtonProps> = args => (
-  <Button {...args}>
+const IconButton: Story<ButtonProps> = args => (
+  <Button aria-label="settings" {...args}>
     <WheelIcon />
   </Button>
 );
 
-export const IButton = IStory.bind({});
-IButton.args = { size: "md" };
+export const Icon = IconButton.bind({});
+Icon.args = { size: "md", variant: "primary" };
 
-const LIStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<ClockIcon />} {...args}>
+const LeftIconButton: Story<ButtonProps> = args => (
+  <Button prefix={<ClockIcon />} {...args}>
     Button
   </Button>
 );
 
-export const LIButton = LIStory.bind({});
-LIButton.args = { size: "md" };
+export const LeftIcon = LeftIconButton.bind({});
+LeftIcon.args = { size: "md", variant: "primary" };
 
-const RIStory: Story<ButtonProps> = args => (
-  <Button rightIcon={<ArrowNarrowRightIcon />} {...args}>
+const RightIconButton: Story<ButtonProps> = args => (
+  <Button suffix={<ArrowNarrowRightIcon />} {...args}>
     Button
   </Button>
 );
 
-export const RIButton = RIStory.bind({});
-RIButton.args = { size: "md" };
+export const RightIcon = RightIconButton.bind({});
+RightIcon.args = { size: "md", variant: "primary" };
 
-const BIStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
+const BothSideIconButton: Story<ButtonProps> = args => (
+  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
     Button
   </Button>
 );
 
-export const BIButton = BIStory.bind({});
-BIButton.args = { size: "md" };
+export const BothSideIcon = BothSideIconButton.bind({});
+BothSideIcon.args = { size: "md", variant: "primary" };
 
-const LStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
+const LoadingIconButton: Story<ButtonProps> = args => (
+  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
     Button
   </Button>
 );
 
-export const LButton = LStory.bind({});
-LButton.args = { size: "md", isLoading: true };
+export const LoadingIcon = LoadingIconButton.bind({});
+LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
 
-const CLStory: Story<ButtonProps> = args => (
-  <Button leftIcon={<PhotographIcon />} rightIcon={<CrossIcon />} {...args}>
-    Button
-  </Button>
+const CustomSpinner = () => (
+  <>
+    Loading
+    <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
+  </>
 );
 
-const CustomSpinner = () => {
+export const CustomLaodingElement = LoadingIconButton.bind({});
+CustomLaodingElement.args = {
+  size: "md",
+  variant: "primary",
+  isLoading: true,
+  spinner: <CustomSpinner />,
+};
+
+const ButtonGroupBase: Story<ButtonGroupProps> = args => (
+  <ButtonGroup {...args}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+    <Button>Button 3</Button>
+  </ButtonGroup>
+);
+
+export const GroupDefault = ButtonGroupBase.bind({});
+GroupDefault.args = { className: "space-x-4" };
+
+export const GroupCollapsed = ButtonGroupBase.bind({});
+GroupCollapsed.args = {
+  isAttached: true,
+  size: "md",
+  variant: "primary",
+};
+
+export const GroupSecondary = ButtonGroupBase.bind({});
+GroupSecondary.args = {
+  isAttached: true,
+  size: "lg",
+  variant: "secondary",
+};
+
+const ButtonGroupExample: Story<ButtonGroupProps> = args => {
+  const tab = useTabState();
   return (
     <>
-      Loading
-      <Spinner className={ocx(theme.button.spinner, "ml-2")} />
+      <TabList as={ButtonGroup} {...args} {...tab} aria-label="My tabs">
+        <Tab as={Button} {...tab}>
+          Tab 1
+        </Tab>
+        <Tab as={Button} {...tab}>
+          Tab 2
+        </Tab>
+        <Tab as={Button} {...tab}>
+          Tab 3
+        </Tab>
+      </TabList>
+      <TabPanel {...tab}>Tab 1</TabPanel>
+      <TabPanel {...tab}>Tab 2</TabPanel>
+      <TabPanel {...tab}>Tab 3</TabPanel>
     </>
   );
 };
 
-export const CLButton = CLStory.bind({});
-CLButton.args = {
-  size: "md",
-  isLoading: true,
-  spinner: <CustomSpinner />,
+export const TabListAsGroup = ButtonGroupExample.bind({});
+TabListAsGroup.args = {
+  isAttached: true,
+  size: "lg",
+  variant: "secondary",
 };

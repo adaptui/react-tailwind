@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Icon, IconProps } from "./Icon";
 
+import { Icon, IconProps } from "./Icon";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export interface CreateIconOptions {
