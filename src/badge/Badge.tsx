@@ -1,26 +1,26 @@
 import React from "react";
+import { Box, BoxProps } from "../box/Box";
 
 import theme from "../theme";
 import { ocx } from "../utils";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
-type VariantsSolid = "primary" | "secondary" | "violet" | "red";
-type VariantsTertiary = `${VariantsSolid}-tertiary`;
+type Variants = "primary" | "secondary" | "outline";
 
-export interface BadgeProps {
+export type BadgeProps = BoxProps & {
   /**
    * badge variants
+   *
+   * @default "primary"
    */
-  variant?: VariantsSolid | "outline";
+  variant?: Variants;
   /**
    * How large should the button be?
+   *
+   * @default "sm"
    */
-  size?: "small" | "medium" | "large";
-  /**
-   * Is tertiary variant?
-   */
-  tertiary?: boolean;
-}
+  size?: "xs" | "sm" | "md" | "lg";
+};
 
 function BadgeComponent(
   props: PropsWithAs<BadgeProps, "span">,
@@ -28,8 +28,7 @@ function BadgeComponent(
 ) {
   const {
     variant = "primary",
-    tertiary = false,
-    size = "medium",
+    size = "sm",
     children,
     className,
     ...rest
@@ -38,16 +37,14 @@ function BadgeComponent(
   const badgeStyles = ocx(
     theme.badge.base,
     theme.badge.size[size],
-    tertiary
-      ? theme.badge.tertiaryVariants[`${variant}-tertiary` as VariantsTertiary]
-      : theme.badge.variants[variant],
+    theme.badge.variants[variant],
     className,
   );
 
   return (
-    <span ref={ref} className={badgeStyles} {...rest}>
+    <Box as="span" ref={ref} className={badgeStyles} {...rest}>
       {children}
-    </span>
+    </Box>
   );
 }
 

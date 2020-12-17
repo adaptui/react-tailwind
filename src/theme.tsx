@@ -36,20 +36,13 @@ const theme = {
     variants: {
       primary: "text-white bg-gray-800",
       secondary: "text-white bg-blue-500",
-      violet: "text-white bg-purple-500",
-      red: "text-white bg-red-600",
       outline: "bg-white text-gray-800 border border-gray-800",
     },
-    tertiaryVariants: {
-      "primary-tertiary": "text-gray-700 bg-gray-50",
-      "secondary-tertiary": "text-blue-700 bg-blue-50",
-      "violet-tertiary": "text-purple-700 bg-purple-50",
-      "red-tertiary": "text-red-700 bg-red-50",
-    },
     size: {
-      small: "text-xs px-2 py-1",
-      medium: "text-sm px-3 py-1",
-      large: "text-base px-4 py-1",
+      xs: "text-xs px-2 py-1",
+      sm: "text-sm px-3 py-1",
+      md: "text-base px-4 py-1",
+      lg: "text-lg px-5 py-1",
     },
   },
 };
