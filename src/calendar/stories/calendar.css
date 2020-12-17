@@ -5,17 +5,11 @@
 @import "tailwindcss/utilities";
 
 @layer components {
-  /* .calendar .calendar__cell[data-is-range-selection] {
-    @apply bg-blue-100 rounded-none text-gray-800 !important;
-  }
-  .calendar .calendar__cell[data-is-selection-start] {
-    @apply bg-blue-500 rounded-l-lg text-white !important;
-  }
-  .calendar .calendar__cell[data-is-selection-end] {
-    @apply bg-blue-500 rounded-r-lg text-white !important;
-  }
-
-  .calendar .calendar__cell[data-is-range-selection]:focus-within {
+  /** Need to add the variant for our data variant via addVariant plugin */
+  /** Need to fix the tailwind override issue with focuswith with the new variants */
+  /** Tailwind override detects only the plain css doesn't support variants */
+  /** Or Look into styling the calendar like the storybook example from renderless component */
+  /* .calendar .calendar__cell[data-is-range-selection]:focus-within {
     @apply bg-blue-400 text-white !important;
-  } */
+  }  */
 }
