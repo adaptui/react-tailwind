@@ -10,9 +10,12 @@ import {
   useCalendarState,
   CalendarInitialState,
   CalendarStateReturn,
+  useRangeCalendarState,
+  RangeCalendarInitialState,
 } from "@renderlesskit/react";
 
 import theme from "../theme";
+import { ocx } from "../utils";
 import { CalendarProvider, useCalendarContext } from "./helpers";
 
 export interface CalendarProps extends CalendarInitialState {}
@@ -20,6 +23,22 @@ export interface CalendarProps extends CalendarInitialState {}
 export const Calendar: React.FC<CalendarProps> = props => {
   const { children } = props;
   const ctx = useCalendarState(props);
+  const context = React.useMemo(() => ctx, [ctx]);
+
+  return (
+    <CalendarProvider value={context}>
+      <RenderlessCalendar {...ctx} className={theme.calendar.base}>
+        {children}
+      </RenderlessCalendar>
+    </CalendarProvider>
+  );
+};
+
+export interface RangeCalendarProps extends RangeCalendarInitialState {}
+
+export const RangeCalendar: React.FC<RangeCalendarProps> = props => {
+  const { children } = props;
+  const ctx = useRangeCalendarState(props);
   const context = React.useMemo(() => ctx, [ctx]);
 
   return (
@@ -118,7 +137,12 @@ export const CalendarTable: React.FC<{}> = props => {
   const state = useCalendarContext();
 
   return (
-    <CalendarGrid {...state} className={theme.calendar.table.base} {...props} />
+    <CalendarGrid
+      as="table"
+      {...state}
+      className={theme.calendar.table.base}
+      {...props}
+    />
   );
 };
 
@@ -176,7 +200,7 @@ export const CalendarTableBodyData: React.FC<any> = props => {
     <CalendarCell
       as="td"
       date={day}
-      className={theme.calendar.table.body.data.base}
+      className={ocx(theme.calendar.table.body.data.base)}
       {...state}
       {...rest}
     />

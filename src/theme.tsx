@@ -32,7 +32,7 @@ const theme = {
     },
   },
   calendar: {
-    base: "calendar p-3 rounded-md bg-white shadow-lg w-max",
+    base: "font-sans p-3 rounded-md bg-white shadow-lg w-max",
     header: {
       base: "flex justify-between",
       title: "text-sm font-bold text-gray-700",
@@ -45,7 +45,7 @@ const theme = {
         row: "text-center",
         header: {
           base:
-            "calendar__cell text-center rounded-lg text-sm wh32-minmax text-gray-500 font-light",
+            "text-center rounded-lg text-sm h-8 w-8 min-h-8 min-w-8 text-gray-500 font-light",
           abbr: "",
         },
       },
@@ -53,8 +53,9 @@ const theme = {
         base: "",
         row: "",
         data: {
-          base: "calendar__cell text-center rounded-lg text-sm wh32-minmax",
-          button: "p-2",
+          base:
+            "text-center rounded-lg text-sm h-8 w-8 min-h-8 min-w-8 focus-within:bg-gray-100 focus-within:text-black aria-selected:text-white aria-selected:bg-blue-400 is-range-selection:bg-blue-100 is-range-selection:rounded-none is-range-selection:text-gray-800 is-range-start:text-white is-range-start:bg-blue-500 is-range-end:text-white is-range-end:bg-blue-500 is-range-start:rounded-l-lg is-range-end:rounded-r-lg",
+          button: "p-2 outline-none aria-disabled:text-gray-400",
         },
       },
     },

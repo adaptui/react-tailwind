@@ -22,6 +22,7 @@ import {
   CalendarTableHeadColumns,
   CalendarTableHeadRow,
   CalendarTitle,
+  RangeCalendar,
 } from "../Calendar";
 
 export default {
@@ -63,3 +64,38 @@ const Template: Story = () => {
 
 export const Default = Template.bind({});
 Default.args = {};
+
+const RangeTemplate: Story = () => {
+  return (
+    <RangeCalendar>
+      <CalendarHeader>
+        <CalendarPreviousYearButton>
+          <DoubleChevronLeft />
+        </CalendarPreviousYearButton>
+        <CalendarPreviousMonthButton>
+          <ChevronLeft />
+        </CalendarPreviousMonthButton>
+        <CalendarTitle />
+        <CalendarNextMonthButton>
+          <ChevronRight />
+        </CalendarNextMonthButton>
+        <CalendarNextYearButton>
+          <DoubleChevronRight />
+        </CalendarNextYearButton>
+      </CalendarHeader>
+      <CalendarTable>
+        <CalendarTableHead>
+          <CalendarTableHeadRow>
+            <CalendarTableHeadColumns />
+          </CalendarTableHeadRow>
+        </CalendarTableHead>
+        <CalendarTableBody>
+          <CalendarTableBodyContents />
+        </CalendarTableBody>
+      </CalendarTable>
+    </RangeCalendar>
+  );
+};
+
+export const RangeDefault = RangeTemplate.bind({});
+RangeDefault.args = {};

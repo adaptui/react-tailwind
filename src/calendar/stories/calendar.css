@@ -4,17 +4,8 @@
 
 @import "tailwindcss/utilities";
 
-@layer utilities {
-  .wh32-minmax {
-    height: 32px;
-    width: 32px;
-    max-height: 32px;
-    max-width: 32px;
-  }
-}
-
 @layer components {
-  .calendar .calendar__cell[data-is-range-selection] {
+  /* .calendar .calendar__cell[data-is-range-selection] {
     @apply bg-blue-100 rounded-none text-gray-800 !important;
   }
   .calendar .calendar__cell[data-is-selection-start] {
@@ -26,18 +17,5 @@
 
   .calendar .calendar__cell[data-is-range-selection]:focus-within {
     @apply bg-blue-400 text-white !important;
-  }
-  .calendar .calendar__cell:focus-within {
-    @apply bg-gray-100;
-  }
-
-  .calendar.calendar [aria-selected="true"] {
-    @apply bg-blue-400 text-white;
-  }
-  .calendar.calendar [aria-disabled="true"] {
-    @apply text-gray-400;
-  }
-  .calendar.calendar span {
-    outline: none;
-  }
+  } */
 }
