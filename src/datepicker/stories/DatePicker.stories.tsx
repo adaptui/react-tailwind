@@ -1,4 +1,3 @@
-import "./datepicker.css";
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
@@ -10,7 +9,7 @@ import {
 import "./DatePicker.css";
 
 export default {
-  title: "Datepicker",
+  title: "DatePicker",
   component: CDatePicker,
   argTypes: {},
 } as Meta;
