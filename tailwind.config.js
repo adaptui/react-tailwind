@@ -1,4 +1,5 @@
 const plugin = require("tailwindcss/plugin");
+const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
   .default;
@@ -8,6 +9,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        orange: colors.orange,
+      },
       fontFamily: {
         sans: ["Inter"],
       },
@@ -62,6 +66,15 @@ module.exports = {
       };
 
       addUtilities(utilities);
+    }),
+    plugin(function ({ addUtilities }) {
+      const utilities = {
+        ".inherit": {
+          display: "inherit",
+        },
+      };
+
+      addUtilities(utilities, ["responsive"]);
     }),
   ],
 };
