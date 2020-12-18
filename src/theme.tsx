@@ -31,6 +31,19 @@ const theme = {
       xl: "h-12 w-12",
     },
   },
+  avatar: {
+    base:
+      "font-sans font-bold inline-flex items-center justify-center text-center text-white fill-current uppercase h-6 w-6 rounded-full ring-2 ring-white",
+    image: "rounded-full w-full h-full object-cover",
+    name:
+      "flex items-center justify-center text-center bg-gray-400 rounded-full w-full h-full",
+    size: {
+      xs: "text-sm h-8 w-8",
+      sm: "text-base h-12 w-12",
+      md: "text-2xl h-16 w-16",
+      lg: "text-3xl h-20 w-20",
+    },
+  },
 };
 
 export default theme;
