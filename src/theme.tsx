@@ -54,7 +54,7 @@ const theme = {
       sm: "text-sm px-3",
       md: "text-base px-4",
       lg: "text-lg px-5",
-    }
+    },
   },
   tag: {
     base:
