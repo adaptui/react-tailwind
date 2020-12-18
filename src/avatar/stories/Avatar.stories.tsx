@@ -93,10 +93,19 @@ export const NameAndFallback: Story<AvatarProps> = () => (
 );
 
 export const Group: Story<AvatarProps> = () => (
-  <AvatarGroup limit={2}>
-    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-    <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-    <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-    <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-  </AvatarGroup>
+  <>
+    {["xs", "sm", "md", "lg"].map((size, i) => {
+      return (
+        <>
+          <br />
+          <AvatarGroup limit={i + 1} size={size as any}>
+            <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+            <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+            <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+          </AvatarGroup>
+        </>
+      );
+    })}
+  </>
 );

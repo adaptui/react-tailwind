@@ -4,6 +4,7 @@ import theme from "../theme";
 import { ocx } from "../utils";
 import { useImage } from "../utils/useImage";
 import { GenericAvatar } from "../icons";
+import { useAvatarGroup } from "./AvatarGroup";
 
 function getInitials(name: string) {
   const [firstName, lastName] = name.split(" ");
@@ -39,13 +40,21 @@ export type AvatarProps = {
 export const Avatar: React.FC<AvatarProps> = ({
   name,
   src,
-  size = "md",
+  size,
   onError,
   className,
   fallback,
   children,
   ...rest
 }) => {
+  const group = useAvatarGroup();
+  const _size = size || group?.size || "md";
+  const avatarStyles = ocx(
+    theme.avatar.base,
+    theme.avatar.size[_size],
+    className,
+  );
+
   const _children = React.Children.toArray(children);
 
   const badges = _children.filter(child => {
@@ -56,11 +65,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   });
 
   return (
-    <div
-      aria-label={name}
-      {...rest}
-      className={ocx(theme.avatar.base, theme.avatar.size[size], className)}
-    >
+    <div aria-label={name} {...rest} className={avatarStyles}>
       <AvatarImage
         src={src}
         name={name}
@@ -105,11 +110,11 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
 };
 
 export type AvatarBadgeProps = {
-  position: "top-left" | "top-right" | "bottom-right" | "bottom-left";
+  position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
 };
 
 export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
-  position,
+  position = "bottom-right",
   children,
   ...rest
 }) => {
