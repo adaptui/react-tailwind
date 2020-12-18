@@ -72,7 +72,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   );
 };
 
-type AvatarImageProps = Pick<
+export type AvatarImageProps = Pick<
   AvatarProps,
   "name" | "src" | "onError" | "fallback"
 >;
@@ -104,9 +104,15 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
   );
 };
 
-export const AvatarBadge: React.FC<{
+export type AvatarBadgeProps = {
   position: "top-left" | "top-right" | "bottom-right" | "bottom-left";
-}> = ({ position, children, ...rest }) => {
+};
+
+export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
+  position,
+  children,
+  ...rest
+}) => {
   return (
     <div
       {...rest}
