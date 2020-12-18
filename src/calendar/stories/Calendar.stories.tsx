@@ -1,7 +1,7 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import "./calendar.css";
+import "./Calendar.css";
 import {
   ChevronLeft,
   ChevronRight,

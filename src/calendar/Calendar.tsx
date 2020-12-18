@@ -12,6 +12,7 @@ import {
   CalendarStateReturn,
   useRangeCalendarState,
   RangeCalendarInitialState,
+  RangeCalendarStateReturn,
 } from "@renderlesskit/react";
 
 import theme from "../theme";
@@ -52,6 +53,21 @@ export const RangeCalendar: React.FC<RangeCalendarProps> = props => {
 
 export const StatelessCalendar: React.FC<
   CalendarProps & { state: CalendarStateReturn }
+> = props => {
+  const { children } = props;
+  const context = React.useMemo(() => props.state, [props.state]);
+
+  return (
+    <CalendarProvider value={context}>
+      <RenderlessCalendar {...props.state} className={theme.calendar.base}>
+        {children}
+      </RenderlessCalendar>
+    </CalendarProvider>
+  );
+};
+
+export const StatelessRangeCalendar: React.FC<
+  RangeCalendarProps & { state: RangeCalendarStateReturn }
 > = props => {
   const { children } = props;
   const context = React.useMemo(() => props.state, [props.state]);
