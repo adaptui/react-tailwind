@@ -33,10 +33,19 @@ const theme = {
   },
   avatar: {
     base:
-      "font-sans font-bold inline-flex items-center justify-center text-center text-white fill-current uppercase h-6 w-6 rounded-full ring-2 ring-white",
+      "font-sans font-bold inline-flex items-center relative justify-center text-center text-white fill-current uppercase h-6 w-6 rounded-full ring-2 ring-white",
     image: "rounded-full w-full h-full object-cover",
-    name:
+    content:
       "flex items-center justify-center text-center bg-gray-400 rounded-full w-full h-full",
+    badge: {
+      base: "absolute",
+      position: {
+        "top-left": "top-0 left-0",
+        "top-right": "top-0 right-0",
+        "bottom-right": "bottom-0 right-0",
+        "bottom-left": "bottom-0 left-0",
+      },
+    },
     size: {
       xs: "text-sm h-8 w-8",
       sm: "text-base h-12 w-12",

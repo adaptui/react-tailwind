@@ -46,17 +46,29 @@ export const Avatar: React.FC<AvatarProps> = ({
   children,
   ...rest
 }) => {
+  const _children = React.Children.toArray(children);
+
+  const badges = _children.filter(child => {
+    return (child as JSX.Element).type === AvatarBadge;
+  });
+  const elements = _children.filter(child => {
+    return (child as JSX.Element).type !== AvatarBadge;
+  });
+
   return (
     <span
       {...rest}
       className={ocx(theme.avatar.base, theme.avatar.size[size], className)}
     >
-      <AvatarImage
-        src={src}
-        onError={onError}
-        name={name}
-        fallback={children || fallback}
-      />
+      <div aria-label={name} {...rest} className={ocx(theme.avatar.content)}>
+        <AvatarImage
+          src={src}
+          name={name}
+          onError={onError}
+          fallback={elements.length > 0 ? children : fallback}
+        />
+        {badges}
+      </div>
     </span>
   );
 };
@@ -78,11 +90,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
   const showFallback = !src || !hasLoaded;
 
   if (showFallback) {
-    return name ? (
-      <AvatarName name={name} />
-    ) : (
-      <span className={ocx(theme.avatar.name)}>{fallback}</span>
-    );
+    return <>{name ? (name ? getInitials?.(name) : null) : fallback}</>;
   }
 
   return (
@@ -97,10 +105,18 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
   );
 };
 
-const AvatarName: React.FC<{ name: string }> = ({ name, ...rest }) => {
+export const AvatarBadge: React.FC<{
+  position: "top-left" | "top-right" | "bottom-right" | "bottom-left";
+}> = ({ position, children, ...rest }) => {
   return (
-    <div aria-label={name} {...rest} className={ocx(theme.avatar.name)}>
-      {name ? getInitials?.(name) : null}
+    <div
+      {...rest}
+      className={ocx(
+        theme.avatar.badge.base,
+        theme.avatar.badge.position[position],
+      )}
+    >
+      {children}
     </div>
   );
 };
