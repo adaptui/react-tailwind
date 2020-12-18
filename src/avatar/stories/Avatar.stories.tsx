@@ -5,6 +5,7 @@ import "./avatar.css";
 import { Avatar, AvatarProps } from "..";
 import { ClockIcon } from "../../icons";
 import { AvatarBadge } from "../Avatar";
+import { AvatarGroup } from "../AvatarGroup";
 
 export default {
   title: "Avatar",
@@ -89,4 +90,13 @@ export const NoNameAndSrcButFallback: Story<AvatarProps> = () => (
 );
 export const NameAndFallback: Story<AvatarProps> = () => (
   <Avatar name="Anurag Hazra" fallback={<ClockIcon />} />
+);
+
+export const Group: Story<AvatarProps> = () => (
+  <AvatarGroup limit={2}>
+    <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+    <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+    <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+    <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+  </AvatarGroup>
 );

@@ -35,6 +35,9 @@ const theme = {
     base:
       "font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white",
     image: "rounded-full w-full h-full object-cover",
+    group: {
+      base: "flex items-center space-x-2",
+    },
     badge: {
       base: "absolute",
       position: {
