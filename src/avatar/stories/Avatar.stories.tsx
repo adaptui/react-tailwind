@@ -33,12 +33,15 @@ Default.args = { size: "md" };
 export const OnError: Story<AvatarProps> = () => (
   <Avatar
     src="https://bit.ly/dan-dabramov"
-    onError={() => alert("Error loading image")}
+    onError={e => {
+      alert("Error loading image");
+      console.log(e);
+    }}
   />
 );
 
 export const WithIcon: Story<AvatarProps> = () => (
-  <Avatar>
+  <Avatar className="bg-red-400">
     <ClockIcon />
   </Avatar>
 );

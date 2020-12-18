@@ -56,20 +56,19 @@ export const Avatar: React.FC<AvatarProps> = ({
   });
 
   return (
-    <span
+    <div
+      aria-label={name}
       {...rest}
       className={ocx(theme.avatar.base, theme.avatar.size[size], className)}
     >
-      <div aria-label={name} {...rest} className={ocx(theme.avatar.content)}>
-        <AvatarImage
-          src={src}
-          name={name}
-          onError={onError}
-          fallback={elements.length > 0 ? children : fallback}
-        />
-        {badges}
-      </div>
-    </span>
+      <AvatarImage
+        src={src}
+        name={name}
+        onError={onError}
+        fallback={elements.length > 0 ? children : fallback}
+      />
+      {badges}
+    </div>
   );
 };
 

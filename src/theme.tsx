@@ -33,10 +33,8 @@ const theme = {
   },
   avatar: {
     base:
-      "font-sans font-bold inline-flex items-center relative justify-center text-center text-white fill-current uppercase h-6 w-6 rounded-full ring-2 ring-white",
+      "font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white",
     image: "rounded-full w-full h-full object-cover",
-    content:
-      "flex items-center justify-center text-center bg-gray-400 rounded-full w-full h-full",
     badge: {
       base: "absolute",
       position: {
