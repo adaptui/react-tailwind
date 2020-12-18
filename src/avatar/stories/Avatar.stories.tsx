@@ -1,5 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
+import { useTooltipState, TooltipReference, Tooltip } from "reakit";
 
 import "./avatar.css";
 import { Avatar, AvatarProps } from "..";
@@ -91,6 +92,27 @@ export const NoNameAndSrcButFallback: Story<AvatarProps> = () => (
 export const NameAndFallback: Story<AvatarProps> = () => (
   <Avatar name="Anurag Hazra" fallback={<ClockIcon />} />
 );
+
+export const OnlineTooltip: Story<AvatarProps> = () => {
+  const tooltip = useTooltipState({ placement: "right-start", gutter: 5 });
+
+  return (
+    <Avatar name="Anurag Hazra" src="https://bit.ly/dan-abramov">
+      <AvatarBadge>
+        <Tooltip
+          as="div"
+          className="font-sans bg-green-500 text-white rounded-full text-xs px-1"
+          {...tooltip}
+        >
+          Online
+        </Tooltip>
+        <TooltipReference {...tooltip}>
+          <OnlineDot></OnlineDot>
+        </TooltipReference>
+      </AvatarBadge>
+    </Avatar>
+  );
+};
 
 export const Group: Story<AvatarProps> = () => (
   <>
