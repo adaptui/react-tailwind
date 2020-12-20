@@ -14,9 +14,11 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
   (props: PropsWithAs<Props, DefaultType>): JSX.Element;
 };
 
-export function forwardRefWithAs<Props, DefaultType extends As>(
-  component: React.ForwardRefRenderFunction<any, any>,
-) {
+export function forwardRefWithAs<
+  Props,
+  RefProp = any,
+  DefaultType extends As = any
+>(component: React.ForwardRefRenderFunction<RefProp, Props>) {
   return (React.forwardRef(component) as unknown) as ComponentWithAs<
     Props,
     DefaultType
