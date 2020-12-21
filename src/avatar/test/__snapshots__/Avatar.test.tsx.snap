@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Avatar should render Avatar 1`] = `
+<DocumentFragment>
+  <div
+    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+  >
+    <svg
+      class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+      focusable="false"
+      viewBox="0 0 16 16"
+    >
+      <g
+        clip-path="url(#clip0)"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 6.8a3.44 3.44 0 003.43-3.4A3.39 3.39 0 008 0a3.44 3.44 0 00-3.43 3.4c0 .9.36 1.77 1 2.4.65.64 1.52 1 2.43 1zM0 17a7.88 7.88 0 014.94-7.33 8.06 8.06 0 0110.45 4.3c.4.96.61 1.99.61 3.03H0z"
+          fill-rule="evenodd"
+        />
+      </g>
+      <defs>
+        <clippath
+          id="clip0"
+        >
+          <path
+            d="M0 0h16v16H0z"
+            fill="#fff"
+          />
+        </clippath>
+      </defs>
+    </svg>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Testing Avatar should render with AvatarBadge & children 1`] = `
+<DocumentFragment>
+  <div
+    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+  >
+    <p>
+      Some Child Element
+    </p>
+    <div
+      class="absolute bottom-0 right-0"
+    >
+      *
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Testing Avatar should render with AvatarBadge 1`] = `
+<DocumentFragment>
+  <div
+    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+  >
+    <svg
+      class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+      focusable="false"
+      viewBox="0 0 16 16"
+    >
+      <g
+        clip-path="url(#clip0)"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 6.8a3.44 3.44 0 003.43-3.4A3.39 3.39 0 008 0a3.44 3.44 0 00-3.43 3.4c0 .9.36 1.77 1 2.4.65.64 1.52 1 2.43 1zM0 17a7.88 7.88 0 014.94-7.33 8.06 8.06 0 0110.45 4.3c.4.96.61 1.99.61 3.03H0z"
+          fill-rule="evenodd"
+        />
+      </g>
+      <defs>
+        <clippath
+          id="clip0"
+        >
+          <path
+            d="M0 0h16v16H0z"
+            fill="#fff"
+          />
+        </clippath>
+      </defs>
+    </svg>
+    <div
+      class="absolute bottom-0 right-0"
+    >
+      *
+    </div>
+  </div>
+</DocumentFragment>
+`;

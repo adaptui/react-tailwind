@@ -62,7 +62,7 @@ export const Avatar: React.FC<AvatarProps> = ({
         src={src}
         name={name}
         onError={onError}
-        fallback={elements.length > 0 ? children : fallback}
+        fallback={elements.length > 0 ? elements : fallback}
       />
       {badges}
     </div>
