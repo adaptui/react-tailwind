@@ -19,6 +19,9 @@ const theme = {
       lg: "h-12 min-w-12 text-lg px-6",
     },
   },
+  iconButton: {
+    base: "px-0",
+  },
   buttonGroup: {
     base: "inline-block",
     attached: "collapse-border",
@@ -54,7 +57,7 @@ const theme = {
       sm: "text-sm px-3",
       md: "text-base px-4",
       lg: "text-lg px-5",
-    }
+    },
   },
   tag: {
     base:
