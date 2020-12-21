@@ -14,7 +14,7 @@ export default {
 } as Meta;
 
 const OnlineDot = () => (
-  <div className="w-4 h-4 rounded-full bg-green-500 border-2 border-white"></div>
+  <div className="w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
 );
 
 const TypingAnimation = () => (
@@ -26,11 +26,11 @@ const TypingAnimation = () => (
 );
 
 const Base: Story<AvatarProps> = args => (
-  <Avatar {...args} src="https://bit.ly/dan-abramov" name="Dan Abrahmov" />
+  <Avatar src="https://bit.ly/dan-abramov" name="Dan Abrahmov" {...args} />
 );
 
 export const Default = Base.bind({});
-Default.args = { size: "md" };
+Default.args = { size: "xl" };
 
 export const OnError: Story<AvatarProps> = () => (
   <Avatar
@@ -43,13 +43,13 @@ export const OnError: Story<AvatarProps> = () => (
 );
 
 export const WithIcon: Story<AvatarProps> = () => (
-  <Avatar className="bg-red-400">
+  <Avatar className="bg-red-400 text-white">
     <ClockIcon />
   </Avatar>
 );
 
 export const WithIconAndBadge: Story<AvatarProps> = () => (
-  <Avatar>
+  <Avatar size="xl">
     <ClockIcon />
     <AvatarBadge position="bottom-right">
       <OnlineDot />
@@ -62,7 +62,7 @@ export const WithBadge: Story<AvatarProps> = () => {
 
   return (
     <>
-      <Avatar src="https://bit.ly/dan-abramov">
+      <Avatar size="xl" src="https://bit.ly/dan-abramov">
         <AvatarBadge position="bottom-right">
           {isTyping ? <TypingAnimation /> : <OnlineDot />}
         </AvatarBadge>
@@ -97,7 +97,7 @@ export const OnlineTooltip: Story<AvatarProps> = () => {
   const tooltip = useTooltipState({ placement: "right-start", gutter: 5 });
 
   return (
-    <Avatar name="Anurag Hazra" src="https://bit.ly/dan-abramov">
+    <Avatar size="xl" name="Anurag Hazra" src="https://bit.ly/dan-abramov">
       <AvatarBadge>
         <Tooltip
           as="div"

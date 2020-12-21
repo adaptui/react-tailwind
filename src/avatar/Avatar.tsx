@@ -17,7 +17,7 @@ export type AvatarProps = {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   /**
    * Custom fallback
    */

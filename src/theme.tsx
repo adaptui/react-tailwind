@@ -44,7 +44,7 @@ const theme = {
   },
   avatar: {
     base:
-      "font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white",
+      "font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white",
     image: "rounded-full w-full h-full object-cover",
     group: {
       base: "flex items-center space-x-2",
@@ -59,10 +59,11 @@ const theme = {
       },
     },
     size: {
-      xs: "text-sm h-8 w-8",
-      sm: "text-base h-12 w-12",
-      md: "text-2xl h-16 w-16",
-      lg: "text-3xl h-20 w-20",
+      xs: "text-xs h-4 w-4",
+      sm: "text-xs h-5 w-5",
+      md: "text-xs h-6 w-6",
+      lg: "text-sm h-8 w-8",
+      xl: "text-sm h-10 w-10",
     },
   },
   badge: {
