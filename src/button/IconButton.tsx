@@ -13,7 +13,7 @@ function IconButtonComponent(
   ref: React.Ref<HTMLButtonElement>,
 ) {
   const { children, className, ...rest } = props;
-  const iconButtonStyles = ocx(theme.iconButton.base, className);
+  const iconButtonStyles = ocx(theme.button.iconButton, className);
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
         "aria-hidden": true,

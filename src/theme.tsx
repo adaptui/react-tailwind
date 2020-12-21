@@ -7,6 +7,7 @@ const theme = {
     spinner: "w-em h-em text-current",
     group: "focus:z-1",
     span: "inline-block cursor-not-allowed",
+    iconButton: "px-0",
     variant: {
       primary: "bg-gray-800",
       secondary: "bg-gray-100 text-gray-800",
@@ -18,9 +19,6 @@ const theme = {
       md: "h-10 min-w-10 text-base px-4",
       lg: "h-12 min-w-12 text-lg px-6",
     },
-  },
-  iconButton: {
-    base: "px-0",
   },
   buttonGroup: {
     base: "inline-block",
