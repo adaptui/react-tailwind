@@ -15,7 +15,7 @@ export type AvatarProps = {
    */
   name?: string;
   /**
-   * How large should the button be?
+   * How large should avatar be?
    */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   /**
