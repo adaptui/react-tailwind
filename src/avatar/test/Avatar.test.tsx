@@ -10,7 +10,7 @@ const axe = configureAxe({
   },
 });
 
-describe("Testing Avatar", () => {
+describe("<Avatar />", () => {
   expect.assertions(1);
 
   it("should render Avatar", () => {

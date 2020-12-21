@@ -41,7 +41,12 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         className={ocx(theme.avatar.group.base)}
       >
         {avatars}
-        {isOverLimit ? <Avatar name={`+ ${childrenCount - limit}`} /> : null}
+        {isOverLimit ? (
+          <Avatar
+            data-testid="testid-truncated"
+            name={`+ ${childrenCount - limit}`}
+          />
+        ) : null}
       </div>
     </AvatarGroupProvider>
   );
