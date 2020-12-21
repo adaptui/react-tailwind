@@ -1,4 +1,3 @@
-import "./datepicker.css";
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
@@ -7,6 +6,7 @@ import {
   CDateRangePicker,
   CustomInputDatePicker,
 } from "../DatePicker";
+import "./DatePicker.css";
 
 export default {
   title: "DatePicker",
@@ -14,9 +14,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story = () => {
-  return <CDatePicker />;
-};
+const Base: Story = () => <CDatePicker />;
 
 const Template2: Story = () => {
   return (
@@ -24,10 +22,10 @@ const Template2: Story = () => {
   );
 };
 
-export const CustomInput = () => <CustomInputDatePicker />;
-
-export const Default = Template.bind({});
+export const Default = Base.bind({});
 Default.args = {};
 
 export const Range = Template2.bind({});
 Range.args = {};
+
+export const CustomInput = () => <CustomInputDatePicker />;
