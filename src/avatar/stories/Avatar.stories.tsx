@@ -7,15 +7,12 @@ import { Avatar, AvatarProps } from "..";
 import { ClockIcon } from "../../icons";
 import { AvatarBadge } from "../Avatar";
 import { AvatarGroup } from "../AvatarGroup";
+import Status, { OfflineDot, OnlineDot } from "../../common/Status";
 
 export default {
   title: "Avatar",
   component: Avatar,
 } as Meta;
-
-const OnlineDot = () => (
-  <div className="w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
-);
 
 const TypingAnimation = () => (
   <div className="spinner rounded-xl bg-green-500 border-2 border-white">
@@ -26,7 +23,11 @@ const TypingAnimation = () => (
 );
 
 const Base: Story<AvatarProps> = args => (
-  <Avatar src="https://bit.ly/dan-abramov" name="Dan Abrahmov" {...args} />
+  <Avatar
+    src="https://bit.ly/dan-abramov"
+    name="Dan Abrahmov"
+    {...args}
+  ></Avatar>
 );
 
 export const Default = Base.bind({});
@@ -52,7 +53,7 @@ export const WithIconAndBadge: Story<AvatarProps> = () => (
   <Avatar size="xl">
     <ClockIcon />
     <AvatarBadge position="bottom-right">
-      <OnlineDot />
+      <OfflineDot />
     </AvatarBadge>
   </Avatar>
 );
@@ -91,6 +92,25 @@ export const NoNameAndSrcButFallback: Story<AvatarProps> = () => (
 );
 export const NameAndFallback: Story<AvatarProps> = () => (
   <Avatar name="Anurag Hazra" fallback={<ClockIcon />} />
+);
+export const Statuses: Story<AvatarProps> = () => (
+  <AvatarGroup size="xl">
+    <Avatar size="xl" src="https://bit.ly/dan-abramov" name="Anurag Hazra">
+      <AvatarBadge>
+        <Status status="online" />
+      </AvatarBadge>
+    </Avatar>
+    <Avatar size="xl" src="https://bit.ly/dan-abramov" name="Anurag Hazra">
+      <AvatarBadge>
+        <Status status="offline" />
+      </AvatarBadge>
+    </Avatar>
+    <Avatar size="xl" src="https://bit.ly/dan-abramov" name="Anurag Hazra">
+      <AvatarBadge>
+        <Status status="sleep" />
+      </AvatarBadge>
+    </Avatar>
+  </AvatarGroup>
 );
 
 export const OnlineTooltip: Story<AvatarProps> = () => {

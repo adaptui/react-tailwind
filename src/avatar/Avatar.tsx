@@ -64,17 +64,22 @@ export const Avatar: React.FC<AvatarProps> = ({
         onError={onError}
         fallback={elements.length > 0 ? elements : fallback}
       />
-      {badges}
+      {React.Children.map(badges, badge => {
+        if (React.isValidElement(badge)) {
+          return React.cloneElement(badge, { size: _size });
+        }
+      })}
     </div>
   );
 };
 
 export type AvatarBadgeProps = {
   position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
-};
+} & Pick<AvatarProps, "size">;
 
 export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
   position = "bottom-right",
+  size = "md",
   children,
   ...rest
 }) => {
@@ -82,6 +87,7 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
     <div
       {...rest}
       className={ocx(
+        theme.avatar.badge.size[size],
         theme.avatar.badge.base,
         theme.avatar.badge.position[position],
       )}

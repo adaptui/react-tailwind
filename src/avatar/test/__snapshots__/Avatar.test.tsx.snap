@@ -3,7 +3,7 @@
 exports[`<Avatar /> should render Avatar 1`] = `
 <DocumentFragment>
   <div
-    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
   >
     <svg
       class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -12,7 +12,7 @@ exports[`<Avatar /> should render Avatar 1`] = `
     >
       <path
         d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-        fill="currentColor"
+        fill="transparent"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -26,13 +26,13 @@ exports[`<Avatar /> should render Avatar 1`] = `
 exports[`<Avatar /> should render with AvatarBadge & children 1`] = `
 <DocumentFragment>
   <div
-    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
   >
     <p>
       Some Child Element
     </p>
     <div
-      class="absolute bottom-0 right-0"
+      class="text-xs h-2 w-2 absolute bottom-0 right-0"
     >
       *
     </div>
@@ -43,7 +43,7 @@ exports[`<Avatar /> should render with AvatarBadge & children 1`] = `
 exports[`<Avatar /> should render with AvatarBadge 1`] = `
 <DocumentFragment>
   <div
-    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
   >
     <svg
       class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -52,7 +52,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
     >
       <path
         d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-        fill="currentColor"
+        fill="transparent"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -60,7 +60,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       />
     </svg>
     <div
-      class="absolute bottom-0 right-0"
+      class="text-xs h-2 w-2 absolute bottom-0 right-0"
     >
       *
     </div>

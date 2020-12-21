@@ -57,6 +57,13 @@ const theme = {
         "bottom-right": "bottom-0 right-0",
         "bottom-left": "bottom-0 left-0",
       },
+      size: {
+        xs: "text-xs h-1.5 w-1.5",
+        sm: "text-xs h-2 w-2",
+        md: "text-xs h-2 w-2",
+        lg: "text-sm h-2.5 w-2.5",
+        xl: "text-sm h-3 w-3",
+      },
     },
     size: {
       xs: "text-xs h-4 w-4",

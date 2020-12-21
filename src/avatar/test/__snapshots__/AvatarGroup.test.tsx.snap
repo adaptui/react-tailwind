@@ -8,7 +8,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
     role="group"
   >
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-3xl h-20 w-20"
+      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
     >
       <svg
         class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -17,7 +17,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       >
         <path
           d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="currentColor"
+          fill="transparent"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -26,7 +26,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       </svg>
     </div>
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
+      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-4 w-4"
     >
       <svg
         class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -35,7 +35,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       >
         <path
           d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="currentColor"
+          fill="transparent"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -55,7 +55,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
     role="group"
   >
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-3xl h-20 w-20"
+      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
     >
       <svg
         class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -64,7 +64,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       >
         <path
           d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="currentColor"
+          fill="transparent"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -73,7 +73,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       </svg>
     </div>
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-3xl h-20 w-20"
+      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
     >
       <svg
         class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -82,7 +82,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       >
         <path
           d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="currentColor"
+          fill="transparent"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -102,7 +102,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
     role="group"
   >
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
     >
       <svg
         class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -111,7 +111,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       >
         <path
           d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="currentColor"
+          fill="transparent"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -120,7 +120,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       </svg>
     </div>
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-white bg-gray-400 fill-current rounded-full ring-2 ring-white text-2xl h-16 w-16"
+      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
     >
       <svg
         class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
@@ -129,7 +129,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       >
         <path
           d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="currentColor"
+          fill="transparent"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
