@@ -41,8 +41,8 @@ function ButtonGroupComponent(
   const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
   const buttonGroupStyles = ocx(
-    `button-group-base`,
-    isAttached ? `button-group-attached` : "",
+    "button-group-base",
+    isAttached ? "button-group-attached" : "",
     className,
   );
 

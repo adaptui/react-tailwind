@@ -48,6 +48,7 @@ function componentPlugin({ addComponents, theme }) {
           ...sizeKeys,
           ...variantKeys,
           ...stokeKeys,
+          ...getPropThemeValue("buttonGroup", "attached"),
           ...getPropThemeValue("button", "prefix"),
           ...getPropThemeValue("button", "suffix"),
           ...getPropThemeValue("tag", "prefix"),
