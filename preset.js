@@ -3,6 +3,8 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
   .default;
 const deepMerge = require("deepmerge");
+const { overrideTailwindClasses } = require("tailwind-override");
+const { cx } = require("@renderlesskit/react");
 
 const uiConfigs = {
   purge: [],
@@ -86,6 +88,41 @@ const uiConfigs = {
   ],
 };
 
+// String assertions
+const isString = value =>
+  Object.prototype.toString.call(value) === "[object String]";
+const isObject = obj => obj && typeof obj === "object";
+const ocx = (...classNames) => overrideTailwindClasses(cx(...classNames));
+
+/**
+ * Performs a deep merge of `source` into `target`.
+ * Mutates `target` only but not its objects and arrays.
+ *
+ * @author inspired by [jhildenbiddle](https://stackoverflow.com/a/48218209).
+ */
+function mergeDeep(target, source) {
+  if (!isObject(target) || !isObject(source)) {
+    return source;
+  }
+
+  Object.keys(source).forEach(key => {
+    const targetValue = target[key];
+    const sourceValue = source[key];
+
+    if (isString(targetValue) && isString(sourceValue)) {
+      target[key] = ocx(targetValue, sourceValue);
+    } else if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+      target[key] = targetValue.concat(sourceValue);
+    } else if (isObject(targetValue) && isObject(sourceValue)) {
+      target[key] = mergeDeep(Object.assign({}, targetValue), sourceValue);
+    } else {
+      target[key] = sourceValue;
+    }
+  });
+
+  return target;
+}
+
 function arrayMergeFn(destinationArray, sourceArray) {
   return destinationArray.concat(sourceArray).reduce((acc, cur) => {
     if (acc.includes(cur)) return acc;
@@ -101,8 +138,7 @@ function mergeConfigs(tailwindConfig) {
     ...userTailwindConfigs
   } = tailwindConfig;
 
-  const mergedComponents = deepMerge(components, userComponents);
-  // console.log("%c mergedComponents", "color: #f279ca", mergedComponents);
+  const mergedComponents = mergeDeep(components, userComponents);
 
   const componentPlugin = plugin(function ({
     addUtilities,

@@ -5,6 +5,9 @@ module.exports = preset({
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Inter"],
+      },
       spacing: {
         "2em": "2em", // for testing
       },
@@ -12,7 +15,7 @@ module.exports = preset({
   },
   components: {
     button: {
-      variant: { secondary: "bg-green-500 text-white" }, // for testing
+      variant: { secondary: "bg-green-500" }, // for testing
     },
   },
   variants: {
