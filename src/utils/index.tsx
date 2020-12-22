@@ -2,7 +2,7 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 import { overrideTailwindClasses } from "tailwind-override";
 
-import tailwindProperties from "../../tailwindProperties.json";
+import { tailwindProperties } from "./tailwindProperties";
 
 export interface CreateContextOptions {
   /**

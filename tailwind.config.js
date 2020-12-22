@@ -24,6 +24,9 @@ module.exports = {
         ...defaultTheme.spacing,
       },
       borderBottom: {},
+      zIndex: {
+        1: 1,
+      },
     },
   },
   variants: {
@@ -47,7 +50,7 @@ module.exports = {
     },
   },
   plugins: [
-    ({ addUtilities, e, theme, variants }) => {
+    plugin(function ({ addUtilities, e, theme, variants }) {
       const colors = flattenColorPalette(theme("borderColor"));
       delete colors["default"];
 
@@ -60,7 +63,7 @@ module.exports = {
       const utilities = Object.assign({}, ...colorMap);
 
       addUtilities(utilities, variants("borderColor"));
-    },
+    }),
     plugin(function ({ addVariant, e }) {
       addVariant("aria-selected", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
@@ -105,6 +108,23 @@ module.exports = {
           )}[data-is-selection-end]`;
         });
       });
+    }),
+    plugin(function ({ addUtilities }) {
+      const utilities = {
+        ".collapse-border > :first-of-type:not(:last-of-type)": {
+          "border-top-right-radius": "0px",
+          "border-bottom-right-radius": "0px",
+        },
+        ".collapse-border > :not(:first-of-type):not(:last-of-type)": {
+          "border-radius": "0px",
+        },
+        ".collapse-border > :not(:first-of-type):last-of-type": {
+          "border-top-left-radius": "0px",
+          "border-bottom-left-radius": "0px",
+        },
+      };
+
+      addUtilities(utilities);
     }),
   ],
 };

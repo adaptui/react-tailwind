@@ -1,3 +1,4 @@
+import * as React from "react";
 import { createIcon } from "../icon";
 
 export const ClockIcon = createIcon({
