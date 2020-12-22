@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import theme from "../theme";
 import { Box, BoxProps } from "../box";
 import { createContext, ocx } from "../utils";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
@@ -42,8 +41,8 @@ function ButtonGroupComponent(
   const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
   const buttonGroupStyles = ocx(
-    theme.buttonGroup.base,
-    isAttached ? theme.buttonGroup.attached : "",
+    `button-group-base`,
+    isAttached ? `button-group-attached` : "",
     className,
   );
 

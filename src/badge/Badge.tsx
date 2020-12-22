@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, BoxProps } from "../box/Box";
 
-import theme from "../theme";
 import { ocx } from "../utils";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 

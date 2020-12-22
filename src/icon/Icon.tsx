@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import theme from "../theme";
 import { ocx } from "../utils";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
@@ -39,7 +38,7 @@ function IconComponent(
     ...rest
   } = props;
 
-  const iconStyles = theme.icon.base;
+  const iconStyles = "icon-base";
 
   const shared: any = {
     ref,

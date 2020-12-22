@@ -1,7 +1,6 @@
 import React from "react";
 import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 
-import theme from "../theme";
 import { ocx } from "../utils";
 import { CrossIcon } from "../icons";
 import { Box, BoxProps } from "../box";
@@ -57,7 +56,7 @@ function TagComponent(
     children,
     ...rest
   } = props;
-  const tagStyles = ocx(theme.tag.base, theme.tag.size[size], className);
+  const tagStyles = ocx("tag-base", `tag-${size}`, className);
 
   // TODO: Clean this up
   if (!closable && suffix.type.displayName !== (CrossIcon as any).displayName) {
@@ -68,7 +67,7 @@ function TagComponent(
 
   const TagWithPrefixSuffix = () => (
     <>
-      {prefix && <span className={theme.tag.prefix}>{prefix}</span>}
+      {prefix && <span className={"tag-prefix"}>{prefix}</span>}
       {children}
       {closable && suffix && (
         <ClosableElement handleClick={() => onClose?.(id)}>
@@ -95,7 +94,7 @@ const ClosableElement: React.FC<{
   return (
     <CompositeItem
       as={Clickable}
-      className={theme.tag.suffix}
+      className={"tag-suffix"}
       onClick={handleClick}
       {...(composite ? composite : {})}
     >

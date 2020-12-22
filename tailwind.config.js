@@ -1,3 +1,4 @@
+const { kebabCase } = require("lodash");
 const plugin = require("tailwindcss/plugin");
 const defaultTheme = require("tailwindcss/defaultTheme");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
@@ -10,10 +11,10 @@ function componentPlugin({ addComponents, theme }) {
     const componentNames = Object.keys(components);
 
     const getThemeValues = (component, name, prop) => {
-      if (!component.variant) return {};
+      if (!component[prop] || !component) return {};
 
       return Object.keys(component[prop])
-        .map(s => `${name}-${s}`)
+        .map(s => `${kebabCase(name)}-${s}`)
         .reduce((prev, curr) => {
           return {
             ...prev,
@@ -26,30 +27,38 @@ function componentPlugin({ addComponents, theme }) {
         }, {});
     };
 
-    const calculateBase = name => {
+    const getPropThemeValue = (name, prop) => {
       return {
-        [`.${name}-base`]: {
-          [`@apply ${theme(`components.${name}.base`)}`]: {},
+        [`.${kebabCase(name)}-${prop}`]: {
+          [`@apply ${theme(`components.${name}.${prop}`)}`]: {},
         },
       };
     };
 
     const getComponentClasses = componentNames => {
       return componentNames.reduce((prev, name) => {
-        const base = calculateBase(name);
+        const base = getPropThemeValue(name, "base");
         const sizeKeys = getThemeValues(components[name], name, "size");
         const variantKeys = getThemeValues(components[name], name, "variant");
+        const stokeKeys = getThemeValues(components[name], name, "stroke");
 
         return {
           ...prev,
           ...base,
           ...sizeKeys,
           ...variantKeys,
+          ...stokeKeys,
+          ...getPropThemeValue("button", "prefix"),
+          ...getPropThemeValue("button", "suffix"),
+          ...getPropThemeValue("tag", "prefix"),
+          ...getPropThemeValue("tag", "suffix"),
         };
       }, {});
     };
 
-    addComponents(getComponentClasses(componentNames));
+    let c = getComponentClasses(componentNames);
+    console.log(c);
+    addComponents(c);
   };
 
   getComponentCSSObject(components);
