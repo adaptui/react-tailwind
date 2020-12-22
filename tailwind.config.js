@@ -3,6 +3,58 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
   .default;
 
+const components = require("./components");
+
+function componentPlugin({ addComponents, theme }) {
+  const getComponentCSSObject = components => {
+    const componentNames = Object.keys(components);
+
+    const getThemeValues = (component, name, prop) => {
+      if (!component.variant) return {};
+
+      return Object.keys(component[prop])
+        .map(s => `${name}-${s}`)
+        .reduce((prev, curr) => {
+          return {
+            ...prev,
+            [`.${curr}`]: {
+              [`@apply ${theme(
+                `components.${name}.${prop}.${curr.replace(`${name}-`, "")}`,
+              )}`]: {},
+            },
+          };
+        }, {});
+    };
+
+    const calculateBase = name => {
+      return {
+        [`.${name}-base`]: {
+          [`@apply ${theme(`components.${name}.base`)}`]: {},
+        },
+      };
+    };
+
+    const getComponentClasses = componentNames => {
+      return componentNames.reduce((prev, name) => {
+        const base = calculateBase(name);
+        const sizeKeys = getThemeValues(components[name], name, "size");
+        const variantKeys = getThemeValues(components[name], name, "variant");
+
+        return {
+          ...prev,
+          ...base,
+          ...sizeKeys,
+          ...variantKeys,
+        };
+      }, {});
+    };
+
+    addComponents(getComponentClasses(componentNames));
+  };
+
+  getComponentCSSObject(components);
+}
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -30,28 +82,7 @@ module.exports = {
         },
       },
     },
-    components: {
-      button: {
-        base:
-          "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
-        prefix: "flex mr-2",
-        suffix: "flex ml-2",
-        spinner: "w-em h-em text-current",
-        group: "focus:z-1",
-        span: "inline-block cursor-not-allowed",
-        variant: {
-          primary: "bg-gray-800",
-          secondary: "bg-gray-100 text-gray-800",
-          link: "text-gray-800",
-        },
-        size: {
-          xs: "h-6 min-w-6 text-xs px-2",
-          sm: "h-8 min-w-8 text-sm px-3",
-          md: "h-10 min-w-10 text-base px-4",
-          lg: "h-12 min-w-12 text-lg px-6",
-        },
-      },
-    },
+    components: components,
   },
   variants: {
     extend: {
@@ -91,46 +122,6 @@ module.exports = {
 
       addUtilities(utilities);
     }),
-    plugin(function ({
-      addUtilities,
-      addComponents,
-      addbase,
-      addVariant,
-      e,
-      prefix,
-      theme,
-      variants,
-      config,
-      postcss,
-    }) {
-      const components = {
-        ".button-base": {
-          [`@apply ${theme("components.button.base")}`]: {},
-        },
-        ".button-primary": {
-          [`@apply ${theme("components.button.variant.primary")}`]: {},
-        },
-        ".button-secondary": {
-          [`@apply ${theme("components.button.variant.secondary")}`]: {},
-        },
-        ".button-link": {
-          [`@apply ${theme("components.button.variant.link")}`]: {},
-        },
-        ".button-xs": {
-          [`@apply ${theme("components.button.size.xs")}`]: {},
-        },
-        ".button-sm": {
-          [`@apply ${theme("components.button.size.sm")}`]: {},
-        },
-        ".button-md": {
-          [`@apply ${theme("components.button.size.md")}`]: {},
-        },
-        ".button-lg": {
-          [`@apply ${theme("components.button.size.lg")}`]: {},
-        },
-      };
-
-      addComponents(components);
-    }),
+    plugin(componentPlugin),
   ],
 };

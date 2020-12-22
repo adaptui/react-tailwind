@@ -35,9 +35,9 @@ function BadgeComponent(
   } = props;
 
   const badgeStyles = ocx(
-    theme.badge.base,
-    theme.badge.size[size],
-    theme.badge.variants[variant],
+    `badge-base`,
+    `badge-${size}`,
+    `badge-${variant}`,
     className,
   );
 
