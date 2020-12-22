@@ -23,6 +23,34 @@ module.exports = {
       zIndex: {
         1: 1,
       },
+      button: {
+        variant: {
+          primary: "bg-green:500",
+          secondary: "bg-green-500",
+        },
+      },
+    },
+    components: {
+      button: {
+        base:
+          "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
+        prefix: "flex mr-2",
+        suffix: "flex ml-2",
+        spinner: "w-em h-em text-current",
+        group: "focus:z-1",
+        span: "inline-block cursor-not-allowed",
+        variant: {
+          primary: "bg-gray-800",
+          secondary: "bg-gray-100 text-gray-800",
+          link: "text-gray-800",
+        },
+        size: {
+          xs: "h-6 min-w-6 text-xs px-2",
+          sm: "h-8 min-w-8 text-sm px-3",
+          md: "h-10 min-w-10 text-base px-4",
+          lg: "h-12 min-w-12 text-lg px-6",
+        },
+      },
     },
   },
   variants: {
@@ -62,6 +90,47 @@ module.exports = {
       };
 
       addUtilities(utilities);
+    }),
+    plugin(function ({
+      addUtilities,
+      addComponents,
+      addbase,
+      addVariant,
+      e,
+      prefix,
+      theme,
+      variants,
+      config,
+      postcss,
+    }) {
+      const components = {
+        ".button-base": {
+          [`@apply ${theme("components.button.base")}`]: {},
+        },
+        ".button-primary": {
+          [`@apply ${theme("components.button.variant.primary")}`]: {},
+        },
+        ".button-secondary": {
+          [`@apply ${theme("components.button.variant.secondary")}`]: {},
+        },
+        ".button-link": {
+          [`@apply ${theme("components.button.variant.link")}`]: {},
+        },
+        ".button-xs": {
+          [`@apply ${theme("components.button.size.xs")}`]: {},
+        },
+        ".button-sm": {
+          [`@apply ${theme("components.button.size.sm")}`]: {},
+        },
+        ".button-md": {
+          [`@apply ${theme("components.button.size.md")}`]: {},
+        },
+        ".button-lg": {
+          [`@apply ${theme("components.button.size.lg")}`]: {},
+        },
+      };
+
+      addComponents(components);
     }),
   ],
 };

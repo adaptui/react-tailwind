@@ -60,9 +60,9 @@ function ButtonComponent(
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
   const buttonStyles = ocx(
-    theme.button.base,
-    theme.button.size[_size],
-    theme.button.variant[_variant],
+    "button-base",
+    `button-${_variant}`,
+    `button-${_size}`,
     group ? theme.button.group : "",
     className,
   );
