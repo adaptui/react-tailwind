@@ -42,19 +42,57 @@ const theme = {
       xl: "h-12 w-12",
     },
   },
-  badge: {
-    base: "font-sans font-medium text-xs rounded-full py-1",
-    variants: {
-      primary: "text-white bg-gray-800",
-      secondary: "text-gray-700 bg-gray-50",
-      outline: "bg-white text-gray-800 border border-gray-800",
+  calendar: {
+    base: "font-sans p-3 rounded-md bg-white shadow-lg w-max",
+    header: {
+      base: "flex justify-between",
+      title: "text-sm font-bold text-gray-700",
+      button: "text-gray-600 w-16px",
     },
-    size: {
-      xs: "text-xs px-2",
-      sm: "text-sm px-3",
-      md: "text-base px-4",
-      lg: "text-lg px-5",
-    }
+    table: {
+      base: "p-4 mt-2",
+      head: {
+        base: "",
+        row: "text-center",
+        header: {
+          base:
+            "text-center rounded-lg text-sm h-8 w-8 min-h-8 min-w-8 text-gray-500 font-light",
+          abbr: "",
+        },
+      },
+      body: {
+        base: "",
+        row: "",
+        data: {
+          base:
+            "text-center rounded-lg text-sm h-8 w-8 min-h-8 min-w-8 focus-within:bg-gray-100 focus-within:text-black aria-selected:text-white aria-selected:bg-blue-400 is-range-selection:bg-blue-100 is-range-selection:rounded-none is-range-selection:text-gray-800 is-range-start:text-white is-range-start:bg-blue-500 is-range-end:text-white is-range-end:bg-blue-500 is-range-start:rounded-l-lg is-range-end:rounded-r-lg",
+          button: "p-2 outline-none aria-disabled:text-gray-400",
+        },
+      },
+    },
+  },
+  datepicker: {
+    base:
+      "datepicker bg-white w-max rounded-md shadow-sm relative inline-block border border-gray-300",
+    container: "flex gap-4 justify-between p-2 pr-4 pl-4 rounded-md",
+    segment_field: "flex justify-between gap-1",
+    segment: "focus:text-blue-500 focus:outline-none font-mono font-normal",
+    trigger:
+      "text-gray-700 focus:outline-none focus:text-blue-500 relative inline-block",
+    badge: {
+      base: "font-sans font-medium text-xs rounded-full py-1",
+      variants: {
+        primary: "text-white bg-gray-800",
+        secondary: "text-gray-700 bg-gray-50",
+        outline: "bg-white text-gray-800 border border-gray-800",
+      },
+      size: {
+        xs: "text-xs px-2",
+        sm: "text-sm px-3",
+        md: "text-base px-4",
+        lg: "text-lg px-5",
+      },
+    },
   },
   tag: {
     base:
