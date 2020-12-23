@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, BoxProps } from "../box/Box";
 
-import theme from "../theme";
 import { ocx } from "../utils";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
@@ -35,9 +34,9 @@ function BadgeComponent(
   } = props;
 
   const badgeStyles = ocx(
-    theme.badge.base,
-    theme.badge.size[size],
-    theme.badge.variants[variant],
+    `badge-base`,
+    `badge-${size}`,
+    `badge-${variant}`,
     className,
   );
 

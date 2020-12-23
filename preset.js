@@ -5,6 +5,8 @@ const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
 const deepMerge = require("deepmerge");
 const { overrideTailwindClasses } = require("tailwind-override");
 const { cx } = require("@renderlesskit/react");
+const components = require("./components");
+const componentPlugin = require("./componentPlugin");
 
 const uiConfigs = {
   purge: [],
@@ -25,28 +27,7 @@ const uiConfigs = {
       },
     },
   },
-  components: {
-    button: {
-      base:
-        "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
-      prefix: "flex mr-2",
-      suffix: "flex ml-2",
-      spinner: "w-em h-em text-current",
-      group: "focus:z-1",
-      span: "inline-block cursor-not-allowed",
-      variant: {
-        primary: "bg-gray-800",
-        secondary: "bg-gray-100 text-gray-800",
-        link: "text-gray-800",
-      },
-      size: {
-        xs: "h-6 min-w-6 text-xs px-2",
-        sm: "h-8 min-w-8 text-sm px-3",
-        md: "h-10 min-w-10 text-base px-4",
-        lg: "h-12 min-w-12 text-lg px-6",
-      },
-    },
-  },
+  components: components,
   variants: {
     extend: {
       cursor: ["disabled"],
@@ -139,55 +120,16 @@ function mergeConfigs(tailwindConfig) {
   } = tailwindConfig;
 
   const mergedComponents = mergeDeep(components, userComponents);
-
-  const componentPlugin = plugin(function ({
-    addUtilities,
-    addComponents,
-    addbase,
-    addVariant,
-    e,
-    prefix,
-    theme,
-    variants,
-    config,
-    postcss,
-  }) {
-    const components = {
-      ".button-base": {
-        [`@apply ${mergedComponents.button.base}`]: {},
-      },
-      ".button-primary": {
-        [`@apply ${mergedComponents.button.variant.primary}`]: {},
-      },
-      ".button-secondary": {
-        [`@apply ${mergedComponents.button.variant.secondary}`]: {},
-      },
-      ".button-link": {
-        [`@apply ${mergedComponents.button.variant.link}`]: {},
-      },
-      ".button-xs": {
-        [`@apply ${mergedComponents.button.size.xs}`]: {},
-      },
-      ".button-sm": {
-        [`@apply ${mergedComponents.button.size.sm}`]: {},
-      },
-      ".button-md": {
-        [`@apply ${mergedComponents.button.size.md}`]: {},
-      },
-      ".button-lg": {
-        [`@apply ${mergedComponents.button.size.lg}`]: {},
-      },
-    };
-
-    addComponents(components);
-  });
-
   const mergedConfig = deepMerge(uiTailwindConfigs, userTailwindConfigs, {
     arrayMerge: arrayMergeFn,
   });
   const finalConfig = {
     ...mergedConfig,
-    plugins: [...plugins, ...userPlugins, componentPlugin],
+    plugins: [
+      ...plugins,
+      ...userPlugins,
+      plugin(componentPlugin(mergedComponents)),
+    ],
   };
   // console.log(
   //   "%c finalConfig",
