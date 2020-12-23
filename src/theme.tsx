@@ -42,6 +42,51 @@ const theme = {
       xl: "h-12 w-12",
     },
   },
+  avatar: {
+    base:
+      "font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white",
+    image: "rounded-full w-full h-full object-cover",
+    group: {
+      base: "flex items-center space-x-2",
+    },
+    badge: {
+      base: "absolute",
+      position: {
+        "top-left": "top-0 left-0",
+        "top-right": "top-0 right-0",
+        "bottom-right": "bottom-0 right-0",
+        "bottom-left": "bottom-0 left-0",
+      },
+      size: {
+        xs: "text-xs h-1.5 w-1.5",
+        sm: "text-xs h-2 w-2",
+        md: "text-xs h-2 w-2",
+        lg: "text-sm h-2.5 w-2.5",
+        xl: "text-sm h-3 w-3",
+      },
+    },
+    size: {
+      xs: "text-xs h-4 w-4",
+      sm: "text-xs h-5 w-5",
+      md: "text-xs h-6 w-6",
+      lg: "text-sm h-8 w-8",
+      xl: "text-sm h-10 w-10",
+    },
+  },
+  badge: {
+    base: "font-sans font-medium text-xs rounded-full py-1",
+    variants: {
+      primary: "text-white bg-gray-800",
+      secondary: "text-gray-700 bg-gray-50",
+      outline: "bg-white text-gray-800 border border-gray-800",
+    },
+    size: {
+      xs: "text-xs px-2",
+      sm: "text-sm px-3",
+      md: "text-base px-4",
+      lg: "text-lg px-5",
+    },
+  },
   calendar: {
     base: "font-sans p-3 rounded-md bg-white shadow-lg w-max",
     header: {

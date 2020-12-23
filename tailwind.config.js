@@ -27,6 +27,9 @@ module.exports = {
       zIndex: {
         1: 1,
       },
+      border: {
+        1.5: "1.5px",
+      },
     },
   },
   variants: {
@@ -121,6 +124,12 @@ module.exports = {
         ".collapse-border > :not(:first-of-type):last-of-type": {
           "border-top-left-radius": "0px",
           "border-bottom-left-radius": "0px",
+        },
+        ".w-inherit": {
+          width: "inherit",
+        },
+        ".h-inherit": {
+          height: "inherit",
         },
       };
 
