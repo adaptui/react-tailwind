@@ -11,10 +11,19 @@ import {
   PhotographIcon,
   ArrowNarrowRightIcon,
 } from "../../icons";
+import {
+  Button,
+  IconButton,
+  ButtonProps,
+  ButtonGroup,
+  CloseButton,
+  IconButtonProps,
+  ButtonGroupProps,
+  CloseButtonProps,
+} from "../index";
 import theme from "../../theme";
 import { ocx } from "../../utils";
 import { Spinner } from "../../spinner";
-import { Button, ButtonProps, ButtonGroup, ButtonGroupProps } from "../index";
 
 export default {
   title: "Button",
@@ -26,13 +35,13 @@ const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 export const Default = Base.bind({});
 Default.args = { size: "md", variant: "primary" };
 
-const IconButton: Story<ButtonProps> = args => (
+const ButtonWithIcon: Story<ButtonProps> = args => (
   <Button aria-label="settings" {...args}>
     <WheelIcon />
   </Button>
 );
 
-export const Icon = IconButton.bind({});
+export const Icon = ButtonWithIcon.bind({});
 Icon.args = { size: "md", variant: "primary" };
 
 const LeftIconButton: Story<ButtonProps> = args => (
@@ -139,3 +148,19 @@ TabListAsGroup.args = {
   size: "lg",
   variant: "secondary",
 };
+
+const IconButtonBase: Story<IconButtonProps> = args => (
+  <IconButton aria-label="picture" {...args}>
+    <PhotographIcon />
+  </IconButton>
+);
+
+export const IconButtonDefault = IconButtonBase.bind({});
+IconButtonDefault.args = { size: "md", variant: "primary" };
+
+const CloseButtonBase: Story<CloseButtonProps> = args => (
+  <CloseButton {...args} />
+);
+
+export const CloseButtonDefault = CloseButtonBase.bind({});
+CloseButtonDefault.args = { size: "md", variant: "primary" };
