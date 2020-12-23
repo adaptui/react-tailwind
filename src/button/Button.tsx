@@ -61,13 +61,10 @@ function ButtonComponent(
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
 
-  const v = tailwindClass("components.button.variant");
-  const s = tailwindClass("components.button.size");
-
   const buttonStyles = ocx(
     tailwindClass("components.button.base"),
-    v[_variant],
-    s[_size],
+    tailwindClass("components.button.variant")[_variant],
+    tailwindClass("components.button.size")[_size],
     group ? tailwindClass("components.button.group") : "",
     className,
   );

@@ -23,7 +23,7 @@ module.exports = createMacro(function ({ references, state, babel }) {
         );
       });
       const obj = babel.types.objectExpression(values);
-      functionCallPath.replaceWith(obj);
+      functionCallPath.replaceWith(babel.types.parenthesizedExpression(obj));
       return;
     }
     if (typeof themeValue === "string") {
