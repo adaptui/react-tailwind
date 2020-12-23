@@ -14,9 +14,9 @@ module.exports = components => {
             return {
               ...prev,
               [`.${curr}`]: {
-                [`@apply ${theme(
-                  `components.${name}.${prop}.${curr.replace(`${name}-`, "")}`,
-                )}`]: {},
+                [`@apply ${
+                  components[name][prop][curr.replace(`${name}-`, "")]
+                }`]: {},
               },
             };
           }, {});
@@ -25,7 +25,7 @@ module.exports = components => {
       const getPropThemeValue = (name, prop) => {
         return {
           [`.${kebabCase(name)}-${prop}`]: {
-            [`@apply ${theme(`components.${name}.${prop}`)}`]: {},
+            [`@apply ${components[name][prop]}`]: {},
           },
         };
       };
