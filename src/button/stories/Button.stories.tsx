@@ -21,11 +21,7 @@ export default {
   component: Button,
 } as Meta;
 
-const Base: Story<ButtonProps> = args => (
-  <Button className="text-gray-800 bg-red-500" {...args}>
-    Button
-  </Button>
-);
+const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 
 export const Default = Base.bind({});
 Default.args = { size: "md", variant: "primary" };

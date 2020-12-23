@@ -124,6 +124,7 @@ function mergeConfigs(tailwindConfig) {
     arrayMerge: arrayMergeFn,
   });
   const finalConfig = {
+    components: mergedComponents,
     ...mergedConfig,
     plugins: [
       ...plugins,

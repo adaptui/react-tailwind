@@ -60,17 +60,17 @@ function ButtonComponent(
   const group = useButtonGroup();
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
+
+  const v = tailwindClass("components.button.variant");
+  const s = tailwindClass("components.button.size");
+
   const buttonStyles = ocx(
-    "button-base",
-    `button-${_variant}`,
-    `button-${_size}`,
-    group ? theme.button.group : "",
+    tailwindClass("components.button.base"),
+    v[_variant],
+    s[_size],
+    group ? tailwindClass("components.button.group") : "",
     className,
   );
-
-  const wow = tailwindClass("bg-red-500 text-red");
-
-  console.log(wow);
 
   const ButtonWithIcons = () => (
     <>

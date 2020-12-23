@@ -13,11 +13,7 @@ module.exports = preset({
       },
     },
   },
-  components: {
-    button: {
-      variant: { secondary: "bg-green-500" }, // for testing
-    },
-  },
+  components: {},
   variants: {
     extend: {
       cursor: ["active"], // for testing
