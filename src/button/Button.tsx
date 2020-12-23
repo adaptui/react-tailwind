@@ -1,3 +1,4 @@
+import tailwindClass from "../../tailwindclass.macro";
 import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
 
@@ -66,6 +67,10 @@ function ButtonComponent(
     group ? theme.button.group : "",
     className,
   );
+
+  const wow = tailwindClass("bg-red-500 text-red");
+
+  console.log(wow);
 
   const ButtonWithIcons = () => (
     <>
