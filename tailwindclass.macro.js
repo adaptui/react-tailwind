@@ -1,50 +1,37 @@
-const { createMacro } = require("babel-plugin-macros");
+const { resolve } = require("path");
+const { existsSync } = require("fs");
+const resolveTailwindConfig = require("tailwindcss/lib/util/resolveConfig")
+  .default;
+const defaultTailwindConfig = require("tailwindcss/stubs/defaultConfig.stub")
+  .default;
 
-const { overrideTailwindClasses } = require("tailwind-override");
-const { cx } = require("@renderlesskit/react");
-const ocx = (...classNames) => overrideTailwindClasses(cx(...classNames));
+const { createMacro, MacroError } = require("babel-plugin-macros");
 
-const theme = require("./tailwind.config");
-const { get } = require("lodash");
+module.exports = createMacro(tailwindClass);
 
-module.exports = createMacro(function ({ references, state, babel }) {
-  references.default.forEach(referencePath => {
-    const [firstArg] = referencePath.parentPath.get("arguments");
+function tailwindClass({ references, state, babel }) {
+  const program = state.file.path;
+  const isDev =
+    process.env.NODE_ENV === "development" ||
+    process.env.NODE_ENV === "dev" ||
+    false;
+  state.isDev = isDev;
+  state.isProd = !isDev;
 
-    const argValue = firstArg.node.value;
-    const themeValue = get(theme, argValue);
-    const functionCallPath = firstArg.parentPath;
-
-    if (typeof themeValue === "object") {
-      const values = Object.keys(themeValue).map(key => {
-        return babel.types.objectProperty(
-          babel.types.stringLiteral(key),
-          babel.types.stringLiteral(themeValue[key]),
-        );
-      });
-      const obj = babel.types.objectExpression(values);
-      functionCallPath.replaceWith(babel.types.parenthesizedExpression(obj));
-      return;
-    }
-    if (typeof themeValue === "string") {
-      const strLiteral = babel.types.stringLiteral(themeValue);
-      functionCallPath.replaceWith(strLiteral);
-      return;
-    }
-  });
-});
-
-// unused
-function tailwindOverride({ references, state, babel }) {
-  references.default.forEach(referencePath => {
-    const args = referencePath.parentPath.get("arguments");
-
-    let stringLiterals = args.map(v => {
-      return v.node.value;
-    });
-    let classname = ocx(...stringLiterals);
-    const functionCallPath = args[0].parentPath;
-    const strLiteral = babel.types.stringLiteral(classname);
-    functionCallPath.replaceWith(strLiteral);
-  });
+  const { configExists, configTailwind } = getConfigTailwindProperties(state);
+  console.log("%c configTailwind", "color: #5200cc", configTailwind);
+  console.log("%c configExists", "color: #40fff2", configExists);
 }
+
+const getConfigTailwindProperties = state => {
+  const sourceRoot = state.file.opts.root || ".";
+
+  const configPath = resolve(sourceRoot, `./tailwind.config.js`);
+  const configExists = existsSync(configPath);
+  const configTailwind = resolveTailwindConfig([defaultTailwindConfig]);
+  if (!configTailwind) {
+    throw new MacroError(`Couldn’t find the Tailwind config`);
+  }
+
+  return { configPath, configExists, configTailwind };
+};

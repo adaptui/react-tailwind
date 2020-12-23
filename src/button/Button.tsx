@@ -69,6 +69,8 @@ function ButtonComponent(
     className,
   );
 
+  console.log(tailwindClass("components.button.base"));
+
   const ButtonWithIcons = () => (
     <>
       {prefix && (
