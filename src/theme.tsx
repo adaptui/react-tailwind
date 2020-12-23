@@ -1,9 +1,46 @@
 const theme = {
+  alert: {
+    base: "font-sans flex items-center w-full overflow-hidden p-4 bg-blue-50",
+    title: "text-gray-800 text-sm leading-4 font-semibold mr-2",
+    description: "inline text-gray-600 text-sm leading-4",
+    icon: {
+      base: "inherit flex-shrink-0 mr-3 w-5 h-5",
+      icons: "w-full h-full",
+    },
+    actionButton: "h-5 bg-transparent px-0",
+    status: {
+      info: {
+        base: "bg-blue-50",
+        icon: "text-blue-400",
+        actionButton: "text-blue-500",
+      },
+      success: {
+        base: "bg-green-50",
+        icon: "text-green-400",
+        actionButton: "text-green-500",
+      },
+      warning: {
+        base: "bg-orange-50",
+        icon: "text-orange-400",
+        actionButton: "text-orange-500",
+      },
+      error: {
+        base: "bg-red-50",
+        icon: "text-red-400",
+        actionButton: "text-red-500",
+      },
+      offline: {
+        base: "bg-purple-50",
+        icon: "text-purple-400",
+        actionButton: "text-purple-500",
+      },
+    },
+  },
   button: {
     base:
       "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
-    prefix: "flex mr-2",
-    suffix: "flex ml-2",
+    prefix: "inherit mr-2",
+    suffix: "inherit ml-2",
     spinner: "w-em h-em text-current",
     group: "focus:z-1",
     span: "inline-block cursor-not-allowed",
