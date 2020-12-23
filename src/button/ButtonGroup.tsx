@@ -3,7 +3,7 @@ import * as React from "react";
 import theme from "../theme";
 import { Box, BoxProps } from "../box";
 import { createContext, ocx } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 
 export type ButtonGroupProps = BoxProps & {
   /**
@@ -34,7 +34,7 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
 
 export { useButtonGroup };
 
-export const ButtonGroup = forwardRefWithAs<ButtonGroupProps, "div">(
+export const ButtonGroup = forwardRefWithAsSimple<ButtonGroupProps, "div">(
   (props, ref) => {
     const { size, variant, isAttached, className, ...rest } = props;
     const context = React.useMemo(() => ({ size, variant }), [size, variant]);

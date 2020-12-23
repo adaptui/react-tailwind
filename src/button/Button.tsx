@@ -5,7 +5,7 @@ import theme from "../theme";
 import { ocx } from "../utils";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 import { useButtonGroup } from "./ButtonGroup";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
@@ -39,7 +39,7 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   isDisabled?: boolean;
 };
 
-export const Button = forwardRefWithAs<
+export const Button = forwardRefWithAsSimple<
   ButtonProps,
   HTMLButtonElement,
   "button"
@@ -111,7 +111,7 @@ export const Button = forwardRefWithAs<
 
 export type ButtonIconProps = BoxProps & {};
 
-export const ButtonIcon = forwardRefWithAs<
+export const ButtonIcon = forwardRefWithAsSimple<
   ButtonIconProps,
   HTMLSpanElement,
   "span"

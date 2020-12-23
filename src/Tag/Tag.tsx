@@ -5,7 +5,7 @@ import theme from "../theme";
 import { ocx } from "../utils";
 import { CrossIcon } from "../icons";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 
 export const TagsContext = React.createContext<CompositeStateReturn | null>(
   null,
@@ -42,7 +42,7 @@ export type TagProps = Omit<BoxProps, "prefix"> & {
   suffix?: React.ReactElement;
 };
 
-export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
+export const Tag = forwardRefWithAsSimple<TagProps, HTMLSpanElement, "span">(
   (props, ref) => {
     const {
       id,

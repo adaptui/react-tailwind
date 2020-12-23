@@ -5,11 +5,16 @@ import { FaBeer, FaCog } from "react-icons/fa";
 
 import "./icon.css";
 import {
+  BoltIcon,
   ClockIcon,
   CrossIcon,
   WheelIcon,
   PhotographIcon,
+  InfoCircleIcon,
+  CheckCircleIcon,
   ArrowNarrowRightIcon,
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
 } from "../../icons";
 import { Icon } from "../index";
 
@@ -37,3 +42,8 @@ export const Wheel = () => <WheelIcon as={FaCog} />;
 export const ReactIcons = () => (
   <Icon as={FaBeer} className="w-8 h-8 text-red-500" />
 );
+export const Bolt = () => <BoltIcon />;
+export const CheckCircle = () => <CheckCircleIcon />;
+export const ExclamationCircle = () => <ExclamationCircleIcon />;
+export const ExclamationTriangle = () => <ExclamationTriangleIcon />;
+export const InfoCircle = () => <InfoCircleIcon />;
