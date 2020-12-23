@@ -8,3 +8,4 @@ export * from "./ExclamationTriangle";
 export * from "./InfoCircle";
 export * from "./Photograph";
 export * from "./Wheel";
+export * from "./GenericAvatar";
