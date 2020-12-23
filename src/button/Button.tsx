@@ -5,7 +5,7 @@ import theme from "../theme";
 import { ocx } from "../utils";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 import { useButtonGroup } from "./ButtonGroup";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
@@ -39,10 +39,11 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   isDisabled?: boolean;
 };
 
-function ButtonComponent(
-  props: PropsWithAs<ButtonProps, "button">,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+export const Button = forwardRefWithAsSimple<
+  ButtonProps,
+  HTMLButtonElement,
+  "button"
+>((props, ref) => {
   const {
     size,
     variant,
@@ -106,19 +107,15 @@ function ButtonComponent(
   }
 
   return <ButtonComp />;
-}
-
-/**
- * Primary UI component for user interaction
- */
-export const Button = forwardRefWithAs<ButtonProps, "button">(ButtonComponent);
+});
 
 export type ButtonIconProps = BoxProps & {};
 
-function ButtonIconComponent(
-  props: PropsWithAs<ButtonIconProps, "span">,
-  ref: React.Ref<HTMLSpanElement>,
-) {
+export const ButtonIcon = forwardRefWithAsSimple<
+  ButtonIconProps,
+  HTMLSpanElement,
+  "span"
+>((props, ref) => {
   const { children, ...rest } = props;
 
   const _children = React.isValidElement(children)
@@ -133,11 +130,4 @@ function ButtonIconComponent(
       {_children}
     </Box>
   );
-}
-
-/**
- * Button Icon to hold icons within the Button
- */
-export const ButtonIcon = forwardRefWithAs<ButtonIconProps, "span">(
-  ButtonIconComponent,
-);
+});
