@@ -6,6 +6,14 @@ const theme = require("./tailwind.config");
 
 const ocx = (...classNames) => overrideTailwindClasses(cx(...classNames));
 
+const constructObject = (data, t) => {
+  return t.objectExpression(
+    Object.keys(data).map(key => {
+      return t.objectProperty(t.stringLiteral(key), t.stringLiteral(data[key]));
+    }),
+  );
+};
+
 module.exports = createMacro(function ({ references, state, babel }) {
   references.default.forEach(referencePath => {
     const [componentPath] = referencePath.parentPath.get("arguments");
@@ -30,13 +38,7 @@ module.exports = createMacro(function ({ references, state, babel }) {
     const functionCallPath = componentPath.parentPath;
 
     if (typeof themeValue === "object") {
-      const values = Object.keys(themeValue).map(key => {
-        return babel.types.objectProperty(
-          babel.types.stringLiteral(key),
-          babel.types.stringLiteral(themeValue[key]),
-        );
-      });
-      const obj = babel.types.objectExpression(values);
+      const obj = constructObject(themeValue, babel.types);
       functionCallPath.replaceWith(babel.types.parenthesizedExpression(obj));
       return;
     }
