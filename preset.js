@@ -5,7 +5,7 @@ const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
 const deepMerge = require("deepmerge");
 const { overrideTailwindClasses } = require("tailwind-override");
 const { cx } = require("@renderlesskit/react");
-const components = require("./components");
+const components = require("./styles");
 const componentPlugin = require("./componentPlugin");
 
 const uiConfigs = {

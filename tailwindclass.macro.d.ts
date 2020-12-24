@@ -1,4 +1,4 @@
-import components from "./components";
+import components from "./styles";
 
 type Components = { components: typeof components };
 
