@@ -1,3 +1,4 @@
+import tw from "../../tailwindclass.macro";
 import React from "react";
 import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 
@@ -56,7 +57,12 @@ function TagComponent(
     children,
     ...rest
   } = props;
-  const tagStyles = ocx("tag-base", `tag-${size}`, className);
+
+  const tagStyles = ocx(
+    tw("components.tag.base"),
+    tw("components.tag.size")[size],
+    className,
+  );
 
   // TODO: Clean this up
   if (!closable && suffix.type.displayName !== (CrossIcon as any).displayName) {
@@ -67,7 +73,7 @@ function TagComponent(
 
   const TagWithPrefixSuffix = () => (
     <>
-      {prefix && <span className={"tag-prefix"}>{prefix}</span>}
+      {prefix && <span className={tw("components.tag.prefix")}>{prefix}</span>}
       {children}
       {closable && suffix && (
         <ClosableElement handleClick={() => onClose?.(id)}>
@@ -94,7 +100,7 @@ const ClosableElement: React.FC<{
   return (
     <CompositeItem
       as={Clickable}
-      className={"tag-suffix"}
+      className={tw("components.tag.suffix")}
       onClick={handleClick}
       {...(composite ? composite : {})}
     >

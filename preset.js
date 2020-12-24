@@ -6,7 +6,6 @@ const deepMerge = require("deepmerge");
 const { overrideTailwindClasses } = require("tailwind-override");
 const { cx } = require("@renderlesskit/react");
 const components = require("./styles");
-const componentPlugin = require("./componentPlugin");
 
 const uiConfigs = {
   purge: [],
@@ -126,11 +125,7 @@ function mergeConfigs(tailwindConfig) {
   const finalConfig = {
     components: mergedComponents,
     ...mergedConfig,
-    plugins: [
-      ...plugins,
-      ...userPlugins,
-      plugin(componentPlugin(mergedComponents)),
-    ],
+    plugins: [...plugins, ...userPlugins],
   };
   // console.log(
   //   "%c finalConfig",

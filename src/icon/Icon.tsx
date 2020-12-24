@@ -1,3 +1,4 @@
+import tw from "../../tailwindclass.macro";
 import * as React from "react";
 
 import { ocx } from "../utils";
@@ -38,12 +39,10 @@ function IconComponent(
     ...rest
   } = props;
 
-  const iconStyles = "icon-base";
-
   const shared: any = {
     ref,
     focusable,
-    className: ocx(iconStyles, className),
+    className: ocx(tw("components.icon.base"), className),
   };
 
   const _viewBox = viewBox ?? fallbackIcon.viewBox;

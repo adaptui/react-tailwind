@@ -1,3 +1,4 @@
+import tw from "../../tailwindclass.macro";
 import React from "react";
 import { Box, BoxProps } from "../box/Box";
 
@@ -34,9 +35,9 @@ function BadgeComponent(
   } = props;
 
   const badgeStyles = ocx(
-    `badge-base`,
-    `badge-${size}`,
-    `badge-${variant}`,
+    tw("components.badge.base"),
+    tw("components.badge.size")[size],
+    tw("components.badge.variant")[variant],
     className,
   );
 

@@ -1,3 +1,4 @@
+import tw from "../../tailwindclass.macro";
 import * as React from "react";
 import { Box, BoxProps } from "../box";
 import { VisuallyHidden } from "reakit";
@@ -33,9 +34,9 @@ function SpinnerComponent(
     ...rest
   } = props;
   const spinnerStyles = ocx(
-    `spinner-base`,
-    `spinner-${size}`,
-    `spinner-${stroke}`,
+    tw("components.spinner.base"),
+    tw("components.spinner.size")[size],
+    tw("components.spinner.stroke")[stroke],
     className,
   );
 
