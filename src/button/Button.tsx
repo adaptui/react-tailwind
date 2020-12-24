@@ -1,8 +1,7 @@
-import tailwindClass from "../../tailwindclass.macro";
+import tw from "../../tailwindclass.macro";
 import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
 
-import theme from "../theme";
 import { ocx } from "../utils";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
@@ -62,28 +61,32 @@ function ButtonComponent(
   const _variant = variant || group?.variant || "primary";
 
   const buttonStyles = ocx(
-    tailwindClass("components.button.base"),
-    tailwindClass("components.button.variant")[_variant],
-    tailwindClass("components.button.size")[_size],
-    group ? tailwindClass("components.button.group") : "",
+    tw("components.button.base"),
+    tw("components.button.variant")[_variant],
+    tw("components.button.size")[_size],
+    group ? tw("components.button.group") : "",
     className,
   );
 
   const ButtonWithIcons = () => (
     <>
       {prefix && (
-        <ButtonIcon className={theme.button.prefix}>{prefix}</ButtonIcon>
+        <ButtonIcon className={tw("components.button.prefix")}>
+          {prefix}
+        </ButtonIcon>
       )}
       {children}
       {suffix && (
-        <ButtonIcon className={theme.button.suffix}>{suffix}</ButtonIcon>
+        <ButtonIcon className={tw("components.button.suffix")}>
+          {suffix}
+        </ButtonIcon>
       )}
     </>
   );
 
   const ButtonSpinner = () => {
     if (spinner) return <>{spinner}</>;
-    return <Spinner className={theme.button.spinner} />;
+    return <Spinner className={tw("components.button.spinner")} />;
   };
 
   const ButtonComp = () => (
@@ -101,7 +104,7 @@ function ButtonComponent(
     return (
       // Pointer Events auto from Reakit makes the pointer events style hidden
       // https://material-ui.com/components/buttons/#limitations
-      <Box as="span" className={theme.button.span}>
+      <Box as="span" className={tw("components.button.span")}>
         <ButtonComp />
       </Box>
     );

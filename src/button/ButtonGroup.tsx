@@ -1,4 +1,5 @@
 import * as React from "react";
+import tw from "../../tailwindclass.macro";
 
 import { Box, BoxProps } from "../box";
 import { createContext, ocx } from "../utils";
@@ -41,8 +42,8 @@ function ButtonGroupComponent(
   const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
   const buttonGroupStyles = ocx(
-    "button-group-base",
-    isAttached ? "button-group-attached" : "",
+    tw("components.buttonGroup.base"),
+    isAttached ? tw("components.buttonGroup.attached") : "",
     className,
   );
 
