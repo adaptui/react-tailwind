@@ -141,6 +141,8 @@
     "react-dom": "16.x || 17.x"
   },
   "husky": {
-    "pre-commit": "yarn hooks:reset-storybook-main"
+    "hooks": {
+      "pre-commit": "yarn hooks:reset-storybook-main"
+    }
   }
 }
