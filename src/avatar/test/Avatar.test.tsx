@@ -1,14 +1,15 @@
 import * as React from "react";
 import { Avatar, AvatarBadge } from "../Avatar";
+
 import { configureAxe } from "jest-axe";
 import { render, waitFor, screen } from "@testing-library/react";
 
 const axe = configureAxe({
   rules: {
-    // disabled landmark rules when testing isolated components.
     region: { enabled: false },
   },
 });
+
 const DELAY = 0;
 const LOAD_IMAGE = "load.png";
 const ERROR_IMAGE = "error.png";
@@ -17,7 +18,7 @@ const orignalImage = window.Image;
 const mockImage = (loadState: string) => {
   jest.useFakeTimers();
 
-  (window.Image as any) = class MockImage {
+  (window.Image as unknown) = class MockImage {
     onload: () => void = () => {};
     onerror: () => void = () => {};
     src: string = "";
@@ -103,7 +104,6 @@ describe("<Avatar />", () => {
     expect(queryByLabelText("fallback")).not.toBeInTheDocument();
   });
 
-  // TODO: Test Image load
   it("Avatar onError", async () => {
     mockImage(ERROR_IMAGE);
     const onErrorFn = jest.fn();
