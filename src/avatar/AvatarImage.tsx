@@ -35,6 +35,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
 
   return (
     <img
+      data-testid="testid-avatarimg"
       src={src}
       alt={name}
       className={ocx(theme.avatar.image)}
