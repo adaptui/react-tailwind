@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { Box, BoxProps } from "../box";
 import { createContext, ocx } from "../utils";
 import { forwardRefWithAsSimple } from "../utils/types";

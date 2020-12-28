@@ -8,7 +8,7 @@ import {
   ExclamationTriangleIcon,
   InfoCircleIcon,
 } from "../icons";
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { Button, ButtonProps } from "../button";
 import { createContext, ocx } from "../utils";
 

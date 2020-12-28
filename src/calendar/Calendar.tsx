@@ -15,7 +15,7 @@ import {
   RangeCalendarStateReturn,
 } from "@renderlesskit/react";
 
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { ocx } from "../utils";
 import { CalendarProvider, useCalendarContext } from "./helpers";
 

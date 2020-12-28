@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { Avatar, AvatarProps } from "./Avatar";
 import { createContext, ocx } from "../utils";
 

@@ -13,7 +13,7 @@ import {
   DateRangePickerInitialState,
   CalendarStateReturn,
 } from "@renderlesskit/react";
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 
 export type withRange<T, K> = T & { isRange: K };
 
@@ -48,10 +48,10 @@ function useDatePickerContext() {
 }
 
 /*
-  What is happening here is that we need to set the isRange to `false or true` inorder to narrow the type. 
+  What is happening here is that we need to set the isRange to `false or true` inorder to narrow the type.
   we cannot do an undefined check here to narrow it down.
 
-  And if we do parameter destructuring, it will cause the isRange to be removed from the props object 
+  And if we do parameter destructuring, it will cause the isRange to be removed from the props object
   and typescript cannot do type narrowing by captured variables
   @see https://github.com/microsoft/TypeScript/issues/12184
   @see https://stackoverflow.com/a/61181442/10629172

@@ -1,6 +1,6 @@
 import React from "react";
 
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { ocx } from "../utils";
 import { AvatarProps } from ".";
 import { useImage } from "../utils/useImage";

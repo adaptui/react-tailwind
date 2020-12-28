@@ -3,7 +3,7 @@ import * as React from "react";
 import { ocx } from "../utils";
 import { Button, ButtonProps } from "./Button";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { CrossIcon } from "../icons";
 
 export type IconButtonProps = ButtonProps & {};

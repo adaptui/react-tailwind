@@ -1,7 +1,7 @@
 import React from "react";
 import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 
-import theme from "../theme";
+import theme from "../theme/defaultTheme";
 import { ocx } from "../utils";
 import { CrossIcon } from "../icons";
 import { Box, BoxProps } from "../box";
