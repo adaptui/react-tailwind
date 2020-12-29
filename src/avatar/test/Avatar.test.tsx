@@ -1,7 +1,40 @@
 import * as React from "react";
+import { render, waitFor } from "@testing-library/react";
+
 import { Avatar, AvatarBadge } from "../Avatar";
-import { render } from "@testing-library/react";
 import { testA11y } from "../../utils/testUtils";
+
+const DELAY = 0;
+const LOAD_IMAGE = "load.png";
+const ERROR_IMAGE = "error.png";
+const orignalImage = window.Image;
+
+const mockImage = (loadState: string) => {
+  jest.useFakeTimers();
+
+  (window.Image as unknown) = class MockImage {
+    onload: () => void = () => {};
+    onerror: () => void = () => {};
+    src: string = "";
+    constructor() {
+      if (loadState === LOAD_IMAGE) {
+        setTimeout(() => {
+          this.onload();
+        }, DELAY);
+      }
+      if (loadState === ERROR_IMAGE) {
+        setTimeout(() => {
+          this.onerror();
+        }, DELAY);
+      }
+      return this;
+    }
+  };
+};
+
+afterAll(() => {
+  window.Image = orignalImage;
+});
 
 describe("<Avatar />", () => {
   expect.assertions(1);
@@ -65,10 +98,15 @@ describe("<Avatar />", () => {
     expect(queryByLabelText("fallback")).not.toBeInTheDocument();
   });
 
-  // TODO: Test Image load
-  test.skip("Avatar onError", async () => {
+  it("Avatar onError", async () => {
+    mockImage(ERROR_IMAGE);
     const onErrorFn = jest.fn();
-    render(<Avatar src="https://somesite.com" onError={onErrorFn}></Avatar>);
+
+    render(<Avatar src={"demo.png"} onError={onErrorFn}></Avatar>);
+
+    await waitFor(() => {
+      jest.advanceTimersByTime(DELAY);
+    });
     expect(onErrorFn).toBeCalledTimes(1);
   });
 
