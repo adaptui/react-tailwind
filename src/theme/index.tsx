@@ -8,11 +8,14 @@ import defaultTailwindConfig from "tailwindcss/stubs/defaultConfig.stub";
 
 import { createContext, ocx } from "../utils";
 import defaultTheme from "./defaultTheme";
-import themeType from "./themeType";
+
+type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
 
 export type ThemeType = typeof defaultTheme;
 
-export type ExtendThemeType = Partial<typeof themeType>;
+export type ExtendThemeType = ThemeType & DeepPartial<{ extend: ThemeType }>;
 
 export type ThemeContext = ThemeType;
 
