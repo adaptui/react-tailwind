@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "../Button";
 
 import { configureAxe } from "jest-axe";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../utils/testUtils";
 
 const axe = configureAxe({
   rules: {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Avatar, AvatarBadge } from "../Avatar";
 import { configureAxe } from "jest-axe";
-import { render } from "@testing-library/react";
+import { render } from "../../utils/testUtils";
 
 const axe = configureAxe({
   rules: {

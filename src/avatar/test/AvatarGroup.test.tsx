@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Avatar } from "../Avatar";
 import { configureAxe } from "jest-axe";
-import { render, screen } from "@testing-library/react";
+
+import { Avatar } from "../Avatar";
 import { AvatarGroup } from "../AvatarGroup";
+import { render, screen } from "../../utils/testUtils";
 
 const axe = configureAxe({
   rules: {
