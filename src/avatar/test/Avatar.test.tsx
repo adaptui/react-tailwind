@@ -1,45 +1,11 @@
 import * as React from "react";
+import { render, screen } from "@testing-library/react";
+
 import { Avatar, AvatarBadge } from "../Avatar";
-
-import { configureAxe } from "jest-axe";
-import { render, waitFor, screen } from "@testing-library/react";
-
-const axe = configureAxe({
-  rules: {
-    region: { enabled: false },
-  },
-});
-
-const DELAY = 0;
-const LOAD_IMAGE = "load.png";
-const ERROR_IMAGE = "error.png";
-const orignalImage = window.Image;
-
-const mockImage = (loadState: string) => {
-  jest.useFakeTimers();
-
-  (window.Image as unknown) = class MockImage {
-    onload: () => void = () => {};
-    onerror: () => void = () => {};
-    src: string = "";
-    constructor() {
-      if (loadState === LOAD_IMAGE) {
-        setTimeout(() => {
-          this.onload();
-        }, DELAY);
-      }
-      if (loadState === ERROR_IMAGE) {
-        setTimeout(() => {
-          this.onerror();
-        }, DELAY);
-      }
-      return this;
-    }
-  };
-};
+import { testA11y, mockImage } from "../../utils/testUtils";
 
 afterAll(() => {
-  window.Image = orignalImage;
+  mockImage.restoreMock();
 });
 
 describe("<Avatar />", () => {
@@ -89,7 +55,7 @@ describe("<Avatar />", () => {
     expect(getByLabelText("fallback")).toHaveTextContent(fallbackContent);
   });
 
-  it("renders name if fallback & name both are provided", () => {
+  it("prioritize name between fallback & name", () => {
     const fallbackContent = "I'm a fallback";
     const name = "Anurag Hazra";
     const { queryByLabelText } = render(
@@ -104,33 +70,46 @@ describe("<Avatar />", () => {
     expect(queryByLabelText("fallback")).not.toBeInTheDocument();
   });
 
+  it("prioritize src between fallback, name & src", async () => {
+    mockImage.load();
+    const fallbackContent = "I'm a fallback";
+    const name = "Anurag Hazra";
+    const src = "demo.png";
+    render(
+      <Avatar
+        src={src}
+        name={name}
+        fallback={<div aria-label="fallback">{fallbackContent}</div>}
+      />,
+    );
+
+    await mockImage.advanceTimer();
+
+    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
+  });
+
+  it("Avatar Image loads", async () => {
+    mockImage.load();
+    await testA11y(<Avatar>Ally</Avatar>);
+    render(<Avatar src={"demo.png"}></Avatar>);
+
+    await mockImage.advanceTimer();
+
+    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
+  });
+
   it("Avatar onError", async () => {
-    mockImage(ERROR_IMAGE);
+    mockImage.error();
     const onErrorFn = jest.fn();
 
     render(<Avatar src={"demo.png"} onError={onErrorFn}></Avatar>);
 
-    await waitFor(() => {
-      jest.advanceTimersByTime(DELAY);
-    });
+    await mockImage.advanceTimer();
+
     expect(onErrorFn).toBeCalledTimes(1);
   });
 
-  it("Avatar Image loads", async () => {
-    mockImage(LOAD_IMAGE);
-    render(<Avatar src={"demo.png"}></Avatar>);
-
-    await waitFor(() => {
-      jest.advanceTimersByTime(DELAY);
-    });
-    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
-  });
-
-  it("should not have axe violations", async () => {
-    jest.useRealTimers();
-    const { container } = render(<Avatar>Ally</Avatar>);
-    const results = await axe(container);
-
-    expect(results).toHaveNoViolations();
+  it("should not have a11y violations", async () => {
+    await testA11y(<Avatar>Ally</Avatar>);
   });
 });
