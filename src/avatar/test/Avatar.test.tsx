@@ -1,14 +1,7 @@
 import * as React from "react";
 import { Avatar, AvatarBadge } from "../Avatar";
-import { configureAxe } from "jest-axe";
 import { render } from "@testing-library/react";
-
-const axe = configureAxe({
-  rules: {
-    // disabled landmark rules when testing isolated components.
-    region: { enabled: false },
-  },
-});
+import { testA11y } from "../../utils/testUtils";
 
 describe("<Avatar />", () => {
   expect.assertions(1);
@@ -79,10 +72,7 @@ describe("<Avatar />", () => {
     expect(onErrorFn).toBeCalledTimes(1);
   });
 
-  it("should not have axe violations", async () => {
-    const { container } = render(<Avatar>Ally</Avatar>);
-    const results = await axe(container);
-
-    expect(results).toHaveNoViolations();
+  it("should not have a11y violations", async () => {
+    await testA11y(<Avatar>Ally</Avatar>);
   });
 });
