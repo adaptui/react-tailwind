@@ -1,6 +1,7 @@
 import * as React from "react";
 import { render as RtlRender, RenderOptions } from "@testing-library/react";
 
+// @ts-ignore
 import tailwindConfig from "../../tailwind.config";
 import { RenderlesskitProvider } from "../theme";
 

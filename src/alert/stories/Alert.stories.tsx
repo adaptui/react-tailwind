@@ -10,11 +10,11 @@ import {
   AlertIcon,
   AlertProps,
 } from "../index";
-import { Button, ButtonIcon } from "../../button";
-import { CrossIcon } from "../../icons";
-import { ocx } from "../../utils";
-import { AlertActionButton } from "../Alert";
 import { Box } from "../../box";
+import { CrossIcon } from "../../icons";
+import { useOverride } from "../../theme";
+import { AlertActionButton } from "../Alert";
+import { Button, ButtonIcon } from "../../button";
 
 export default {
   title: "Alert",
@@ -30,6 +30,7 @@ const Base: Story<AlertProps> = args => {
     error: "bg-red-200",
     offline: "bg-purple-200",
   };
+  const ocx = useOverride();
 
   return (
     <Alert {...args} className="flex justify-between">

@@ -5,7 +5,7 @@ import { createContext } from "../utils";
 import defaultTheme from "./defaultTheme";
 import { cx } from "@renderlesskit/react";
 import { overrideTailwindClasses } from "tailwind-override";
-import defaultTailwindProperties from "./defaultTailwindProperties.json";
+import defaultTailwindProperties from "./defaultTailwindProperties";
 
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
