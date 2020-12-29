@@ -50,7 +50,7 @@ describe("<Avatar />", () => {
     expect(getByLabelText("fallback")).toHaveTextContent(fallbackContent);
   });
 
-  it("renders name if fallback & name both are provided", () => {
+  it("prioritize name between fallback & name", () => {
     const fallbackContent = "I'm a fallback";
     const name = "Anurag Hazra";
     const { queryByLabelText } = render(

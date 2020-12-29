@@ -11,7 +11,7 @@ export const axe = configureAxe({
 });
 
 type UI = Parameters<typeof render>[0] | Element;
-type TestA11YOptions = Omit<RenderOptions, "queries"> & {
+type TestA11YOptions = RenderOptions & {
   axeOptions?: RunOptions;
 };
 
