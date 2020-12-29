@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { ocx } from "../utils";
-import { useTheme } from "../theme";
 import { CrossIcon } from "../icons";
 import { Button, ButtonProps } from "./Button";
+import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export type IconButtonProps = ButtonProps & {};
@@ -14,6 +13,7 @@ function IconButtonComponent(
 ) {
   const { children, className, ...rest } = props;
   const theme = useTheme();
+  const ocx = useOverride();
   const iconButtonStyles = ocx(theme.button.iconButton, className);
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {

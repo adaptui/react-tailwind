@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { ocx } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 const fallbackIcon = {
@@ -40,6 +39,7 @@ function IconComponent(
   } = props;
 
   const theme = useTheme();
+  const ocx = useOverride();
   const iconStyles = theme.icon.base;
 
   const shared: any = {

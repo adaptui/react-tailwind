@@ -13,7 +13,7 @@ import {
   DateRangePickerInitialState,
   CalendarStateReturn,
 } from "@renderlesskit/react";
-import { useTheme } from "../theme";
+import { useOverride, useTheme } from "../theme";
 
 export type withRange<T, K> = T & { isRange: K };
 
@@ -98,6 +98,7 @@ const DatePickerRange: React.FC<DateRangePickerInitialState> = props => {
 const DatePickerField: React.FC = props => {
   const state = useDatePickerContext();
   const theme = useTheme();
+  const ocx = useOverride();
 
   return (
     <DatePickerWrapper className={theme.datepicker.base} {...state}>
@@ -109,6 +110,7 @@ const DatePickerField: React.FC = props => {
 const DatePickerStartSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
   const theme = useTheme();
+  const ocx = useOverride();
 
   if (state.isRange === false) {
     throw new Error(
@@ -138,6 +140,7 @@ const DatePickerStartSegmentInput: React.FC = () => {
 const DatePickerEndSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
   const theme = useTheme();
+  const ocx = useOverride();
 
   if (state.isRange === false) {
     throw new Error(
@@ -167,6 +170,7 @@ const DatePickerEndSegmentInput: React.FC = () => {
 const DatePickerSegmentInput: React.FC = () => {
   const state = useDatePickerContext();
   const theme = useTheme();
+  const ocx = useOverride();
 
   if (state.isRange === true) {
     throw new Error(
@@ -194,6 +198,7 @@ const DatePickerSegmentInput: React.FC = () => {
 const DatePickerTrigger: React.FC = props => {
   const state = useDatePickerContext();
   const theme = useTheme();
+  const ocx = useOverride();
 
   return (
     <Trigger className={theme.datepicker.trigger} {...state}>
@@ -206,6 +211,7 @@ const DatePickerContent: React.FC<{
   children: (state: CalendarStateReturn) => JSX.Element;
 }> = ({ children }) => {
   const state = useDatePickerContext();
+
   return (
     <Content {...state}>
       {typeof children === "function" ? children(state.calendar) : children}

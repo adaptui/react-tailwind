@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { createContext, ocx } from "../utils";
+import { createContext } from "../utils";
+import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAsSimple } from "../utils/types";
 
 export type ButtonGroupProps = BoxProps & {
@@ -40,6 +40,7 @@ export const ButtonGroup = forwardRefWithAsSimple<ButtonGroupProps, "div">(
     const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
     const theme = useTheme();
+    const ocx = useOverride();
     const buttonGroupStyles = ocx(
       theme.buttonGroup.base,
       isAttached ? theme.buttonGroup.attached : "",

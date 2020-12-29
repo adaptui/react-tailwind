@@ -8,8 +8,8 @@ import {
   ExclamationTriangleIcon,
   InfoCircleIcon,
 } from "../icons";
-import { useTheme } from "../theme";
-import { createContext, ocx } from "../utils";
+import { createContext } from "../utils";
+import { useOverride, useTheme } from "../theme";
 import { Button, ButtonProps } from "../button";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
@@ -46,6 +46,7 @@ function AlertComponent(
 ) {
   const { status = "info", className, ...rest } = props;
   const theme = useTheme();
+  const ocx = useOverride();
   const alertStyles = ocx(
     theme.alert.base,
     theme.alert.status[status].base,
@@ -69,6 +70,7 @@ function AlertTitleComponent(
 ) {
   const { className, ...rest } = props;
   const theme = useTheme();
+  const ocx = useOverride();
   const alertTitleStyles = ocx(theme.alert.title, className);
 
   return <Role className={alertTitleStyles} ref={ref} {...rest} />;
@@ -86,6 +88,7 @@ function AlertDescriptionComponent(
 ) {
   const { className, ...rest } = props;
   const theme = useTheme();
+  const ocx = useOverride();
   const alertDescriptionStyles = ocx(theme.alert.description, className);
 
   return <Role className={alertDescriptionStyles} ref={ref} {...rest} />;
@@ -104,6 +107,7 @@ function AlertActionButtonComponent(
   const { status } = useAlertContext();
   const { className, ...rest } = props;
   const theme = useTheme();
+  const ocx = useOverride();
   const alertActionButtonStyles = ocx(
     theme.alert.actionButton,
     theme.alert.status[status].actionButton,
@@ -128,6 +132,7 @@ function AlertIconComponent(
   const { className, ...rest } = props;
   const Icon = STATUSICONS[status];
   const theme = useTheme();
+  const ocx = useOverride();
   const alertIconBaseStyles = ocx(theme.alert.icon.base, className);
   const alertIconIconsStyles = ocx(
     theme.alert.icon.base,

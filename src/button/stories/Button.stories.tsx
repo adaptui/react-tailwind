@@ -21,9 +21,8 @@ import {
   ButtonGroupProps,
   CloseButtonProps,
 } from "../index";
-import { ocx } from "../../utils";
 import { Spinner } from "../../spinner";
-import { useTheme } from "../../theme";
+import { useOverride, useTheme } from "../../theme";
 
 export default {
   title: "Button",
@@ -82,6 +81,7 @@ LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
 
 const CustomSpinner = () => {
   const theme = useTheme();
+  const ocx = useOverride();
 
   return (
     <>

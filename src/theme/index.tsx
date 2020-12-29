@@ -1,13 +1,11 @@
 import * as React from "react";
 import { defaults, isString, isUndefined, mergeWith } from "lodash";
 
-// @ts-ignore
-import resolveConfig from "tailwindcss/lib/util/resolveConfig";
-// @ts-ignore
-import defaultTailwindConfig from "tailwindcss/stubs/defaultConfig.stub";
-
-import { createContext, ocx } from "../utils";
+import { createContext } from "../utils";
 import defaultTheme from "./defaultTheme";
+import { cx } from "@renderlesskit/react";
+import { overrideTailwindClasses } from "tailwind-override";
+import defaultTailwindProperties from "./defaultTailwindProperties.json";
 
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
@@ -24,28 +22,48 @@ const [ThemeProvider, useTheme] = createContext<ThemeContext>({
   name: "ThemeProvider",
 });
 
-export { useTheme };
+export type OverrideContext = (...classNames: any[]) => string;
+
+const [OverrideProvider, useOverride] = createContext<OverrideContext>({
+  strict: false,
+  name: "OverrideProvider",
+});
+
+export { useTheme, useOverride };
 
 export type RenderlesskitProviderProps = {
   tailwindConfig?: any;
   theme?: ExtendThemeType;
   children?: React.ReactNode;
+  tailwindProperties?: any;
 };
 
 export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
-  const { children, tailwindConfig, theme = defaultTheme } = props;
-  const finalTailwindConfig = tailwindConfig
-    ? resolveConfig([tailwindConfig, defaultTailwindConfig])
-    : resolveConfig([defaultTailwindConfig]);
+  const {
+    children,
+    tailwindConfig = { components: {} },
+    theme = defaultTheme,
+    tailwindProperties = defaultTailwindProperties,
+  } = props;
+
+  const ocx = (...classNames: any[]) =>
+    overrideTailwindClasses(cx(...classNames), {
+      tailwindProperties: tailwindProperties,
+    });
 
   const {
     components: userTheme,
-  }: { components: ExtendThemeType } = finalTailwindConfig;
+  }: { components: ExtendThemeType } = tailwindConfig;
   const finalTheme: ThemeType = mergeExtensions(
     mergeThemes([userTheme, theme]),
+    ocx,
   );
 
-  return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider value={finalTheme}>
+      <OverrideProvider value={ocx}>{children}</OverrideProvider>
+    </ThemeProvider>
+  );
 };
 
 function mergeThemes(themes: ExtendThemeType[]) {
@@ -74,7 +92,7 @@ function collectExtends(items: ExtendThemeType[]) {
   }, {});
 }
 
-function mergeExtensions({ extend, ...theme }: any) {
+function mergeExtensions({ extend, ...theme }: any, ocx: any) {
   return mergeWith(theme, extend, (themeValue, extendValue) => {
     return mergeWith(themeValue, ...extendValue, (merged: any, value: any) => {
       if (isString(merged) && isString(value)) {

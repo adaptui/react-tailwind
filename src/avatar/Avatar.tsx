@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { ocx } from "../utils";
-import { useTheme } from "../theme";
+import { useOverride, useTheme } from "../theme";
 import { AvatarImage } from "./AvatarImage";
 import { useAvatarGroup } from "./AvatarGroup";
 
@@ -42,6 +41,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   const group = useAvatarGroup();
   const _size = size || group?.size || "md";
   const theme = useTheme();
+  const ocx = useOverride();
   const avatarStyles = ocx(
     theme.avatar.base,
     theme.avatar.size[_size],
@@ -85,6 +85,7 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
   ...rest
 }) => {
   const theme = useTheme();
+  const ocx = useOverride();
 
   return (
     <div

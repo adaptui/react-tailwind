@@ -1,12 +1,11 @@
 import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
 
-import { ocx } from "../utils";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAsSimple } from "../utils/types";
 import { useButtonGroup } from "./ButtonGroup";
-import { useTheme } from "../theme";
+import { useOverride, useTheme } from "../theme";
+import { forwardRefWithAsSimple } from "../utils/types";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
@@ -61,6 +60,7 @@ export const Button = forwardRefWithAsSimple<
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
   const theme = useTheme();
+  const ocx = useOverride();
   const buttonStyles = ocx(
     theme.button.base,
     theme.button.size[_size],
