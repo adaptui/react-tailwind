@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import theme from "../theme/defaultTheme";
 import { ocx } from "../utils";
+import { useTheme } from "../theme";
 import { AvatarImage } from "./AvatarImage";
 import { useAvatarGroup } from "./AvatarGroup";
 
@@ -41,6 +41,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 }) => {
   const group = useAvatarGroup();
   const _size = size || group?.size || "md";
+  const theme = useTheme();
   const avatarStyles = ocx(
     theme.avatar.base,
     theme.avatar.size[_size],
@@ -83,6 +84,8 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
   children,
   ...rest
 }) => {
+  const theme = useTheme();
+
   return (
     <div
       {...rest}

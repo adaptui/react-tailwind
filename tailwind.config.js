@@ -56,6 +56,26 @@ module.exports = {
       borderRadius: ["is-range-selection", "is-range-end", "is-range-start"],
     },
   },
+  components: {
+    extend: {
+      button: {
+        variant: {
+          secondary: "bg-green-500",
+        },
+        size: {
+          xl: "h-16 min-w-16 text-xl px-8",
+        },
+      },
+      alert: {
+        status: {
+          info: {
+            base: "bg-red-500",
+            icon: "text-white",
+          },
+        },
+      },
+    },
+  },
   plugins: [
     plugin(function ({ addUtilities, e, theme, variants }) {
       const colors = flattenColorPalette(theme("borderColor"));

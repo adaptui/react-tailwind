@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import theme from "../theme/defaultTheme";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { createContext, ocx } from "../utils";
 import { forwardRefWithAsSimple } from "../utils/types";
@@ -39,6 +39,7 @@ export const ButtonGroup = forwardRefWithAsSimple<ButtonGroupProps, "div">(
     const { size, variant, isAttached, className, ...rest } = props;
     const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
+    const theme = useTheme();
     const buttonGroupStyles = ocx(
       theme.buttonGroup.base,
       isAttached ? theme.buttonGroup.attached : "",

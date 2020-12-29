@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import { ocx } from "../utils";
+import { useTheme } from "../theme";
+import { CrossIcon } from "../icons";
 import { Button, ButtonProps } from "./Button";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
-import theme from "../theme/defaultTheme";
-import { CrossIcon } from "../icons";
 
 export type IconButtonProps = ButtonProps & {};
 
@@ -13,6 +13,7 @@ function IconButtonComponent(
   ref: React.Ref<HTMLButtonElement>,
 ) {
   const { children, className, ...rest } = props;
+  const theme = useTheme();
   const iconButtonStyles = ocx(theme.button.iconButton, className);
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {

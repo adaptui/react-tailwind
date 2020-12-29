@@ -2,8 +2,8 @@ import * as React from "react";
 import { Box, BoxProps } from "../box";
 import { VisuallyHidden } from "reakit";
 
-import theme from "../theme/defaultTheme";
 import { ocx } from "../utils";
+import { useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export interface SpinnerProps extends BoxProps {
@@ -33,6 +33,7 @@ function SpinnerComponent(
     className,
     ...rest
   } = props;
+  const theme = useTheme();
   const spinnerStyles = ocx(
     theme.spinner.base,
     theme.spinner.size[size],

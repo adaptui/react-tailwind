@@ -8,10 +8,9 @@ import {
   ExclamationTriangleIcon,
   InfoCircleIcon,
 } from "../icons";
-import theme from "../theme/defaultTheme";
-import { Button, ButtonProps } from "../button";
+import { useTheme } from "../theme";
 import { createContext, ocx } from "../utils";
-
+import { Button, ButtonProps } from "../button";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 const STATUSICONS = {
@@ -46,6 +45,7 @@ function AlertComponent(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const { status = "info", className, ...rest } = props;
+  const theme = useTheme();
   const alertStyles = ocx(
     theme.alert.base,
     theme.alert.status[status].base,
@@ -68,6 +68,7 @@ function AlertTitleComponent(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const { className, ...rest } = props;
+  const theme = useTheme();
   const alertTitleStyles = ocx(theme.alert.title, className);
 
   return <Role className={alertTitleStyles} ref={ref} {...rest} />;
@@ -84,6 +85,7 @@ function AlertDescriptionComponent(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const { className, ...rest } = props;
+  const theme = useTheme();
   const alertDescriptionStyles = ocx(theme.alert.description, className);
 
   return <Role className={alertDescriptionStyles} ref={ref} {...rest} />;
@@ -101,6 +103,7 @@ function AlertActionButtonComponent(
 ) {
   const { status } = useAlertContext();
   const { className, ...rest } = props;
+  const theme = useTheme();
   const alertActionButtonStyles = ocx(
     theme.alert.actionButton,
     theme.alert.status[status].actionButton,
@@ -124,6 +127,7 @@ function AlertIconComponent(
   const { status } = useAlertContext();
   const { className, ...rest } = props;
   const Icon = STATUSICONS[status];
+  const theme = useTheme();
   const alertIconBaseStyles = ocx(theme.alert.icon.base, className);
   const alertIconIconsStyles = ocx(
     theme.alert.icon.base,

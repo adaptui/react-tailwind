@@ -37,7 +37,6 @@
     "commit": "gacp",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
-    "eject": "react-scripts eject",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "format:package": "sort-package-json",
     "lint": "eslint src --ext .tsx,.ts,.jsx,.js",
