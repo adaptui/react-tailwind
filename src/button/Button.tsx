@@ -7,6 +7,8 @@ import { useButtonGroup } from "./ButtonGroup";
 import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAsSimple } from "../utils/types";
 
+type AnyString = string & { ignore?: any };
+
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How large should the button be?
@@ -15,7 +17,7 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "link";
+  variant?: "primary" | "secondary" | "link" | AnyString;
   /**
    * If added, the button will show an icon before the button's label.
    */
@@ -61,6 +63,7 @@ export const Button = forwardRefWithAsSimple<
   const _variant = variant || group?.variant || "primary";
   const theme = useTheme();
   const ocx = useOverride();
+
   const buttonStyles = ocx(
     theme.button.base,
     theme.button.size[_size],

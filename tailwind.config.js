@@ -73,6 +73,7 @@ module.exports = {
       button: {
         variant: {
           secondary: "bg-green-500",
+          tertiary: "bg-purple-600",
         },
         size: {
           xl: "h-16 min-w-16 text-xl px-8",

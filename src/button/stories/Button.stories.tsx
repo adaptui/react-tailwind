@@ -43,6 +43,9 @@ const ButtonWithIcon: Story<ButtonProps> = args => (
 export const Icon = ButtonWithIcon.bind({});
 Icon.args = { size: "md", variant: "primary" };
 
+export const ExtendedVariant = Default.bind({});
+ExtendedVariant.args = { size: "md", variant: "tertiary" };
+
 const LeftIconButton: Story<ButtonProps> = args => (
   <Button prefix={<ClockIcon />} {...args}>
     Button
