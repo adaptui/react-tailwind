@@ -23,7 +23,10 @@ function run(title, subtitle, command, options) {
     color("subtitle", "Running the following command: " + command + "\n"),
   );
 
-  var result = spawnSync(command, { stdio: "inherit", shell: true });
+  var result = spawnSync(command, {
+    stdio: options.ignoreStdio ? "ignore" : "inherit",
+    shell: true,
+  });
 
   if (result.status !== 0 && !options.ignoreFailure) {
     console.error(
@@ -71,5 +74,6 @@ run(
 run(
   "Tailwind Override Properties",
   "TailwindCSS Properties for Overrides from the above generated file...",
-  `npx tailwind-override --inputFile ${outputTailwindcssFile} --outputFile tailwindProperties.json > /dev/null`,
+  `npx tailwind-override --inputFile ${outputTailwindcssFile} --outputFile tailwindProperties.json`,
+  { ignoreStdio: true },
 );
