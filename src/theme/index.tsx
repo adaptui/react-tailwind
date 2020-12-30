@@ -1,8 +1,9 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 import { defaults, isString, isUndefined, mergeWith } from "lodash";
+
 import { createContext } from "../utils";
 import defaultTheme from "./defaultTheme";
-import { cx } from "@renderlesskit/react";
 import defaultTailwindProperties from "./defaultTailwindProperties";
 
 type DeepPartial<T> = {

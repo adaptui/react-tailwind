@@ -247,7 +247,7 @@ export const CalendarTableBodyRow: React.FC<{}> = props => {
 };
 
 export const CalendarTableBodyData: React.FC<any> = props => {
-  const { day, dayIndex, ...rest } = props;
+  const { day, dayIndex, className, ...rest } = props;
   const state = useCalendarContext();
   const theme = useTheme();
   const ocx = useOverride();
@@ -256,7 +256,7 @@ export const CalendarTableBodyData: React.FC<any> = props => {
     <CalendarCell
       as="td"
       date={day}
-      className={ocx(theme.calendar.table.body.data.base)}
+      className={ocx(theme.calendar.table.body.data.base, className)}
       {...state}
       {...rest}
     />
