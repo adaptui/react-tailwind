@@ -7,14 +7,16 @@ import { TagsContext } from "./Tag";
 export type TagGroupProps = {
   allowArrowNavigation?: boolean;
   className?: string;
+  baseId?: string;
 };
 
 export const TagGroup: React.FC<TagGroupProps> = ({
   children,
   allowArrowNavigation = false,
+  baseId,
   ...props
 }) => {
-  const composite = useCompositeState();
+  const composite = useCompositeState({ baseId });
 
   return allowArrowNavigation ? (
     <TagsContext.Provider value={composite}>

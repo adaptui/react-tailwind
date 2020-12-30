@@ -15,22 +15,6 @@ afterEach(() => {
 });
 
 describe("<Tag />", () => {
-  it("should render Tag", () => {
-    const { asFragment } = render(<Tag>hello</Tag>);
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
-  it("should render Tag with prefix & suffix", () => {
-    const { asFragment } = render(
-      <Tag prefix={<p>prefix</p>} suffix={<p>suffix</p>} closable>
-        hello
-      </Tag>,
-    );
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it("should be closable", () => {
     const onCloseFn = jest.fn();
     render(
