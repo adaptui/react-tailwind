@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tag /> should render Tag 1`] = `
+<DocumentFragment>
+  <span
+    class="font-sans font-semibold bg-gray-100 text-gray-800 inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40 h-10 min-w-10 text-base px-4"
+  >
+    hello
+  </span>
+</DocumentFragment>
+`;
+
+exports[`<Tag /> should render Tag with prefix & suffix 1`] = `
+<DocumentFragment>
+  <span
+    class="font-sans font-semibold bg-gray-100 text-gray-800 inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40 h-10 min-w-10 text-base px-4"
+  >
+    <span
+      class="flex mr-2"
+    >
+      <p>
+        prefix
+      </p>
+    </span>
+    hello
+    <button
+      class="flex ml-2"
+      data-testid="testid-close-element"
+      id="id-ksdndd"
+      tabindex="0"
+    >
+      <p>
+        suffix
+      </p>
+    </button>
+  </span>
+</DocumentFragment>
+`;
