@@ -5,8 +5,6 @@ const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
   .default;
 
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
@@ -37,7 +35,7 @@ module.exports = {
     },
   },
   variants: {
-    textCbackgroundColorolor: [
+    backgroundColor: [
       "responsive",
       "dark",
       "group-hover",
@@ -68,6 +66,7 @@ module.exports = {
       borderRadius: ["is-range-selection", "is-range-end", "is-range-start"],
     },
   },
+  // This only affected the Storybook, doesn't go or merge when used this config as preset
   components: {
     extend: {
       button: {
@@ -104,6 +103,7 @@ module.exports = {
 
       addUtilities(utilities, variants("borderColor"));
     }),
+    // * Simplify the repeated variants plugins
     plugin(function ({ addVariant, e }) {
       addVariant("aria-selected", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
@@ -168,12 +168,6 @@ module.exports = {
         ".h-inherit": {
           height: "inherit",
         },
-      };
-
-      addUtilities(utilities);
-    }),
-    plugin(function ({ addUtilities }) {
-      const utilities = {
         ".inherit": {
           display: "inherit",
         },
