@@ -12,9 +12,9 @@ import {
 } from "../index";
 import { Button, ButtonIcon } from "../../button";
 import { CrossIcon } from "../../icons";
-import { ocx } from "../../utils";
 import { AlertActionButton } from "../Alert";
 import { Box } from "../../box";
+import { cx } from "@renderlesskit/react";
 
 export default {
   title: "Alert",
@@ -41,15 +41,17 @@ const Base: Story<AlertProps> = args => {
         <AlertDescription>Your experience may be degrated</AlertDescription>
       </Box>
       <Box className="items-center inherit">
-        <AlertActionButton>Reach Out</AlertActionButton>
+        <AlertActionButton className="bg-transparent!">
+          Reach Out
+        </AlertActionButton>
         <Button
           aria-label="close"
           className={cx(
-            "h-5 px-0 bg-transparent min-w-5 ml-2",
+            "h-5 px-0 bg-transparent! min-w-5 ml-2",
             `hover:${buttonBg[status]}`,
           )}
         >
-          <ButtonIcon className="text-gray-800 inherit">
+          <ButtonIcon className="text-gray-800! inherit">
             <CrossIcon />
           </ButtonIcon>
         </Button>
