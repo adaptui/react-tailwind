@@ -40,20 +40,46 @@ module.exports = {
     extend: {
       cursor: ["disabled"],
       opacity: ["disabled"],
+      margin: ["DEFAULT", "!"],
+      padding: ["DEFAULT", "!"],
+      fontStyle: ["DEFAULT", "!"],
+      fontWeight: ["DEFAULT", "!"],
+      fontSize: ["DEFAULT", "!"],
+      display: ["DEFAULT", "!"],
+      width: ["DEFAULT", "!"],
+      height: ["DEFAULT", "!"],
+      borderCollapse: ["DEFAULT", "!"],
+      borderColor: ["DEFAULT", "!"],
+      borderOpacity: ["DEFAULT", "!"],
+      borderStyle: ["DEFAULT", "!"],
+      borderWidth: ["DEFAULT", "!"],
+      outline: ["DEFAULT", "!"],
+      stroke: ["DEFAULT", "!"],
       textColor: [
+        "DEFAULT",
         "aria-selected",
         "aria-disabled",
         "is-range-selection",
         "is-range-start",
         "is-range-end",
+        "!",
       ],
       backgroundColor: [
+        "DEFAULT",
         "aria-selected",
+        "aria-selected!",
         "is-range-selection",
         "is-range-start",
         "is-range-end",
+        "!",
       ],
-      borderRadius: ["is-range-selection", "is-range-end", "is-range-start"],
+      borderRadius: [
+        "DEFAULT",
+        "is-range-selection",
+        "is-range-end",
+        "is-range-start",
+        "!",
+      ],
     },
   },
   plugins: [
@@ -72,6 +98,11 @@ module.exports = {
       addUtilities(utilities, variants("borderColor"));
     }),
     plugin(function ({ addVariant, e }) {
+      addVariant("!", ({ modifySelectors }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`${className}!`)}`;
+        });
+      });
       addVariant("aria-selected", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -79,8 +110,13 @@ module.exports = {
           )}[aria-selected="true"]`;
         });
       });
-    }),
-    plugin(function ({ addVariant, e }) {
+      addVariant("aria-selected!", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `aria-selected!${separator}${className}`,
+          )}[aria-selected="true"]`;
+        });
+      });
       addVariant("aria-disabled", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -88,8 +124,13 @@ module.exports = {
           )}[aria-disabled="true"]`;
         });
       });
-    }),
-    plugin(function ({ addVariant, e }) {
+      addVariant("aria-disabled!", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `aria-disabled!${separator}${className}`,
+          )}[aria-disabled="true"]`;
+        });
+      });
       addVariant("is-range-selection", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -97,8 +138,13 @@ module.exports = {
           )}[data-is-range-selection]`;
         });
       });
-    }),
-    plugin(function ({ addVariant, e }) {
+      addVariant("is-range-selection!", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `is-range-selection!${separator}${className}`,
+          )}[data-is-range-selection]`;
+        });
+      });
       addVariant("is-range-start", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -106,8 +152,13 @@ module.exports = {
           )}[data-is-selection-start]`;
         });
       });
-    }),
-    plugin(function ({ addVariant, e }) {
+      addVariant("is-range-start!", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `is-range-start!${separator}${className}`,
+          )}[data-is-selection-start]`;
+        });
+      });
       addVariant("is-range-end", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -115,7 +166,15 @@ module.exports = {
           )}[data-is-selection-end]`;
         });
       });
+      addVariant("is-range-end!", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `is-range-end!${separator}${className}`,
+          )}[data-is-selection-end]`;
+        });
+      });
     }),
+
     plugin(function ({ addUtilities }) {
       const utilities = {
         ".collapse-border > :first-of-type:not(:last-of-type)": {

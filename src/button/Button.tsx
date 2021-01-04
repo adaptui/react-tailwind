@@ -2,7 +2,7 @@ import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
 
 import theme from "../theme";
-import { ocx } from "../utils";
+import { cx } from "@renderlesskit/react";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAsSimple } from "../utils/types";
@@ -60,7 +60,7 @@ export const Button = forwardRefWithAsSimple<
   const group = useButtonGroup();
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
-  const buttonStyles = ocx(
+  const buttonStyles = cx(
     theme.button.base,
     theme.button.size[_size],
     theme.button.variant[_variant],

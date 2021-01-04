@@ -1,10 +1,10 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
-import { ocx } from "../utils";
-import { Button, ButtonProps } from "./Button";
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 import theme from "../theme";
 import { CrossIcon } from "../icons";
+import { Button, ButtonProps } from "./Button";
+import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export type IconButtonProps = ButtonProps & {};
 
@@ -13,7 +13,7 @@ function IconButtonComponent(
   ref: React.Ref<HTMLButtonElement>,
 ) {
   const { children, className, ...rest } = props;
-  const iconButtonStyles = ocx(theme.button.iconButton, className);
+  const iconButtonStyles = cx(theme.button.iconButton, className);
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
         "aria-hidden": true,

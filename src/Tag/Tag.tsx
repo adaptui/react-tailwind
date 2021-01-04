@@ -1,8 +1,8 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 
 import theme from "../theme";
-import { ocx } from "../utils";
 import { CrossIcon } from "../icons";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAsSimple } from "../utils/types";
@@ -55,7 +55,7 @@ export const Tag = forwardRefWithAsSimple<TagProps, HTMLSpanElement, "span">(
       children,
       ...rest
     } = props;
-    const tagStyles = ocx(theme.tag.base, theme.tag.size[size], className);
+    const tagStyles = cx(theme.tag.base, theme.tag.size[size], className);
 
     // TODO: Clean this up
     if (

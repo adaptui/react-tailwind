@@ -13,10 +13,11 @@ import {
   useRangeCalendarState,
   RangeCalendarInitialState,
   RangeCalendarStateReturn,
+  cx,
 } from "@renderlesskit/react";
 
 import theme from "../theme";
-import { ocx } from "../utils";
+
 import { CalendarProvider, useCalendarContext } from "./helpers";
 
 export interface CalendarProps extends CalendarInitialState {}
@@ -149,14 +150,17 @@ export const CalendarNextYearButton: React.FC<{}> = props => {
   );
 };
 
-export const CalendarTable: React.FC<{}> = props => {
+export const CalendarTable: React.FC<{ classname?: string }> = ({
+  classname,
+  ...props
+}) => {
   const state = useCalendarContext();
 
   return (
     <CalendarGrid
       as="table"
       {...state}
-      className={theme.calendar.table.base}
+      className={cx(theme.calendar.table.base, classname)}
       {...props}
     />
   );
@@ -200,15 +204,26 @@ export const CalendarTableHeadHeaderAbbr: React.FC<any> = props => {
   );
 };
 
-export const CalendarTableBody: React.FC<{}> = props => {
-  return <tbody className={theme.calendar.table.body.base} {...props} />;
+export const CalendarTableBody: React.FC<{ classname?: string }> = ({
+  classname,
+  ...props
+}) => {
+  return (
+    <tbody
+      className={cx(theme.calendar.table.body.base, classname)}
+      {...props}
+    />
+  );
 };
 
 export const CalendarTableBodyRow: React.FC<{}> = props => {
   return <tr className={theme.calendar.table.body.row} {...props} />;
 };
 
-export const CalendarTableBodyData: React.FC<any> = props => {
+export const CalendarTableBodyData: React.FC<{
+  classname?: string;
+  [x: string]: any;
+}> = ({ classname, ...props }) => {
   const { day, dayIndex, ...rest } = props;
   const state = useCalendarContext();
 
@@ -216,7 +231,7 @@ export const CalendarTableBodyData: React.FC<any> = props => {
     <CalendarCell
       as="td"
       date={day}
-      className={ocx(theme.calendar.table.body.data.base)}
+      className={cx(theme.calendar.table.body.data.base, classname)}
       {...state}
       {...rest}
     />
@@ -261,7 +276,12 @@ export const CalendarTableBodyContents: React.FC = () => {
       {state.daysInMonth.map((week, weekIndex) => (
         <CalendarTableBodyRow key={weekIndex}>
           {week.map((day, dayIndex) => (
-            <CalendarTableBodyData day={day} key={dayIndex} dayIndex={dayIndex}>
+            <CalendarTableBodyData
+              day={day}
+              key={dayIndex}
+              dayIndex={dayIndex}
+              classname="aria-selected!:bg-yellow-500"
+            >
               <CalendarTableBodyDataButton day={day} />
             </CalendarTableBodyData>
           ))}

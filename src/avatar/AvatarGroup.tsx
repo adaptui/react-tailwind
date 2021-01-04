@@ -1,8 +1,9 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
 import theme from "../theme";
 import { Avatar, AvatarProps } from "./Avatar";
-import { createContext, ocx } from "../utils";
+import { createContext } from "../utils";
 
 export type AvatarGroupProps = Pick<AvatarProps, "size"> & { limit?: number };
 export type AvatarGroupContext = Pick<AvatarProps, "size"> & {};
@@ -38,7 +39,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         role="group"
         aria-label="Avatar group"
         {...rest}
-        className={ocx(theme.avatar.group.base)}
+        className={cx(theme.avatar.group.base)}
       >
         {avatars}
         {isOverLimit ? (

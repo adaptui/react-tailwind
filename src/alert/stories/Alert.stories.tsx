@@ -44,7 +44,7 @@ const Base: Story<AlertProps> = args => {
         <AlertActionButton>Reach Out</AlertActionButton>
         <Button
           aria-label="close"
-          className={ocx(
+          className={cx(
             "h-5 px-0 bg-transparent min-w-5 ml-2",
             `hover:${buttonBg[status]}`,
           )}

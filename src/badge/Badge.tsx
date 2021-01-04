@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, BoxProps } from "../box/Box";
+import { cx } from "@renderlesskit/react";
 
 import theme from "../theme";
-import { ocx } from "../utils";
+import { Box, BoxProps } from "../box/Box";
+
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 type Variants = "primary" | "secondary" | "outline";
@@ -34,7 +35,7 @@ function BadgeComponent(
     ...rest
   } = props;
 
-  const badgeStyles = ocx(
+  const badgeStyles = cx(
     theme.badge.base,
     theme.badge.size[size],
     theme.badge.variants[variant],

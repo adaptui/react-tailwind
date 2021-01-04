@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Role, RoleProps } from "reakit";
+import { cx } from "@renderlesskit/react";
 
 import {
   BoltIcon,
@@ -10,7 +11,7 @@ import {
 } from "../icons";
 import theme from "../theme";
 import { Button, ButtonProps } from "../button";
-import { createContext, ocx } from "../utils";
+import { createContext } from "../utils";
 
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
@@ -46,7 +47,7 @@ function AlertComponent(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const { status = "info", className, ...rest } = props;
-  const alertStyles = ocx(
+  const alertStyles = cx(
     theme.alert.base,
     theme.alert.status[status].base,
     className,
@@ -68,7 +69,7 @@ function AlertTitleComponent(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const { className, ...rest } = props;
-  const alertTitleStyles = ocx(theme.alert.title, className);
+  const alertTitleStyles = cx(theme.alert.title, className);
 
   return <Role className={alertTitleStyles} ref={ref} {...rest} />;
 }
@@ -84,7 +85,7 @@ function AlertDescriptionComponent(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const { className, ...rest } = props;
-  const alertDescriptionStyles = ocx(theme.alert.description, className);
+  const alertDescriptionStyles = cx(theme.alert.description, className);
 
   return <Role className={alertDescriptionStyles} ref={ref} {...rest} />;
 }
@@ -101,7 +102,7 @@ function AlertActionButtonComponent(
 ) {
   const { status } = useAlertContext();
   const { className, ...rest } = props;
-  const alertActionButtonStyles = ocx(
+  const alertActionButtonStyles = cx(
     theme.alert.actionButton,
     theme.alert.status[status].actionButton,
     className,
@@ -124,8 +125,8 @@ function AlertIconComponent(
   const { status } = useAlertContext();
   const { className, ...rest } = props;
   const Icon = STATUSICONS[status];
-  const alertIconBaseStyles = ocx(theme.alert.icon.base, className);
-  const alertIconIconsStyles = ocx(
+  const alertIconBaseStyles = cx(theme.alert.icon.base, className);
+  const alertIconIconsStyles = cx(
     theme.alert.icon.base,
     theme.alert.status[status].icon,
     className,

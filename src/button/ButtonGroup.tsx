@@ -1,8 +1,9 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
 import theme from "../theme";
 import { Box, BoxProps } from "../box";
-import { createContext, ocx } from "../utils";
+import { createContext } from "../utils";
 import { forwardRefWithAsSimple } from "../utils/types";
 
 export type ButtonGroupProps = BoxProps & {
@@ -39,7 +40,7 @@ export const ButtonGroup = forwardRefWithAsSimple<ButtonGroupProps, "div">(
     const { size, variant, isAttached, className, ...rest } = props;
     const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
-    const buttonGroupStyles = ocx(
+    const buttonGroupStyles = cx(
       theme.buttonGroup.base,
       isAttached ? theme.buttonGroup.attached : "",
       className,

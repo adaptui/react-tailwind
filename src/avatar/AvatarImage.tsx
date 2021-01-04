@@ -1,7 +1,7 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 
 import theme from "../theme";
-import { ocx } from "../utils";
 import { AvatarProps } from ".";
 import { useImage } from "../utils/useImage";
 import { GenericAvatar } from "../icons";
@@ -38,7 +38,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
       data-testid="testid-avatarimg"
       src={src}
       alt={name}
-      className={ocx(theme.avatar.image)}
+      className={cx(theme.avatar.image)}
       style={{
         borderRadius: "inherit",
       }}

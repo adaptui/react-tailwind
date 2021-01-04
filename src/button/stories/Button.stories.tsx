@@ -22,8 +22,8 @@ import {
   CloseButtonProps,
 } from "../index";
 import theme from "../../theme";
-import { ocx } from "../../utils";
 import { Spinner } from "../../spinner";
+import { cx } from "@renderlesskit/react";
 
 export default {
   title: "Button",
@@ -45,7 +45,7 @@ export const Icon = ButtonWithIcon.bind({});
 Icon.args = { size: "md", variant: "primary" };
 
 const LeftIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<ClockIcon />} {...args}>
+  <Button {...args} size="md" className="bg-yellow-100!" prefix={<ClockIcon />}>
     Button
   </Button>
 );
@@ -83,7 +83,7 @@ LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
 const CustomSpinner = () => (
   <>
     Loading
-    <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
+    <Spinner className={cx(theme.button.spinner, "ml-2!", "text-blue-500!")} />
   </>
 );
 
@@ -104,7 +104,7 @@ const ButtonGroupBase: Story<ButtonGroupProps> = args => (
 );
 
 export const GroupDefault = ButtonGroupBase.bind({});
-GroupDefault.args = { className: "space-x-4" };
+GroupDefault.args = { className: "space-x-4!" };
 
 export const GroupCollapsed = ButtonGroupBase.bind({});
 GroupCollapsed.args = {

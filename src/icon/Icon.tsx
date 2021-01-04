@@ -1,7 +1,7 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
 import theme from "../theme";
-import { ocx } from "../utils";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
@@ -44,7 +44,7 @@ function IconComponent(
   const shared: any = {
     ref,
     focusable,
-    className: ocx(iconStyles, className),
+    className: cx(iconStyles, className),
   };
 
   const _viewBox = viewBox ?? fallbackIcon.viewBox;

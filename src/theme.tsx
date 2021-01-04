@@ -41,7 +41,7 @@ const theme = {
       "font-sans font-semibold text-white inline-flex items-center justify-center appearance-none rounded-md transition-all relative whitespace-nowrap align-middle outline-none w-auto select-none disabled:cursor-not-allowed disabled:opacity-40",
     prefix: "inherit mr-2",
     suffix: "inherit ml-2",
-    spinner: "w-em h-em text-current",
+    spinner: "w-em h-em text-current!",
     group: "focus:z-1",
     span: "inline-block cursor-not-allowed",
     iconButton: "px-0",
