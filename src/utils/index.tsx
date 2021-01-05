@@ -58,7 +58,4 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
 /**
  * Override base styles with those that come after like the css rules
  */
-export const ocx = (...classNames: any[]) =>
-  overrideTailwindClasses(cx(...classNames), {
-    tailwindProperties: tailwindProperties,
-  });
+export const ocx = (...classNames: any[]) => cx(...classNames);
