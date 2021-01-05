@@ -43,7 +43,7 @@ const theme = {
       "def:font-sans def:font-semibold def:text-white def:inline-flex def:items-center def:justify-center def:appearance-none def:rounded-md def:transition-all def:relative def:whitespace-nowrap def:align-middle def:outline-none def:w-auto def:select-none def-disabled:cursor-not-allowed disabled:cursor-not-allowed def-disabled:opacity-40",
     prefix: "def:inherit def:mr-2",
     suffix: "def:inherit def:ml-2",
-    spinner: "def:w-em def:h-em text-current",
+    spinner: "def:w-em def:h-em def:text-current",
     group: "focus:z-1",
     span: "def:inline-block def:cursor-not-allowed",
     iconButton: "def:px-0",

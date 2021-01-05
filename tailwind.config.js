@@ -3,9 +3,11 @@ const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
   .default;
+const buildSelectorVariant = require("tailwindcss/lib/util/buildSelectorVariant")
+  .default;
 
 module.exports = {
-  purge: ["./src/theme.tsx"],
+  purge: ["./src/theme.tsx", "./src/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -38,16 +40,15 @@ module.exports = {
   },
   variants: {
     extend: {
-      accessibility: ["def", "DEFAULT", "responsive", "focus-within", "focus"],
-      alignContent: ["def", "DEFAULT", "responsive"],
-      alignItems: ["def", "DEFAULT", "responsive"],
-      alignSelf: ["def", "DEFAULT", "responsive"],
-      animation: ["def", "DEFAULT", "responsive"],
-      appearance: ["def", "DEFAULT", "responsive"],
-      backgroundAttachment: ["def", "DEFAULT", "responsive"],
-      backgroundClip: ["def", "DEFAULT", "responsive"],
+      accessibility: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      alignContent: ["lib", "DEFAULT", "responsive"],
+      alignItems: ["lib", "DEFAULT", "responsive"],
+      alignSelf: ["lib", "DEFAULT", "responsive"],
+      animation: ["lib", "DEFAULT", "responsive"],
+      appearance: ["lib", "DEFAULT", "responsive"],
+      backgroundAttachment: ["lib", "DEFAULT", "responsive"],
+      backgroundClip: ["lib", "DEFAULT", "responsive"],
       backgroundColor: [
-        "def",
         "DEFAULT",
         "aria-selected",
         "is-range-selection",
@@ -59,10 +60,11 @@ module.exports = {
         "focus-within",
         "hover",
         "focus",
+        "lib",
       ],
-      backgroundImage: ["def", "DEFAULT", "responsive"],
+      backgroundImage: ["lib", "DEFAULT", "responsive"],
       backgroundOpacity: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "group-hover",
@@ -70,12 +72,12 @@ module.exports = {
         "hover",
         "focus",
       ],
-      backgroundPosition: ["def", "DEFAULT", "responsive"],
-      backgroundRepeat: ["def", "DEFAULT", "responsive"],
-      backgroundSize: ["def", "DEFAULT", "responsive"],
-      borderCollapse: ["def", "DEFAULT", "responsive"],
+      backgroundPosition: ["lib", "DEFAULT", "responsive"],
+      backgroundRepeat: ["lib", "DEFAULT", "responsive"],
+      backgroundSize: ["lib", "DEFAULT", "responsive"],
+      borderCollapse: ["lib", "DEFAULT", "responsive"],
       borderColor: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "dark",
@@ -85,7 +87,7 @@ module.exports = {
         "focus",
       ],
       borderOpacity: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "group-hover",
@@ -94,17 +96,17 @@ module.exports = {
         "focus",
       ],
       borderRadius: [
-        "def",
+        "lib",
         "DEFAULT",
         "is-range-selection",
         "is-range-end",
         "is-range-start",
         "responsive",
       ],
-      borderStyle: ["def", "DEFAULT", "responsive"],
-      borderWidth: ["def", "DEFAULT", "responsive"],
+      borderStyle: ["lib", "DEFAULT", "responsive"],
+      borderWidth: ["lib", "DEFAULT", "responsive"],
       boxShadow: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "group-hover",
@@ -112,68 +114,67 @@ module.exports = {
         "hover",
         "focus",
       ],
-      boxSizing: ["def", "DEFAULT", "responsive"],
-      clear: ["def", "DEFAULT", "responsive"],
-      container: ["def", "DEFAULT", "responsive"],
-      cursor: ["def", "DEFAULT", "def-disabled", "disabled", "responsive"],
-      display: ["def", "DEFAULT", "responsive"],
-      divideColor: ["def", "DEFAULT", "responsive", "dark"],
-      divideOpacity: ["def", "DEFAULT", "responsive"],
-      divideStyle: ["def", "DEFAULT", "responsive"],
-      divideWidth: ["def", "DEFAULT", "responsive"],
-      fill: ["def", "DEFAULT", "responsive"],
-      flex: ["def", "DEFAULT", "responsive"],
-      flexDirection: ["def", "DEFAULT", "responsive"],
-      flexGrow: ["def", "DEFAULT", "responsive"],
-      flexShrink: ["def", "DEFAULT", "responsive"],
-      flexWrap: ["def", "DEFAULT", "responsive"],
-      float: ["def", "DEFAULT", "responsive"],
-      fontFamily: ["def", "DEFAULT", "responsive"],
-      fontSize: ["def", "DEFAULT", "responsive"],
-      fontSmoothing: ["def", "DEFAULT", "responsive"],
-      fontStyle: ["def", "DEFAULT", "responsive"],
-      fontVariantNumeric: ["def", "DEFAULT", "responsive"],
-      fontWeight: ["def", "DEFAULT", "responsive"],
-      gap: ["def", "DEFAULT", "responsive"],
+      boxSizing: ["lib", "DEFAULT", "responsive"],
+      clear: ["lib", "DEFAULT", "responsive"],
+      container: ["lib", "DEFAULT", "responsive"],
+      cursor: ["lib", "DEFAULT", "disabled", "responsive"],
+      display: ["lib", "DEFAULT", "responsive"],
+      divideColor: ["lib", "DEFAULT", "responsive", "dark"],
+      divideOpacity: ["lib", "DEFAULT", "responsive"],
+      divideStyle: ["lib", "DEFAULT", "responsive"],
+      divideWidth: ["lib", "DEFAULT", "responsive"],
+      fill: ["lib", "DEFAULT", "responsive"],
+      flex: ["lib", "DEFAULT", "responsive"],
+      flexDirection: ["lib", "DEFAULT", "responsive"],
+      flexGrow: ["lib", "DEFAULT", "responsive"],
+      flexShrink: ["lib", "DEFAULT", "responsive"],
+      flexWrap: ["lib", "DEFAULT", "responsive"],
+      float: ["lib", "DEFAULT", "responsive"],
+      fontFamily: ["lib", "DEFAULT", "responsive"],
+      fontSize: ["lib", "DEFAULT", "responsive"],
+      fontSmoothing: ["lib", "DEFAULT", "responsive"],
+      fontStyle: ["lib", "DEFAULT", "responsive"],
+      fontVariantNumeric: ["lib", "DEFAULT", "responsive"],
+      fontWeight: ["lib", "DEFAULT", "responsive"],
+      gap: ["lib", "DEFAULT", "responsive"],
       gradientColorStops: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "dark",
         "hover",
         "focus",
       ],
-      gridAutoColumns: ["def", "DEFAULT", "responsive"],
-      gridAutoFlow: ["def", "DEFAULT", "responsive"],
-      gridAutoRows: ["def", "DEFAULT", "responsive"],
-      gridColumn: ["def", "DEFAULT", "responsive"],
-      gridColumnEnd: ["def", "DEFAULT", "responsive"],
-      gridColumnStart: ["def", "DEFAULT", "responsive"],
-      gridRow: ["def", "DEFAULT", "responsive"],
-      gridRowEnd: ["def", "DEFAULT", "responsive"],
-      gridRowStart: ["def", "DEFAULT", "responsive"],
-      gridTemplateColumns: ["def", "DEFAULT", "responsive"],
-      gridTemplateRows: ["def", "DEFAULT", "responsive"],
-      height: ["def", "DEFAULT", "responsive"],
-      inset: ["def", "DEFAULT", "responsive"],
-      justifyContent: ["def", "DEFAULT", "responsive"],
-      justifyItems: ["def", "DEFAULT", "responsive"],
-      justifySelf: ["def", "DEFAULT", "responsive"],
-      letterSpacing: ["def", "DEFAULT", "responsive"],
-      lineHeight: ["def", "DEFAULT", "responsive"],
-      listStylePosition: ["def", "DEFAULT", "responsive"],
-      listStyleType: ["def", "DEFAULT", "responsive"],
-      margin: ["def", "DEFAULT", "responsive"],
-      maxHeight: ["def", "DEFAULT", "responsive"],
-      maxWidth: ["def", "DEFAULT", "responsive"],
-      minHeight: ["def", "DEFAULT", "responsive"],
-      minWidth: ["def", "DEFAULT", "responsive"],
-      objectFit: ["def", "DEFAULT", "responsive"],
-      objectPosition: ["def", "DEFAULT", "responsive"],
+      gridAutoColumns: ["lib", "DEFAULT", "responsive"],
+      gridAutoFlow: ["lib", "DEFAULT", "responsive"],
+      gridAutoRows: ["lib", "DEFAULT", "responsive"],
+      gridColumn: ["lib", "DEFAULT", "responsive"],
+      gridColumnEnd: ["lib", "DEFAULT", "responsive"],
+      gridColumnStart: ["lib", "DEFAULT", "responsive"],
+      gridRow: ["lib", "DEFAULT", "responsive"],
+      gridRowEnd: ["lib", "DEFAULT", "responsive"],
+      gridRowStart: ["lib", "DEFAULT", "responsive"],
+      gridTemplateColumns: ["lib", "DEFAULT", "responsive"],
+      gridTemplateRows: ["lib", "DEFAULT", "responsive"],
+      height: ["lib", "DEFAULT", "responsive"],
+      inset: ["lib", "DEFAULT", "responsive"],
+      justifyContent: ["lib", "DEFAULT", "responsive"],
+      justifyItems: ["lib", "DEFAULT", "responsive"],
+      justifySelf: ["lib", "DEFAULT", "responsive"],
+      letterSpacing: ["lib", "DEFAULT", "responsive"],
+      lineHeight: ["lib", "DEFAULT", "responsive"],
+      listStylePosition: ["lib", "DEFAULT", "responsive"],
+      listStyleType: ["lib", "DEFAULT", "responsive"],
+      margin: ["lib", "DEFAULT", "responsive"],
+      maxHeight: ["lib", "DEFAULT", "responsive"],
+      maxWidth: ["lib", "DEFAULT", "responsive"],
+      minHeight: ["lib", "DEFAULT", "responsive"],
+      minWidth: ["lib", "DEFAULT", "responsive"],
+      objectFit: ["lib", "DEFAULT", "responsive"],
+      objectPosition: ["lib", "DEFAULT", "responsive"],
       opacity: [
-        "def",
+        "lib",
         "DEFAULT",
-        "def-disabled",
         "disabled",
         "responsive",
         "group-hover",
@@ -181,21 +182,21 @@ module.exports = {
         "hover",
         "focus",
       ],
-      order: ["def", "DEFAULT", "responsive"],
-      outline: ["def", "DEFAULT", "responsive", "focus-within", "focus"],
-      overflow: ["def", "DEFAULT", "responsive"],
-      overscrollBehavior: ["def", "DEFAULT", "responsive"],
-      padding: ["def", "DEFAULT", "responsive"],
-      placeContent: ["def", "DEFAULT", "responsive"],
-      placeItems: ["def", "DEFAULT", "responsive"],
-      placeSelf: ["def", "DEFAULT", "responsive"],
-      placeholderColor: ["def", "DEFAULT", "responsive", "dark", "focus"],
-      placeholderOpacity: ["def", "DEFAULT", "responsive", "focus"],
-      pointerEvents: ["def", "DEFAULT", "responsive"],
-      position: ["def", "DEFAULT", "responsive"],
-      resize: ["def", "DEFAULT", "responsive"],
+      order: ["lib", "DEFAULT", "responsive"],
+      outline: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      overflow: ["lib", "DEFAULT", "responsive"],
+      overscrollBehavior: ["lib", "DEFAULT", "responsive"],
+      padding: ["lib", "DEFAULT", "responsive"],
+      placeContent: ["lib", "DEFAULT", "responsive"],
+      placeItems: ["lib", "DEFAULT", "responsive"],
+      placeSelf: ["lib", "DEFAULT", "responsive"],
+      placeholderColor: ["lib", "DEFAULT", "responsive", "dark", "focus"],
+      placeholderOpacity: ["lib", "DEFAULT", "responsive", "focus"],
+      pointerEvents: ["lib", "DEFAULT", "responsive"],
+      position: ["lib", "DEFAULT", "responsive"],
+      resize: ["lib", "DEFAULT", "responsive"],
       ringColor: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "dark",
@@ -203,7 +204,7 @@ module.exports = {
         "focus",
       ],
       ringOffsetColor: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "dark",
@@ -211,24 +212,24 @@ module.exports = {
         "focus",
       ],
       ringOffsetWidth: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "focus-within",
         "focus",
       ],
-      ringOpacity: ["def", "DEFAULT", "responsive", "focus-within", "focus"],
-      ringWidth: ["def", "DEFAULT", "responsive", "focus-within", "focus"],
-      rotate: ["def", "DEFAULT", "responsive", "hover", "focus"],
-      scale: ["def", "DEFAULT", "responsive", "hover", "focus"],
-      skew: ["def", "DEFAULT", "responsive", "hover", "focus"],
-      space: ["def", "DEFAULT", "responsive"],
-      stroke: ["def", "DEFAULT", "responsive"],
-      strokeWidth: ["def", "DEFAULT", "responsive"],
-      tableLayout: ["def", "DEFAULT", "responsive"],
-      textAlign: ["def", "DEFAULT", "responsive"],
+      ringOpacity: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      ringWidth: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      rotate: ["lib", "DEFAULT", "responsive", "hover", "focus"],
+      scale: ["lib", "DEFAULT", "responsive", "hover", "focus"],
+      skew: ["lib", "DEFAULT", "responsive", "hover", "focus"],
+      space: ["lib", "DEFAULT", "responsive"],
+      stroke: ["lib", "DEFAULT", "responsive"],
+      strokeWidth: ["lib", "DEFAULT", "responsive"],
+      tableLayout: ["lib", "DEFAULT", "responsive"],
+      textAlign: ["lib", "DEFAULT", "responsive"],
       textColor: [
-        "def",
+        "lib",
         "DEFAULT",
         "aria-selected",
         "aria-disabled",
@@ -243,7 +244,7 @@ module.exports = {
         "focus",
       ],
       textDecoration: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "group-hover",
@@ -252,7 +253,7 @@ module.exports = {
         "focus",
       ],
       textOpacity: [
-        "def",
+        "lib",
         "DEFAULT",
         "responsive",
         "group-hover",
@@ -260,39 +261,25 @@ module.exports = {
         "hover",
         "focus",
       ],
-      textOverflow: ["def", "DEFAULT", "responsive"],
-      textTransform: ["def", "DEFAULT", "responsive"],
-      transform: ["def", "DEFAULT", "responsive"],
-      transformOrigin: ["def", "DEFAULT", "responsive"],
-      transitionDelay: ["def", "DEFAULT", "responsive"],
-      transitionDuration: ["def", "DEFAULT", "responsive"],
-      transitionProperty: ["def", "DEFAULT", "responsive"],
-      transitionTimingFunction: ["def", "DEFAULT", "responsive"],
-      translate: ["def", "DEFAULT", "responsive", "hover", "focus"],
-      userSelect: ["def", "DEFAULT", "responsive"],
-      verticalAlign: ["def", "DEFAULT", "responsive"],
-      visibility: ["def", "DEFAULT", "responsive"],
-      whitespace: ["def", "DEFAULT", "responsive"],
-      width: ["def", "DEFAULT", "responsive"],
-      wordBreak: ["def", "DEFAULT", "responsive"],
-      zIndex: ["def", "DEFAULT", "responsive", "focus-within", "focus"],
+      textOverflow: ["lib", "DEFAULT", "responsive"],
+      textTransform: ["lib", "DEFAULT", "responsive"],
+      transform: ["lib", "DEFAULT", "responsive"],
+      transformOrigin: ["lib", "DEFAULT", "responsive"],
+      transitionDelay: ["lib", "DEFAULT", "responsive"],
+      transitionDuration: ["lib", "DEFAULT", "responsive"],
+      transitionProperty: ["lib", "DEFAULT", "responsive"],
+      transitionTimingFunction: ["lib", "DEFAULT", "responsive"],
+      translate: ["lib", "DEFAULT", "responsive", "hover", "focus"],
+      userSelect: ["lib", "DEFAULT", "responsive"],
+      verticalAlign: ["lib", "DEFAULT", "responsive"],
+      visibility: ["lib", "DEFAULT", "responsive"],
+      whitespace: ["lib", "DEFAULT", "responsive"],
+      width: ["lib", "DEFAULT", "responsive"],
+      wordBreak: ["lib", "DEFAULT", "responsive"],
+      zIndex: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
     },
   },
   plugins: [
-    plugin(function ({ addVariant, e }) {
-      addVariant("def", ({ modifySelectors, separator }) => {
-        modifySelectors(({ className }) => {
-          return `.${e(`def${separator}${className}`)}`;
-        });
-      });
-    }),
-    plugin(function ({ addVariant, e }) {
-      addVariant("def-disabled", ({ modifySelectors, separator }) => {
-        modifySelectors(({ className }) => {
-          return `.${e(`def-disabled${separator}${className}:disabled`)}`;
-        });
-      });
-    }),
     plugin(function ({ addUtilities, e, theme, variants }) {
       const colors = flattenColorPalette(theme("borderColor"));
       delete colors["default"];
@@ -305,7 +292,7 @@ module.exports = {
       }));
       const utilities = Object.assign({}, ...colorMap);
 
-      addUtilities(utilities, ["def", "DEFAULT", "responsive"]);
+      addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
     }),
     plugin(function ({ addUtilities }) {
       const utilities = {
@@ -331,7 +318,7 @@ module.exports = {
         },
       };
 
-      addUtilities(utilities, ["def", "DEFAULT", "responsive"]);
+      addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
     }),
     plugin(function ({ addVariant, e }) {
       addVariant("aria-selected", ({ modifySelectors, separator }) => {
@@ -377,6 +364,19 @@ module.exports = {
           )}[data-is-selection-end]`;
         });
       });
+    }),
+    plugin(function ({ addVariant, e }) {
+      addVariant(
+        "lib",
+        ({ container, separator, modifySelectors }) => {
+          modifySelectors(({ selector }) => {
+            return buildSelectorVariant(selector, "lib", separator, message => {
+              throw container.error(message);
+            });
+          });
+        },
+        { unstable_stack: true },
+      );
     }),
   ],
 };
