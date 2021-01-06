@@ -30,11 +30,7 @@ export default {
   component: Button,
 } as Meta;
 
-const Base: Story<ButtonProps> = args => (
-  <Button disabled {...args}>
-    Button
-  </Button>
-);
+const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 
 export const Default = Base.bind({});
 Default.args = { size: "md", variant: "primary" };

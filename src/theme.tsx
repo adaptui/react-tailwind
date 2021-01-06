@@ -40,11 +40,11 @@ const theme = {
   },
   button: {
     base:
-      "lib:font-sans lib:font-semibold lib:text-white lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:rounded-md lib:transition-all lib:relative lib:whitespace-nowrap lib:align-middle lib:outline-none lib:w-auto lib:select-none def-disabled:cursor-not-allowed disabled:cursor-not-allowed def-disabled:opacity-40",
+      "lib:font-sans lib:font-semibold lib:text-white lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:rounded-md lib:transition-all lib:relative lib:whitespace-nowrap lib:align-middle lib:outline-none lib:w-auto lib:select-none lib:disabled:cursor-not-allowed lib:disabled:opacity-40",
     prefix: "lib:inherit lib:mr-2",
     suffix: "lib:inherit lib:ml-2",
     spinner: "lib:w-em lib:h-em lib:text-current",
-    group: "focus:z-1",
+    group: "lib:focus:z-1",
     span: "lib:inline-block lib:cursor-not-allowed",
     iconButton: "lib:px-0",
     variant: {
@@ -151,8 +151,8 @@ const theme = {
         row: "",
         data: {
           base:
-            "lib:text-center lib:rounded-lg lib:text-sm lib:h-8 lib:w-8 lib:min-h-8 lib:min-w-8 focus-within:bg-gray-100 focus-within:text-black aria-selected:text-white aria-selected:bg-blue-400 is-range-selection:bg-blue-100 is-range-selection:rounded-none is-range-selection:text-gray-800 is-range-start:text-white is-range-start:bg-blue-500 is-range-end:text-white is-range-end:bg-blue-500 is-range-start:rounded-l-lg is-range-end:rounded-r-lg",
-          button: "lib:p-2 lib:outline-none aria-disabled:text-gray-400",
+            "lib:text-center lib:rounded-lg lib:text-sm lib:h-8 lib:w-8 lib:min-h-8 lib:min-w-8 lib:focus-within:bg-gray-100 lib:focus-within:text-black lib:aria-selected:text-white lib:aria-selected:bg-blue-400 lib:is-range-selection:bg-blue-100 lib:is-range-selection:rounded-none lib:is-range-selection:text-gray-800 lib:is-range-start:text-white lib:is-range-start:bg-blue-500 lib:is-range-end:text-white lib:is-range-end:bg-blue-500 lib:is-range-start:rounded-l-lg lib:is-range-end:rounded-r-lg",
+          button: "lib:p-2 lib:outline-none lib:aria-disabled:text-gray-400",
         },
       },
     },
@@ -164,9 +164,9 @@ const theme = {
       "lib:flex lib:gap-4 lib:justify-between lib:p-2 lib:pr-4 lib:pl-4 lib:rounded-md",
     segment_field: "lib:flex lib:justify-between lib:gap-1",
     segment:
-      "focus:text-blue-500 focus:outline-none lib:font-mono lib:font-normal",
+      "lib:focus:text-blue-500 lib:focus:outline-none lib:font-mono lib:font-normal",
     trigger:
-      "lib:text-gray-700 focus:outline-none focus:text-blue-500 lib:relative lib:inline-block",
+      "lib:text-gray-700 lib:focus:outline-none focus:text-blue-500 lib:relative lib:inline-block",
     badge: {
       base:
         "lib:font-sans lib:font-medium lib:text-xs lib:rounded-full lib:py-1",
@@ -186,7 +186,7 @@ const theme = {
   },
   tag: {
     base:
-      "lib:font-sans lib:font-semibold lib:bg-gray-100 lib:text-gray-800 lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:rounded-md lib:transition-all lib:relative lib:whitespace-nowrap lib:align-middle lib:outline-none lib:w-auto lib:select-none disabled:cursor-not-allowed disabled:opacity-40",
+      "lib:font-sans lib:font-semibold lib:bg-gray-100 lib:text-gray-800 lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:rounded-md lib:transition-all lib:relative lib:whitespace-nowrap lib:align-middle lib:outline-none lib:w-auto lib:select-none lib:disabled:cursor-not-allowed lib:disabled:opacity-40",
     prefix: "lib:flex lib:mr-2",
     suffix: "lib:flex lib:ml-2",
     size: {
