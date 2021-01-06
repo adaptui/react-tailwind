@@ -5,6 +5,23 @@ const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
   .default;
 const buildSelectorVariant = require("tailwindcss/lib/util/buildSelectorVariant")
   .default;
+const selectorParser = require("postcss-selector-parser");
+
+function generatePseudoClassVariant(pseudoClass, selectorPrefix = pseudoClass) {
+  return ({ modifySelectors, separator }) => {
+    const parser = selectorParser(selectors => {
+      selectors.walkClasses(sel => {
+        sel.value = `lib${separator}${selectorPrefix}${separator}${sel.value}`;
+        sel.parent.insertAfter(
+          sel,
+          selectorParser.pseudo({ value: `:${pseudoClass}` }),
+        );
+      });
+    });
+
+    return modifySelectors(({ selector }) => parser.processSync(selector));
+  };
+}
 
 module.exports = {
   purge: ["./src/theme.tsx", "./src/**/*.tsx"],
@@ -40,7 +57,15 @@ module.exports = {
   },
   variants: {
     extend: {
-      accessibility: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      accessibility: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:focus-within",
+        "focus-within",
+        "lib:focus",
+        "focus",
+      ],
       alignContent: ["lib", "DEFAULT", "responsive"],
       alignItems: ["lib", "DEFAULT", "responsive"],
       alignSelf: ["lib", "DEFAULT", "responsive"],
@@ -49,18 +74,25 @@ module.exports = {
       backgroundAttachment: ["lib", "DEFAULT", "responsive"],
       backgroundClip: ["lib", "DEFAULT", "responsive"],
       backgroundColor: [
+        "lib",
         "DEFAULT",
-        "aria-selected",
-        "is-range-selection",
-        "is-range-start",
-        "is-range-end",
         "responsive",
         "dark",
+        "lib:aria-selected",
+        "aria-selected",
+        "lib:is-range-selection",
+        "is-range-selection",
+        "lib:is-range-start",
+        "is-range-start",
+        "lib:is-range-start",
+        "is-range-end",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
-        "lib",
       ],
       backgroundImage: ["lib", "DEFAULT", "responsive"],
       backgroundOpacity: [
@@ -68,8 +100,11 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       backgroundPosition: ["lib", "DEFAULT", "responsive"],
@@ -82,8 +117,11 @@ module.exports = {
         "responsive",
         "dark",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       borderOpacity: [
@@ -91,17 +129,23 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       borderRadius: [
         "lib",
         "DEFAULT",
-        "is-range-selection",
-        "is-range-end",
-        "is-range-start",
         "responsive",
+        "lib:is-range-selection",
+        "is-range-selection",
+        "lib:is-range-start",
+        "is-range-end",
+        "lib:is-range-start",
+        "is-range-start",
       ],
       borderStyle: ["lib", "DEFAULT", "responsive"],
       borderWidth: ["lib", "DEFAULT", "responsive"],
@@ -110,14 +154,17 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       boxSizing: ["lib", "DEFAULT", "responsive"],
       clear: ["lib", "DEFAULT", "responsive"],
       container: ["lib", "DEFAULT", "responsive"],
-      cursor: ["lib", "DEFAULT", "disabled", "responsive"],
+      cursor: ["lib", "DEFAULT", "lib:disabled", "disabled", "responsive"],
       display: ["lib", "DEFAULT", "responsive"],
       divideColor: ["lib", "DEFAULT", "responsive", "dark"],
       divideOpacity: ["lib", "DEFAULT", "responsive"],
@@ -142,7 +189,9 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "dark",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       gridAutoColumns: ["lib", "DEFAULT", "responsive"],
@@ -175,23 +224,48 @@ module.exports = {
       opacity: [
         "lib",
         "DEFAULT",
+        "lib:disabled",
         "disabled",
         "responsive",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       order: ["lib", "DEFAULT", "responsive"],
-      outline: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      outline: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:focus-within",
+        "focus-within",
+        "lib:focus",
+        "focus",
+      ],
       overflow: ["lib", "DEFAULT", "responsive"],
       overscrollBehavior: ["lib", "DEFAULT", "responsive"],
       padding: ["lib", "DEFAULT", "responsive"],
       placeContent: ["lib", "DEFAULT", "responsive"],
       placeItems: ["lib", "DEFAULT", "responsive"],
       placeSelf: ["lib", "DEFAULT", "responsive"],
-      placeholderColor: ["lib", "DEFAULT", "responsive", "dark", "focus"],
-      placeholderOpacity: ["lib", "DEFAULT", "responsive", "focus"],
+      placeholderColor: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "dark",
+        "lib:focus",
+        "focus",
+      ],
+      placeholderOpacity: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:focus",
+        "focus",
+      ],
       pointerEvents: ["lib", "DEFAULT", "responsive"],
       position: ["lib", "DEFAULT", "responsive"],
       resize: ["lib", "DEFAULT", "responsive"],
@@ -200,7 +274,9 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "dark",
+        "lib:focus-within",
         "focus-within",
+        "lib:focus",
         "focus",
       ],
       ringOffsetColor: [
@@ -208,21 +284,65 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "dark",
+        "lib:focus-within",
         "focus-within",
+        "lib:focus",
         "focus",
       ],
       ringOffsetWidth: [
         "lib",
         "DEFAULT",
         "responsive",
+        "lib:focus-within",
         "focus-within",
+        "lib:focus",
         "focus",
       ],
-      ringOpacity: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
-      ringWidth: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
-      rotate: ["lib", "DEFAULT", "responsive", "hover", "focus"],
-      scale: ["lib", "DEFAULT", "responsive", "hover", "focus"],
-      skew: ["lib", "DEFAULT", "responsive", "hover", "focus"],
+      ringOpacity: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:focus-within",
+        "focus-within",
+        "lib:focus",
+        "focus",
+      ],
+      ringWidth: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:focus-within",
+        "focus-within",
+        "lib:focus",
+        "focus",
+      ],
+      rotate: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:hover",
+        "hover",
+        "lib:focus",
+        "focus",
+      ],
+      scale: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:hover",
+        "hover",
+        "lib:focus",
+        "focus",
+      ],
+      skew: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:hover",
+        "hover",
+        "lib:focus",
+        "focus",
+      ],
       space: ["lib", "DEFAULT", "responsive"],
       stroke: ["lib", "DEFAULT", "responsive"],
       strokeWidth: ["lib", "DEFAULT", "responsive"],
@@ -231,16 +351,24 @@ module.exports = {
       textColor: [
         "lib",
         "DEFAULT",
-        "aria-selected",
-        "aria-disabled",
-        "is-range-selection",
-        "is-range-start",
-        "is-range-end",
         "responsive",
         "dark",
+        "lib:aria-selected",
+        "aria-selected",
+        "lib:aria-disabled",
+        "aria-disabled",
+        "lib:is-range-selection",
+        "is-range-selection",
+        "lib:is-range-start",
+        "is-range-start",
+        "lib:is-range-start",
+        "is-range-end",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       textDecoration: [
@@ -248,8 +376,11 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       textOpacity: [
@@ -257,8 +388,11 @@ module.exports = {
         "DEFAULT",
         "responsive",
         "group-hover",
+        "lib:focus-within",
         "focus-within",
+        "lib:hover",
         "hover",
+        "lib:focus",
         "focus",
       ],
       textOverflow: ["lib", "DEFAULT", "responsive"],
@@ -269,14 +403,30 @@ module.exports = {
       transitionDuration: ["lib", "DEFAULT", "responsive"],
       transitionProperty: ["lib", "DEFAULT", "responsive"],
       transitionTimingFunction: ["lib", "DEFAULT", "responsive"],
-      translate: ["lib", "DEFAULT", "responsive", "hover", "focus"],
+      translate: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:hover",
+        "hover",
+        "lib:focus",
+        "focus",
+      ],
       userSelect: ["lib", "DEFAULT", "responsive"],
       verticalAlign: ["lib", "DEFAULT", "responsive"],
       visibility: ["lib", "DEFAULT", "responsive"],
       whitespace: ["lib", "DEFAULT", "responsive"],
       width: ["lib", "DEFAULT", "responsive"],
       wordBreak: ["lib", "DEFAULT", "responsive"],
-      zIndex: ["lib", "DEFAULT", "responsive", "focus-within", "focus"],
+      zIndex: [
+        "lib",
+        "DEFAULT",
+        "responsive",
+        "lib:focus-within",
+        "focus-within",
+        "lib:focus",
+        "focus",
+      ],
     },
   },
   plugins: [
@@ -321,6 +471,13 @@ module.exports = {
       addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
     }),
     plugin(function ({ addVariant, e }) {
+      addVariant("lib:aria-selected", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `lib${separator}aria-selected${separator}${className}`,
+          )}[aria-selected="true"]`;
+        });
+      });
       addVariant("aria-selected", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -330,6 +487,13 @@ module.exports = {
       });
     }),
     plugin(function ({ addVariant, e }) {
+      addVariant("lib:aria-disabled", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `lib${separator}aria-disabled${separator}${className}`,
+          )}[aria-disabled="true"]`;
+        });
+      });
       addVariant("aria-disabled", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -339,6 +503,13 @@ module.exports = {
       });
     }),
     plugin(function ({ addVariant, e }) {
+      addVariant("lib:is-range-selection", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `lib${separator}is-range-selection${separator}${className}`,
+          )}[data-is-range-selection]`;
+        });
+      });
       addVariant("is-range-selection", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -348,6 +519,13 @@ module.exports = {
       });
     }),
     plugin(function ({ addVariant, e }) {
+      addVariant("lib:is-range-start", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `lib${separator}is-range-start${separator}${className}`,
+          )}[data-is-selection-start]`;
+        });
+      });
       addVariant("is-range-start", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -357,6 +535,13 @@ module.exports = {
       });
     }),
     plugin(function ({ addVariant, e }) {
+      addVariant("lib:is-range-end", ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(
+            `lib${separator}is-range-end${separator}${className}`,
+          )}[data-is-selection-end]`;
+        });
+      });
       addVariant("is-range-end", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(
@@ -366,17 +551,20 @@ module.exports = {
       });
     }),
     plugin(function ({ addVariant, e }) {
-      addVariant(
-        "lib",
-        ({ container, separator, modifySelectors }) => {
-          modifySelectors(({ selector }) => {
-            return buildSelectorVariant(selector, "lib", separator, message => {
-              throw container.error(message);
-            });
+      addVariant("lib", ({ container, separator, modifySelectors }) => {
+        modifySelectors(({ selector }) => {
+          return buildSelectorVariant(selector, "lib", separator, message => {
+            throw container.error(message);
           });
-        },
-        { unstable_stack: true },
+        });
+      });
+      addVariant("lib:hover", generatePseudoClassVariant("hover"));
+      addVariant(
+        "lib:focus-within",
+        generatePseudoClassVariant("focus-within"),
       );
+      addVariant("lib:focus", generatePseudoClassVariant("focus"));
+      addVariant("lib:disabled", generatePseudoClassVariant("disabled"));
     }),
   ],
 };
