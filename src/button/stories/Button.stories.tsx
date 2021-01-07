@@ -1,4 +1,5 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
@@ -21,8 +22,8 @@ import {
   ButtonGroupProps,
   CloseButtonProps,
 } from "../index";
+import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
-import { useOverride, useTheme } from "../../theme";
 
 export default {
   title: "Button",
@@ -84,12 +85,11 @@ LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
 
 const CustomSpinner = () => {
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <>
       Loading
-      <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
+      <Spinner className={cx(theme.button.spinner, "ml-2", "text-red-500")} />
     </>
   );
 };

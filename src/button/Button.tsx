@@ -1,10 +1,11 @@
-import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
+import { cx } from "@renderlesskit/react";
+import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 
+import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { useButtonGroup } from "./ButtonGroup";
-import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAsSimple } from "../utils/types";
 
 type AnyString = string & { ignore?: any };
@@ -62,9 +63,8 @@ export const Button = forwardRefWithAsSimple<
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
   const theme = useTheme();
-  const ocx = useOverride();
 
-  const buttonStyles = ocx(
+  const buttonStyles = cx(
     theme.button.base,
     theme.button.size[_size],
     theme.button.variant[_variant],

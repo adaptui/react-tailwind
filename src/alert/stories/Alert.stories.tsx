@@ -12,7 +12,6 @@ import {
 } from "../index";
 import { Box } from "../../box";
 import { CrossIcon } from "../../icons";
-import { useOverride } from "../../theme";
 import { AlertActionButton } from "../Alert";
 import { Button, ButtonIcon } from "../../button";
 
@@ -30,10 +29,9 @@ const Base: Story<AlertProps> = args => {
     error: "bg-red-200",
     offline: "bg-purple-200",
   };
-  const ocx = useOverride();
 
   return (
-    <Alert {...args} className="flex justify-between">
+    <Alert {...args} status={status} className="flex justify-between">
       <Box className="items-center inherit">
         <AlertIcon />
         <AlertTitle>
@@ -45,10 +43,7 @@ const Base: Story<AlertProps> = args => {
         <AlertActionButton>Reach Out</AlertActionButton>
         <Button
           aria-label="close"
-          className={ocx(
-            "h-5 px-0 bg-transparent min-w-5 ml-2",
-            `hover:${buttonBg[status]}`,
-          )}
+          className={`h-5 px-0 bg-transparent min-w-5 ml-2 hover:${buttonBg[status]}`}
         >
           <ButtonIcon className="text-gray-800 inherit">
             <CrossIcon />

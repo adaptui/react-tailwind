@@ -1,16 +1,8 @@
 import * as React from "react";
-import { configureAxe } from "jest-axe";
 
 import { Avatar } from "../Avatar";
 import { AvatarGroup } from "../AvatarGroup";
-import { render, screen } from "../../utils/testUtils";
-
-const axe = configureAxe({
-  rules: {
-    // disabled landmark rules when testing isolated components.
-    region: { enabled: false },
-  },
-});
+import { render, screen, testA11y } from "../../utils/testUtils";
 
 describe("<AvatarGroup />", () => {
   expect.assertions(1);
@@ -104,15 +96,12 @@ describe("<AvatarGroup />", () => {
     expect(group.childElementCount).toEqual(2);
   });
 
-  it("should not have axe violations", async () => {
-    const { container } = render(
+  it("should not have a11y violations", async () => {
+    await testA11y(
       <AvatarGroup>
         <Avatar />
         <Avatar />
       </AvatarGroup>,
     );
-    const results = await axe(container);
-
-    expect(results).toHaveNoViolations();
   });
 });

@@ -1,15 +1,7 @@
 import * as React from "react";
 import { Button } from "../Button";
 
-import { configureAxe } from "jest-axe";
-import { render, screen } from "../../utils/testUtils";
-
-const axe = configureAxe({
-  rules: {
-    // disabled landmark rules when testing isolated components.
-    region: { enabled: false },
-  },
-});
+import { render, screen, testA11y } from "../../utils/testUtils";
 
 describe("Testing Button", () => {
   it("should render properly", () => {
@@ -19,9 +11,6 @@ describe("Testing Button", () => {
   });
 
   it("should not have axe violations", async () => {
-    const { container } = render(<Button>Ally</Button>);
-    const results = await axe(container);
-
-    expect(results).toHaveNoViolations();
+    testA11y(<Button>Ally</Button>);
   });
 });

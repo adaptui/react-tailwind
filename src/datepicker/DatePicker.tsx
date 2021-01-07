@@ -14,7 +14,6 @@ import {
   DatePickerEndSegmentInput,
   DatePickerStartSegmentInput,
 } from "./CompundDatePicker";
-
 import {
   CalendarHeader,
   CalendarNextMonthButton,
@@ -30,7 +29,6 @@ import {
   CalendarTitle,
   StatelessCalendar,
 } from "../calendar";
-
 import {
   ChevronLeft,
   ChevronRight,

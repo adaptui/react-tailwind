@@ -1,13 +1,10 @@
 import * as React from "react";
-import { Avatar, AvatarBadge } from "../Avatar";
-import { configureAxe } from "jest-axe";
-import { render } from "../../utils/testUtils";
 
-const axe = configureAxe({
-  rules: {
-    // disabled landmark rules when testing isolated components.
-    region: { enabled: false },
-  },
+import { Avatar, AvatarBadge } from "../Avatar";
+import { render, screen, testA11y, mockImage } from "../../utils/testUtils";
+
+afterAll(() => {
+  mockImage.restoreMock();
 });
 
 describe("<Avatar />", () => {
@@ -57,7 +54,7 @@ describe("<Avatar />", () => {
     expect(getByLabelText("fallback")).toHaveTextContent(fallbackContent);
   });
 
-  it("renders name if fallback & name both are provided", () => {
+  it("prioritize name between fallback & name", () => {
     const fallbackContent = "I'm a fallback";
     const name = "Anurag Hazra";
     const { queryByLabelText } = render(
@@ -72,17 +69,46 @@ describe("<Avatar />", () => {
     expect(queryByLabelText("fallback")).not.toBeInTheDocument();
   });
 
-  // TODO: Test Image load
-  test.skip("Avatar onError", async () => {
+  it("prioritize src between fallback, name & src", async () => {
+    mockImage.load();
+    const fallbackContent = "I'm a fallback";
+    const name = "Anurag Hazra";
+    const src = "demo.png";
+    render(
+      <Avatar
+        src={src}
+        name={name}
+        fallback={<div aria-label="fallback">{fallbackContent}</div>}
+      />,
+    );
+
+    await mockImage.advanceTimer();
+
+    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
+  });
+
+  it("Avatar Image loads", async () => {
+    mockImage.load();
+    await testA11y(<Avatar>Ally</Avatar>);
+    render(<Avatar src={"demo.png"}></Avatar>);
+
+    await mockImage.advanceTimer();
+
+    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
+  });
+
+  it("Avatar onError", async () => {
+    mockImage.error();
     const onErrorFn = jest.fn();
-    render(<Avatar src="https://somesite.com" onError={onErrorFn}></Avatar>);
+
+    render(<Avatar src={"demo.png"} onError={onErrorFn}></Avatar>);
+
+    await mockImage.advanceTimer();
+
     expect(onErrorFn).toBeCalledTimes(1);
   });
 
-  it("should not have axe violations", async () => {
-    const { container } = render(<Avatar>Ally</Avatar>);
-    const results = await axe(container);
-
-    expect(results).toHaveNoViolations();
+  it("should not have a11y violations", async () => {
+    await testA11y(<Avatar>Ally</Avatar>);
   });
 });
