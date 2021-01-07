@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
 export interface CreateContextOptions {
   /**
@@ -51,8 +50,3 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
     Context,
   ] as CreateContextReturn<ContextType>;
 }
-
-/**
- * Override base styles with those that come after like the css rules
- */
-export const ocx = (...classNames: any[]) => cx(...classNames);

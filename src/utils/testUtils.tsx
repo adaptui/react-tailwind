@@ -1,7 +1,29 @@
-import React from "react";
-import { configureAxe } from "jest-axe";
+import {
+  render as RtlRender,
+  RenderOptions,
+  waitFor,
+} from "@testing-library/react";
+import * as React from "react";
 import { RunOptions } from "axe-core";
-import { render, RenderOptions, waitFor } from "@testing-library/react";
+import { configureAxe } from "jest-axe";
+
+// @ts-ignore
+import tailwindConfig from "../../tailwind.config";
+import { RenderlesskitProvider } from "../theme";
+
+export const render = (
+  children: React.ReactNode,
+  options: RenderOptions = {},
+) => {
+  return RtlRender(
+    <RenderlesskitProvider tailwindConfig={tailwindConfig}>
+      {children}
+    </RenderlesskitProvider>,
+    options,
+  );
+};
+
+export * from "@testing-library/react";
 
 export const axe = configureAxe({
   rules: {

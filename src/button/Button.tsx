@@ -1,12 +1,14 @@
 import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
 
-import theme from "../theme";
+import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAsSimple } from "../utils/types";
-import { useButtonGroup } from "./ButtonGroup";
 import { cx } from "@renderlesskit/react";
+import { useButtonGroup } from "./ButtonGroup";
+import { forwardRefWithAsSimple } from "../utils/types";
+
+type AnyString = string & { ignore?: any };
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
@@ -16,7 +18,7 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "link";
+  variant?: "primary" | "secondary" | "link" | AnyString;
   /**
    * If added, the button will show an icon before the button's label.
    */
@@ -60,6 +62,8 @@ export const Button = forwardRefWithAsSimple<
   const group = useButtonGroup();
   const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
+  const theme = useTheme();
+
   const buttonStyles = cx(
     theme.button.base,
     theme.button.size[_size],

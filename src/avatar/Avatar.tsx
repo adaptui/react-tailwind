@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import theme from "../theme";
+import { cx } from "@renderlesskit/react";
 import { AvatarImage } from "./AvatarImage";
 import { useAvatarGroup } from "./AvatarGroup";
-import { cx } from "@renderlesskit/react";
+import { useOverride, useTheme } from "../theme";
 
 export type AvatarProps = {
   /**
@@ -41,6 +41,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 }) => {
   const group = useAvatarGroup();
   const _size = size || group?.size || "md";
+  const theme = useTheme();
   const avatarStyles = cx(
     theme.avatar.base,
     theme.avatar.size[_size],
@@ -83,6 +84,9 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
   children,
   ...rest
 }) => {
+  const theme = useTheme();
+  const ocx = useOverride();
+
   return (
     <div
       {...rest}

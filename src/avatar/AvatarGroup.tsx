@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import theme from "../theme";
+import { createContext } from "../utils";
 import { Avatar, AvatarProps } from "./Avatar";
-import { createContext, ocx } from "../utils";
+import { useOverride, useTheme } from "../theme";
 
 export type AvatarGroupProps = Pick<AvatarProps, "size"> & { limit?: number };
 export type AvatarGroupContext = Pick<AvatarProps, "size"> & {};
@@ -26,6 +26,8 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
 
   const avatars = React.Children.toArray(children);
   const childrenCount = React.Children.count(children);
+  const theme = useTheme();
+  const ocx = useOverride();
 
   const isOverLimit = childrenCount > limit && limit >= 0;
   if (isOverLimit) {

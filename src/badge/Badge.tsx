@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, BoxProps } from "../box/Box";
 
-import theme from "../theme";
-import { ocx } from "../utils";
+import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 type Variants = "primary" | "secondary" | "outline";
@@ -34,6 +33,8 @@ function BadgeComponent(
     ...rest
   } = props;
 
+  const theme = useTheme();
+  const ocx = useOverride();
   const badgeStyles = ocx(
     theme.badge.base,
     theme.badge.size[size],

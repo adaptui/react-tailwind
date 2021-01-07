@@ -10,11 +10,10 @@ import {
   AlertIcon,
   AlertProps,
 } from "../index";
-import { Button, ButtonIcon } from "../../button";
+import { Box } from "../../box";
 import { CrossIcon } from "../../icons";
 import { AlertActionButton } from "../Alert";
-import { Box } from "../../box";
-import { cx } from "@renderlesskit/react";
+import { Button, ButtonIcon } from "../../button";
 
 export default {
   title: "Alert",
@@ -44,10 +43,7 @@ const Base: Story<AlertProps> = args => {
         <AlertActionButton>Reach Out</AlertActionButton>
         <Button
           aria-label="close"
-          className={cx(
-            "h-5 px-0 bg-transparent min-w-5 ml-2",
-            `hover:${buttonBg[status]}`,
-          )}
+          className={`h-5 px-0 bg-transparent min-w-5 ml-2 hover:${buttonBg[status]}`}
         >
           <ButtonIcon className="text-gray-800 inherit">
             <CrossIcon />

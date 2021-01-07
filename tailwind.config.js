@@ -418,6 +418,28 @@ module.exports = {
       "focus",
     ],
   },
+  // This only affected the Storybook, doesn't go or merge when used this config as preset
+  components: {
+    extend: {
+      button: {
+        variant: {
+          secondary: "bg-green-500",
+          tertiary: "bg-purple-600",
+        },
+        size: {
+          xl: "h-16 min-w-16 text-xl px-8",
+        },
+      },
+      alert: {
+        status: {
+          info: {
+            base: "bg-red-500",
+            icon: "text-white",
+          },
+        },
+      },
+    },
+  },
   plugins: [
     /* =========================================================================
       Utilities

@@ -21,9 +21,8 @@ import {
   ButtonGroupProps,
   CloseButtonProps,
 } from "../index";
-import theme from "../../theme";
-import { ocx } from "../../utils";
 import { Spinner } from "../../spinner";
+import { useOverride, useTheme } from "../../theme";
 
 export default {
   title: "Button",
@@ -43,6 +42,9 @@ const ButtonWithIcon: Story<ButtonProps> = args => (
 
 export const Icon = ButtonWithIcon.bind({});
 Icon.args = { size: "md", variant: "primary" };
+
+export const ExtendedVariant = Default.bind({});
+ExtendedVariant.args = { size: "md", variant: "tertiary" };
 
 const LeftIconButton: Story<ButtonProps> = args => (
   <Button prefix={<ClockIcon />} {...args}>
@@ -80,12 +82,17 @@ const LoadingIconButton: Story<ButtonProps> = args => (
 export const LoadingIcon = LoadingIconButton.bind({});
 LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
 
-const CustomSpinner = () => (
-  <>
-    Loading
-    <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
-  </>
-);
+const CustomSpinner = () => {
+  const theme = useTheme();
+  const ocx = useOverride();
+
+  return (
+    <>
+      Loading
+      <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
+    </>
+  );
+};
 
 export const CustomLaodingElement = LoadingIconButton.bind({});
 CustomLaodingElement.args = {
