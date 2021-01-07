@@ -3,7 +3,7 @@ import { cx } from "@renderlesskit/react";
 import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 
 import { useTheme } from "../theme";
-import { CrossIcon } from "../icons";
+import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAsSimple } from "../utils/types";
 
@@ -48,7 +48,7 @@ export const Tag = forwardRefWithAsSimple<TagProps, HTMLSpanElement, "span">(
       id,
       size = "md",
       prefix,
-      suffix = <CrossIcon />,
+      suffix = <CloseIcon />,
       className,
       closable,
       onClose,
@@ -61,7 +61,7 @@ export const Tag = forwardRefWithAsSimple<TagProps, HTMLSpanElement, "span">(
     // TODO: Clean this up
     if (
       !closable &&
-      suffix.type.displayName !== (CrossIcon as any).displayName
+      suffix.type.displayName !== (CloseIcon as any).displayName
     ) {
       console.warn(
         "Tag: `suffix` will not be visible because `closable` is set to false, please set `closable` to true",

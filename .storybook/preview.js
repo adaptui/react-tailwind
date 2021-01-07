@@ -12,7 +12,9 @@ export const decorators = [
 
     return (
       <RenderlesskitProvider tailwindConfig={tailwindConfig}>
-        <Story />
+        <div className="font-sans">
+          <Story />
+        </div>
       </RenderlesskitProvider>
     );
   },

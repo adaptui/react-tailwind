@@ -11,7 +11,7 @@ import {
   AlertProps,
 } from "../index";
 import { Box } from "../../box";
-import { CrossIcon } from "../../icons";
+import { CloseIcon } from "../../icons";
 import { AlertActionButton } from "../Alert";
 import { Button, ButtonIcon } from "../../button";
 
@@ -46,7 +46,7 @@ const Base: Story<AlertProps> = args => {
           className={`h-5 px-0 bg-transparent min-w-5 ml-2 hover:${buttonBg[status]}`}
         >
           <ButtonIcon className="text-gray-800 inherit">
-            <CrossIcon />
+            <CloseIcon />
           </ButtonIcon>
         </Button>
       </Box>

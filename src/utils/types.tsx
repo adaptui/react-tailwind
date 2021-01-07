@@ -33,3 +33,5 @@ export function forwardRefWithAs<Props, DefaultType extends As>(
     DefaultType
   >;
 }
+
+export type AnyString = string & { ignore?: any };

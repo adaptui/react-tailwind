@@ -6,18 +6,17 @@ import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
 import "./button.css";
 import {
-  ClockIcon,
-  CrossIcon,
-  WheelIcon,
+  CloseIcon,
   PhotographIcon,
-  ArrowNarrowRightIcon,
+  SearchIcon,
+  CaretDownIcon,
 } from "../../icons";
 import {
   Button,
   IconButton,
   ButtonProps,
   ButtonGroup,
-  CloseButton,
+  CloseButton as CloseButtonDefault,
   IconButtonProps,
   ButtonGroupProps,
   CloseButtonProps,
@@ -33,55 +32,56 @@ export default {
 const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 
 export const Default = Base.bind({});
-Default.args = { size: "md", variant: "primary" };
-
-const ButtonWithIcon: Story<ButtonProps> = args => (
-  <Button aria-label="settings" {...args}>
-    <WheelIcon />
-  </Button>
-);
-
-export const Icon = ButtonWithIcon.bind({});
-Icon.args = { size: "md", variant: "primary" };
+Default.args = { size: "lg", variant: "primary" };
 
 export const ExtendedVariant = Default.bind({});
-ExtendedVariant.args = { size: "md", variant: "tertiary" };
+ExtendedVariant.args = { size: "xxl", variant: "tertiary" };
 
 const LeftIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<ClockIcon />} {...args}>
+  <Button prefix={<SearchIcon />} {...args}>
     Button
   </Button>
 );
 
 export const LeftIcon = LeftIconButton.bind({});
-LeftIcon.args = { size: "md", variant: "primary" };
+LeftIcon.args = { size: "lg", variant: "primary" };
 
 const RightIconButton: Story<ButtonProps> = args => (
-  <Button suffix={<ArrowNarrowRightIcon />} {...args}>
+  <Button suffix={<CaretDownIcon />} {...args}>
     Button
   </Button>
 );
 
 export const RightIcon = RightIconButton.bind({});
-RightIcon.args = { size: "md", variant: "primary" };
+RightIcon.args = { size: "lg", variant: "primary" };
 
 const BothSideIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
+  <Button prefix={<SearchIcon />} suffix={<CaretDownIcon />} {...args}>
     Button
   </Button>
 );
 
 export const BothSideIcon = BothSideIconButton.bind({});
-BothSideIcon.args = { size: "md", variant: "primary" };
+BothSideIcon.args = { size: "lg", variant: "primary" };
 
-const LoadingIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
-    Button
-  </Button>
+const IconButtonBase: Story<IconButtonProps> = args => (
+  <IconButton aria-label="picture" {...args}>
+    <SearchIcon />
+  </IconButton>
 );
 
-export const LoadingIcon = LoadingIconButton.bind({});
-LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
+export const OnlyIcon = IconButtonBase.bind({});
+OnlyIcon.args = { size: "lg", variant: "primary" };
+
+const CloseButtonBase: Story<CloseButtonProps> = args => (
+  <CloseButtonDefault {...args} />
+);
+
+export const CloseButton = CloseButtonBase.bind({});
+CloseButton.args = { size: "lg", variant: "primary" };
+
+export const LoadingIcon = BothSideIconButton.bind({});
+LoadingIcon.args = { size: "lg", variant: "primary", isLoading: true };
 
 const CustomSpinner = () => {
   const theme = useTheme();
@@ -94,9 +94,9 @@ const CustomSpinner = () => {
   );
 };
 
-export const CustomLaodingElement = LoadingIconButton.bind({});
+export const CustomLaodingElement = BothSideIconButton.bind({});
 CustomLaodingElement.args = {
-  size: "md",
+  size: "lg",
   variant: "primary",
   isLoading: true,
   spinner: <CustomSpinner />,
@@ -116,7 +116,7 @@ GroupDefault.args = { className: "space-x-4" };
 export const GroupCollapsed = ButtonGroupBase.bind({});
 GroupCollapsed.args = {
   isAttached: true,
-  size: "md",
+  size: "lg",
   variant: "primary",
 };
 
@@ -155,19 +155,3 @@ TabListAsGroup.args = {
   size: "lg",
   variant: "secondary",
 };
-
-const IconButtonBase: Story<IconButtonProps> = args => (
-  <IconButton aria-label="picture" {...args}>
-    <PhotographIcon />
-  </IconButton>
-);
-
-export const IconButtonDefault = IconButtonBase.bind({});
-IconButtonDefault.args = { size: "md", variant: "primary" };
-
-const CloseButtonBase: Story<CloseButtonProps> = args => (
-  <CloseButton {...args} />
-);
-
-export const CloseButtonDefault = CloseButtonBase.bind({});
-CloseButtonDefault.args = { size: "md", variant: "primary" };

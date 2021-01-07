@@ -38,7 +38,7 @@ export type RenderlesskitProviderProps = {
 export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
   const {
     children,
-    tailwindConfig = { components: {} },
+    tailwindConfig = { components: { extend: {} } },
     theme = defaultTheme,
   } = props;
 

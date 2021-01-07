@@ -6,19 +6,17 @@ import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { useButtonGroup } from "./ButtonGroup";
-import { forwardRefWithAsSimple } from "../utils/types";
-
-type AnyString = string & { ignore?: any };
+import { AnyString, forwardRefWithAsSimple } from "../utils/types";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "lg" | "xl" | AnyString;
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "link" | AnyString;
+  variant?: "primary" | "secondary" | "outline" | "ghost" | AnyString;
   /**
    * If added, the button will show an icon before the button's label.
    */
@@ -60,7 +58,7 @@ export const Button = forwardRefWithAsSimple<
   } = props;
   const _isDisabled = isDisabled || isLoading;
   const group = useButtonGroup();
-  const _size = size || group?.size || "md";
+  const _size = size || group?.size || "lg";
   const _variant = variant || group?.variant || "primary";
   const theme = useTheme();
 
@@ -75,11 +73,11 @@ export const Button = forwardRefWithAsSimple<
   const ButtonWithIcons = () => (
     <>
       {prefix && (
-        <ButtonIcon className={theme.button.prefix}>{prefix}</ButtonIcon>
+        <ButtonIcon className={theme.button.prefix[_size]}>{prefix}</ButtonIcon>
       )}
       {children}
       {suffix && (
-        <ButtonIcon className={theme.button.suffix}>{suffix}</ButtonIcon>
+        <ButtonIcon className={theme.button.suffix[_size]}>{suffix}</ButtonIcon>
       )}
     </>
   );
