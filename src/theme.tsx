@@ -1,7 +1,7 @@
 const theme = {
   alert: {
     base:
-      "lib:font-sans lib:flex lib:items-center lib:w-full lib:overflow-hidden lib:p-4 lib:bg-blue-50",
+      "lib:font-sans lib:flex lib:items-center lib:w-full lib:overflow-hidden lib:p-4",
     title:
       "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
     description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
@@ -9,7 +9,7 @@ const theme = {
       base: "lib:inherit lib:flex-shrink-0 lib:mr-3 lib:w-5 lib:h-5",
       icons: "lib:w-full lib:h-full",
     },
-    actionButton: "lib:h-5 lib:bg-transparent lib:px-0",
+    actionButton: "lib:h-5 bg-transparent lib:px-0",
     status: {
       info: {
         base: "lib:bg-blue-50 ",
@@ -43,7 +43,7 @@ const theme = {
       "lib:font-sans lib:font-semibold lib:text-white lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:rounded-md lib:transition-all lib:relative lib:whitespace-nowrap lib:align-middle lib:outline-none lib:w-auto lib:select-none lib:disabled:cursor-not-allowed lib:disabled:opacity-40",
     prefix: "lib:inherit lib:mr-2",
     suffix: "lib:inherit lib:ml-2",
-    spinner: "lib:w-em lib:h-em lib:text-current",
+    spinner: "lib:w-em lib:h-em text-current",
     group: "lib:focus:z-1",
     span: "lib:inline-block lib:cursor-not-allowed",
     iconButton: "lib:px-0",

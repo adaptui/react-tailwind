@@ -12,9 +12,9 @@ import {
 } from "../index";
 import { Button, ButtonIcon } from "../../button";
 import { CrossIcon } from "../../icons";
-import { ocx } from "../../utils";
 import { AlertActionButton } from "../Alert";
 import { Box } from "../../box";
+import { cx } from "@renderlesskit/react";
 
 export default {
   title: "Alert",
@@ -32,7 +32,7 @@ const Base: Story<AlertProps> = args => {
   };
 
   return (
-    <Alert {...args} className="flex justify-between">
+    <Alert {...args} status={status} className="flex justify-between">
       <Box className="items-center inherit">
         <AlertIcon />
         <AlertTitle>
@@ -44,7 +44,7 @@ const Base: Story<AlertProps> = args => {
         <AlertActionButton>Reach Out</AlertActionButton>
         <Button
           aria-label="close"
-          className={ocx(
+          className={cx(
             "h-5 px-0 bg-transparent min-w-5 ml-2",
             `hover:${buttonBg[status]}`,
           )}
