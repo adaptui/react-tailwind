@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  cx,
   CalendarCell,
   CalendarGrid,
   CalendarHeader as RenderlessCalendarHeader,
@@ -15,7 +16,7 @@ import {
   RangeCalendarStateReturn,
 } from "@renderlesskit/react";
 
-import { useOverride, useTheme } from "../theme";
+import { useTheme } from "../theme";
 import { CalendarProvider, useCalendarContext } from "./helpers";
 
 export interface CalendarProps extends CalendarInitialState {}
@@ -25,7 +26,6 @@ export const Calendar: React.FC<CalendarProps> = props => {
   const ctx = useCalendarState(props);
   const context = React.useMemo(() => ctx, [ctx]);
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarProvider value={context}>
@@ -43,7 +43,6 @@ export const RangeCalendar: React.FC<RangeCalendarProps> = props => {
   const ctx = useRangeCalendarState(props);
   const context = React.useMemo(() => ctx, [ctx]);
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarProvider value={context}>
@@ -60,7 +59,6 @@ export const StatelessCalendar: React.FC<
   const { children } = props;
   const context = React.useMemo(() => props.state, [props.state]);
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarProvider value={context}>
@@ -77,7 +75,6 @@ export const StatelessRangeCalendar: React.FC<
   const { children } = props;
   const context = React.useMemo(() => props.state, [props.state]);
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarProvider value={context}>
@@ -90,7 +87,6 @@ export const StatelessRangeCalendar: React.FC<
 
 export const CalendarHeader: React.FC<{}> = props => {
   const theme = useTheme();
-  const ocx = useOverride();
 
   return <div className={theme.calendar.header.base} {...props}></div>;
 };
@@ -98,7 +94,6 @@ export const CalendarHeader: React.FC<{}> = props => {
 export const CalendarPreviousYearButton: React.FC<{}> = props => {
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarButton
@@ -113,7 +108,6 @@ export const CalendarPreviousYearButton: React.FC<{}> = props => {
 export const CalendarPreviousMonthButton: React.FC<{}> = props => {
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarButton
@@ -128,7 +122,6 @@ export const CalendarPreviousMonthButton: React.FC<{}> = props => {
 export const CalendarTitle: React.FC<{}> = props => {
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <RenderlessCalendarHeader
@@ -142,7 +135,6 @@ export const CalendarTitle: React.FC<{}> = props => {
 export const CalendarNextMonthButton: React.FC<{}> = props => {
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarButton
@@ -157,7 +149,6 @@ export const CalendarNextMonthButton: React.FC<{}> = props => {
 export const CalendarNextYearButton: React.FC<{}> = props => {
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarButton
@@ -172,7 +163,6 @@ export const CalendarNextYearButton: React.FC<{}> = props => {
 export const CalendarTable: React.FC<{}> = props => {
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarGrid
@@ -186,14 +176,12 @@ export const CalendarTable: React.FC<{}> = props => {
 
 export const CalendarTableHead: React.FC<{}> = props => {
   const theme = useTheme();
-  const ocx = useOverride();
 
   return <thead className={theme.calendar.table.head.base} {...props} />;
 };
 
 export const CalendarTableHeadRow: React.FC<{}> = props => {
   const theme = useTheme();
-  const ocx = useOverride();
 
   return <tr className={theme.calendar.table.head.row} {...props} />;
 };
@@ -202,7 +190,6 @@ export const CalendarTableHeadHeader: React.FC<any> = props => {
   const { dayIndex, ...rest } = props;
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarWeekTitle
@@ -219,7 +206,6 @@ export const CalendarTableHeadHeader: React.FC<any> = props => {
 export const CalendarTableHeadHeaderAbbr: React.FC<any> = props => {
   const { day, ...rest } = props;
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <abbr
@@ -234,14 +220,12 @@ export const CalendarTableHeadHeaderAbbr: React.FC<any> = props => {
 
 export const CalendarTableBody: React.FC<{}> = props => {
   const theme = useTheme();
-  const ocx = useOverride();
 
   return <tbody className={theme.calendar.table.body.base} {...props} />;
 };
 
 export const CalendarTableBodyRow: React.FC<{}> = props => {
   const theme = useTheme();
-  const ocx = useOverride();
 
   return <tr className={theme.calendar.table.body.row} {...props} />;
 };
@@ -250,13 +234,12 @@ export const CalendarTableBodyData: React.FC<any> = props => {
   const { day, dayIndex, className, ...rest } = props;
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarCell
       as="td"
       date={day}
-      className={ocx(theme.calendar.table.body.data.base, className)}
+      className={cx(theme.calendar.table.body.data.base, className)}
       {...state}
       {...rest}
     />
@@ -267,7 +250,6 @@ export const CalendarTableBodyDataButton: React.FC<any> = props => {
   const { day, ...rest } = props;
   const state = useCalendarContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CalendarCellButton

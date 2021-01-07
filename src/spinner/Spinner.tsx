@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Box, BoxProps } from "../box";
 import { VisuallyHidden } from "reakit";
+import { cx } from "@renderlesskit/react";
 
-import { useOverride, useTheme } from "../theme";
+import { useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export interface SpinnerProps extends BoxProps {
@@ -33,8 +34,7 @@ function SpinnerComponent(
     ...rest
   } = props;
   const theme = useTheme();
-  const ocx = useOverride();
-  const spinnerStyles = ocx(
+  const spinnerStyles = cx(
     theme.spinner.base,
     theme.spinner.size[size],
     theme.spinner.stroke[stroke],

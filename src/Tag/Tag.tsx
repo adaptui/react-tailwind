@@ -1,9 +1,10 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 
+import { useTheme } from "../theme";
 import { CrossIcon } from "../icons";
 import { Box, BoxProps } from "../box";
-import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAsSimple } from "../utils/types";
 
 export const TagsContext = React.createContext<CompositeStateReturn | null>(
@@ -55,8 +56,7 @@ export const Tag = forwardRefWithAsSimple<TagProps, HTMLSpanElement, "span">(
       ...rest
     } = props;
     const theme = useTheme();
-    const ocx = useOverride();
-    const tagStyles = ocx(theme.tag.base, theme.tag.size[size], className);
+    const tagStyles = cx(theme.tag.base, theme.tag.size[size], className);
 
     // TODO: Clean this up
     if (
@@ -93,7 +93,6 @@ const ClosableElement: React.FC<{
 }> = ({ handleClick, children }) => {
   const composite = useTagsContext();
   const theme = useTheme();
-  const ocx = useOverride();
 
   return (
     <CompositeItem

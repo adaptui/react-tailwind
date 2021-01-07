@@ -1,10 +1,10 @@
-import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
+import { cx } from "@renderlesskit/react";
+import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
-import { cx } from "@renderlesskit/react";
 import { useButtonGroup } from "./ButtonGroup";
 import { forwardRefWithAsSimple } from "../utils/types";
 

@@ -1,9 +1,10 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 
 import { AvatarProps } from ".";
+import { useTheme } from "../theme";
 import { GenericAvatar } from "../icons";
 import { useImage } from "../utils/useImage";
-import { useOverride, useTheme } from "../theme";
 
 function getInitials(name: string) {
   const [firstName, lastName] = name.split(" ");
@@ -28,7 +29,6 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
   const hasLoaded = status === "loaded";
   const showFallback = !src || !hasLoaded;
   const theme = useTheme();
-  const ocx = useOverride();
 
   if (showFallback) {
     return <>{name ? (name ? getInitials?.(name) : null) : fallback}</>;
@@ -39,7 +39,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
       data-testid="testid-avatarimg"
       src={src}
       alt={name}
-      className={ocx(theme.avatar.image)}
+      className={cx(theme.avatar.image)}
       style={{
         borderRadius: "inherit",
       }}

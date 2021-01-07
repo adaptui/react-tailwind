@@ -1,8 +1,8 @@
 import * as React from "react";
+
 import { Avatar } from "../Avatar";
-import { render, screen } from "@testing-library/react";
 import { AvatarGroup } from "../AvatarGroup";
-import { testA11y } from "../../utils/testUtils";
+import { render, screen, testA11y } from "../../utils/testUtils";
 
 describe("<AvatarGroup />", () => {
   expect.assertions(1);

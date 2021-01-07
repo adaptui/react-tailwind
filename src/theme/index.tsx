@@ -4,8 +4,6 @@ import { defaults, isString, isUndefined, mergeWith } from "lodash";
 
 import { createContext } from "../utils";
 import defaultTheme from "./defaultTheme";
-import { overrideTailwindClasses } from "./tailwind-override";
-import defaultTailwindProperties from "./defaultTailwindProperties";
 
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
@@ -28,14 +26,7 @@ const [ThemeProvider, useTheme] = createContext<ThemeContext>({
   name: "ThemeProvider",
 });
 
-export type OverrideContext = (...classNames: any[]) => string;
-
-const [OverrideProvider, useOverride] = createContext<OverrideContext>({
-  strict: false,
-  name: "OverrideProvider",
-});
-
-export { useTheme, useOverride };
+export { useTheme };
 
 export type RenderlesskitProviderProps = {
   tailwindConfig?: any;
@@ -49,26 +40,16 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
     children,
     tailwindConfig = { components: {} },
     theme = defaultTheme,
-    tailwindProperties = defaultTailwindProperties,
   } = props;
 
-  const ocx = (...classNames: string[]) =>
-    overrideTailwindClasses(cx(...classNames), {
-      tailwindProperties: tailwindProperties,
-    });
   const {
     components: userTheme,
   }: { components: ExtendThemeType } = tailwindConfig;
   const finalTheme: ThemeType = mergeExtensions(
     mergeThemes([userTheme, theme]),
-    ocx,
   );
 
-  return (
-    <ThemeProvider value={finalTheme}>
-      <OverrideProvider value={ocx}>{children}</OverrideProvider>
-    </ThemeProvider>
-  );
+  return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
 };
 
 function mergeThemes(themes: ExtendThemeType[]) {
@@ -102,14 +83,11 @@ function collectExtends(
   }, {});
 }
 
-function mergeExtensions(
-  { extend, ...theme }: any,
-  ocx: (...classNames: string[]) => string,
-): ExtendThemeType {
+function mergeExtensions({ extend, ...theme }: any): ExtendThemeType {
   return mergeWith(theme, extend, (themeValue, extendValue) => {
     return mergeWith(themeValue, ...extendValue, (merged: any, value: any) => {
       if (isString(merged) && isString(value)) {
-        return ocx(merged, value);
+        return cx(merged, value);
       }
 
       return undefined;

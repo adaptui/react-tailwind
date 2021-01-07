@@ -1,8 +1,9 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
 import { CrossIcon } from "../icons";
+import { useTheme } from "../theme";
 import { Button, ButtonProps } from "./Button";
-import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 export type IconButtonProps = ButtonProps & {};
@@ -13,8 +14,7 @@ function IconButtonComponent(
 ) {
   const { children, className, ...rest } = props;
   const theme = useTheme();
-  const ocx = useOverride();
-  const iconButtonStyles = ocx(theme.button.iconButton, className);
+  const iconButtonStyles = cx(theme.button.iconButton, className);
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
         "aria-hidden": true,

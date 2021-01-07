@@ -1,7 +1,8 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useOverride, useTheme } from "../theme";
 import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 
 const fallbackIcon = {
@@ -39,13 +40,12 @@ function IconComponent(
   } = props;
 
   const theme = useTheme();
-  const ocx = useOverride();
   const iconStyles = theme.icon.base;
 
   const shared: any = {
     ref,
     focusable,
-    className: ocx(iconStyles, className),
+    className: cx(iconStyles, className),
   };
 
   const _viewBox = viewBox ?? fallbackIcon.viewBox;
