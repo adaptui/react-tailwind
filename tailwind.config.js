@@ -28,6 +28,7 @@ module.exports = {
     extend: {
       colors: {
         orange: colors.orange,
+        gray: colors.gray,
       },
       fontFamily: {
         sans: ["Inter"],
@@ -418,32 +419,8 @@ module.exports = {
       "focus",
     ],
   },
-  // This only affected the Storybook, doesn't go or merge when used this config as preset
-  components: {
-    extend: {
-      button: {
-        variant: {
-          secondary: "bg-green-500",
-          tertiary: "bg-purple-600",
-        },
-        size: {
-          xl: "h-16 min-w-16 text-xl px-8",
-        },
-      },
-      alert: {
-        status: {
-          info: {
-            base: "bg-red-500",
-            icon: "text-white",
-          },
-        },
-      },
-    },
-  },
   plugins: [
-    /* =========================================================================
-      Utilities
-      ========================================================================== */
+    /* Utilities */
     plugin(function ({ addUtilities, e, theme, variants }) {
       const colors = flattenColorPalette(theme("borderColor"));
       delete colors["default"];
@@ -485,9 +462,7 @@ module.exports = {
       addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
     }),
 
-    /* =========================================================================
-      Variants
-      ========================================================================== */
+    /* Variants */
     plugin(function ({ addVariant, e }) {
       addVariant("lib", ({ container, separator, modifySelectors }) => {
         modifySelectors(({ selector }) => {
@@ -541,4 +516,27 @@ module.exports = {
       generateDataClassVariant("is-selection-end", true, "lib");
     }),
   ],
+
+  // This only affected the Storybook, doesn't go or merge when used this config as preset
+  components: {
+    extend: {
+      button: {
+        variant: {
+          tertiary: "bg-purple-600 lib:text-white",
+        },
+        size: {
+          xxl:
+            "h-16 min-w-16 text-xl px-8 w-auto font-medium rounded-lg shadow-sm",
+        },
+      },
+      // alert: {
+      //   status: {
+      //     info: {
+      //       base: "bg-red-500",
+      //       icon: "text-white",
+      //     },
+      //   },
+      // },
+    },
+  },
 };
