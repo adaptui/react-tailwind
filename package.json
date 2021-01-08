@@ -128,6 +128,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "reakit-test-utils": "^0.15.1",
     "rimraf": "^3.0.2",
     "sort-package-json": "^1.48.1",
     "standard-version": "^9.1.0",

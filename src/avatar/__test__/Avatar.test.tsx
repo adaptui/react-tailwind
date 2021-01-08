@@ -1,7 +1,8 @@
 import * as React from "react";
+import { screen } from "@testing-library/react";
 
 import { Avatar, AvatarBadge } from "../Avatar";
-import { render, screen, testA11y, mockImage } from "../../utils/testUtils";
+import { render, testA11y, mockImage } from "../../utils/testUtils";
 
 afterAll(() => {
   mockImage.restoreMock();

@@ -96,6 +96,8 @@ const ClosableElement: React.FC<{
 
   return (
     <CompositeItem
+      aria-label="close"
+      data-testid="testid-close-element"
       as={Clickable}
       className={theme.tag.suffix}
       onClick={handleClick}
