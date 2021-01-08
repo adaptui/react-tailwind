@@ -11,7 +11,8 @@ import { configureAxe } from "jest-axe";
 import tailwindConfig from "../../tailwind.config";
 import { RenderlesskitProvider } from "../theme";
 
-export const render = (
+// @ts-ignore
+export const render: typeof RtlRender = (
   children: React.ReactNode,
   options: RenderOptions = {},
 ) => {

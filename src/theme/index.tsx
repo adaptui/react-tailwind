@@ -15,11 +15,12 @@ type DeepDictionary<K> = {
     : K[P];
 };
 
-export type ThemeType = typeof defaultTheme;
+export type DefaultTheme = typeof defaultTheme;
 
-export type ExtendThemeType = ThemeType & DeepPartial<{ extend: ThemeType }>;
+export type ExtendThemeType = DefaultTheme &
+  DeepPartial<{ extend: DefaultTheme }>;
 
-export type ThemeContext = DeepDictionary<ThemeType>;
+export type ThemeContext = DeepDictionary<DefaultTheme>;
 
 const [ThemeProvider, useTheme] = createContext<ThemeContext>({
   strict: false,
@@ -45,7 +46,7 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
   const {
     components: userTheme,
   }: { components: ExtendThemeType } = tailwindConfig;
-  const finalTheme: ThemeType = mergeExtensions(
+  const finalTheme: DefaultTheme = mergeExtensions(
     mergeThemes([userTheme, theme]),
   );
 
@@ -54,9 +55,9 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
 
 function mergeThemes(themes: ExtendThemeType[]) {
   return {
-    ...themes.reduce<ThemeType>(
+    ...themes.reduce<DefaultTheme>(
       (merged, theme) => defaults(merged, theme),
-      {} as ThemeType,
+      {} as DefaultTheme,
     ),
 
     // In order to resolve n config objects, we combine all of their `extend` properties
