@@ -4,7 +4,7 @@ import { VisuallyHidden } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 
 export interface SpinnerProps extends BoxProps {
   /**
@@ -22,10 +22,11 @@ export interface SpinnerProps extends BoxProps {
   stroke?: "transparent" | "visible";
 }
 
-function SpinnerComponent(
-  props: PropsWithAs<SpinnerProps, "div">,
-  ref: React.Ref<HTMLDivElement>,
-) {
+export const Spinner = forwardRefWithAsSimple<
+  SpinnerProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
   const {
     label = "Loading...",
     size = "md",
@@ -46,10 +47,4 @@ function SpinnerComponent(
       {label && <VisuallyHidden>{label}</VisuallyHidden>}
     </Box>
   );
-}
-
-/**
- * Spinner is used to indicate the loading state of a page or a component,
- * It renders a `div` by default.
- */
-export const Spinner = forwardRefWithAs<SpinnerProps, "div">(SpinnerComponent);
+});

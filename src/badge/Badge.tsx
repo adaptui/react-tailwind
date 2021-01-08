@@ -3,7 +3,7 @@ import { cx } from "@renderlesskit/react";
 import { Box, BoxProps } from "../box/Box";
 
 import { useTheme } from "../theme";
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 
 type Variants = "primary" | "secondary" | "outline";
 
@@ -22,10 +22,11 @@ export type BadgeProps = BoxProps & {
   size?: "xs" | "sm" | "md" | "lg";
 };
 
-function BadgeComponent(
-  props: PropsWithAs<BadgeProps, "span">,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+export const Badge = forwardRefWithAsSimple<
+  BadgeProps,
+  HTMLButtonElement,
+  "span"
+>((props, ref) => {
   const {
     variant = "primary",
     size = "sm",
@@ -47,6 +48,4 @@ function BadgeComponent(
       {children}
     </Box>
   );
-}
-
-export const Badge = forwardRefWithAs<BadgeProps, "span">(BadgeComponent);
+});

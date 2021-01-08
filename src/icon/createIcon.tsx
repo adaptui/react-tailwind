@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Icon, IconProps } from "./Icon";
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { forwardRefWithAsSimple, PropsWithAs } from "../utils/types";
 
 export interface CreateIconOptions {
   /**
@@ -36,16 +36,17 @@ export function createIcon(options: CreateIconOptions) {
     defaultProps = {},
   } = options;
 
-  function IconComponent(
-    props: PropsWithAs<IconProps, "svg">,
-    ref: React.Ref<HTMLOrSVGElement>,
-  ) {
+  const IconComponent = forwardRefWithAsSimple<
+    IconProps,
+    HTMLOrSVGElement,
+    "svg"
+  >((props, ref) => {
     return (
       <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
         {path ?? <path fill="currentColor" d={pathDefinition} />}
       </Icon>
     );
-  }
+  });
 
-  return forwardRefWithAs<IconProps, "svg">(IconComponent);
+  return IconComponent;
 }

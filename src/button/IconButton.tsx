@@ -5,7 +5,7 @@ import { Button, ButtonProps } from "reakit";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
 import { useButtonGroup } from "./ButtonGroup";
-import { AnyString, forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { AnyString, forwardRefWithAsSimple } from "../utils/types";
 
 export type IconButtonProps = ButtonProps & {
   /**
@@ -18,10 +18,11 @@ export type IconButtonProps = ButtonProps & {
   variant?: "primary" | "secondary" | "outline" | "ghost" | AnyString;
 };
 
-function IconButtonComponent(
-  props: PropsWithAs<IconButtonProps, "button">,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+const IconButton = forwardRefWithAsSimple<
+  IconButtonProps,
+  HTMLButtonElement,
+  "button"
+>((props, ref) => {
   const { children, size, variant, className, ...rest } = props;
 
   const group = useButtonGroup();
@@ -47,21 +48,15 @@ function IconButtonComponent(
       {_children}
     </Button>
   );
-}
-
-/**
- * Button Icon to hold icons within the Button
- */
-export const IconButton = forwardRefWithAs<IconButtonProps, "button">(
-  IconButtonComponent,
-);
+});
 
 export type CloseButtonProps = IconButtonProps & {};
 
-function CloseButtonComponent(
-  props: PropsWithAs<CloseButtonProps, "button">,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+export const CloseButton = forwardRefWithAsSimple<
+  CloseButtonProps,
+  HTMLButtonElement,
+  "button"
+>((props, ref) => {
   const { children, ...rest } = props;
 
   return (
@@ -69,11 +64,4 @@ function CloseButtonComponent(
       {children || <CloseIcon />}
     </IconButton>
   );
-}
-
-/**
- * Button Icon to hold icons within the Button
- */
-export const CloseButton = forwardRefWithAs<CloseButtonProps, "button">(
-  CloseButtonComponent,
-);
+});
