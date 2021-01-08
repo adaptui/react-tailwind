@@ -4,7 +4,6 @@ import { cx } from "@renderlesskit/react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
-import "./button.css";
 import {
   CloseIcon,
   PhotographIcon,
