@@ -23,11 +23,10 @@ type Merge<T, U> =
 
 // it merge 2 static types and try to avoid of unnecessary options (`'`)
 /**
- * @template T default theme
- * @template U user theme
+ * @template T source object
+ * @template U target object
  *
  * @description Deep merge two theme objects
- *
  */
 export type DeepMerge<T, U> =
   // check if generic types are arrays and unwrap it and do the recursion
@@ -50,6 +49,17 @@ interface _ComponentDefaultTheme {
 declare global {
   namespace Renderlesskit {
     export interface Theme extends _ComponentDefaultTheme {}
+    /**
+     * @template T default theme
+     * @template U user theme
+     *
+     * @description Safely Deep merges default theme with user theme
+     */
+    export type MergeTheme<T, U> = DeepMerge<
+      T,
+      U extends { [x: string]: any } ? U : {}
+    >;
+
     /**
      * @template C component name
      * @template K key
