@@ -22,6 +22,13 @@ type Merge<T, U> =
     { [K in keyof GetObjSameKeys<T, U>]: DeepMerge<T[K], U[K]> };
 
 // it merge 2 static types and try to avoid of unnecessary options (`'`)
+/**
+ * @template T default theme
+ * @template U user theme
+ *
+ * @description Deep merge two theme objects
+ *
+ */
 export type DeepMerge<T, U> =
   // check if generic types are arrays and unwrap it and do the recursion
   [T, U] extends [(infer TItem)[], (infer UItem)[]]
@@ -39,8 +46,17 @@ export type DeepMerge<T, U> =
 interface _ComponentDefaultTheme {
   components: DefaultTheme;
 }
-export declare namespace Renderlesskit {
-  interface Theme extends _ComponentDefaultTheme {}
-}
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+declare global {
+  namespace Renderlesskit {
+    export interface Theme extends _ComponentDefaultTheme {}
+    /**
+     * @template C component name
+     * @template K key
+     */
+    export type GetThemeValue<
+      C extends keyof Renderlesskit.Theme["components"],
+      K extends keyof Renderlesskit.Theme["components"][C]
+    > = Renderlesskit.Theme["components"][C][K];
+  }
+}

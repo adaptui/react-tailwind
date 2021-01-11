@@ -5,17 +5,17 @@ import { Button, ButtonProps } from "reakit";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
 import { useButtonGroup } from "./ButtonGroup";
-import { AnyString, forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAsSimple } from "../utils/types";
 
 export type IconButtonProps = ButtonProps & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "lg" | "xl" | AnyString;
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | AnyString;
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
 };
 
 const IconButton = forwardRefWithAsSimple<

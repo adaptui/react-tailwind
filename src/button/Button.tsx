@@ -7,17 +7,16 @@ import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { useButtonGroup } from "./ButtonGroup";
 import { forwardRefWithAsSimple } from "../utils/types";
-import { Renderlesskit } from "../theme/types";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    */
-  size?: keyof Renderlesskit.Theme["components"]["button"]["size"];
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
    */
-  variant?: keyof Renderlesskit.Theme["components"]["button"]["variant"];
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
   /**
    * If added, the button will show an icon before the button's label.
    */
