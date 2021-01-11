@@ -13,3 +13,4 @@ export * from "./Tag";
 export * from "./theme";
 export * from "./theme/types";
 export * from "./utils";
+export * from "./preset";

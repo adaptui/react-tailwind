@@ -23,6 +23,11 @@ function generatePseudoClassVariant(pseudoClass, selectorPrefix = pseudoClass) {
   };
 }
 
+// autocomplete support
+/** @typedef { import('tailwindcss/defaultConfig') } DefaultConfig */
+/** @typedef { import('tailwindcss/defaultTheme') } DefaultTheme */
+
+/** @type { DefaultConfig & { theme: { extend: DefaultTheme } } } */
 module.exports = {
   theme: {
     extend: {
