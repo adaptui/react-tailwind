@@ -14,6 +14,12 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
   (props: PropsWithAs<Props, DefaultType>): JSX.Element;
 };
 
+/**
+ * @template Props Component Props
+ * @template RefProp HTML intrinsic type, eg: HTMLDivElement
+ * @template DefaultType string, eg: "div"
+ * @param component
+ */
 export function forwardRefWithAsSimple<
   Props,
   RefProp = any,
