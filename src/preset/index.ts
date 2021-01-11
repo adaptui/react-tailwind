@@ -1,6 +1,6 @@
 import deepMerge from "deepmerge";
 // @ts-ignore
-import renderlesskitConfig from "../../tailwind.config";
+// import renderlesskitConfig from "/src/tailwind.config";
 
 function arrayMergeFn(destinationArray: any[], sourceArray: any) {
   return destinationArray
@@ -14,7 +14,10 @@ function arrayMergeFn(destinationArray: any[], sourceArray: any) {
 /**
  * Merge renderlesskit and Tailwind CSS configurations
  */
-export function preset<T extends { purge: any }>(tailwindConfig: T): T {
+export function preset<T extends { [x: string]: any; purge: any }, K extends T>(
+  tailwindConfig: T,
+  renderlesskitConfig: K,
+): T {
   let purge;
   if (Array.isArray(tailwindConfig.purge)) {
     purge = {
