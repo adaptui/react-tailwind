@@ -2,6 +2,7 @@ import {
   render as RtlRender,
   RenderOptions,
   waitFor,
+  RenderResult,
 } from "@testing-library/react";
 import * as React from "react";
 import { RunOptions } from "axe-core";
@@ -10,12 +11,14 @@ import { configureAxe } from "jest-axe";
 // @ts-ignore
 import tailwindConfig from "../../tailwind.config";
 import { RenderlesskitProvider } from "../theme";
+export * from "@testing-library/react";
 
-// @ts-ignore
-export const render: typeof RtlRender = (
+type Render = (
   children: React.ReactNode,
-  options: RenderOptions = {},
-) => {
+  options?: RenderOptions,
+) => RenderResult;
+
+export const render: Render = (children, options = {}) => {
   return RtlRender(
     <RenderlesskitProvider tailwindConfig={tailwindConfig}>
       {children}
@@ -23,8 +26,6 @@ export const render: typeof RtlRender = (
     options,
   );
 };
-
-export * from "@testing-library/react";
 
 export const axe = configureAxe({
   rules: {
