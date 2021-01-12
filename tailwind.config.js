@@ -24,6 +24,7 @@ function generatePseudoClassVariant(pseudoClass, selectorPrefix = pseudoClass) {
 }
 
 module.exports = {
+  purge: ["./src/theme/defaultTheme.tsx"],
   theme: {
     extend: {
       colors: {
