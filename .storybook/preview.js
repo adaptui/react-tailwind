@@ -1,5 +1,3 @@
-import { kebabCase } from "lodash";
-
 import "../src/style.css";
 import tailwindConfig from "../tailwind.config";
 import { RenderlesskitProvider } from "../src/theme";

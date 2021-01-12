@@ -17,7 +17,7 @@ export type AvatarProps = {
   /**
    * How large should avatar be?
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: keyof Renderlesskit.GetThemeValue<"avatar", "size">;
   /**
    * Custom fallback
    */

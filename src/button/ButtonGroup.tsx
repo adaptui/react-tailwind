@@ -14,11 +14,11 @@ export type ButtonGroupProps = BoxProps & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "link";
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
 };
 
 export type ButtonGroupContext = Pick<

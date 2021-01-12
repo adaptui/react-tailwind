@@ -22,7 +22,7 @@ const STATUS_ICONS = {
   offline: BoltIcon,
 };
 
-export type AlertStatus = "success" | "warning" | "error" | "info" | "offline";
+export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
 type AlertContext = {
   status: AlertStatus;

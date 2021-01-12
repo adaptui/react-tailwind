@@ -30,7 +30,7 @@ export type TagProps = Omit<BoxProps, "prefix"> & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"tag", "size">;
   /**
    * If added, tag will show prefix the content before the tag's label
    */
