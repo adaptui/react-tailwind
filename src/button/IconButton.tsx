@@ -18,7 +18,7 @@ export type IconButtonProps = ButtonProps & {
   variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
 };
 
-const IconButton = forwardRefWithAsSimple<
+export const IconButton = forwardRefWithAsSimple<
   IconButtonProps,
   HTMLButtonElement,
   "button"

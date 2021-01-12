@@ -4,7 +4,6 @@ module.exports = preset({
   theme: {
     extend: {},
   },
-
   // This only affected the Storybook, doesn't go or merge when used this config as preset
   components: {
     extend: {
