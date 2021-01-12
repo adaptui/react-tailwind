@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createIcon should render 1`] = `
+<DocumentFragment>
+  <svg
+    class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+    data-testid="testid-icon"
+    focusable="false"
+    viewBox="0 0 12 12"
+  >
+    <path
+      d="M3 3l6 5.943M3 9l5.94-6"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.3"
+    />
+  </svg>
+</DocumentFragment>
+`;
