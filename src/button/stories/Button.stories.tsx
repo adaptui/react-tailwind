@@ -5,12 +5,6 @@ import { Story, Meta } from "@storybook/react/types-6-0";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
 import {
-  CloseIcon,
-  PhotographIcon,
-  SearchIcon,
-  CaretDownIcon,
-} from "../../icons";
-import {
   Button,
   IconButton,
   ButtonProps,
@@ -22,6 +16,7 @@ import {
 } from "../index";
 import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
+import { SearchIcon, CaretDownIcon } from "../../icons";
 
 export default {
   title: "Button",

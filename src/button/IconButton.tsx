@@ -18,7 +18,7 @@ export type IconButtonProps = ButtonProps & {
   variant?: "primary" | "secondary" | "outline" | "ghost" | AnyString;
 };
 
-const IconButton = forwardRefWithAsSimple<
+export const IconButton = forwardRefWithAsSimple<
   IconButtonProps,
   HTMLButtonElement,
   "button"
