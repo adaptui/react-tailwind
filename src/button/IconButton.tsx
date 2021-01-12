@@ -5,7 +5,7 @@ import { Button, ButtonProps } from "reakit";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
 import { useButtonGroup } from "./ButtonGroup";
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export type IconButtonProps = ButtonProps & {
   /**
@@ -18,7 +18,7 @@ export type IconButtonProps = ButtonProps & {
   variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
 };
 
-export const IconButton = forwardRefWithAsSimple<
+export const IconButton = forwardRefWithAs<
   IconButtonProps,
   HTMLButtonElement,
   "button"
@@ -52,7 +52,7 @@ export const IconButton = forwardRefWithAsSimple<
 
 export type CloseButtonProps = IconButtonProps & {};
 
-export const CloseButton = forwardRefWithAsSimple<
+export const CloseButton = forwardRefWithAs<
   CloseButtonProps,
   HTMLButtonElement,
   "button"

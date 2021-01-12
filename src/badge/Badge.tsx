@@ -3,7 +3,7 @@ import { cx } from "@renderlesskit/react";
 import { Box, BoxProps } from "../box/Box";
 
 import { useTheme } from "../theme";
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export type BadgeProps = BoxProps & {
   /**
@@ -20,30 +20,28 @@ export type BadgeProps = BoxProps & {
   size?: keyof Renderlesskit.GetThemeValue<"badge", "size">;
 };
 
-export const Badge = forwardRefWithAsSimple<
-  BadgeProps,
-  HTMLButtonElement,
-  "span"
->((props, ref) => {
-  const {
-    variant = "primary",
-    size = "sm",
-    children,
-    className,
-    ...rest
-  } = props;
+export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
+  (props, ref) => {
+    const {
+      variant = "primary",
+      size = "sm",
+      children,
+      className,
+      ...rest
+    } = props;
 
-  const theme = useTheme();
-  const badgeStyles = cx(
-    theme.badge.base,
-    theme.badge.size[size],
-    theme.badge.variants[variant],
-    className,
-  );
+    const theme = useTheme();
+    const badgeStyles = cx(
+      theme.badge.base,
+      theme.badge.size[size],
+      theme.badge.variants[variant],
+      className,
+    );
 
-  return (
-    <Box as="span" ref={ref} className={badgeStyles} {...rest}>
-      {children}
-    </Box>
-  );
-});
+    return (
+      <Box as="span" ref={ref} className={badgeStyles} {...rest}>
+        {children}
+      </Box>
+    );
+  },
+);

@@ -20,19 +20,15 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
  * @template DefaultType string, eg: "div"
  * @param component
  */
-export function forwardRefWithAsSimple<
+export function forwardRefWithAs<
   Props,
   RefProp = any,
   DefaultType extends As = any
->(component: React.ForwardRefRenderFunction<RefProp, Props>) {
-  return (React.forwardRef(component) as unknown) as ComponentWithAs<
-    Props,
-    DefaultType
-  >;
-}
-
-export function forwardRefWithAs<Props, DefaultType extends As>(
-  component: React.ForwardRefRenderFunction<any, any>,
+>(
+  component: React.ForwardRefRenderFunction<
+    RefProp,
+    PropsWithAs<Props, DefaultType>
+  >,
 ) {
   return (React.forwardRef(component) as unknown) as ComponentWithAs<
     Props,

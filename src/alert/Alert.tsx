@@ -12,7 +12,7 @@ import {
 import { useTheme } from "../theme";
 import { createContext } from "../utils";
 import { Button, ButtonProps } from "../button";
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 const STATUS_ICONS = {
   info: InfoCircleIcon,
@@ -41,7 +41,7 @@ export type AlertProps = RoleProps & {
   status?: AlertStatus;
 };
 
-export const Alert = forwardRefWithAsSimple<AlertProps, HTMLDivElement, "div">(
+export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
   (props, ref) => {
     const { status = "info", className, ...rest } = props;
     const theme = useTheme();
@@ -61,7 +61,7 @@ export const Alert = forwardRefWithAsSimple<AlertProps, HTMLDivElement, "div">(
 
 export type AlertTitleProps = RoleProps & {};
 
-export const AlertTitle = forwardRefWithAsSimple<
+export const AlertTitle = forwardRefWithAs<
   AlertTitleProps,
   HTMLDivElement,
   "div"
@@ -75,7 +75,7 @@ export const AlertTitle = forwardRefWithAsSimple<
 
 export type AlertDescriptionProps = RoleProps & {};
 
-export const AlertDescription = forwardRefWithAsSimple<
+export const AlertDescription = forwardRefWithAs<
   AlertDescriptionProps,
   HTMLDivElement,
   "div"
@@ -89,7 +89,7 @@ export const AlertDescription = forwardRefWithAsSimple<
 
 export type AlertActionButtonProps = ButtonProps & {};
 
-export const AlertActionButton = forwardRefWithAsSimple<
+export const AlertActionButton = forwardRefWithAs<
   AlertActionButtonProps,
   HTMLButtonElement,
   "button"
@@ -108,7 +108,7 @@ export const AlertActionButton = forwardRefWithAsSimple<
 
 export type AlertIconProps = RoleProps & {};
 
-export const AlertIcon = forwardRefWithAsSimple<
+export const AlertIcon = forwardRefWithAs<
   AlertIconProps,
   HTMLSpanElement,
   "span"

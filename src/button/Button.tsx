@@ -6,7 +6,7 @@ import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { useButtonGroup } from "./ButtonGroup";
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
@@ -39,7 +39,7 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   isDisabled?: boolean;
 };
 
-export const Button = forwardRefWithAsSimple<
+export const Button = forwardRefWithAs<
   ButtonProps,
   HTMLButtonElement,
   "button"
@@ -113,7 +113,7 @@ export const Button = forwardRefWithAsSimple<
 
 export type ButtonIconProps = BoxProps & {};
 
-export const ButtonIcon = forwardRefWithAsSimple<
+export const ButtonIcon = forwardRefWithAs<
   ButtonIconProps,
   HTMLSpanElement,
   "span"
