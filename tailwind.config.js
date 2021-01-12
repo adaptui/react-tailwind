@@ -1,6 +1,26 @@
 const { preset } = require("./preset");
 
 module.exports = preset({
+  purge: {
+    content: [
+      "./src/theme/defaultTheme.tsx",
+      "../src/**/stories/*.stories.@(ts|tsx)",
+    ],
+    // options: {
+    //   safelist: {
+    //     standard: [
+    //       /aria-selected/,
+    //       /aria-disabled/,
+    //       /is-range-selection/,
+    //       /is-range-selection/,
+    //       /is-selection-start/,
+    //       /is-selection-start/,
+    //       /is-selection-end/,
+    //       /is-selection-end/,
+    //     ],
+    //   },
+    // },
+  },
   theme: {
     extend: {},
   },

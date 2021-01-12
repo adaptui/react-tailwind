@@ -490,23 +490,51 @@ const renderlesskitConfig = {
         const variantName = variant ? `${variant}:${dataName}` : dataName;
 
         addVariant(variantName, ({ modifySelectors, separator }) => {
-          modifySelectors(({ className }) => {
-            const selector = selectorClass => {
-              // `.${e(`is-range-selection${separator}${className}`)}[data-is-range-selection]`
-              if (dataBool)
-                return `.${e(`${selectorClass}`)}[data-${dataName}]`;
-              // `.${e(`aria-selected${separator}${className}`)}[aria-selected="true"]`
-              return `.${e(`${selectorClass}`)}[${dataName}="true"]`;
-            };
-            // `aria-selected${separator}${className}`
-            const dataClass = `${dataName}${separator}${className}`;
-            // `lib${separator}aria-selected${separator}${className}`
-            const variantDataClass = variant
-              ? `${variant}${separator}${dataClass}`
-              : dataClass;
+          // modifySelectors(({ className }) => {
+          //   const selector = selectorClass => {
+          //     // `.${e(`is-range-selection${separator}${className}`)}[data-is-range-selection]`
+          //     if (dataBool)
+          //       return `.${e(`${selectorClass}`)}[data-${dataName}]`;
+          //     // `.${e(`aria-selected${separator}${className}`)}[aria-selected="true"]`
+          //     return `.${e(`${selectorClass}`)}[${dataName}="true"]`;
+          //   };
+          //   // `aria-selected${separator}${className}`
+          //   const dataClass = `${dataName}${separator}${className}`;
+          //   // `lib${separator}aria-selected${separator}${className}`
+          //   const variantDataClass = variant
+          //     ? `${variant}${separator}${dataClass}`
+          //     : dataClass;
 
-            return selector(variantDataClass);
+          //   return selector(variantDataClass);
+          // });
+
+          const parser = selectorParser(selectors => {
+            selectors.walkClasses(sel => {
+              // `aria-selected${separator}${className}`
+              const dataClass = `${dataName}${separator}${sel.value}`;
+
+              // `lib${separator}aria-selected${separator}${className}`
+              if (variant) {
+                sel.value = `${variant}${separator}${dataClass}`;
+              } else {
+                sel.value = dataClass;
+              }
+
+              if (dataBool) {
+                sel.parent.insertAfter(
+                  sel,
+                  selectorParser.attribute({ attribute: `data-${dataName}` }),
+                );
+              } else {
+                sel.parent.insertAfter(
+                  sel,
+                  selectorParser.attribute({ attribute: `${dataName}="true"` }),
+                );
+              }
+            });
           });
+
+          modifySelectors(({ selector }) => parser.processSync(selector));
         });
       }
 
