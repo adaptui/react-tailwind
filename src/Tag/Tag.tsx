@@ -46,7 +46,7 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
   (props, ref) => {
     const {
       id,
-      size = "md",
+      size = "sm",
       prefix,
       suffix = <CloseIcon />,
       className,

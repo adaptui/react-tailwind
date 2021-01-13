@@ -3,16 +3,17 @@ import { Story, Meta } from "@storybook/react/types-6-0";
 
 import { Tag, TagGroup, TagProps } from "../index";
 import { ClockIcon, PhotographIcon } from "../../icons";
+import { Avatar } from "../../avatar";
 
 export default {
   title: "Tag",
   component: Tag,
 } as Meta;
 
-const Component: Story<TagProps> = args => <Tag {...args}>Tag</Tag>;
+const Component: Story<TagProps> = args => <Tag {...args}>Chennai</Tag>;
 
 export const Default = Component.bind({});
-Default.args = { size: "md", onClose: () => alert(1) };
+Default.args = { size: "lg", onClose: () => alert(1) };
 
 export const GroupArrowNavigation = () => {
   return (
@@ -68,3 +69,12 @@ PrefixSuffixIcon.args = {
 
 export const Closable = Default.bind({});
 Closable.args = { closable: true, onClose: () => alert("Removed") };
+
+export const WithAvatar = () => {
+  return (
+    <Tag closable>
+      <Avatar className="ring-0" src="https://bit.ly/dan-abramov" />
+      <span className="ml-2">Steve</span>
+    </Tag>
+  );
+};
