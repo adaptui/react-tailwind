@@ -59,7 +59,14 @@ export const Icon = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
     const _path = (children ?? fallbackIcon.path) as React.ReactNode;
 
     return (
-      <Box as={element} ref={ref} viewBox={_viewBox} {...shared} {...rest}>
+      <Box
+        data-testid="testid-icon"
+        as={element}
+        ref={ref}
+        viewBox={_viewBox}
+        {...shared}
+        {...rest}
+      >
         {_path}
       </Box>
     );
