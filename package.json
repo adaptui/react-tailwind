@@ -39,7 +39,6 @@
     "contributors:generate": "all-contributors generate",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "format:package": "sort-package-json",
-    "generateTailwindProperties": "node ./scripts/generate-tailwind-properties.js",
     "lint": "eslint src --ext .tsx,.ts,.jsx,.js",
     "prepublishOnly": "yarn test && yarn build",
     "release": "git add . && standard-version -a",
