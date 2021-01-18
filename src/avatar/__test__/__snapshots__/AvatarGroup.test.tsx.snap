@@ -4,14 +4,15 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
 <DocumentFragment>
   <div
     aria-label="Avatar group"
-    class="flex items-center space-x-2"
+    class="lib:flex lib:items-center lib:space-x-2"
     role="group"
   >
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-sm lib:h-8 lib:w-8"
     >
       <svg
-        class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -26,10 +27,11 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       </svg>
     </div>
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-4 w-4"
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-4 lib:w-4"
     >
       <svg
-        class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -51,14 +53,15 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
 <DocumentFragment>
   <div
     aria-label="Avatar group"
-    class="flex items-center space-x-2"
+    class="lib:flex lib:items-center lib:space-x-2"
     role="group"
   >
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-sm lib:h-8 lib:w-8"
     >
       <svg
-        class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -73,10 +76,11 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       </svg>
     </div>
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-sm h-8 w-8"
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-sm lib:h-8 lib:w-8"
     >
       <svg
-        class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -98,14 +102,15 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
 <DocumentFragment>
   <div
     aria-label="Avatar group"
-    class="flex items-center space-x-2"
+    class="lib:flex lib:items-center lib:space-x-2"
     role="group"
   >
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
     >
       <svg
-        class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -120,10 +125,11 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       </svg>
     </div>
     <div
-      class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
     >
       <svg
-        class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >

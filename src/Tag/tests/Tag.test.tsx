@@ -1,8 +1,8 @@
 import * as React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 import { Tag } from "../Tag";
-import { testA11y } from "../../utils/testUtils";
+import { render, testA11y } from "../../utils/testUtils";
 
 const spyWarn = jest.spyOn(console, "warn");
 

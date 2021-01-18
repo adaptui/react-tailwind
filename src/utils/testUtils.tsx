@@ -1,7 +1,31 @@
-import React from "react";
-import { configureAxe } from "jest-axe";
+import {
+  render as RtlRender,
+  RenderOptions,
+  waitFor,
+  RenderResult,
+} from "@testing-library/react";
+import * as React from "react";
 import { RunOptions } from "axe-core";
-import { render, RenderOptions, waitFor } from "@testing-library/react";
+import { configureAxe } from "jest-axe";
+
+// @ts-ignore
+import tailwindConfig from "../../tailwind.config";
+import { RenderlesskitProvider } from "../theme";
+export * from "@testing-library/react";
+
+type Render = (
+  children: React.ReactNode,
+  options?: RenderOptions,
+) => RenderResult;
+
+export const render: Render = (children, options = {}) => {
+  return RtlRender(
+    <RenderlesskitProvider tailwindConfig={tailwindConfig}>
+      {children}
+    </RenderlesskitProvider>,
+    options,
+  );
+};
 
 export const axe = configureAxe({
   rules: {
@@ -25,6 +49,7 @@ export const testA11y = async (
     ? render(ui, options).container
     : ui;
 
+  // @ts-ignore
   const results = await axe(container, axeOptions);
 
   expect(results).toHaveNoViolations();

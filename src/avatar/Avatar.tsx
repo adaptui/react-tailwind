@@ -1,7 +1,7 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
-import theme from "../theme";
-import { ocx } from "../utils";
+import { useTheme } from "../theme";
 import { AvatarImage } from "./AvatarImage";
 import { useAvatarGroup } from "./AvatarGroup";
 
@@ -17,7 +17,7 @@ export type AvatarProps = {
   /**
    * How large should avatar be?
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: keyof Renderlesskit.GetThemeValue<"avatar", "size">;
   /**
    * Custom fallback
    */
@@ -41,7 +41,8 @@ export const Avatar: React.FC<AvatarProps> = ({
 }) => {
   const group = useAvatarGroup();
   const _size = size || group?.size || "md";
-  const avatarStyles = ocx(
+  const theme = useTheme();
+  const avatarStyles = cx(
     theme.avatar.base,
     theme.avatar.size[_size],
     className,
@@ -83,10 +84,12 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
   children,
   ...rest
 }) => {
+  const theme = useTheme();
+
   return (
     <div
       {...rest}
-      className={ocx(
+      className={cx(
         theme.avatar.badge.size[size],
         theme.avatar.badge.base,
         theme.avatar.badge.position[position],

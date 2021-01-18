@@ -1,29 +1,22 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
-import "./button.css";
-import {
-  ClockIcon,
-  CrossIcon,
-  WheelIcon,
-  PhotographIcon,
-  ArrowNarrowRightIcon,
-} from "../../icons";
 import {
   Button,
   IconButton,
   ButtonProps,
   ButtonGroup,
-  CloseButton,
+  CloseButton as CloseButtonDefault,
   IconButtonProps,
   ButtonGroupProps,
   CloseButtonProps,
 } from "../index";
-import theme from "../../theme";
-import { ocx } from "../../utils";
+import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
+import { SearchIcon, CaretDownIcon } from "../../icons";
 
 export default {
   title: "Button",
@@ -33,63 +26,71 @@ export default {
 const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
 
 export const Default = Base.bind({});
-Default.args = { size: "md", variant: "primary" };
+Default.args = { size: "lg", variant: "primary" };
 
-const ButtonWithIcon: Story<ButtonProps> = args => (
-  <Button aria-label="settings" {...args}>
-    <WheelIcon />
-  </Button>
-);
-
-export const Icon = ButtonWithIcon.bind({});
-Icon.args = { size: "md", variant: "primary" };
+export const ExtendedVariant = Default.bind({});
+ExtendedVariant.args = { size: "xxl", variant: "tertiary" };
 
 const LeftIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<ClockIcon />} {...args}>
+  <Button prefix={<SearchIcon />} {...args}>
     Button
   </Button>
 );
 
 export const LeftIcon = LeftIconButton.bind({});
-LeftIcon.args = { size: "md", variant: "primary" };
+LeftIcon.args = { size: "lg", variant: "primary" };
 
 const RightIconButton: Story<ButtonProps> = args => (
-  <Button suffix={<ArrowNarrowRightIcon />} {...args}>
+  <Button suffix={<CaretDownIcon />} {...args}>
     Button
   </Button>
 );
 
 export const RightIcon = RightIconButton.bind({});
-RightIcon.args = { size: "md", variant: "primary" };
+RightIcon.args = { size: "lg", variant: "primary" };
 
 const BothSideIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
+  <Button prefix={<SearchIcon />} suffix={<CaretDownIcon />} {...args}>
     Button
   </Button>
 );
 
 export const BothSideIcon = BothSideIconButton.bind({});
-BothSideIcon.args = { size: "md", variant: "primary" };
+BothSideIcon.args = { size: "lg", variant: "primary" };
 
-const LoadingIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<PhotographIcon />} suffix={<CrossIcon />} {...args}>
-    Button
-  </Button>
+const IconButtonBase: Story<IconButtonProps> = args => (
+  <IconButton aria-label="picture" {...args}>
+    <SearchIcon />
+  </IconButton>
 );
 
-export const LoadingIcon = LoadingIconButton.bind({});
-LoadingIcon.args = { size: "md", variant: "primary", isLoading: true };
+export const OnlyIcon = IconButtonBase.bind({});
+OnlyIcon.args = { size: "lg", variant: "primary" };
 
-const CustomSpinner = () => (
-  <>
-    Loading
-    <Spinner className={ocx(theme.button.spinner, "ml-2", "text-red-500")} />
-  </>
+const CloseButtonBase: Story<CloseButtonProps> = args => (
+  <CloseButtonDefault {...args} />
 );
 
-export const CustomLaodingElement = LoadingIconButton.bind({});
+export const CloseButton = CloseButtonBase.bind({});
+CloseButton.args = { size: "lg", variant: "primary" };
+
+export const LoadingIcon = BothSideIconButton.bind({});
+LoadingIcon.args = { size: "lg", variant: "primary", isLoading: true };
+
+const CustomSpinner = () => {
+  const theme = useTheme();
+
+  return (
+    <>
+      Loading
+      <Spinner className={cx(theme.button.spinner, "ml-2", "text-red-500")} />
+    </>
+  );
+};
+
+export const CustomLaodingElement = BothSideIconButton.bind({});
 CustomLaodingElement.args = {
-  size: "md",
+  size: "lg",
   variant: "primary",
   isLoading: true,
   spinner: <CustomSpinner />,
@@ -109,7 +110,7 @@ GroupDefault.args = { className: "space-x-4" };
 export const GroupCollapsed = ButtonGroupBase.bind({});
 GroupCollapsed.args = {
   isAttached: true,
-  size: "md",
+  size: "lg",
   variant: "primary",
 };
 
@@ -148,19 +149,3 @@ TabListAsGroup.args = {
   size: "lg",
   variant: "secondary",
 };
-
-const IconButtonBase: Story<IconButtonProps> = args => (
-  <IconButton aria-label="picture" {...args}>
-    <PhotographIcon />
-  </IconButton>
-);
-
-export const IconButtonDefault = IconButtonBase.bind({});
-IconButtonDefault.args = { size: "md", variant: "primary" };
-
-const CloseButtonBase: Story<CloseButtonProps> = args => (
-  <CloseButton {...args} />
-);
-
-export const CloseButtonDefault = CloseButtonBase.bind({});
-CloseButtonDefault.args = { size: "md", variant: "primary" };

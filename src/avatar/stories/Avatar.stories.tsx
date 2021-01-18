@@ -3,9 +3,9 @@ import { Story, Meta } from "@storybook/react";
 import { useTooltipState, TooltipReference, Tooltip } from "reakit";
 
 import "./avatar.css";
-import { Avatar, AvatarProps } from "..";
 import { ClockIcon } from "../../icons";
 import { AvatarBadge } from "../Avatar";
+import { Avatar, AvatarProps } from "..";
 import { AvatarGroup } from "../AvatarGroup";
 import Status, { OfflineDot, OnlineDot } from "../../common/Status";
 
@@ -15,10 +15,10 @@ export default {
 } as Meta;
 
 const TypingAnimation = () => (
-  <div className="spinner rounded-xl bg-green-500 border-2 border-white">
-    <div className="bounce1 bg-green-200"></div>
-    <div className="bounce2 bg-green-200"></div>
-    <div className="bounce3 bg-green-200"></div>
+  <div className="bg-green-500 border-2 border-white spinner rounded-xl">
+    <div className="bg-green-200 bounce1"></div>
+    <div className="bg-green-200 bounce2"></div>
+    <div className="bg-green-200 bounce3"></div>
   </div>
 );
 
@@ -44,7 +44,7 @@ export const OnError: Story<AvatarProps> = () => (
 );
 
 export const WithIcon: Story<AvatarProps> = () => (
-  <Avatar className="bg-red-400 text-white">
+  <Avatar className="text-white bg-red-400">
     <ClockIcon />
   </Avatar>
 );
@@ -121,7 +121,7 @@ export const OnlineTooltip: Story<AvatarProps> = () => {
       <AvatarBadge>
         <Tooltip
           as="div"
-          className="font-sans bg-green-500 text-white rounded-full text-xs px-1"
+          className="px-1 font-sans text-xs text-white bg-green-500 rounded-full"
           {...tooltip}
         >
           Online

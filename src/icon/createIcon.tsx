@@ -36,16 +36,15 @@ export function createIcon(options: CreateIconOptions) {
     defaultProps = {},
   } = options;
 
-  function IconComponent(
-    props: PropsWithAs<IconProps, "svg">,
-    ref: React.Ref<HTMLOrSVGElement>,
-  ) {
-    return (
-      <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
-        {path ?? <path fill="currentColor" d={pathDefinition} />}
-      </Icon>
-    );
-  }
+  const IconComponent = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
+    (props, ref) => {
+      return (
+        <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
+          {path ?? <path fill="currentColor" d={pathDefinition} />}
+        </Icon>
+      );
+    },
+  );
 
-  return forwardRefWithAs<IconProps, "svg">(IconComponent);
+  return IconComponent;
 }

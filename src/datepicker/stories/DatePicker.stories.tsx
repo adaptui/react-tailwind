@@ -6,7 +6,6 @@ import {
   CDateRangePicker,
   CustomInputDatePicker,
 } from "../DatePicker";
-import "./DatePicker.css";
 
 export default {
   title: "DatePicker",

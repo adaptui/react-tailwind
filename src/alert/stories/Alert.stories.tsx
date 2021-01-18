@@ -2,19 +2,17 @@ import React from "react";
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from "@storybook/react/types-6-0";
 
-import "./Alert.css";
 import {
   Alert,
-  AlertTitle,
-  AlertDescription,
   AlertIcon,
   AlertProps,
+  AlertTitle,
+  AlertDescription,
 } from "../index";
-import { Button, ButtonIcon } from "../../button";
-import { CrossIcon } from "../../icons";
-import { ocx } from "../../utils";
-import { AlertActionButton } from "../Alert";
 import { Box } from "../../box";
+import { CloseIcon } from "../../icons";
+import { AlertActionButton } from "../Alert";
+import { Button, ButtonIcon } from "../../button";
 
 export default {
   title: "Alert",
@@ -32,7 +30,7 @@ const Base: Story<AlertProps> = args => {
   };
 
   return (
-    <Alert {...args} className="flex justify-between">
+    <Alert {...args} status={status} className="flex justify-between">
       <Box className="items-center inherit">
         <AlertIcon />
         <AlertTitle>
@@ -41,16 +39,13 @@ const Base: Story<AlertProps> = args => {
         <AlertDescription>Your experience may be degrated</AlertDescription>
       </Box>
       <Box className="items-center inherit">
-        <AlertActionButton>Reach Out</AlertActionButton>
+        <AlertActionButton as="div">Reach Out</AlertActionButton>
         <Button
           aria-label="close"
-          className={ocx(
-            "h-5 px-0 bg-transparent min-w-5 ml-2",
-            `hover:${buttonBg[status]}`,
-          )}
+          className={`h-5 px-0 bg-transparent min-w-5 ml-2 hover:${buttonBg[status]}`}
         >
           <ButtonIcon className="text-gray-800 inherit">
-            <CrossIcon />
+            <CloseIcon />
           </ButtonIcon>
         </Button>
       </Box>

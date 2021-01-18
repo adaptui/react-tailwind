@@ -3,10 +3,11 @@
 exports[`<Avatar /> should render Avatar 1`] = `
 <DocumentFragment>
   <div
-    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
+    class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
   >
     <svg
-      class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+      class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+      data-testid="testid-icon"
       focusable="false"
       viewBox="0 0 12 12"
     >
@@ -26,13 +27,13 @@ exports[`<Avatar /> should render Avatar 1`] = `
 exports[`<Avatar /> should render with AvatarBadge & children 1`] = `
 <DocumentFragment>
   <div
-    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
+    class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
   >
     <p>
       Some Child Element
     </p>
     <div
-      class="text-xs h-2 w-2 absolute bottom-0 right-0"
+      class="lib:text-xs lib:h-2 lib:w-2 lib:absolute lib:bottom-0 lib:right-0"
     >
       *
     </div>
@@ -43,10 +44,11 @@ exports[`<Avatar /> should render with AvatarBadge & children 1`] = `
 exports[`<Avatar /> should render with AvatarBadge 1`] = `
 <DocumentFragment>
   <div
-    class="font-sans font-bold inline-flex items-center relative justify-center text-center uppercase text-gray-500 bg-gray-100 fill-current rounded-full ring-2 ring-white text-xs h-6 w-6"
+    class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
   >
     <svg
-      class="w-em h-em inline-block leading-em flex-shrink-0 text-current align-middle"
+      class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+      data-testid="testid-icon"
       focusable="false"
       viewBox="0 0 12 12"
     >
@@ -60,7 +62,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       />
     </svg>
     <div
-      class="text-xs h-2 w-2 absolute bottom-0 right-0"
+      class="lib:text-xs lib:h-2 lib:w-2 lib:absolute lib:bottom-0 lib:right-0"
     >
       *
     </div>

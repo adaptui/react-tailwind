@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Role, RoleProps } from "reakit";
 
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export type BoxProps = RoleProps & {};
 
-export const Box = forwardRefWithAsSimple<BoxProps, HTMLDivElement, "div">(
+export const Box = forwardRefWithAs<BoxProps, HTMLDivElement, "div">(
   (props, ref) => {
     return <Role ref={ref} {...props} />;
   },
