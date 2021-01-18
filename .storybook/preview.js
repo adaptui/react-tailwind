@@ -1,4 +1,4 @@
-import "./style.css";
+import "../src/button/stories/style.css";
 import tailwindConfig from "../tailwind.config";
 import { RenderlesskitProvider } from "../src/theme";
 
