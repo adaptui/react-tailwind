@@ -1,4 +1,4 @@
-import "../src/style.css";
+import "./style.css";
 import tailwindConfig from "../tailwind.config";
 import { RenderlesskitProvider } from "../src/theme";
 
