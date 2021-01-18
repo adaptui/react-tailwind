@@ -1,4 +1,4 @@
-import { kebabCase } from "lodash";
+import "../src/button/stories/style.css";
 import tailwindConfig from "../tailwind.config";
 import { RenderlesskitProvider } from "../src/theme";
 
@@ -8,8 +8,6 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => {
-    document.body.id = kebabCase(context.kind);
-
     return (
       <RenderlesskitProvider tailwindConfig={tailwindConfig}>
         <div className="font-sans">

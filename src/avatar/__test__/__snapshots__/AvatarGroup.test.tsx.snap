@@ -12,6 +12,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -30,6 +31,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -59,6 +61,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -77,6 +80,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -106,6 +110,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >
@@ -124,6 +129,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 12 12"
       >

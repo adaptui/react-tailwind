@@ -6,17 +6,17 @@ import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
 import { useButtonGroup } from "./ButtonGroup";
-import { AnyString, forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "lg" | "xl" | AnyString;
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | AnyString;
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
   /**
    * If added, the button will show an icon before the button's label.
    */
@@ -39,7 +39,7 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   isDisabled?: boolean;
 };
 
-export const Button = forwardRefWithAsSimple<
+export const Button = forwardRefWithAs<
   ButtonProps,
   HTMLButtonElement,
   "button"
@@ -113,7 +113,7 @@ export const Button = forwardRefWithAsSimple<
 
 export type ButtonIconProps = BoxProps & {};
 
-export const ButtonIcon = forwardRefWithAsSimple<
+export const ButtonIcon = forwardRefWithAs<
   ButtonIconProps,
   HTMLSpanElement,
   "span"

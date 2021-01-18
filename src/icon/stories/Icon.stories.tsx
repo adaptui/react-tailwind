@@ -3,7 +3,6 @@ import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { FaBeer, FaCog } from "react-icons/fa";
 
-import "./icon.css";
 import {
   BoltIcon,
   ClockIcon,

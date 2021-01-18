@@ -5,7 +5,7 @@ import { Clickable, CompositeItem, CompositeStateReturn } from "reakit";
 import { useTheme } from "../theme";
 import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export const TagsContext = React.createContext<CompositeStateReturn | null>(
   null,
@@ -30,7 +30,7 @@ export type TagProps = Omit<BoxProps, "prefix"> & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"tag", "size">;
   /**
    * If added, tag will show prefix the content before the tag's label
    */
@@ -42,11 +42,11 @@ export type TagProps = Omit<BoxProps, "prefix"> & {
   suffix?: React.ReactElement;
 };
 
-export const Tag = forwardRefWithAsSimple<TagProps, HTMLSpanElement, "span">(
+export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
   (props, ref) => {
     const {
       id,
-      size = "md",
+      size = "sm",
       prefix,
       suffix = <CloseIcon />,
       className,

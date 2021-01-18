@@ -4,7 +4,7 @@ import { cx } from "@renderlesskit/react";
 import { Box, BoxProps } from "../box";
 import { createContext } from "../utils";
 import { useTheme } from "../theme";
-import { forwardRefWithAsSimple } from "../utils/types";
+import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonGroupProps = BoxProps & {
   /**
@@ -14,11 +14,11 @@ export type ButtonGroupProps = BoxProps & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "link";
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
 };
 
 export type ButtonGroupContext = Pick<
@@ -35,7 +35,7 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
 
 export { useButtonGroup };
 
-export const ButtonGroup = forwardRefWithAsSimple<ButtonGroupProps, "div">(
+export const ButtonGroup = forwardRefWithAs<ButtonGroupProps, "div">(
   (props, ref) => {
     const { size, variant, isAttached, className, ...rest } = props;
     const context = React.useMemo(() => ({ size, variant }), [size, variant]);

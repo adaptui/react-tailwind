@@ -229,8 +229,7 @@ const theme = {
     size: {
       xs: "lib:h-6 lib:min-w-6 lib:text-xs lib:px-2",
       sm: "lib:h-8 lib:min-w-8 lib:text-sm lib:px-3",
-      md: "lib:h-10 lib:min-w-10 lib:text-base lib:px-4",
-      lg: "lib:h-12 lib:min-w-12 lib:text-lg lib:px-6",
+      lg: "lib:h-10 lib:min-w-10 lib:text-base lib:px-4 lib:rounded-lg",
     },
   },
 };
