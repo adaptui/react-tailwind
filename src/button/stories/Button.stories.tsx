@@ -16,12 +16,21 @@ import {
 import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
 import { SearchIcon, CaretDownIcon } from "../../icons";
-import { storyTemplate } from "../../utils/storybookUtils";
+import { createControls, storyTemplate } from "../../utils/storybookUtils";
 
 export default {
   title: "Button",
   component: Button,
-} as Meta<ButtonProps>;
+  argTypes: createControls("button", {
+    unions: ["size", "variant"],
+    ignore: [
+      "unstable_system",
+      "unstable_clickOnEnter",
+      "unstable_clickOnSpace",
+      "wrapElement",
+    ],
+  }),
+} as Meta;
 
 const base = storyTemplate<ButtonProps>(Button, {
   children: "Button",
