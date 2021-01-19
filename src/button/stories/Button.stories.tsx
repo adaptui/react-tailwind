@@ -12,70 +12,73 @@ import {
   CloseButton as CloseButtonDefault,
   IconButtonProps,
   ButtonGroupProps,
-  CloseButtonProps,
 } from "../index";
 import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
 import { SearchIcon, CaretDownIcon } from "../../icons";
+import { storyTemplate } from "../../utils/storybookUtils";
 
 export default {
   title: "Button",
   component: Button,
-} as Meta;
+} as Meta<ButtonProps>;
 
-const Base: Story<ButtonProps> = args => <Button {...args}>Button</Button>;
+const base = storyTemplate<ButtonProps>(Button, {
+  children: "Button",
+  size: "lg",
+  variant: "primary",
+});
 
-export const Default = Base.bind({});
-Default.args = { size: "lg", variant: "primary" };
+export const Default = base({ size: "lg", children: "Button" });
 
-export const ExtendedVariant = Default.bind({});
-ExtendedVariant.args = { size: "xxl", variant: "tertiary" };
+export const ExtendedVariant = base({
+  // @ts-ignore
+  size: "xxl",
+  // @ts-ignore
+  variant: "tertiary",
+  children: "Button",
+});
 
-const LeftIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<SearchIcon />} {...args}>
-    Button
-  </Button>
-);
+export const LeftIcon = base({
+  size: "lg",
+  variant: "primary",
+  prefix: <SearchIcon />,
+  children: "Button",
+});
 
-export const LeftIcon = LeftIconButton.bind({});
-LeftIcon.args = { size: "lg", variant: "primary" };
+export const RightIcon = base({
+  size: "lg",
+  variant: "primary",
+  suffix: <CaretDownIcon />,
+  children: "Button",
+});
 
-const RightIconButton: Story<ButtonProps> = args => (
-  <Button suffix={<CaretDownIcon />} {...args}>
-    Button
-  </Button>
-);
+export const BothIcon = base({
+  size: "lg",
+  variant: "primary",
+  suffix: <CaretDownIcon />,
+  prefix: <SearchIcon />,
+  children: "Button",
+});
 
-export const RightIcon = RightIconButton.bind({});
-RightIcon.args = { size: "lg", variant: "primary" };
+export const LoadingIcon = base({
+  suffix: <CaretDownIcon />,
+  prefix: <SearchIcon />,
+  children: "Button",
+  isLoading: true,
+});
 
-const BothSideIconButton: Story<ButtonProps> = args => (
-  <Button prefix={<SearchIcon />} suffix={<CaretDownIcon />} {...args}>
-    Button
-  </Button>
-);
+const iconButtonBase = storyTemplate<IconButtonProps>(args => {
+  return (
+    <IconButton aria-label="picture" {...args}>
+      <SearchIcon />
+    </IconButton>
+  );
+});
+export const OnlyIcon = iconButtonBase({ size: "lg", variant: "primary" });
 
-export const BothSideIcon = BothSideIconButton.bind({});
-BothSideIcon.args = { size: "lg", variant: "primary" };
-
-const IconButtonBase: Story<IconButtonProps> = args => (
-  <IconButton aria-label="picture" {...args}>
-    <SearchIcon />
-  </IconButton>
-);
-
-export const OnlyIcon = IconButtonBase.bind({});
-OnlyIcon.args = { size: "lg", variant: "primary" };
-
-const CloseButtonBase: Story<CloseButtonProps> = args => (
-  <CloseButtonDefault {...args} />
-);
-
-export const CloseButton = CloseButtonBase.bind({});
-CloseButton.args = { size: "lg", variant: "primary" };
-
-export const LoadingIcon = BothSideIconButton.bind({});
-LoadingIcon.args = { size: "lg", variant: "primary", isLoading: true };
+const closeButtonBase = storyTemplate<IconButtonProps>(CloseButtonDefault);
+export const CloseButton = closeButtonBase({ size: "lg", variant: "primary" });
 
 const CustomSpinner = () => {
   const theme = useTheme();
@@ -88,38 +91,35 @@ const CustomSpinner = () => {
   );
 };
 
-export const CustomLaodingElement = BothSideIconButton.bind({});
-CustomLaodingElement.args = {
-  size: "lg",
-  variant: "primary",
+export const CustomLoadingElement = base({
+  suffix: <CaretDownIcon />,
+  prefix: <SearchIcon />,
+  children: "Button",
   isLoading: true,
   spinner: <CustomSpinner />,
-};
+});
 
-const ButtonGroupBase: Story<ButtonGroupProps> = args => (
+const buttonGroupBase = storyTemplate<ButtonGroupProps>(args => (
   <ButtonGroup {...args}>
     <Button>Button 1</Button>
     <Button>Button 2</Button>
     <Button>Button 3</Button>
   </ButtonGroup>
-);
+));
 
-export const GroupDefault = ButtonGroupBase.bind({});
-GroupDefault.args = { className: "space-x-4" };
+export const GroupDefault = buttonGroupBase({ className: "space-x-4" });
 
-export const GroupCollapsed = ButtonGroupBase.bind({});
-GroupCollapsed.args = {
+export const GroupCollapsed = buttonGroupBase({
   isAttached: true,
   size: "lg",
   variant: "primary",
-};
+});
 
-export const GroupSecondary = ButtonGroupBase.bind({});
-GroupSecondary.args = {
+export const GroupSecondary = buttonGroupBase({
   isAttached: true,
   size: "lg",
   variant: "secondary",
-};
+});
 
 const ButtonGroupExample: Story<ButtonGroupProps> = args => {
   const tab = useTabState();
