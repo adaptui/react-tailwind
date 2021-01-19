@@ -232,6 +232,12 @@ const theme = {
       lg: "lib:h-10 lib:min-w-10 lib:text-base lib:px-4 lib:rounded-lg",
     },
   },
+  checkbox: {
+    label:
+      "lib:relative lib:inline-flex lib:items-center lib:font-sans lib:align-top lib:cursor-pointer",
+    input:
+      "lib:absolute lib:top-0 lib:w-full lib:h-full lib:p-0 lib:m-0 lib:overflow-visible lib:opacity-0 lib:z-1",
+  },
 };
 
 export default theme;

@@ -4,6 +4,7 @@ import {
   CheckboxProps as RenderlessCheckboxProps,
 } from "reakit";
 
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
 
@@ -14,13 +15,10 @@ export const Checkbox = forwardRefWithAs<
   HTMLLabelElement,
   "label"
 >((props, ref) => {
+  const theme = useTheme();
+
   return (
-    <Box
-      as="label"
-      className="relative inline-flex items-center font-sans align-top cursor-pointer"
-      ref={ref}
-      {...props}
-    />
+    <Box as="label" className={theme.checkbox.label} ref={ref} {...props} />
   );
 });
 
@@ -31,11 +29,9 @@ export const CheckboxInput = forwardRefWithAs<
   HTMLInputElement,
   "input"
 >((props, ref) => {
+  const theme = useTheme();
+
   return (
-    <RenderlessCheckbox
-      className="absolute top-0 w-full h-full p-0 m-0 overflow-visible opacity-0 z-1"
-      ref={ref}
-      {...props}
-    />
+    <RenderlessCheckbox className={theme.checkbox.input} ref={ref} {...props} />
   );
 });
