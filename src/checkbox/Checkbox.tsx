@@ -3,16 +3,17 @@ import {
   Checkbox as RenderlessCheckbox,
   CheckboxProps as RenderlessCheckboxProps,
 } from "reakit";
-import { Box, BoxProps } from "../box";
 
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs } from "../utils/types";
 
 export type CheckboxProps = BoxProps & {};
 
-function CheckboxComponent(
-  props: PropsWithAs<CheckboxProps, "label">,
-  ref: React.Ref<HTMLLabelElement>,
-) {
+export const Checkbox = forwardRefWithAs<
+  CheckboxProps,
+  HTMLLabelElement,
+  "label"
+>((props, ref) => {
   return (
     <Box
       as="label"
@@ -21,18 +22,15 @@ function CheckboxComponent(
       {...props}
     />
   );
-}
-
-export const Checkbox = forwardRefWithAs<CheckboxProps, "label">(
-  CheckboxComponent,
-);
+});
 
 export type CheckboxInputProps = RenderlessCheckboxProps & {};
 
-function CheckboxInputComponent(
-  props: PropsWithAs<CheckboxInputProps, "input">,
-  ref: React.Ref<HTMLInputElement>,
-) {
+export const CheckboxInput = forwardRefWithAs<
+  CheckboxInputProps,
+  HTMLInputElement,
+  "input"
+>((props, ref) => {
   return (
     <RenderlessCheckbox
       className="absolute top-0 w-full h-full p-0 m-0 overflow-visible opacity-0 z-1"
@@ -40,8 +38,4 @@ function CheckboxInputComponent(
       {...props}
     />
   );
-}
-
-export const CheckboxInput = forwardRefWithAs<CheckboxInputProps, "input">(
-  CheckboxInputComponent,
-);
+});

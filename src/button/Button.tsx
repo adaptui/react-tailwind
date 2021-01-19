@@ -1,22 +1,22 @@
-import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 import React from "react";
+import { cx } from "@renderlesskit/react";
+import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 
-import theme from "../theme";
-import { ocx } from "../utils";
+import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 import { useButtonGroup } from "./ButtonGroup";
+import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
    */
-  variant?: "primary" | "secondary" | "link";
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
   /**
    * If added, the button will show an icon before the button's label.
    */
@@ -39,10 +39,11 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   isDisabled?: boolean;
 };
 
-function ButtonComponent(
-  props: PropsWithAs<ButtonProps, "button">,
-  ref: React.Ref<HTMLButtonElement>,
-) {
+export const Button = forwardRefWithAs<
+  ButtonProps,
+  HTMLButtonElement,
+  "button"
+>((props, ref) => {
   const {
     size,
     variant,
@@ -57,9 +58,11 @@ function ButtonComponent(
   } = props;
   const _isDisabled = isDisabled || isLoading;
   const group = useButtonGroup();
-  const _size = size || group?.size || "md";
+  const _size = size || group?.size || "lg";
   const _variant = variant || group?.variant || "primary";
-  const buttonStyles = ocx(
+  const theme = useTheme();
+
+  const buttonStyles = cx(
     theme.button.base,
     theme.button.size[_size],
     theme.button.variant[_variant],
@@ -70,11 +73,11 @@ function ButtonComponent(
   const ButtonWithIcons = () => (
     <>
       {prefix && (
-        <ButtonIcon className={theme.button.prefix}>{prefix}</ButtonIcon>
+        <ButtonIcon className={theme.button.prefix[_size]}>{prefix}</ButtonIcon>
       )}
       {children}
       {suffix && (
-        <ButtonIcon className={theme.button.suffix}>{suffix}</ButtonIcon>
+        <ButtonIcon className={theme.button.suffix[_size]}>{suffix}</ButtonIcon>
       )}
     </>
   );
@@ -106,19 +109,15 @@ function ButtonComponent(
   }
 
   return <ButtonComp />;
-}
-
-/**
- * Primary UI component for user interaction
- */
-export const Button = forwardRefWithAs<ButtonProps, "button">(ButtonComponent);
+});
 
 export type ButtonIconProps = BoxProps & {};
 
-function ButtonIconComponent(
-  props: PropsWithAs<ButtonIconProps, "span">,
-  ref: React.Ref<HTMLSpanElement>,
-) {
+export const ButtonIcon = forwardRefWithAs<
+  ButtonIconProps,
+  HTMLSpanElement,
+  "span"
+>((props, ref) => {
   const { children, ...rest } = props;
 
   const _children = React.isValidElement(children)
@@ -133,11 +132,4 @@ function ButtonIconComponent(
       {_children}
     </Box>
   );
-}
-
-/**
- * Button Icon to hold icons within the Button
- */
-export const ButtonIcon = forwardRefWithAs<ButtonIconProps, "span">(
-  ButtonIconComponent,
-);
+});

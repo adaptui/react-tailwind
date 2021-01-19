@@ -4,7 +4,6 @@
     "module": "esnext",
     "lib": ["dom", "esnext", "dom.iterable"],
     "types": ["node", "jest", "@testing-library/jest-dom"],
-    "allowJs": true,
     "jsx": "react-jsx",
     "strict": true,
     "strictFunctionTypes": true,
@@ -19,11 +18,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "isolatedModules": true,
     "declaration": true,
     "sourceMap": true,
     "declarationDir": "dist/types"
-  },
-  "include": ["src"],
-  "exclude": ["**/*/__mocks__"]
+  }
 }

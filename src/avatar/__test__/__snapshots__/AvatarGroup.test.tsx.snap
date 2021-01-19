@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Avatar group"
+    class="lib:flex lib:items-center lib:space-x-2"
+    role="group"
+  >
+    <div
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-sm lib:h-8 lib:w-8"
+    >
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </div>
+    <div
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-4 lib:w-4"
+    >
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Avatar group"
+    class="lib:flex lib:items-center lib:space-x-2"
+    role="group"
+  >
+    <div
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-sm lib:h-8 lib:w-8"
+    >
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </div>
+    <div
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-sm lib:h-8 lib:w-8"
+    >
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<AvatarGroup /> should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Avatar group"
+    class="lib:flex lib:items-center lib:space-x-2"
+    role="group"
+  >
+    <div
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
+    >
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </div>
+    <div
+      class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
+    >
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;
