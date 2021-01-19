@@ -1,6 +1,8 @@
 import { expectAssignable, expectType } from "tsd";
 import theme from "./defaultTheme";
 
+// TODO: Test global renderlesskit namespace
+
 expectType<Renderlesskit.Theme>({ components: theme });
 
 // GetThemeValue test
