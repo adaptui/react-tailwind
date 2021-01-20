@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import theme from "../src/theme/defaultTheme";
 
 export const storyTemplate = <ComponentProps,>(
-  Component: React.FC,
+  Component: React.FC<ComponentProps>,
   defaultArgs?: Partial<ComponentProps>,
 ) => (props: ComponentProps) => {
   const base: Story<ComponentProps> = args => <Component {...args} />;
@@ -18,23 +18,31 @@ export const createUnionControl = (keys: any) => {
   };
 };
 
+type CreateControlsOptions = { unions?: string[]; ignore?: string[] };
 export const createControls = (
   component: string,
-  options?: { unions: string[]; ignore: string[] },
+  options?: CreateControlsOptions,
 ) => {
-  const controls = options?.unions.reduce((cur, key) => {
-    return {
-      ...cur,
-      [key]: createUnionControl((theme as Record<string, any>)[component][key]),
-    };
-  }, {});
+  try {
+    const controls = (options?.unions || []).reduce((cur, key) => {
+      const value = (theme as Record<string, any>)[component][key];
 
-  const ignoredControls = options?.ignore.reduce((cur, key) => {
-    return {
-      ...cur,
-      [key]: { table: { disable: true } },
-    };
-  }, {});
+      if (!value) return cur;
+      return {
+        ...cur,
+        [key]: createUnionControl(value),
+      };
+    }, {});
 
-  return { ...controls, ...ignoredControls };
+    const ignoredControls = (options?.ignore || []).reduce((cur, key) => {
+      return {
+        ...cur,
+        [key]: { table: { disable: true } },
+      };
+    }, {});
+
+    return { ...controls, ...ignoredControls };
+  } catch (e) {
+    console.log(e);
+  }
 };

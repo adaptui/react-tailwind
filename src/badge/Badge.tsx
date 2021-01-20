@@ -11,7 +11,7 @@ export type BadgeProps = BoxProps & {
    *
    * @default "primary"
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variants">;
+  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
   /**
    * How large should the button be?
    *
@@ -34,7 +34,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
     const badgeStyles = cx(
       theme.badge.base,
       theme.badge.size[size],
-      theme.badge.variants[variant],
+      theme.badge.variant[variant],
       className,
     );
 
