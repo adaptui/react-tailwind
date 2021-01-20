@@ -1,5 +1,5 @@
 export const button = {
-  span: "lib:inline-block lib:cursor-not-allowed",
+  span: "inline-block cursor-not-allowed",
   base:
     "lib:inline-flex lib:items-center lib:justify-center lib:outline-none lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none lib:disabled:cursor-not-allowed lib:disabled:opacity-40",
   variant: {
@@ -18,18 +18,18 @@ export const button = {
     xl:
       "lib:h-12 lib:w-auto lib:min-w-12 lib:px-4 lib:text-base lib:font-medium lib:rounded-lg lib:shadow-sm",
   },
+  group: "lib:focus:z-1 lib:-mr-px lib:shadow-none",
   prefix: {
-    xs: "lib:inherit lib:mr-1.5",
-    sm: "lib:inherit lib:mr-2",
-    lg: "lib:inherit lib:mr-2",
-    xl: "lib:inherit lib:mr-2",
+    xs: "inherit mr-1.5",
+    sm: "inherit mr-2",
+    lg: "inherit mr-2",
+    xl: "inherit mr-2",
   },
   suffix: {
-    xs: "lib:inherit lib:ml-1.5",
-    sm: "lib:inherit lib:ml-2",
-    lg: "lib:inherit lib:ml-2",
-    xl: "lib:inherit lib:ml-2",
+    xs: "inherit ml-1.5",
+    sm: "inherit ml-2",
+    lg: "inherit ml-2",
+    xl: "inherit ml-2",
   },
-  spinner: "lib:w-em lib:h-em text-current",
-  group: "lib:focus:z-1 lib:-mr-px lib:shadow-none",
+  spinner: "w-em h-em text-current",
 };

@@ -2,11 +2,12 @@ import React from "react";
 import { cx } from "@renderlesskit/react";
 import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 
+import { Box } from "../box";
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
-import { Box, BoxProps } from "../box";
 import { useButtonGroup } from "./ButtonGroup";
 import { forwardRefWithAs } from "../utils/types";
+import { ButtonIcon } from "./ButtonIcon";
 
 export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   /**
@@ -109,27 +110,4 @@ export const Button = forwardRefWithAs<
   }
 
   return <ButtonComp />;
-});
-
-export type ButtonIconProps = BoxProps & {};
-
-export const ButtonIcon = forwardRefWithAs<
-  ButtonIconProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const { children, ...rest } = props;
-
-  const _children = React.isValidElement(children)
-    ? React.cloneElement(children, {
-        "aria-hidden": true,
-        focusable: false,
-      })
-    : children;
-
-  return (
-    <Box as="span" ref={ref} {...rest}>
-      {_children}
-    </Box>
-  );
 });

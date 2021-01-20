@@ -104,19 +104,6 @@ const iconButtonBase = storyTemplate<IconButtonProps>(
 );
 
 export const OnlyIcon = iconButtonBase({});
-const IconButtonGroupBase = storyTemplate<ButtonGroupProps>(args => (
-  <ButtonGroup {...args}>
-    <IconButton aria-label="search" {...args}>
-      <SearchIcon />
-    </IconButton>
-    <IconButton aria-label="info" {...args}>
-      <InfoCircleIcon />
-    </IconButton>
-    <IconButton aria-label="settings" {...args}>
-      <WheelIcon />
-    </IconButton>
-  </ButtonGroup>
-));
 
 const closeButtonBase = storyTemplate<IconButtonProps>(CloseButtonDefault, {
   size: "lg",
@@ -136,14 +123,31 @@ const buttonGroupBase = storyTemplate<ButtonGroupProps>(
   { size: "lg", variant: "primary" },
 );
 
-export const GroupDefault = buttonGroupBase({ className: "space-x-4" });
+export const GroupDefault = buttonGroupBase({});
 
 export const GroupCollapsed = buttonGroupBase({ isAttached: true });
 
+const IconButtonGroupBase = storyTemplate<ButtonGroupProps>(
+  args => (
+    <ButtonGroup {...args}>
+      <IconButton aria-label="search">
+        <SearchIcon />
+      </IconButton>
+      <IconButton aria-label="info">
+        <InfoCircleIcon />
+      </IconButton>
+      <IconButton aria-label="settings">
+        <WheelIcon />
+      </IconButton>
+    </ButtonGroup>
+  ),
+  { size: "lg", variant: "primary" },
+);
+
+export const IconButtonGroupDefault = IconButtonGroupBase({});
+
 export const IconButtonGroupCollapsed = IconButtonGroupBase({
   isAttached: true,
-  size: "lg",
-  variant: "primary",
 });
 
 export const GroupSecondary = buttonGroupBase({

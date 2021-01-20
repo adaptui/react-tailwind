@@ -1,38 +1,37 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react/types-6-0";
 
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
 import { Badge, BadgeProps } from "../Badge";
 
 export default {
   title: "Badge",
   component: Badge,
-  argTypes: {},
+  argTypes: createControls("badge", {
+    unions: ["size", "variant"],
+  }),
 } as Meta;
 
-const Template: Story<BadgeProps> = args => <Badge {...args}>badge</Badge>;
+const base = storyTemplate<BadgeProps>(
+  args => {
+    return <Badge {...args}>Badge</Badge>;
+  },
+  { variant: "primary", size: "sm" },
+);
 
-export const Primary = Template.bind({});
-Primary.args = {
-  size: "sm",
-  variant: "primary",
-};
+export const Primary = base({});
 
-export const XSmall = Template.bind({});
-XSmall.args = {
-  size: "xs",
-};
+export const Secondary = base({ variant: "secondary" });
 
-export const Small = Template.bind({});
-Small.args = {
-  size: "sm",
-};
+export const Outline = base({ variant: "outline" });
 
-export const Medium = Template.bind({});
-Medium.args = {
-  size: "md",
-};
+export const Ghost = base({ variant: "ghost" });
 
-export const Large = Template.bind({});
-Large.args = {
-  size: "lg",
-};
+export const ExtraSmall = base({ size: "xs" });
+
+export const Small = base({});
+
+export const Large = base({ size: "lg" });
