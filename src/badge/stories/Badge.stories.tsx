@@ -1,11 +1,11 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Badge, BadgeProps } from "../Badge";
 import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { Badge, BadgeProps } from "../Badge";
 
 export default {
   title: "Badge",
@@ -17,27 +17,21 @@ export default {
 
 const base = storyTemplate<BadgeProps>(
   args => {
-    return <Badge {...args}>badge</Badge>;
+    return <Badge {...args}>Badge</Badge>;
   },
-  { variant: "primary" },
+  { variant: "primary", size: "sm" },
 );
 
-export const Primary = base({
-  size: "sm",
-});
+export const Primary = base({});
 
-export const XSmall = base({
-  size: "xs",
-});
+export const Secondary = base({ variant: "secondary" });
 
-export const Small = base({
-  size: "sm",
-});
+export const Outline = base({ variant: "outline" });
 
-export const Medium = base({
-  size: "md",
-});
+export const Ghost = base({ variant: "ghost" });
 
-export const Large = base({
-  size: "lg",
-});
+export const ExtraSmall = base({ size: "xs" });
+
+export const Small = base({});
+
+export const Large = base({ size: "lg" });
