@@ -1,8 +1,9 @@
 import React from "react";
+import { FaCopy } from "react-icons/fa";
 import { Meta } from "@storybook/react/types-6-0";
 
 import { Tag, TagGroup, TagProps } from "../index";
-import { ClockIcon, PhotographIcon } from "../../icons";
+import { ClockIcon } from "../../icons";
 import { Avatar } from "../../avatar";
 import {
   createControls,
@@ -25,12 +26,12 @@ export const Default = base({ size: "lg", onClose: () => alert(1) });
 
 export const PrefixIcon = base({ prefix: <ClockIcon /> });
 
-export const SuffixIcon = base({ closable: true, suffix: <PhotographIcon /> });
+export const SuffixIcon = base({ closable: true, suffix: <FaCopy /> });
 
 export const PrefixSuffixIcon = base({
   closable: true,
   prefix: <ClockIcon />,
-  suffix: <PhotographIcon />,
+  suffix: <FaCopy />,
 });
 
 export const Closable = base({
