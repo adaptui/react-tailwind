@@ -16,7 +16,10 @@ import {
 import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
 import { SearchIcon, CaretDownIcon } from "../../icons";
-import { createControls, storyTemplate } from "../../utils/storybookUtils";
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Button",

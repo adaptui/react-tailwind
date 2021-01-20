@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Story } from "@storybook/react";
 
-import theme from "../theme/defaultTheme";
+import theme from "../src/theme/defaultTheme";
 
 export const storyTemplate = <ComponentProps,>(
   Component: React.FC,
