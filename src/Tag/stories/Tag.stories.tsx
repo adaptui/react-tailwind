@@ -1,19 +1,52 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
+import { Avatar } from "../../avatar";
 import { Tag, TagGroup, TagProps } from "../index";
 import { ClockIcon, PhotographIcon } from "../../icons";
-import { Avatar } from "../../avatar";
 
 export default {
   title: "Tag",
   component: Tag,
+  argTypes: createControls("tag", {
+    unions: ["size"],
+    ignore: ["prefix", "suffix"],
+  }),
 } as Meta;
 
-const Component: Story<TagProps> = args => <Tag {...args}>Chennai</Tag>;
+const base = storyTemplate<TagProps>(Tag, {
+  children: "Tag",
+  size: "sm",
+  onClose: () => alert("Closable"),
+});
 
-export const Default = Component.bind({});
-Default.args = { size: "lg", onClose: () => alert(1) };
+export const Default = base({});
+
+export const PrefixIcon = base({ prefix: <ClockIcon /> });
+
+export const ClosableSuffixIcon = base({
+  closable: true,
+  suffix: <PhotographIcon />,
+});
+
+export const PrefixSuffixIcon = base({
+  prefix: <ClockIcon />,
+  closable: true,
+  suffix: <PhotographIcon />,
+});
+
+export const WithAvatar = () => {
+  return (
+    <Tag closable>
+      <Avatar className="ring-0" src="https://bit.ly/dan-abramov" />
+      <span className="ml-2">Steve</span>
+    </Tag>
+  );
+};
 
 export const GroupArrowNavigation = () => {
   return (
@@ -35,7 +68,7 @@ export const GroupNoArrowNavigation = () => {
   );
 };
 
-export const TagsExample = () => {
+export const TagGroupsListExample = () => {
   const [tags, setTags] = React.useState(["One", "Two", "Three"]);
 
   return (
@@ -51,30 +84,5 @@ export const TagsExample = () => {
         </Tag>
       ))}
     </TagGroup>
-  );
-};
-
-export const PrefixIcon = Default.bind({});
-PrefixIcon.args = { prefix: <ClockIcon /> };
-
-export const SuffixIcon = Default.bind({});
-SuffixIcon.args = { closable: true, suffix: <PhotographIcon /> };
-
-export const PrefixSuffixIcon = Default.bind({});
-PrefixSuffixIcon.args = {
-  closable: true,
-  prefix: <ClockIcon />,
-  suffix: <PhotographIcon />,
-};
-
-export const Closable = Default.bind({});
-Closable.args = { closable: true, onClose: () => alert("Removed") };
-
-export const WithAvatar = () => {
-  return (
-    <Tag closable>
-      <Avatar className="ring-0" src="https://bit.ly/dan-abramov" />
-      <span className="ml-2">Steve</span>
-    </Tag>
   );
 };

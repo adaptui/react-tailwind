@@ -70,10 +70,10 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
 
     const TagWithPrefixSuffix = () => (
       <>
-        {prefix && <span className={theme.tag.prefix}>{prefix}</span>}
+        {prefix && <span className={theme.tag.prefix[size]}>{prefix}</span>}
         {children}
         {closable && suffix && (
-          <ClosableElement handleClick={() => onClose?.(id)}>
+          <ClosableElement handleClick={() => onClose?.(id)} size={size}>
             {suffix}
           </ClosableElement>
         )}
@@ -90,7 +90,9 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
 
 const ClosableElement: React.FC<{
   handleClick: () => void;
-}> = ({ handleClick, children }) => {
+  size: TagProps["size"];
+}> = props => {
+  const { size = "sm", handleClick, children } = props;
   const composite = useTagsContext();
   const theme = useTheme();
 
@@ -99,7 +101,7 @@ const ClosableElement: React.FC<{
       aria-label="close"
       data-testid="testid-close-element"
       as={Clickable}
-      className={theme.tag.suffix}
+      className={theme.tag.suffix[size]}
       onClick={handleClick}
       {...(composite ? composite : {})}
     >
