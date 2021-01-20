@@ -38,56 +38,33 @@ const base = storyTemplate<ButtonProps>(Button, {
   variant: "primary",
 });
 
-export const Default = base({ size: "lg", children: "Button" });
+export const Default = base({});
 
 export const ExtendedVariant = base({
   // @ts-ignore
   size: "xxl",
   // @ts-ignore
   variant: "tertiary",
-  children: "Button",
 });
 
 export const LeftIcon = base({
-  size: "lg",
-  variant: "primary",
   prefix: <SearchIcon />,
-  children: "Button",
 });
 
 export const RightIcon = base({
-  size: "lg",
-  variant: "primary",
   suffix: <CaretDownIcon />,
-  children: "Button",
 });
 
 export const BothIcon = base({
-  size: "lg",
-  variant: "primary",
   suffix: <CaretDownIcon />,
   prefix: <SearchIcon />,
-  children: "Button",
 });
 
 export const LoadingIcon = base({
   suffix: <CaretDownIcon />,
   prefix: <SearchIcon />,
-  children: "Button",
   isLoading: true,
 });
-
-const iconButtonBase = storyTemplate<IconButtonProps>(args => {
-  return (
-    <IconButton aria-label="picture" {...args}>
-      <SearchIcon />
-    </IconButton>
-  );
-});
-export const OnlyIcon = iconButtonBase({ size: "lg", variant: "primary" });
-
-const closeButtonBase = storyTemplate<IconButtonProps>(CloseButtonDefault);
-export const CloseButton = closeButtonBase({ size: "lg", variant: "primary" });
 
 const CustomSpinner = () => {
   const theme = useTheme();
@@ -103,35 +80,53 @@ const CustomSpinner = () => {
 export const CustomLoadingElement = base({
   suffix: <CaretDownIcon />,
   prefix: <SearchIcon />,
-  children: "Button",
   isLoading: true,
   spinner: <CustomSpinner />,
 });
 
-const buttonGroupBase = storyTemplate<ButtonGroupProps>(args => (
-  <ButtonGroup {...args}>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
-    <Button>Button 3</Button>
-  </ButtonGroup>
-));
+const iconButtonBase = storyTemplate<IconButtonProps>(
+  args => {
+    return (
+      <IconButton aria-label="picture" {...args}>
+        <SearchIcon />
+      </IconButton>
+    );
+  },
+  { size: "lg", variant: "primary" },
+);
 
-export const GroupDefault = buttonGroupBase({ className: "space-x-4" });
+export const OnlyIcon = iconButtonBase({});
 
-export const GroupCollapsed = buttonGroupBase({
-  isAttached: true,
+const closeButtonBase = storyTemplate<IconButtonProps>(CloseButtonDefault, {
   size: "lg",
   variant: "primary",
 });
 
+export const CloseButton = closeButtonBase({});
+
+const buttonGroupBase = storyTemplate<ButtonGroupProps>(
+  args => (
+    <ButtonGroup {...args}>
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+      <Button>Button 3</Button>
+    </ButtonGroup>
+  ),
+  { size: "lg", variant: "primary" },
+);
+
+export const GroupDefault = buttonGroupBase({ className: "space-x-4" });
+
+export const GroupCollapsed = buttonGroupBase({ isAttached: true });
+
 export const GroupSecondary = buttonGroupBase({
   isAttached: true,
-  size: "lg",
   variant: "secondary",
 });
 
 const ButtonGroupExample: Story<ButtonGroupProps> = args => {
   const tab = useTabState();
+
   return (
     <>
       <TabList as={ButtonGroup} {...args} {...tab} aria-label="My tabs">
