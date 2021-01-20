@@ -1,8 +1,8 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { Box, BoxProps } from "../box/Box";
 
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box/Box";
 import { forwardRefWithAs } from "../utils/types";
 
 export type BadgeProps = BoxProps & {
@@ -22,14 +22,7 @@ export type BadgeProps = BoxProps & {
 
 export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
   (props, ref) => {
-    const {
-      variant = "primary",
-      size = "sm",
-      children,
-      className,
-      ...rest
-    } = props;
-
+    const { variant = "primary", size = "sm", className, ...rest } = props;
     const theme = useTheme();
     const badgeStyles = cx(
       theme.badge.base,
@@ -38,10 +31,6 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
       className,
     );
 
-    return (
-      <Box as="span" ref={ref} className={badgeStyles} {...rest}>
-        {children}
-      </Box>
-    );
+    return <Box as="span" ref={ref} className={badgeStyles} {...rest} />;
   },
 );
