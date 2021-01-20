@@ -23,6 +23,12 @@ module.exports = function (api) {
   const plugins = [
     "@chakra-ui/babel-plugin",
     "@babel/plugin-proposal-class-properties",
+    isBuild
+      ? [
+          "babel-plugin-jsx-remove-data-test-id",
+          { attributes: ["data-testid"] },
+        ]
+      : {},
   ];
 
   return {
