@@ -2,7 +2,6 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 import { Button, ButtonProps } from "reakit";
 
-import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
 import { useButtonGroup } from "./ButtonGroup";
 import { forwardRefWithAs } from "../utils/types";
@@ -40,6 +39,7 @@ export const IconButton = forwardRefWithAs<
     ? React.cloneElement(children, {
         "aria-hidden": true,
         focusable: false,
+        role: "img",
       })
     : children;
 
@@ -47,21 +47,5 @@ export const IconButton = forwardRefWithAs<
     <Button className={iconButtonStyles} ref={ref} {...rest}>
       {_children}
     </Button>
-  );
-});
-
-export type CloseButtonProps = IconButtonProps & {};
-
-export const CloseButton = forwardRefWithAs<
-  CloseButtonProps,
-  HTMLButtonElement,
-  "button"
->((props, ref) => {
-  const { children, ...rest } = props;
-
-  return (
-    <IconButton aria-label="close" ref={ref} {...rest}>
-      {children || <CloseIcon />}
-    </IconButton>
   );
 });

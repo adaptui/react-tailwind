@@ -8,10 +8,6 @@ import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonGroupProps = BoxProps & {
   /**
-   * Button will look collapsed together.
-   */
-  isAttached?: boolean;
-  /**
    * How large should the button be?
    */
   size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
@@ -19,12 +15,13 @@ export type ButtonGroupProps = BoxProps & {
    * How the button should be styled?
    */
   variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
+  /**
+   * Button will look collapsed together.
+   */
+  isAttached?: boolean;
 };
 
-export type ButtonGroupContext = Pick<
-  ButtonGroupProps,
-  "size" | "variant"
-> & {};
+export type ButtonGroupContext = Pick<ButtonGroupProps, "size" | "variant">;
 
 const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
   {
@@ -43,7 +40,7 @@ export const ButtonGroup = forwardRefWithAs<ButtonGroupProps, "div">(
     const theme = useTheme();
     const buttonGroupStyles = cx(
       theme.buttonGroup.base,
-      isAttached ? theme.buttonGroup.attached : "",
+      isAttached ? theme.buttonGroup.attached : "lib:space-x-1",
       className,
     );
 

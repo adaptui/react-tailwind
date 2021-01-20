@@ -64,7 +64,7 @@ export const BothSideIcon = BothSideIconButton.bind({});
 BothSideIcon.args = { size: "lg", variant: "primary" };
 
 const IconButtonBase: Story<IconButtonProps> = args => (
-  <IconButton aria-label="picture" {...args}>
+  <IconButton aria-label="Search" {...args}>
     <SearchIcon />
   </IconButton>
 );
@@ -111,20 +111,20 @@ const ButtonGroupBase: Story<ButtonGroupProps> = args => (
 
 const IconButtonGroupBase: Story<ButtonGroupProps> = args => (
   <ButtonGroup {...args}>
-    <IconButton aria-label="search" {...args}>
+    <IconButton aria-label="search">
       <SearchIcon />
     </IconButton>
-    <IconButton aria-label="info" {...args}>
+    <IconButton aria-label="info">
       <InfoCircleIcon />
     </IconButton>
-    <IconButton aria-label="settings" {...args}>
+    <IconButton aria-label="settings">
       <WheelIcon />
     </IconButton>
   </ButtonGroup>
 );
 
 export const GroupDefault = ButtonGroupBase.bind({});
-GroupDefault.args = { className: "space-x-4" };
+GroupDefault.args = {};
 
 export const GroupCollapsed = ButtonGroupBase.bind({});
 GroupCollapsed.args = {
