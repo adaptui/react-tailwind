@@ -1,7 +1,7 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import { Story, Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react/types-6-0";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
 import {
@@ -13,9 +13,14 @@ import {
   IconButtonProps,
   ButtonGroupProps,
 } from "../index";
+import {
+  SearchIcon,
+  CaretDownIcon,
+  InfoCircleIcon,
+  WheelIcon,
+} from "../../icons";
 import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
-import { SearchIcon, CaretDownIcon } from "../../icons";
 import {
   createControls,
   storyTemplate,
@@ -99,6 +104,19 @@ const iconButtonBase = storyTemplate<IconButtonProps>(
 );
 
 export const OnlyIcon = iconButtonBase({});
+const IconButtonGroupBase = storyTemplate<ButtonGroupProps>(args => (
+  <ButtonGroup {...args}>
+    <IconButton aria-label="search" {...args}>
+      <SearchIcon />
+    </IconButton>
+    <IconButton aria-label="info" {...args}>
+      <InfoCircleIcon />
+    </IconButton>
+    <IconButton aria-label="settings" {...args}>
+      <WheelIcon />
+    </IconButton>
+  </ButtonGroup>
+));
 
 const closeButtonBase = storyTemplate<IconButtonProps>(CloseButtonDefault, {
   size: "lg",
@@ -122,12 +140,18 @@ export const GroupDefault = buttonGroupBase({ className: "space-x-4" });
 
 export const GroupCollapsed = buttonGroupBase({ isAttached: true });
 
+export const IconButtonGroupCollapsed = IconButtonGroupBase({
+  isAttached: true,
+  size: "lg",
+  variant: "primary",
+});
+
 export const GroupSecondary = buttonGroupBase({
   isAttached: true,
   variant: "secondary",
 });
 
-const ButtonGroupExample: Story<ButtonGroupProps> = args => {
+const buttonGroupExample = storyTemplate<ButtonGroupProps>(args => {
   const tab = useTabState();
 
   return (
@@ -148,11 +172,10 @@ const ButtonGroupExample: Story<ButtonGroupProps> = args => {
       <TabPanel {...tab}>Tab 3</TabPanel>
     </>
   );
-};
+});
 
-export const TabListAsGroup = ButtonGroupExample.bind({});
-TabListAsGroup.args = {
+export const TabListAsGroup = buttonGroupExample({
   isAttached: true,
   size: "lg",
   variant: "secondary",
-};
+});
