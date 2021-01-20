@@ -14,9 +14,14 @@ import {
   ButtonGroupProps,
   CloseButtonProps,
 } from "../index";
+import {
+  SearchIcon,
+  CaretDownIcon,
+  InfoCircleIcon,
+  WheelIcon,
+} from "../../icons";
 import { useTheme } from "../../theme";
 import { Spinner } from "../../spinner";
-import { SearchIcon, CaretDownIcon } from "../../icons";
 
 export default {
   title: "Button",
@@ -104,11 +109,32 @@ const ButtonGroupBase: Story<ButtonGroupProps> = args => (
   </ButtonGroup>
 );
 
+const IconButtonGroupBase: Story<ButtonGroupProps> = args => (
+  <ButtonGroup {...args}>
+    <IconButton aria-label="search" {...args}>
+      <SearchIcon />
+    </IconButton>
+    <IconButton aria-label="info" {...args}>
+      <InfoCircleIcon />
+    </IconButton>
+    <IconButton aria-label="settings" {...args}>
+      <WheelIcon />
+    </IconButton>
+  </ButtonGroup>
+);
+
 export const GroupDefault = ButtonGroupBase.bind({});
 GroupDefault.args = { className: "space-x-4" };
 
 export const GroupCollapsed = ButtonGroupBase.bind({});
 GroupCollapsed.args = {
+  isAttached: true,
+  size: "lg",
+  variant: "primary",
+};
+
+export const IconButtonGroupCollapsed = IconButtonGroupBase.bind({});
+IconButtonGroupCollapsed.args = {
   isAttached: true,
   size: "lg",
   variant: "primary",
