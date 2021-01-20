@@ -130,3 +130,5 @@ export const AlertIcon = forwardRefWithAs<
     </Role>
   );
 });
+
+export default Alert;

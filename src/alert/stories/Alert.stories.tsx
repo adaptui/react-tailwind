@@ -13,13 +13,18 @@ import { Box } from "../../box";
 import { CloseIcon } from "../../icons";
 import { AlertActionButton } from "../Alert";
 import { Button, ButtonIcon } from "../../button";
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Alert",
   component: Alert,
+  argTypes: createControls("alert", { unions: ["status"] }),
 } as Meta;
 
-const Base: Story<AlertProps> = args => {
+const base = storyTemplate<AlertProps>(args => {
   const status = args?.status || "info";
   const buttonBg = {
     info: "bg-blue-200",
@@ -51,7 +56,6 @@ const Base: Story<AlertProps> = args => {
       </Box>
     </Alert>
   );
-};
+});
 
-export const Default = Base.bind({});
-Default.args = { status: "info" };
+export const Default = base({ status: "info" });
