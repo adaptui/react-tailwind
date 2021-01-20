@@ -2,14 +2,14 @@ import React from "react";
 import { FaCopy } from "react-icons/fa";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Tag, TagGroup, TagProps } from "../index";
-import { ClockIcon } from "../../icons";
 import { Avatar } from "../../avatar";
+import { ClockIcon } from "../../icons";
 import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
 import { TagGroupProps } from "../TagGroup";
+import { Tag, TagGroup, TagProps } from "../index";
 
 export default {
   title: "Tag",
@@ -39,6 +39,15 @@ export const Closable = base({
   onClose: () => alert("Removed"),
 });
 
+export const WithAvatar = () => {
+  return (
+    <Tag closable>
+      <Avatar className="ring-0" src="https://bit.ly/dan-abramov" />
+      <span className="ml-2">Steve</span>
+    </Tag>
+  );
+};
+
 const group = storyTemplate<TagGroupProps>(args => {
   return (
     <TagGroup
@@ -54,18 +63,10 @@ const group = storyTemplate<TagGroupProps>(args => {
 });
 
 export const GroupArrowNavigation = group({});
+
 export const GroupNoArrowNavigation = group({ allowArrowNavigation: false });
 
-export const WithAvatar = () => {
-  return (
-    <Tag closable>
-      <Avatar className="ring-0" src="https://bit.ly/dan-abramov" />
-      <span className="ml-2">Steve</span>
-    </Tag>
-  );
-};
-
-export const TagsExample = () => {
+export const TagGroupsListExample = () => {
   const [tags, setTags] = React.useState(["One", "Two", "Three"]);
 
   return (
