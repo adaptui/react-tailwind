@@ -13,6 +13,7 @@ export default {
 const Base: Story<CheckboxProps> = args => {
   const [checked, setChecked] = React.useState(false);
   const toggle = () => setChecked(!checked);
+
   return (
     <Checkbox {...args}>
       <CheckboxInput checked={checked} onChange={toggle} />

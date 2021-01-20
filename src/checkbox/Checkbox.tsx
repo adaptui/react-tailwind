@@ -3,6 +3,7 @@ import {
   Checkbox as RenderlessCheckbox,
   CheckboxProps as RenderlessCheckboxProps,
 } from "reakit";
+import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
@@ -15,11 +16,11 @@ export const Checkbox = forwardRefWithAs<
   HTMLLabelElement,
   "label"
 >((props, ref) => {
+  const { className, ...rest } = props;
   const theme = useTheme();
+  const checkboxStyles = cx(theme.checkbox.label, className);
 
-  return (
-    <Box as="label" className={theme.checkbox.label} ref={ref} {...props} />
-  );
+  return <Box as="label" className={checkboxStyles} ref={ref} {...rest} />;
 });
 
 export type CheckboxInputProps = RenderlessCheckboxProps & {};
@@ -29,9 +30,11 @@ export const CheckboxInput = forwardRefWithAs<
   HTMLInputElement,
   "input"
 >((props, ref) => {
+  const { className, ...rest } = props;
   const theme = useTheme();
+  const checkboxInputStyles = cx(theme.checkbox.input, className);
 
   return (
-    <RenderlessCheckbox className={theme.checkbox.input} ref={ref} {...props} />
+    <RenderlessCheckbox className={checkboxInputStyles} ref={ref} {...rest} />
   );
 });
