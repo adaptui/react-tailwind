@@ -88,10 +88,12 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
   },
 );
 
-const ClosableElement: React.FC<{
+type ClosableElementProps = {
   handleClick: () => void;
   size: TagProps["size"];
-}> = props => {
+};
+
+const ClosableElement: React.FC<ClosableElementProps> = props => {
   const { size = "sm", handleClick, children } = props;
   const composite = useTagsContext();
   const theme = useTheme();
