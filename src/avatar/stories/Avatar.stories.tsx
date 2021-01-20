@@ -8,10 +8,15 @@ import { AvatarBadge } from "../Avatar";
 import { Avatar, AvatarProps } from "..";
 import { AvatarGroup } from "../AvatarGroup";
 import Status, { OfflineDot, OnlineDot } from "../../common/Status";
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Avatar",
   component: Avatar,
+  argTypes: createControls("avatar", { unions: ["size"] }),
 } as Meta;
 
 const TypingAnimation = () => (
@@ -22,41 +27,47 @@ const TypingAnimation = () => (
   </div>
 );
 
-const Base: Story<AvatarProps> = args => (
-  <Avatar
-    src="https://bit.ly/dan-abramov"
-    name="Dan Abrahmov"
-    {...args}
-  ></Avatar>
+const base = storyTemplate<AvatarProps & { children?: React.ReactNode }>(
+  args => <Avatar {...args}>{args.children}</Avatar>,
+  {
+    size: "md",
+  },
 );
 
-export const Default = Base.bind({});
-Default.args = { size: "xl" };
+export const Default = base({});
 
-export const OnError: Story<AvatarProps> = () => (
-  <Avatar
-    src="https://bit.ly/dan-dabramov"
-    onError={e => {
-      alert("Error loading image");
-      console.log(e);
-    }}
-  />
-);
+export const OnError = base({
+  src: "https://bit.ly/dan-dabramov",
+  onError: e => {
+    alert("Error loading image");
+    console.log(e);
+  },
+});
 
-export const WithIcon: Story<AvatarProps> = () => (
-  <Avatar className="text-white bg-red-400">
-    <ClockIcon />
-  </Avatar>
-);
+export const WithIcon = base({
+  className: "text-white bg-red-400",
+  children: <ClockIcon />,
+});
 
-export const WithIconAndBadge: Story<AvatarProps> = () => (
-  <Avatar size="xl">
-    <ClockIcon />
-    <AvatarBadge position="bottom-right">
-      <OfflineDot />
-    </AvatarBadge>
-  </Avatar>
-);
+export const WithIconAndBadge = base({
+  size: "xl",
+  children: (
+    <>
+      <ClockIcon />
+      <AvatarBadge position="bottom-right">
+        <OfflineDot />
+      </AvatarBadge>
+    </>
+  ),
+});
+
+export const NoNameAndSrc = base({});
+export const NameButNoSrc = base({ name: "Anurag Hazra" });
+export const NoNameAndSrcButFallback = base({ fallback: <ClockIcon /> });
+export const NameAndFallback = base({
+  name: "Anurag Hazra",
+  fallback: <ClockIcon />,
+});
 
 export const WithBadge: Story<AvatarProps> = () => {
   const [isTyping, setTyping] = React.useState(false);
@@ -83,16 +94,6 @@ export const WithBadge: Story<AvatarProps> = () => {
   );
 };
 
-export const NoNameAndSrc: Story<AvatarProps> = () => <Avatar />;
-export const NameButNoSrc: Story<AvatarProps> = () => (
-  <Avatar name="Anurag Hazra" />
-);
-export const NoNameAndSrcButFallback: Story<AvatarProps> = () => (
-  <Avatar fallback={<ClockIcon />} />
-);
-export const NameAndFallback: Story<AvatarProps> = () => (
-  <Avatar name="Anurag Hazra" fallback={<ClockIcon />} />
-);
 export const Statuses: Story<AvatarProps> = () => (
   <AvatarGroup size="xl">
     <Avatar size="xl" src="https://bit.ly/dan-abramov" name="Anurag Hazra">

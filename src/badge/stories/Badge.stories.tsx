@@ -1,38 +1,43 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react/types-6-0";
 
 import { Badge, BadgeProps } from "../Badge";
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Badge",
   component: Badge,
-  argTypes: {},
+  argTypes: createControls("badge", {
+    unions: ["size", "variant"],
+  }),
 } as Meta;
 
-const Template: Story<BadgeProps> = args => <Badge {...args}>badge</Badge>;
+const base = storyTemplate<BadgeProps>(
+  args => {
+    return <Badge {...args}>badge</Badge>;
+  },
+  { variant: "primary" },
+);
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Primary = base({
   size: "sm",
-  variant: "primary",
-};
+});
 
-export const XSmall = Template.bind({});
-XSmall.args = {
+export const XSmall = base({
   size: "xs",
-};
+});
 
-export const Small = Template.bind({});
-Small.args = {
+export const Small = base({
   size: "sm",
-};
+});
 
-export const Medium = Template.bind({});
-Medium.args = {
+export const Medium = base({
   size: "md",
-};
+});
 
-export const Large = Template.bind({});
-Large.args = {
+export const Large = base({
   size: "lg",
-};
+});
