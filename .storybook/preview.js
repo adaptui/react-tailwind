@@ -10,7 +10,7 @@ export const decorators = [
   (Story, context) => {
     return (
       <RenderlesskitProvider tailwindConfig={tailwindConfig}>
-        <div className="font-sans">
+        <div className="box-border font-sans">
           <Story />
         </div>
       </RenderlesskitProvider>

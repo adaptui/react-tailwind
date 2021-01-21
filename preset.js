@@ -54,7 +54,7 @@ const renderlesskitConfig = {
       zIndex: {
         1: 1,
       },
-      border: {
+      borderWidth: {
         1.5: "1.5px",
       },
     },
