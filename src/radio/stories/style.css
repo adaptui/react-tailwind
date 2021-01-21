@@ -1,4 +1,4 @@
-.radio {
+/* .radio {
   display: grid;
   grid-template-columns: min-content auto;
   grid-gap: 0.5em;
@@ -34,8 +34,8 @@
   transform: scale(1);
 }
 .radio input:checked + .radio__control {
-  background-color: #27272a;
-  border: 0em solid #a1a1aa;
+  background-color: white;
+  border: 0.35em solid #27272a;
 }
 
 .radio input:disabled + .radio__control::before {
@@ -45,4 +45,4 @@
 
 .radio input:disabled + .radio__control {
   border: 0.3em solid #e4e4e7;
-}
+} */

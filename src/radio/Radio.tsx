@@ -7,6 +7,7 @@ import {
   RadioProps,
   useRadioState,
 } from "reakit";
+import { useTheme } from "../theme";
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 
@@ -22,13 +23,17 @@ export const Radio = forwardRefWithAs<
   "input"
 >(({ children, className, ...props }, ref) => {
   const state = useRadioContext();
+  const theme = useTheme();
+
   return (
-    <label className={cx("radio", className)}>
-      <span className="radio__input">
-        <ReakitRadio className="sr-only" {...state} {...props} ref={ref} />
-        <span className="radio__control" />
-      </span>
-      <span className="radio__label">{children}</span>
+    <label className={cx(theme.radio.base, className)}>
+      <ReakitRadio
+        className={theme.radio.input}
+        {...state}
+        {...props}
+        ref={ref}
+      />
+      <span>{children}</span>
     </label>
   );
 });

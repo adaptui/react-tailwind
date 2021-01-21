@@ -1,4 +1,3 @@
-import "./style.css";
 import React from "react";
 import { Meta } from "@storybook/react";
 import { Radio, RadioGroup } from "../Radio";

@@ -9,6 +9,7 @@ import { icon } from "./icon";
 import { iconButton } from "./iconButton";
 import { spinner } from "./spinner";
 import { tag } from "./tag";
+import { radio } from "./radio";
 
 const theme = {
   alert,
@@ -22,6 +23,7 @@ const theme = {
   iconButton,
   spinner,
   tag,
+  radio,
 };
 
 export default theme;
