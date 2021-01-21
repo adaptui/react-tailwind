@@ -1,51 +1,83 @@
 import React from "react";
-import { CheckboxStateReturn, useCheckboxState } from "reakit";
-import { Story, Meta } from "@storybook/react/types-6-0";
+import { CheckboxStateReturn } from "reakit";
+import { Meta } from "@storybook/react/types-6-0";
 
 import {} from "../index";
-import { Checkbox, CheckboxProps } from "../Checkbox";
+import {
+  createUnionControl,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
+import { Checkbox, CheckboxProps, CheckboxStatus } from "../Checkbox";
 
 export default {
   title: "Checkbox",
   component: Checkbox,
+  argTypes: {
+    defaultState: createUnionControl({
+      true: true,
+      false: false,
+      indeterminate: "indeterminate",
+    }),
+    size: createUnionControl({
+      xs: "xs",
+      sm: "sm",
+      lg: "lg",
+    }),
+  },
 } as Meta;
 
-const Base: Story<CheckboxProps> = args => (
-  <Checkbox {...args}>Checkbox</Checkbox>
-);
+const base = storyTemplate<CheckboxProps>(Checkbox, {
+  children: "Checkbox",
+  size: "sm",
+  defaultState: true,
+});
 
-export const Default = Base.bind({});
-Default.args = {};
+export const ExtraSmall = base({ size: "xs" });
 
-export const DefaultChecked = Base.bind({});
-DefaultChecked.args = { defaultState: true };
+export const Small = base({});
 
-export const DefaultIndeterminate = Base.bind({});
-DefaultIndeterminate.args = { defaultState: "indeterminate" };
+export const Large = base({ size: "lg" });
+
+export const DefaultUnchecked = base({ defaultState: false });
+
+export const DefaultChecked = base({ defaultState: true });
 
 export const Controlled = () => {
-  const [state, setState] = React.useState<CheckboxStateReturn["state"]>(false);
+  const [state, onStateChange] = React.useState<CheckboxStatus>(false);
 
   return (
-    <Checkbox state={state} setState={setState}>
-      Checkbox
-    </Checkbox>
+    <>
+      <Checkbox state={state} onStateChange={onStateChange}>
+        Checkbox
+      </Checkbox>
+      <div className="mt-2">{`Checked: ${state}`}</div>
+    </>
   );
 };
 
 export const Group = () => {
-  const checkbox = useCheckboxState({ state: [] });
+  const [state, onStateChange] = React.useState<CheckboxStatus>([]);
 
   return (
     <>
-      <div>Choices: {checkbox.state.join(", ")}</div>
-      <Checkbox {...checkbox} value="apple">
+      <div className="mb-2">Choices: {(state as string[]).join(", ")}</div>
+      <Checkbox state={state} onStateChange={onStateChange} value="apple">
         Apple
       </Checkbox>
-      <Checkbox {...checkbox} className="ml-2" value="orange">
+      <Checkbox
+        state={state}
+        onStateChange={onStateChange}
+        className="ml-2"
+        value="orange"
+      >
         Orange
       </Checkbox>
-      <Checkbox {...checkbox} className="ml-2" value="watermelon">
+      <Checkbox
+        state={state}
+        onStateChange={onStateChange}
+        className="ml-2"
+        value="watermelon"
+      >
         Watermelon
       </Checkbox>
     </>
@@ -54,7 +86,7 @@ export const Group = () => {
 
 export const GroupIndeterminateSimple = () => {
   const [checkedItems, setCheckedItems] = React.useState<
-    [CheckboxStateReturn["state"], CheckboxStateReturn["state"]]
+    CheckboxStateReturn["state"][]
   >([false, false]);
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
@@ -63,20 +95,20 @@ export const GroupIndeterminateSimple = () => {
     <>
       <Checkbox
         state={isIndeterminate ? "indeterminate" : allChecked}
-        setState={e => setCheckedItems([e, e])}
+        onStateChange={e => setCheckedItems([e, e])}
       >
         Parent Checkbox
       </Checkbox>
       <div className="flex flex-col pl-6 mt-1">
         <Checkbox
           state={checkedItems[0]}
-          setState={e => setCheckedItems([e, checkedItems[1]])}
+          onStateChange={e => setCheckedItems([e, checkedItems[1]])}
         >
           Child Checkbox 1
         </Checkbox>
         <Checkbox
           state={checkedItems[1]}
-          setState={e => setCheckedItems([checkedItems[0], e])}
+          onStateChange={e => setCheckedItems([checkedItems[0], e])}
         >
           Child Checkbox 2
         </Checkbox>
@@ -87,8 +119,8 @@ export const GroupIndeterminateSimple = () => {
 
 export const GroupIndeterminateComplex = () => {
   const values = React.useMemo(() => ["Apple", "Orange", "Watermelon"], []);
-  const [itemState, setItemState] = React.useState<string[]>([]);
-  const [groupState, setGroupState] = React.useState(false);
+  const [itemState, setItemState] = React.useState<CheckboxStatus>([]);
+  const [groupState, setGroupState] = React.useState<CheckboxStatus>(false);
 
   // updates items when group is toggled
   React.useEffect(() => {
@@ -101,6 +133,8 @@ export const GroupIndeterminateComplex = () => {
 
   // updates group when items is toggled
   React.useEffect(() => {
+    if (!Array.isArray(itemState)) return;
+
     if (itemState.length === values.length) {
       setGroupState(true);
     } else if (itemState.length) {
@@ -112,7 +146,7 @@ export const GroupIndeterminateComplex = () => {
 
   return (
     <>
-      <Checkbox state={groupState} setState={setGroupState}>
+      <Checkbox state={groupState} onStateChange={setGroupState}>
         Fruits
       </Checkbox>
       <div className="flex flex-col pl-6 mt-1">
@@ -121,7 +155,7 @@ export const GroupIndeterminateComplex = () => {
             <Checkbox
               key={i}
               state={itemState}
-              setState={setItemState}
+              onStateChange={setItemState}
               value={value}
             >
               {value}

@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
+  CheckboxStateReturn,
   Checkbox as RenderlessCheckbox,
   CheckboxProps as RenderlessCheckboxProps,
-  CheckboxStateReturn,
 } from "reakit";
 import { cx, useControllableState } from "@renderlesskit/react";
 
@@ -12,11 +12,20 @@ import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 import { CheckIcon, IndeterminateIcon } from "../icons";
 
-const [CheckboxProvider, useCheckboxContext] = createContext<
-  CheckboxStateReturn & {
-    value?: string | number;
-  }
->({
+export type CheckboxStatus = CheckboxStateReturn["state"];
+
+export type CheckboxContextProps = {
+  defaultState?: CheckboxStatus;
+  state?: CheckboxStatus;
+  onStateChange?: (e: CheckboxStatus) => void;
+  value?: string | number;
+  size?: "xs" | "sm" | "lg";
+};
+
+const [
+  CheckboxProvider,
+  useCheckboxContext,
+] = createContext<CheckboxContextProps>({
   strict: false,
   name: "CheckboxContext",
 });
@@ -47,7 +56,7 @@ export const CheckboxInput = forwardRefWithAs<
   const { className, ...rest } = props;
   const theme = useTheme();
   const checkboxInputStyles = cx(theme.checkbox.input, className);
-  const state = useCheckboxContext();
+  const { size, ...state } = useCheckboxContext();
 
   return (
     <RenderlessCheckbox
@@ -67,7 +76,7 @@ export const CheckboxIcon = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, children, ...rest } = props;
-  const { state, value } = useCheckboxContext();
+  const { state, value, size = "sm" } = useCheckboxContext();
   let stateProp = state;
 
   if (Array.isArray(state) && value) {
@@ -77,6 +86,7 @@ export const CheckboxIcon = forwardRefWithAs<
   const theme = useTheme();
   const checkboxIconStyles = cx(
     theme.checkbox.icon.base,
+    theme.checkbox.icon.size[size],
     stateProp ? theme.checkbox.icon.checked : theme.checkbox.icon.unchecked,
     className,
   );
@@ -108,29 +118,43 @@ export const CheckboxText = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
+  const { size = "sm" } = useCheckboxContext();
+
   const theme = useTheme();
-  const checkboxLabelStyles = cx(theme.checkbox.label, className);
+  const checkboxLabelStyles = cx(
+    theme.checkbox.label.base,
+    theme.checkbox.label.size[size],
+    className,
+  );
 
   return <Box className={checkboxLabelStyles} ref={ref} {...rest} />;
 });
 
-export type CheckboxProps = BoxProps & {
-  defaultState?: CheckboxStateReturn["state"];
-  state?: CheckboxStateReturn["state"];
-  setState?: CheckboxStateReturn["setState"];
-  value?: string | number;
-};
+export type CheckboxProps = BoxProps & CheckboxContextProps;
 
 export const Checkbox: React.FC<CheckboxProps> = props => {
-  const { state, setState, defaultState, value, children, ...rest } = props;
-  const [checkboxState, checkboxSetState] = useControllableState({
+  const {
+    state,
+    onStateChange,
+    defaultState,
+    value,
+    size,
+    children,
+    ...rest
+  } = props;
+  const [checkboxState, onCheckboxStateChange] = useControllableState({
     value: state,
     defaultValue: defaultState,
-    onChange: setState,
+    onChange: onStateChange,
   });
   const context = React.useMemo(
-    () => ({ state: checkboxState, setState: checkboxSetState, value }),
-    [checkboxState, checkboxSetState, value],
+    () => ({
+      state: checkboxState,
+      setState: onCheckboxStateChange,
+      value,
+      size,
+    }),
+    [checkboxState, onCheckboxStateChange, value, size],
   );
 
   return (
