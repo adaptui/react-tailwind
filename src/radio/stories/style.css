@@ -1,0 +1,48 @@
+.radio {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  font-size: 1rem;
+}
+
+.radio .radio__label {
+  line-height: 1;
+  transition: 180ms all ease-in-out;
+  opacity: 0.8;
+}
+
+.radio .radio__control {
+  display: grid;
+  place-items: center;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 0.1em solid #a1a1aa;
+  transform: translateY(-0.05em);
+}
+
+.radio input + .radio__control::before {
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
+  box-shadow: inset 0.4em 0.4em white;
+  border-radius: 50%;
+  transition: 180ms transform ease-in-out;
+  transform: scale(0);
+}
+.radio input:checked + .radio__control::before {
+  transform: scale(1);
+}
+.radio input:checked + .radio__control {
+  background-color: #27272a;
+  border: 0em solid #a1a1aa;
+}
+
+.radio input:disabled + .radio__control::before {
+  transform: scale(1);
+  box-shadow: inset 0.4em 0.4em #a1a1aa;
+}
+
+.radio input:disabled + .radio__control {
+  border: 0.3em solid #e4e4e7;
+}
