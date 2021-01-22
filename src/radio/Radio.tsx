@@ -1,15 +1,15 @@
+import React from "react";
 import { cx } from "@renderlesskit/react";
 import {
   Radio as ReakitRadio,
   RadioGroup as ReakitRadioGroup,
   RadioGroupProps,
-  RadioInitialState,
   RadioProps,
-  useRadioState,
 } from "reakit";
 import { useTheme } from "../theme";
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+import { useRadioState, RadioInitialState } from "./useRadioState";
 
 const [RadioProvider, useRadioContext] = createContext({
   name: "RadioContext",
