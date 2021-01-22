@@ -531,6 +531,7 @@ const renderlesskitConfig = {
       generateDataClassVariant("is-selection-end", true, "lib");
     }),
     require("@tailwindcss/forms"),
+    require("./forms"),
   ],
 };
 
