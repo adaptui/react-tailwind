@@ -20,6 +20,7 @@ export type CheckboxContextProps = {
   onStateChange?: (e: CheckboxStatus) => void;
   value?: string | number;
   size?: "xs" | "sm" | "lg";
+  isDisabled?: boolean;
 };
 
 const [
@@ -40,8 +41,13 @@ export const CheckboxLabel = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const { className, ...rest } = props;
+  const { isDisabled } = useCheckboxContext();
   const theme = useTheme();
-  const checkboxStyles = cx(theme.checkbox.base, className);
+  const checkboxStyles = cx(
+    theme.checkbox.base,
+    isDisabled ? "cursor-not-allowed" : "",
+    className,
+  );
 
   return <Box as="label" className={checkboxStyles} ref={ref} {...rest} />;
 });
@@ -56,12 +62,13 @@ export const CheckboxInput = forwardRefWithAs<
   const { className, ...rest } = props;
   const theme = useTheme();
   const checkboxInputStyles = cx(theme.checkbox.input, className);
-  const { size, ...state } = useCheckboxContext();
+  const { size, isDisabled, ...state } = useCheckboxContext();
 
   return (
     <RenderlessCheckbox
       className={checkboxInputStyles}
       ref={ref}
+      disabled={isDisabled}
       {...state}
       {...rest}
     />
@@ -76,7 +83,7 @@ export const CheckboxIcon = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, children, ...rest } = props;
-  const { state, value, size = "sm" } = useCheckboxContext();
+  const { state, value, size = "sm", isDisabled } = useCheckboxContext();
   let stateProp = state;
 
   if (Array.isArray(state) && value) {
@@ -87,7 +94,11 @@ export const CheckboxIcon = forwardRefWithAs<
   const checkboxIconStyles = cx(
     theme.checkbox.icon.base,
     theme.checkbox.icon.size[size],
-    stateProp ? theme.checkbox.icon.checked : theme.checkbox.icon.unchecked,
+    isDisabled
+      ? theme.checkbox.icon.disabled
+      : stateProp
+      ? theme.checkbox.icon.checked
+      : theme.checkbox.icon.unchecked,
     className,
   );
 
@@ -138,7 +149,8 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
     onStateChange,
     defaultState,
     value,
-    size,
+    size = "sm",
+    isDisabled = false,
     children,
     ...rest
   } = props;
@@ -153,8 +165,9 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
       setState: onCheckboxStateChange,
       value,
       size,
+      isDisabled,
     }),
-    [checkboxState, onCheckboxStateChange, value, size],
+    [checkboxState, onCheckboxStateChange, value, size, isDisabled],
   );
 
   return (

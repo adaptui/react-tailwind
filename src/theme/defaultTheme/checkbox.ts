@@ -12,6 +12,7 @@ export const checkbox = {
     },
     unchecked: "lib:border-1.5 lib:border-solid lib:border-gray-400",
     checked: "lib:text-white lib:bg-gray-800",
+    disabled: "lib:text-gray-400 lib:bg-gray-200",
   },
   label: {
     base: "lib:ml-2 lib:text-gray-600 lib:select-none",

@@ -13,11 +13,12 @@ export default {
   title: "Checkbox",
   component: Checkbox,
   argTypes: {
-    defaultState: createUnionControl({
-      true: true,
-      false: false,
-      indeterminate: "indeterminate",
-    }),
+    defaultState: {
+      control: {
+        type: "inline-radio",
+        options: [true, false, "indeterminate"],
+      },
+    },
     size: createUnionControl({
       xs: "xs",
       sm: "sm",
@@ -41,6 +42,8 @@ export const Large = base({ size: "lg" });
 export const DefaultUnchecked = base({ defaultState: false });
 
 export const DefaultChecked = base({ defaultState: true });
+
+export const Disabled = base({ isDisabled: true });
 
 export const Controlled = () => {
   const [state, onStateChange] = React.useState<CheckboxStatus>(false);
