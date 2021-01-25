@@ -1,28 +1,6 @@
 const deepMerge = require("deepmerge");
-const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
-const selectorParser = require("postcss-selector-parser");
-const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette")
-  .default;
-const buildSelectorVariant = require("tailwindcss/lib/util/buildSelectorVariant")
-  .default;
-
-function generatePseudoClassVariant(pseudoClass, selectorPrefix = pseudoClass) {
-  return ({ modifySelectors, separator }) => {
-    const parser = selectorParser(selectors => {
-      selectors.walkClasses(sel => {
-        sel.value = `lib${separator}${selectorPrefix}${separator}${sel.value}`;
-        sel.parent.insertAfter(
-          sel,
-          selectorParser.pseudo({ value: `:${pseudoClass}` }),
-        );
-      });
-    });
-
-    return modifySelectors(({ selector }) => parser.processSync(selector));
-  };
-}
 
 // autocomplete support
 /** @typedef { import('tailwindcss/defaultConfig') } DefaultConfig */
@@ -427,109 +405,9 @@ const renderlesskitConfig = {
     ],
   },
   plugins: [
-    /* Utilities */
-    plugin(function ({ addUtilities, e, theme, variants }) {
-      const colors = flattenColorPalette(theme("borderColor"));
-      delete colors["default"];
-
-      const colorMap = Object.keys(colors).map(color => ({
-        [`.border-t-${color}`]: { borderTopColor: colors[color] },
-        [`.border-r-${color}`]: { borderRightColor: colors[color] },
-        [`.border-b-${color}`]: { borderBottomColor: colors[color] },
-        [`.border-l-${color}`]: { borderLeftColor: colors[color] },
-      }));
-      const utilities = Object.assign({}, ...colorMap);
-
-      addUtilities(utilities, variants("borderColor"));
-    }),
-    plugin(function ({ addUtilities }) {
-      const utilities = {
-        ".collapse-border > :first-of-type:not(:last-of-type)": {
-          "border-top-right-radius": "0px",
-          "border-bottom-right-radius": "0px",
-        },
-        ".collapse-border > :not(:first-of-type):not(:last-of-type)": {
-          "border-radius": "0px",
-        },
-        ".collapse-border > :not(:first-of-type):last-of-type": {
-          "border-top-left-radius": "0px",
-          "border-bottom-left-radius": "0px",
-        },
-        ".w-inherit": {
-          width: "inherit",
-        },
-        ".h-inherit": {
-          height: "inherit",
-        },
-        ".inherit": {
-          display: "inherit",
-        },
-      };
-
-      addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
-    }),
-
-    /* Variants */
-    plugin(function ({ addVariant, e }) {
-      addVariant("lib", ({ container, separator, modifySelectors }) => {
-        modifySelectors(({ selector }) => {
-          return buildSelectorVariant(selector, "lib", separator, message => {
-            throw container.error(message);
-          });
-        });
-      });
-      addVariant("lib:hover", generatePseudoClassVariant("hover"));
-      addVariant(
-        "lib:focus-within",
-        generatePseudoClassVariant("focus-within"),
-      );
-      addVariant("lib:focus", generatePseudoClassVariant("focus"));
-      addVariant("lib:disabled", generatePseudoClassVariant("disabled"));
-
-      function generateDataClassVariant(dataName, dataBool, variant) {
-        // lib:aria-selected OR aria-selected
-        const variantName = variant ? `${variant}:${dataName}` : dataName;
-
-        addVariant(variantName, ({ modifySelectors, separator }) => {
-          const parser = selectorParser(selectors => {
-            selectors.walkClasses(sel => {
-              const dataClass = `${dataName}${separator}${sel.value}`;
-
-              if (variant) {
-                sel.value = `${variant}${separator}${dataClass}`;
-              } else {
-                sel.value = dataClass;
-              }
-
-              if (dataBool) {
-                sel.parent.insertAfter(
-                  sel,
-                  selectorParser.attribute({ attribute: `data-${dataName}` }),
-                );
-              } else {
-                sel.parent.insertAfter(
-                  sel,
-                  selectorParser.attribute({ attribute: `${dataName}="true"` }),
-                );
-              }
-            });
-          });
-
-          modifySelectors(({ selector }) => parser.processSync(selector));
-        });
-      }
-
-      generateDataClassVariant("aria-selected", false);
-      generateDataClassVariant("aria-selected", false, "lib");
-      generateDataClassVariant("aria-disabled", false);
-      generateDataClassVariant("aria-disabled", false, "lib");
-      generateDataClassVariant("is-range-selection", true);
-      generateDataClassVariant("is-range-selection", true, "lib");
-      generateDataClassVariant("is-selection-start", true);
-      generateDataClassVariant("is-selection-start", true, "lib");
-      generateDataClassVariant("is-selection-end", true);
-      generateDataClassVariant("is-selection-end", true, "lib");
-    }),
+    require("./tailwindPlugins/borderColor"),
+    require("./tailwindPlugins/utilities"),
+    require("./tailwindPlugins/variantPlugin"),
   ],
 };
 
