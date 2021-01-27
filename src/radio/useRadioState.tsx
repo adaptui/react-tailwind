@@ -7,24 +7,26 @@ import {
   useCompositeState,
 } from "reakit";
 
+type StateType = string | number | undefined;
+
 export type RadioState = CompositeState & {
   /**
    * The `value` attribute of the current checked radio.
    */
-  state: string | number | undefined;
+  state: StateType;
 };
 
 export type RadioActions = CompositeActions & {
   /**
    * Sets `state`.
    */
-  setState: React.Dispatch<React.SetStateAction<string | number | undefined>>;
+  setState: React.Dispatch<React.SetStateAction<StateType>>;
 };
 
 export type RadioInitialState = CompositeInitialState &
   Partial<Pick<RadioState, "state">> & {
-    defaultState?: RadioState["state"];
-    onStateChange?: (v: RadioState["state"]) => void;
+    defaultState?: StateType;
+    onStateChange?: (v: StateType) => void;
   };
 
 export type RadioStateReturn = RadioState & RadioActions;
