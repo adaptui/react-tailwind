@@ -17,14 +17,17 @@ const [RadioProvider, useRadioContext] = createContext({
   errorMessage: "Radio must be used within RadioContextProvider",
 });
 
-export const RadioLabel: React.FC<{ className?: string }> = ({
-  children,
-  className,
-}) => {
-  const theme = useTheme();
+export const RadioLabel = forwardRefWithAs<{}, HTMLLabelElement, "label">(
+  ({ children, className }, ref) => {
+    const theme = useTheme();
 
-  return <label className={cx(theme.radio.base, className)}>{children}</label>;
-};
+    return (
+      <label ref={ref} className={cx(theme.radio.base, className)}>
+        {children}
+      </label>
+    );
+  },
+);
 
 export const Radio = forwardRefWithAs<
   Partial<RadioProps>,
@@ -35,15 +38,12 @@ export const Radio = forwardRefWithAs<
   const theme = useTheme();
 
   return (
-    <label className={cx(theme.radio.base, className)}>
-      <ReakitRadio
-        className={theme.radio.input}
-        {...state}
-        {...props}
-        ref={ref}
-      />
-      <span>{children}</span>
-    </label>
+    <ReakitRadio
+      className={theme.radio.input}
+      {...state}
+      {...props}
+      ref={ref}
+    />
   );
 });
 
