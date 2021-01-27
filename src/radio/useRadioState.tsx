@@ -18,7 +18,7 @@ export type RadioActions = CompositeActions & {
   /**
    * Sets `state`.
    */
-  setState: React.Dispatch<React.SetStateAction<string | number>>;
+  setState: React.Dispatch<React.SetStateAction<string | number | undefined>>;
 };
 
 export type RadioInitialState = CompositeInitialState &
@@ -40,7 +40,7 @@ export function useRadioState(
     ...props
   } = initialState;
 
-  const [state, setState] = useControllableState({
+  const [state, setState] = useControllableState<string | number | undefined>({
     value: initialValue,
     defaultValue: defaultState,
     onChange: onStateChange,

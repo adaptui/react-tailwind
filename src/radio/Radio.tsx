@@ -1,19 +1,26 @@
 import React from "react";
-import { cx } from "@renderlesskit/react";
 import {
   Radio as ReakitRadio,
   RadioProps as ReakitRadioProps,
   RadioGroup as ReakitRadioGroup,
   RadioGroupProps as ReakitRadioGroupProps,
-  useRadio,
 } from "reakit";
-import { BoxProps, Box } from "../box";
+import { cx } from "@renderlesskit/react";
+
 import { useTheme } from "../theme";
+import { BoxProps, Box } from "../box";
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
-import { useRadioState, RadioInitialState } from "./useRadioState";
+import {
+  useRadioState,
+  RadioInitialState,
+  RadioStateReturn,
+} from "./useRadioState";
 
-const [RadioProvider, useRadioContext] = createContext({
+const [RadioProvider, useRadioContext] = createContext<{
+  radioState: RadioStateReturn;
+  radioSize?: RadioLabelProps["size"];
+}>({
   name: "RadioContext",
   strict: true,
   errorMessage: "Radio must be used within RadioContextProvider",
@@ -25,14 +32,15 @@ export interface RadioLabelProps extends BoxProps {
    */
   size?: keyof Renderlesskit.GetThemeValue<"radio", "size">;
 }
+
 export const RadioLabel = forwardRefWithAs<
   RadioLabelProps,
   HTMLLabelElement,
   "label"
->(({ children, className, size = "sm", ...props }, ref) => {
+>(({ children, className, size, ...props }, ref) => {
   const theme = useTheme();
-  const radio = useRadio();
-  const _size = size || radio?.size || "md";
+  const { radioSize } = useRadioContext();
+  const _size = size || radioSize || "sm";
 
   return (
     <Box
@@ -51,13 +59,13 @@ export const Radio = forwardRefWithAs<
   HTMLInputElement,
   "input"
 >(({ children, className, ...props }, ref) => {
-  const state = useRadioContext();
+  const { radioState } = useRadioContext();
   const theme = useTheme();
 
   return (
     <ReakitRadio
       className={theme.radio.input}
-      {...state}
+      {...radioState}
       {...props}
       ref={ref}
     />
@@ -75,7 +83,7 @@ export const RadioGroup = forwardRefWithAs<
   const radio = useRadioState(props);
 
   return (
-    <RadioProvider value={{ state: radio, size }}>
+    <RadioProvider value={{ radioState: radio, radioSize: size }}>
       <ReakitRadioGroup {...radio} ref={ref}>
         {children}
       </ReakitRadioGroup>
