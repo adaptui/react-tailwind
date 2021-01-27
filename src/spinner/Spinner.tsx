@@ -15,11 +15,11 @@ export interface SpinnerProps extends BoxProps {
   /**
    * How large should the button be?
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: keyof Renderlesskit.GetThemeValue<"spinner", "size">;
   /**
    * How the spinner should be displayed?
    */
-  stroke?: "transparent" | "visible";
+  stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
 }
 
 export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
