@@ -1,13 +1,22 @@
 import React from "react";
+import { cx } from "@renderlesskit/react";
 import { CheckboxStateReturn } from "reakit";
 import { Meta } from "@storybook/react/types-6-0";
 
-import {} from "../index";
+import {
+  Checkbox,
+  CheckboxInput,
+  CheckboxLabel,
+  CheckboxProps,
+  CheckboxStateProps,
+  CheckboxStatus,
+  CheckboxIcon,
+  CheckboxText,
+} from "../Checkbox";
 import {
   createUnionControl,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
-import { Checkbox, CheckboxProps, CheckboxStatus } from "../Checkbox";
 
 export default {
   title: "Checkbox",
@@ -167,6 +176,104 @@ export const GroupIndeterminateComplex = () => {
           );
         })}
       </div>
+    </>
+  );
+};
+
+const CheckboxCustom = (props: any) => {
+  const [
+    checkboxState,
+    setCheckboxStateChange,
+  ] = React.useState<CheckboxStatus>(true);
+  const state: CheckboxStateProps = {
+    state: checkboxState,
+    setState: setCheckboxStateChange,
+    size: "sm",
+    value: "one",
+    isDisabled: false,
+  };
+
+  return (
+    <CheckboxLabel {...state}>
+      <CheckboxInput {...state} />
+      <CheckboxIcon
+        {...state}
+        className="w-8 h-8 text-2xl text-white bg-blue-500"
+      />
+      <CheckboxText className="text-orange-500" {...state}>
+        Custom Checkbox
+      </CheckboxText>
+    </CheckboxLabel>
+  );
+};
+
+export const CustomCheckbox = () => {
+  return <CheckboxCustom />;
+};
+
+// Inspired from https://codepen.io/geertsdev/pen/yLaGLJq
+const CheckboxCustomComplete = (props: any) => {
+  const { children, className, state, setState, value, ...rest } = props;
+
+  return (
+    <CheckboxLabel
+      className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
+      {...rest}
+    >
+      <CheckboxInput state={state} setState={setState} value={value} />
+      {state.includes(value) ? (
+        <span
+          aris-hidden="true"
+          role="img"
+          className="text-blue-500 absolute inset-y-0 left-0 flex items-center pl-1.5"
+        >
+          <svg
+            className="w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+      ) : null}
+      <span className="select-none">{children}</span>
+    </CheckboxLabel>
+  );
+};
+
+export const CompleteCustomCheckbox = () => {
+  const [state, onStateChange] = React.useState<CheckboxStatus>([]);
+
+  return (
+    <>
+      <CheckboxCustomComplete
+        value="one"
+        state={state}
+        setState={onStateChange}
+      >
+        Button one 😁
+      </CheckboxCustomComplete>
+      <CheckboxCustomComplete
+        className="ml-2"
+        value="two"
+        state={state}
+        setState={onStateChange}
+      >
+        Button two 🤓
+      </CheckboxCustomComplete>
+      <CheckboxCustomComplete
+        className="ml-2"
+        value="three"
+        state={state}
+        setState={onStateChange}
+      >
+        Button three 👻
+      </CheckboxCustomComplete>
     </>
   );
 };

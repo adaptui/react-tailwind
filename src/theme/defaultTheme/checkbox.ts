@@ -1,6 +1,7 @@
 export const checkbox = {
   base:
     "lib:relative lib:inline-flex lib:items-center lib:align-top lib:cursor-pointer",
+  disabled: "lib:cursor-not-allowed",
   input: "lib:sr-only",
   icon: {
     base:
