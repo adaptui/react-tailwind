@@ -20,9 +20,7 @@ export type CheckboxStateValues = {
   isDisabled?: boolean;
 };
 
-export type CheckboxStateActions = {
-  setState?: CheckboxStateReturn["setState"];
-};
+export type CheckboxStateActions = Pick<CheckboxStateReturn, "setState">;
 
 export type CheckboxStateProps = CheckboxStateValues & CheckboxStateActions;
 
