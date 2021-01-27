@@ -6,6 +6,7 @@ import {
   Radio as ReakitRadio,
   RadioGroup as ReakitRadioGroup,
 } from "reakit";
+import { BoxProps, Box } from "../box";
 import { useTheme } from "../theme";
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
@@ -17,17 +18,25 @@ const [RadioProvider, useRadioContext] = createContext({
   errorMessage: "Radio must be used within RadioContextProvider",
 });
 
-export const RadioLabel = forwardRefWithAs<{}, HTMLLabelElement, "label">(
-  ({ children, className }, ref) => {
-    const theme = useTheme();
+export interface RadioLabelProps extends BoxProps {}
+export const RadioLabel = forwardRefWithAs<
+  RadioLabelProps,
+  HTMLLabelElement,
+  "label"
+>(({ children, className, ...props }, ref) => {
+  const theme = useTheme();
 
-    return (
-      <label ref={ref} className={cx(theme.radio.base, className)}>
-        {children}
-      </label>
-    );
-  },
-);
+  return (
+    <Box
+      as="label"
+      ref={ref}
+      className={cx(theme.radio.base, className)}
+      {...props}
+    >
+      {children}
+    </Box>
+  );
+});
 
 export const Radio = forwardRefWithAs<
   Partial<RadioProps>,
