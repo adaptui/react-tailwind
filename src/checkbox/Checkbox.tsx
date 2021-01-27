@@ -17,7 +17,7 @@ export type CheckboxStatus = CheckboxStateReturn["state"];
 export type CheckboxContextProps = {
   defaultState?: CheckboxStatus;
   state?: CheckboxStatus;
-  onStateChange?: (e: CheckboxStatus) => void;
+  onStateChange?: (value: CheckboxStatus) => void;
   value?: string | number;
   size?: "xs" | "sm" | "lg";
   isDisabled?: boolean;

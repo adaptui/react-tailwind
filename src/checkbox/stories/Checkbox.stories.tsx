@@ -13,17 +13,18 @@ export default {
   title: "Checkbox",
   component: Checkbox,
   argTypes: {
+    size: createUnionControl({
+      xs: "xs",
+      sm: "sm",
+      lg: "lg",
+    }),
     defaultState: {
       control: {
         type: "inline-radio",
         options: [true, false, "indeterminate"],
       },
     },
-    size: createUnionControl({
-      xs: "xs",
-      sm: "sm",
-      lg: "lg",
-    }),
+    isDisabled: { control: { type: "boolean" } },
   },
 } as Meta;
 
@@ -98,20 +99,20 @@ export const GroupIndeterminateSimple = () => {
     <>
       <Checkbox
         state={isIndeterminate ? "indeterminate" : allChecked}
-        onStateChange={e => setCheckedItems([e, e])}
+        onStateChange={value => setCheckedItems([value, value])}
       >
         Parent Checkbox
       </Checkbox>
       <div className="flex flex-col pl-6 mt-1">
         <Checkbox
           state={checkedItems[0]}
-          onStateChange={e => setCheckedItems([e, checkedItems[1]])}
+          onStateChange={value => setCheckedItems([value, checkedItems[1]])}
         >
           Child Checkbox 1
         </Checkbox>
         <Checkbox
           state={checkedItems[1]}
-          onStateChange={e => setCheckedItems([checkedItems[0], e])}
+          onStateChange={value => setCheckedItems([checkedItems[0], value])}
         >
           Child Checkbox 2
         </Checkbox>
