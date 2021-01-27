@@ -10,7 +10,7 @@ export default {
 
 export const Default = () => {
   return (
-    <RadioGroup>
+    <RadioGroup size="sm">
       <div className="flex gap-5">
         <RadioLabel>
           <Radio value="1" /> One
