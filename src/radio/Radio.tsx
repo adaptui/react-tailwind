@@ -1,10 +1,10 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 import {
+  RadioProps,
+  RadioGroupProps,
   Radio as ReakitRadio,
   RadioGroup as ReakitRadioGroup,
-  RadioGroupProps,
-  RadioProps,
 } from "reakit";
 import { useTheme } from "../theme";
 import { createContext } from "../utils";
@@ -16,6 +16,15 @@ const [RadioProvider, useRadioContext] = createContext({
   strict: true,
   errorMessage: "Radio must be used within RadioContextProvider",
 });
+
+export const RadioLabel: React.FC<{ className?: string }> = ({
+  children,
+  className,
+}) => {
+  const theme = useTheme();
+
+  return <label className={cx(theme.radio.base, className)}>{children}</label>;
+};
 
 export const Radio = forwardRefWithAs<
   Partial<RadioProps>,

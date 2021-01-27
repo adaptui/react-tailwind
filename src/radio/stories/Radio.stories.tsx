@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta } from "@storybook/react";
-import { Radio, RadioGroup } from "../Radio";
+import { Radio, RadioGroup, RadioLabel } from "../Radio";
 import { Button } from "../../";
 
 export default {
@@ -12,12 +12,19 @@ export const Default = () => {
   return (
     <RadioGroup>
       <div className="flex gap-5">
-        <Radio value="1">One</Radio>
-        <Radio value="2">Two</Radio>
-        <Radio value="3">Three</Radio>
-        <Radio value="4" disabled>
+        <RadioLabel>
+          <Radio value="1" /> One
+        </RadioLabel>
+        <RadioLabel>
+          <Radio value="2" /> Two
+        </RadioLabel>
+        <RadioLabel>
+          <Radio value="3" /> Three
+        </RadioLabel>
+        <RadioLabel>
+          <Radio value="4" disabled />
           Disabled
-        </Radio>
+        </RadioLabel>
       </div>
     </RadioGroup>
   );
@@ -36,12 +43,19 @@ export const Controlled = () => {
         }}
       >
         <div className="flex gap-5">
-          <Radio value="1">One</Radio>
-          <Radio value="2">Two</Radio>
-          <Radio value="3">Three</Radio>
-          <Radio value="4" disabled>
+          <RadioLabel>
+            <Radio value="1" /> One
+          </RadioLabel>
+          <RadioLabel>
+            <Radio value="2" /> Two
+          </RadioLabel>
+          <RadioLabel>
+            <Radio value="3" /> Three
+          </RadioLabel>
+          <RadioLabel>
+            <Radio value="4" disabled />
             Disabled
-          </Radio>
+          </RadioLabel>
         </div>
       </RadioGroup>
       <Button onClick={() => setState("2")}>change</Button>
@@ -51,17 +65,20 @@ export const Controlled = () => {
 
 export const States = () => {
   return (
-    <RadioGroup state={"2"}>
+    <RadioGroup defaultState={"2"}>
       <div className="flex flex-col gap-2">
-        <Radio value="1" className="hover:bg-gray-100 p-2 rounded-md">
+        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <Radio value="1" />
           Unchecked
-        </Radio>
-        <Radio value="2" className="hover:bg-gray-100 p-2 rounded-md">
+        </RadioLabel>
+        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <Radio value="2" />
           Checked
-        </Radio>
-        <Radio value="3" disabled className="hover:bg-gray-100 p-2 rounded-md">
+        </RadioLabel>
+        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <Radio value="3" disabled />
           Disabled
-        </Radio>
+        </RadioLabel>
       </div>
     </RadioGroup>
   );
