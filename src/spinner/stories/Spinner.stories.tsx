@@ -1,12 +1,11 @@
 import React from "react";
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Spinner, SpinnerProps } from "../index";
 import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { Spinner, SpinnerProps } from "../index";
 
 export default {
   title: "Spinner",
@@ -16,6 +15,10 @@ export default {
 
 const base = storyTemplate<SpinnerProps>(args => <Spinner {...args} />);
 
-export const Default = base({ size: "md" });
+export const ExtraSmall = base({ size: "xs" });
+export const Small = base({ size: "sm" });
+export const Medium = base({ size: "md" });
+export const Large = base({ size: "lg" });
+export const ExtraLarge = base({ size: "xl" });
 
 export const StrokeVisible = base({ size: "md", stroke: "visible" });

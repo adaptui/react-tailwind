@@ -1,34 +1,65 @@
 import * as React from "react";
-import { Composite, useCompositeState } from "reakit";
+import { Composite, CompositeStateReturn, useCompositeState } from "reakit";
 
-import { Box } from "../box";
-import { TagsContext } from "./Tag";
+import { TagProps } from "./Tag";
+import { Box, BoxProps } from "../box";
+import { createContext } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
 
-export type TagGroupProps = {
-  allowArrowNavigation?: boolean;
-  className?: string;
-  baseId?: string;
+export type TagGroupContext = Pick<TagGroupProps, "size" | "variant"> & {
+  composite: CompositeStateReturn;
 };
 
-export const TagGroup: React.FC<TagGroupProps> = ({
-  children,
-  allowArrowNavigation = false,
-  baseId,
-  ...props
-}) => {
-  const composite = useCompositeState({ baseId });
+const [TagGroupProvider, useTagGroup] = createContext<TagGroupContext>({
+  strict: false,
+  name: "TagGroupContext",
+});
 
-  return allowArrowNavigation ? (
-    <TagsContext.Provider value={composite}>
-      <Composite {...composite} role="group" aria-label="Tags group" {...props}>
-        {children}
-      </Composite>
-    </TagsContext.Provider>
-  ) : (
-    <Box as="div" role="group" aria-label="Tags group" {...props}>
-      {children}
-    </Box>
-  );
-};
+export { useTagGroup };
+
+export type TagGroupProps = BoxProps &
+  Pick<TagProps, "size" | "variant"> & {
+    baseId?: string;
+    allowArrowNavigation?: boolean;
+  };
+
+export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
+  (props, ref) => {
+    const {
+      size = "sm",
+      variant = "primary",
+      baseId,
+      allowArrowNavigation = true,
+      children,
+      ...rest
+    } = props;
+    const composite = useCompositeState({ baseId });
+    const context = React.useMemo(() => ({ size, variant, composite }), [
+      size,
+      variant,
+      composite,
+    ]);
+
+    return (
+      <TagGroupProvider value={context}>
+        {allowArrowNavigation ? (
+          <Composite
+            {...composite}
+            role="group"
+            aria-label="Tags group"
+            ref={ref}
+            {...rest}
+          >
+            {children}
+          </Composite>
+        ) : (
+          <Box role="group" aria-label="Tags group" ref={ref} {...rest}>
+            {children}
+          </Box>
+        )}
+      </TagGroupProvider>
+    );
+  },
+);
 
 export default TagGroup;

@@ -2,7 +2,7 @@ import { CloseIcon } from "../icons";
 import { forwardRefWithAs } from "../utils/types";
 import { IconButton, IconButtonProps } from "./IconButton";
 
-export type CloseButtonProps = IconButtonProps;
+export type CloseButtonProps = IconButtonProps & {};
 
 export const CloseButton = forwardRefWithAs<
   CloseButtonProps,
