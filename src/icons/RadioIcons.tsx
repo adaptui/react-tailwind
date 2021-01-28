@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createIcon } from "../icon";
 
-export const RadioCircleCheckedIcon = createIcon({
-  displayName: "RadioCircle",
+export const RadioCheckedIcon = createIcon({
+  displayName: "RadioChecked",
   viewBox: "0 0 16 16",
   path: (
     <>
@@ -12,8 +12,8 @@ export const RadioCircleCheckedIcon = createIcon({
   ),
 });
 
-export const RadioCircleUncheckedIcon = createIcon({
-  displayName: "RadioCircle",
+export const RadioUncheckedIcon = createIcon({
+  displayName: "RadioUnchecked",
   viewBox: "0 0 16 16",
   path: (
     <>
@@ -29,8 +29,8 @@ export const RadioCircleUncheckedIcon = createIcon({
   ),
 });
 
-export const RadioCircleDisabledIcon = createIcon({
-  displayName: "RadioCircle",
+export const RadioDisabledIcon = createIcon({
+  displayName: "RadioDisabled",
   viewBox: "0 0 16 16",
   path: (
     <>

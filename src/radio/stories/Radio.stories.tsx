@@ -1,62 +1,41 @@
 import React from "react";
 import { Meta } from "@storybook/react";
-import { RadioGroup, RadioLabel, Radio } from "../index";
+import { RadioGroup, RadioLabel, Radio, RadioGroupProps } from "../index";
+import {
+  createControls,
+  storyTemplate,
+} from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Radio",
   component: Radio,
+  argTypes: createControls("radio", { unions: ["size"] }),
 } as Meta;
 
-export const Default = () => {
-  return (
-    <RadioGroup>
-      <div className="flex gap-3">
-        <RadioLabel>
-          <Radio value="1" />
-          label 1
-        </RadioLabel>
+const base = storyTemplate<RadioGroupProps>(
+  (args: any) => {
+    return (
+      <RadioGroup size={args.size}>
+        <div className="flex gap-3">
+          <RadioLabel>
+            <Radio value="1" />
+            label 1
+          </RadioLabel>
 
-        <RadioLabel>
-          <Radio value="2" />
-          label 2
-        </RadioLabel>
-      </div>
-    </RadioGroup>
-  );
-};
+          <RadioLabel>
+            <Radio value="2" />
+            label 2
+          </RadioLabel>
+        </div>
+      </RadioGroup>
+    );
+  },
+  {
+    size: "lg",
+  },
+);
 
-// export const Controlled = () => {
-//   const [state, setState] = React.useState("3");
-
-//   console.log(state);
-//   return (
-//     <>
-//       <RadioGroup
-//         state={state}
-//         onStateChange={e => {
-//           setState(e as string);
-//         }}
-//       >
-//         <div className="flex gap-5">
-//           <RadioLabel>
-//             <Radio value="1" /> One
-//           </RadioLabel>
-//           <RadioLabel>
-//             <Radio value="2" /> Two
-//           </RadioLabel>
-//           <RadioLabel>
-//             <Radio value="3" /> Three
-//           </RadioLabel>
-//           <RadioLabel>
-//             <Radio value="4" disabled />
-//             Disabled
-//           </RadioLabel>
-//         </div>
-//       </RadioGroup>
-//       <Button onClick={() => setState("2")}>change</Button>
-//     </>
-//   );
-// };
+export const Default = base({});
 
 export const States = () => {
   return (

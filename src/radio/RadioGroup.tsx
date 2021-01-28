@@ -1,19 +1,33 @@
 import React from "react";
 import { RadioInitialState, RadioStateReturn, useRadioState } from "reakit";
 import { createContext } from "../utils";
+import { RadioCommonProps } from "./Radio";
 
-export const [RadioProvider, useRadioContext] = createContext<{
+type RadioContextType = {
   radioState?: RadioStateReturn;
-}>({
-  errorMessage: "Radio must be used within RadioProvider",
-  name: "RadioContext",
-  strict: true,
-});
+  radioSize?: RadioCommonProps["size"];
+};
+export const [RadioProvider, useRadioContext] = createContext<RadioContextType>(
+  {
+    errorMessage: "Radio must be used within RadioProvider",
+    name: "RadioContext",
+    strict: true,
+  },
+);
 
-export const RadioGroup: React.FC<RadioInitialState> = ({ children }) => {
-  const state = useRadioState();
+export type RadioGroupProps = RadioInitialState &
+  Pick<RadioCommonProps, "size">;
+
+export const RadioGroup: React.FC<RadioGroupProps> = ({
+  children,
+  size,
+  ...props
+}) => {
+  const state = useRadioState(props);
 
   return (
-    <RadioProvider value={{ radioState: state }}>{children}</RadioProvider>
+    <RadioProvider value={{ radioState: state, radioSize: size }}>
+      {children}
+    </RadioProvider>
   );
 };

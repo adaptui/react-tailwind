@@ -5,7 +5,7 @@ export const radio = {
   input: "lib:sr-only",
   icon: {
     base:
-      "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:select-none lib:transition-all mr-2",
+      "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:select-none lib:transition-all lib:mr-2",
     size: {
       xs: "lib:w-3.5 lib:h-3.5 lib:text-xxs",
       sm: "lib:w-4 lib:h-4 lib:text-xs",
@@ -16,7 +16,7 @@ export const radio = {
     disabled: "lib:text-gray-400",
   },
   label: {
-    base: "lib:ml-2 lib:text-gray-600 lib:select-none",
+    base: "lib:text-gray-600 lib:select-none",
     size: {
       xs: "lib:text-xs",
       sm: "lib:text-sm",

@@ -1,36 +1,35 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { Box, BoxProps, RadioProps, RadioState } from "reakit";
-import { useTheme } from "..";
-import { forwardRefWithAs } from "../utils/types";
-import { useRadioContext } from "./RadioGroup";
-import {
-  RadioCircleCheckedIcon,
-  RadioCircleDisabledIcon,
-  RadioCircleUncheckedIcon,
-} from "../icons/RadioCircle";
+import { Box, BoxProps, RadioState } from "reakit";
 
-export type RadioIconProps = BoxProps &
-  RadioState & {
-    disabled?: boolean;
-    value?: RadioProps["value"];
-    size: keyof Renderlesskit.GetThemeValue<"radio", "icon">["size"];
-  };
+import {
+  RadioCheckedIcon,
+  RadioDisabledIcon,
+  RadioUncheckedIcon,
+} from "../icons/RadioIcons";
+import { useTheme } from "..";
+import { RadioCommonProps } from "./Radio";
+import { useRadioContext } from "./RadioGroup";
+import { forwardRefWithAs } from "../utils/types";
+
+export type RadioIconProps = BoxProps & RadioState & RadioCommonProps;
 
 export const RadioIcon = forwardRefWithAs<
   Partial<RadioIconProps>,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { radioState } = useRadioContext();
-  const { value, size = "md", disabled, ...mainProps } = props;
+  const { radioState, radioSize } = useRadioContext();
+  const { value, size, disabled, ...mainProps } = props;
   const { className, children, ...rest } = mainProps;
-  let stateProp = radioState?.state === value;
+
+  const _size = size || radioSize || "md";
+  const stateProp = radioState?.state === value;
 
   const theme = useTheme();
   const radioIconStyles = cx(
     theme.radio.icon.base,
-    theme.radio.icon.size[size],
+    theme.radio.icon.size[_size],
     disabled
       ? theme.radio.icon.disabled
       : stateProp
@@ -41,20 +40,20 @@ export const RadioIcon = forwardRefWithAs<
 
   return (
     <Box
-      className={radioIconStyles}
       ref={ref}
-      aria-hidden="true"
       role="img"
+      aria-hidden="true"
+      className={radioIconStyles}
       {...rest}
     >
       {children ? (
         children
       ) : disabled ? (
-        <RadioCircleDisabledIcon />
+        <RadioDisabledIcon />
       ) : stateProp ? (
-        <RadioCircleCheckedIcon />
+        <RadioCheckedIcon />
       ) : (
-        <RadioCircleUncheckedIcon />
+        <RadioUncheckedIcon />
       )}
     </Box>
   );
