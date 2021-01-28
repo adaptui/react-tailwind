@@ -4,6 +4,7 @@ import { badge } from "./badge";
 import { button } from "./button";
 import { buttonGroup } from "./buttonGroup";
 import { calendar } from "./calendar";
+import { checkbox } from "./checkbox";
 import { datepicker } from "./datepicker";
 import { icon } from "./icon";
 import { iconButton } from "./iconButton";
@@ -17,6 +18,7 @@ const theme = {
   button,
   buttonGroup,
   calendar,
+  checkbox,
   datepicker,
   icon,
   iconButton,
