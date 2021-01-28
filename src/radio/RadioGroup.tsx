@@ -16,17 +16,37 @@ export const [RadioProvider, useRadioContext] = createContext<RadioContextType>(
 );
 
 export type RadioGroupProps = RadioInitialState &
-  Pick<RadioCommonProps, "size">;
+  Pick<RadioCommonProps, "size"> & {
+    onStateChange?: (state: RadioCommonProps["value"]) => void;
+    state?: RadioCommonProps["value"];
+    defaultState?: RadioCommonProps["value"];
+  };
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({
   children,
   size,
+  state,
+  defaultState,
+  onStateChange,
   ...props
 }) => {
-  const state = useRadioState(props);
+  const radioState = useRadioState({
+    state: defaultState ? defaultState : state,
+    ...props,
+  });
+
+  React.useEffect(() => {
+    state && radioState.setState(state);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, radioState.setState]);
+
+  React.useEffect(() => {
+    onStateChange?.(radioState.state);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [radioState.state]);
 
   return (
-    <RadioProvider value={{ radioState: state, radioSize: size }}>
+    <RadioProvider value={{ radioState: radioState, radioSize: size }}>
       {children}
     </RadioProvider>
   );

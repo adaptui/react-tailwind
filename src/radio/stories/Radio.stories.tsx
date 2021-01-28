@@ -5,6 +5,7 @@ import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { Button } from "../../button";
 
 export default {
   title: "Radio",
@@ -55,5 +56,30 @@ export const States = () => {
         </RadioLabel>
       </div>
     </RadioGroup>
+  );
+};
+
+export const Controlled = () => {
+  const [state, setState] = React.useState("2");
+  return (
+    <>
+      <RadioGroup state={state} onStateChange={e => setState(e as string)}>
+        <div className="flex flex-col gap-2">
+          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+            <Radio value="1" />
+            Unchecked
+          </RadioLabel>
+          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+            <Radio value="2" />
+            Checked
+          </RadioLabel>
+          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+            <Radio value="3" />
+            Disabled
+          </RadioLabel>
+        </div>
+      </RadioGroup>
+      <Button onClick={() => setState("2")}>change</Button>
+    </>
   );
 };
