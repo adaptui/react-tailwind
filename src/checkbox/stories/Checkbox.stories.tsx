@@ -1,6 +1,5 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { CheckboxStateReturn } from "reakit";
 import { Meta } from "@storybook/react/types-6-0";
 
 import {
@@ -98,9 +97,10 @@ export const Group = () => {
 };
 
 export const GroupIndeterminateSimple = () => {
-  const [checkedItems, setCheckedItems] = React.useState<
-    CheckboxStateReturn["state"][]
-  >([false, false]);
+  const [checkedItems, setCheckedItems] = React.useState<CheckboxStatus[]>([
+    false,
+    false,
+  ]);
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 

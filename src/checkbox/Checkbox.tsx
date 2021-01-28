@@ -16,11 +16,13 @@ export type CheckboxStatus = CheckboxStateReturn["state"];
 export type CheckboxStateValues = {
   state?: CheckboxStatus;
   value?: string | number;
-  size?: "xs" | "sm" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon">["size"];
   isDisabled?: boolean;
 };
 
-export type CheckboxStateActions = Pick<CheckboxStateReturn, "setState">;
+export type CheckboxStateActions = Partial<
+  Pick<CheckboxStateReturn, "setState">
+>;
 
 export type CheckboxStateProps = CheckboxStateValues & CheckboxStateActions;
 
