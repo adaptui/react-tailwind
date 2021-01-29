@@ -3,16 +3,16 @@ import { Meta } from "@storybook/react/types-6-0";
 import {
   Switch,
   SwitchProps,
-  SwitchLabel,
-  SwitchIcon,
-  SwitchInput,
   SwitchStateContext,
   SwitchThemeContext,
 } from "../Switch";
+import { SwitchIcon } from "../SwitchIcon";
 import {
   createUnionControl,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { SwitchLabel } from "../SwitchLabel";
+import { SwitchInput } from "../SwitchInput";
 
 export default {
   title: "Switch",
@@ -47,7 +47,7 @@ export const DefaultUnchecked = base({ defaultState: false });
 
 export const DefaultChecked = base({ defaultState: true });
 
-export const CustomSwitch = storyTemplate<SwitchProps>(
+export const Custom = storyTemplate<SwitchProps>(
   args => (
     <Switch {...args}>
       {({
@@ -61,7 +61,7 @@ export const CustomSwitch = storyTemplate<SwitchProps>(
           <SwitchLabel className="inline-flex items-center px-4 py-3 bg-gray-100 rounded-lg">
             <SwitchInput />
             <SwitchIcon />
-            <span className="ml-2 text-sm text-gray-800">
+            <span className="ml-2 text-sm text-gray-800 select-none">
               {state ? "Dark Mode" : "Light Mode"}
             </span>
           </SwitchLabel>
