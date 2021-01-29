@@ -27,7 +27,7 @@ export type RadioGroupProps = RadioInitialState &
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({
   children,
-  size,
+  size = "sm",
   ...props
 }) => {
   const radioState = useRadioState(props);

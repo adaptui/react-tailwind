@@ -23,7 +23,7 @@ export const RadioIcon = forwardRefWithAs<
   const { value, size, disabled, ...mainProps } = props;
   const { className, children, ...rest } = mainProps;
 
-  const _size = size || radioSize || "md";
+  const _size = size || radioSize || "sm";
   const stateProp = radioState?.state === value;
 
   const theme = useTheme();
@@ -45,16 +45,6 @@ export const RadioIcon = forwardRefWithAs<
       aria-hidden="true"
       className={radioIconStyles}
       {...rest}
-    >
-      {children ? (
-        children
-      ) : disabled ? (
-        <RadioDisabledIcon />
-      ) : stateProp ? (
-        <RadioCheckedIcon />
-      ) : (
-        <RadioUncheckedIcon />
-      )}
-    </Box>
+    />
   );
 });

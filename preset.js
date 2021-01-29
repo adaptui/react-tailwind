@@ -57,6 +57,10 @@ const renderlesskitConfig = {
       border: {
         1.5: "1.5px",
       },
+      borderWidth: {
+        5: "5px",
+        6: "6px",
+      },
     },
   },
   variants: {
