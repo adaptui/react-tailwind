@@ -17,6 +17,9 @@ const renderlesskitConfig = {
       fontFamily: {
         sans: ["Inter"],
       },
+      fontSize: {
+        xxs: ["0.625rem", { lineHeight: "0.625rem" }],
+      },
       spacing: {
         em: "1em",
         6.5: "1.625rem",
@@ -34,7 +37,7 @@ const renderlesskitConfig = {
       zIndex: {
         1: 1,
       },
-      border: {
+      borderWidth: {
         1.5: "1.5px",
       },
     },
