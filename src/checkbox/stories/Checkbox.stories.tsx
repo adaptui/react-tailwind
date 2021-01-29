@@ -32,7 +32,7 @@ export default {
         options: [true, false, "indeterminate"],
       },
     },
-    isDisabled: { control: { type: "boolean" } },
+    disabled: { control: { type: "boolean" } },
   },
 } as Meta;
 
@@ -52,28 +52,33 @@ export const DefaultUnchecked = base({ defaultState: false });
 
 export const DefaultChecked = base({ defaultState: true });
 
-export const Disabled = base({ isDisabled: true });
+export const Disabled = base({ disabled: true });
 
-export const Controlled = () => {
+export const Controlled = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>(false);
 
   return (
     <>
-      <Checkbox state={state} onStateChange={onStateChange}>
+      <Checkbox state={state} onStateChange={onStateChange} {...args}>
         Checkbox
       </Checkbox>
       <div className="mt-2">{`Checked: ${state}`}</div>
     </>
   );
-};
+})({ size: "sm" });
 
-export const Group = () => {
+export const Group = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>([]);
 
   return (
     <>
       <div className="mb-2">Choices: {(state as string[]).join(", ")}</div>
-      <Checkbox state={state} onStateChange={onStateChange} value="apple">
+      <Checkbox
+        state={state}
+        onStateChange={onStateChange}
+        value="apple"
+        {...args}
+      >
         Apple
       </Checkbox>
       <Checkbox
@@ -81,6 +86,7 @@ export const Group = () => {
         onStateChange={onStateChange}
         className="ml-2"
         value="orange"
+        {...args}
       >
         Orange
       </Checkbox>
@@ -89,12 +95,13 @@ export const Group = () => {
         onStateChange={onStateChange}
         className="ml-2"
         value="watermelon"
+        {...args}
       >
         Watermelon
       </Checkbox>
     </>
   );
-};
+})({ size: "sm" });
 
 export const GroupIndeterminateSimple = () => {
   const [checkedItems, setCheckedItems] = React.useState<CheckboxStatus[]>([
@@ -190,7 +197,7 @@ const CheckboxCustom = (props: any) => {
     setState: setCheckboxStateChange,
     size: "sm",
     value: "one",
-    isDisabled: false,
+    disabled: false,
   };
 
   return (
