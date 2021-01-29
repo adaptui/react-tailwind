@@ -49,11 +49,6 @@ export function useRadioState(
   });
 
   React.useEffect(() => {
-    state && setState(state);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, setState]);
-
-  React.useEffect(() => {
     onStateChange?.(state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
