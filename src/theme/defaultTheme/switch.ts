@@ -1,5 +1,5 @@
 export const _switch = {
-  label: "lib:inline-block leading-normal lib:align-top",
+  label: "lib:inline-block leading-normal lib:align-top lib:cursor-pointer",
   input: "lib:sr-only",
   icon: {
     wrapper: {
