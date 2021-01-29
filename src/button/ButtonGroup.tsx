@@ -18,26 +18,15 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
 
 export { useButtonGroup };
 
-export type ButtonGroupProps = BoxProps & {
-  /**
-   * How large should the button be?
-   *
-   * @default "lg"
-   */
-  size?: ButtonProps["size"];
-  /**
-   * How the button should be styled?
-   *
-   * @default "primary"
-   */
-  variant?: ButtonProps["variant"];
-  /**
-   * Button will look collapsed together.
-   *
-   * @default false
-   */
-  attached?: boolean;
-};
+export type ButtonGroupProps = BoxProps &
+  Pick<ButtonProps, "size" | "variant"> & {
+    /**
+     * Button will look collapsed together.
+     *
+     * @default false
+     */
+    attached?: boolean;
+  };
 
 export const ButtonGroup = forwardRefWithAs<
   ButtonGroupProps,
@@ -63,10 +52,10 @@ export const ButtonGroup = forwardRefWithAs<
   return (
     <ButtonGroupProvider value={context}>
       <Box
+        ref={ref}
         role="group"
         aria-label="Button group"
         className={buttonGroupStyles}
-        ref={ref}
         {...rest}
       />
     </ButtonGroupProvider>

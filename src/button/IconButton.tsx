@@ -1,25 +1,17 @@
+import {
+  Button as ReakitButton,
+  ButtonProps as ReakitButtonProps,
+} from "reakit";
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
-import { Button, ButtonProps } from "reakit";
 
 import { useTheme } from "../theme";
+import { ButtonProps } from "./Button";
 import { useButtonGroup } from "./ButtonGroup";
 import { forwardRefWithAs } from "../utils/types";
 
-export type IconButtonProps = ButtonProps & {
-  /**
-   * How large should the iconButton be?
-   *
-   * @default "lg"
-   */
-  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
-  /**
-   * How the iconButton should be styled?
-   *
-   * @default "primary"
-   */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
-};
+export type IconButtonProps = ReakitButtonProps &
+  Pick<ButtonProps, "size" | "variant"> & {};
 
 export const IconButton = forwardRefWithAs<
   IconButtonProps,
@@ -59,13 +51,13 @@ export const IconButton = forwardRefWithAs<
     : children;
 
   return (
-    <Button
+    <ReakitButton
       ref={ref}
       className={iconButtonStyles}
       style={disabled ? { pointerEvents: "unset", ...style } : style}
       {...rest}
     >
       {_children}
-    </Button>
+    </ReakitButton>
   );
 });
