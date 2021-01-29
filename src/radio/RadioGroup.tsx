@@ -1,7 +1,8 @@
 import React from "react";
-import { RadioInitialState, RadioStateReturn, useRadioState } from "reakit";
+import { RadioInitialState, RadioStateReturn } from "reakit";
 import { createContext } from "../utils";
 import { RadioCommonProps } from "./Radio";
+import { useRadioState } from "./useRadioState";
 
 type RadioContextType = {
   radioState?: RadioStateReturn;
@@ -26,25 +27,9 @@ export type RadioGroupProps = RadioInitialState &
 export const RadioGroup: React.FC<RadioGroupProps> = ({
   children,
   size,
-  state,
-  defaultState,
-  onStateChange,
   ...props
 }) => {
-  const radioState = useRadioState({
-    state: defaultState ? defaultState : state,
-    ...props,
-  });
-
-  React.useEffect(() => {
-    state && radioState.setState(state);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, radioState.setState]);
-
-  React.useEffect(() => {
-    onStateChange?.(radioState.state);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [radioState.state]);
+  const radioState = useRadioState(props);
 
   return (
     <RadioProvider value={{ radioState: radioState, radioSize: size }}>

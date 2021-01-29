@@ -40,7 +40,7 @@ export const Default = base({});
 
 export const States = () => {
   return (
-    <RadioGroup state={"2"}>
+    <RadioGroup defaultState={"2"}>
       <div className="flex flex-col gap-2">
         <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
           <Radio value="1" />
@@ -60,7 +60,7 @@ export const States = () => {
 };
 
 export const Controlled = () => {
-  const [state, setState] = React.useState("2");
+  const [state, setState] = React.useState("1");
   return (
     <>
       <RadioGroup state={state} onStateChange={e => setState(e as string)}>
