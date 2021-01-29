@@ -1,5 +1,9 @@
 import React from "react";
-import { Radio as ReakitRadio, RadioProps as ReakitRadioProps } from "reakit";
+import {
+  Radio as ReakitRadio,
+  RadioProps as ReakitRadioProps,
+  RadioHTMLProps,
+} from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -7,14 +11,14 @@ import { RadioIcon } from "./RadioIcon";
 import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
 
-export type RadioCommonProps = {
-  disabled?: boolean;
-  value?: ReakitRadioProps["value"];
+export type RadioCommonProps = Partial<
+  Pick<ReakitRadioProps, "value" | "disabled">
+> & {
   size?: keyof Renderlesskit.GetThemeValue<"radio", "icon">["size"];
 };
 
 export const Radio = forwardRefWithAs<
-  Partial<ReakitRadioProps>,
+  RadioHTMLProps & RadioCommonProps,
   HTMLInputElement,
   "input"
 >((props, ref) => {

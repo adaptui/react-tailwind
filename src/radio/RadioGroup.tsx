@@ -7,13 +7,14 @@ type RadioContextType = {
   radioState?: RadioStateReturn;
   radioSize?: RadioCommonProps["size"];
 };
-export const [RadioProvider, useRadioContext] = createContext<RadioContextType>(
-  {
-    errorMessage: "Radio must be used within RadioProvider",
-    name: "RadioContext",
-    strict: true,
-  },
-);
+
+const [RadioProvider, useRadioContext] = createContext<RadioContextType>({
+  errorMessage: "Radio must be used within RadioProvider",
+  name: "RadioContext",
+  strict: true,
+});
+
+export { RadioProvider, useRadioContext };
 
 export type RadioGroupProps = RadioInitialState &
   Pick<RadioCommonProps, "size"> & {
