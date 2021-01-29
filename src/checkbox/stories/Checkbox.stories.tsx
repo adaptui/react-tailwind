@@ -55,6 +55,7 @@ export const DefaultChecked = base({ defaultState: true });
 export const Disabled = base({ disabled: true });
 
 export const Controlled = storyTemplate<CheckboxProps>(args => {
+  console.log("%c args", "color: #cc0036", args);
   const [state, onStateChange] = React.useState<CheckboxStatus>(false);
 
   return (
@@ -69,6 +70,7 @@ export const Controlled = storyTemplate<CheckboxProps>(args => {
 
 export const Group = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>([]);
+  console.log("%c state", "color: #607339", state);
 
   return (
     <>

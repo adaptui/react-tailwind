@@ -14,17 +14,6 @@ import { CheckIcon, IndeterminateIcon } from "../icons";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
-export type CheckboxStateValues = {
-  state?: CheckboxStatus;
-  value?: string | number;
-  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon">["size"];
-  disabled?: boolean;
-};
-
-export type CheckboxStateActions = Partial<
-  Pick<CheckboxStateReturn, "setState">
->;
-
 export type CheckboxStateContext = ReakitCheckboxProps;
 
 const [
@@ -190,7 +179,7 @@ type CheckboxRenderProps = {
 export type CheckboxProps = Omit<ReakitCheckboxProps, "size" | "setState"> &
   CheckboxThemeContext & {
     defaultState?: CheckboxStateContext["state"];
-    onStateChange?: (value: CheckboxStateContext["state"]) => void;
+    onStateChange?: (value: CheckboxStatus) => void;
   };
 
 export const Checkbox: React.FC<
