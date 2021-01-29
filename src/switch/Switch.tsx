@@ -1,20 +1,20 @@
-import { cx, useControllableState } from "@renderlesskit/react";
 import {
   CheckboxStateReturn,
   Checkbox as RenderlessSwitch,
   CheckboxProps as RenderlessSwitchProps,
 } from "reakit";
 import * as React from "react";
+import { cx, useControllableState } from "@renderlesskit/react";
 
-import { forwardRefWithAs } from "../utils/types";
-import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs } from "../utils/types";
 
 export type SwitchStatus = CheckboxStateReturn["state"];
 
 export type SwitchStateValues = {
   state?: SwitchStatus;
-  size?: "xs" | "sm" | "lg";
+  size?: keyof Renderlesskit.GetThemeValue<"switch", "icon">["wrapper"]["size"];
 };
 
 export type SwitchStateActions = Pick<CheckboxStateReturn, "setState">;

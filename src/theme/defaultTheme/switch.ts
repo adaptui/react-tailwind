@@ -1,4 +1,4 @@
-export const Switch = {
+export const _switch = {
   label: "lib:inline-block leading-normal lib:align-top",
   input: "lib:sr-only",
   icon: {
