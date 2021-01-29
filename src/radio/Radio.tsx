@@ -1,8 +1,8 @@
 import React from "react";
 import {
+  RadioHTMLProps,
   Radio as ReakitRadio,
   RadioProps as ReakitRadioProps,
-  RadioHTMLProps,
 } from "reakit";
 import { cx } from "@renderlesskit/react";
 

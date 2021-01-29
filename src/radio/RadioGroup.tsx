@@ -1,5 +1,6 @@
 import React from "react";
 import { RadioInitialState, RadioStateReturn } from "reakit";
+
 import { createContext } from "../utils";
 import { RadioCommonProps } from "./Radio";
 import { useRadioState } from "./useRadioState";

@@ -1,11 +1,12 @@
-import { cx } from "@renderlesskit/react";
 import React from "react";
 import { BoxProps } from "reakit";
-import { useTheme } from "..";
+import { cx } from "@renderlesskit/react";
+
 import { Box } from "../box";
-import { forwardRefWithAs } from "../utils/types";
+import { useTheme } from "..";
 import { RadioCommonProps } from "./Radio";
 import { useRadioContext } from "./RadioGroup";
+import { forwardRefWithAs } from "../utils/types";
 
 export type RadioLabelProps = BoxProps & Omit<RadioCommonProps, "value">;
 

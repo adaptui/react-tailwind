@@ -1,11 +1,12 @@
 import React from "react";
 import { Meta } from "@storybook/react";
-import { RadioGroup, RadioLabel, Radio, RadioGroupProps } from "../index";
+
+import { Button } from "../../button";
 import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
-import { Button } from "../../button";
+import { RadioGroup, RadioLabel, Radio, RadioGroupProps } from "../index";
 
 export default {
   title: "Radio",

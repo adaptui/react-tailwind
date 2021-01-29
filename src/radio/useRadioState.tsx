@@ -1,4 +1,3 @@
-import { useControllableState } from "@renderlesskit/react";
 import * as React from "react";
 import {
   CompositeState,
@@ -6,6 +5,7 @@ import {
   CompositeInitialState,
   useCompositeState,
 } from "reakit";
+import { useControllableState } from "@renderlesskit/react";
 
 type StateType = string | number | undefined;
 
