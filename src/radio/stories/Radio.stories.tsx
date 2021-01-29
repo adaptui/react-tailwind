@@ -33,7 +33,7 @@ const base = storyTemplate<RadioGroupProps>(
     );
   },
   {
-    size: "sm",
+    size: "lg",
   },
 );
 
@@ -41,7 +41,7 @@ export const Default = base({});
 
 export const States = () => {
   return (
-    <RadioGroup defaultState={"2"} size="sm">
+    <RadioGroup defaultState={"2"}>
       <div className="flex flex-col gap-2">
         <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
           <Radio value="1" />
