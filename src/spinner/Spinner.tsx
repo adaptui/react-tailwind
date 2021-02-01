@@ -25,7 +25,7 @@ export interface SpinnerProps extends BoxProps {
    *
    * @default "transparent"
    */
-  stroke?: "transparent" | "visible";
+  stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
 }
 
 export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
