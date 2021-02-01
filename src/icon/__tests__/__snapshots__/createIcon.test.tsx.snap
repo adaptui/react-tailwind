@@ -10,6 +10,7 @@ exports[`createIcon should render 1`] = `
   >
     <path
       d="M3 3l6 5.943M3 9l5.94-6"
+      fill="none"
       stroke="currentColor"
       stroke-linecap="round"
       stroke-linejoin="round"

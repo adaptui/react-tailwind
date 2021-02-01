@@ -1,21 +1,27 @@
+import {
+  Button as ReakitButton,
+  ButtonProps as ReakitButtonProps,
+} from "reakit";
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { Button as AriaButton, ButtonProps as AriaButtonProps } from "reakit";
 
-import { Box } from "../box";
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
+import { ButtonIcon } from "./ButtonIcon";
 import { useButtonGroup } from "./ButtonGroup";
 import { forwardRefWithAs } from "../utils/types";
-import { ButtonIcon } from "./ButtonIcon";
 
-export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
+export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
    * How large should the button be?
+   *
+   * @default "lg"
    */
   size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
    * How the button should be styled?
+   *
+   * @default "primary"
    */
   variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
   /**
@@ -28,16 +34,14 @@ export type ButtonProps = Omit<AriaButtonProps, "prefix"> & {
   suffix?: React.ReactElement;
   /**
    * If `true`, the button will show a spinner.
+   *
+   * @default false
    */
-  isLoading?: boolean;
+  loading?: boolean;
   /**
    * If added, the button will show this spinner components
    */
   spinner?: React.ReactElement;
-  /**
-   * If `true`, the button will be disabled.
-   */
-  isDisabled?: boolean;
 };
 
 export const Button = forwardRefWithAs<
@@ -50,25 +54,39 @@ export const Button = forwardRefWithAs<
     variant,
     prefix,
     suffix,
-    isLoading,
+    loading = false,
     spinner,
-    isDisabled,
+    disabled = false,
     className,
+    style,
     children,
     ...rest
   } = props;
-  const _isDisabled = isDisabled || isLoading;
   const group = useButtonGroup();
   const _size = size || group?.size || "lg";
   const _variant = variant || group?.variant || "primary";
-  const theme = useTheme();
+  const _disabled = disabled || loading;
 
+  const theme = useTheme();
   const buttonStyles = cx(
     theme.button.base,
     theme.button.size[_size],
     theme.button.variant[_variant],
     group ? theme.button.group : "",
+    disabled ? theme.button.disabled : "",
     className,
+  );
+
+  const ButtonComp = () => (
+    <ReakitButton
+      ref={ref}
+      className={buttonStyles}
+      disabled={_disabled}
+      style={_disabled ? { pointerEvents: "unset", ...style } : style}
+      {...rest}
+    >
+      {!loading ? <ButtonWithIcons /> : <ButtonSpinner />}
+    </ReakitButton>
   );
 
   const ButtonWithIcons = () => (
@@ -87,27 +105,6 @@ export const Button = forwardRefWithAs<
     if (spinner) return <>{spinner}</>;
     return <Spinner className={theme.button.spinner} />;
   };
-
-  const ButtonComp = () => (
-    <AriaButton
-      ref={ref}
-      className={buttonStyles}
-      disabled={_isDisabled}
-      {...rest}
-    >
-      {!isLoading ? <ButtonWithIcons /> : <ButtonSpinner />}
-    </AriaButton>
-  );
-
-  if (_isDisabled) {
-    return (
-      // Pointer Events auto from Reakit makes the pointer events style hidden
-      // https://material-ui.com/components/buttons/#limitations
-      <Box as="span" className={theme.button.span}>
-        <ButtonComp />
-      </Box>
-    );
-  }
 
   return <ButtonComp />;
 });

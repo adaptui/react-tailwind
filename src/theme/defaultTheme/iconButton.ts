@@ -1,7 +1,6 @@
 import { button } from "./button";
 
 export const iconButton = {
-  span: button.span,
   base: button.base,
   variant: button.variant,
   size: {
@@ -15,4 +14,5 @@ export const iconButton = {
       "lib:h-12 lib:w-auto lib:min-w-12 lib:text-base lib:rounded-lg lib:shadow-sm",
   },
   group: button.group,
+  disabled: button.disabled,
 };

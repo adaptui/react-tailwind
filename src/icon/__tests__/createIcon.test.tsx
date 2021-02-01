@@ -1,5 +1,4 @@
 import * as React from "react";
-import { screen } from "@testing-library/react";
 
 import { createIcon } from "../createIcon";
 import { render, testA11y } from "../../utils/testUtils";
@@ -9,6 +8,7 @@ const Test = createIcon({
   viewBox: "0 0 12 12",
   path: (
     <path
+      fill="none"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"

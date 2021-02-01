@@ -7,17 +7,17 @@ import { forwardRefWithAs } from "../utils/types";
 
 export type BadgeProps = BoxProps & {
   /**
-   * badge variants
-   *
-   * @default "primary"
-   */
-  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
-  /**
-   * How large should the button be?
+   * How large should the badge be?
    *
    * @default "sm"
    */
   size?: keyof Renderlesskit.GetThemeValue<"badge", "size">;
+  /**
+   * How the badge should be styled?
+   *
+   * @default "primary"
+   */
+  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
 };
 
 export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
