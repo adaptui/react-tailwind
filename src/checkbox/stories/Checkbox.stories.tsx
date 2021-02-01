@@ -7,10 +7,10 @@ import {
   CheckboxInput,
   CheckboxLabel,
   CheckboxProps,
-  CheckboxStateProps,
   CheckboxStatus,
   CheckboxIcon,
   CheckboxText,
+  CheckboxStateContext,
 } from "../Checkbox";
 import {
   createUnionControl,
@@ -55,7 +55,6 @@ export const DefaultChecked = base({ defaultState: true });
 export const Disabled = base({ disabled: true });
 
 export const Controlled = storyTemplate<CheckboxProps>(args => {
-  console.log("%c args", "color: #cc0036", args);
   const [state, onStateChange] = React.useState<CheckboxStatus>(false);
 
   return (
@@ -70,7 +69,6 @@ export const Controlled = storyTemplate<CheckboxProps>(args => {
 
 export const Group = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>([]);
-  console.log("%c state", "color: #607339", state);
 
   return (
     <>
@@ -189,73 +187,72 @@ export const GroupIndeterminateComplex = () => {
   );
 };
 
-const CheckboxCustom = (props: any) => {
+const CheckboxCustom = (props: CheckboxProps) => {
   const [
     checkboxState,
     setCheckboxStateChange,
   ] = React.useState<CheckboxStatus>(true);
-  const state: CheckboxStateProps = {
+  const { size } = props;
+  const state: CheckboxStateContext = {
     state: checkboxState,
     setState: setCheckboxStateChange,
-    size: "sm",
-    value: "one",
-    disabled: false,
+    disabled: props?.disabled,
   };
 
   return (
-    <CheckboxLabel {...state}>
-      <CheckboxInput {...state} />
+    <CheckboxLabel state={state}>
+      <CheckboxInput state={state} />
       <CheckboxIcon
-        {...state}
         className="w-8 h-8 text-2xl text-white bg-blue-500"
+        size={size}
+        state={state}
       />
-      <CheckboxText className="text-orange-500" {...state}>
+      <CheckboxText className="text-orange-500" size={size}>
         Custom Checkbox
       </CheckboxText>
     </CheckboxLabel>
   );
 };
 
-export const CustomCheckbox = () => {
-  return <CheckboxCustom />;
-};
+export const CustomCheckbox = storyTemplate<CheckboxProps>(CheckboxCustom)({});
 
 // Inspired from https://codepen.io/geertsdev/pen/yLaGLJq
-const CheckboxCustomComplete = (props: any) => {
-  const { children, className, state, setState, value, ...rest } = props;
-
+const CheckboxCustomComplete = (props: CheckboxProps) => {
+  const { className, children } = props;
   return (
-    <CheckboxLabel
-      className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
-      {...rest}
-    >
-      <CheckboxInput state={state} setState={setState} value={value} />
-      {state.includes(value) ? (
-        <span
-          aris-hidden="true"
-          role="img"
-          className="text-blue-500 absolute inset-y-0 left-0 flex items-center pl-1.5"
-        >
-          <svg
-            className="w-5 h-5"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+    <Checkbox {...props}>
+      <CheckboxLabel
+        className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
+      >
+        <CheckboxInput />
+        {(props?.state as string[]).includes(props?.value as string) ? (
+          <span
+            aris-hidden="true"
+            role="img"
+            className="text-blue-500 absolute inset-y-0 left-0 flex items-center pl-1.5"
           >
-            <path
-              fillRule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </span>
-      ) : null}
-      <span className="select-none">{children}</span>
-    </CheckboxLabel>
+            <svg
+              className="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </span>
+        ) : null}
+        <span className="select-none">{children}</span>
+      </CheckboxLabel>
+    </Checkbox>
   );
 };
 
-export const CompleteCustomCheckbox = () => {
+export const CompleteCustomCheckbox = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>([]);
 
   return (
@@ -263,7 +260,8 @@ export const CompleteCustomCheckbox = () => {
       <CheckboxCustomComplete
         value="one"
         state={state}
-        setState={onStateChange}
+        onStateChange={onStateChange}
+        {...args}
       >
         Button one 😁
       </CheckboxCustomComplete>
@@ -271,7 +269,8 @@ export const CompleteCustomCheckbox = () => {
         className="ml-2"
         value="two"
         state={state}
-        setState={onStateChange}
+        onStateChange={onStateChange}
+        {...args}
       >
         Button two 🤓
       </CheckboxCustomComplete>
@@ -279,10 +278,11 @@ export const CompleteCustomCheckbox = () => {
         className="ml-2"
         value="three"
         state={state}
-        setState={onStateChange}
+        onStateChange={onStateChange}
+        {...args}
       >
         Button three 👻
       </CheckboxCustomComplete>
     </>
   );
-};
+})({});

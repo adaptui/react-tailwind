@@ -65,7 +65,7 @@ export const CheckboxLabel = forwardRefWithAs<
   return <Box as="label" ref={ref} className={checkboxStyles} {...rest} />;
 });
 
-export type CheckboxInputProps = Omit<ReakitCheckboxProps, "size"> &
+export type CheckboxInputProps = Omit<ReakitCheckboxProps, "size" | "state"> &
   CheckboxStateProps;
 
 export const CheckboxInput = forwardRefWithAs<
@@ -76,6 +76,9 @@ export const CheckboxInput = forwardRefWithAs<
   const { className, state, size, ...rest } = props;
   const checkboxState = useCheckboxState();
   const _state = state || checkboxState || {};
+  // Interpts with the checked unchecked state
+  if (_state["value"] === undefined) delete _state["value"];
+  if (_state["checked"] === undefined) delete _state["checked"];
 
   const theme = useTheme();
   const checkboxInputStyles = cx(theme.checkbox.input, className);
@@ -151,7 +154,7 @@ export const CheckboxText = forwardRefWithAs<
   const { state, size, className, ...rest } = props;
 
   const checkboxTheme = useCheckboxTheme();
-  const _size = size || checkboxTheme.size || "sm";
+  const _size = size || checkboxTheme?.size || "sm";
 
   const theme = useTheme();
   const checkboxLabelStyles = cx(
