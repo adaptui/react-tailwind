@@ -1,6 +1,5 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Meta } from "@storybook/react/types-6-0";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
@@ -46,32 +45,33 @@ const base = storyTemplate<ButtonProps>(Button, {
   variant: "primary",
 });
 
-export const Default = base({});
+export const ExtraSmall = base({ size: "xs" });
+export const Small = base({ size: "sm" });
+export const Large = base({});
+export const ExtraLarge = base({ size: "xl" });
 
-export const ExtendedVariant = base({
+export const Primary = base({});
+export const Secondary = base({ variant: "secondary" });
+export const Outline = base({ variant: "outline" });
+export const Ghost = base({ variant: "ghost" });
+
+export const ExtendedTheme = base({
   // @ts-ignore
   size: "xxl",
   // @ts-ignore
   variant: "tertiary",
 });
 
-export const LeftIcon = base({
-  prefix: <SearchIcon />,
-});
-
-export const RightIcon = base({
-  suffix: <CaretDownIcon />,
-});
-
+export const LeftIcon = base({ prefix: <SearchIcon /> });
+export const RightIcon = base({ suffix: <CaretDownIcon /> });
 export const BothIcon = base({
   suffix: <CaretDownIcon />,
   prefix: <SearchIcon />,
 });
-
 export const LoadingIcon = base({
   suffix: <CaretDownIcon />,
   prefix: <SearchIcon />,
-  isLoading: true,
+  loading: true,
 });
 
 const CustomSpinner = () => {
@@ -88,7 +88,7 @@ const CustomSpinner = () => {
 export const CustomLoadingElement = base({
   suffix: <CaretDownIcon />,
   prefix: <SearchIcon />,
-  isLoading: true,
+  loading: true,
   spinner: <CustomSpinner />,
 });
 
@@ -125,7 +125,10 @@ const buttonGroupBase = storyTemplate<ButtonGroupProps>(
 
 export const GroupDefault = buttonGroupBase({});
 
-export const GroupCollapsed = buttonGroupBase({ isAttached: true });
+export const GroupCollapsed = buttonGroupBase({
+  attached: true,
+  variant: "secondary",
+});
 
 const IconButtonGroupBase = storyTemplate<ButtonGroupProps>(
   args => (
@@ -147,11 +150,7 @@ const IconButtonGroupBase = storyTemplate<ButtonGroupProps>(
 export const IconButtonGroupDefault = IconButtonGroupBase({});
 
 export const IconButtonGroupCollapsed = IconButtonGroupBase({
-  isAttached: true,
-});
-
-export const GroupSecondary = buttonGroupBase({
-  isAttached: true,
+  attached: true,
   variant: "secondary",
 });
 
@@ -179,7 +178,7 @@ const buttonGroupExample = storyTemplate<ButtonGroupProps>(args => {
 });
 
 export const TabListAsGroup = buttonGroupExample({
-  isAttached: true,
+  attached: true,
   size: "lg",
   variant: "secondary",
 });

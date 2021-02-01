@@ -1,5 +1,4 @@
 import React from "react";
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from "@storybook/react/types-6-0";
 
 import { Box, BoxProps } from "../index";
@@ -19,7 +18,7 @@ const BoxStyled: Story<BoxProps> = args => (
   <Box
     {...args}
     as="figure"
-    className="p-8 bg-gray-100 md:flex rounded-xl md:p-0"
+    className="p-8 overflow-hidden bg-gray-100 md:flex rounded-xl md:p-0"
   >
     <Box
       as="img"

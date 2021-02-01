@@ -22,6 +22,12 @@ const base = storyTemplate<BadgeProps>(
   { variant: "primary", size: "sm" },
 );
 
+export const ExtraSmall = base({ size: "xs" });
+
+export const Small = base({});
+
+export const Large = base({ size: "lg" });
+
 export const Primary = base({});
 
 export const Secondary = base({ variant: "secondary" });
@@ -29,9 +35,3 @@ export const Secondary = base({ variant: "secondary" });
 export const Outline = base({ variant: "outline" });
 
 export const Ghost = base({ variant: "ghost" });
-
-export const ExtraSmall = base({ size: "xs" });
-
-export const Small = base({});
-
-export const Large = base({ size: "lg" });

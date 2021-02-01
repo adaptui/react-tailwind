@@ -1,13 +1,6 @@
 export const button = {
-  span: "inline-block cursor-not-allowed",
   base:
-    "lib:inline-flex lib:items-center lib:justify-center lib:outline-none lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none lib:disabled:cursor-not-allowed lib:disabled:opacity-40",
-  variant: {
-    primary: "lib:bg-gray-800 lib:text-white",
-    secondary: "lib:bg-gray-100 lib:text-gray-800",
-    outline: "lib:text-gray-800 lib:border lib:border-gray-300",
-    ghost: "lib:text-gray-800 lib:hover:bg-gray-100",
-  },
+    "lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none",
   size: {
     xs:
       "lib:h-6 lib:w-auto lib:min-w-6 lib:px-2 lib:text-xs lib:font-medium lib:rounded-md lib:shadow-sm",
@@ -18,6 +11,13 @@ export const button = {
     xl:
       "lib:h-12 lib:w-auto lib:min-w-12 lib:px-4 lib:text-base lib:font-medium lib:rounded-lg lib:shadow-sm",
   },
+  variant: {
+    primary: "lib:bg-gray-800 lib:text-white",
+    secondary: "lib:bg-gray-100 lib:text-gray-800",
+    outline: "lib:text-gray-800 lib:border lib:border-gray-300",
+    ghost: "lib:text-gray-800 lib:hover:bg-gray-100",
+  },
+  disabled: "lib:cursor-not-allowed lib:opacity-40",
   group: "lib:focus:z-1 lib:-mr-px lib:shadow-none",
   prefix: {
     xs: "inherit mr-1.5",

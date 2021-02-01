@@ -1,23 +1,29 @@
 import * as React from "react";
-import { Box, BoxProps } from "../box";
 import { VisuallyHidden } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
 
 export interface SpinnerProps extends BoxProps {
   /**
    * For accessibility, it is important to add a fallback loading text.
    * This text will be visible to screen readers.
+   *
+   * @default "Loading..."
    */
   label?: string;
   /**
-   * How large should the button be?
+   * How large should the spinner be?
+   *
+   * @default "md"
    */
   size?: keyof Renderlesskit.GetThemeValue<"spinner", "size">;
   /**
    * How the spinner should be displayed?
+   *
+   * @default "transparent"
    */
   stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
 }
@@ -29,6 +35,8 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
       size = "md",
       stroke = "transparent",
       className,
+      // Extracting it so that it doesn't appear in the DOM by mistake
+      children,
       ...rest
     } = props;
     const theme = useTheme();

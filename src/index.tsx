@@ -9,7 +9,7 @@ export * from "./datepicker";
 export * from "./icon";
 export * from "./icons";
 export * from "./spinner";
-export * from "./Tag";
+export * from "./tag";
 export * from "./theme";
 export * from "./theme/types";
 export * from "./utils";
