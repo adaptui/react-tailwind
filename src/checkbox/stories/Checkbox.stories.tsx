@@ -11,7 +11,7 @@ import {
   CheckboxIcon,
   CheckboxText,
   CheckboxStateContext,
-} from "../Checkbox";
+} from "../index";
 import {
   createUnionControl,
   storyTemplate,
