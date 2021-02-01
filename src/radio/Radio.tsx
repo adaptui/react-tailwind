@@ -1,50 +1,55 @@
-import { cx } from "@renderlesskit/react";
+import React from "react";
 import {
+  RadioHTMLProps,
   Radio as ReakitRadio,
-  RadioGroup as ReakitRadioGroup,
-  RadioGroupProps,
-  RadioInitialState,
-  RadioProps,
-  useRadioState,
+  RadioProps as ReakitRadioProps,
 } from "reakit";
-import { createContext } from "../utils";
+import { cx } from "@renderlesskit/react";
+
+import { useTheme } from "../theme";
+import { RadioIcon } from "./RadioIcon";
+import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
 
-const [RadioProvider, useRadioContext] = createContext({
-  name: "RadioContext",
-  strict: true,
-  errorMessage: "Radio must be used within RadioContextProvider",
-});
+export type RadioCommonProps = Partial<
+  Pick<ReakitRadioProps, "value" | "disabled">
+> & {
+  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon">["size"];
+};
+
+export const RadioInput: React.FC<RadioHTMLProps & RadioCommonProps> = ({
+  className,
+  ...rest
+}) => {
+  const theme = useTheme();
+  const { radioState } = useRadioContext();
+
+  const radioStyles = cx(theme.radio.input, className);
+
+  return <ReakitRadio className={radioStyles} {...radioState} {...rest} />;
+};
 
 export const Radio = forwardRefWithAs<
-  Partial<RadioProps>,
+  RadioHTMLProps &
+    RadioCommonProps & {
+      checkedIcon?: React.ReactNode;
+      uncheckedIcon?: React.ReactNode;
+      disabledIcon?: React.ReactNode;
+    },
   HTMLInputElement,
   "input"
->(({ children, className, ...props }, ref) => {
-  const state = useRadioContext();
+>((props, ref) => {
+  const { checkedIcon, uncheckedIcon, disabledIcon } = props;
   return (
-    <label className={cx("radio", className)}>
-      <span className="radio__input">
-        <ReakitRadio className="sr-only" {...state} {...props} ref={ref} />
-        <span className="radio__control" />
-      </span>
-      <span className="radio__label">{children}</span>
-    </label>
-  );
-});
-
-export const RadioGroup = forwardRefWithAs<
-  Partial<RadioGroupProps & RadioInitialState>,
-  HTMLDivElement,
-  "div"
->(({ children, ...props }, ref) => {
-  const radio = useRadioState(props);
-
-  return (
-    <RadioProvider value={radio}>
-      <ReakitRadioGroup {...radio} ref={ref}>
-        {children}
-      </ReakitRadioGroup>
-    </RadioProvider>
+    <>
+      <RadioInput ref={ref} {...props} />
+      <RadioIcon
+        value={props.value}
+        disabled={props.disabled}
+        checkedIcon={checkedIcon}
+        uncheckedIcon={uncheckedIcon}
+        disabledIcon={disabledIcon}
+      />
+    </>
   );
 });
