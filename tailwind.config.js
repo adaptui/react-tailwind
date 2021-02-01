@@ -5,7 +5,7 @@ module.exports = preset({
     content: [
       "./node_modules/@tailwindcss/forms/**/*",
       "./src/theme/defaultTheme/**/*",
-      "../src/**/stories/*.stories.@(ts|tsx)",
+      "./src/**/stories/*.stories.@(ts|tsx)",
     ],
   },
   theme: {

@@ -7,7 +7,7 @@ import {
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { RadioIcon, RadioIconProps } from "./RadioIcon";
+import { RadioIcon } from "./RadioIcon";
 import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
 
