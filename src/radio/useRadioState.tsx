@@ -1,4 +1,3 @@
-import { useControllableState } from "@renderlesskit/react";
 import * as React from "react";
 import {
   CompositeState,
@@ -6,6 +5,7 @@ import {
   CompositeInitialState,
   useCompositeState,
 } from "reakit";
+import { useControllableState } from "@renderlesskit/react";
 
 type StateType = string | number | undefined;
 
@@ -47,6 +47,11 @@ export function useRadioState(
     defaultValue: defaultState,
     onChange: onStateChange,
   });
+
+  React.useEffect(() => {
+    onStateChange?.(state);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   const composite = useCompositeState({ ...props, loop });
   return {
