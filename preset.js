@@ -28,6 +28,12 @@ const renderlesskitConfig = {
       lineHeight: {
         em: "1em",
       },
+      width: {
+        "14px": "14px",
+      },
+      height: {
+        "14px": "14px",
+      },
       minWidth: {
         ...defaultTheme.spacing,
       },
@@ -39,6 +45,10 @@ const renderlesskitConfig = {
       },
       borderWidth: {
         1.5: "1.5px",
+      },
+      boxShadow: {
+        thumb:
+          "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
       },
     },
   },

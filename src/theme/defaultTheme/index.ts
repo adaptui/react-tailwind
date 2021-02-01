@@ -13,6 +13,7 @@ import { iconButton } from "./iconButton";
 import { spinner } from "./spinner";
 import { tag } from "./tag";
 import { radio } from "./radio";
+import { slider } from "./slider";
 
 const theme = {
   alert,
@@ -28,6 +29,7 @@ const theme = {
   spinner,
   tag,
   radio,
+  slider,
   switch: _switch,
 };
 
