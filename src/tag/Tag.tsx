@@ -5,8 +5,8 @@ import { Clickable, CompositeItem } from "reakit";
 import { useTheme } from "../theme";
 import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
-import { useTagGroup } from "./TagGroup";
 import { forwardRefWithAs } from "../utils/types";
+import { useTagGroup } from "./TagGroup";
 
 export type TagProps = Omit<BoxProps, "prefix"> & {
   /**
@@ -62,7 +62,7 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
     } = props;
 
     const group = useTagGroup();
-    const _size = size || group?.size || "lg";
+    const _size = size || group?.size || "sm";
     const _variant = variant || group?.variant || "primary";
 
     const theme = useTheme();

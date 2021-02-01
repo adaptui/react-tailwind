@@ -8,8 +8,7 @@ import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
-import { TagGroupProps } from "../TagGroup";
-import { Tag, TagGroup, TagProps } from "../index";
+import { Tag, TagProps, TagGroupProps, TagGroup } from "..";
 
 export default {
   title: "Tag",
