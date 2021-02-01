@@ -3,21 +3,23 @@ import { Meta } from "@storybook/react";
 
 import { Button } from "../../button";
 import {
-  createControls,
   storyTemplate,
+  createUnionControl,
 } from "../../../.storybook/storybookUtils";
 import { RadioGroup, RadioLabel, Radio, RadioGroupProps } from "../index";
 
 export default {
   title: "Radio",
   component: Radio,
-  argTypes: createControls("radio", { unions: ["size"] }),
+  argTypes: {
+    size: createUnionControl(["xs", "sm", "lg"]),
+  },
 } as Meta;
 
 const base = storyTemplate<RadioGroupProps>(
-  (args: any) => {
+  args => {
     return (
-      <RadioGroup size={args.size}>
+      <RadioGroup {...args}>
         <div className="flex gap-3">
           <RadioLabel>
             <Radio value="1" />
@@ -33,7 +35,8 @@ const base = storyTemplate<RadioGroupProps>(
     );
   },
   {
-    size: "lg",
+    defaultState: "2",
+    size: "sm",
   },
 );
 

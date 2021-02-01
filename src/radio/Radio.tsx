@@ -22,7 +22,7 @@ export const Radio = forwardRefWithAs<
   HTMLInputElement,
   "input"
 >((props, ref) => {
-  const { className, size, ...rest } = props;
+  const { className, ...rest } = props;
 
   const theme = useTheme();
   const { radioState } = useRadioContext();
