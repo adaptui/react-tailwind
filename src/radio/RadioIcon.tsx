@@ -12,7 +12,13 @@ import { RadioCommonProps } from "./Radio";
 import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
 
-export type RadioIconProps = BoxProps & RadioState & RadioCommonProps;
+export type RadioIconProps = BoxProps &
+  RadioState &
+  RadioCommonProps & {
+    checkedIcon?: React.ReactNode;
+    uncheckedIcon?: React.ReactNode;
+    disabledIcon?: React.ReactNode;
+  };
 
 export const RadioIcon = forwardRefWithAs<
   Partial<RadioIconProps>,
@@ -38,6 +44,12 @@ export const RadioIcon = forwardRefWithAs<
     className,
   );
 
+  const iconMap = {
+    checked: props.checkedIcon || <RadioCheckedIcon />,
+    unchecked: props.uncheckedIcon || <RadioUncheckedIcon />,
+    disabled: props.disabledIcon || <RadioDisabledIcon />,
+  };
+
   return (
     <Box
       ref={ref}
@@ -46,15 +58,13 @@ export const RadioIcon = forwardRefWithAs<
       className={radioIconStyles}
       {...rest}
     >
-      {children ? (
-        children
-      ) : disabled ? (
-        <RadioDisabledIcon />
-      ) : stateProp ? (
-        <RadioCheckedIcon />
-      ) : (
-        <RadioUncheckedIcon />
-      )}
+      {children
+        ? children
+        : disabled
+        ? iconMap.disabled
+        : stateProp
+        ? iconMap.checked
+        : iconMap.unchecked}
     </Box>
   );
 });

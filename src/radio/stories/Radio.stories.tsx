@@ -6,7 +6,16 @@ import {
   storyTemplate,
   createUnionControl,
 } from "../../../.storybook/storybookUtils";
-import { RadioGroup, RadioLabel, Radio, RadioGroupProps } from "../index";
+import {
+  RadioIcon,
+  RadioInput,
+  RadioGroup,
+  RadioLabel,
+  Radio,
+  RadioGroupProps,
+} from "../index";
+import { WheelIcon } from "../../icons";
+import { InfoCircle } from "../../icon/stories/Icon.stories";
 
 export default {
   title: "Radio",
@@ -80,6 +89,37 @@ export const Controlled = () => {
           <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
             <Radio value="3" />
             Disabled
+          </RadioLabel>
+        </div>
+      </RadioGroup>
+      <Button onClick={() => setState("2")}>change</Button>
+    </>
+  );
+};
+
+export const CustomIcon = () => {
+  const [state, setState] = React.useState("1");
+  return (
+    <>
+      <RadioGroup state={state} onStateChange={e => setState(e as string)}>
+        <div className="flex flex-col gap-2">
+          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+            <RadioInput value="1" />
+            <RadioIcon
+              value="1"
+              checkedIcon={<WheelIcon />}
+              uncheckedIcon={<InfoCircle />}
+            />
+            Two
+          </RadioLabel>
+          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+            <RadioInput value="2" />
+            <RadioIcon
+              value="2"
+              checkedIcon={<WheelIcon />}
+              uncheckedIcon={<InfoCircle />}
+            />
+            Two
           </RadioLabel>
         </div>
       </RadioGroup>

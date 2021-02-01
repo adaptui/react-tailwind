@@ -7,7 +7,7 @@ import {
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { RadioIcon } from "./RadioIcon";
+import { RadioIcon, RadioIconProps } from "./RadioIcon";
 import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
 
@@ -17,26 +17,39 @@ export type RadioCommonProps = Partial<
   size?: keyof Renderlesskit.GetThemeValue<"radio", "icon">["size"];
 };
 
+export const RadioInput: React.FC<RadioHTMLProps & RadioCommonProps> = ({
+  className,
+  ...rest
+}) => {
+  const theme = useTheme();
+  const { radioState } = useRadioContext();
+
+  const radioStyles = cx(theme.radio.input, className);
+
+  return <ReakitRadio className={radioStyles} {...radioState} {...rest} />;
+};
+
 export const Radio = forwardRefWithAs<
-  RadioHTMLProps & RadioCommonProps,
+  RadioHTMLProps &
+    RadioCommonProps & {
+      checkedIcon?: React.ReactNode;
+      uncheckedIcon?: React.ReactNode;
+      disabledIcon?: React.ReactNode;
+    },
   HTMLInputElement,
   "input"
 >((props, ref) => {
-  const { className, ...rest } = props;
-
-  const theme = useTheme();
-  const { radioState } = useRadioContext();
-  const radioStyles = cx(theme.radio.input, className);
-
+  const { checkedIcon, uncheckedIcon, disabledIcon } = props;
   return (
     <>
-      <ReakitRadio
-        ref={ref}
-        className={radioStyles}
-        {...radioState}
-        {...rest}
+      <RadioInput ref={ref} {...props} />
+      <RadioIcon
+        value={props.value}
+        disabled={props.disabled}
+        checkedIcon={checkedIcon}
+        uncheckedIcon={uncheckedIcon}
+        disabledIcon={disabledIcon}
       />
-      <RadioIcon value={rest.value} disabled={rest.disabled} />
     </>
   );
 });
