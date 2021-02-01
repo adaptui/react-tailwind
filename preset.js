@@ -22,6 +22,8 @@ const renderlesskitConfig = {
       },
       spacing: {
         em: "1em",
+        6.5: "1.625rem",
+        8.5: "2.125rem",
       },
       lineHeight: {
         em: "1em",

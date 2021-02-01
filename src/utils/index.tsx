@@ -50,3 +50,16 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
     Context,
   ] as CreateContextReturn<ContextType>;
 }
+
+// Function assertions
+export function isFunction(value: any): value is Function {
+  return typeof value === "function";
+}
+
+// From Chakra Utils
+export function runIfFn<T, U>(
+  valueOrFn: T | ((...fnArgs: U[]) => T),
+  ...args: U[]
+): T {
+  return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
+}
