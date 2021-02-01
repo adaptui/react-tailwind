@@ -35,6 +35,18 @@ export type SwitchStateProps = Partial<SwitchThemeContext> & {
   state?: SwitchStateContext;
 };
 
+type SwitchRenderProps = {
+  children?:
+    | (({
+        state,
+        theme,
+      }: {
+        state: SwitchStateContext;
+        theme: SwitchThemeContext;
+      }) => JSX.Element)
+    | React.ReactNode;
+};
+
 export type SwitchProps = {
   state?: SwitchStateContext["state"];
   defaultState?: SwitchStateContext["state"];
@@ -42,7 +54,7 @@ export type SwitchProps = {
   size?: SwitchThemeContext["size"];
 };
 
-export const Switch: React.FC<SwitchProps> = props => {
+export const Switch: React.FC<SwitchProps & SwitchRenderProps> = props => {
   const {
     defaultState,
     state: initialState,
