@@ -5,21 +5,7 @@ import { Box, BoxProps } from "../box";
 import { createContext } from "../utils";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
-
-export type ButtonGroupProps = BoxProps & {
-  /**
-   * How large should the button be?
-   */
-  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
-  /**
-   * How the button should be styled?
-   */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
-  /**
-   * Button will look collapsed together.
-   */
-  isAttached?: boolean;
-};
+import { ButtonProps } from "./Button";
 
 export type ButtonGroupContext = Pick<ButtonGroupProps, "size" | "variant">;
 
@@ -32,30 +18,48 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupContext>(
 
 export { useButtonGroup };
 
-export const ButtonGroup = forwardRefWithAs<ButtonGroupProps, "div">(
-  (props, ref) => {
-    const { size, variant, isAttached, className, ...rest } = props;
-    const context = React.useMemo(() => ({ size, variant }), [size, variant]);
+export type ButtonGroupProps = BoxProps &
+  Pick<ButtonProps, "size" | "variant"> & {
+    /**
+     * Button will look collapsed together.
+     *
+     * @default false
+     */
+    attached?: boolean;
+  };
 
-    const theme = useTheme();
-    const buttonGroupStyles = cx(
-      theme.buttonGroup.base,
-      isAttached ? theme.buttonGroup.attached : "lib:space-x-1",
-      className,
-    );
+export const ButtonGroup = forwardRefWithAs<
+  ButtonGroupProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    size = "lg",
+    variant = "primary",
+    attached = false,
+    className,
+    ...rest
+  } = props;
+  const context = React.useMemo(() => ({ size, variant }), [size, variant]);
 
-    return (
-      <ButtonGroupProvider value={context}>
-        <Box
-          role="group"
-          aria-label="Button group"
-          className={buttonGroupStyles}
-          ref={ref}
-          {...rest}
-        />
-      </ButtonGroupProvider>
-    );
-  },
-);
+  const theme = useTheme();
+  const buttonGroupStyles = cx(
+    theme.buttonGroup.base,
+    attached ? theme.buttonGroup.attached : theme.buttonGroup.notAttached,
+    className,
+  );
+
+  return (
+    <ButtonGroupProvider value={context}>
+      <Box
+        ref={ref}
+        role="group"
+        aria-label="Button group"
+        className={buttonGroupStyles}
+        {...rest}
+      />
+    </ButtonGroupProvider>
+  );
+});
 
 export default ButtonGroup;

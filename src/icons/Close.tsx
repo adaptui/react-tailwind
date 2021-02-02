@@ -6,6 +6,7 @@ export const CloseIcon = createIcon({
   viewBox: "0 0 12 12",
   path: (
     <path
+      fill="none"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
