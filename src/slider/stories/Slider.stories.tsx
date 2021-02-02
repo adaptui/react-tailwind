@@ -24,7 +24,7 @@ export const Reversed = base({ reversed: true });
 export const Orientation = () => {
   return (
     <div role="group" aria-labelledby="styled-slider" style={{ height: 200 }}>
-      <Slider orientation="vertical" />
+      <Slider orientation="vertical" origin={0} />
     </div>
   );
 };

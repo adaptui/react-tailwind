@@ -34,12 +34,12 @@ export const slider = {
       base: "h-full",
     },
     track: {
-      base: "h-full w-fit",
+      base: "h-full w-fit left-1",
       main: "w-1 h-full",
       filled: "w-1 top-unset bottom-0 left-1/2 transform -translate-x-1/2",
     },
     thumb: {
-      base: "flex-row top-unset",
+      base: "flex-row top-unset left-0",
       handle: "-left-1/2 -transform translate-x-1/2",
     },
   },

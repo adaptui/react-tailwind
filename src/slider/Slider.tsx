@@ -11,7 +11,9 @@ import {
 import { VisuallyHidden } from "reakit";
 
 import { useTheme } from "..";
-import { createContext } from "../utils";
+import { createContext, runIfFn } from "../utils";
+
+const percent = (v: number) => `${v}%`;
 
 const [
   SliderStateProvider,
@@ -21,7 +23,7 @@ const [
   strict: true,
 });
 
-const useSliderValues = (props: SliderProps & { origin?: number }) => {
+const useSliderValues = (props: SliderProps) => {
   const state = useSliderContext();
   const origin = props.origin || 0;
   const { values, getValuePercent, getThumbPercent } = state;
@@ -32,24 +34,24 @@ const useSliderValues = (props: SliderProps & { origin?: number }) => {
   const isReversed = state.reversed;
 
   const trackWidth = !isRange
-    ? `${
-        (getValuePercent(Math.max(values[0], origin)) -
-          getValuePercent(Math.min(values[0], origin))) *
-        100
-      }%`
-    : `${(getThumbPercent(1) - getThumbPercent(0)) * 100}%`;
+    ? (getValuePercent(Math.max(values[0], origin)) -
+        getValuePercent(Math.min(values[0], origin))) *
+      100
+    : (getThumbPercent(1) - getThumbPercent(0)) * 100;
+
   const trackLeft = !isRange
-    ? `${getValuePercent(Math.min(values[0], origin)) * 100}%`
-    : `${getThumbPercent(0) * 100}%`;
-  const trackRight = !isRange ? "0px" : `${getThumbPercent(0) * 100}%`;
+    ? getValuePercent(Math.min(values[0], origin)) * 100
+    : getThumbPercent(0) * 100;
+
+  const trackRight = !isRange ? "0px" : percent(getThumbPercent(0) * 100);
 
   return {
     isVertical,
     isRange,
     isMulti,
     isReversed,
-    trackWidth,
-    trackLeft,
+    trackWidth: percent(trackWidth),
+    trackLeft: percent(trackLeft),
     trackRight,
     getValuePercent,
     getThumbPercent,
@@ -59,6 +61,7 @@ const useSliderValues = (props: SliderProps & { origin?: number }) => {
 
 export const SliderTrack: React.FC<SliderProps> = ({
   orientation = "horizontal",
+  origin,
   ...props
 }) => {
   const theme = useTheme();
@@ -73,7 +76,7 @@ export const SliderTrack: React.FC<SliderProps> = ({
     trackRight,
     getThumbPercent,
     state,
-  } = useSliderValues({ orientation });
+  } = useSliderValues({ orientation, origin });
 
   return (
     <RenderlessSliderTrack
@@ -112,12 +115,14 @@ export const SliderTrack: React.FC<SliderProps> = ({
 
 export const SliderThumb: React.FC<SliderProps> = ({
   orientation = "horizontal",
+  origin,
   children,
 }) => {
   const theme = useTheme();
 
   const { isVertical, isReversed, getThumbPercent, state } = useSliderValues({
     orientation,
+    origin,
   });
 
   return (
@@ -163,10 +168,17 @@ export const SliderThumb: React.FC<SliderProps> = ({
   );
 };
 
-export type SliderProps = SliderInitialState;
+export type SliderProps = SliderInitialState & { origin?: number };
+type SliderRenderProps = {
+  children?:
+    | (({ state }: { state: SliderStateReturn }) => JSX.Element)
+    | React.ReactNode;
+};
 
-export const Slider: React.FC<SliderProps> = ({
+export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
   orientation = "horizontal",
+  children,
+  origin,
   ...props
 }) => {
   const theme = useTheme();
@@ -174,15 +186,19 @@ export const Slider: React.FC<SliderProps> = ({
 
   return (
     <SliderStateProvider value={state}>
-      <div
-        className={cx(
-          theme.slider.common.wrapper.base,
-          theme.slider[orientation].wrapper.base,
-        )}
-      >
-        <SliderTrack orientation={orientation} />
-        <SliderThumb orientation={orientation} />
-      </div>
+      {children ? (
+        runIfFn(children, { state })
+      ) : (
+        <div
+          className={cx(
+            theme.slider.common.wrapper.base,
+            theme.slider[orientation].wrapper.base,
+          )}
+        >
+          <SliderTrack origin={origin} orientation={orientation} />
+          <SliderThumb origin={origin} orientation={orientation} />
+        </div>
+      )}
     </SliderStateProvider>
   );
 };
