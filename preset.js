@@ -28,10 +28,15 @@ const renderlesskitConfig = {
       lineHeight: {
         em: "1em",
       },
+      top: {
+        unset: "unset",
+      },
       width: {
+        fit: "fit-content",
         "14px": "14px",
       },
       height: {
+        fit: "fit-content",
         "14px": "14px",
       },
       minWidth: {
