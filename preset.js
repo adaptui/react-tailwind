@@ -24,12 +24,14 @@ const renderlesskitConfig = {
         em: "1em",
         6.5: "1.625rem",
         8.5: "2.125rem",
+        half: "50%",
       },
       lineHeight: {
         em: "1em",
       },
       minWidth: {
         ...defaultTheme.spacing,
+        half: "50%",
       },
       minHeight: {
         ...defaultTheme.spacing,
@@ -39,6 +41,15 @@ const renderlesskitConfig = {
       },
       borderWidth: {
         1.5: "1.5px",
+      },
+      keyframes: {
+        progress: {
+          "0%": { left: "-40%" },
+          "100%": { left: "100%" },
+        },
+      },
+      animation: {
+        progress: "progress 1s ease infinite normal none running",
       },
     },
   },
