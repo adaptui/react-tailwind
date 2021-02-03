@@ -1,33 +1,25 @@
 import * as React from "react";
-import { cx, ProgressStateReturn } from "@renderlesskit/react";
+import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { CircularProgressProps } from "./CircularProgress";
+import { useCircularProgress } from "./CircularProgress";
 
-export type CircularProgressBarProps = BoxProps &
-  Pick<CircularProgressProps, "size"> &
-  ProgressStateReturn & {
-    trackStyle?: string;
-    innerTrackStyle?: string;
-  };
+export type CircularProgressBarProps = BoxProps & {
+  trackStyle?: string;
+  innerTrackStyle?: string;
+};
 
 export const CircularProgressBar = forwardRefWithAs<
   CircularProgressBarProps,
   HTMLOrSVGElement,
   "svg"
 >((props, ref) => {
-  const {
-    size = "sm",
-    className,
-    trackStyle,
-    innerTrackStyle,
-    isIndeterminate,
-    percent,
-    ...rest
-  } = props;
+  const { className, trackStyle, innerTrackStyle, ...rest } = props;
   const theme = useTheme();
+  const { state, size = "md" } = useCircularProgress();
+  const { isIndeterminate, percent } = state;
   const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
   const strokeDasharray =
     determinant == null ? undefined : `${determinant} ${264 - determinant}`;
@@ -42,6 +34,7 @@ export const CircularProgressBar = forwardRefWithAs<
         isIndeterminate ? theme.circularProgress.bar.indeterminate : "",
         className,
       )}
+      {...rest}
     >
       <circle
         cx={50}

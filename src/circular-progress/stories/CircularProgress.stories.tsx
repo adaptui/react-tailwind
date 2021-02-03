@@ -7,9 +7,9 @@ import {
   createUnionControl,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { CircularProgressBar } from "../CircularProgressBar";
 import { CircularProgress, CircularProgressProps } from "../index";
 import { CircularProgressWrapper } from "../CircularProgressWrapper";
-import { CircularProgressBar } from "../CircularProgressBar";
 
 export default {
   title: "CircularProgress",
@@ -71,16 +71,12 @@ export const Custom = storyTemplate<CircularProgressProps>(
     return (
       <>
         <CircularProgress value={value} {...args}>
-          {({ state, size }) => (
-            <CircularProgressWrapper {...state}>
-              <CircularProgressBar
-                size={size}
-                trackStyle="text-red-300"
-                innerTrackStyle="text-red-800"
-                {...state}
-              />
-            </CircularProgressWrapper>
-          )}
+          <CircularProgressWrapper>
+            <CircularProgressBar
+              trackStyle="text-red-300"
+              innerTrackStyle="text-red-800"
+            />
+          </CircularProgressWrapper>
         </CircularProgress>
         <Button type="reset" className="block mt-2" onClick={() => setValue(0)}>
           Restart CircularProgress
