@@ -1,24 +1,22 @@
 import * as React from "react";
-import {
-  cx,
-  Progress as RenderlesskitProgress,
-  ProgressProps as RenderlesskitProgressProps,
-  ProgressStateReturn,
-} from "@renderlesskit/react";
+import { cx, Progress as RenderlesskitProgress } from "@renderlesskit/react";
 
+import { BoxProps } from "../box";
 import { useTheme } from "../theme";
+import { useProgress } from "./Progress";
 import { forwardRefWithAs } from "../utils/types";
 
-export type ProgressBarProps = RenderlesskitProgressProps &
-  Pick<ProgressStateReturn, "percent">;
+export type ProgressBarProps = BoxProps & {};
 
 export const ProgressBar = forwardRefWithAs<
   ProgressBarProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { percent, isIndeterminate, className, ...rest } = props;
+  const { className, ...rest } = props;
   const theme = useTheme();
+  const { state } = useProgress();
+  const { percent, isIndeterminate } = state;
 
   return (
     <RenderlesskitProgress

@@ -69,11 +69,9 @@ export const Custom = storyTemplate<ProgressProps>(
     return (
       <>
         <Progress value={value} {...args}>
-          {({ state, size }) => (
-            <ProgressTrack size={size} className="bg-red-300">
-              <ProgressBar {...state} className="bg-red-800" />
-            </ProgressTrack>
-          )}
+          <ProgressTrack className="bg-red-300">
+            <ProgressBar className="bg-red-800" />
+          </ProgressTrack>
         </Progress>
         <Button type="reset" className="block mt-2" onClick={() => setValue(0)}>
           Restart Progress
