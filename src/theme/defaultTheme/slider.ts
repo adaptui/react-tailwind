@@ -12,7 +12,7 @@ export const slider = {
     thumb: {
       base: "absolute z-1 flex items-center",
       handle:
-        "w-14px h-14px bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb",
+        "w-12px h-12px bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb text-xxs text-gray-400",
     },
   },
   horizontal: {

@@ -10,6 +10,7 @@ import { useTheme } from "..";
 import { createContext, runIfFn } from "../utils";
 import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
+import { TooltipInitialState } from "reakit/ts";
 
 const percent = (v: number) => `${v}%`;
 
@@ -59,7 +60,14 @@ export const useSliderValues = (props: SliderProps) => {
   };
 };
 
-export type SliderProps = SliderInitialState & { origin?: number };
+export type SliderProps = SliderInitialState & {
+  origin?: number;
+  thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
+  tooltipContent?:
+    | React.ReactNode
+    | ((state: SliderStateReturn) => JSX.Element);
+  tooltipVisible?: boolean;
+};
 type SliderRenderProps = {
   children?:
     | (({ state }: { state: SliderStateReturn }) => JSX.Element)
@@ -68,6 +76,7 @@ type SliderRenderProps = {
 
 export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
   orientation = "horizontal",
+  thumbContent,
   children,
   origin,
   ...props
@@ -87,7 +96,14 @@ export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
           )}
         >
           <SliderTrack origin={origin} orientation={orientation} />
-          <SliderThumb origin={origin} orientation={orientation} />
+          <SliderThumb
+            origin={origin}
+            orientation={orientation}
+            tooltipVisible={props.tooltipVisible}
+            tooltipContent={props.tooltipContent}
+          >
+            {thumbContent ? runIfFn(thumbContent, state.values) : thumbContent}
+          </SliderThumb>
         </div>
       )}
     </SliderStateProvider>

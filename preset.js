@@ -33,11 +33,15 @@ const renderlesskitConfig = {
       },
       width: {
         fit: "fit-content",
-        "14px": "14px",
+        "12px": "12px",
+        "16px": "16px",
+        "20px": "20px",
       },
       height: {
         fit: "fit-content",
-        "14px": "14px",
+        "12px": "12px",
+        "16px": "16px",
+        "20px": "20px",
       },
       minWidth: {
         ...defaultTheme.spacing,
