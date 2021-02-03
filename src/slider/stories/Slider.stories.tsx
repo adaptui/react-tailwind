@@ -8,6 +8,8 @@ import {
 
 import { Slider, SliderProps } from "../Slider";
 import { SliderThumbHandle } from "../../icons/SliderThumbHandle";
+import { SliderTrack } from "../SliderTrack";
+import { SliderThumb } from "../SliderThumb";
 
 export default {
   title: "Slider",
@@ -51,12 +53,29 @@ export const TooltipPlacement = base({
 });
 
 export const Reversed = base({ reversed: true });
-export const Vertical = base({ orientation: "vertical" });
 
-export const Orientation = () => {
+export const Vertical = () => {
   return (
     <div role="group" aria-labelledby="styled-slider" style={{ height: 200 }}>
       <Slider size="xs" orientation="vertical" origin={0} />
+    </div>
+  );
+};
+
+export const Customization = () => {
+  return (
+    <div role="group" aria-labelledby="styled-slider" style={{ width: 400 }}>
+      <Slider size="xs">
+        {({ state }) => (
+          <>
+            <span>
+              {state.isThumbDragging(0) ? "Dragging" : "Not dragging"}
+            </span>
+            <SliderThumb tooltipVisible={true}></SliderThumb>
+            <SliderTrack />
+          </>
+        )}
+      </Slider>
     </div>
   );
 };

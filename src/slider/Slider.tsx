@@ -78,6 +78,7 @@ export type SliderProps = SliderInitialState & {
     "common"
   >["thumb"]["handle"]["size"];
 };
+
 type SliderRenderProps = {
   children?:
     | (({ state }: { state: SliderStateReturn }) => JSX.Element)
@@ -98,26 +99,28 @@ export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
   return (
     <SliderStateProvider value={state}>
       <SliderPropsContext value={{ size, orientation, origin }}>
-        {children ? (
-          runIfFn(children, { state })
-        ) : (
-          <div
-            className={cx(
-              theme.slider.common.wrapper.base,
-              theme.slider[orientation].wrapper.base,
-            )}
-          >
-            <SliderTrack />
-            <SliderThumb
-              tooltipVisible={props.tooltipVisible}
-              tooltipContent={props.tooltipContent}
-            >
-              {thumbContent
-                ? runIfFn(thumbContent, state.values)
-                : thumbContent}
-            </SliderThumb>
-          </div>
-        )}
+        <div
+          className={cx(
+            theme.slider.common.wrapper.base,
+            theme.slider[orientation].wrapper.base,
+          )}
+        >
+          {children ? (
+            runIfFn(children, { state })
+          ) : (
+            <>
+              <SliderTrack />
+              <SliderThumb
+                tooltipVisible={props.tooltipVisible}
+                tooltipContent={props.tooltipContent}
+              >
+                {thumbContent
+                  ? runIfFn(thumbContent, state.values)
+                  : thumbContent}
+              </SliderThumb>
+            </>
+          )}
+        </div>
       </SliderPropsContext>
     </SliderStateProvider>
   );

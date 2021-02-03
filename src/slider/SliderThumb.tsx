@@ -1,23 +1,18 @@
 import React from "react";
 import {
-  cx,
-  SliderInput,
-  SliderThumb as RenderlessSliderThumb,
-} from "@renderlesskit/react";
-import {
   Tooltip,
   VisuallyHidden,
   useTooltipState,
   TooltipReference,
 } from "reakit";
+import {
+  cx,
+  SliderInput,
+  SliderThumb as RenderlessSliderThumb,
+} from "@renderlesskit/react";
 
 import { runIfFn, useTheme } from "..";
-import {
-  SliderProps,
-  useSliderContext,
-  useSliderPropsContext,
-  useSliderValues,
-} from "./Slider";
+import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 
 export const SliderThumb: React.FC<SliderProps> = ({
   orientation,
