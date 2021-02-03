@@ -33,12 +33,18 @@ const renderlesskitConfig = {
       },
       width: {
         fit: "fit-content",
+        "2px": "2px",
+        "4px": "4px",
+        "8px": "8px",
         "12px": "12px",
         "16px": "16px",
         "20px": "20px",
       },
       height: {
         fit: "fit-content",
+        "2px": "2px",
+        "4px": "4px",
+        "8px": "8px",
         "12px": "12px",
         "16px": "16px",
         "20px": "20px",

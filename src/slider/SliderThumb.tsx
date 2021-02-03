@@ -12,22 +12,34 @@ import {
 } from "reakit";
 
 import { runIfFn, useTheme } from "..";
-import { SliderProps, useSliderValues } from "./Slider";
+import {
+  SliderProps,
+  useSliderContext,
+  useSliderPropsContext,
+  useSliderValues,
+} from "./Slider";
 
 export const SliderThumb: React.FC<SliderProps> = ({
-  orientation = "horizontal",
+  orientation,
   tooltipContent,
   tooltipVisible,
   origin,
   children,
+  size,
   ...props
 }) => {
   const theme = useTheme();
   const tooltip = useTooltipState({});
 
+  const contextProps = useSliderPropsContext();
+
+  const _orientation = orientation || contextProps.orientation || "horizontal";
+  const _size = size || contextProps.size || "sm";
+  const _origin = origin || contextProps.origin || 0;
+
   const { isVertical, isReversed, getThumbPercent, state } = useSliderValues({
-    orientation,
-    origin,
+    orientation: _orientation,
+    origin: _origin,
   });
 
   React.useEffect(() => {
@@ -37,12 +49,13 @@ export const SliderThumb: React.FC<SliderProps> = ({
 
   const thumbStyles = cx(
     theme.slider.common.thumb.base,
-    theme.slider[orientation].thumb.base,
+    theme.slider[_orientation].thumb.base,
   );
 
   const thumbHandleStyles = cx(
-    theme.slider.common.thumb.handle,
-    theme.slider[orientation].thumb.handle,
+    theme.slider.common.thumb.handle.base,
+    theme.slider.common.thumb.handle.size[_size],
+    theme.slider[_orientation].thumb.handle,
   );
 
   const thumbDynamicStyles = (index: number) => {

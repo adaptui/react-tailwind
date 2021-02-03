@@ -10,7 +10,6 @@ import { useTheme } from "..";
 import { createContext, runIfFn } from "../utils";
 import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
-import { TooltipInitialState } from "reakit/ts";
 
 const percent = (v: number) => `${v}%`;
 
@@ -22,7 +21,14 @@ const [
   strict: true,
 });
 
-export { useSliderContext };
+const [SliderPropsContext, useSliderPropsContext] = createContext<
+  Pick<SliderProps, "orientation" | "size" | "origin">
+>({
+  name: "SliderProps",
+  strict: false,
+});
+
+export { useSliderContext, useSliderPropsContext };
 
 export const useSliderValues = (props: SliderProps) => {
   const state = useSliderContext();
@@ -67,6 +73,10 @@ export type SliderProps = SliderInitialState & {
     | React.ReactNode
     | ((state: SliderStateReturn) => JSX.Element);
   tooltipVisible?: boolean;
+  size?: keyof Renderlesskit.GetThemeValue<
+    "slider",
+    "common"
+  >["thumb"]["handle"]["size"];
 };
 type SliderRenderProps = {
   children?:
@@ -79,6 +89,7 @@ export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
   thumbContent,
   children,
   origin,
+  size = "sm",
   ...props
 }) => {
   const theme = useTheme();
@@ -86,26 +97,28 @@ export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
 
   return (
     <SliderStateProvider value={state}>
-      {children ? (
-        runIfFn(children, { state })
-      ) : (
-        <div
-          className={cx(
-            theme.slider.common.wrapper.base,
-            theme.slider[orientation].wrapper.base,
-          )}
-        >
-          <SliderTrack origin={origin} orientation={orientation} />
-          <SliderThumb
-            origin={origin}
-            orientation={orientation}
-            tooltipVisible={props.tooltipVisible}
-            tooltipContent={props.tooltipContent}
+      <SliderPropsContext value={{ size, orientation, origin }}>
+        {children ? (
+          runIfFn(children, { state })
+        ) : (
+          <div
+            className={cx(
+              theme.slider.common.wrapper.base,
+              theme.slider[orientation].wrapper.base,
+            )}
           >
-            {thumbContent ? runIfFn(thumbContent, state.values) : thumbContent}
-          </SliderThumb>
-        </div>
-      )}
+            <SliderTrack />
+            <SliderThumb
+              tooltipVisible={props.tooltipVisible}
+              tooltipContent={props.tooltipContent}
+            >
+              {thumbContent
+                ? runIfFn(thumbContent, state.values)
+                : thumbContent}
+            </SliderThumb>
+          </div>
+        )}
+      </SliderPropsContext>
     </SliderStateProvider>
   );
 };

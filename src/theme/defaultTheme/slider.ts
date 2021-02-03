@@ -11,8 +11,15 @@ export const slider = {
     },
     thumb: {
       base: "absolute z-1 flex items-center",
-      handle:
-        "w-12px h-12px bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb text-xxs text-gray-400",
+      handle: {
+        base:
+          "bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb text-gray-400",
+        size: {
+          xs: "w-12px h-12px text-xxs",
+          sm: "w-16px h-16px text-xs",
+          lg: "w-20px h-20px text-sm",
+        },
+      },
     },
   },
   horizontal: {
@@ -21,8 +28,13 @@ export const slider = {
     },
     track: {
       base: "w-full top-1/2 transform translate-y-1/2",
-      main: "h-1",
-      filled: "h-1 top-0",
+      main: "",
+      filled: "top-0",
+      size: {
+        xs: "h-2px",
+        sm: "h-4px",
+        lg: "h-8px",
+      },
     },
     thumb: {
       base: "flex-col bottom-0",
@@ -34,12 +46,17 @@ export const slider = {
       base: "h-full",
     },
     track: {
-      base: "h-full w-fit left-1",
-      main: "w-1 h-full",
-      filled: "w-1 top-unset bottom-0 left-1/2 transform -translate-x-1/2",
+      base: "h-full w-fit",
+      main: "h-full",
+      filled: "top-unset bottom-0",
+      size: {
+        xs: "w-2px",
+        sm: "w-4px",
+        lg: "w-8px",
+      },
     },
     thumb: {
-      base: "flex-row top-unset left-0",
+      base: "flex-row top-unset left-1/2 transform -translate-x-1/2",
       handle: "-left-1/2 -transform translate-x-1/2",
     },
   },
