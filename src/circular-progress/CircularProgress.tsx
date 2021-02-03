@@ -27,13 +27,7 @@ export { useCircularProgress };
 
 type CircularProgressRenderProps = {
   children?:
-    | (({
-        state,
-        size,
-      }: {
-        state: ProgressStateReturn;
-        size: CircularProgressProps["size"];
-      }) => JSX.Element)
+    | (({ state, size }: CircularProgressContext) => JSX.Element)
     | React.ReactNode;
 };
 
