@@ -18,15 +18,22 @@ export const CircularProgressBar = forwardRefWithAs<
   HTMLOrSVGElement,
   "svg"
 >((props, ref) => {
+  const [state, _props] = split(props, [
+    "value",
+    "min",
+    "max",
+    "isIndeterminate",
+    "percent",
+    "setValue",
+  ]);
+  const { isIndeterminate, percent } = state;
   const {
     size = "sm",
     className,
     trackStyle,
     innerTrackStyle,
-    isIndeterminate,
-    percent,
     ...rest
-  } = props;
+  } = _props;
   const theme = useTheme();
   const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
   const strokeDasharray =
@@ -42,6 +49,7 @@ export const CircularProgressBar = forwardRefWithAs<
         isIndeterminate ? theme.circularProgress.bar.indeterminate : "",
         className,
       )}
+      {...rest}
     >
       <circle
         cx={50}
@@ -72,3 +80,19 @@ export const CircularProgressBar = forwardRefWithAs<
     </Box>
   );
 });
+
+export type Dict<T = any> = Record<string, T>;
+export function split<T extends Dict, K extends keyof T>(object: T, keys: K[]) {
+  const picked: Dict = {};
+  const omitted: Dict = {};
+
+  Object.keys(object).forEach(key => {
+    if (keys.includes(key as T[K])) {
+      picked[key] = object[key];
+    } else {
+      omitted[key] = object[key];
+    }
+  });
+
+  return [picked, omitted] as [{ [P in K]: T[P] }, Omit<T, K>];
+}
