@@ -4,7 +4,12 @@ import { cx, SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
 import { useTheme } from "..";
 import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 
-export const SliderTrack: React.FC<SliderProps> = ({
+export type SliderTrackProps = Omit<
+  SliderProps,
+  "thumbContent" | "tooltipContent"
+>;
+
+export const SliderTrack: React.FC<SliderTrackProps> = ({
   orientation,
   origin,
   size,

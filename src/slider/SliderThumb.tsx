@@ -88,7 +88,7 @@ export const SliderThumb: React.FC<SliderProps> = ({
               <Tooltip
                 {...tooltip}
                 as="div"
-                className="pointer-events-none text-xs"
+                className={theme.slider.common.tooltipContent}
               >
                 {tooltipContent
                   ? runIfFn(tooltipContent, state)
