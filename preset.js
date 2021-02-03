@@ -47,9 +47,25 @@ const renderlesskitConfig = {
           "0%": { left: "-40%" },
           "100%": { left: "100%" },
         },
+        circularProgress: {
+          "0%": {
+            strokeDasharray: "1, 400",
+            strokeDashoffset: "0",
+          },
+          "50%": {
+            strokeDasharray: "400, 400",
+            strokeDashoffset: "-100",
+          },
+          "100%": {
+            strokeDasharray: "400, 400",
+            strokeDashoffset: "-260",
+          },
+        },
       },
       animation: {
         progress: "progress 1s ease infinite normal none running",
+        circularProgress:
+          "circularProgress 2s ease infinite normal none running",
       },
     },
   },

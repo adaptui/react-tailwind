@@ -6,32 +6,32 @@ import {
 import * as React from "react";
 
 import { runIfFn } from "../utils";
-import { ProgressBar } from "./ProgressBar";
-import { ProgressTrack } from "./ProgressTrack";
+import { CircularProgressBar } from "./CircularProgressBar";
+import { CircularProgressWrapper } from "./CircularProgressWrapper";
 
-type ProgressRenderProps = {
+type CircularProgressRenderProps = {
   children?:
     | (({
         state,
         size,
       }: {
         state: ProgressStateReturn;
-        size: ProgressProps["size"];
+        size: CircularProgressProps["size"];
       }) => JSX.Element)
     | React.ReactNode;
 };
 
-export type ProgressProps = ProgressInitialState & {
+export type CircularProgressProps = ProgressInitialState & {
   /**
-   * How large should the progress be?
+   * How large should the circular progress be?
    *
    * @default "sm"
    */
-  size?: keyof Renderlesskit.GetThemeValue<"progress", "track">["size"];
+  size?: keyof Renderlesskit.GetThemeValue<"circularProgress", "bar">["size"];
 };
 
-export const Progress: React.FC<
-  ProgressProps & ProgressRenderProps
+export const CircularProgress: React.FC<
+  CircularProgressProps & CircularProgressRenderProps
 > = props => {
   const { value: defaultValue, size = "sm", children, ...rest } = props;
   const state = useProgressState(rest);
@@ -46,12 +46,12 @@ export const Progress: React.FC<
       {children ? (
         runIfFn(children, { state, size })
       ) : (
-        <ProgressTrack size={size}>
-          <ProgressBar {...state} />
-        </ProgressTrack>
+        <CircularProgressWrapper {...state}>
+          <CircularProgressBar size={size} {...state} />
+        </CircularProgressWrapper>
       )}
     </>
   );
 };
 
-export default Progress;
+export default CircularProgress;
