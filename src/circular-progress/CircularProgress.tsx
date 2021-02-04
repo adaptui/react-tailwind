@@ -17,13 +17,13 @@ export type CircularProgressContext = Pick<CircularProgressProps, "size"> & {
 
 const [
   CircularProgressProvider,
-  useCircularProgress,
+  useCircularProgressContext,
 ] = createContext<CircularProgressContext>({
   name: "CircularProgressContext",
   strict: false,
 });
 
-export { useCircularProgress };
+export { useCircularProgressContext };
 
 type CircularProgressRenderProps = {
   children?:

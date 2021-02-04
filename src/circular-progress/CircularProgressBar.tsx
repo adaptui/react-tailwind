@@ -4,7 +4,7 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { useCircularProgress } from "./CircularProgress";
+import { useCircularProgressContext } from "./CircularProgress";
 
 export type CircularProgressBarProps = BoxProps & {
   trackStyle?: string;
@@ -18,7 +18,7 @@ export const CircularProgressBar = forwardRefWithAs<
 >((props, ref) => {
   const { className, trackStyle, innerTrackStyle, ...rest } = props;
   const theme = useTheme();
-  const { state, size = "md" } = useCircularProgress();
+  const { state, size = "md" } = useCircularProgressContext();
   const { isIndeterminate, percent } = state;
   const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
   const strokeDasharray =
