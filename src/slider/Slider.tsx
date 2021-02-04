@@ -10,6 +10,8 @@ import { useTheme } from "..";
 import { createContext, runIfFn } from "../utils";
 import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
+import { Box } from "../box";
+import { forwardRefWithAs } from "../utils/types";
 
 const percent = (v: number) => `${v}%`;
 
@@ -85,24 +87,31 @@ type SliderRenderProps = {
     | React.ReactNode;
 };
 
-export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
-  orientation = "horizontal",
-  thumbContent,
-  children,
-  origin,
-  size = "sm",
-  ...props
-}) => {
+export const Slider = forwardRefWithAs<
+  SliderProps & SliderRenderProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    orientation = "horizontal",
+    thumbContent,
+    children,
+    origin,
+    size = "sm",
+    className,
+  } = props;
   const theme = useTheme();
   const state = useSliderState({ ...props, orientation });
 
   return (
     <SliderStateProvider value={state}>
       <SliderPropsContext value={{ size, orientation, origin }}>
-        <div
+        <Box
+          ref={ref}
           className={cx(
             theme.slider.common.wrapper.base,
             theme.slider[orientation].wrapper.base,
+            className,
           )}
         >
           {children ? (
@@ -120,8 +129,8 @@ export const Slider: React.FC<SliderProps & SliderRenderProps> = ({
               </SliderThumb>
             </>
           )}
-        </div>
+        </Box>
       </SliderPropsContext>
     </SliderStateProvider>
   );
-};
+});
