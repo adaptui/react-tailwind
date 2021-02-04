@@ -3,13 +3,18 @@ import { cx, SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
 
 import { useTheme } from "..";
 import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
+import { forwardRefWithAs } from "../utils/types";
 
 export type SliderTrackProps = Omit<
   SliderProps,
   "thumbContent" | "size" | "orientation" | "origin"
 >;
 
-export const SliderTrack: React.FC<SliderTrackProps> = props => {
+export const SliderTrack = forwardRefWithAs<
+  SliderTrackProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
   const theme = useTheme();
   const contextProps = useSliderPropsContext();
 
@@ -54,7 +59,12 @@ export const SliderTrack: React.FC<SliderTrackProps> = props => {
   };
 
   return (
-    <RenderlessSliderTrack {...state} className={trackContainerStyles}>
+    <RenderlessSliderTrack
+      {...state}
+      ref={ref}
+      className={trackContainerStyles}
+      style={{ padding: `${contextProps.padding}px 0` }}
+    >
       <div className={trackMainStyles}>
         {!isMulti ? (
           <div className={trackFilledStyles} style={trackDynamicStyles} />
@@ -62,4 +72,4 @@ export const SliderTrack: React.FC<SliderTrackProps> = props => {
       </div>
     </RenderlessSliderTrack>
   );
-};
+});

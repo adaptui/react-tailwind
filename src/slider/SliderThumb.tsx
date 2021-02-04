@@ -1,20 +1,22 @@
 import React from "react";
-import { VisuallyHidden } from "reakit";
 import {
   cx,
   SliderInput,
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
+import { Box } from "../box";
 import { useTheme } from "..";
 import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
+import { forwardRefWithAs } from "../utils/types";
 
 type SliderThumbProps = Omit<SliderProps, "size" | "orientation" | "origin">;
 
-export const SliderThumb: React.FC<SliderThumbProps> = ({
-  children,
-  ...props
-}) => {
+export const SliderThumb = forwardRefWithAs<
+  SliderThumbProps,
+  HTMLDivElement,
+  "div"
+>(({ children, ...props }, ref) => {
   const theme = useTheme();
 
   const contextProps = useSliderPropsContext();
@@ -28,20 +30,17 @@ export const SliderThumb: React.FC<SliderThumbProps> = ({
     origin: origin,
   });
 
-  const thumbStyles = cx(
-    theme.slider.common.thumb.base,
-    theme.slider[orientation].thumb.base,
-  );
-
   const thumbHandleStyles = cx(
-    theme.slider.common.thumb.handle.base,
-    theme.slider.common.thumb.handle.size[size],
-    theme.slider[orientation].thumb.handle,
+    theme.slider.common.thumb.base,
+    theme.slider.common.thumb.size[size],
+    theme.slider[orientation].thumb.base,
   );
 
   const thumbDynamicStyles = (index: number) => {
     const percent = getThumbPercent(index) * 100;
-    const calc = `calc(${percent}% - 7px)`;
+    const calc = `calc(${percent}% - ${
+      contextProps.thumbSize.current.height / 2
+    }px)`;
     return {
       right: isReversed ? calc : "",
       left: !isReversed && !isVertical ? calc : "",
@@ -53,24 +52,23 @@ export const SliderThumb: React.FC<SliderThumbProps> = ({
     <>
       {[...new Array(state.values.length).keys()].map(index => {
         return (
-          <div
-            className={thumbStyles}
+          <RenderlessSliderThumb
+            ref={ref}
             key={`thumb-${index}`}
             style={thumbDynamicStyles(index)}
+            {...state}
+            index={index}
+            className={thumbHandleStyles}
           >
-            <RenderlessSliderThumb
-              {...state}
+            <SliderInput
+              className={theme.slider.common.input}
               index={index}
-              className={thumbHandleStyles}
-            >
-              <VisuallyHidden>
-                <SliderInput index={index} {...state} />
-              </VisuallyHidden>
-              {children}
-            </RenderlessSliderThumb>
-          </div>
+              {...state}
+            />
+            {children}
+          </RenderlessSliderThumb>
         );
       })}
     </>
   );
-};
+});

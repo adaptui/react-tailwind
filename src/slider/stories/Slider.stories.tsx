@@ -43,7 +43,7 @@ export const Reversed = base({ reversed: true });
 export const Vertical = () => {
   return (
     <div role="group" aria-labelledby="styled-slider" style={{ height: 200 }}>
-      <Slider size="xs" orientation="vertical" origin={0} />
+      <Slider size="lg" orientation="vertical" origin={0} />
     </div>
   );
 };
