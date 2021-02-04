@@ -7,9 +7,12 @@ import { calendar } from "./calendar";
 import { checkbox } from "./checkbox";
 import { datepicker } from "./datepicker";
 import { icon } from "./icon";
+import { _switch } from "./switch";
 import { iconButton } from "./iconButton";
+
 import { spinner } from "./spinner";
 import { tag } from "./tag";
+import { radio } from "./radio";
 
 const theme = {
   alert,
@@ -24,6 +27,8 @@ const theme = {
   iconButton,
   spinner,
   tag,
+  radio,
+  switch: _switch,
 };
 
 export default theme;

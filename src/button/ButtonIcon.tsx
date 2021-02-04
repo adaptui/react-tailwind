@@ -3,7 +3,7 @@ import { Box, BoxProps } from "reakit";
 
 import { forwardRefWithAs } from "../utils/types";
 
-export type ButtonIconProps = BoxProps;
+export type ButtonIconProps = BoxProps & {};
 
 export const ButtonIcon = forwardRefWithAs<
   ButtonIconProps,
@@ -11,12 +11,11 @@ export const ButtonIcon = forwardRefWithAs<
   "span"
 >((props, ref) => {
   const { children, ...rest } = props;
-
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
-        "aria-hidden": true,
-        focusable: false,
         role: "img",
+        focusable: false,
+        "aria-hidden": true,
       })
     : children;
 
