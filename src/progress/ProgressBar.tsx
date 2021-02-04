@@ -1,12 +1,15 @@
+import {
+  cx,
+  ProgressProps,
+  Progress as RenderlesskitProgress,
+} from "@renderlesskit/react";
 import * as React from "react";
-import { cx, Progress as RenderlesskitProgress } from "@renderlesskit/react";
 
-import { BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { useProgressContext } from "./Progress";
 import { forwardRefWithAs } from "../utils/types";
 
-export type ProgressBarProps = BoxProps & {};
+export type ProgressBarProps = Partial<ProgressProps> & {};
 
 export const ProgressBar = forwardRefWithAs<
   ProgressBarProps,
