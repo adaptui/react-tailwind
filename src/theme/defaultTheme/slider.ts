@@ -8,7 +8,7 @@ export const slider = {
     track: {
       base: "relative top-0 cursor-pointer rounded-full overflow-hidden",
       main: "bg-gray-300",
-      filled: "absolute bg-gray-800",
+      filled: "absolute bg-gray-800 pointer-events-none",
     },
     thumb: {
       base: "absolute z-1 flex items-center",
@@ -28,9 +28,9 @@ export const slider = {
       base: "w-full top-0",
     },
     track: {
-      base: "w-full top-1/2 transform translate-y-1/2",
+      base: "w-full",
       main: "",
-      filled: "top-0",
+      filled: "",
       size: {
         xs: "h-2px",
         sm: "h-4px",
@@ -38,8 +38,8 @@ export const slider = {
       },
     },
     thumb: {
-      base: "flex-col bottom-0",
-      handle: "top-1/2 transform translate-y-1/2",
+      base: "flex-col top-0",
+      handle: "",
     },
   },
   vertical: {

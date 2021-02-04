@@ -102,6 +102,16 @@ export const Slider = forwardRefWithAs<
   } = props;
   const theme = useTheme();
   const state = useSliderState({ ...props, orientation });
+  const thumbRef = React.useRef<HTMLDivElement>(null);
+  const thumbSize = React.useRef({ width: 0, height: 0 });
+
+  React.useLayoutEffect(() => {
+    if (thumbRef.current) {
+      const dimension = thumbRef?.current?.getBoundingClientRect();
+      thumbSize.current.width = dimension.width;
+      thumbSize.current.height = dimension.height;
+    }
+  }, [thumbRef]);
 
   return (
     <SliderStateProvider value={state}>
@@ -113,6 +123,10 @@ export const Slider = forwardRefWithAs<
             theme.slider[orientation].wrapper.base,
             className,
           )}
+          style={{
+            paddingTop: thumbSize.current.width / 2,
+            paddingBottom: thumbSize.current.height / 2,
+          }}
         >
           {children ? (
             runIfFn(children, { state })
@@ -120,6 +134,7 @@ export const Slider = forwardRefWithAs<
             <>
               <SliderTrack />
               <SliderThumb
+                ref={thumbRef}
                 tooltipVisible={props.tooltipVisible}
                 tooltipContent={props.tooltipContent}
               >
