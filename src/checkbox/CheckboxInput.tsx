@@ -6,23 +6,21 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
+import { useCheckboxContext } from "./Checkbox";
 import { forwardRefWithAs } from "../utils/types";
-import { CheckboxStateProps, useCheckboxState } from "./Checkbox";
 
-export type CheckboxInputProps = Omit<ReakitCheckboxProps, "size" | "state"> &
-  CheckboxStateProps;
+export type CheckboxInputProps = ReakitCheckboxProps & {};
 
 export const CheckboxInput = forwardRefWithAs<
   CheckboxInputProps,
   HTMLInputElement,
   "input"
 >((props, ref) => {
-  const { className, state, size, ...rest } = props;
-  const checkboxState = useCheckboxState();
-  const _state = state || checkboxState || {};
+  const { className, ...rest } = props;
+  const { state } = useCheckboxContext();
   // Interpts with the checked unchecked state
-  if (_state["value"] === undefined) delete _state["value"];
-  if (_state["checked"] === undefined) delete _state["checked"];
+  if (state["value"] === undefined) delete state["value"];
+  if (state["checked"] === undefined) delete state["checked"];
 
   const theme = useTheme();
   const checkboxInputStyles = cx(theme.checkbox.input, className);
@@ -31,7 +29,7 @@ export const CheckboxInput = forwardRefWithAs<
     <ReakitCheckbox
       ref={ref}
       className={checkboxInputStyles}
-      {..._state}
+      {...state}
       {...rest}
     />
   );

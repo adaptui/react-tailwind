@@ -4,25 +4,24 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { CheckboxStateProps, useCheckboxState } from "./Checkbox";
+import { useCheckboxContext } from "./Checkbox";
 
-export type CheckboxLabelProps = BoxProps & CheckboxStateProps;
+export type CheckboxLabelProps = BoxProps & {};
 
 export const CheckboxLabel = forwardRefWithAs<
   CheckboxLabelProps,
   HTMLLabelElement,
   "label"
 >((props, ref) => {
-  const { state, size, className, ...rest } = props;
-  const checkboxState = useCheckboxState();
-  const _state = state || checkboxState || {};
+  const { className, ...rest } = props;
+  const { state } = useCheckboxContext();
 
   const theme = useTheme();
-  const checkboxStyles = cx(
+  const checkboxLabelStyles = cx(
     theme.checkbox.base,
-    _state?.disabled ? theme.checkbox.disabled : "",
+    state?.disabled ? theme.checkbox.disabled : "",
     className,
   );
 
-  return <Box as="label" ref={ref} className={checkboxStyles} {...rest} />;
+  return <Box as="label" ref={ref} className={checkboxLabelStyles} {...rest} />;
 });

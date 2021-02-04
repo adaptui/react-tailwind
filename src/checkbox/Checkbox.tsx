@@ -13,54 +13,30 @@ import { createContext, runIfFn } from "../utils";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
-export type CheckboxStateContext = ReakitCheckboxProps;
+export type CheckboxContext = {
+  state: ReakitCheckboxProps;
+  size: CheckboxProps["size"];
+};
 
-const [
-  CheckboxStateProvider,
-  useCheckboxState,
-] = createContext<CheckboxStateContext>({
-  name: "CheckboxStateContext",
+const [CheckboxProvider, useCheckboxContext] = createContext<CheckboxContext>({
+  name: "CheckboxContext",
   strict: false,
 });
 
-export { useCheckboxState };
-
-export type CheckboxThemeContext = {
-  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon">["size"];
-};
-
-const [
-  CheckboxThemeProvider,
-  useCheckboxTheme,
-] = createContext<CheckboxThemeContext>({
-  name: "CheckboxThemeContext",
-  strict: false,
-});
-
-export { useCheckboxTheme };
-
-export type CheckboxStateProps = CheckboxThemeContext & {
-  state?: CheckboxStateContext;
-};
+export { useCheckboxContext };
 
 type CheckboxRenderProps = {
   children?:
-    | (({
-        state,
-        theme,
-      }: {
-        state: CheckboxStateContext;
-        theme: CheckboxThemeContext;
-      }) => JSX.Element)
+    | (({ state, size }: CheckboxContext) => JSX.Element)
     | React.ReactNode
     | string;
 };
 
-export type CheckboxProps = Omit<ReakitCheckboxProps, "size" | "setState"> &
-  CheckboxThemeContext & {
-    defaultState?: CheckboxStateContext["state"];
-    onStateChange?: (value: CheckboxStatus) => void;
-  };
+export type CheckboxProps = Omit<ReakitCheckboxProps, "size" | "setState"> & {
+  defaultState?: ReakitCheckboxProps["state"];
+  onStateChange?: (value: CheckboxStatus) => void;
+  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon">["size"];
+};
 
 export const Checkbox: React.FC<
   CheckboxProps & CheckboxRenderProps
@@ -69,11 +45,11 @@ export const Checkbox: React.FC<
     defaultState,
     state: initialState,
     onStateChange,
-    size = "sm",
     value,
     checked,
     disabled,
     focusable,
+    size = "sm",
     children,
     ...rest
   } = props;
@@ -101,21 +77,19 @@ export const Checkbox: React.FC<
       focusable,
     ],
   );
-  const theme = React.useMemo(() => ({ size }), [size]);
+  const context = React.useMemo(() => ({ state, size }), [state, size]);
 
   return (
-    <CheckboxStateProvider value={state}>
-      <CheckboxThemeProvider value={theme}>
-        {typeof children !== "string" ? (
-          runIfFn(children, { state, theme })
-        ) : (
-          <CheckboxLabel {...rest}>
-            <CheckboxInput />
-            <CheckboxIcon />
-            {children ? <CheckboxText>{children}</CheckboxText> : null}
-          </CheckboxLabel>
-        )}
-      </CheckboxThemeProvider>
-    </CheckboxStateProvider>
+    <CheckboxProvider value={context}>
+      {typeof children !== "string" ? (
+        runIfFn(children, { state, size })
+      ) : (
+        <CheckboxLabel {...rest}>
+          <CheckboxInput />
+          <CheckboxIcon />
+          {children ? <CheckboxText>{children}</CheckboxText> : null}
+        </CheckboxLabel>
+      )}
+    </CheckboxProvider>
   );
 };

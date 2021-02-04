@@ -10,7 +10,6 @@ import {
   CheckboxStatus,
   CheckboxIcon,
   CheckboxText,
-  CheckboxStateContext,
 } from "../index";
 import {
   createUnionControl,
@@ -188,29 +187,16 @@ export const GroupIndeterminateComplex = () => {
 };
 
 const CheckboxCustom = (props: CheckboxProps) => {
-  const [
-    checkboxState,
-    setCheckboxStateChange,
-  ] = React.useState<CheckboxStatus>(true);
-  const { size } = props;
-  const state: CheckboxStateContext = {
-    state: checkboxState,
-    setState: setCheckboxStateChange,
-    disabled: props?.disabled,
-  };
+  const [state, onStateChange] = React.useState<CheckboxStatus>(true);
 
   return (
-    <CheckboxLabel state={state}>
-      <CheckboxInput state={state} />
-      <CheckboxIcon
-        className="w-8 h-8 text-2xl text-white bg-blue-500"
-        size={size}
-        state={state}
-      />
-      <CheckboxText className="text-orange-500" size={size}>
-        Custom Checkbox
-      </CheckboxText>
-    </CheckboxLabel>
+    <Checkbox state={state} onStateChange={onStateChange} {...props}>
+      <CheckboxLabel>
+        <CheckboxInput />
+        <CheckboxIcon className="w-8 h-8 text-2xl text-white bg-blue-500" />
+        <CheckboxText className="text-orange-500">Custom Checkbox</CheckboxText>
+      </CheckboxLabel>
+    </Checkbox>
   );
 };
 
