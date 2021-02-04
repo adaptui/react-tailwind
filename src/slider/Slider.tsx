@@ -71,10 +71,6 @@ export const useSliderValues = (props: SliderProps) => {
 export type SliderProps = SliderInitialState & {
   origin?: number;
   thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
-  tooltipContent?:
-    | React.ReactNode
-    | ((state: SliderStateReturn) => JSX.Element);
-  tooltipVisible?: boolean;
   size?: keyof Renderlesskit.GetThemeValue<
     "slider",
     "common"
@@ -119,10 +115,7 @@ export const Slider = forwardRefWithAs<
           ) : (
             <>
               <SliderTrack />
-              <SliderThumb
-                tooltipVisible={props.tooltipVisible}
-                tooltipContent={props.tooltipContent}
-              >
+              <SliderThumb>
                 {thumbContent
                   ? runIfFn(thumbContent, state.values)
                   : thumbContent}

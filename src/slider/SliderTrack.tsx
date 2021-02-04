@@ -6,7 +6,7 @@ import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 
 export type SliderTrackProps = Omit<
   SliderProps,
-  "thumbContent" | "tooltipContent" | "size" | "orientation" | "origin"
+  "thumbContent" | "size" | "orientation" | "origin"
 >;
 
 export const SliderTrack: React.FC<SliderTrackProps> = props => {

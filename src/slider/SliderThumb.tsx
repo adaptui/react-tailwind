@@ -1,29 +1,21 @@
 import React from "react";
-import {
-  Tooltip,
-  VisuallyHidden,
-  useTooltipState,
-  TooltipReference,
-} from "reakit";
+import { VisuallyHidden } from "reakit";
 import {
   cx,
   SliderInput,
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
-import { runIfFn, useTheme } from "..";
+import { useTheme } from "..";
 import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 
 type SliderThumbProps = Omit<SliderProps, "size" | "orientation" | "origin">;
 
 export const SliderThumb: React.FC<SliderThumbProps> = ({
-  tooltipContent,
-  tooltipVisible,
   children,
   ...props
 }) => {
   const theme = useTheme();
-  const tooltip = useTooltipState({});
 
   const contextProps = useSliderPropsContext();
 
@@ -35,11 +27,6 @@ export const SliderThumb: React.FC<SliderThumbProps> = ({
     orientation: orientation,
     origin: origin,
   });
-
-  React.useEffect(() => {
-    tooltip.unstable_update();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.values]);
 
   const thumbStyles = cx(
     theme.slider.common.thumb.base,
@@ -72,8 +59,6 @@ export const SliderThumb: React.FC<SliderThumbProps> = ({
             style={thumbDynamicStyles(index)}
           >
             <RenderlessSliderThumb
-              as={TooltipReference}
-              {...tooltip}
               {...state}
               index={index}
               className={thumbHandleStyles}
@@ -83,17 +68,6 @@ export const SliderThumb: React.FC<SliderThumbProps> = ({
               </VisuallyHidden>
               {children}
             </RenderlessSliderThumb>
-            {tooltipVisible ? (
-              <Tooltip
-                {...tooltip}
-                as="div"
-                className={theme.slider.common.tooltipContent}
-              >
-                {tooltipContent
-                  ? runIfFn(tooltipContent, state)
-                  : state.getThumbValueLabel(index)}
-              </Tooltip>
-            ) : null}
           </div>
         );
       })}
