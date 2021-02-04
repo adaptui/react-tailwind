@@ -1,5 +1,4 @@
 import React from "react";
-import { Tooltip, useTooltipState, TooltipReference } from "reakit";
 import {
   cx,
   SliderInput,
@@ -7,7 +6,7 @@ import {
 } from "@renderlesskit/react";
 
 import { Box } from "../box";
-import { runIfFn, useTheme } from "..";
+import { useTheme } from "..";
 import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 import { forwardRefWithAs } from "../utils/types";
 
@@ -17,9 +16,8 @@ export const SliderThumb = forwardRefWithAs<
   SliderThumbProps,
   HTMLDivElement,
   "div"
->(({ tooltipContent, tooltipVisible, children, ...props }, ref) => {
+>(({ children, ...props }, ref) => {
   const theme = useTheme();
-  const tooltip = useTooltipState({});
 
   const contextProps = useSliderPropsContext();
 
@@ -32,20 +30,10 @@ export const SliderThumb = forwardRefWithAs<
     origin: origin,
   });
 
-  React.useEffect(() => {
-    tooltip.unstable_update();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.values]);
-
-  const thumbStyles = cx(
-    theme.slider.common.thumb.base,
-    theme.slider[orientation].thumb.base,
-  );
-
   const thumbHandleStyles = cx(
-    theme.slider.common.thumb.handle.base,
-    theme.slider.common.thumb.handle.size[size],
-    theme.slider[orientation].thumb.handle,
+    theme.slider.common.thumb.base,
+    theme.slider.common.thumb.size[size],
+    theme.slider[orientation].thumb.base,
   );
 
   const thumbDynamicStyles = (index: number) => {
@@ -64,38 +52,21 @@ export const SliderThumb = forwardRefWithAs<
     <>
       {[...new Array(state.values.length).keys()].map(index => {
         return (
-          <Box
+          <RenderlessSliderThumb
             ref={ref}
-            className={thumbStyles}
             key={`thumb-${index}`}
             style={thumbDynamicStyles(index)}
+            {...state}
+            index={index}
+            className={thumbHandleStyles}
           >
-            <RenderlessSliderThumb
-              as={TooltipReference}
-              {...tooltip}
-              {...state}
+            <SliderInput
+              className={theme.slider.common.input}
               index={index}
-              className={thumbHandleStyles}
-            >
-              <SliderInput
-                className={theme.slider.common.input}
-                index={index}
-                {...state}
-              />
-              {children}
-            </RenderlessSliderThumb>
-            {tooltipVisible ? (
-              <Tooltip
-                {...tooltip}
-                as="div"
-                className={theme.slider.common.tooltipContent}
-              >
-                {tooltipContent
-                  ? runIfFn(tooltipContent, state)
-                  : state.getThumbValueLabel(index)}
-              </Tooltip>
-            ) : null}
-          </Box>
+              {...state}
+            />
+            {children}
+          </RenderlessSliderThumb>
         );
       })}
     </>

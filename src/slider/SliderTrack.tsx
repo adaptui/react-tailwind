@@ -7,7 +7,7 @@ import { forwardRefWithAs } from "../utils/types";
 
 export type SliderTrackProps = Omit<
   SliderProps,
-  "thumbContent" | "tooltipContent" | "size" | "orientation" | "origin"
+  "thumbContent" | "size" | "orientation" | "origin"
 >;
 
 export const SliderTrack = forwardRefWithAs<

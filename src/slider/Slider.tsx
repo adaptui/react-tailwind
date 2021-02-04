@@ -101,14 +101,7 @@ const useSliderDimensions = () => {
 export type SliderProps = SliderInitialState & {
   origin?: number;
   thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
-  tooltipContent?:
-    | React.ReactNode
-    | ((state: SliderStateReturn) => JSX.Element);
-  tooltipVisible?: boolean;
-  size?: keyof Renderlesskit.GetThemeValue<
-    "slider",
-    "common"
-  >["thumb"]["handle"]["size"];
+  size?: keyof Renderlesskit.GetThemeValue<"slider", "common">["thumb"]["size"];
 };
 
 type SliderRenderProps = {
@@ -152,11 +145,7 @@ export const Slider = forwardRefWithAs<
           ) : (
             <>
               <SliderTrack ref={trackRef} />
-              <SliderThumb
-                ref={thumbRef}
-                tooltipVisible={props.tooltipVisible}
-                tooltipContent={props.tooltipContent}
-              >
+              <SliderThumb ref={thumbRef}>
                 {thumbContent
                   ? runIfFn(thumbContent, state.values)
                   : thumbContent}

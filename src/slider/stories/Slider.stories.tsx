@@ -38,20 +38,6 @@ export const ThumbIcon = base({
   thumbContent: <SliderThumbHandle />,
 });
 
-export const TooltipContent = base({
-  tooltipVisible: true,
-  tooltipContent: state => (
-    <small className="text-xxs">value: {state.getThumbValueLabel(0)}</small>
-  ),
-});
-
-export const TooltipPlacement = base({
-  tooltipVisible: true,
-  tooltipContent: state => (
-    <small className="text-xxs">value: {state.getThumbValueLabel(0)}</small>
-  ),
-});
-
 export const Reversed = base({ reversed: true });
 
 export const Vertical = () => {
@@ -71,7 +57,7 @@ export const Customization = () => {
             <span>
               {state.isThumbDragging(0) ? "Dragging" : "Not dragging"}
             </span>
-            <SliderThumb tooltipVisible={true}></SliderThumb>
+            <SliderThumb />
             <SliderTrack />
           </>
         )}
