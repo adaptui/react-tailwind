@@ -71,7 +71,7 @@ export const Customization = () => {
             <span>
               {state.isThumbDragging(0) ? "Dragging" : "Not dragging"}
             </span>
-            <SliderThumb tooltipVisible={true} size="lg"></SliderThumb>
+            <SliderThumb tooltipVisible={true}></SliderThumb>
             <SliderTrack />
           </>
         )}

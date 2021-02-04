@@ -6,21 +6,16 @@ import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 
 export type SliderTrackProps = Omit<
   SliderProps,
-  "thumbContent" | "tooltipContent"
+  "thumbContent" | "tooltipContent" | "size" | "orientation" | "origin"
 >;
 
-export const SliderTrack: React.FC<SliderTrackProps> = ({
-  orientation,
-  origin,
-  size,
-  ...props
-}) => {
+export const SliderTrack: React.FC<SliderTrackProps> = props => {
   const theme = useTheme();
   const contextProps = useSliderPropsContext();
 
-  const _orientation = orientation || contextProps.orientation || "horizontal";
-  const _size = size || contextProps.size || "sm";
-  const _origin = origin || contextProps.origin || 0;
+  const orientation = contextProps.orientation || "horizontal";
+  const size = contextProps.size || "sm";
+  const origin = contextProps.origin || 0;
 
   const {
     isVertical,
@@ -32,23 +27,23 @@ export const SliderTrack: React.FC<SliderTrackProps> = ({
     trackRight,
     getThumbPercent,
     state,
-  } = useSliderValues({ orientation: _orientation, origin: _origin });
+  } = useSliderValues({ orientation: orientation, origin: origin });
 
   const trackContainerStyles = cx(
     theme.slider.common.track.base,
-    theme.slider[_orientation].track.base,
+    theme.slider[orientation].track.base,
   );
 
   const trackMainStyles = cx(
     theme.slider.common.track.main,
-    theme.slider[_orientation].track.main,
-    theme.slider[_orientation].track.size[_size],
+    theme.slider[orientation].track.main,
+    theme.slider[orientation].track.size[size],
   );
 
   const trackFilledStyles = cx(
     theme.slider.common.track.filled,
-    theme.slider[_orientation].track.filled,
-    theme.slider[_orientation].track.size[_size],
+    theme.slider[orientation].track.filled,
+    theme.slider[orientation].track.size[size],
   );
 
   const trackDynamicStyles = {
