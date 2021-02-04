@@ -15,6 +15,43 @@ export default {
   argTypes: { size: createUnionControl(["xs", "sm", "lg", "xl"]) },
 } as Meta;
 
+const base = storyTemplate<ProgressProps>(
+  args => {
+    const [value, setValue] = useProgressState();
+
+    return (
+      <>
+        <Progress value={value} {...args} />
+        <ActionButtons setValue={setValue} />
+      </>
+    );
+  },
+  { size: "sm" },
+);
+
+export const ExtraSmall = base({ size: "xs" });
+export const Small = base({});
+export const Large = base({ size: "lg" });
+export const ExtraLarge = base({ size: "xl" });
+
+export const Custom = storyTemplate<ProgressProps>(
+  args => {
+    const [value, setValue] = useProgressState();
+
+    return (
+      <>
+        <Progress value={value} {...args}>
+          <ProgressTrack className="bg-red-300">
+            <ProgressBar className="bg-red-800" />
+          </ProgressTrack>
+        </Progress>
+        <ActionButtons setValue={setValue} />
+      </>
+    );
+  },
+  { size: "lg" },
+)({});
+
 const useProgressState = (initialValue: number | null = 0) => {
   const [value, setValue] = React.useState<number | null>(initialValue);
 
@@ -38,51 +75,17 @@ const useProgressState = (initialValue: number | null = 0) => {
   return [value, setValue] as const;
 };
 
-const base = storyTemplate<ProgressProps>(
-  args => {
-    const [value, setValue] = useProgressState();
-
-    return (
-      <>
-        <Progress value={value} {...args} />
-        <Button type="reset" className="block mt-2" onClick={() => setValue(0)}>
-          Restart Progress
-        </Button>
-        <Button onClick={() => setValue(null)} className="block mt-2">
-          Make Indeterminate - Sets value to `null`
-        </Button>
-      </>
-    );
-  },
-  { size: "sm" },
-);
-
-export const ExtraSmall = base({ size: "xs" });
-export const Small = base({});
-export const Large = base({ size: "lg" });
-export const ExtraLarge = base({ size: "xl" });
-
-export const Custom = storyTemplate<ProgressProps>(
-  args => {
-    const [value, setValue] = useProgressState();
-
-    return (
-      <>
-        <Progress value={value} {...args}>
-          {({ state, size }) => (
-            <ProgressTrack size={size} className="bg-red-300">
-              <ProgressBar {...state} className="bg-red-800" />
-            </ProgressTrack>
-          )}
-        </Progress>
-        <Button type="reset" className="block mt-2" onClick={() => setValue(0)}>
-          Restart Progress
-        </Button>
-        <Button onClick={() => setValue(null)} className="block mt-2">
-          Make Indeterminate - Sets value to `null`
-        </Button>
-      </>
-    );
-  },
-  { size: "lg" },
-)({});
+const ActionButtons: React.FC<{
+  setValue: React.Dispatch<React.SetStateAction<number | null>>;
+}> = ({ setValue }) => {
+  return (
+    <>
+      <Button type="reset" className="block mt-2" onClick={() => setValue(0)}>
+        Restart Progress
+      </Button>
+      <Button onClick={() => setValue(null)} className="block mt-2">
+        Make Indeterminate - Sets value to `null`
+      </Button>
+    </>
+  );
+};

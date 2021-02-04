@@ -5,53 +5,72 @@ import {
 } from "@renderlesskit/react";
 import * as React from "react";
 
-import { runIfFn } from "../utils";
+import { BoxProps } from "../box";
 import { ProgressBar } from "./ProgressBar";
 import { ProgressTrack } from "./ProgressTrack";
+import { createContext, runIfFn } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+
+export type ProgressContext = {
+  state: ProgressStateReturn;
+  size: ProgressProps["size"];
+};
+
+const [ProgressProvider, useProgressContext] = createContext<ProgressContext>({
+  name: "ProgressContext",
+  strict: false,
+});
+
+export { useProgressContext };
 
 type ProgressRenderProps = {
   children?:
-    | (({
-        state,
-        size,
-      }: {
-        state: ProgressStateReturn;
-        size: ProgressProps["size"];
-      }) => JSX.Element)
+    | (({ state, size }: ProgressContext) => JSX.Element)
     | React.ReactNode;
 };
 
-export type ProgressProps = ProgressInitialState & {
-  /**
-   * How large should the progress be?
-   *
-   * @default "sm"
-   */
-  size?: keyof Renderlesskit.GetThemeValue<"progress", "track">["size"];
-};
+export type ProgressProps = BoxProps &
+  ProgressInitialState & {
+    /**
+     * How large should the progress be?
+     *
+     * @default "sm"
+     */
+    size?: keyof Renderlesskit.GetThemeValue<"progress", "track">["size"];
+  };
 
-export const Progress: React.FC<
-  ProgressProps & ProgressRenderProps
-> = props => {
-  const { value: defaultValue, size = "sm", children, ...rest } = props;
-  const state = useProgressState(rest);
+export const Progress: React.FC = forwardRefWithAs<
+  ProgressProps & ProgressRenderProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    value: defaultValue,
+    min,
+    max,
+    size = "sm",
+    children,
+    ...rest
+  } = props;
+  const state = useProgressState({ min, max });
   const { setValue } = state;
+  const context = React.useMemo(() => ({ state, size }), [state, size]);
 
   React.useEffect(() => {
     if (defaultValue !== undefined) setValue(defaultValue);
   }, [defaultValue, setValue]);
 
   return (
-    <>
+    <ProgressProvider value={context}>
       {children ? (
         runIfFn(children, { state, size })
       ) : (
-        <ProgressTrack size={size}>
-          <ProgressBar {...state} />
+        <ProgressTrack ref={ref} {...rest}>
+          <ProgressBar />
         </ProgressTrack>
       )}
-    </>
+    </ProgressProvider>
   );
-};
+});
 
 export default Progress;
