@@ -50,7 +50,7 @@ export const SliderThumb = React.forwardRef<HTMLElement, SliderThumbProps>(
 
     const thumbDynamicStyles = (index: number) => {
       const percent = getThumbPercent(index) * 100;
-      const calc = `calc(${percent}% - 7px)`;
+      const calc = `calc(${percent}% - 5px)`;
       return {
         right: isReversed ? calc : "",
         left: !isReversed && !isVertical ? calc : "",

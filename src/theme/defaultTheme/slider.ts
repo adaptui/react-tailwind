@@ -38,7 +38,7 @@ export const slider = {
       },
     },
     thumb: {
-      base: "flex-col top-0",
+      base: "flex-col top-1/4 transform -translate-y-1/4",
       handle: "",
     },
   },
