@@ -1,6 +1,7 @@
 export const slider = {
   base: "relative",
   common: {
+    input: "sr-only",
     tooltipContent: "pointer-events-none text-xs",
     wrapper: {
       base: "relative inline-block touch-action-none select-none outline-none",
