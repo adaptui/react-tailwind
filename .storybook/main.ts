@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ["../src/progress/stories/*.stories.@(ts|tsx)"],
+  stories: ["../src/*/stories/*.stories.@(ts|tsx)"],
   addons: ["@storybook/addon-essentials"],
   typescript: {
     reactDocgen: false,

@@ -3,7 +3,7 @@ import { cx, Progress as RenderlesskitProgress } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { useProgress } from "./Progress";
+import { useProgressContext } from "./Progress";
 import { forwardRefWithAs } from "../utils/types";
 
 export type ProgressBarProps = BoxProps & {};
@@ -15,7 +15,7 @@ export const ProgressBar = forwardRefWithAs<
 >((props, ref) => {
   const { className, ...rest } = props;
   const theme = useTheme();
-  const { state } = useProgress();
+  const { state } = useProgressContext();
   const { percent, isIndeterminate } = state;
 
   return (
@@ -25,8 +25,9 @@ export const ProgressBar = forwardRefWithAs<
       style={{ width: `${percent}%` }}
       className={cx(
         theme.progress.bar.base,
-        !isIndeterminate ? theme.progress.bar.normal : "",
-        isIndeterminate ? theme.progress.bar.indeterminate : "",
+        !isIndeterminate
+          ? theme.progress.bar.normal
+          : theme.progress.bar.indeterminate,
         className,
       )}
       {...rest}

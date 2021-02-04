@@ -16,12 +16,12 @@ export type ProgressContext = {
   size: ProgressProps["size"];
 };
 
-const [ProgressProvider, useProgress] = createContext<ProgressContext>({
+const [ProgressProvider, useProgressContext] = createContext<ProgressContext>({
   name: "ProgressContext",
   strict: false,
 });
 
-export { useProgress };
+export { useProgressContext };
 
 type ProgressRenderProps = {
   children?:

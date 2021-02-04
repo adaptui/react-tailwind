@@ -4,7 +4,7 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { ProgressProps, useProgress } from "./Progress";
+import { ProgressProps, useProgressContext } from "./Progress";
 
 export type ProgressTrackProps = BoxProps & Pick<ProgressProps, "size">;
 
@@ -15,7 +15,7 @@ export const ProgressTrack = forwardRefWithAs<
 >((props, ref) => {
   const { className, ...rest } = props;
   const theme = useTheme();
-  const { size = "sm" } = useProgress();
+  const { size = "sm" } = useProgressContext();
 
   return (
     <Box
