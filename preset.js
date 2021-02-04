@@ -29,6 +29,7 @@ const renderlesskitConfig = {
         em: "1em",
       },
       top: {
+        "2px": "2px",
         unset: "unset",
       },
       width: {

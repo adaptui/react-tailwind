@@ -24,7 +24,12 @@ const [
 });
 
 const [SliderPropsContext, useSliderPropsContext] = createContext<
-  Pick<SliderProps, "orientation" | "size" | "origin">
+  Pick<SliderProps, "orientation" | "size" | "origin"> & {
+    thumbSize: React.MutableRefObject<{
+      width: number;
+      height: number;
+    }>;
+  }
 >({
   name: "SliderProps",
   strict: false,
@@ -115,7 +120,7 @@ export const Slider = forwardRefWithAs<
 
   return (
     <SliderStateProvider value={state}>
-      <SliderPropsContext value={{ size, orientation, origin }}>
+      <SliderPropsContext value={{ size, orientation, origin, thumbSize }}>
         <Box
           ref={ref}
           className={cx(
@@ -123,10 +128,6 @@ export const Slider = forwardRefWithAs<
             theme.slider[orientation].wrapper.base,
             className,
           )}
-          style={{
-            paddingTop: thumbSize.current.width / 2,
-            paddingBottom: thumbSize.current.height / 2,
-          }}
         >
           {children ? (
             runIfFn(children, { state })

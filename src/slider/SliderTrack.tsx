@@ -54,7 +54,14 @@ export const SliderTrack: React.FC<SliderTrackProps> = props => {
   };
 
   return (
-    <RenderlessSliderTrack {...state} className={trackContainerStyles}>
+    <RenderlessSliderTrack
+      {...state}
+      className={trackContainerStyles}
+      style={{
+        paddingTop: contextProps.thumbSize.current.width / 2,
+        paddingBottom: contextProps.thumbSize.current.height / 2,
+      }}
+    >
       <div className={trackMainStyles}>
         {!isMulti ? (
           <div className={trackFilledStyles} style={trackDynamicStyles} />
