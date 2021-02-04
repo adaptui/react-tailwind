@@ -1,12 +1,15 @@
+import {
+  cx,
+  ProgressProps,
+  Progress as RenderlesskitProgress,
+} from "@renderlesskit/react";
 import * as React from "react";
-import { cx, Progress as RenderlesskitProgress } from "@renderlesskit/react";
 
-import { BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { useCircularProgressContext } from "./CircularProgress";
 
-export type CircularProgressWrapperProps = BoxProps & {};
+export type CircularProgressWrapperProps = Partial<ProgressProps> & {};
 
 export const CircularProgressWrapper = forwardRefWithAs<
   CircularProgressWrapperProps,
