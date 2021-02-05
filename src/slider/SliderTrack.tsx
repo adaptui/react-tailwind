@@ -43,13 +43,13 @@ export const SliderTrack = forwardRefWithAs<
   const trackMainStyles = cx(
     theme.slider.common.track.main,
     theme.slider[orientation].track.main,
-    theme.slider[orientation].track.size[size],
+    theme.slider.common.track.size[size],
   );
 
   const trackFilledStyles = cx(
     theme.slider.common.track.filled,
     theme.slider[orientation].track.filled,
-    theme.slider[orientation].track.size[size],
+    theme.slider.common.track.size[size],
   );
 
   const trackDynamicStyles = {

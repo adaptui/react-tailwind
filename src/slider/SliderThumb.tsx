@@ -38,7 +38,12 @@ export const SliderThumb = forwardRefWithAs<
 
   const thumbDynamicStyles = (index: number) => {
     const percent = getThumbPercent(index) * 100;
-    const calc = `calc(${percent}% - ${thumbSize.current.height / 2}px)`;
+    const calc = `${clamp(
+      percent,
+      state.min,
+      state.max - thumbSize.current.width / 4,
+    )}%`;
+
     return {
       right: isReversed ? calc : "",
       left: !isReversed && !isVertical ? calc : "",
@@ -70,3 +75,7 @@ export const SliderThumb = forwardRefWithAs<
     </>
   );
 });
+
+function clamp(num: number, min: number, max: number) {
+  return num <= min ? min : num >= max ? max : num;
+}
