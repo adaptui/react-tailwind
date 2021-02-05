@@ -1,55 +1,58 @@
 export const slider = {
-  base: "relative",
+  base: "lib:relative",
   common: {
-    input: "sr-only",
-    tooltipContent: "pointer-events-none text-xs",
+    input: "lib:sr-only",
+    tooltipContent: "lib:pointer-events-none lib:text-xs",
     wrapper: {
-      base: "relative inline-block touch-action-none select-none outline-none",
+      base:
+        "lib:relative lib:inline-block lib:touch-action-none lib:select-none lib:outline-none",
     },
     track: {
-      base: "relative top-0 cursor-pointer",
-      main: "bg-gray-300 rounded-full",
-      filled: "absolute bg-gray-800 pointer-events-none rounded-full",
+      base: "lib:relative lib:top-0 lib:cursor-pointer",
+      main: "lib:bg-gray-300 lib:rounded-full",
+      filled:
+        "lib:absolute lib:bg-gray-800 lib:pointer-events-none lib:rounded-full",
       size: {
-        xs: "h-2px",
-        sm: "h-4px",
-        lg: "h-8px",
+        xs: "lib:h-2px",
+        sm: "lib:h-4px",
+        lg: "lib:h-8px",
       },
     },
     thumb: {
       base:
-        "absolute z-1 flex items-center bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb text-gray-400 focus-within:ring-2 focus-within:ring-gray-800",
+        "lib:absolute lib:z-1 lib:flex lib:items-center lib:bg-white lib:flex lib:items-center lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-gray-400 lib:focus-within:ring-2 lib:focus-within:ring-gray-800",
       size: {
-        xs: "w-12px h-12px text-xxs",
-        sm: "w-16px h-16px text-xs",
-        lg: "w-20px h-20px text-sm",
+        xs: "lib:w-12px lib:h-12px lib:text-xxs",
+        sm: "lib:w-16px lib:h-16px lib:text-xs",
+        lg: "lib:w-20px lib:h-20px lib:text-sm",
       },
     },
   },
   horizontal: {
     wrapper: {
-      base: "w-full top-0",
+      base: "lib:w-full lib:top-0",
     },
     track: {
-      base: "w-full",
+      base: "lib:w-full",
       main: "",
       filled: "",
     },
     thumb: {
-      base: "flex-col top-1/4 transform -translate-y-1/4",
+      base: "lib:flex-col lib:top-1/4 lib:transform lib:-translate-y-1/4",
     },
   },
   vertical: {
     wrapper: {
-      base: "h-full",
+      base: "lib:h-full",
     },
     track: {
-      base: "h-full w-fit",
-      main: "h-full",
-      filled: "top-unset bottom-0",
+      base: "lib:h-full lib:w-fit",
+      main: "lib:h-full",
+      filled: "lib:top-unset lib:bottom-0",
     },
     thumb: {
-      base: "flex-row top-unset left-1/2 transform -translate-x-1/2",
+      base:
+        "lib:flex-row lib:top-unset lib:left-1/2 lib:transform lib:-translate-x-1/2",
     },
   },
 };
