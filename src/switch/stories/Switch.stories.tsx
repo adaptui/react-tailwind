@@ -1,6 +1,5 @@
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Switch, SwitchProps } from "../Switch";
 import { SwitchIcon } from "../SwitchIcon";
 import {
   createUnionControl,
@@ -8,6 +7,7 @@ import {
 } from "../../../.storybook/storybookUtils";
 import { SwitchLabel } from "../SwitchLabel";
 import { SwitchInput } from "../SwitchInput";
+import { Switch, SwitchProps } from "../Switch";
 
 export default {
   title: "Switch",
@@ -45,7 +45,7 @@ export const DefaultChecked = base({ defaultState: true });
 export const Custom = storyTemplate<SwitchProps>(
   args => (
     <Switch {...args}>
-      {({ state: { state }, theme }) => {
+      {({ state }) => {
         return (
           <SwitchLabel className="inline-flex items-center px-4 py-3 bg-gray-100 rounded-lg">
             <SwitchInput />

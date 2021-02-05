@@ -6,19 +6,21 @@ import {
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { useSwitchState } from "./Switch";
+import { useSwitchContext } from "./Switch";
 import { forwardRefWithAs } from "../utils/types";
 
-export type SwitchInputProps = ReakitSwitchProps;
+export type SwitchInputProps = ReakitSwitchProps & {};
 
 export const SwitchInput = forwardRefWithAs<
-  Partial<SwitchInputProps>,
+  SwitchInputProps,
   HTMLInputElement,
   "input"
 >((props, ref) => {
-  const { className, state, ...rest } = props;
-  const switchState = useSwitchState();
-  const _state = state || switchState || {};
+  const { className, ...rest } = props;
+  const { state } = useSwitchContext();
+  // Interpts with the checked unchecked state
+  if (state["value"] === undefined) delete state["value"];
+  if (state["checked"] === undefined) delete state["checked"];
 
   const theme = useTheme();
   const switchInputStyles = cx(theme.switch.input, className);
@@ -28,7 +30,7 @@ export const SwitchInput = forwardRefWithAs<
       ref={ref}
       role="switch"
       className={switchInputStyles}
-      {..._state}
+      {...state}
       {...rest}
     />
   );
