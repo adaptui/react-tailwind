@@ -12,11 +12,6 @@ export const slider = {
       main: "lib:bg-gray-300 lib:rounded-full",
       filled:
         "lib:absolute lib:bg-gray-800 lib:pointer-events-none lib:rounded-full",
-      size: {
-        xs: "lib:h-2px",
-        sm: "lib:h-4px",
-        lg: "lib:h-8px",
-      },
     },
     thumb: {
       base:
@@ -36,6 +31,11 @@ export const slider = {
       base: "lib:w-full",
       main: "",
       filled: "",
+      size: {
+        xs: "lib:h-2px",
+        sm: "lib:h-4px",
+        lg: "lib:h-8px",
+      },
     },
     thumb: {
       base: "lib:flex-col lib:top-1/4 lib:transform lib:-translate-y-1/4",
@@ -49,6 +49,11 @@ export const slider = {
       base: "lib:h-full lib:w-fit",
       main: "lib:h-full",
       filled: "lib:top-unset lib:bottom-0",
+      size: {
+        xs: "lib:w-2px",
+        sm: "lib:w-4px",
+        lg: "lib:w-8px",
+      },
     },
     thumb: {
       base:
