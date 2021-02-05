@@ -29,7 +29,7 @@ export { useCheckboxContext };
 
 type CheckboxRenderProps = {
   children?:
-    | (({ state, size }: CheckboxContext) => JSX.Element)
+    | ((state: ReakitCheckboxOptions) => JSX.Element)
     | React.ReactNode
     | string;
 };
@@ -84,7 +84,7 @@ export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(
     return (
       <CheckboxProvider value={context}>
         {typeof children !== "string" ? (
-          runIfFn(children, { state, size })
+          runIfFn(children, state)
         ) : (
           <CheckboxLabel ref={ref} {...rest}>
             <CheckboxInput />
