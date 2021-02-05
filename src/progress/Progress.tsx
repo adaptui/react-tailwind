@@ -24,9 +24,7 @@ const [ProgressProvider, useProgressContext] = createContext<ProgressContext>({
 export { useProgressContext };
 
 type ProgressRenderProps = {
-  children?:
-    | (({ ...state }: ProgressStateReturn) => JSX.Element)
-    | React.ReactNode;
+  children?: ((state: ProgressStateReturn) => JSX.Element) | React.ReactNode;
 };
 
 export type ProgressProps = BoxProps &
@@ -63,7 +61,7 @@ export const Progress: React.FC = forwardRefWithAs<
   return (
     <ProgressProvider value={context}>
       {children ? (
-        runIfFn(children, { ...state })
+        runIfFn(children, state)
       ) : (
         <>
           <ProgressTrack ref={ref} {...rest}>
