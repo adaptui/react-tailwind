@@ -1,6 +1,13 @@
 export const avatar = {
   base:
-    "lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white",
+    "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:rounded-full lib:flex-shrink-0",
+  size: {
+    xs: "lib:text-xs lib:h-4 lib:w-4",
+    sm: "lib:text-xs lib:h-5 lib:w-5",
+    md: "lib:text-xs lib:h-6 lib:w-6",
+    lg: "lib:text-sm lib:h-8 lib:w-8",
+    xl: "lib:text-sm lib:h-10 lib:w-10",
+  },
   image: "lib:rounded-full lib:w-full lib:h-full lib:object-cover",
   group: {
     base: "lib:flex lib:items-center lib:space-x-2",
@@ -20,12 +27,5 @@ export const avatar = {
       lg: "lib:text-sm lib:h-2.5 lib:w-2.5",
       xl: "lib:text-sm lib:h-3 lib:w-3",
     },
-  },
-  size: {
-    xs: "lib:text-xs lib:h-4 lib:w-4",
-    sm: "lib:text-xs lib:h-5 lib:w-5",
-    md: "lib:text-xs lib:h-6 lib:w-6",
-    lg: "lib:text-sm lib:h-8 lib:w-8",
-    xl: "lib:text-sm lib:h-10 lib:w-10",
   },
 };
