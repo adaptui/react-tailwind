@@ -23,17 +23,18 @@ export const CircularProgressBar = forwardRefWithAs<
   const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
   const strokeDasharray =
     determinant == null ? undefined : `${determinant} ${264 - determinant}`;
+  const circularProgressBarStyles = cx(
+    theme.circularProgress.bar.size[size],
+    isIndeterminate ? theme.circularProgress.bar.indeterminate : "",
+    className,
+  );
 
   return (
     <Box
       as="svg"
       ref={ref}
       viewBox="0 0 100 100"
-      className={cx(
-        theme.circularProgress.bar.size[size],
-        isIndeterminate ? theme.circularProgress.bar.indeterminate : "",
-        className,
-      )}
+      className={circularProgressBarStyles}
       {...rest}
     >
       <circle
