@@ -29,7 +29,7 @@ export const IconButton = forwardRefWithAs<
   } = props;
 
   const group = useButtonGroup();
-  const _size = size || group?.size || "lg";
+  const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
 
   const theme = useTheme();

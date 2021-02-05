@@ -41,13 +41,13 @@ export default {
 
 const base = storyTemplate<ButtonProps>(Button, {
   children: "Button",
-  size: "lg",
+  size: "md",
   variant: "primary",
 });
 
-export const ExtraSmall = base({ size: "xs" });
 export const Small = base({ size: "sm" });
-export const Large = base({});
+export const Medium = base({});
+export const Large = base({ size: "lg" });
 export const ExtraLarge = base({ size: "xl" });
 
 export const Primary = base({});
@@ -100,13 +100,13 @@ const iconButtonBase = storyTemplate<IconButtonProps>(
       </IconButton>
     );
   },
-  { size: "lg", variant: "primary" },
+  { size: "md", variant: "primary" },
 );
 
 export const OnlyIcon = iconButtonBase({});
 
 const closeButtonBase = storyTemplate<IconButtonProps>(CloseButtonDefault, {
-  size: "lg",
+  size: "md",
   variant: "primary",
 });
 
@@ -120,7 +120,7 @@ const buttonGroupBase = storyTemplate<ButtonGroupProps>(
       <Button>Button 3</Button>
     </ButtonGroup>
   ),
-  { size: "lg", variant: "primary" },
+  { size: "md", variant: "primary" },
 );
 
 export const GroupDefault = buttonGroupBase({});
@@ -144,7 +144,7 @@ const IconButtonGroupBase = storyTemplate<ButtonGroupProps>(
       </IconButton>
     </ButtonGroup>
   ),
-  { size: "lg", variant: "primary" },
+  { size: "md", variant: "primary" },
 );
 
 export const IconButtonGroupDefault = IconButtonGroupBase({});
@@ -179,6 +179,6 @@ const buttonGroupExample = storyTemplate<ButtonGroupProps>(args => {
 
 export const TabListAsGroup = buttonGroupExample({
   attached: true,
-  size: "lg",
+  size: "md",
   variant: "secondary",
 });

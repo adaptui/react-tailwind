@@ -1,5 +1,4 @@
 import * as React from "react";
-import { VisuallyHidden } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -49,7 +48,7 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
 
     return (
       <Box ref={ref} className={spinnerStyles} {...rest}>
-        {label && <VisuallyHidden>{label}</VisuallyHidden>}
+        {label && <div className="sr-only">{label}</div>}
       </Box>
     );
   },
