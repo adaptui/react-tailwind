@@ -21,7 +21,7 @@ export default {
 
 const base = storyTemplate<SliderProps>(args => {
   return (
-    <div role="group" aria-labelledby="styled-slider" style={{ width: 400 }}>
+    <div role="group" aria-labelledby="styled-slider" style={{ width: 200 }}>
       <Slider {...args} />
     </div>
   );

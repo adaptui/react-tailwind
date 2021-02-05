@@ -5,7 +5,7 @@ export const slider = {
     tooltipContent: "lib:pointer-events-none lib:text-xs",
     wrapper: {
       base:
-        "lib:relative lib:inline-block lib:touch-action-none lib:select-none lib:outline-none",
+        "lib:relative lib:inline-block touch-action-none lib:select-none lib:outline-none",
     },
     track: {
       base: "lib:relative lib:top-0 lib:cursor-pointer",
