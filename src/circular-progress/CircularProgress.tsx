@@ -26,9 +26,7 @@ const [
 export { useCircularProgressContext };
 
 type CircularProgressRenderProps = {
-  children?:
-    | (({ ...state }: ProgressStateReturn) => JSX.Element)
-    | React.ReactNode;
+  children?: ((state: ProgressStateReturn) => JSX.Element) | React.ReactNode;
 };
 
 export type CircularProgressProps = BoxProps &
@@ -66,7 +64,7 @@ export const CircularProgress = forwardRefWithAs<
   return (
     <CircularProgressProvider value={context}>
       {children ? (
-        runIfFn(children, { ...state })
+        runIfFn(children, state)
       ) : (
         <CircularProgressWrapper ref={ref} {...rest}>
           <CircularProgressBar />
