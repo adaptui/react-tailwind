@@ -10,6 +10,11 @@ export const slider = {
       base: "relative top-0 cursor-pointer",
       main: "bg-gray-300 rounded-full",
       filled: "absolute bg-gray-800 pointer-events-none rounded-full",
+      size: {
+        xs: "h-2px",
+        sm: "h-4px",
+        lg: "h-8px",
+      },
     },
     thumb: {
       base:
@@ -29,11 +34,6 @@ export const slider = {
       base: "w-full",
       main: "",
       filled: "",
-      size: {
-        xs: "h-2px",
-        sm: "h-4px",
-        lg: "h-8px",
-      },
     },
     thumb: {
       base: "flex-col top-1/4 transform -translate-y-1/4",
@@ -47,11 +47,6 @@ export const slider = {
       base: "h-full w-fit",
       main: "h-full",
       filled: "top-unset bottom-0",
-      size: {
-        xs: "w-2px",
-        sm: "w-4px",
-        lg: "w-8px",
-      },
     },
     thumb: {
       base: "flex-row top-unset left-1/2 transform -translate-x-1/2",

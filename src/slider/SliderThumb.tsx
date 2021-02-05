@@ -38,7 +38,10 @@ export const SliderThumb = forwardRefWithAs<
 
   const thumbDynamicStyles = (index: number) => {
     const percent = getThumbPercent(index) * 100;
-    const calc = `calc(${percent}% - ${thumbSize.current.height / 2}px)`;
+    const offset =
+      percent - (thumbSize.current.height / 4) * getThumbPercent(index);
+    const calc = `${offset}%`;
+
     return {
       right: isReversed ? calc : "",
       left: !isReversed && !isVertical ? calc : "",
