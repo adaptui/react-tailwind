@@ -6,39 +6,41 @@ import {
 import * as React from "react";
 
 import { BoxProps } from "../box";
-import { ProgressBar } from "./ProgressBar";
-import { ProgressTrack } from "./ProgressTrack";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+import { CircularProgressBar } from "./CircularProgressBar";
+import { CircularProgressWrapper } from "./CircularProgressWrapper";
 
-export type ProgressContext = {
+export type CircularProgressContext = Pick<CircularProgressProps, "size"> & {
   state: ProgressStateReturn;
-  size: ProgressProps["size"];
 };
 
-const [ProgressProvider, useProgressContext] = createContext<ProgressContext>({
-  name: "ProgressContext",
+const [
+  CircularProgressProvider,
+  useCircularProgressContext,
+] = createContext<CircularProgressContext>({
+  name: "CircularProgressContext",
   strict: false,
 });
 
-export { useProgressContext };
+export { useCircularProgressContext };
 
-type ProgressRenderProps = {
+type CircularProgressRenderProps = {
   children?: ((state: ProgressStateReturn) => JSX.Element) | React.ReactNode;
 };
 
-export type ProgressProps = BoxProps &
+export type CircularProgressProps = BoxProps &
   ProgressInitialState & {
     /**
-     * How large should the progress be?
+     * How large should the circular progress be?
      *
      * @default "sm"
      */
-    size?: keyof Renderlesskit.GetThemeValue<"progress", "track">["size"];
+    size?: keyof Renderlesskit.GetThemeValue<"circularProgress", "bar">["size"];
   };
 
-export const Progress: React.FC = forwardRefWithAs<
-  ProgressProps & ProgressRenderProps,
+export const CircularProgress = forwardRefWithAs<
+  CircularProgressProps & CircularProgressRenderProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
@@ -52,6 +54,7 @@ export const Progress: React.FC = forwardRefWithAs<
   } = props;
   const state = useProgressState({ min, max });
   const { setValue } = state;
+
   const context = React.useMemo(() => ({ state, size }), [state, size]);
 
   React.useEffect(() => {
@@ -59,16 +62,16 @@ export const Progress: React.FC = forwardRefWithAs<
   }, [defaultValue, setValue]);
 
   return (
-    <ProgressProvider value={context}>
+    <CircularProgressProvider value={context}>
       {children ? (
         runIfFn(children, state)
       ) : (
-        <ProgressTrack ref={ref} {...rest}>
-          <ProgressBar />
-        </ProgressTrack>
+        <CircularProgressWrapper ref={ref} {...rest}>
+          <CircularProgressBar />
+        </CircularProgressWrapper>
       )}
-    </ProgressProvider>
+    </CircularProgressProvider>
   );
 });
 
-export default Progress;
+export default CircularProgress;
