@@ -16,11 +16,12 @@ export const SliderTrack = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const theme = useTheme();
-  const contextProps = useSliderPropsContext();
-
-  const orientation = contextProps.orientation || "horizontal";
-  const size = contextProps.size || "sm";
-  const origin = contextProps.origin || 0;
+  const {
+    padding,
+    orientation = "horizontal",
+    size = "sm",
+    origin = 0,
+  } = useSliderPropsContext();
 
   const {
     isVertical,
@@ -63,7 +64,7 @@ export const SliderTrack = forwardRefWithAs<
       {...state}
       ref={ref}
       className={trackContainerStyles}
-      style={{ padding: `${contextProps.padding}px 0` }}
+      style={{ padding: `${padding}px 0` }}
     >
       <div className={trackMainStyles}>
         {!isMulti ? (

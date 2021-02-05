@@ -127,19 +127,18 @@ export const Slider = forwardRefWithAs<
   const state = useSliderState({ ...props, orientation });
   const { thumbSize, padding, thumbRef, trackRef } = useSliderDimensions();
 
+  const sliderWrapperStyles = cx(
+    theme.slider.common.wrapper.base,
+    theme.slider[orientation].wrapper.base,
+    className,
+  );
+
   return (
     <SliderStateProvider value={state}>
       <SliderPropsContext
         value={{ size, orientation, origin, thumbSize, padding }}
       >
-        <Box
-          ref={ref}
-          className={cx(
-            theme.slider.common.wrapper.base,
-            theme.slider[orientation].wrapper.base,
-            className,
-          )}
-        >
+        <Box ref={ref} className={sliderWrapperStyles}>
           {children ? (
             runIfFn(children, { state })
           ) : (

@@ -5,7 +5,6 @@ import {
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
-import { Box } from "../box";
 import { useTheme } from "..";
 import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
 import { forwardRefWithAs } from "../utils/types";
@@ -19,11 +18,12 @@ export const SliderThumb = forwardRefWithAs<
 >(({ children, ...props }, ref) => {
   const theme = useTheme();
 
-  const contextProps = useSliderPropsContext();
-
-  const orientation = contextProps.orientation || "horizontal";
-  const size = contextProps.size || "sm";
-  const origin = contextProps.origin || 0;
+  const {
+    thumbSize,
+    orientation = "horizontal",
+    size = "sm",
+    origin = 0,
+  } = useSliderPropsContext();
 
   const { isVertical, isReversed, getThumbPercent, state } = useSliderValues({
     orientation: orientation,
@@ -38,9 +38,7 @@ export const SliderThumb = forwardRefWithAs<
 
   const thumbDynamicStyles = (index: number) => {
     const percent = getThumbPercent(index) * 100;
-    const calc = `calc(${percent}% - ${
-      contextProps.thumbSize.current.height / 2
-    }px)`;
+    const calc = `calc(${percent}% - ${thumbSize.current.height / 2}px)`;
     return {
       right: isReversed ? calc : "",
       left: !isReversed && !isVertical ? calc : "",
