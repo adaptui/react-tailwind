@@ -5,12 +5,13 @@ import { button } from "./button";
 import { buttonGroup } from "./buttonGroup";
 import { calendar } from "./calendar";
 import { checkbox } from "./checkbox";
+import { circularProgress } from "./circularProgress";
 import { datepicker } from "./datepicker";
 import { icon } from "./icon";
-import { _switch } from "./switch";
 import { iconButton } from "./iconButton";
-
+import { progress } from "./progress";
 import { spinner } from "./spinner";
+import { _switch } from "./switch";
 import { tag } from "./tag";
 import { radio } from "./radio";
 import { slider } from "./slider";
@@ -23,14 +24,16 @@ const theme = {
   buttonGroup,
   calendar,
   checkbox,
+  circularProgress,
   datepicker,
   icon,
   iconButton,
-  spinner,
-  tag,
+  progress,
   radio,
   slider,
+  spinner,
   switch: _switch,
+  tag,
 };
 
 export default theme;

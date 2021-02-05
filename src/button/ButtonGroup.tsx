@@ -1,11 +1,11 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { Box, BoxProps } from "../box";
-import { createContext } from "../utils";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
+import { Box, BoxProps } from "../box";
 import { ButtonProps } from "./Button";
+import { createContext } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonGroupContext = Pick<ButtonGroupProps, "size" | "variant">;
 

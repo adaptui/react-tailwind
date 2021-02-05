@@ -2,9 +2,9 @@ export const button = {
   base:
     "lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none",
   size: {
-    xs:
-      "lib:h-6 lib:w-auto lib:min-w-6 lib:px-2 lib:text-xs lib:font-medium lib:rounded-md lib:shadow-sm",
     sm:
+      "lib:h-6 lib:w-auto lib:min-w-6 lib:px-2 lib:text-xs lib:font-medium lib:rounded-md lib:shadow-sm",
+    md:
       "lib:h-8 lib:w-auto lib:min-w-8 lib:px-3 lib:text-sm lib:font-medium lib:rounded-md lib:shadow-sm",
     lg:
       "lib:h-10 lib:w-auto lib:min-w-10 lib:px-4 lib:text-sm lib:font-medium lib:rounded-lg lib:shadow-sm",
@@ -20,14 +20,14 @@ export const button = {
   disabled: "lib:cursor-not-allowed lib:opacity-40",
   group: "lib:focus:z-1 lib:-mr-px lib:shadow-none",
   prefix: {
-    xs: "inherit mr-1.5",
-    sm: "inherit mr-2",
+    sm: "inherit mr-1.5",
+    md: "inherit mr-2",
     lg: "inherit mr-2",
     xl: "inherit mr-2",
   },
   suffix: {
-    xs: "inherit ml-1.5",
-    sm: "inherit ml-2",
+    sm: "inherit ml-1.5",
+    md: "inherit ml-2",
     lg: "inherit ml-2",
     xl: "inherit ml-2",
   },

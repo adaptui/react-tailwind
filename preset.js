@@ -24,6 +24,7 @@ const renderlesskitConfig = {
         em: "1em",
         6.5: "1.625rem",
         8.5: "2.125rem",
+        half: "50%",
       },
       lineHeight: {
         em: "1em",
@@ -51,6 +52,7 @@ const renderlesskitConfig = {
       },
       minWidth: {
         ...defaultTheme.spacing,
+        half: "50%",
       },
       minHeight: {
         ...defaultTheme.spacing,
@@ -64,6 +66,31 @@ const renderlesskitConfig = {
       boxShadow: {
         thumb:
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
+      },
+      keyframes: {
+        progress: {
+          "0%": { left: "-40%" },
+          "100%": { left: "100%" },
+        },
+        circularProgress: {
+          "0%": {
+            strokeDasharray: "1, 400",
+            strokeDashoffset: "0",
+          },
+          "50%": {
+            strokeDasharray: "400, 400",
+            strokeDashoffset: "-100",
+          },
+          "100%": {
+            strokeDasharray: "400, 400",
+            strokeDashoffset: "-260",
+          },
+        },
+      },
+      animation: {
+        progress: "progress 1s ease infinite normal none running",
+        circularProgress:
+          "circularProgress 2s ease infinite normal none running",
       },
     },
   },
