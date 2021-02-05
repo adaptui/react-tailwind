@@ -70,6 +70,7 @@ export const SliderTrack = forwardRefWithAs<
         {!isMulti ? (
           <div className={trackFilledStyles} style={trackDynamicStyles} />
         ) : null}
+        {props.children}
       </div>
     </RenderlessSliderTrack>
   );

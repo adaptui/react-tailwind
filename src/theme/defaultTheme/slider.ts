@@ -7,13 +7,13 @@ export const slider = {
       base: "relative inline-block touch-action-none select-none outline-none",
     },
     track: {
-      base: "relative top-0 cursor-pointer rounded-full overflow-hidden",
-      main: "bg-gray-300",
-      filled: "absolute bg-gray-800 pointer-events-none",
+      base: "relative top-0 cursor-pointer",
+      main: "bg-gray-300 rounded-full",
+      filled: "absolute bg-gray-800 pointer-events-none rounded-full",
     },
     thumb: {
       base:
-        "absolute z-1 flex items-center bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb text-gray-400",
+        "absolute z-1 flex items-center bg-white flex items-center justify-center rounded-full select-none cursor-pointer shadow-thumb text-gray-400 focus-within:ring-2 focus-within:ring-gray-800",
       size: {
         xs: "w-12px h-12px text-xxs",
         sm: "w-16px h-16px text-xs",

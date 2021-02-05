@@ -106,7 +106,15 @@ export type SliderProps = SliderInitialState & {
 
 type SliderRenderProps = {
   children?:
-    | (({ state }: { state: SliderStateReturn }) => JSX.Element)
+    | (({
+        state,
+        trackRef,
+        thumbRef,
+      }: {
+        state: SliderStateReturn;
+        trackRef: React.RefObject<HTMLDivElement>;
+        thumbRef: React.RefObject<HTMLDivElement>;
+      }) => JSX.Element)
     | React.ReactNode;
 };
 
@@ -133,26 +141,30 @@ export const Slider = forwardRefWithAs<
     className,
   );
 
+  const contextProps = React.useMemo(
+    () => ({ size, orientation, origin, thumbSize, padding }),
+    [size, orientation, origin, thumbSize, padding],
+  );
+
   return (
-    <SliderStateProvider value={state}>
-      <SliderPropsContext
-        value={{ size, orientation, origin, thumbSize, padding }}
-      >
+    <SliderPropsContext value={contextProps}>
+      <SliderStateProvider value={state}>
         <Box ref={ref} className={sliderWrapperStyles}>
           {children ? (
-            runIfFn(children, { state })
+            runIfFn(children, { state, trackRef, thumbRef })
           ) : (
             <>
-              <SliderTrack ref={trackRef} />
-              <SliderThumb ref={thumbRef}>
-                {thumbContent
-                  ? runIfFn(thumbContent, state.values)
-                  : thumbContent}
-              </SliderThumb>
+              <SliderTrack ref={trackRef}>
+                <SliderThumb ref={thumbRef}>
+                  {thumbContent
+                    ? runIfFn(thumbContent, state.values)
+                    : thumbContent}
+                </SliderThumb>
+              </SliderTrack>
             </>
           )}
         </Box>
-      </SliderPropsContext>
-    </SliderStateProvider>
+      </SliderStateProvider>
+    </SliderPropsContext>
   );
 });

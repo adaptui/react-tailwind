@@ -29,6 +29,7 @@ const base = storyTemplate<SliderProps>(args => {
 
 export const Default = base({ size: "sm" });
 export const Origin = base({ origin: 50 });
+export const Range = base({ defaultValues: [30, 70] });
 
 export const ThumbContent = base({
   thumbContent: v => <small className="text-xxs">{v[0]}</small>,
@@ -52,13 +53,14 @@ export const Customization = () => {
   return (
     <div role="group" aria-labelledby="styled-slider" style={{ width: 400 }}>
       <Slider size="xs">
-        {({ state }) => (
+        {({ state, trackRef, thumbRef }) => (
           <>
             <span>
               {state.isThumbDragging(0) ? "Dragging" : "Not dragging"}
             </span>
-            <SliderThumb />
-            <SliderTrack />
+            <SliderTrack ref={trackRef}>
+              <SliderThumb ref={thumbRef} />
+            </SliderTrack>
           </>
         )}
       </Slider>
