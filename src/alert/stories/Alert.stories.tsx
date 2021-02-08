@@ -16,6 +16,7 @@ import {
   createUnionControl,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { cx } from "@renderlesskit/react";
 
 export default {
   title: "Alert",
@@ -49,32 +50,31 @@ export const Default = base({
 
 export const Customization = storyTemplate<AlertProps>(args => {
   const status = args?.status || "info";
-  const buttonBg = {
-    info: "bg-blue-200",
-    success: "bg-green-200",
-    warning: "bg-orange-200",
-    error: "bg-red-200",
-    offline: "bg-purple-200",
-  };
-
   return (
     <Alert {...args} status={status} className="flex justify-between">
-      <AlertTitle>
-        <AlertIcon />
-        Build failed due to timeout
-      </AlertTitle>
-      <AlertDescription>
-        Build container is stuck in building state for 2700000ms
-      </AlertDescription>
-      <AlertActions>
-        <AlertActionButton as="div">Reach Out</AlertActionButton>
-        <IconButton
-          aria-label="close"
-          className={`text-gray-800 h-5 px-0 bg-transparent min-w-5 ml-2 hover:${buttonBg[status]}`}
-        >
-          <CloseIcon />
-        </IconButton>
-      </AlertActions>
+      {({ status, styles }) => (
+        <>
+          <AlertTitle>
+            <AlertIcon />
+            Build failed due to timeout
+          </AlertTitle>
+          <AlertDescription>
+            Build container is stuck in building state for 2700000ms
+          </AlertDescription>
+          <AlertActions>
+            <AlertActionButton as="div">Reach Out</AlertActionButton>
+            <IconButton
+              aria-label="close"
+              className={cx(
+                styles.iconButton.base,
+                styles.status[status].iconButton,
+              )}
+            >
+              <CloseIcon />
+            </IconButton>
+          </AlertActions>
+        </>
+      )}
     </Alert>
   );
 })({});

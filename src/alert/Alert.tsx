@@ -49,62 +49,74 @@ export type AlertProps = RoleProps & {
   description?: string;
 };
 
-export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
-  (props, ref) => {
-    const {
-      title,
-      description,
-      actionButtonLabel,
-      status = "info",
-      icon = <CloseIcon />,
-      className,
-      children,
-      ...rest
-    } = props;
-    const theme = useTheme();
-    const alertStyles = cx(
-      theme.alert.base,
-      theme.alert.status[status].base,
-      className,
-    );
+type AlertRenderProps = {
+  children?:
+    | React.ReactNode
+    | (({
+        status,
+        styles,
+      }: {
+        status: AlertStatus;
+        styles: Renderlesskit.Theme["components"]["alert"];
+      }) => JSX.Element);
+};
 
-    return (
-      <AlertProvider value={{ status }}>
-        <Role role="alert" className={alertStyles} ref={ref} {...rest}>
-          {children ? (
-            runIfFn(children, status)
-          ) : (
-            <>
-              <AlertTitle>
-                <AlertIcon />
-                {title}
-              </AlertTitle>
-              {description && (
-                <AlertDescription>{description}</AlertDescription>
+export const Alert = forwardRefWithAs<
+  AlertProps & AlertRenderProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    title,
+    description,
+    actionButtonLabel,
+    status = "info",
+    icon = <CloseIcon />,
+    className,
+    children,
+    ...rest
+  } = props;
+  const theme = useTheme();
+  const alertStyles = cx(
+    theme.alert.base,
+    theme.alert.status[status].base,
+    className,
+  );
+
+  return (
+    <AlertProvider value={{ status }}>
+      <Role role="alert" className={alertStyles} ref={ref} {...rest}>
+        {children ? (
+          runIfFn(children, { status, styles: theme.alert })
+        ) : (
+          <>
+            <AlertTitle>
+              <AlertIcon />
+              {title}
+            </AlertTitle>
+            {description && <AlertDescription>{description}</AlertDescription>}
+            <AlertActions>
+              {actionButtonLabel && (
+                <AlertActionButton as="div">
+                  {actionButtonLabel}
+                </AlertActionButton>
               )}
-              <AlertActions>
-                {actionButtonLabel && (
-                  <AlertActionButton as="div">
-                    {actionButtonLabel}
-                  </AlertActionButton>
+              <IconButton
+                aria-label="close"
+                className={cx(
+                  theme.alert.iconButton.base,
+                  theme.alert.status[status].iconButton,
                 )}
-                <IconButton
-                  aria-label="close"
-                  className={cx(
-                    theme.alert.iconButton.base,
-                    theme.alert.status[status].iconButton,
-                  )}
-                >
-                  {icon}
-                </IconButton>
-              </AlertActions>
-            </>
-          )}
-        </Role>
-      </AlertProvider>
-    );
-  },
-);
+              >
+                {icon}
+              </IconButton>
+            </AlertActions>
+          </>
+        )}
+      </Role>
+    </AlertProvider>
+  );
+});
 
 export type AlertTitleProps = RoleProps & {};
 
