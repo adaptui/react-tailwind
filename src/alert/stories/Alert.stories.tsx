@@ -10,28 +10,42 @@ import {
   AlertDescription,
   AlertActions,
 } from "../index";
-import { Box } from "../../box";
 import { CloseIcon } from "../../icons";
 import { AlertActionButton } from "../Alert";
-import { Button, ButtonIcon, IconButton } from "../../button";
+import { IconButton } from "../../button";
 import {
-  createControls,
+  createUnionControl,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
-
 export default {
   title: "Alert",
   component: Alert,
-  argTypes: createControls("alert", { unions: ["status"] }),
+  argTypes: {
+    status: createUnionControl([
+      "info",
+      "success",
+      "warning",
+      "error",
+      "offline",
+    ]),
+    title: { defaultValue: "" },
+    description: { defaultValue: "" },
+    actionButtonLabel: { defaultValue: "" },
+  },
 } as Meta;
 
 const base = storyTemplate<AlertProps>(args => {
   const status = args?.status || "info";
 
-  return <Alert {...args} status={status} />;
+  return <Alert status={status} {...args} />;
 });
 
-export const Default = base({ status: "info" });
+export const Default = base({
+  status: "info",
+  actionButtonLabel: "Reach Out",
+  title: "Your browser is outdated.",
+  description: "Your experience may be degraded.",
+});
 
 export const Example1 = storyTemplate<AlertProps>(args => {
   const status = args?.status || "info";

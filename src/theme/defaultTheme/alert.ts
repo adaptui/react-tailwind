@@ -1,10 +1,10 @@
 export const alert = {
   base:
-    "lib:font-sans lib:flex lib:items-center lib:justify-between lib:w-full lib:min-h-10 lib:overflow-hidden lib:p-2 lib:px-3 lib:rounded-md",
+    "lib:font-sans lib:flex lib:items-center lib:w-full lib:min-h-10 lib:overflow-hidden lib:p-2 lib:px-3 lib:rounded-md",
   title:
     "lib:flex lib:items-center lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
-  actionsWrapper: "items-center inherit",
+  actionsWrapper: "items-center inherit ml-auto",
   icon: {
     base: "flex-shrink-0 mr-3 w-3.5 h-3.5 max-w-3.5 max-h-3.5",
     icons: "relative -top-0.5 lib:w-full lib:h-full",

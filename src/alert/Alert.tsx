@@ -44,11 +44,17 @@ export type AlertProps = RoleProps & {
    * button action icon
    */
   icon?: React.ReactNode;
+  actionButtonLabel?: string;
+  title?: string;
+  description?: string;
 };
 
 export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
   (props, ref) => {
     const {
+      title,
+      description,
+      actionButtonLabel,
       status = "info",
       icon = <CloseIcon />,
       className,
@@ -71,10 +77,17 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
             <>
               <AlertTitle>
                 <AlertIcon />
-                We’re here to help you through these tough times.
+                {title}
               </AlertTitle>
+              {description && (
+                <AlertDescription>{description}</AlertDescription>
+              )}
               <AlertActions>
-                <AlertActionButton as="div">Reach Out</AlertActionButton>
+                {actionButtonLabel && (
+                  <AlertActionButton as="div">
+                    {actionButtonLabel}
+                  </AlertActionButton>
+                )}
                 <IconButton
                   aria-label="close"
                   className={theme.alert.iconButton.base}
