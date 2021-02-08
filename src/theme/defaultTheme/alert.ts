@@ -9,6 +9,9 @@ export const alert = {
     base: "flex-shrink-0 mr-3 w-3.5 h-3.5 max-w-3.5 max-h-3.5",
     icons: "relative -top-0.5 lib:w-full lib:h-full",
   },
+  iconButton: {
+    base: "text-gray-800 h-5 px-0 bg-transparent min-w-5 ml-2",
+  },
   actionButton: "lib:h-5 bg-transparent lib:px-0 lib:shadow-none",
   status: {
     info: {

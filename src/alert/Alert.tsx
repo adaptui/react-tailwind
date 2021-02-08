@@ -8,11 +8,12 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
+  CloseIcon,
 } from "../icons";
 import { useTheme } from "../theme";
-import { createContext } from "../utils";
-import { Button, ButtonProps } from "../button";
 import { forwardRefWithAs } from "../utils/types";
+import { createContext, runIfFn } from "../utils";
+import { Button, ButtonProps, IconButton } from "../button";
 
 const STATUS_ICONS = {
   info: InfoCircleIcon,
@@ -39,11 +40,21 @@ export type AlertProps = RoleProps & {
    * The status of the alert
    */
   status?: AlertStatus;
+  /**
+   * button action icon
+   */
+  icon?: React.ReactNode;
 };
 
 export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
   (props, ref) => {
-    const { status = "info", className, ...rest } = props;
+    const {
+      status = "info",
+      icon = <CloseIcon />,
+      className,
+      children,
+      ...rest
+    } = props;
     const theme = useTheme();
     const alertStyles = cx(
       theme.alert.base,
@@ -53,7 +64,27 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
 
     return (
       <AlertProvider value={{ status }}>
-        <Role role="alert" className={alertStyles} ref={ref} {...rest} />
+        <Role role="alert" className={alertStyles} ref={ref} {...rest}>
+          {children ? (
+            runIfFn(children, status)
+          ) : (
+            <>
+              <AlertTitle>
+                <AlertIcon />
+                We’re here to help you through these tough times.
+              </AlertTitle>
+              <AlertActions>
+                <AlertActionButton as="div">Reach Out</AlertActionButton>
+                <IconButton
+                  aria-label="close"
+                  className={theme.alert.iconButton.base}
+                >
+                  {icon}
+                </IconButton>
+              </AlertActions>
+            </>
+          )}
+        </Role>
       </AlertProvider>
     );
   },
