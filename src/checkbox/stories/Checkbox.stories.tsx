@@ -25,12 +25,7 @@ export default {
       sm: "sm",
       lg: "lg",
     }),
-    defaultState: {
-      control: {
-        type: "inline-radio",
-        options: [true, false, "indeterminate"],
-      },
-    },
+    defaultState: createUnionControl([true, false, "indeterminate"]),
     disabled: { control: { type: "boolean" } },
   },
 } as Meta;

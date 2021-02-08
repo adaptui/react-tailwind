@@ -14,10 +14,10 @@ expectType<Renderlesskit.GetThemeValue<"button", "variant">>({
   outline: "",
 });
 expectType<Renderlesskit.GetThemeValue<"button", "size">>({
+  md: "",
   lg: "",
   sm: "",
   xl: "",
-  xs: "",
 });
 
 // user extended theme
