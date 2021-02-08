@@ -5,17 +5,17 @@ export const slider = {
     tooltipContent: "lib:pointer-events-none lib:text-xs",
     wrapper: {
       base:
-        "lib:relative lib:inline-block touch-action-none lib:select-none lib:outline-none",
+        "lib:text-gray-800 lib:relative lib:inline-block touch-action-none lib:select-none lib:outline-none",
     },
     track: {
       base: "lib:relative lib:top-0 lib:cursor-pointer",
       main: "lib:bg-gray-300 lib:rounded-full",
       filled:
-        "lib:absolute lib:bg-gray-800 lib:pointer-events-none lib:rounded-full",
+        "lib:absolute lib:bg-current lib:pointer-events-none lib:rounded-full",
     },
     thumb: {
       base:
-        "lib:absolute lib:z-1 lib:flex lib:items-center lib:bg-white lib:flex lib:items-center lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-gray-400 lib:focus-within:ring-2 lib:focus-within:ring-gray-800",
+        "lib:absolute lib:z-1 lib:flex lib:items-center lib:bg-white lib:flex lib:items-center lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-current lib:focus-within:ring-2 lib:focus-within:ring-current",
       size: {
         xs: "lib:w-12px lib:h-12px lib:text-xxs",
         sm: "lib:w-16px lib:h-16px lib:text-xs",
