@@ -2,8 +2,9 @@ import React from "react";
 import { cx, SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
 
 import { useTheme } from "..";
-import { SliderProps, useSliderPropsContext, useSliderValues } from "./Slider";
+import { SliderProps, useSliderPropsContext } from "./Slider";
 import { forwardRefWithAs } from "../utils/types";
+import { useSliderValues } from "./hooks/useSliderValues";
 
 export type SliderTrackProps = Omit<
   SliderProps,

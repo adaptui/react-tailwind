@@ -12,8 +12,9 @@ import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
 import { Box } from "../box";
 import { forwardRefWithAs } from "../utils/types";
+import { useSliderDimensions } from "./hooks/useSliderDimensions";
 
-const percent = (v: number) => `${v}%`;
+export const percent = (v: number) => `${v}%`;
 
 const [
   SliderStateProvider,
@@ -36,67 +37,6 @@ const [SliderPropsContext, useSliderPropsContext] = createContext<
 });
 
 export { useSliderContext, useSliderPropsContext };
-
-export const useSliderValues = (props: SliderProps) => {
-  const state = useSliderContext();
-  const origin = props.origin || 0;
-  const { values, getValuePercent, getThumbPercent } = state;
-
-  const isVertical = props.orientation === "vertical";
-  const isRange = values.length === 2;
-  const isMulti = values.length > 2;
-  const isReversed = state.reversed;
-
-  const trackWidth = !isRange
-    ? (getValuePercent(Math.max(values[0], origin)) -
-        getValuePercent(Math.min(values[0], origin))) *
-      100
-    : (getThumbPercent(1) - getThumbPercent(0)) * 100;
-
-  const trackLeft = !isRange
-    ? getValuePercent(Math.min(values[0], origin)) * 100
-    : getThumbPercent(0) * 100;
-
-  const trackRight = !isRange ? "0px" : percent(getThumbPercent(0) * 100);
-
-  return {
-    isVertical,
-    isRange,
-    isMulti,
-    isReversed,
-    trackWidth: percent(trackWidth),
-    trackLeft: percent(trackLeft),
-    trackRight,
-    getValuePercent,
-    getThumbPercent,
-    state,
-  };
-};
-
-const useSliderDimensions = () => {
-  const thumbRef = React.useRef<HTMLDivElement>(null);
-  const trackRef = React.useRef<HTMLDivElement>(null);
-  const thumbSize = React.useRef({ width: 0, height: 0 });
-  const trackHeight = React.useRef({ height: 0 });
-  const padding = thumbSize.current.height / 2 - trackHeight.current.height / 2;
-
-  React.useLayoutEffect(() => {
-    if (thumbRef.current) {
-      const dimension = thumbRef?.current?.getBoundingClientRect();
-      thumbSize.current.width = dimension.width;
-      thumbSize.current.height = dimension.height;
-    }
-  }, [thumbRef]);
-
-  React.useLayoutEffect(() => {
-    if (trackRef.current) {
-      const dimension = trackRef?.current?.getBoundingClientRect();
-      trackHeight.current.height = dimension.height;
-    }
-  }, [trackRef]);
-
-  return { thumbRef, trackRef, padding, thumbSize };
-};
 
 export type SliderProps = SliderInitialState & {
   origin?: number;
