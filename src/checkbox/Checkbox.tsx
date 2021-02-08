@@ -38,7 +38,7 @@ export type CheckboxProps = BoxProps &
   Omit<ReakitCheckboxOptions, "size" | "setState"> & {
     defaultState?: ReakitCheckboxOptions["state"];
     onStateChange?: (value: CheckboxStatus) => void;
-    size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon">["size"];
+    size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
   };
 
 export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(

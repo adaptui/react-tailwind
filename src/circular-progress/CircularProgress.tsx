@@ -36,7 +36,7 @@ export type CircularProgressProps = BoxProps &
      *
      * @default "sm"
      */
-    size?: keyof Renderlesskit.GetThemeValue<"circularProgress", "bar">["size"];
+    size?: keyof Renderlesskit.GetThemeValue<"circularProgress", "bar", "size">;
   };
 
 export const CircularProgress = forwardRefWithAs<

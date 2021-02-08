@@ -34,8 +34,9 @@ export type SwitchProps = BoxProps &
     onStateChange?: (value: CheckboxStatus) => void;
     size?: keyof Renderlesskit.GetThemeValue<
       "switch",
-      "icon"
-    >["wrapper"]["size"];
+      "icon",
+      "wrapper"
+    >["size"];
   };
 
 export const Switch = forwardRefWithAs<

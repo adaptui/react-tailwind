@@ -34,7 +34,7 @@ export type ProgressProps = BoxProps &
      *
      * @default "sm"
      */
-    size?: keyof Renderlesskit.GetThemeValue<"progress", "track">["size"];
+    size?: keyof Renderlesskit.GetThemeValue<"progress", "track", "size">;
   };
 
 export const Progress: React.FC = forwardRefWithAs<
