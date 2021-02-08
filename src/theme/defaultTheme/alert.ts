@@ -1,14 +1,15 @@
 export const alert = {
   base:
-    "lib:font-sans lib:flex lib:items-center lib:w-full lib:overflow-hidden lib:p-4",
+    "lib:font-sans lib:flex lib:items-center lib:justify-between lib:w-full lib:min-h-10 lib:overflow-hidden lib:p-2 lib:px-3 lib:rounded-md",
   title:
-    "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
+    "lib:flex lib:items-center lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
+  actionsWrapper: "items-center inherit",
   icon: {
-    base: "lib:inherit lib:flex-shrink-0 lib:mr-3 lib:w-5 lib:h-5",
-    icons: "lib:w-full lib:h-full",
+    base: "flex-shrink-0 mr-3 w-3.5 h-3.5 max-w-3.5 max-h-3.5",
+    icons: "relative -top-0.5 lib:w-full lib:h-full",
   },
-  actionButton: "lib:h-5 bg-transparent lib:px-0",
+  actionButton: "lib:h-5 bg-transparent lib:px-0 lib:shadow-none",
   status: {
     info: {
       base: "lib:bg-blue-50 ",

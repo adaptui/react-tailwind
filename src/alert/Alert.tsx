@@ -87,6 +87,20 @@ export const AlertDescription = forwardRefWithAs<
   return <Role className={alertDescriptionStyles} ref={ref} {...rest} />;
 });
 
+export type AlertActionsProps = RoleProps & {};
+
+export const AlertActions = forwardRefWithAs<
+  AlertActionsProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const { className, ...rest } = props;
+  const theme = useTheme();
+  const alertActionsStyles = cx(theme.alert.actionsWrapper, className);
+
+  return <Role className={alertActionsStyles} ref={ref} {...rest} />;
+});
+
 export type AlertActionButtonProps = ButtonProps & {};
 
 export const AlertActionButton = forwardRefWithAs<
@@ -119,7 +133,7 @@ export const AlertIcon = forwardRefWithAs<
   const theme = useTheme();
   const alertIconBaseStyles = cx(theme.alert.icon.base, className);
   const alertIconIconsStyles = cx(
-    theme.alert.icon.base,
+    theme.alert.icon.icons,
     theme.alert.status[status].icon,
     className,
   );
