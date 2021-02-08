@@ -90,7 +90,10 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
                 )}
                 <IconButton
                   aria-label="close"
-                  className={theme.alert.iconButton.base}
+                  className={cx(
+                    theme.alert.iconButton.base,
+                    theme.alert.status[status].iconButton,
+                  )}
                 >
                   {icon}
                 </IconButton>
