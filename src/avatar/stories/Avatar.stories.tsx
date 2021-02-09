@@ -39,13 +39,13 @@ export const Default = base({});
 export const OnError = base({
   src: "https://bit.ly/dan-dabramov",
   onError: e => {
-    alert("Error loading image");
+    // alert("Error loading image");
     console.log(e);
   },
 });
 
 export const WithIcon = base({
-  className: "text-white bg-red-400",
+  className: "text-white bg-blue-400",
   children: <ClockIcon />,
 });
 

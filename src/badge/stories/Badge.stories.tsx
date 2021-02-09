@@ -19,8 +19,10 @@ const base = storyTemplate<BadgeProps>(
   args => {
     return <Badge {...args}>Badge</Badge>;
   },
-  { variant: "primary", size: "sm" },
+  { size: "sm" },
 );
+
+export const Default = base({});
 
 export const ExtraSmall = base({ size: "xs" });
 
