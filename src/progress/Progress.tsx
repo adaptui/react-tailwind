@@ -9,7 +9,7 @@ import { BoxProps } from "../box";
 import { ProgressBar } from "./ProgressBar";
 import { ProgressTrack } from "./ProgressTrack";
 import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type ProgressContext = {
   state: ProgressStateReturn;
@@ -23,9 +23,7 @@ const [ProgressProvider, useProgressContext] = createContext<ProgressContext>({
 
 export { useProgressContext };
 
-type ProgressRenderProps = {
-  children?: ((state: ProgressStateReturn) => JSX.Element) | React.ReactNode;
-};
+type ProgressRenderProps = RenderProp<ProgressStateReturn>;
 
 export type ProgressProps = BoxProps &
   ProgressInitialState & {
@@ -37,7 +35,7 @@ export type ProgressProps = BoxProps &
     size?: keyof Renderlesskit.GetThemeValue<"progress", "track", "size">;
   };
 
-export const Progress: React.FC = forwardRefWithAs<
+export const Progress = forwardRefWithAs<
   ProgressProps & ProgressRenderProps,
   HTMLDivElement,
   "div"

@@ -1,5 +1,9 @@
 import * as React from "react";
 
+export type RenderProp<T> = {
+  children?: React.ReactNode | ((args: T) => JSX.Element);
+};
+
 export type As<Props = any> = React.ElementType<Props>;
 
 export type PropsWithAs<Props = {}, Type extends As = As> = Props &
