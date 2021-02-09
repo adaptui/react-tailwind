@@ -8,7 +8,7 @@ import { SwitchIcon } from "./SwitchIcon";
 import { SwitchLabel } from "./SwitchLabel";
 import { SwitchInput } from "./SwitchInput";
 import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
@@ -24,9 +24,7 @@ const [SwitchProvider, useSwitchContext] = createContext<SwitchContext>({
 
 export { useSwitchContext };
 
-type SwitchRenderProps = {
-  children?: ((state: CheckboxStateReturn) => JSX.Element) | React.ReactNode;
-};
+type SwitchRenderProps = RenderProp<CheckboxStateReturn>;
 
 export type SwitchProps = BoxProps &
   Omit<ReakitCheckboxOptions, "size" | "setState"> & {

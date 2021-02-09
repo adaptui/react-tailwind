@@ -7,7 +7,7 @@ import * as React from "react";
 
 import { BoxProps } from "../box";
 import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { CircularProgressBar } from "./CircularProgressBar";
 import { CircularProgressWrapper } from "./CircularProgressWrapper";
 
@@ -25,9 +25,7 @@ const [
 
 export { useCircularProgressContext };
 
-type CircularProgressRenderProps = {
-  children?: ((state: ProgressStateReturn) => JSX.Element) | React.ReactNode;
-};
+type CircularProgressRenderProps = RenderProp<ProgressStateReturn>;
 
 export type CircularProgressProps = BoxProps &
   ProgressInitialState & {
