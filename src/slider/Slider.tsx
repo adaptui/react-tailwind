@@ -79,8 +79,13 @@ export const Slider = forwardRefWithAs<
     isDisabled,
     reversed,
     onChange,
+    onChangeEnd,
+    onChangeStart,
+    formatOptions,
+    defaultValues,
     ...rest
   } = props;
+
   const theme = useTheme();
   const state = useSliderState({ ...props, orientation });
   const { thumbSize, padding, thumbRef, trackRef } = useSliderDimensions();
