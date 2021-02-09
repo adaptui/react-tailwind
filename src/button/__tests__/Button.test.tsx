@@ -1,10 +1,22 @@
+import "../../../dist/tailwind.css";
 import * as React from "react";
 import { Button } from "../Button";
 
 import { screen } from "@testing-library/react";
 import { render, testA11y } from "../../utils/testUtils";
+import { generateImage } from "jsdom-screenshot";
 
 describe("Testing Button", () => {
+  it("has no visual regressions", async () => {
+    render(<Button>Hello World</Button>);
+
+    const screenshot = await generateImage();
+    expect(screenshot).toMatchImageSnapshot({
+      failureThreshold: 0.005,
+      failureThresholdType: "percent",
+    });
+  });
+
   it("should render properly", () => {
     render(<Button>Hello World</Button>);
 

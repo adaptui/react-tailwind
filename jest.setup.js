@@ -5,6 +5,7 @@ const {
 } = require("jest-matcher-utils");
 const { toHaveNoViolations: axeMatchers } = require("jest-axe");
 const matchers = require("@testing-library/jest-dom/matchers");
+const { toMatchImageSnapshot } = require("jest-image-snapshot");
 
 // Consider [aria-activedescendant="${id}"] #${id} as the focused element.
 function toHaveFocus(element) {
@@ -31,4 +32,9 @@ function toHaveFocus(element) {
   };
 }
 
-expect.extend({ ...matchers, ...axeMatchers, toHaveFocus });
+expect.extend({
+  ...matchers,
+  ...axeMatchers,
+  toHaveFocus,
+  toMatchImageSnapshot,
+});
