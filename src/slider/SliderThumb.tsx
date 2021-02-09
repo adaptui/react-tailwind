@@ -16,7 +16,7 @@ export const SliderThumb = forwardRefWithAs<
   SliderThumbProps,
   HTMLDivElement,
   "div"
->(({ children, ...props }, ref) => {
+>(({ children, className, ...props }, ref) => {
   const theme = useTheme();
 
   const {
@@ -43,12 +43,12 @@ export const SliderThumb = forwardRefWithAs<
       percent -
       (thumbSize.current.height / (isVertical ? 2 : 4)) *
         getThumbPercent(index);
-    const calc = `${offset}%`;
+    const offsetPercent = `${offset}%`;
 
     return {
-      right: isReversed ? calc : "",
-      left: !isReversed && !isVertical ? calc : "",
-      bottom: isVertical ? calc : "",
+      right: isReversed ? offsetPercent : "",
+      left: !isReversed && !isVertical ? offsetPercent : "",
+      bottom: isVertical ? offsetPercent : "",
     };
   };
 
@@ -60,9 +60,10 @@ export const SliderThumb = forwardRefWithAs<
             ref={ref}
             key={`thumb-${index}`}
             style={thumbDynamicStyles(index)}
-            {...state}
             index={index}
-            className={thumbHandleStyles}
+            {...state}
+            {...props}
+            className={cx(thumbHandleStyles, className)}
           >
             <SliderInput
               className={theme.slider.common.input}

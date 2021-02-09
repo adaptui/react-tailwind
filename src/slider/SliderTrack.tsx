@@ -15,7 +15,7 @@ export const SliderTrack = forwardRefWithAs<
   SliderTrackProps,
   HTMLDivElement,
   "div"
->((props, ref) => {
+>(({ className, ...props }, ref) => {
   const theme = useTheme();
   const {
     padding,
@@ -64,8 +64,9 @@ export const SliderTrack = forwardRefWithAs<
     <RenderlessSliderTrack
       {...state}
       ref={ref}
-      className={trackContainerStyles}
+      className={cx(trackContainerStyles, className)}
       style={{ padding: `${padding}px 0` }}
+      {...props}
     >
       <div className={trackMainStyles}>
         {!isMulti ? (
