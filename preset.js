@@ -29,6 +29,15 @@ const renderlesskitConfig = {
       lineHeight: {
         em: "1em",
       },
+      inset: {
+        unset: "unset",
+      },
+      width: {
+        fit: "fit-content",
+      },
+      height: {
+        fit: "fit-content",
+      },
       minWidth: {
         ...defaultTheme.spacing,
         half: "50%",
@@ -41,6 +50,10 @@ const renderlesskitConfig = {
       },
       borderWidth: {
         1.5: "1.5px",
+      },
+      boxShadow: {
+        thumb:
+          "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
       },
       keyframes: {
         progress: {

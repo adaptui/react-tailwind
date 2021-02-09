@@ -22,6 +22,9 @@ const utilities = plugin(function ({ addUtilities }) {
     ".inherit": {
       display: "inherit",
     },
+    ".touch-action-none": {
+      "touch-action": "none",
+    },
   };
 
   addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
