@@ -6,17 +6,17 @@ import {
   AlertIcon,
   AlertProps,
   AlertTitle,
-  AlertDescription,
   AlertActions,
+  AlertDescription,
 } from "../index";
 import { CloseIcon } from "../../icons";
 import { IconButton } from "../../button";
 import { AlertActionButton } from "../Alert";
-import {
-  createUnionControl,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
 import { cx } from "@renderlesskit/react";
+import {
+  storyTemplate,
+  createUnionControl,
+} from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Alert",

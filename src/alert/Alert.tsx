@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Role, RoleProps } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import {
@@ -14,6 +13,7 @@ import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { createContext, runIfFn } from "../utils";
 import { Button, ButtonProps, IconButton } from "../button";
+import { Box, BoxProps } from "../box";
 
 const STATUS_ICONS = {
   info: InfoCircleIcon,
@@ -35,7 +35,7 @@ const [AlertProvider, useAlertContext] = createContext<AlertContext>({
     "useAlertContext: `context` is undefined. Seems you forgot to wrap alert components in `<Alert />`",
 });
 
-export type AlertProps = RoleProps & {
+export type AlertProps = BoxProps & {
   /**
    * The status of the alert
    */
@@ -85,7 +85,7 @@ export const Alert = forwardRefWithAs<
 
   return (
     <AlertProvider value={{ status }}>
-      <Role role="alert" className={alertStyles} ref={ref} {...rest}>
+      <Box role="alert" className={alertStyles} ref={ref} {...rest}>
         {children ? (
           runIfFn(children, { status, styles: theme.alert })
         ) : (
@@ -113,12 +113,12 @@ export const Alert = forwardRefWithAs<
             </AlertActions>
           </>
         )}
-      </Role>
+      </Box>
     </AlertProvider>
   );
 });
 
-export type AlertTitleProps = RoleProps & {};
+export type AlertTitleProps = BoxProps & {};
 
 export const AlertTitle = forwardRefWithAs<
   AlertTitleProps,
@@ -129,10 +129,10 @@ export const AlertTitle = forwardRefWithAs<
   const theme = useTheme();
   const alertTitleStyles = cx(theme.alert.title, className);
 
-  return <Role className={alertTitleStyles} ref={ref} {...rest} />;
+  return <Box className={alertTitleStyles} ref={ref} {...rest} />;
 });
 
-export type AlertDescriptionProps = RoleProps & {};
+export type AlertDescriptionProps = BoxProps & {};
 
 export const AlertDescription = forwardRefWithAs<
   AlertDescriptionProps,
@@ -143,10 +143,10 @@ export const AlertDescription = forwardRefWithAs<
   const theme = useTheme();
   const alertDescriptionStyles = cx(theme.alert.description, className);
 
-  return <Role className={alertDescriptionStyles} ref={ref} {...rest} />;
+  return <Box className={alertDescriptionStyles} ref={ref} {...rest} />;
 });
 
-export type AlertActionsProps = RoleProps & {};
+export type AlertActionsProps = BoxProps & {};
 
 export const AlertActions = forwardRefWithAs<
   AlertActionsProps,
@@ -157,7 +157,7 @@ export const AlertActions = forwardRefWithAs<
   const theme = useTheme();
   const alertActionsStyles = cx(theme.alert.actionsWrapper, className);
 
-  return <Role className={alertActionsStyles} ref={ref} {...rest} />;
+  return <Box className={alertActionsStyles} ref={ref} {...rest} />;
 });
 
 export type AlertActionButtonProps = ButtonProps & {};
@@ -179,7 +179,7 @@ export const AlertActionButton = forwardRefWithAs<
   return <Button className={alertActionButtonStyles} ref={ref} {...rest} />;
 });
 
-export type AlertIconProps = RoleProps & {};
+export type AlertIconProps = BoxProps;
 
 export const AlertIcon = forwardRefWithAs<
   AlertIconProps,
@@ -198,9 +198,9 @@ export const AlertIcon = forwardRefWithAs<
   );
 
   return (
-    <Role as="span" className={alertIconBaseStyles} ref={ref} {...rest}>
+    <Box as="span" ref={ref} className={alertIconBaseStyles} {...rest}>
       <Icon className={alertIconIconsStyles} />
-    </Role>
+    </Box>
   );
 });
 
