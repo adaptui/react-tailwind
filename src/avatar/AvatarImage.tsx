@@ -3,25 +3,37 @@ import { cx } from "@renderlesskit/react";
 
 import { AvatarProps } from ".";
 import { useTheme } from "../theme";
-import { useImage } from "../utils/useImage";
-import { forwardRefWithAs } from "../utils/types";
 import { Box, BoxProps } from "../box";
 import { GenericAvatar } from "../icons";
+import { useImage } from "../utils/useImage";
+import { forwardRefWithAs } from "../utils/types";
 
-export type AvatarImageProps = Pick<
-  AvatarProps,
-  "name" | "src" | "onError" | "icon" | "getInitials"
->;
+export type AvatarImageProps = BoxProps &
+  Pick<
+    AvatarProps,
+    "src" | "onError" | "fallback" | "name" | "loading" | "size"
+  > &
+  Pick<Required<AvatarProps>, "getInitials">;
 
-export const AvatarImage: React.FC<AvatarImageProps> = ({
-  src,
-  onError,
-  name,
-  getInitials,
-  icon,
-}) => {
+export const AvatarImage = forwardRefWithAs<
+  AvatarImageProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    src,
+    onError,
+    name,
+    getInitials,
+    fallback,
+    loading,
+    size = "md",
+  } = props;
+  const theme = useTheme();
+  /**
+   * Use the image hook to only show the image when it has loaded
+   */
   const status = useImage({ src, onError });
-
   const hasLoaded = status === "loaded";
 
   /**
@@ -32,53 +44,50 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
    * In this case, we'll show either the name avatar or default avatar
    */
   const showFallback = !src || !hasLoaded;
-  const theme = useTheme();
 
   if (showFallback) {
     return (
       <>
         {name ? (
-          <AvatarName getInitials={getInitials} name={name} />
-        ) : icon ? (
-          icon
+          <AvatarName
+            getInitials={getInitials}
+            name={name}
+            size={size}
+            ref={ref}
+          />
+        ) : fallback ? (
+          React.cloneElement(fallback as React.ReactElement, { ref })
         ) : (
-          <GenericAvatar />
+          <GenericAvatar ref={ref} />
         )}
       </>
     );
   }
 
   return (
-    <img
+    <Box
+      as="img"
+      ref={ref}
       data-testid="testid-avatarimg"
       src={src}
       alt={name}
+      loading={loading}
       className={cx(theme.avatar.image)}
-      style={{
-        borderRadius: "inherit",
-      }}
     />
   );
-};
+});
 
-export default AvatarImage;
+export type AvatarNameProps = BoxProps &
+  Pick<AvatarProps, "size"> &
+  Pick<Required<AvatarProps>, "name" | "getInitials">;
 
-interface AvatarNameProps
-  extends BoxProps,
-    Pick<AvatarProps, "name" | "getInitials"> {}
-
-/**
- * The avatar name container
- */
 const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
-  const { name, getInitials, className, ...rest } = props;
-  const theme = useTheme();
-
-  const avatarNameStyles = cx(theme.avatar.name, className);
+  const { name, getInitials, className, size, ...rest } = props;
+  const initials = getInitials(name);
 
   return (
-    <Box aria-label={name} ref={ref} className={avatarNameStyles} {...rest}>
-      {name ? getInitials?.(name) : null}
+    <Box aria-label={name} ref={ref} {...rest}>
+      {size === "xs" ? initials?.charAt(0) : initials}
     </Box>
   );
 });

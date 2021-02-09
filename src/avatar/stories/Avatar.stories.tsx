@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 // import { useTooltipState, TooltipReference, Tooltip } from "reakit";
 
 import "./avatar.css";
-import { ClockIcon } from "../../icons";
+import { PhotographIcon } from "../../icons";
 // import { AvatarBadge } from "../Avatar";
 import { Avatar, AvatarProps } from "..";
 // import { AvatarGroup } from "../AvatarGroup";
@@ -16,44 +16,35 @@ import {
 export default {
   title: "Avatar",
   component: Avatar,
-  argTypes: createControls("avatar", { unions: ["size"] }),
+  argTypes: createControls("avatar", { unions: ["size", "name"] }),
 } as Meta;
 
-const base = storyTemplate<AvatarProps & { children?: React.ReactNode }>(
+const base = storyTemplate<AvatarProps>(
   args => <Avatar {...args}>{args.children}</Avatar>,
-  {
-    size: "md",
-  },
+  { size: "xl" },
 );
 
-export const Default = base({});
-
-export const WithIcon = base({
-  className: "text-white bg-red-400",
-  icon: <ClockIcon />,
+export const SrcAndName = base({
+  src: "https://bit.ly/ryan-florence",
+  name: "Ryan Florence",
 });
-
-export const NoNameAndSrc = base({});
-export const NameButNoSrc = base({ name: "Anurag Hazra" });
-export const NoNameAndSrcButFallback = base({ icon: <ClockIcon /> });
-export const NameAndFallback = base({
-  name: "Anurag Hazra",
-  icon: <ClockIcon />,
+export const NoSrcAndName = base({ name: "John Conner" });
+export const NoNameAndNoSrc = base({});
+export const NoNameNoSrcButFallback = base({
+  fallback: <PhotographIcon />,
 });
-
-export const OnError = base({
-  src: "https://bit.ly/dan-dabramov",
-  onError: (e: any) => {
-    alert("Error loading image");
-    console.log(e);
-  },
+export const InvalidSrc = base({
+  src: "https://bit.ly/dan-abramav",
+  name: "Dan Abramov",
+  fallback: <PhotographIcon />,
+  onError: () => alert("Provide a valid src url"),
 });
 
 // export const WithIconAndBadge = base({
 //   size: "xl",
 //   children: (
 //     <>
-//       <ClockIcon />
+//       <PhotographIcon />
 //       <AvatarBadge position="bottom-right">
 //         <OfflineDot />
 //       </AvatarBadge>
@@ -143,12 +134,4 @@ export const OnError = base({
 //       );
 //     })}
 //   </>
-// );
-
-// const TypingAnimation = () => (
-//   <div className="bg-green-500 border-2 border-white spinner rounded-xl">
-//     <div className="bg-green-200 bounce1"></div>
-//     <div className="bg-green-200 bounce2"></div>
-//     <div className="bg-green-200 bounce3"></div>
-//   </div>
 // );

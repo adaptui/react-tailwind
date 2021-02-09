@@ -3,12 +3,17 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { GenericAvatar } from "../icons";
+import { Status, StatusProps } from "../common/Status";
 import { AvatarImage } from "./AvatarImage";
 import { useAvatarGroup } from "./AvatarGroup";
 import { forwardRefWithAs } from "../utils/types";
 
-export type AvatarProps = BoxProps & {
+export type AvatarProps = Omit<BoxProps, "onError"> & {
+  /**
+   * How large should avatar be?
+   * @default "md"
+   */
+  size?: keyof Renderlesskit.GetThemeValue<"avatar", "size">;
   /**
    * URL for the avatar image
    */
@@ -18,23 +23,23 @@ export type AvatarProps = BoxProps & {
    */
   name?: string;
   /**
-   * How large should avatar be?
+   * Defines loading strategy
    */
-  size?: keyof Renderlesskit.GetThemeValue<"avatar", "size">;
+  loading?: "eager" | "lazy";
+  /**
+   * Function to get the initials to display
+   */
+  getInitials?: (name: string) => string;
+  /**
+   * Function called when image failed to load
+   */
+  onError?: () => void;
   /**
    * The default avatar used as fallback when `name`, and `src`
    * is not specified.
    * @type React.ReactElement
    */
-  icon?: React.ReactNode;
-  /**
-   * Function called when image failed to load
-   */
-  onError?: (e: any) => void;
-  /**
-   * Function to get the initials to display
-   */
-  getInitials?: (name: string) => string;
+  fallback?: React.ReactNode;
 };
 
 export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
@@ -42,11 +47,12 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     const {
       name,
       src,
-      size,
+      size = "md",
       onError,
       className,
-      icon,
+      fallback,
       getInitials = initials,
+      loading,
       children,
       ...rest
     } = props;
@@ -59,61 +65,58 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
       className,
     );
 
-    // const _children = React.Children.toArray(children);
-
-    // const badges = _children.filter(child => {
-    //   return (child as JSX.Element).type === AvatarBadge;
-    // });
-    // const elements = _children.filter(child => {
-    //   return (child as JSX.Element).type !== AvatarBadge;
-    // });
-
     return (
-      <Box ref={ref} aria-label={name} {...rest} className={avatarStyles}>
+      <Box ref={ref} className={avatarStyles} {...rest}>
         <AvatarImage
           src={src}
           getInitials={getInitials}
           name={name}
           onError={onError}
-          icon={icon}
+          fallback={fallback}
+          loading={loading}
+          size={size}
         />
-        {/* {React.Children.map(badges, badge => {
-          if (React.isValidElement(badge)) {
-            return React.cloneElement(badge, { size: _size });
-          }
-        })} */}
+        <AvatarBadge size={size}></AvatarBadge>
       </Box>
     );
   },
 );
 
-export type AvatarBadgeProps = {
+export type AvatarBadgeProps = BoxProps & {
   position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
-} & Pick<AvatarProps, "size">;
+} & Pick<AvatarProps, "size"> &
+  Partial<StatusProps>;
 
-export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
-  position = "bottom-right",
-  size = "md",
-  children,
-  ...rest
-}) => {
+export const AvatarBadge = forwardRefWithAs<
+  AvatarBadgeProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    size = "md",
+    status = "typing",
+    position = "bottom-right",
+    ...rest
+  } = props;
   const theme = useTheme();
 
   return (
-    <div
-      {...rest}
+    <Box
+      as="div"
+      ref={ref}
       className={cx(
-        theme.avatar.badge.size[size],
         theme.avatar.badge.base,
+        theme.avatar.badge.size[size],
         theme.avatar.badge.position[position],
       )}
+      {...rest}
     >
-      {children}
-    </div>
+      <Status status={status} />
+    </Box>
   );
-};
+});
 
-function initials(name: string) {
+export function initials(name: string) {
   const [firstName, lastName] = name.split(" ");
   return firstName && lastName
     ? `${firstName.charAt(0)}${lastName.charAt(0)}`

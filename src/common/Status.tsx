@@ -1,16 +1,12 @@
 import React from "react";
 
 export const OnlineDot: React.FC = () => (
-  <div className="w-inherit h-inherit rounded-full bg-green-500 border-2 border-white" />
+  <div className="bg-green-500 border-1.5 border-white rounded-full w-inherit h-inherit" />
 );
 
 export const OfflineDot: React.FC = () => (
-  <div className="w-inherit h-inherit rounded-full bg-yellow-500 border-2 border-white" />
+  <div className="bg-yellow-500 border-1.5 border-white rounded-full w-inherit h-inherit" />
 );
-
-export type StatusProps = {
-  status: "online" | "offline" | "sleep";
-};
 
 export const HalfMoonDot: React.FC = () => {
   return (
@@ -18,7 +14,7 @@ export const HalfMoonDot: React.FC = () => {
       viewBox="0 0 5 5"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-inherit h-inherit rounded-full bg-white border border-white"
+      className="bg-white border border-white rounded-full w-inherit h-inherit"
     >
       <path
         fill-rule="evenodd"
@@ -30,10 +26,29 @@ export const HalfMoonDot: React.FC = () => {
   );
 };
 
+const TypingAnimation = () => (
+  <div className="bg-gray-500 border-1.5 border-white rounded-full h-3 w-auto p-1 flex items-center justify-center">
+    <div className="bg-white w-0.5 h-0.5 rounded-full animate-pulse"></div>
+    <div
+      className="bg-white w-0.5 h-0.5 ml-px rounded-full animate-pulse"
+      style={{ animationDelay: "0.67s" }}
+    ></div>
+    <div
+      className="bg-white w-0.5 h-0.5 ml-px rounded-full animate-pulse"
+      style={{ animationDelay: "1.34s" }}
+    ></div>
+  </div>
+);
+
 const ComponentMap = {
   offline: <OfflineDot />,
   online: <OnlineDot />,
   sleep: <HalfMoonDot />,
+  typing: <TypingAnimation />,
+};
+
+export type StatusProps = {
+  status: "online" | "offline" | "sleep" | "typing";
 };
 
 export const Status: React.FC<StatusProps> = ({ status }) => {
