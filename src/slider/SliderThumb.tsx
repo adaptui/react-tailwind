@@ -9,8 +9,10 @@ import { useTheme } from "..";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
 import { SliderProps, useSliderPropsContext } from "./Slider";
+import { BoxProps } from "../box";
 
-type SliderThumbProps = Omit<SliderProps, "size" | "orientation" | "origin">;
+type SliderThumbProps = BoxProps &
+  Omit<SliderProps, "size" | "orientation" | "origin">;
 
 export const SliderThumb = forwardRefWithAs<
   SliderThumbProps,
@@ -35,6 +37,7 @@ export const SliderThumb = forwardRefWithAs<
     theme.slider.common.thumb.base,
     theme.slider.common.thumb.size[size],
     theme.slider[orientation].thumb.base,
+    className,
   );
 
   const thumbDynamicStyles = (index: number) => {
@@ -63,7 +66,7 @@ export const SliderThumb = forwardRefWithAs<
             index={index}
             {...state}
             {...props}
-            className={cx(thumbHandleStyles, className)}
+            className={thumbHandleStyles}
           >
             <SliderInput
               className={theme.slider.common.input}

@@ -75,21 +75,19 @@ export const LableDesign = storyTemplate<
   const [value, setValue] = React.useState(50);
 
   return (
-    <>
-      <div role="group" aria-labelledby="price" style={{ width: 400 }}>
-        <div className="flex justify-between pb-2">
-          <label>Price (${value})</label>
-          <span className={args.currentColor}>0$ - 100$</span>
-        </div>
-        <Slider
-          {...args}
-          className={args.currentColor}
-          onChange={v => setValue(v[0])}
-          values={[value]}
-          min={0}
-          max={100}
-        />
+    <div role="group" aria-labelledby="price" style={{ width: 400 }}>
+      <div className="flex justify-between pb-2">
+        <label>Price (${value})</label>
+        <span className={args.currentColor}>0$ - 100$</span>
       </div>
-    </>
+      <Slider
+        {...args}
+        className={args.currentColor}
+        onChange={v => setValue(v[0])}
+        values={[value]}
+        min={0}
+        max={100}
+      />
+    </div>
   );
 })({ currentColor: "text-blue-500", size: "sm" });

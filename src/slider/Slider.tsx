@@ -36,7 +36,7 @@ const [SliderPropsContext, useSliderPropsContext] = createContext<
 
 export { useSliderContext, useSliderPropsContext };
 
-export type SliderProps = BoxProps &
+export type SliderProps = Omit<BoxProps, "onChange"> &
   SliderInitialState & {
     origin?: number;
     thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
@@ -78,6 +78,7 @@ export const Slider = forwardRefWithAs<
     step,
     isDisabled,
     reversed,
+    onChange,
     ...rest
   } = props;
   const theme = useTheme();

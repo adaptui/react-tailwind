@@ -5,11 +5,10 @@ import { useTheme } from "..";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
 import { SliderProps, useSliderPropsContext } from "./Slider";
+import { BoxProps } from "../box";
 
-export type SliderTrackProps = Omit<
-  SliderProps,
-  "thumbContent" | "size" | "orientation" | "origin"
->;
+export type SliderTrackProps = BoxProps &
+  Omit<SliderProps, "thumbContent" | "size" | "orientation" | "origin">;
 
 export const SliderTrack = forwardRefWithAs<
   SliderTrackProps,
@@ -39,6 +38,7 @@ export const SliderTrack = forwardRefWithAs<
   const trackContainerStyles = cx(
     theme.slider.common.track.base,
     theme.slider[orientation].track.base,
+    className,
   );
 
   const trackMainStyles = cx(
@@ -64,7 +64,7 @@ export const SliderTrack = forwardRefWithAs<
     <RenderlessSliderTrack
       {...state}
       ref={ref}
-      className={cx(trackContainerStyles, className)}
+      className={trackContainerStyles}
       style={{ padding: `${padding}px 0` }}
       {...props}
     >
