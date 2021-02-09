@@ -14,7 +14,7 @@ import { forwardRefWithAs } from "../utils/types";
 export type RadioCommonProps = Partial<
   Pick<ReakitRadioProps, "value" | "disabled">
 > & {
-  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon">["size"];
+  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
 };
 
 export const RadioInput: React.FC<RadioHTMLProps & RadioCommonProps> = ({
