@@ -16,7 +16,7 @@ import {
 export default {
   title: "Avatar",
   component: Avatar,
-  argTypes: createControls("avatar", { unions: ["size", "name"] }),
+  argTypes: createControls("avatar", { unions: ["size"] }),
 } as Meta;
 
 const base = storyTemplate<AvatarProps>(

@@ -3,12 +3,17 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { Status, StatusProps } from "../common/Status";
+import { GenericAvatar } from "../icons";
+import { AvatarName } from "./AvatarName";
+import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
+import { useImage } from "../utils/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
 import { forwardRefWithAs } from "../utils/types";
+import { createContext, runIfFn } from "../utils";
+import { Status, StatusProps } from "../common/Status";
 
-export type AvatarProps = Omit<BoxProps, "onError"> & {
+export type AvatarInitialProps = {
   /**
    * How large should avatar be?
    * @default "md"
@@ -42,6 +47,8 @@ export type AvatarProps = Omit<BoxProps, "onError"> & {
   fallback?: React.ReactNode;
 };
 
+export type AvatarProps = Omit<BoxProps, "onError"> & AvatarInitialProps;
+
 export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
   (props, ref) => {
     const {
@@ -49,11 +56,11 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
       src,
       size = "md",
       onError,
-      className,
       fallback,
       getInitials = initials,
       loading,
       children,
+      className,
       ...rest
     } = props;
     const group = useAvatarGroup();
@@ -65,19 +72,47 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
       className,
     );
 
+    const context: AvatarInitialProps = React.useMemo(
+      () => ({ size, src, name, loading, getInitials, onError, fallback }),
+      [size, src, name, loading, getInitials, onError, fallback],
+    );
+
+    /**
+     * Use the image hook to only show the image when it has loaded
+     */
+    const status = useImage({ src, onError });
+    const hasLoaded = status === "loaded";
+
+    /**
+     * Fallback avatar applies under 2 conditions:
+     * - If `src` was passed and the image has not loaded or failed to load
+     * - If `src` wasn't passed
+     *
+     * In this case, we'll show either the name avatar or default avatar
+     */
+    const showFallback = !src || !hasLoaded;
+
     return (
-      <Box ref={ref} className={avatarStyles} {...rest}>
-        <AvatarImage
-          src={src}
-          getInitials={getInitials}
-          name={name}
-          onError={onError}
-          fallback={fallback}
-          loading={loading}
-          size={size}
-        />
-        <AvatarBadge size={size}></AvatarBadge>
-      </Box>
+      <AvatarProvider value={context}>
+        <Box ref={ref} className={avatarStyles} {...rest}>
+          {children ? (
+            runIfFn(children, context)
+          ) : (
+            <>
+              {!showFallback ? (
+                <AvatarImage />
+              ) : name ? (
+                <AvatarName />
+              ) : (
+                <AvatarIcon>
+                  {fallback ? fallback : <GenericAvatar />}
+                </AvatarIcon>
+              )}
+              <AvatarBadge size={size}></AvatarBadge>
+            </>
+          )}
+        </Box>
+      </AvatarProvider>
     );
   },
 );
@@ -115,6 +150,15 @@ export const AvatarBadge = forwardRefWithAs<
     </Box>
   );
 });
+
+export type AvatarContext = AvatarInitialProps;
+
+const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
+  name: "AvatarContext",
+  strict: false,
+});
+
+export { useAvatarContext };
 
 export function initials(name: string) {
   const [firstName, lastName] = name.split(" ");

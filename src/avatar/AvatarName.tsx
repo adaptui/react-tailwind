@@ -1,0 +1,30 @@
+import * as React from "react";
+import { cx } from "@renderlesskit/react";
+
+import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs } from "../utils/types";
+import { initials, useAvatarContext } from "./Avatar";
+
+export type AvatarNameProps = BoxProps & {};
+
+export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
+  const { className, ...rest } = props;
+  const theme = useTheme();
+  const { size, name, getInitials = initials } = useAvatarContext();
+
+  const initial = name ? getInitials(name) : null;
+
+  if (!initial) return null;
+
+  return (
+    <Box
+      aria-label={name}
+      ref={ref}
+      className={cx(theme.avatar.name, className)}
+      {...rest}
+    >
+      {size === "xs" ? initial?.charAt(0) : initial}
+    </Box>
+  );
+});
