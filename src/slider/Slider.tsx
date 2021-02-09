@@ -7,14 +7,12 @@ import {
 } from "@renderlesskit/react";
 
 import { useTheme } from "..";
-import { createContext, runIfFn } from "../utils";
+import { Box, BoxProps } from "../box";
 import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
-import { Box } from "../box";
 import { forwardRefWithAs } from "../utils/types";
+import { createContext, runIfFn } from "../utils";
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
-
-export const percent = (v: number) => `${v}%`;
 
 const [
   SliderStateProvider,
@@ -38,11 +36,15 @@ const [SliderPropsContext, useSliderPropsContext] = createContext<
 
 export { useSliderContext, useSliderPropsContext };
 
-export type SliderProps = SliderInitialState & {
-  origin?: number;
-  thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
-  size?: keyof Renderlesskit.GetThemeValue<"slider", "common">["thumb"]["size"];
-};
+export type SliderProps = BoxProps &
+  SliderInitialState & {
+    origin?: number;
+    thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
+    size?: keyof Renderlesskit.GetThemeValue<
+      "slider",
+      "common"
+    >["thumb"]["size"];
+  };
 
 type SliderRenderProps = {
   children?:
@@ -70,6 +72,13 @@ export const Slider = forwardRefWithAs<
     origin,
     size = "sm",
     className,
+    values,
+    min,
+    max,
+    step,
+    isDisabled,
+    reversed,
+    ...rest
   } = props;
   const theme = useTheme();
   const state = useSliderState({ ...props, orientation });
@@ -89,19 +98,17 @@ export const Slider = forwardRefWithAs<
   return (
     <SliderPropsContext value={contextProps}>
       <SliderStateProvider value={state}>
-        <Box ref={ref} className={sliderWrapperStyles}>
+        <Box ref={ref} className={sliderWrapperStyles} {...rest}>
           {children ? (
             runIfFn(children, { state, trackRef, thumbRef })
           ) : (
-            <>
-              <SliderTrack ref={trackRef}>
-                <SliderThumb ref={thumbRef}>
-                  {thumbContent
-                    ? runIfFn(thumbContent, state.values)
-                    : thumbContent}
-                </SliderThumb>
-              </SliderTrack>
-            </>
+            <SliderTrack ref={trackRef}>
+              <SliderThumb ref={thumbRef}>
+                {thumbContent
+                  ? runIfFn(thumbContent, state.values)
+                  : thumbContent}
+              </SliderThumb>
+            </SliderTrack>
           )}
         </Box>
       </SliderStateProvider>

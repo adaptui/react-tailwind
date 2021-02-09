@@ -1,4 +1,6 @@
-import { SliderProps, useSliderContext, percent } from "../Slider";
+import { SliderProps, useSliderContext } from "../Slider";
+
+export const percent = (v: number) => `${v}%`;
 
 export const useSliderValues = (props: SliderProps) => {
   const state = useSliderContext();
