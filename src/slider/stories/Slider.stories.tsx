@@ -2,14 +2,14 @@ import React from "react";
 import { Meta } from "@storybook/react";
 
 import {
-  createUnionControl,
   storyTemplate,
+  createUnionControl,
 } from "../../../.storybook/storybookUtils";
 
-import { Slider, SliderProps } from "../Slider";
-import { SliderThumbHandle } from "../../icons/SliderThumbHandle";
 import { SliderTrack } from "../SliderTrack";
 import { SliderThumb } from "../SliderThumb";
+import { Slider, SliderProps } from "../Slider";
+import { SliderThumbHandle } from "../../icons/SliderThumbHandle";
 
 export default {
   title: "Slider",
