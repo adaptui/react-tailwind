@@ -14,9 +14,14 @@ expectType<Renderlesskit.GetThemeValue<"button", "variant">>({
   outline: "",
 });
 expectType<Renderlesskit.GetThemeValue<"button", "size">>({
+  md: "",
   lg: "",
   sm: "",
   xl: "",
+});
+expectType<Renderlesskit.GetThemeValue<"switch", "icon", "wrapper">["size"]>({
+  lg: "",
+  sm: "",
   xs: "",
 });
 

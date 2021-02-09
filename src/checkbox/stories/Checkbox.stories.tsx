@@ -25,12 +25,7 @@ export default {
       sm: "sm",
       lg: "lg",
     }),
-    defaultState: {
-      control: {
-        type: "inline-radio",
-        options: [true, false, "indeterminate"],
-      },
-    },
+    defaultState: createUnionControl([true, false, "indeterminate"]),
     disabled: { control: { type: "boolean" } },
   },
 } as Meta;
@@ -102,7 +97,7 @@ export const Group = storyTemplate<CheckboxProps>(args => {
   );
 })({ size: "sm" });
 
-export const GroupIndeterminateSimple = () => {
+export const GroupIndeterminateSimple = storyTemplate<CheckboxProps>(args => {
   const [checkedItems, setCheckedItems] = React.useState<CheckboxStatus[]>([
     false,
     false,
@@ -115,6 +110,7 @@ export const GroupIndeterminateSimple = () => {
       <Checkbox
         state={isIndeterminate ? "indeterminate" : allChecked}
         onStateChange={value => setCheckedItems([value, value])}
+        {...args}
       >
         Parent Checkbox
       </Checkbox>
@@ -122,21 +118,23 @@ export const GroupIndeterminateSimple = () => {
         <Checkbox
           state={checkedItems[0]}
           onStateChange={value => setCheckedItems([value, checkedItems[1]])}
+          {...args}
         >
           Child Checkbox 1
         </Checkbox>
         <Checkbox
           state={checkedItems[1]}
           onStateChange={value => setCheckedItems([checkedItems[0], value])}
+          {...args}
         >
           Child Checkbox 2
         </Checkbox>
       </div>
     </>
   );
-};
+})({ size: "sm" });
 
-export const GroupIndeterminateComplex = () => {
+export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
   const values = React.useMemo(() => ["Apple", "Orange", "Watermelon"], []);
   const [itemState, setItemState] = React.useState<CheckboxStatus>([]);
   const [groupState, setGroupState] = React.useState<CheckboxStatus>(false);
@@ -165,7 +163,7 @@ export const GroupIndeterminateComplex = () => {
 
   return (
     <>
-      <Checkbox state={groupState} onStateChange={setGroupState}>
+      <Checkbox state={groupState} onStateChange={setGroupState} {...args}>
         Fruits
       </Checkbox>
       <div className="flex flex-col pl-6 mt-1">
@@ -176,6 +174,7 @@ export const GroupIndeterminateComplex = () => {
               state={itemState}
               onStateChange={setItemState}
               value={value}
+              {...args}
             >
               {value}
             </Checkbox>
@@ -184,7 +183,7 @@ export const GroupIndeterminateComplex = () => {
       </div>
     </>
   );
-};
+})({ size: "sm" });
 
 const CheckboxCustom = (props: CheckboxProps) => {
   const [state, onStateChange] = React.useState<CheckboxStatus>(true);
@@ -204,11 +203,12 @@ export const CustomCheckbox = storyTemplate<CheckboxProps>(CheckboxCustom)({});
 
 // Inspired from https://codepen.io/geertsdev/pen/yLaGLJq
 const CheckboxCustomComplete = (props: CheckboxProps) => {
-  const { className, children } = props;
+  const { className, children, ...rest } = props;
   return (
     <Checkbox {...props}>
       <CheckboxLabel
         className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
+        {...rest}
       >
         <CheckboxInput />
         {(props?.state as string[]).includes(props?.value as string) ? (

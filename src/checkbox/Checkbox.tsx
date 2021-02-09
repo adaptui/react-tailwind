@@ -29,7 +29,7 @@ export { useCheckboxContext };
 
 type CheckboxRenderProps = {
   children?:
-    | (({ state, size }: CheckboxContext) => JSX.Element)
+    | ((state: ReakitCheckboxOptions) => JSX.Element)
     | React.ReactNode
     | string;
 };
@@ -38,7 +38,7 @@ export type CheckboxProps = BoxProps &
   Omit<ReakitCheckboxOptions, "size" | "setState"> & {
     defaultState?: ReakitCheckboxOptions["state"];
     onStateChange?: (value: CheckboxStatus) => void;
-    size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon">["size"];
+    size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
   };
 
 export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(
@@ -84,7 +84,7 @@ export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(
     return (
       <CheckboxProvider value={context}>
         {typeof children !== "string" ? (
-          runIfFn(children, { state, size })
+          runIfFn(children, state)
         ) : (
           <CheckboxLabel ref={ref} {...rest}>
             <CheckboxInput />

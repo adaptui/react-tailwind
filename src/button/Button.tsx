@@ -15,7 +15,7 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    *
-   * @default "lg"
+   * @default "md"
    */
   size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
   /**
@@ -63,7 +63,7 @@ export const Button = forwardRefWithAs<
     ...rest
   } = props;
   const group = useButtonGroup();
-  const _size = size || group?.size || "lg";
+  const _size = size || group?.size || "md";
   const _variant = variant || group?.variant || "primary";
   const _disabled = disabled || loading;
 

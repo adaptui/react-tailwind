@@ -1,64 +1,57 @@
 import * as React from "react";
+import { CheckboxOptions as ReakitCheckboxOptions } from "reakit";
 import { CheckboxStateReturn } from "reakit";
 import { useControllableState } from "@renderlesskit/react";
 
+import { BoxProps } from "../box";
 import { SwitchIcon } from "./SwitchIcon";
 import { SwitchLabel } from "./SwitchLabel";
 import { SwitchInput } from "./SwitchInput";
 import { createContext, runIfFn } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
 
-export type SwitchStateContext = CheckboxStateReturn;
+export type CheckboxStatus = CheckboxStateReturn["state"];
 
-const [SwitchStateProvider, useSwitchState] = createContext<SwitchStateContext>(
-  {
-    name: "SwitchStateContext",
-    strict: false,
-  },
-);
-
-export { useSwitchState };
-
-export type SwitchThemeContext = {
-  size: keyof Renderlesskit.GetThemeValue<"switch", "icon">["wrapper"]["size"];
+export type SwitchContext = {
+  state: ReakitCheckboxOptions;
+  size: SwitchProps["size"];
 };
 
-const [SwitchThemeProvider, useSwitchTheme] = createContext<SwitchThemeContext>(
-  {
-    name: "SwitchThemeContext",
-    strict: false,
-  },
-);
+const [SwitchProvider, useSwitchContext] = createContext<SwitchContext>({
+  name: "SwitchContext",
+  strict: false,
+});
 
-export { useSwitchTheme };
-
-export type SwitchStateProps = Partial<SwitchThemeContext> & {
-  state?: SwitchStateContext;
-};
+export { useSwitchContext };
 
 type SwitchRenderProps = {
-  children?:
-    | (({
-        state,
-        theme,
-      }: {
-        state: SwitchStateContext;
-        theme: SwitchThemeContext;
-      }) => JSX.Element)
-    | React.ReactNode;
+  children?: ((state: CheckboxStateReturn) => JSX.Element) | React.ReactNode;
 };
 
-export type SwitchProps = {
-  state?: SwitchStateContext["state"];
-  defaultState?: SwitchStateContext["state"];
-  onStateChange?: (value: SwitchStateContext["state"]) => void;
-  size?: SwitchThemeContext["size"];
-};
+export type SwitchProps = BoxProps &
+  Omit<ReakitCheckboxOptions, "size" | "setState"> & {
+    defaultState?: ReakitCheckboxOptions["state"];
+    onStateChange?: (value: CheckboxStatus) => void;
+    size?: keyof Renderlesskit.GetThemeValue<
+      "switch",
+      "icon",
+      "wrapper"
+    >["size"];
+  };
 
-export const Switch: React.FC<SwitchProps & SwitchRenderProps> = props => {
+export const Switch = forwardRefWithAs<
+  SwitchProps & SwitchRenderProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
   const {
     defaultState,
     state: initialState,
     onStateChange,
+    value,
+    checked,
+    disabled,
+    focusable,
     size = "sm",
     children,
     ...rest
@@ -72,23 +65,25 @@ export const Switch: React.FC<SwitchProps & SwitchRenderProps> = props => {
     () => ({
       state: switchState,
       setState: setSwitchStateChange,
+      value,
+      checked,
+      disabled,
+      focusable,
     }),
-    [switchState, setSwitchStateChange],
+    [switchState, setSwitchStateChange, value, checked, disabled, focusable],
   );
-  const theme = React.useMemo(() => ({ size }), [size]);
+  const context = React.useMemo(() => ({ state, size }), [state, size]);
 
   return (
-    <SwitchStateProvider value={state}>
-      <SwitchThemeProvider value={theme}>
-        {children ? (
-          runIfFn(children, { state, theme })
-        ) : (
-          <SwitchLabel {...rest}>
-            <SwitchInput />
-            <SwitchIcon />
-          </SwitchLabel>
-        )}
-      </SwitchThemeProvider>
-    </SwitchStateProvider>
+    <SwitchProvider value={context}>
+      {children ? (
+        runIfFn(children, state)
+      ) : (
+        <SwitchLabel ref={ref} {...rest}>
+          <SwitchInput />
+          <SwitchIcon />
+        </SwitchLabel>
+      )}
+    </SwitchProvider>
   );
-};
+});
