@@ -71,18 +71,18 @@ export const Customization = () => {
 
 export const LableDesign = storyTemplate<
   SliderProps & { currentColor: string }
->(args => {
+>(({ currentColor, ...args }) => {
   const [value, setValue] = React.useState(50);
 
   return (
     <div role="group" aria-labelledby="price" style={{ width: 400 }}>
       <div className="flex justify-between pb-2">
         <label>Price (${value})</label>
-        <span className={args.currentColor}>0$ - 100$</span>
+        <span className={currentColor}>0$ - 100$</span>
       </div>
       <Slider
         {...args}
-        className={args.currentColor}
+        className={currentColor}
         onChange={v => setValue(v[0])}
         values={[value]}
         min={0}
