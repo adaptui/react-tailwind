@@ -13,7 +13,7 @@ export const slider = {
     },
     thumb: {
       base:
-        "lib:absolute lib:z-1 lib:flex lib:items-center lib:bg-white lib:flex lib:items-center lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-current lib:focus-within:ring-2 lib:focus-within:ring-current",
+        "lib:absolute lib:z-1 lib:flex lib:items-center lib:bg-white lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-current lib:focus-within:ring-2 lib:focus-within:ring-current",
       size: {
         xs: "lib:w-3 lib:h-3 lib:text-xxs",
         sm: "lib:w-4 lib:h-4 lib:text-xs",

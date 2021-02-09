@@ -1,17 +1,17 @@
 export const progress = {
   track: {
-    base: "relative overflow-hidden bg-gray-300 rounded-2xl",
+    base: "lib:relative lib:overflow-hidden lib:bg-gray-300 lib:rounded-2xl",
     size: {
-      xs: "h-0.5",
-      sm: "h-1",
-      lg: "h-2",
-      xl: "h-4",
+      xs: "lib:h-0.5",
+      sm: "lib:h-1",
+      lg: "lib:h-2",
+      xl: "lib:h-4",
     },
   },
   bar: {
-    base: "h-full",
-    normal: "transition-all bg-gray-800 rounded-2xl",
+    base: "lib:h-full",
+    normal: "lib:transition-all lib:bg-gray-800 lib:rounded-2xl",
     indeterminate:
-      "absolute min-w-half bg-gradient-to-r from-transparent via-gray-800 to-transparent animate-progress",
+      "lib:absolute lib:min-w-half lib:bg-gradient-to-r lib:from-transparent lib:via-gray-800 lib:to-transparent lib:animate-progress",
   },
 };
