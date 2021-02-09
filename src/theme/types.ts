@@ -1,3 +1,4 @@
+import { GetEffectiveTypeRootsHost } from "tsd/libraries/typescript";
 import { DefaultTheme } from "..";
 
 // https://stackoverflow.com/questions/60795256/typescript-type-merging
@@ -60,13 +61,18 @@ declare global {
       U extends { [x: string]: any } ? U : {}
     >;
 
+    type _Comps = Renderlesskit.Theme["components"];
+
     /**
      * @template C component name
      * @template K key
      */
     export type GetThemeValue<
-      C extends keyof Renderlesskit.Theme["components"],
-      K extends keyof Renderlesskit.Theme["components"][C]
-    > = Renderlesskit.Theme["components"][C][K];
+      C extends keyof _Comps,
+      K extends keyof _Comps[C],
+      L extends keyof _Comps[C][K] = keyof _Comps[C][K] & { _s: string }
+    > = L extends { [x: string]: any; _s: string }
+      ? _Comps[C][K]
+      : _Comps[C][K][L];
   }
 }
