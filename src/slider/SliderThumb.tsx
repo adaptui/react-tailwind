@@ -6,9 +6,9 @@ import {
 } from "@renderlesskit/react";
 
 import { useTheme } from "..";
-import { SliderProps, useSliderPropsContext } from "./Slider";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
+import { SliderProps, useSliderPropsContext } from "./Slider";
 
 type SliderThumbProps = Omit<SliderProps, "size" | "orientation" | "origin">;
 
