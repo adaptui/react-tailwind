@@ -11,7 +11,7 @@ import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { CheckboxInput } from "./CheckboxInput";
 import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
@@ -27,12 +27,7 @@ const [CheckboxProvider, useCheckboxContext] = createContext<CheckboxContext>({
 
 export { useCheckboxContext };
 
-type CheckboxRenderProps = {
-  children?:
-    | ((state: ReakitCheckboxOptions) => JSX.Element)
-    | React.ReactNode
-    | string;
-};
+type CheckboxRenderProps = RenderProp<ReakitCheckboxOptions>;
 
 export type CheckboxProps = BoxProps &
   Omit<ReakitCheckboxOptions, "size" | "setState"> & {
