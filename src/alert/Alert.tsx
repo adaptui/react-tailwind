@@ -3,17 +3,17 @@ import { cx } from "@renderlesskit/react";
 
 import {
   BoltIcon,
+  CloseIcon,
   InfoCircleIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   ExclamationTriangleIcon,
-  CloseIcon,
 } from "../icons";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
+import { Box, BoxProps } from "../box";
 import { createContext, runIfFn } from "../utils";
 import { Button, ButtonProps, IconButton } from "../button";
-import { Box, BoxProps } from "../box";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 const STATUS_ICONS = {
   info: InfoCircleIcon,
@@ -49,17 +49,10 @@ export type AlertProps = BoxProps & {
   description?: string;
 };
 
-type AlertRenderProps = {
-  children?:
-    | React.ReactNode
-    | (({
-        status,
-        styles,
-      }: {
-        status: AlertStatus;
-        styles: Renderlesskit.Theme["components"]["alert"];
-      }) => JSX.Element);
-};
+type AlertRenderProps = RenderProp<{
+  status: AlertStatus;
+  styles: Renderlesskit.Theme["components"]["alert"];
+}>;
 
 export const Alert = forwardRefWithAs<
   AlertProps & AlertRenderProps,
@@ -118,6 +111,8 @@ export const Alert = forwardRefWithAs<
   );
 });
 
+Alert.displayName = "Alert";
+
 export type AlertTitleProps = BoxProps & {};
 
 export const AlertTitle = forwardRefWithAs<
@@ -131,6 +126,8 @@ export const AlertTitle = forwardRefWithAs<
 
   return <Box className={alertTitleStyles} ref={ref} {...rest} />;
 });
+
+AlertTitle.displayName = "AlertTitle";
 
 export type AlertDescriptionProps = BoxProps & {};
 
@@ -146,6 +143,8 @@ export const AlertDescription = forwardRefWithAs<
   return <Box className={alertDescriptionStyles} ref={ref} {...rest} />;
 });
 
+AlertDescription.displayName = "AlertDescription";
+
 export type AlertActionsProps = BoxProps & {};
 
 export const AlertActions = forwardRefWithAs<
@@ -159,6 +158,8 @@ export const AlertActions = forwardRefWithAs<
 
   return <Box className={alertActionsStyles} ref={ref} {...rest} />;
 });
+
+AlertActions.displayName = "AlertActions";
 
 export type AlertActionButtonProps = ButtonProps & {};
 
@@ -178,6 +179,8 @@ export const AlertActionButton = forwardRefWithAs<
 
   return <Button className={alertActionButtonStyles} ref={ref} {...rest} />;
 });
+
+AlertActionButton.displayName = "AlertActionButton";
 
 export type AlertIconProps = BoxProps;
 
@@ -203,5 +206,7 @@ export const AlertIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+AlertIcon.displayName = "AlertIcon";
 
 export default Alert;

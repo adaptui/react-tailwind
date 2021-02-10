@@ -35,17 +35,21 @@ export default {
   },
 } as Meta;
 
-const base = storyTemplate<AlertProps>(args => {
-  const status = args?.status || "info";
+const base = storyTemplate<AlertProps>(
+  args => {
+    const status = args?.status || "info";
 
-  return <Alert status={status} {...args} />;
-});
+    return <Alert status={status} {...args} />;
+  },
+  {
+    actionButtonLabel: "Reach Out",
+    title: "Your browser is outdated.",
+    description: "Your experience may be degraded.",
+  },
+);
 
 export const Default = base({
   status: "info",
-  actionButtonLabel: "Reach Out",
-  title: "Your browser is outdated.",
-  description: "Your experience may be degraded.",
 });
 
 export const Customization = storyTemplate<AlertProps>(args => {
