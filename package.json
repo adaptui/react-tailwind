@@ -47,6 +47,7 @@
     "release:github": "conventional-github-releaser -p angular",
     "release:tags": "git push --follow-tags origin main",
     "storybook": "start-storybook -p 6006",
+    "pretest": "node ./scripts/pretest.js",
     "test": "jest --config ./jest.config.ts --no-cache",
     "typecheck": "tsc --noEmit --project tsconfig.prod.json && tsd"
   },
