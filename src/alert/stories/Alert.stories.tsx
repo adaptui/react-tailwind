@@ -8,10 +8,10 @@ import {
   AlertTitle,
   AlertActions,
   AlertDescription,
+  AlertActionButton,
 } from "../index";
 import { CloseIcon } from "../../icons";
 import { IconButton } from "../../button";
-import { AlertActionButton } from "../Alert";
 import { cx } from "@renderlesskit/react";
 import {
   storyTemplate,
