@@ -1,22 +1,9 @@
-import React from "react";
-
-import { useTheme } from "..";
-import { Box, BoxProps } from "../box";
-import { cx } from "@renderlesskit/react";
-import { forwardRefWithAs } from "../utils/types";
+import { BoxProps } from "../box";
+import { createComponent } from "./Alert";
 
 export type AlertActionsProps = BoxProps & {};
 
-export const AlertActions = forwardRefWithAs<
-  AlertActionsProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const alertActionsStyles = cx(theme.alert.actionsWrapper, className);
-
-  return <Box className={alertActionsStyles} ref={ref} {...rest} />;
-});
-
-AlertActions.displayName = "AlertActions";
+export const AlertActions = createComponent<AlertActionsProps>(
+  "actionsWrapper",
+  "AlertActions",
+);

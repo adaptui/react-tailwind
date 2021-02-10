@@ -116,4 +116,28 @@ export const Alert = forwardRefWithAs<
 
 Alert.displayName = "Alert";
 
+/**
+ * Utility function to refactor out redundant components,
+ * we can remove this later if use cases differ in future to avoid wrong abstraction
+ *
+ * @param styleToken theme token name accessing theme.alert[styleToken]
+ * @param displayName sets displayName of the component
+ */
+export const createComponent = <Props extends { className?: string }>(
+  styleToken: string,
+  displayName: string,
+) => {
+  const Comp = forwardRefWithAs<Props, HTMLDivElement, "div">((props, ref) => {
+    const { className, ...rest } = props;
+    const theme = useTheme();
+    const styles = cx(theme.alert[styleToken], className);
+
+    return <Box className={styles} ref={ref} {...rest} />;
+  });
+
+  Comp.displayName = displayName;
+
+  return Comp;
+};
+
 export default Alert;
