@@ -22,7 +22,13 @@ export default {
   title: "Alert",
   component: Alert,
   argTypes: {
-    status: createUnionControl(["info", "success", "warning", "error"]),
+    status: createUnionControl([
+      "neutral",
+      "info",
+      "success",
+      "warning",
+      "error",
+    ]),
     title: { defaultValue: "" },
     description: { defaultValue: "" },
     actionButtonLabel: { defaultValue: "" },

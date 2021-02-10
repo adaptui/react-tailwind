@@ -14,6 +14,7 @@ import { Button, ButtonProps, IconButton } from "../button";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 const STATUS_ICONS = {
+  neutral: InfoCircleIcon,
   info: InfoCircleIcon,
   success: CheckCircleIcon,
   warning: ExclamationTriangleIcon,
