@@ -1,6 +1,5 @@
 import React from "react";
 import { Meta } from "@storybook/react";
-// import { useTooltipState, TooltipReference, Tooltip } from "reakit";
 
 import { PhotographIcon } from "../../icons";
 import { Avatar, AvatarProps } from "../index";
@@ -53,53 +52,54 @@ export const TypingBadge = base({
   status: "typing",
 });
 
-export const BadgeExample = () => {
-  const [isTyping, setTyping] = React.useState(false);
+export const BadgeExample = storyTemplate<AvatarProps>(
+  args => {
+    const [isTyping, setTyping] = React.useState(false);
 
-  return (
-    <>
-      <Avatar
-        size="xl"
-        src="https://bit.ly/dan-abramov"
-        status={isTyping ? "typing" : "online"}
-      />
-
-      <br />
-
-      <label>
-        isTyping?
-        <input
-          type="checkbox"
-          name="typing"
-          onChange={() => setTyping(!isTyping)}
+    return (
+      <>
+        <Avatar
+          status={isTyping ? "typing" : "online"}
+          className="flex"
+          {...args}
         />
-      </label>
-    </>
-  );
-};
+        <label className="block mt-4">
+          isTyping?
+          <input
+            type="checkbox"
+            name="typing"
+            className="ml-2"
+            onChange={() => setTyping(!isTyping)}
+          />
+        </label>
+      </>
+    );
+  },
+  { size: "xl", src: "https://bit.ly/dan-abramov" },
+)({});
 
-export const Group = () => (
-  <AvatarGroup size="xl">
-    <Avatar
-      size="xl"
-      src="https://bit.ly/dan-abramov"
-      name="Dan Abramov"
-      status="online"
-    ></Avatar>
-    <Avatar
-      size="xl"
-      src="https://bit.ly/dan-abramov"
-      name="Dan Abramov"
-      status="sleep"
-    ></Avatar>
-    <Avatar
-      size="xl"
-      src="https://bit.ly/dan-abramov"
-      name="Dan Abramov"
-      status="typing"
-    ></Avatar>
-  </AvatarGroup>
-);
+export const Group = storyTemplate<AvatarProps>(
+  args => (
+    <AvatarGroup {...args}>
+      <Avatar
+        src="https://bit.ly/dan-abramov"
+        name="Dan Abramov"
+        status="online"
+      />
+      <Avatar
+        src="https://bit.ly/dan-abramov"
+        name="Dan Abramov"
+        status="sleep"
+      />
+      <Avatar
+        src="https://bit.ly/dan-abramov"
+        name="Dan Abramov"
+        status="typing"
+      />
+    </AvatarGroup>
+  ),
+  { size: "xl" },
+)({});
 
 export const GroupWithLimit = () => (
   <>

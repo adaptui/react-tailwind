@@ -56,7 +56,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     const {
       name,
       src,
-      size = "md",
+      size,
       onError,
       fallback,
       getInitials = initials,
@@ -78,7 +78,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
 
     const context: AvatarInitialProps = React.useMemo(
       () => ({
-        size,
+        size: _size,
         src,
         name,
         loading,
@@ -89,7 +89,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
         position,
       }),
       [
-        size,
+        _size,
         src,
         name,
         loading,
