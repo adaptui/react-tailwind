@@ -11,7 +11,7 @@ import { useImage } from "../utils/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
 import { forwardRefWithAs } from "../utils/types";
 import { createContext, runIfFn } from "../utils";
-import { Status, StatusProps } from "../common/Status";
+import { AvatarBadge } from "./AvatarBadge";
 
 export type AvatarInitialProps = {
   /**
@@ -45,6 +45,8 @@ export type AvatarInitialProps = {
    * @type React.ReactElement
    */
   fallback?: React.ReactNode;
+  status?: "online" | "sleep" | "typing";
+  position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
 };
 
 export type AvatarProps = Omit<BoxProps, "onError"> & AvatarInitialProps;
@@ -59,6 +61,8 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
       fallback,
       getInitials = initials,
       loading,
+      status,
+      position,
       children,
       className,
       ...rest
@@ -73,15 +77,35 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     );
 
     const context: AvatarInitialProps = React.useMemo(
-      () => ({ size, src, name, loading, getInitials, onError, fallback }),
-      [size, src, name, loading, getInitials, onError, fallback],
+      () => ({
+        size,
+        src,
+        name,
+        loading,
+        getInitials,
+        onError,
+        fallback,
+        status,
+        position,
+      }),
+      [
+        size,
+        src,
+        name,
+        loading,
+        getInitials,
+        onError,
+        fallback,
+        status,
+        position,
+      ],
     );
 
     /**
      * Use the image hook to only show the image when it has loaded
      */
-    const status = useImage({ src, onError });
-    const hasLoaded = status === "loaded";
+    const imageStatus = useImage({ src, onError });
+    const hasLoaded = imageStatus === "loaded";
 
     /**
      * Fallback avatar applies under 2 conditions:
@@ -108,7 +132,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
                   {fallback ? fallback : <GenericAvatar />}
                 </AvatarIcon>
               )}
-              <AvatarBadge size={size}></AvatarBadge>
+              {status ? <AvatarBadge /> : null}
             </>
           )}
         </Box>
@@ -116,40 +140,6 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     );
   },
 );
-
-export type AvatarBadgeProps = BoxProps & {
-  position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
-} & Pick<AvatarProps, "size"> &
-  Partial<StatusProps>;
-
-export const AvatarBadge = forwardRefWithAs<
-  AvatarBadgeProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const {
-    size = "md",
-    status = "typing",
-    position = "bottom-right",
-    ...rest
-  } = props;
-  const theme = useTheme();
-
-  return (
-    <Box
-      as="div"
-      ref={ref}
-      className={cx(
-        theme.avatar.badge.base,
-        theme.avatar.badge.size[size],
-        theme.avatar.badge.position[position],
-      )}
-      {...rest}
-    >
-      <Status status={status} />
-    </Box>
-  );
-});
 
 export type AvatarContext = AvatarInitialProps;
 
