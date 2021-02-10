@@ -2,11 +2,9 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import {
-  BoltIcon,
   CloseIcon,
   InfoCircleIcon,
   CheckCircleIcon,
-  ExclamationCircleIcon,
   ExclamationTriangleIcon,
 } from "../icons";
 import { useTheme } from "../theme";
@@ -19,8 +17,7 @@ const STATUS_ICONS = {
   info: InfoCircleIcon,
   success: CheckCircleIcon,
   warning: ExclamationTriangleIcon,
-  error: ExclamationCircleIcon,
-  offline: BoltIcon,
+  error: InfoCircleIcon,
 };
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;

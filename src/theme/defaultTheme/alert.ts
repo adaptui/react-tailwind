@@ -38,11 +38,5 @@ export const alert = {
       actionButton: "lib:text-red-500",
       iconButton: "lib:hover:bg-red-200",
     },
-    offline: {
-      base: "lib:bg-purple-50",
-      icon: "lib:text-purple-400",
-      actionButton: "lib:text-purple-500",
-      iconButton: "lib:hover:bg-purple-200",
-    },
   },
 };
