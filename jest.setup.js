@@ -33,7 +33,7 @@ function toHaveFocus(element) {
 }
 
 const customConfig = {
-  failureThreshold: 0.005,
+  threshold: 0.01,
   failureThresholdType: "percent",
 };
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
