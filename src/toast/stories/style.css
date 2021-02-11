@@ -1,3 +1,5 @@
+/* TOAST CONTAINER */
+
 .toast__container {
   position: fixed;
   z-index: 5000;
@@ -9,7 +11,22 @@
   overflow: hidden;
 }
 
+.toast__container:hover {
+  bottom: calc(var(--safe-area-gap, 0px) + 20px);
+}
+
+.toast__container:hover > .stack-toast {
+  transform: translate3d(
+    var(--toast-x-offset),
+    calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)),
+    0
+  );
+}
+
+/* TOAST */
+
 .stack-toast {
+  --toast-x-offset: -50%;
   --stack-gap: 20px;
   --safe-area-gap: env(safe-area-inset-bottom);
   position: absolute;
@@ -17,48 +34,30 @@
   bottom: 0;
   left: 50%;
   transition: all 0.4s ease;
-  transform: translate3d(-50%, 86px, 0);
+  transform: translate3d(var(--toast-x-offset), 0, 0);
   opacity: 0;
-}
-
-.stack-toast:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 1px);
-  width: 100%;
-  height: 1000px;
-  background: transparent;
 }
 
 .stack-toast:not(:last-child) {
   --i: calc(var(--index) - 1);
-  transform: translate3d(-50%, calc(1px - (var(--stack-gap) * var(--i))), 0)
+  transform: translate3d(
+      var(--toast-x-offset),
+      calc(1px - (var(--stack-gap) * var(--i))),
+      0
+    )
     scale(calc(1 - 0.05 * var(--i)));
   opacity: 1;
+}
+
+.stack-toast-1 {
+  transition: all 0.4s ease;
+  transform: translate3d(var(--toast-x-offset), 0, 0) !important;
+  opacity: 1 !important;
 }
 
 .stack-toast-4 {
   pointer-events: none;
   opacity: 0 !important;
-}
-.stack-toast-1 {
-  transition: all 0.4s ease;
-  transform: translate3d(-50%, 0, 0) !important;
-  opacity: 1 !important;
-}
-
-.toast__container:hover {
-  bottom: calc(var(--safe-area-gap, 0px) + 20px);
-}
-
-.toast__container:hover > .stack-toast {
-  transform: translate3d(
-    -50%,
-    calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)),
-    0
-  );
 }
 
 @keyframes toastFadeIn {
