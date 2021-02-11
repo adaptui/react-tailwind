@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
-  useToast,
+  Toast,
+  useToast as useRenderlesskitToast,
   ToastProvider as RenderlesskitToastProvider,
 } from "@renderlesskit/react";
 import { Tag } from "../tag";
 import { InfoCircleIcon } from "../icons";
+
+type ToastProviderProps = React.ComponentProps<
+  typeof RenderlesskitToastProvider
+>;
 
 const Fade: React.FC<{
   enter: string;
@@ -36,18 +41,14 @@ const Fade: React.FC<{
   ) : null;
 };
 
-export const ToastProvider: React.FC = ({ children }) => {
+export const ToastProvider: React.FC<ToastProviderProps> = ({
+  children,
+  ...props
+}) => {
   return (
     <RenderlesskitToastProvider
-      autoDismiss={false}
-      placement="bottom-right"
-      toastWrapper={function Wrapper({
-        children,
-        id,
-        index,
-        isVisible,
-        ...props
-      }) {
+      {...props}
+      toastWrapper={function Wrapper({ children, id, index, isVisible }) {
         const { toasts } = useToast();
         const totalToasts = Object.values(toasts).length;
 
@@ -85,7 +86,7 @@ export const ToastProvider: React.FC = ({ children }) => {
                 show
                 key={sortIndex}
                 enter="toastFadeIn 0.6s"
-                leave="toastFadeOut 0.6s"
+                leave="toastFadeOut 0.2s"
               >
                 {children}
               </Fade>
@@ -127,4 +128,21 @@ export const ToastProvider: React.FC = ({ children }) => {
       {children}
     </RenderlesskitToastProvider>
   );
+};
+
+// Custom useToast to prevent users from giving placement in showToast & also Typescript fix
+// some typs can be removed after we export that from renderlesskit/react
+type ToastContextState = ReturnType<typeof useRenderlesskitToast>;
+
+type UseToast = () => Omit<ToastContextState, "showToast"> & {
+  showToast: (p: Partial<Omit<Toast, "isVisible" | "placement">>) => void;
+};
+
+export const useToast: UseToast = () => {
+  const props = useRenderlesskitToast();
+
+  return {
+    ...props,
+    showToast: p => props.showToast({ ...p, placement: undefined }),
+  };
 };
