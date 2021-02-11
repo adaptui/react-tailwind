@@ -1,10 +1,7 @@
 import "./style.css";
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import {
-  createControls,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
+import { storyTemplate } from "../../../.storybook/storybookUtils";
 import { useToast, ToastController } from "@renderlesskit/react";
 import { ToastProvider } from "../Toast";
 import { Button } from "../../button";
@@ -32,6 +29,7 @@ const ToastTriggers = () => {
         variant="primary"
         onClick={() => {
           showToast({
+            placement: "bottom-center",
             type: "success",
             content: `Figma saves your work ${Math.random().toFixed(2)}`,
           });
@@ -45,7 +43,7 @@ const ToastTriggers = () => {
           showToast({
             type: "error",
             content: `${Math.random().toFixed(2)} emails archived`,
-            placement: "top-right",
+            placement: "bottom-right",
           });
         }}
       >

@@ -9,7 +9,6 @@
 }
 
 .stack-toast {
-  --radius: 5px;
   --stack-gap: 20px;
   --safe-area-gap: env(safe-area-inset-bottom);
   position: absolute;
@@ -40,9 +39,11 @@
 }
 
 .stack-toast-4 {
+  pointer-events: none;
   opacity: 0 !important;
 }
 .stack-toast-1 {
+  transition: all 0.4s ease;
   transform: translate3d(0, 0, 0) !important;
   opacity: 1 !important;
 }
@@ -57,4 +58,25 @@
     calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)),
     0
   );
+}
+
+@keyframes toastFadeIn {
+  0% {
+    opacity: 0.5;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes toastFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(50px);
+  }
 }
