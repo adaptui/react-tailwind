@@ -3,40 +3,30 @@
 exports[`<Avatar /> should render Avatar 1`] = `
 <DocumentFragment>
   <div
-    class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
+    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-xs lib:h-6 lib:w-6"
   >
-    <svg
-      class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
-      data-testid="testid-icon"
-      focusable="false"
-      viewBox="0 0 12 12"
+    <span
+      aria-label="Avatar Icon"
+      class="lib:inherit lib:text-gray-500"
     >
-      <path
-        d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-        fill="transparent"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.3"
-      />
-    </svg>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`<Avatar /> should render with AvatarBadge & children 1`] = `
-<DocumentFragment>
-  <div
-    class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
-  >
-    <p>
-      Some Child Element
-    </p>
-    <div
-      class="lib:text-xs lib:h-2 lib:w-2 lib:absolute lib:bottom-0 lib:right-0"
-    >
-      *
-    </div>
+      <svg
+        aria-hidden="true"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        role="img"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </span>
   </div>
 </DocumentFragment>
 `;
@@ -44,27 +34,46 @@ exports[`<Avatar /> should render with AvatarBadge & children 1`] = `
 exports[`<Avatar /> should render with AvatarBadge 1`] = `
 <DocumentFragment>
   <div
-    class="lib:font-sans lib:font-bold lib:inline-flex lib:items-center lib:relative lib:justify-center lib:text-center lib:uppercase lib:text-gray-500 lib:bg-gray-100 lib:fill-current lib:rounded-full lib:ring-2 lib:ring-white lib:text-xs lib:h-6 lib:w-6"
+    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-xs lib:h-6 lib:w-6"
   >
-    <svg
-      class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
-      data-testid="testid-icon"
-      focusable="false"
-      viewBox="0 0 12 12"
+    <span
+      aria-label="Avatar Icon"
+      class="lib:inherit lib:text-gray-500"
     >
-      <path
-        d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-        fill="transparent"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1.3"
-      />
-    </svg>
+      <svg
+        aria-hidden="true"
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        data-testid="testid-icon"
+        focusable="false"
+        role="img"
+        viewBox="0 0 12 12"
+      >
+        <path
+          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
+          fill="transparent"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.3"
+        />
+      </svg>
+    </span>
     <div
-      class="lib:text-xs lib:h-2 lib:w-2 lib:absolute lib:bottom-0 lib:right-0"
+      class="lib:absolute lib:flex lib:items-center lib:justify-center bg-white rounded-full lib:text-1 lib:p-0.5 lib:bottom-0 lib:right-0"
     >
-      *
+      <svg
+        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500"
+        data-testid="testid-icon"
+        focusable="false"
+        viewBox="0 0 9 9"
+      >
+        <circle
+          cx="4.5"
+          cy="4.5"
+          fill="currentColor"
+          r="4.5"
+        />
+      </svg>
     </div>
   </div>
 </DocumentFragment>

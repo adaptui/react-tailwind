@@ -1,15 +1,26 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
+import { GenericAvatar } from "../icons";
+import { AvatarName } from "./AvatarName";
+import { AvatarIcon } from "./AvatarIcon";
+import { AvatarImage } from "./AvatarImage";
 import { Avatar, AvatarProps } from "./Avatar";
 import { forwardRefWithAs } from "../utils/types";
 import { createContext, getValidChildren } from "../utils";
-import { AvatarImage } from "./AvatarImage";
-import { AvatarName } from "./AvatarName";
-import { AvatarIcon } from "./AvatarIcon";
-import { GenericAvatar } from "../icons";
+
+export type AvatarGroupContext = Pick<AvatarProps, "size" | "showBorder"> & {};
+
+const [AvatarGroupProvider, useAvatarGroup] = createContext<AvatarGroupContext>(
+  {
+    strict: false,
+    name: "AvatarGroupProvider",
+  },
+);
+
+export { useAvatarGroup };
 
 export type AvatarGroupProps = BoxProps &
   AvatarGroupContext & { limit?: number };
@@ -28,7 +39,6 @@ export const AvatarGroup = forwardRefWithAs<
     ...rest
   } = props;
   const theme = useTheme();
-  const excessStyles = cx(theme.avatar.base, theme.avatar.size[size]);
   const context = React.useMemo(() => ({ size, showBorder }), [
     size,
     showBorder,
@@ -37,14 +47,14 @@ export const AvatarGroup = forwardRefWithAs<
   const validChildren = getValidChildren(children);
 
   /**
-   * get the avatars within the max
+   * Get the avatars within the max
    */
   const childrenWithinMax = limit
     ? validChildren.slice(0, limit)
     : validChildren;
 
   /**
-   * get the remaining avatar count
+   * Get the remaining avatar count
    */
   const excess = limit != null && validChildren.length - limit;
 
@@ -59,7 +69,10 @@ export const AvatarGroup = forwardRefWithAs<
       >
         {childrenWithinMax}
         {excess > 0 ? (
-          <Avatar {...validChildren[limit].props}>
+          <Avatar
+            {...validChildren[limit].props}
+            data-testid="testid-truncated"
+          >
             {({ showFallback, name, fallback }) => {
               return (
                 <>
@@ -90,14 +103,3 @@ export const AvatarGroup = forwardRefWithAs<
     </AvatarGroupProvider>
   );
 });
-
-export type AvatarGroupContext = Pick<AvatarProps, "size" | "showBorder"> & {};
-
-const [AvatarGroupProvider, useAvatarGroup] = createContext<AvatarGroupContext>(
-  {
-    strict: false,
-    name: "AvatarGroupProvider",
-  },
-);
-
-export { useAvatarGroup };

@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { Avatar } from "../Avatar";
-import { screen } from "@testing-library/react";
 import { AvatarGroup } from "../AvatarGroup";
+import { screen } from "@testing-library/react";
 import { render, testA11y } from "../../utils/testUtils";
 
 describe("<AvatarGroup />", () => {

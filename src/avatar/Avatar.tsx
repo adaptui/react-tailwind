@@ -7,11 +7,11 @@ import { GenericAvatar } from "../icons";
 import { AvatarName } from "./AvatarName";
 import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
+import { AvatarBadge } from "./AvatarBadge";
 import { useImage } from "../utils/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { createContext, runIfFn } from "../utils";
-import { AvatarBadge } from "./AvatarBadge";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type AvatarInitialProps = {
   /**
@@ -51,9 +51,26 @@ export type AvatarInitialProps = {
    * Best for a group of avatars
    */
   showBorder?: boolean;
+  /**
+   * Shows AvatarBadge with the given type
+   * @default "online"
+   */
   status?: "online" | "sleep" | "typing";
+  /**
+   * Position for the AvatarBadge
+   * @default "bottom-right"
+   */
   position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
 };
+
+export type AvatarContext = AvatarInitialProps & { showFallback: boolean };
+
+const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
+  name: "AvatarContext",
+  strict: false,
+});
+
+export { useAvatarContext };
 
 type AvatarRenderProps = RenderProp<AvatarContext>;
 
@@ -156,15 +173,6 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     );
   },
 );
-
-export type AvatarContext = AvatarInitialProps & { showFallback: boolean };
-
-const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
-  name: "AvatarContext",
-  strict: false,
-});
-
-export { useAvatarContext };
 
 export function initials(name: string) {
   const [firstName, lastName] = name.split(" ");

@@ -1,13 +1,13 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { PhotographIcon } from "../../icons";
-import { Avatar, AvatarProps } from "../index";
 import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { PhotographIcon } from "../../icons";
 import { AvatarGroup } from "../AvatarGroup";
+import { Avatar, AvatarProps } from "../index";
 
 export default {
   title: "Avatar",

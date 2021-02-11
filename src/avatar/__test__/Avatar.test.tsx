@@ -1,7 +1,7 @@
 import * as React from "react";
 import { screen } from "@testing-library/react";
 
-import { Avatar, AvatarBadge } from "../Avatar";
+import { Avatar } from "../index";
 import { render, testA11y, mockImage } from "../../utils/testUtils";
 
 afterAll(() => {
@@ -18,22 +18,7 @@ describe("<Avatar />", () => {
   });
 
   it("should render with AvatarBadge", () => {
-    const { asFragment } = render(
-      <Avatar>
-        <AvatarBadge>*</AvatarBadge>
-      </Avatar>,
-    );
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
-  it("should render with AvatarBadge & children", () => {
-    const { asFragment } = render(
-      <Avatar>
-        <p>Some Child Element</p>
-        <AvatarBadge>*</AvatarBadge>
-      </Avatar>,
-    );
+    const { asFragment } = render(<Avatar status="online"></Avatar>);
 
     expect(asFragment()).toMatchSnapshot();
   });
