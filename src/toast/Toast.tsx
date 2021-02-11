@@ -11,13 +11,11 @@ export const ToastProvider: React.FC = ({ children }) => {
     <RenderlesskitToastProvider
       autoDismiss={false}
       placement="bottom-center"
-      toastWrapper={function Wrapper({ children, id, ...props }) {
-        // WIP!
+      toastWrapper={function Wrapper({ children, id, index, ...props }) {
         const { toasts } = useToast();
         const totalToasts = Object.values(toasts).length;
-        const index = totalToasts - +id.split("-")[1] + 1;
 
-        let sortIndex = index;
+        let sortIndex = totalToasts - index;
         if (sortIndex > 3) {
           sortIndex = 4;
         }
