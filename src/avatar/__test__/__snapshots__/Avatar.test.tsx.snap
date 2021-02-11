@@ -59,7 +59,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       </svg>
     </span>
     <div
-      class="lib:absolute lib:flex lib:items-center lib:justify-center bg-white rounded-full lib:text-1 lib:p-0.5 lib:bottom-0 lib:right-0"
+      class="lib:absolute lib:flex lib:items-center lib:justify-center bg-white rounded-full lib:text-1 lib:p-0.5 lib:transform lib:translate-x-0.5 lib:translate-y-0.5 lib:bottom-0 lib:right-0"
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500"
