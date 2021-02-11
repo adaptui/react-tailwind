@@ -1,7 +1,12 @@
 .toast__container {
-  bottom: calc(var(--safe-area-gap, 0px) + 10px);
+  position: fixed;
   z-index: 5000;
+  height: 0;
   transition: all 0.4s ease;
+  height: 160px;
+  max-height: 160px;
+  width: 300px;
+  overflow: hidden;
 }
 
 .stack-toast {
@@ -10,9 +15,9 @@
   position: absolute;
   width: max-content;
   bottom: 0;
-  left: 0;
+  left: 50%;
   transition: all 0.4s ease;
-  transform: translate3d(0, 86px, 0);
+  transform: translate3d(-50%, 86px, 0);
   opacity: 0;
 }
 
@@ -29,7 +34,7 @@
 
 .stack-toast:not(:last-child) {
   --i: calc(var(--index) - 1);
-  transform: translate3d(0, calc(1px - (var(--stack-gap) * var(--i))), 0)
+  transform: translate3d(-50%, calc(1px - (var(--stack-gap) * var(--i))), 0)
     scale(calc(1 - 0.05 * var(--i)));
   opacity: 1;
 }
@@ -40,7 +45,7 @@
 }
 .stack-toast-1 {
   transition: all 0.4s ease;
-  transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(-50%, 0, 0) !important;
   opacity: 1 !important;
 }
 
@@ -50,7 +55,7 @@
 
 .toast__container:hover > .stack-toast {
   transform: translate3d(
-    0,
+    -50%,
     calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)),
     0
   );
