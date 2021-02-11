@@ -20,6 +20,18 @@
   opacity: 0;
 }
 
+.stack-toast:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 1px);
+  width: 100%;
+  /* This for destroy the middle toast, still keep `spread` */
+  height: 1000px;
+  background: transparent;
+}
+
 .stack-toast:not(:last-child) {
   --i: calc(var(--index) - 1);
   transform: translate3d(0, calc(1px - (var(--stack-gap) * var(--i))), 0)

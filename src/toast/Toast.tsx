@@ -1,5 +1,8 @@
 import React from "react";
-import { ToastProvider as RenderlesskitToastProvider } from "@renderlesskit/react";
+import {
+  ToastProvider as RenderlesskitToastProvider,
+  useToast,
+} from "@renderlesskit/react";
 import { Tag } from "../tag";
 import { InfoCircleIcon } from "../icons";
 
@@ -8,31 +11,37 @@ export const ToastProvider: React.FC = ({ children }) => {
     <RenderlesskitToastProvider
       autoDismiss={false}
       placement="bottom-center"
-      toastWrapper={({ children, id, ...props }) => {
+      toastWrapper={function Wrapper({ children, id, ...props }) {
         // WIP!
-        const index = +id.split("-")[1];
-        const scale = `scale(${index / 30})`;
+        const { toasts } = useToast();
+        const totalToasts = Object.values(toasts).length;
+        const index = totalToasts - +id.split("-")[1] + 1;
 
-        const sortIndex = index;
+        let sortIndex = index;
+        if (sortIndex > 3) {
+          sortIndex = 4;
+        }
 
-        const heights = [50, 50, 50];
-        // el.className = `toast toast-${sortIndex}`;
-        document.body.style.setProperty("--index", "" + sortIndex);
+        let hoverOffsetY = 0;
+        const heights = [25, 25, 25];
         if (sortIndex > 1) {
-          const hoverOffsetY = heights
+          hoverOffsetY = heights
             .slice(0, sortIndex - 1)
             .reduce((res, next) => (res += next), 0);
-          document.body.style.setProperty(
-            "--hover-offset-y",
-            `-${hoverOffsetY}px`,
-          );
-        } else {
-          document.body.style.removeProperty("--hover-offset-y");
         }
-        document.body.style.setProperty("--index", "" + index);
 
         return (
-          <div className={`stack-toast stack-toast-${sortIndex}`}>
+          <div
+            className={`stack-toast stack-toast-${sortIndex}`}
+            style={
+              {
+                "--index": sortIndex,
+                ...(sortIndex > 1
+                  ? { "--hover-offset-y": `-${hoverOffsetY}px` }
+                  : {}),
+              } as React.CSSProperties
+            }
+          >
             {children}
           </div>
         );

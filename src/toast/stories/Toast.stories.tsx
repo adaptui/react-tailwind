@@ -33,7 +33,7 @@ const ToastTriggers = () => {
         onClick={() => {
           showToast({
             type: "success",
-            content: "Figma saves your work automagically",
+            content: `Figma saves your work ${Math.random().toFixed(2)}`,
           });
         }}
       >
@@ -44,7 +44,7 @@ const ToastTriggers = () => {
         onClick={() => {
           showToast({
             type: "error",
-            content: "4 emails archived",
+            content: `${Math.random().toFixed(2)} emails archived`,
             placement: "top-right",
           });
         }}
