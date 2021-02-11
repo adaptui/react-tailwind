@@ -39,11 +39,16 @@ export const avatar = {
       "bottom-left": "lib:bottom-0 lib:left-0",
     },
     size: {
-      xs: "lib:text-1 lib:p-px",
-      sm: "lib:text-1 lib:p-0.5",
-      md: "lib:text-1 lib:p-0.5",
-      lg: "lib:text-1.5 lib:p-0.5",
-      xl: "lib:text-2 lib:p-0.5",
+      xs:
+        "lib:text-1 lib:p-px lib:transform lib:translate-x-px lib:translate-y-px",
+      sm:
+        "lib:text-1 lib:p-0.5 lib:transform lib:translate-x-0.5 lib:translate-y-0.5",
+      md:
+        "lib:text-1 lib:p-0.5 lib:transform lib:translate-x-0.5 lib:translate-y-0.5",
+      lg:
+        "lib:text-1.5 lib:p-0.5 lib:transform lib:translate-x-0.5 lib:translate-y-0.5",
+      xl:
+        "lib:text-2 lib:p-0.5 lib:transform lib:translate-x-0.5 lib:translate-y-0.5",
     },
     online: "lib:text-green-500",
     sleep: "lib:text-gray-500",
@@ -59,13 +64,6 @@ export const avatar = {
       },
       circle:
         "lib:bg-white lib:w-0.5 lib:h-0.5 lib:rounded-full lib:animate-pulse",
-      position: {
-        xs: "lib:transform lib:translate-x-1/4 lib:translate-y-1/4",
-        sm: "lib:transform lib:translate-x-1/4 lib:translate-y-1/4",
-        md: "lib:transform lib:translate-x-1/4 lib:translate-y-1/4",
-        lg: "lib:transform lib:translate-x-1",
-        xl: "lib:transform lib:translate-x-1",
-      },
     },
   },
 };

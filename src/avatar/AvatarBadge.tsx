@@ -39,7 +39,6 @@ export const AvatarBadge = forwardRefWithAs<
         theme.avatar.badge.base,
         theme.avatar.badge.size[size],
         theme.avatar.badge.position[position],
-        status === "typing" ? theme.avatar.badge.typing.position[size] : "",
         className,
       )}
       {...rest}
