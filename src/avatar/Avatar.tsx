@@ -9,7 +9,7 @@ import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
 import { useImage } from "../utils/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { createContext, runIfFn } from "../utils";
 import { AvatarBadge } from "./AvatarBadge";
 
@@ -45,11 +45,21 @@ export type AvatarInitialProps = {
    * @type React.ReactElement
    */
   fallback?: React.ReactNode;
+  /**
+   * If `true`, the `Avatar` will show a border around it.
+   *
+   * Best for a group of avatars
+   */
+  showBorder?: boolean;
   status?: "online" | "sleep" | "typing";
   position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
 };
 
-export type AvatarProps = Omit<BoxProps, "onError"> & AvatarInitialProps;
+type AvatarRenderProps = RenderProp<AvatarContext>;
+
+export type AvatarProps = Omit<BoxProps, "onError"> &
+  AvatarInitialProps &
+  AvatarRenderProps;
 
 export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
   (props, ref) => {
@@ -63,42 +73,21 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
       loading,
       status,
       position,
+      showBorder,
       children,
       className,
       ...rest
     } = props;
+
     const group = useAvatarGroup();
     const _size = size || group?.size || "md";
+    const _showBorder = showBorder || group?.showBorder || false;
     const theme = useTheme();
     const avatarStyles = cx(
       theme.avatar.base,
       theme.avatar.size[_size],
+      _showBorder ? theme.avatar.border : "",
       className,
-    );
-
-    const context: AvatarInitialProps = React.useMemo(
-      () => ({
-        size: _size,
-        src,
-        name,
-        loading,
-        getInitials,
-        onError,
-        fallback,
-        status,
-        position,
-      }),
-      [
-        _size,
-        src,
-        name,
-        loading,
-        getInitials,
-        onError,
-        fallback,
-        status,
-        position,
-      ],
     );
 
     /**
@@ -115,6 +104,33 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
      * In this case, we'll show either the name avatar or default avatar
      */
     const showFallback = !src || !hasLoaded;
+
+    const context: AvatarContext = React.useMemo(
+      () => ({
+        size: _size,
+        src,
+        name,
+        loading,
+        getInitials,
+        onError,
+        fallback,
+        status,
+        position,
+        showFallback,
+      }),
+      [
+        _size,
+        src,
+        name,
+        loading,
+        getInitials,
+        onError,
+        fallback,
+        status,
+        position,
+        showFallback,
+      ],
+    );
 
     return (
       <AvatarProvider value={context}>
@@ -141,7 +157,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
   },
 );
 
-export type AvatarContext = AvatarInitialProps;
+export type AvatarContext = AvatarInitialProps & { showFallback: boolean };
 
 const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
   name: "AvatarContext",
