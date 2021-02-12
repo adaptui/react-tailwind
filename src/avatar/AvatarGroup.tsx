@@ -11,7 +11,10 @@ import { Avatar, AvatarProps } from "./Avatar";
 import { forwardRefWithAs } from "../utils/types";
 import { createContext, getValidChildren } from "../utils";
 
-export type AvatarGroupContext = Pick<AvatarProps, "size" | "showBorder"> & {};
+export type AvatarGroupContext = Pick<
+  AvatarProps,
+  "size" | "showBorder" | "borderColor"
+> & {};
 
 const [AvatarGroupProvider, useAvatarGroup] = createContext<AvatarGroupContext>(
   {
@@ -34,14 +37,16 @@ export const AvatarGroup = forwardRefWithAs<
     limit = 100,
     size = "md",
     showBorder = true,
+    borderColor,
     className,
     children,
     ...rest
   } = props;
   const theme = useTheme();
-  const context = React.useMemo(() => ({ size, showBorder }), [
+  const context = React.useMemo(() => ({ size, showBorder, borderColor }), [
     size,
     showBorder,
+    borderColor,
   ]);
 
   const validChildren = getValidChildren(children);
@@ -92,7 +97,7 @@ export const AvatarGroup = forwardRefWithAs<
                       theme.avatar.group.excess.text.size[size],
                     )}
                   >
-                    +{excess}
+                    +{size === "xs" ? "" : excess}
                   </Box>
                 </>
               );

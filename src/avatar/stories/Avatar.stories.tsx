@@ -101,25 +101,30 @@ export const Group = storyTemplate<AvatarProps>(
   { size: "xl" },
 )({});
 
-export const GroupWithLimit = () => (
-  <>
-    {["xs", "sm", "md", "lg", "xl"].map((size, i) => {
-      return (
-        <AvatarGroup
-          limit={i + 1}
-          className="flex mt-4"
-          size={size as any}
-          showBorder
-        >
-          <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-          <Avatar name="Anurag Hazra" />
-          <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-          <Avatar />
-          <Avatar name="Navin Moorthy" />
-          <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-          <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-        </AvatarGroup>
-      );
-    })}
-  </>
-);
+export const GroupWithLimit = () => {
+  const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+  return (
+    <>
+      {sizes.map((size, i) => {
+        return (
+          <AvatarGroup
+            key={i}
+            limit={i + 1}
+            className="flex mt-4"
+            size={size}
+            showBorder
+            borderColor="border-red-200"
+          >
+            <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+            <Avatar name="Anurag Hazra" />
+            <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+            <Avatar />
+            <Avatar name="Navin Moorthy" />
+            <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+            <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+          </AvatarGroup>
+        );
+      })}
+    </>
+  );
+};

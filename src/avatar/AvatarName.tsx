@@ -11,7 +11,7 @@ export type AvatarNameProps = BoxProps & {};
 export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
   const { className, ...rest } = props;
   const theme = useTheme();
-  const { size, name, getInitials = initials } = useAvatarContext();
+  const { size = "md", name, getInitials = initials } = useAvatarContext();
 
   const initial = name ? getInitials(name) : null;
 
@@ -21,7 +21,11 @@ export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
     <Box
       aria-label={name}
       ref={ref}
-      className={cx(theme.avatar.name, className)}
+      className={cx(
+        theme.avatar.name.base,
+        theme.avatar.name.size[size],
+        className,
+      )}
       {...rest}
     >
       {size === "xs" ? initial?.charAt(0) : initial}

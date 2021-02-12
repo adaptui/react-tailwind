@@ -46,11 +46,15 @@ export type AvatarInitialProps = {
    */
   fallback?: React.ReactNode;
   /**
-   * If `true`, the `Avatar` will show a border around it.
+   * If `true`, the `Avatar` will show a `border` around it.
    *
    * Best for a group of avatars
    */
   showBorder?: boolean;
+  /**
+   * Color of the `border` to match it's parent background.
+   */
+  borderColor?: string;
   /**
    * Shows AvatarBadge with the given type
    * @default "online"
@@ -91,6 +95,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
       status,
       position,
       showBorder,
+      borderColor,
       children,
       className,
       ...rest
@@ -99,11 +104,13 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     const group = useAvatarGroup();
     const _size = size || group?.size || "md";
     const _showBorder = showBorder || group?.showBorder || false;
+    const _borderColor = borderColor || group?.borderColor || false;
     const theme = useTheme();
     const avatarStyles = cx(
       theme.avatar.base,
       theme.avatar.size[_size],
-      _showBorder ? theme.avatar.border : "",
+      _showBorder ? theme.avatar.border.width[_size] : "",
+      _showBorder && _borderColor ? _borderColor : theme.avatar.border.color,
       className,
     );
 

@@ -4,6 +4,7 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
+import { useAvatarContext } from "./Avatar";
 
 export type AvatarIconProps = BoxProps & {};
 
@@ -14,6 +15,7 @@ export const AvatarIcon = forwardRefWithAs<
 >((props, ref) => {
   const { className, children, ...rest } = props;
   const theme = useTheme();
+  const { size = "md" } = useAvatarContext();
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
         role: "img",
@@ -26,7 +28,11 @@ export const AvatarIcon = forwardRefWithAs<
     <Box
       as="span"
       ref={ref}
-      className={cx(theme.avatar.icon, className)}
+      className={cx(
+        theme.avatar.icon.base,
+        theme.avatar.icon.size[size],
+        className,
+      )}
       aria-label="Avatar Icon"
       {...rest}
     >
