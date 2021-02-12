@@ -8,11 +8,11 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
     role="group"
   >
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-sm lib:h-8 lib:w-8 border-2 border-white"
+      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-8 lib:w-8 lib:border-2 lib:border-white"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inherit lib:text-gray-500"
+        class="lib:inherit lib:text-gray-500 lib:text-xs"
       >
         <svg
           aria-hidden="true"
@@ -34,11 +34,11 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       </span>
     </div>
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-xxs lib:h-4 lib:w-4 border-2 border-white"
+      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-4 lib:w-4 lib:border lib:border-white"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inherit lib:text-gray-500"
+        class="lib:inherit lib:text-gray-500 lib:text-xxs"
       >
         <svg
           aria-hidden="true"
@@ -71,11 +71,11 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
     role="group"
   >
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-sm lib:h-8 lib:w-8 border-2 border-white"
+      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-8 lib:w-8 lib:border-2 lib:border-white"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inherit lib:text-gray-500"
+        class="lib:inherit lib:text-gray-500 lib:text-xs"
       >
         <svg
           aria-hidden="true"
@@ -97,11 +97,11 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       </span>
     </div>
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-sm lib:h-8 lib:w-8 border-2 border-white"
+      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-8 lib:w-8 lib:border-2 lib:border-white"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inherit lib:text-gray-500"
+        class="lib:inherit lib:text-gray-500 lib:text-xs"
       >
         <svg
           aria-hidden="true"
@@ -134,11 +134,11 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
     role="group"
   >
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-xs lib:h-6 lib:w-6 border-2 border-white"
+      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:border-2 lib:border-white"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inherit lib:text-gray-500"
+        class="lib:inherit lib:text-gray-500 lib:text-xs"
       >
         <svg
           aria-hidden="true"
@@ -160,11 +160,11 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:text-xs lib:h-6 lib:w-6 border-2 border-white"
+      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:border-2 lib:border-white"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inherit lib:text-gray-500"
+        class="lib:inherit lib:text-gray-500 lib:text-xs"
       >
         <svg
           aria-hidden="true"
