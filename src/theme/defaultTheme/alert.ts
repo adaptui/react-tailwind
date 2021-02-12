@@ -7,14 +7,14 @@ export const alert = {
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
   actionsWrapper: "h-fit items-center inherit ml-auto",
   icon: {
-    base: "self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4 overflow-auto",
+    base: "self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4",
     icons: "lib:relative lib:-top-1.5 lib:w-full lib:h-full",
   },
   iconButton: {
     base:
       "lib:text-gray-800 lib:h-4 lib:p-0 bg-transparent lib:min-w-4 lib:ml-2 lib:shadow-none",
   },
-  actionButton: "ml-1 p-0 text-sm bg-transparent lib:px-0 lib:shadow-none",
+  actionButton: "p-0 text-sm bg-transparent lib:px-0 lib:shadow-none w-fit",
   status: {
     neutral: {
       base: "lib:bg-gray-100",

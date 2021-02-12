@@ -16,6 +16,7 @@ import {
 } from ".";
 import { AlertBody } from "./AlertBody";
 import { AlertCloseButton } from "./AlertCloseButton";
+import { useMediaQuery } from "../utils/useMediaQuery";
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
@@ -83,6 +84,10 @@ export const Alert = forwardRefWithAs<
     theme.alert.status[status].base,
     className,
   );
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const Action = actionButtonLabel && (
+    <AlertActionButton>{actionButtonLabel}</AlertActionButton>
+  );
 
   return (
     <AlertProvider value={{ status }}>
@@ -97,13 +102,10 @@ export const Alert = forwardRefWithAs<
               {description && (
                 <AlertDescription>{description}</AlertDescription>
               )}
+              {isMobile ? Action : null}
             </AlertBody>
             <AlertActions>
-              {actionButtonLabel && (
-                <AlertActionButton as="div">
-                  {actionButtonLabel}
-                </AlertActionButton>
-              )}
+              {!isMobile ? Action : null}
               <AlertCloseButton>{icon}</AlertCloseButton>
             </AlertActions>
           </>
