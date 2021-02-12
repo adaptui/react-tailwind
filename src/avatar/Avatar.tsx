@@ -34,7 +34,7 @@ export type AvatarInitialProps = {
   /**
    * Function to get the initials to display
    */
-  getInitials?: (name: string) => string;
+  getInitials?: (name?: string) => string | undefined;
   /**
    * Function called when image failed to load
    */
@@ -158,9 +158,14 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
 
     return (
       <AvatarProvider value={context}>
-        <Box ref={ref} className={avatarStyles} {...rest}>
+        <Box
+          ref={ref}
+          className={avatarStyles}
+          {...rest}
+          data-testid="testid-avatar_children"
+        >
           {children ? (
-            runIfFn(children, context)
+            runIfFn(children, { ...context, getInitials })
           ) : (
             <>
               <AvatarContents />
@@ -173,7 +178,8 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
   },
 );
 
-export function initials(name: string) {
+export function initials(name?: string) {
+  if (!name) return;
   const [firstName, lastName] = name.split(" ");
   return firstName && lastName
     ? `${firstName.charAt(0)}${lastName.charAt(0)}`

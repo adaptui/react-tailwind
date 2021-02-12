@@ -70,16 +70,14 @@ export const AvatarGroup = forwardRefWithAs<
       >
         {childrenWithinMax}
         {excess > 0 ? (
-          <Avatar
-            {...validChildren[limit].props}
-            data-testid="testid-truncated"
-          >
-            {({ showFallback, name, fallback }) => {
+          <Avatar {...validChildren[limit].props}>
+            {() => {
               return (
                 <>
                   <AvatarContents />
                   <Box className={theme.avatar.group.excess.bg} />
                   <Box
+                    data-testid="testid-excess_label"
                     className={cx(
                       theme.avatar.group.excess.text.base,
                       theme.avatar.group.excess.text.size[size],
