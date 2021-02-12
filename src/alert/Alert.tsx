@@ -31,89 +31,88 @@ const [AlertProvider, useAlertContext] = createContext<AlertContext>({
 
 export { AlertProvider, useAlertContext };
 
-export type AlertProps = BoxProps & {
-  /**
-   * The status of the alert
-   */
-  status?: AlertStatus;
-  /**
-   * button action icon
-   */
-  icon?: React.ReactNode;
-  /**
-   * Action button label
-   */
-  actionButtonLabel?: string;
-  /**
-   * Title of the alert
-   */
-  title?: string;
-  /**
-   * Description of the alert
-   */
-  description?: string;
-};
+export type AlertProps = BoxProps &
+  AlertRenderProps & {
+    /**
+     * The status of the alert
+     */
+    status?: AlertStatus;
+    /**
+     * button action icon
+     */
+    icon?: React.ReactNode;
+    /**
+     * Action button label
+     */
+    actionButtonLabel?: string;
+    /**
+     * Title of the alert
+     */
+    title?: string;
+    /**
+     * Description of the alert
+     */
+    description?: string;
+  };
 
 type AlertRenderProps = RenderProp<{
   status: AlertStatus;
   styles: Renderlesskit.Theme["components"]["alert"];
 }>;
 
-export const Alert = forwardRefWithAs<
-  AlertProps & AlertRenderProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const {
-    title,
-    description,
-    actionButtonLabel,
-    status = "info",
-    icon = <CloseIcon />,
-    className,
-    children,
-    ...rest
-  } = props;
-  const theme = useTheme();
+export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
+  (props, ref) => {
+    const {
+      title,
+      description,
+      actionButtonLabel,
+      status = "info",
+      icon = <CloseIcon />,
+      className,
+      children,
+      ...rest
+    } = props;
+    const theme = useTheme();
 
-  const hasDescription = !!description;
-  const alertStyles = cx(
-    theme.alert.base,
-    hasDescription ? "" : "items-center",
-    theme.alert.status[status].base,
-    className,
-  );
+    const hasDescription = !!description;
+    const alertStyles = cx(
+      theme.alert.base,
+      hasDescription ? "" : "items-center",
+      theme.alert.status[status].base,
+      className,
+    );
 
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
-  const Action = actionButtonLabel && (
-    <AlertActionButton>{actionButtonLabel}</AlertActionButton>
-  );
+    const [isMobile] = useMediaQuery("(max-width: 768px)");
+    const Action = actionButtonLabel && (
+      <AlertActionButton>{actionButtonLabel}</AlertActionButton>
+    );
 
-  return (
-    <AlertProvider value={{ status }}>
-      <Box role="alert" className={alertStyles} ref={ref} {...rest}>
-        {children ? (
-          runIfFn(children, { status, styles: theme.alert })
-        ) : (
-          <>
-            <AlertIcon className={hasDescription ? "" : "self-center"} />
-            <AlertBody>
-              <AlertTitle>{title}</AlertTitle>
-              {description && (
-                <AlertDescription>{description}</AlertDescription>
-              )}
-              {isMobile ? Action : null}
-            </AlertBody>
-            <AlertActions>
-              {!isMobile ? Action : null}
-              <AlertCloseButton>{icon}</AlertCloseButton>
-            </AlertActions>
-          </>
-        )}
-      </Box>
-    </AlertProvider>
-  );
-});
+    return (
+      <AlertProvider value={{ status }}>
+        <Box role="alert" className={alertStyles} ref={ref} {...rest}>
+          {children ? (
+            runIfFn(children, { status, styles: theme.alert })
+          ) : (
+            <>
+              <AlertIcon className={hasDescription ? "" : "self-center"} />
+              <AlertBody>
+                <AlertTitle>{title}</AlertTitle>
+                {description && (
+                  <AlertDescription>{description}</AlertDescription>
+                )}
+                {isMobile ? Action : null}
+              </AlertBody>
+              <AlertActions>
+                {!isMobile ? Action : null}
+                <AlertCloseButton>{icon}</AlertCloseButton>
+              </AlertActions>
+            </>
+          )}
+        </Box>
+      </AlertProvider>
+    );
+  },
+);
 
 Alert.displayName = "Alert";
 
@@ -124,21 +123,21 @@ Alert.displayName = "Alert";
  * @param styleToken theme token name accessing theme.alert[styleToken]
  * @param displayName sets displayName of the component
  */
-export const createComponent = <Props extends { className?: string }>(
-  styleToken: string,
-  displayName: string,
-) => {
-  const Comp = forwardRefWithAs<Props, HTMLDivElement, "div">((props, ref) => {
-    const { className, ...rest } = props;
-    const theme = useTheme();
-    const styles = cx(theme.alert[styleToken], className);
+// export const createComponent = <Props extends { className?: string }>(
+//   styleToken: string,
+//   displayName: string,
+// ) => {
+//   const Comp = forwardRefWithAs<Props, HTMLDivElement, "div">((props, ref) => {
+//     const { className, ...rest } = props;
+//     const theme = useTheme();
+//     const styles = cx(theme.alert[styleToken], className);
 
-    return <Box className={styles} ref={ref} {...rest} />;
-  });
+//     return <Box className={styles} ref={ref} {...rest} />;
+//   });
 
-  Comp.displayName = displayName;
+//   Comp.displayName = displayName;
 
-  return Comp;
-};
+//   return Comp;
+// };
 
 export default Alert;

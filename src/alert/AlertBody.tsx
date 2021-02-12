@@ -1,9 +1,8 @@
 import React from "react";
 
-import { Button, ButtonProps, useTheme } from "..";
+import { useTheme } from "..";
 import { cx } from "@renderlesskit/react";
 import { forwardRefWithAs } from "../utils/types";
-import { useAlertContext } from "./Alert";
 import { Box, BoxProps } from "../box";
 
 export type AlertBodyProps = BoxProps & {};
