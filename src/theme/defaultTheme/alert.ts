@@ -5,16 +5,16 @@ export const alert = {
   title:
     "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
-  actionsWrapper: "h-fit items-center inherit ml-auto",
+  actionsWrapper: "h-fit items-center lib:gap-2 lib:inherit lib:ml-auto",
   icon: {
-    base: "self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4",
+    base: "lib:self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4",
     icons: "lib:relative lib:-top-1.5 lib:w-full lib:h-full",
   },
   iconButton: {
     base:
       "lib:text-gray-800 lib:h-4 lib:p-0 bg-transparent lib:min-w-4 lib:ml-2 lib:shadow-none",
   },
-  actionButton: "p-0 text-sm bg-transparent lib:px-0 lib:shadow-none w-fit",
+  actionButton: "p-0 text-sm bg-transparent lib:px-0 lib:shadow-none lib:w-fit",
   status: {
     neutral: {
       base: "lib:bg-gray-100",

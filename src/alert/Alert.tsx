@@ -5,7 +5,6 @@ import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { createContext, runIfFn } from "../utils";
-import { IconButton } from "../button";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 import {
   AlertIcon,
@@ -84,6 +83,7 @@ export const Alert = forwardRefWithAs<
     theme.alert.status[status].base,
     className,
   );
+
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const Action = actionButtonLabel && (
     <AlertActionButton>{actionButtonLabel}</AlertActionButton>
