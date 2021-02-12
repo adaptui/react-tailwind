@@ -14,6 +14,8 @@ import {
   AlertDescription,
   AlertActionButton,
 } from ".";
+import { AlertBody } from "./AlertBody";
+import { AlertCloseButton } from "./AlertCloseButton";
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
@@ -73,8 +75,11 @@ export const Alert = forwardRefWithAs<
     ...rest
   } = props;
   const theme = useTheme();
+
+  const hasDescription = !!description;
   const alertStyles = cx(
     theme.alert.base,
+    hasDescription ? "" : "items-center",
     theme.alert.status[status].base,
     className,
   );
@@ -86,26 +91,20 @@ export const Alert = forwardRefWithAs<
           runIfFn(children, { status, styles: theme.alert })
         ) : (
           <>
-            <AlertTitle>
-              <AlertIcon />
-              {title}
-            </AlertTitle>
-            {description && <AlertDescription>{description}</AlertDescription>}
+            <AlertIcon className={hasDescription ? "" : "self-center"} />
+            <AlertBody>
+              <AlertTitle>{title}</AlertTitle>
+              {description && (
+                <AlertDescription>{description}</AlertDescription>
+              )}
+            </AlertBody>
             <AlertActions>
               {actionButtonLabel && (
                 <AlertActionButton as="div">
                   {actionButtonLabel}
                 </AlertActionButton>
               )}
-              <IconButton
-                aria-label="close"
-                className={cx(
-                  theme.alert.iconButton.base,
-                  theme.alert.status[status].iconButton,
-                )}
-              >
-                {icon}
-              </IconButton>
+              <AlertCloseButton>{icon}</AlertCloseButton>
             </AlertActions>
           </>
         )}

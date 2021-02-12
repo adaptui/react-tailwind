@@ -4,28 +4,26 @@ import { Button, ButtonProps, useTheme } from "..";
 import { cx } from "@renderlesskit/react";
 import { forwardRefWithAs } from "../utils/types";
 import { useAlertContext } from "./Alert";
-import { Box, BoxProps } from "../box";
 
-export type AlertActionButtonProps = BoxProps & {};
+export type AlertCloseButtonProps = ButtonProps & {};
 
-export const AlertActionButton = forwardRefWithAs<
-  AlertActionButtonProps,
+export const AlertCloseButton = forwardRefWithAs<
+  AlertCloseButtonProps,
   HTMLButtonElement,
   "button"
 >((props, ref) => {
   const { status } = useAlertContext();
   const { className, ...rest } = props;
   const theme = useTheme();
-  const alertActionButtonStyles = cx(
-    theme.button.base,
+  const alertCloseButtonStyles = cx(
     theme.alert.actionButton,
     theme.alert.status[status].actionButton,
     className,
   );
 
   return (
-    <Box as="button" className={alertActionButtonStyles} ref={ref} {...rest} />
+    <Button size="sm" className={alertCloseButtonStyles} ref={ref} {...rest} />
   );
 });
 
-AlertActionButton.displayName = "AlertActionButton";
+AlertCloseButton.displayName = "AlertCloseButton";

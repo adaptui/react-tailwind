@@ -3,6 +3,7 @@ import { Meta } from "@storybook/react/types-6-0";
 
 import {
   Alert,
+  AlertBody,
   AlertIcon,
   AlertProps,
   AlertTitle,
@@ -58,13 +59,13 @@ export const Customization = storyTemplate<AlertProps>(args => {
     <Alert {...args} status={status} className="flex justify-between">
       {({ status, styles }) => (
         <>
-          <AlertTitle>
-            <AlertIcon />
-            Build failed due to timeout
-          </AlertTitle>
-          <AlertDescription>
-            Build container is stuck in building state for 2700000ms
-          </AlertDescription>
+          <AlertIcon />
+          <AlertBody>
+            <AlertTitle>Build failed due to timeout</AlertTitle>
+            <AlertDescription>
+              Build container is stuck in building state for 2700000ms
+            </AlertDescription>
+          </AlertBody>
           <AlertActions>
             <AlertActionButton as="div">Reach Out</AlertActionButton>
             <IconButton

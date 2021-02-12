@@ -1,19 +1,20 @@
 export const alert = {
   base:
-    "lib:font-sans lib:flex lib:items-center lib:w-full lib:min-h-10 lib:overflow-hidden lib:p-2 lib:px-3 lib:rounded-md",
+    "lib:font-sans lib:flex lib:w-full lib:overflow-hidden lib:p-3 lib:rounded-md",
+  body: "flex flex-col gap-1.5",
   title:
-    "lib:flex lib:items-centerlib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
+    "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
-  actionsWrapper: "items-center inherit ml-auto",
+  actionsWrapper: "h-fit items-center inherit ml-auto",
   icon: {
-    base: "lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4 lib:max-w-4 lib:max-h-4",
-    icons: "lib:relative lib:-top-0.5 lib:w-full lib:h-full",
+    base: "self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4 overflow-auto",
+    icons: "lib:relative lib:-top-1.5 lib:w-full lib:h-full",
   },
   iconButton: {
     base:
-      "lib:text-gray-800 lib:h-5 lib:px-0 bg-transparent lib:min-w-5 lib:ml-2 lib:shadow-none",
+      "lib:text-gray-800 lib:h-4 lib:p-0 bg-transparent lib:min-w-4 lib:ml-2 lib:shadow-none",
   },
-  actionButton: "lib:h-5 bg-transparent lib:px-0 lib:shadow-none",
+  actionButton: "ml-1 p-0 text-sm bg-transparent lib:px-0 lib:shadow-none",
   status: {
     neutral: {
       base: "lib:bg-gray-100",
