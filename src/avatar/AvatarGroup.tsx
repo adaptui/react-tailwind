@@ -3,13 +3,9 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { GenericAvatar } from "../icons";
-import { AvatarName } from "./AvatarName";
-import { AvatarIcon } from "./AvatarIcon";
-import { AvatarImage } from "./AvatarImage";
-import { Avatar, AvatarProps } from "./Avatar";
 import { forwardRefWithAs } from "../utils/types";
 import { createContext, getValidChildren } from "../utils";
+import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
 
 export type AvatarGroupContext = Pick<
   AvatarProps,
@@ -81,15 +77,7 @@ export const AvatarGroup = forwardRefWithAs<
             {({ showFallback, name, fallback }) => {
               return (
                 <>
-                  {!showFallback ? (
-                    <AvatarImage />
-                  ) : name ? (
-                    <AvatarName />
-                  ) : (
-                    <AvatarIcon>
-                      {fallback ? fallback : <GenericAvatar />}
-                    </AvatarIcon>
-                  )}
+                  <AvatarContents />
                   <Box className={theme.avatar.group.excess.bg} />
                   <Box
                     className={cx(

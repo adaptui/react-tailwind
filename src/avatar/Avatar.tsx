@@ -64,7 +64,7 @@ export type AvatarInitialProps = {
    * Position for the AvatarBadge
    * @default "bottom-right"
    */
-  position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
+  position?: keyof Renderlesskit.GetThemeValue<"avatar", "badge", "position">;
 };
 
 export type AvatarContext = AvatarInitialProps & { showFallback: boolean };
@@ -163,15 +163,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
             runIfFn(children, context)
           ) : (
             <>
-              {!showFallback ? (
-                <AvatarImage />
-              ) : name ? (
-                <AvatarName />
-              ) : (
-                <AvatarIcon>
-                  {fallback ? fallback : <GenericAvatar />}
-                </AvatarIcon>
-              )}
+              <AvatarContents />
               {status ? <AvatarBadge /> : null}
             </>
           )}
@@ -187,3 +179,18 @@ export function initials(name: string) {
     ? `${firstName.charAt(0)}${lastName.charAt(0)}`
     : firstName.charAt(0);
 }
+
+export const AvatarContents = () => {
+  const { showFallback, name, fallback } = useAvatarContext();
+  return (
+    <>
+      {!showFallback ? (
+        <AvatarImage />
+      ) : name ? (
+        <AvatarName />
+      ) : (
+        <AvatarIcon>{fallback ? fallback : <GenericAvatar />}</AvatarIcon>
+      )}
+    </>
+  );
+};
