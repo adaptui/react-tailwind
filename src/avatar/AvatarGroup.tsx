@@ -70,23 +70,40 @@ export const AvatarGroup = forwardRefWithAs<
       >
         {childrenWithinMax}
         {excess > 0 ? (
-          <Avatar {...validChildren[limit].props}>
-            <>
-              <AvatarContents />
-              <Box className={theme.avatar.group.excess.bg} />
-              <Box
-                data-testid="testid-excess_label"
-                className={cx(
-                  theme.avatar.group.excess.text.base,
-                  theme.avatar.group.excess.text.size[size],
-                )}
-              >
-                +{size === "xs" ? "" : excess}
-              </Box>
-            </>
-          </Avatar>
+          <AvatarExcess
+            size={size}
+            excess={excess}
+            {...validChildren[limit].props}
+          />
         ) : null}
       </Box>
     </AvatarGroupProvider>
   );
 });
+
+const AvatarExcess = ({
+  excess,
+  size = "md",
+  ...props
+}: AvatarProps & {
+  excess: number | false;
+}) => {
+  const theme = useTheme();
+
+  const excessStyles = cx(
+    theme.avatar.group.excess.text.base,
+    theme.avatar.group.excess.text.size[size],
+  );
+
+  return (
+    <Avatar {...props}>
+      <>
+        <AvatarContents />
+        <Box className={theme.avatar.group.excess.bg} />
+        <Box data-testid="testid-excess_label" className={excessStyles}>
+          +{size === "xs" ? "" : excess}
+        </Box>
+      </>
+    </Avatar>
+  );
+};

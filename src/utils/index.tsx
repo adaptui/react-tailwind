@@ -41,7 +41,7 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
       throw new Error(errorMessage);
     }
 
-    return context;
+    return context || {};
   }
 
   return [
@@ -75,3 +75,9 @@ export function getValidChildren(children: React.ReactNode) {
     React.isValidElement(child),
   ) as React.ReactElement[];
 }
+
+export const isBrowser = typeof window !== "undefined";
+
+export const useSafeLayoutEffect = isBrowser
+  ? React.useLayoutEffect
+  : React.useEffect;

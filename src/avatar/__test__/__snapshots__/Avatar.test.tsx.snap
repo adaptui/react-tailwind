@@ -3,7 +3,7 @@
 exports[`<Avatar /> should render Avatar 1`] = `
 <DocumentFragment>
   <div
-    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:border-white"
+    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:ring-white"
     data-testid="testid-avatar_children"
   >
     <span
@@ -35,7 +35,7 @@ exports[`<Avatar /> should render Avatar 1`] = `
 exports[`<Avatar /> should render with AvatarBadge 1`] = `
 <DocumentFragment>
   <div
-    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:border-white"
+    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:ring-white"
     data-testid="testid-avatar_children"
   >
     <span
@@ -61,7 +61,8 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       </svg>
     </span>
     <div
-      class="lib:absolute lib:flex lib:items-center lib:justify-center lib:border-white lib:rounded-full lib:transform lib:text-1 lib:border-2 lib:translate-x-0.5 lib:translate-y-0.5 lib:bottom-0 lib:right-0"
+      class="lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full lib:text-1 lib:ring-2 lib:bottom-0 lib:right-0"
+      data-testid="testid-avatar-badge"
     >
       <svg
         class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500"
