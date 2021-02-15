@@ -69,11 +69,13 @@ export const AvatarGroup = forwardRefWithAs<
         {...rest}
       >
         {childrenWithinMax}
-        <AvatarExcess
-          size={size}
-          excess={excess}
-          {...validChildren[limit].props}
-        />
+        {excess > 0 ? (
+          <AvatarExcess
+            size={size}
+            excess={excess}
+            {...validChildren[limit].props}
+          />
+        ) : null}
       </Box>
     </AvatarGroupProvider>
   );
@@ -93,7 +95,7 @@ const AvatarExcess = ({
     theme.avatar.group.excess.text.size[size],
   );
 
-  return excess > 0 ? (
+  return (
     <Avatar {...props}>
       <>
         <AvatarContents />
@@ -103,5 +105,5 @@ const AvatarExcess = ({
         </Box>
       </>
     </Avatar>
-  ) : null;
+  );
 };

@@ -32,17 +32,22 @@ export const AvatarBadge = forwardRefWithAs<
   );
 
   const Status = () => {
-    if (status === "online")
+    if (_status === "online")
       return <DotIcon className={theme.avatar.badge.statuses.online} />;
-    if (status === "sleep")
+    if (_status === "sleep")
       return <MoonIcon className={theme.avatar.badge.statuses.sleep} />;
-    if (status === "typing") return <TypingAnimation />;
+    if (_status === "typing") return <TypingAnimation />;
 
     return null;
   };
 
   return (
-    <Box ref={ref} className={badgeStyles} {...rest}>
+    <Box
+      ref={ref}
+      className={badgeStyles}
+      data-testid="testid-avatar-badge"
+      {...rest}
+    >
       {children ? (
         React.cloneElement(children as React.ReactElement, {
           className: theme.avatar.badge.statuses[_status],
