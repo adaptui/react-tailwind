@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { Avatar } from "../Avatar";
-import { screen } from "@testing-library/react";
 import { AvatarGroup } from "../AvatarGroup";
+import { screen } from "@testing-library/react";
 import { render, testA11y } from "../../utils/testUtils";
 
 describe("<AvatarGroup />", () => {
@@ -50,7 +50,7 @@ describe("<AvatarGroup />", () => {
       </AvatarGroup>,
     );
 
-    const truncateCircle = screen.queryByTestId("testid-truncated");
+    const truncateCircle = screen.queryByTestId("testid-excess_label");
     expect(truncateCircle).not.toBeInTheDocument();
 
     const group = screen.getByRole("group", {
@@ -69,7 +69,7 @@ describe("<AvatarGroup />", () => {
       </AvatarGroup>,
     );
 
-    const truncateCircle = screen.queryByTestId("testid-truncated");
+    const truncateCircle = screen.queryByTestId("testid-excess_label");
     expect(truncateCircle).toHaveTextContent("+1");
 
     const group = screen.getByRole("group", {
@@ -87,7 +87,7 @@ describe("<AvatarGroup />", () => {
       </AvatarGroup>,
     );
 
-    const truncateCircle = screen.queryByTestId("testid-truncated");
+    const truncateCircle = screen.queryByTestId("testid-excess_label");
     expect(truncateCircle).not.toBeInTheDocument();
 
     const group = screen.getByRole("group", {
