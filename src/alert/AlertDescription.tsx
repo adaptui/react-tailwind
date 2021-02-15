@@ -13,6 +13,7 @@ export const AlertDescription = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
+
   const theme = useTheme();
   const alertDescriptionStyles = cx(theme.alert.description, className);
 

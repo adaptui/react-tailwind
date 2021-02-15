@@ -4,7 +4,6 @@ import { cx } from "@renderlesskit/react";
 import {
   AlertIcon,
   AlertTitle,
-  AlertActions,
   AlertDescription,
   AlertActionButton,
 } from "./index";
@@ -93,9 +92,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
             runIfFn(children, { status, styles: theme.alert })
           ) : (
             <>
-              <AlertIcon
-                className={hasDescription ? "" : theme.alert.icon.center}
-              />
+              <AlertIcon />
               <AlertBody>
                 <AlertTitle>{title}</AlertTitle>
                 {description && (
@@ -103,10 +100,8 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
                 )}
                 {isMobile ? Action : null}
               </AlertBody>
-              <AlertActions>
-                {!isMobile ? Action : null}
-                <AlertCloseButton>{icon}</AlertCloseButton>
-              </AlertActions>
+              {!isMobile ? Action : null}
+              <AlertCloseButton>{icon}</AlertCloseButton>
             </>
           )}
         </Box>

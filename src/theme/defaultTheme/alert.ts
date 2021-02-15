@@ -1,26 +1,20 @@
 export const alert = {
   base:
-    "lib:font-sans lib:flex lib:w-full lib:overflow-hidden lib:p-3 lib:rounded-md",
+    "lib:flex items-center lib:w-full lib:overflow-hidden lib:px-3 lib:py-2.5 lib:rounded-md",
+  icon: "lib:inherit lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4",
   body: {
-    base: "flex gap-1.5",
-    desktop: "flex-row",
-    mobile: "flex-col",
+    base: "lib:flex lib:text-sm flex-1 min-w-0",
+    mobile: "lib:flex-col",
   },
-  title:
-    "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
-  description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
-  actionsWrapper: "h-fit items-center lib:gap-2 lib:inherit lib:ml-auto",
+  title: "lib:text-gray-800 lib:mr-2",
+  description: "lib:text-gray-600",
   itemsCenter: "items-center",
-  icon: {
-    center: "self-center",
-    base: "lib:self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4",
-    icons: "lib:relative lib:-top-1.5 lib:w-full lib:h-full",
-  },
   iconButton: {
     base:
       "lib:text-gray-800 lib:h-4 lib:p-0 bg-transparent lib:min-w-4 lib:ml-2 lib:shadow-none",
   },
-  actionButton: "p-0 text-sm bg-transparent lib:px-0 lib:shadow-none lib:w-fit",
+  actionButton: "hover:bg-blue-100 -my-2 shadow-none",
+  closeButton: "hover:bg-blue-100 -my-2 -mr-2 shadow-none",
   status: {
     neutral: {
       base: "lib:bg-gray-100",

@@ -14,11 +14,12 @@ export const AlertBody = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const theme = useTheme();
   const { isMobile } = useAlertContext();
+
+  const theme = useTheme();
   const alertBodyStyles = cx(
     theme.alert.body.base,
-    isMobile ? theme.alert.body.mobile : theme.alert.body.desktop,
+    isMobile ? theme.alert.body.mobile : "",
     className,
   );
 

@@ -7,7 +7,6 @@ import {
   AlertIcon,
   AlertProps,
   AlertTitle,
-  AlertActions,
   AlertDescription,
   AlertActionButton,
 } from "../index";
@@ -45,41 +44,42 @@ const base = storyTemplate<AlertProps>(
   {
     actionButtonLabel: "Reach Out",
     title: "Your browser is outdated.",
-    description: "Your experience may be degraded.",
+    status: "info",
   },
 );
 
-export const Default = base({
-  status: "info",
+export const Default = base({});
+export const WithDescription = base({
+  description: "Your experience may be degraded.",
 });
 
-export const Customization = storyTemplate<AlertProps>(args => {
-  const status = args?.status || "info";
-  return (
-    <Alert {...args} status={status} className="flex justify-between">
-      {({ status, styles }) => (
-        <>
-          <AlertIcon />
-          <AlertBody>
-            <AlertTitle>Build failed due to timeout</AlertTitle>
-            <AlertDescription>
-              Build container is stuck in building state for 2700000ms
-            </AlertDescription>
-          </AlertBody>
-          <AlertActions>
-            <AlertActionButton as="div">Reach Out</AlertActionButton>
-            <IconButton
-              aria-label="close"
-              className={cx(
-                styles.iconButton.base,
-                styles.status[status].iconButton,
-              )}
-            >
-              <CloseIcon />
-            </IconButton>
-          </AlertActions>
-        </>
-      )}
-    </Alert>
-  );
-})({});
+// export const Customization = storyTemplate<AlertProps>(args => {
+//   const status = args?.status || "info";
+//   return (
+//     <Alert {...args} status={status}>
+//       {({ status, styles }) => (
+//         <>
+//           <AlertIcon />
+//           <AlertBody>
+//             <AlertTitle>Build failed due to timeout</AlertTitle>
+//             <AlertDescription>
+//               Build container is stuck in building state for 2700000ms
+//             </AlertDescription>
+//           </AlertBody>
+//           <AlertActions>
+//             <AlertActionButton as="div">Reach Out</AlertActionButton>
+//             <IconButton
+//               aria-label="close"
+//               className={cx(
+//                 styles.iconButton.base,
+//                 styles.status[status].iconButton,
+//               )}
+//             >
+//               <CloseIcon />
+//             </IconButton>
+//           </AlertActions>
+//         </>
+//       )}
+//     </Alert>
+//   );
+// })({});
