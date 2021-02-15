@@ -17,6 +17,18 @@ describe("<Avatar />", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  it("should render Avatar renderProps", () => {
+    render(
+      <Avatar name="Anurag hazra">
+        {({ name, getInitials }) => <p>{getInitials!(name)}</p>}
+      </Avatar>,
+    );
+
+    expect(screen.getByTestId("testid-avatar_children")).toHaveTextContent(
+      "Ah",
+    );
+  });
+
   it("should render with AvatarBadge", () => {
     const { asFragment } = render(<Avatar status="online"></Avatar>);
 
