@@ -12,6 +12,7 @@ import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
 import { AlertBody } from "./AlertBody";
 import { useMediaQuery } from "../hooks";
+import { AlertActions } from "./AlertActions";
 import { createContext, runIfFn } from "../utils";
 import { AlertCloseButton } from "./AlertCloseButton";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
@@ -76,7 +77,6 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
     const theme = useTheme();
     const alertStyles = cx(
       theme.alert.base,
-      hasDescription ? "" : theme.alert.itemsCenter,
       theme.alert.status[status].base,
       className,
     );
@@ -98,10 +98,14 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
                 {description && (
                   <AlertDescription>{description}</AlertDescription>
                 )}
-                {isMobile ? Action : null}
+                <Box as="span" style={{ display: "inherit" }}>
+                  {isMobile ? Action : null}
+                </Box>
               </AlertBody>
-              {!isMobile ? Action : null}
-              <AlertCloseButton>{icon}</AlertCloseButton>
+              <AlertActions>
+                {!isMobile ? Action : null}
+                <AlertCloseButton>{icon}</AlertCloseButton>
+              </AlertActions>
             </>
           )}
         </Box>

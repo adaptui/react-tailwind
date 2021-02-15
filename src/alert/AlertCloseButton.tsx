@@ -2,11 +2,11 @@ import React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../index";
-import { IconButton, IconButtonProps } from "../button";
 import { useAlertContext } from "./Alert";
 import { forwardRefWithAs } from "../utils/types";
+import { CloseButton, CloseButtonProps } from "../button";
 
-export type AlertCloseButtonProps = IconButtonProps & {};
+export type AlertCloseButtonProps = CloseButtonProps & {};
 
 export const AlertCloseButton = forwardRefWithAs<
   AlertCloseButtonProps,
@@ -24,7 +24,7 @@ export const AlertCloseButton = forwardRefWithAs<
   );
 
   return (
-    <IconButton
+    <CloseButton
       variant="ghost"
       className={alertCloseButtonStyles}
       ref={ref}
