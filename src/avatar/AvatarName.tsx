@@ -17,17 +17,14 @@ export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
 
   if (!initial) return null;
 
+  const nameStyles = cx(
+    theme.avatar.name.base,
+    theme.avatar.name.size[size],
+    className,
+  );
+
   return (
-    <Box
-      aria-label={name}
-      ref={ref}
-      className={cx(
-        theme.avatar.name.base,
-        theme.avatar.name.size[size],
-        className,
-      )}
-      {...rest}
-    >
+    <Box aria-label={name} ref={ref} className={nameStyles} {...rest}>
       {size === "xs" ? initial?.charAt(0) : initial}
     </Box>
   );

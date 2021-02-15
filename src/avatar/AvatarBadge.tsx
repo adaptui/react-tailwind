@@ -22,6 +22,13 @@ export const AvatarBadge = forwardRefWithAs<
     position = "bottom-right",
   } = useAvatarContext();
 
+  const badgeStyles = cx(
+    theme.avatar.badge.base,
+    theme.avatar.badge.size[size],
+    theme.avatar.badge.position[position],
+    className,
+  );
+
   const Status = () => {
     if (status === "online")
       return <DotIcon className={theme.avatar.badge.online} />;
@@ -33,16 +40,7 @@ export const AvatarBadge = forwardRefWithAs<
   };
 
   return (
-    <Box
-      ref={ref}
-      className={cx(
-        theme.avatar.badge.base,
-        theme.avatar.badge.size[size],
-        theme.avatar.badge.position[position],
-        className,
-      )}
-      {...rest}
-    >
+    <Box ref={ref} className={badgeStyles} {...rest}>
       {children ? children : <Status />}
     </Box>
   );
@@ -61,35 +59,25 @@ export const TypingAnimation = forwardRefWithAs<
   const theme = useTheme();
   const { size = "md" } = useAvatarContext();
 
+  const baseStyles = cx(
+    theme.avatar.badge.typing.base,
+    theme.avatar.badge.typing.size[size],
+    className,
+  );
+  const typingStyles = cx(theme.avatar.badge.typing.circle, circleStyle);
+
   return (
-    <Box
-      ref={ref}
-      className={cx(
-        theme.avatar.badge.typing.base,
-        theme.avatar.badge.typing.size[size],
-        className,
-      )}
-      {...rest}
-    >
+    <Box ref={ref} className={baseStyles} {...rest}>
       {["lg", "xl"].includes(size) ? (
         <>
-          <Box className={cx(theme.avatar.badge.typing.circle, circleStyle)} />
-          <Box
-            className={cx(theme.avatar.badge.typing.circle, circleStyle)}
-            style={{ animationDelay: "0.67s" }}
-          />
-          <Box
-            className={cx(theme.avatar.badge.typing.circle, circleStyle)}
-            style={{ animationDelay: "1.34s" }}
-          />
+          <Box className={typingStyles} />
+          <Box className={typingStyles} style={{ animationDelay: "0.67s" }} />
+          <Box className={typingStyles} style={{ animationDelay: "1.34s" }} />
         </>
       ) : (
         <>
-          <Box className={cx(theme.avatar.badge.typing.circle, circleStyle)} />
-          <Box
-            className={cx(theme.avatar.badge.typing.circle, circleStyle)}
-            style={{ animationDelay: "1s" }}
-          />
+          <Box className={typingStyles} />
+          <Box className={typingStyles} style={{ animationDelay: "1s" }} />
         </>
       )}
     </Box>

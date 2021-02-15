@@ -57,7 +57,6 @@ export type AvatarInitialProps = {
   borderColor?: string;
   /**
    * Shows AvatarBadge with the given type
-   * @default "online"
    */
   status?: "online" | "sleep" | "typing";
   /**

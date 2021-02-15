@@ -24,15 +24,17 @@ export const AvatarIcon = forwardRefWithAs<
       })
     : children;
 
+  const iconStyles = cx(
+    theme.avatar.icon.base,
+    theme.avatar.icon.size[size],
+    className,
+  );
+
   return (
     <Box
       as="span"
       ref={ref}
-      className={cx(
-        theme.avatar.icon.base,
-        theme.avatar.icon.size[size],
-        className,
-      )}
+      className={iconStyles}
       aria-label="Avatar Icon"
       {...rest}
     >
