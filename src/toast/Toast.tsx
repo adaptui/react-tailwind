@@ -1,14 +1,19 @@
 import React from "react";
 import {
-  Toast,
+  cx,
+  Toast as IToast,
   ToastContextState,
   ToastProviderProps,
   useToast as useRenderlesskitToast,
   ToastProvider as RenderlesskitToastProvider,
 } from "@renderlesskit/react";
+
 import { Tag } from "../tag";
+import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
 import { InfoCircleIcon } from "../icons";
 import { ToastWrapper } from "./ToastWrapper";
+import { forwardRefWithAs } from "../utils/types";
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
@@ -52,8 +57,23 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   );
 };
 
+type ToastProps = BoxProps & {};
+export const Toast = forwardRefWithAs<ToastProps, HTMLDivElement, "div">(
+  (props, ref) => {
+    const { children, className, ...rest } = props;
+    const theme = useTheme();
+
+    const toastStyles = cx(theme.toast.base, className);
+    return (
+      <Box className={toastStyles} ref={ref} {...rest}>
+        {children}
+      </Box>
+    );
+  },
+);
+
 type UseToast = () => Omit<ToastContextState, "showToast"> & {
-  showToast: (p: Partial<Omit<Toast, "isVisible" | "placement">>) => void;
+  showToast: (p: Partial<Omit<IToast, "isVisible" | "placement">>) => void;
 };
 
 export const useToast: UseToast = () => {
