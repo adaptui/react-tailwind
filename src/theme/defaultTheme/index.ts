@@ -15,6 +15,7 @@ import { _switch } from "./switch";
 import { tag } from "./tag";
 import { radio } from "./radio";
 import { slider } from "./slider";
+import { tooltip } from "./tooltip";
 
 const theme = {
   alert,
@@ -34,6 +35,7 @@ const theme = {
   spinner,
   switch: _switch,
   tag,
+  tooltip,
 };
 
 export default theme;
