@@ -1,16 +1,11 @@
 import React, {
-  ImgHTMLAttributes,
-  useCallback,
-  useEffect,
   useRef,
   useState,
+  useEffect,
+  useCallback,
+  ImgHTMLAttributes,
 } from "react";
-
-const isBrowser = typeof window !== "undefined";
-
-export const useSafeLayoutEffect = isBrowser
-  ? React.useLayoutEffect
-  : React.useEffect;
+import { useSafeLayoutEffect } from ".";
 
 export interface UseImageProps {
   /**

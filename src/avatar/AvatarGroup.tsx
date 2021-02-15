@@ -88,18 +88,17 @@ const AvatarExcess = ({
 }) => {
   const theme = useTheme();
 
+  const excessStyles = cx(
+    theme.avatar.group.excess.text.base,
+    theme.avatar.group.excess.text.size[size],
+  );
+
   return excess > 0 ? (
     <Avatar {...props}>
       <>
         <AvatarContents />
         <Box className={theme.avatar.group.excess.bg} />
-        <Box
-          data-testid="testid-excess_label"
-          className={cx(
-            theme.avatar.group.excess.text.base,
-            theme.avatar.group.excess.text.size[size],
-          )}
-        >
+        <Box data-testid="testid-excess_label" className={excessStyles}>
           +{size === "xs" ? "" : excess}
         </Box>
       </>
