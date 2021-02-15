@@ -4,23 +4,25 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { useAvatarContext } from "./Avatar";
+import { AvatarProps, useAvatarContext } from "./Avatar";
 import { MoonIcon, DotIcon } from "../icons";
 
-export type AvatarBadgeProps = BoxProps & {};
+export type AvatarBadgeProps = BoxProps & Pick<AvatarProps, "status"> & {};
 
 export const AvatarBadge = forwardRefWithAs<
   AvatarBadgeProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { className, children, ...rest } = props;
+  const { className, children, status, ...rest } = props;
   const theme = useTheme();
   const {
     size = "md",
-    status = "online",
+    status: contextStatus,
     position = "bottom-right",
   } = useAvatarContext();
+
+  const _status = status || contextStatus || "online";
 
   const badgeStyles = cx(
     theme.avatar.badge.base,
@@ -31,9 +33,9 @@ export const AvatarBadge = forwardRefWithAs<
 
   const Status = () => {
     if (status === "online")
-      return <DotIcon className={theme.avatar.badge.online} />;
+      return <DotIcon className={theme.avatar.badge.statuses.online} />;
     if (status === "sleep")
-      return <MoonIcon className={theme.avatar.badge.sleep} />;
+      return <MoonIcon className={theme.avatar.badge.statuses.sleep} />;
     if (status === "typing") return <TypingAnimation />;
 
     return null;
@@ -41,7 +43,13 @@ export const AvatarBadge = forwardRefWithAs<
 
   return (
     <Box ref={ref} className={badgeStyles} {...rest}>
-      {children ? children : <Status />}
+      {children ? (
+        React.cloneElement(children as React.ReactElement, {
+          className: theme.avatar.badge.statuses[_status],
+        })
+      ) : (
+        <Status />
+      )}
     </Box>
   );
 });
@@ -60,11 +68,14 @@ export const TypingAnimation = forwardRefWithAs<
   const { size = "md" } = useAvatarContext();
 
   const baseStyles = cx(
-    theme.avatar.badge.typing.base,
-    theme.avatar.badge.typing.size[size],
+    theme.avatar.badge.statuses.typing.base,
+    theme.avatar.badge.statuses.typing.size[size],
     className,
   );
-  const typingStyles = cx(theme.avatar.badge.typing.circle, circleStyle);
+  const typingStyles = cx(
+    theme.avatar.badge.statuses.typing.circle,
+    circleStyle,
+  );
 
   return (
     <Box ref={ref} className={baseStyles} {...rest}>

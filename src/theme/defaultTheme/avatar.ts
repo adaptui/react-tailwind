@@ -55,20 +55,22 @@ export const avatar = {
       lg: "lib:text-1.5 lib:border-2 lib:translate-x-0.5 lib:translate-y-0.5",
       xl: "lib:text-2 lib:border-2 lib:translate-x-0.5 lib:translate-y-0.5",
     },
-    online: "lib:text-green-500",
-    sleep: "lib:text-gray-500",
-    typing: {
-      base:
-        "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",
-      size: {
-        xs: "lib:h-1 lib:p-px",
-        sm: "lib:h-1.5 lib:p-0.5",
-        md: "lib:h-1.5 lib:p-0.5",
-        lg: "lib:h-1.5 lib:p-0.5",
-        xl: "lib:h-2 lib:p-1",
+    statuses: {
+      online: "lib:text-green-500",
+      sleep: "lib:text-gray-500",
+      typing: {
+        base:
+          "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",
+        size: {
+          xs: "lib:h-1 lib:p-px",
+          sm: "lib:h-1.5 lib:p-0.5",
+          md: "lib:h-1.5 lib:p-0.5",
+          lg: "lib:h-1.5 lib:p-0.5",
+          xl: "lib:h-2 lib:p-1",
+        },
+        circle:
+          "lib:bg-white lib:w-0.5 lib:h-0.5 lib:rounded-full lib:animate-pulse",
       },
-      circle:
-        "lib:bg-white lib:w-0.5 lib:h-0.5 lib:rounded-full lib:animate-pulse",
     },
   },
   group: {

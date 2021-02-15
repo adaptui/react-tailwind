@@ -5,9 +5,11 @@ import {
   createControls,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
-import { PhotographIcon } from "../../icons";
+import { InfoCircleIcon, PhotographIcon } from "../../icons";
 import { AvatarGroup, AvatarGroupProps } from "../AvatarGroup";
 import { Avatar, AvatarProps } from "../index";
+import { AvatarContents } from "../Avatar";
+import { AvatarBadge } from "../AvatarBadge";
 
 export default {
   title: "Avatar",
@@ -33,7 +35,7 @@ export const InvalidSrc = base({
   src: "https://bit.ly/dan-abramav",
   name: "Dan Abramov",
   fallback: <PhotographIcon />,
-  onError: () => alert("Provide a valid src url"),
+  onError: () => console.log("Provide a valid src url"),
 });
 
 export const OnlineBadge = base({
@@ -45,6 +47,22 @@ export const SleepBadge = base({
   src: "https://bit.ly/ryan-florence",
   name: "Ryan Florence",
   status: "sleep",
+});
+export const CustomBadge = base({
+  src: "https://bit.ly/ryan-florence",
+  name: "Ryan Florence",
+  // @ts-ignore
+  status: "custom",
+  children: () => {
+    return (
+      <>
+        <AvatarContents />
+        <AvatarBadge>
+          <InfoCircleIcon />
+        </AvatarBadge>
+      </>
+    );
+  },
 });
 export const TypingBadge = base({
   src: "https://bit.ly/ryan-florence",
