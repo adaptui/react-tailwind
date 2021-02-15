@@ -70,7 +70,6 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       children,
       ...rest
     } = props;
-    const hasDescription = !!description;
     const [isMobile] = useMediaQuery("(max-width: 768px)");
     const context = { status, isMobile };
 
