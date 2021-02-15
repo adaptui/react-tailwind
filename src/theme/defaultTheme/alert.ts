@@ -1,7 +1,11 @@
 export const alert = {
   base:
     "lib:font-sans lib:flex lib:w-full lib:overflow-hidden lib:p-3 lib:rounded-md",
-  body: "flex flex-col gap-1.5",
+  body: {
+    base: "flex gap-1.5",
+    desktop: "flex-row",
+    mobile: "flex-col",
+  },
   title:
     "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",

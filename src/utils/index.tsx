@@ -63,3 +63,14 @@ export function runIfFn<T, U>(
 ): T {
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
+
+// SSR check
+export function canUseDOM() {
+  return !!(
+    typeof window !== "undefined" &&
+    window.document &&
+    window.document.createElement
+  );
+}
+
+export const isBrowser = canUseDOM();

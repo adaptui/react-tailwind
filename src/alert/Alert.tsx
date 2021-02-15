@@ -1,27 +1,25 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { CloseIcon } from "../icons";
-import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
 import {
   AlertIcon,
   AlertTitle,
   AlertActions,
   AlertDescription,
   AlertActionButton,
-} from ".";
+} from "./index";
+import { useTheme } from "../theme";
+import { CloseIcon } from "../icons";
+import { Box, BoxProps } from "../box";
 import { AlertBody } from "./AlertBody";
+import { useMediaQuery } from "../hooks";
+import { createContext, runIfFn } from "../utils";
 import { AlertCloseButton } from "./AlertCloseButton";
-import { useMediaQuery } from "../utils/useMediaQuery";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
-type AlertContext = {
-  status: AlertStatus;
-};
+export type AlertContext = { status: AlertStatus; isMobile: boolean };
 
 const [AlertProvider, useAlertContext] = createContext<AlertContext>({
   name: "AlertContext",
@@ -30,6 +28,11 @@ const [AlertProvider, useAlertContext] = createContext<AlertContext>({
 });
 
 export { AlertProvider, useAlertContext };
+
+type AlertRenderProps = RenderProp<{
+  status: AlertStatus;
+  styles: Renderlesskit.Theme["components"]["alert"];
+}>;
 
 export type AlertProps = BoxProps &
   AlertRenderProps & {
@@ -55,11 +58,6 @@ export type AlertProps = BoxProps &
     description?: string;
   };
 
-type AlertRenderProps = RenderProp<{
-  status: AlertStatus;
-  styles: Renderlesskit.Theme["components"]["alert"];
-}>;
-
 export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
   (props, ref) => {
     const {
@@ -72,9 +70,11 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       children,
       ...rest
     } = props;
-    const theme = useTheme();
-
     const hasDescription = !!description;
+    const [isMobile] = useMediaQuery("(max-width: 768px)");
+    const context = { status, isMobile };
+
+    const theme = useTheme();
     const alertStyles = cx(
       theme.alert.base,
       hasDescription ? "" : theme.alert.itemsCenter,
@@ -82,13 +82,12 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       className,
     );
 
-    const [isMobile] = useMediaQuery("(max-width: 768px)");
     const Action = actionButtonLabel && (
       <AlertActionButton>{actionButtonLabel}</AlertActionButton>
     );
 
     return (
-      <AlertProvider value={{ status }}>
+      <AlertProvider value={context}>
         <Box role="alert" className={alertStyles} ref={ref} {...rest}>
           {children ? (
             runIfFn(children, { status, styles: theme.alert })
@@ -117,29 +116,5 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
 );
 
 Alert.displayName = "Alert";
-
-/**
- * Utility function to refactor out redundant components,
- * we can remove this later if use cases differ in future to avoid wrong abstraction
- *
- * @param styleToken theme token name accessing theme.alert[styleToken]
- * @param displayName sets displayName of the component
- */
-// export const createComponent = <Props extends { className?: string }>(
-//   styleToken: string,
-//   displayName: string,
-// ) => {
-//   const Comp = forwardRefWithAs<Props, HTMLDivElement, "div">((props, ref) => {
-//     const { className, ...rest } = props;
-//     const theme = useTheme();
-//     const styles = cx(theme.alert[styleToken], className);
-
-//     return <Box className={styles} ref={ref} {...rest} />;
-//   });
-
-//   Comp.displayName = displayName;
-
-//   return Comp;
-// };
 
 export default Alert;
