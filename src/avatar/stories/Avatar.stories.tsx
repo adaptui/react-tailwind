@@ -146,5 +146,5 @@ export const GroupWithLimit = storyTemplate<AvatarGroupProps>(
       </>
     );
   },
-  { showBorder: true, borderColor: "border-red-200" },
+  { showBorder: true, borderColor: "ring-red-200" },
 )({});

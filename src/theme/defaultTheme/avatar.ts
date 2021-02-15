@@ -10,13 +10,13 @@ export const avatar = {
   },
   border: {
     width: {
-      xs: "lib:border",
-      sm: "lib:border",
-      md: "lib:border-2",
-      lg: "lib:border-2",
-      xl: "lib:border-2",
+      xs: "lib:ring-1",
+      sm: "lib:ring-1",
+      md: "lib:ring-2",
+      lg: "lib:ring-2",
+      xl: "lib:ring-2",
     },
-    color: "lib:border-white",
+    color: "lib:ring-white",
   },
   name: {
     base: "lib:text-center lib:uppercase lib:text-gray-500",
@@ -41,7 +41,7 @@ export const avatar = {
   image: "lib:rounded-full lib:w-full lib:h-full lib:object-cover",
   badge: {
     base:
-      "lib:absolute lib:flex lib:items-center lib:justify-center lib:border-white lib:rounded-full lib:transform",
+      "lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full",
     position: {
       "top-left": "lib:top-0 lib:left-0",
       "top-right": "lib:top-0 lib:right-0",
@@ -49,11 +49,11 @@ export const avatar = {
       "bottom-left": "lib:bottom-0 lib:left-0",
     },
     size: {
-      xs: "lib:text-1 lib:border lib:translate-x-px lib:translate-y-px",
-      sm: "lib:text-1 lib:border lib:translate-x-px lib:translate-y-px",
-      md: "lib:text-1 lib:border-2 lib:translate-x-0.5 lib:translate-y-0.5",
-      lg: "lib:text-1.5 lib:border-2 lib:translate-x-0.5 lib:translate-y-0.5",
-      xl: "lib:text-2 lib:border-2 lib:translate-x-0.5 lib:translate-y-0.5",
+      xs: "lib:text-1 lib:ring-1",
+      sm: "lib:text-1 lib:ring-1",
+      md: "lib:text-1 lib:ring-2",
+      lg: "lib:text-1.5 lib:ring-2",
+      xl: "lib:text-2 lib:ring-2",
     },
     statuses: {
       online: "lib:text-green-500",

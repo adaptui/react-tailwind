@@ -3,7 +3,7 @@ import { createIcon } from "../icon";
 
 export const MoonIcon = createIcon({
   displayName: "MoonIcon",
-  viewBox: "0 0 9 9",
+  viewBox: "0 0 10 10",
   path: (
     <path
       fill="currentColor"
