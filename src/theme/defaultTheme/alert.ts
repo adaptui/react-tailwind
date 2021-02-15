@@ -6,7 +6,9 @@ export const alert = {
     "lib:text-gray-800 lib:text-sm lib:leading-4 lib:font-semibold lib:mr-2",
   description: "lib:inline lib:text-gray-600 lib:text-sm lib:leading-4",
   actionsWrapper: "h-fit items-center lib:gap-2 lib:inherit lib:ml-auto",
+  itemsCenter: "items-center",
   icon: {
+    center: "self-center",
     base: "lib:self-start lib:flex-shrink-0 lib:mr-3 lib:w-4 lib:h-4",
     icons: "lib:relative lib:-top-1.5 lib:w-full lib:h-full",
   },

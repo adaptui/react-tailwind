@@ -77,7 +77,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
     const hasDescription = !!description;
     const alertStyles = cx(
       theme.alert.base,
-      hasDescription ? "" : "items-center",
+      hasDescription ? "" : theme.alert.itemsCenter,
       theme.alert.status[status].base,
       className,
     );
@@ -94,7 +94,9 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
             runIfFn(children, { status, styles: theme.alert })
           ) : (
             <>
-              <AlertIcon className={hasDescription ? "" : "self-center"} />
+              <AlertIcon
+                className={hasDescription ? "" : theme.alert.icon.center}
+              />
               <AlertBody>
                 <AlertTitle>{title}</AlertTitle>
                 {description && (
