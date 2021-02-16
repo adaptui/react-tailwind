@@ -7,7 +7,7 @@ import {
   RadioDisabledIcon,
   RadioUncheckedIcon,
 } from "../icons/RadioIcons";
-import { useTheme } from "..";
+import { useTheme } from "../index";
 import { RadioCommonProps } from "./Radio";
 import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
@@ -29,7 +29,7 @@ export const RadioIcon = forwardRefWithAs<
   const { value, size, disabled, ...mainProps } = props;
   const { className, children, ...rest } = mainProps;
 
-  const _size = size || radioSize || "sm";
+  const _size = size || radioSize || "md";
   const stateProp = radioState?.state === value;
 
   const theme = useTheme();
@@ -68,3 +68,5 @@ export const RadioIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+RadioIcon.displayName = "RadioIcon";

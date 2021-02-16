@@ -3,7 +3,7 @@ import { BoxProps } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import { Box } from "../box";
-import { useTheme } from "..";
+import { useTheme } from "../index";
 import { RadioCommonProps } from "./Radio";
 import { useRadioContext } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
@@ -19,7 +19,7 @@ export const RadioLabel = forwardRefWithAs<
   const { className, ...rest } = mainProps;
   const theme = useTheme();
   const { radioSize } = useRadioContext();
-  const _size = size || radioSize || "sm";
+  const _size = size || radioSize || "md";
 
   const radioStyles = cx(
     theme.radio.base,
@@ -31,3 +31,5 @@ export const RadioLabel = forwardRefWithAs<
 
   return <Box as="label" ref={ref} className={radioStyles} {...rest} />;
 });
+
+RadioLabel.displayName = "RadioLabel";

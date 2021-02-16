@@ -16,13 +16,13 @@ export const tag = {
     ghost: "lib:text-gray-800 lib:hover:bg-gray-100",
   },
   prefix: {
-    sm: "inherit mr-1.5 text-xs",
-    md: "inherit mr-2 text-xs",
-    lg: "inherit mr-2 text-base",
+    sm: "inline-flex mr-1.5 text-xs",
+    md: "inline-flex mr-2 text-xs",
+    lg: "inline-flex mr-2 text-base",
   },
   suffix: {
-    sm: "inherit ml-1.5 text-xs",
-    md: "inherit ml-2 text-xs",
-    lg: "inherit ml-2 text-base",
+    sm: "inline-flex ml-1.5 text-xs",
+    md: "inline-flex ml-2 text-xs",
+    lg: "inline-flex ml-2 text-base",
   },
 };

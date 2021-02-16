@@ -3,9 +3,9 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { MoonIcon, DotIcon } from "../icons";
 import { forwardRefWithAs } from "../utils/types";
 import { AvatarProps, useAvatarContext } from "./Avatar";
-import { MoonIcon, DotIcon } from "../icons";
 
 export type AvatarBadgeProps = BoxProps & Pick<AvatarProps, "status"> & {};
 
@@ -59,6 +59,8 @@ export const AvatarBadge = forwardRefWithAs<
   );
 });
 
+AvatarBadge.displayName = "AvatarBadge";
+
 export type TypingAnimationProps = BoxProps & {
   circleStyle?: string;
 };
@@ -99,3 +101,5 @@ export const TypingAnimation = forwardRefWithAs<
     </Box>
   );
 });
+
+TypingAnimation.displayName = "TypingAnimation";

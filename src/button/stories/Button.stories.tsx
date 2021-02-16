@@ -180,5 +180,5 @@ const buttonGroupExample = storyTemplate<ButtonGroupProps>(args => {
 export const TabListAsGroup = buttonGroupExample({
   attached: true,
   size: "md",
-  variant: "secondary",
+  variant: "outline",
 });

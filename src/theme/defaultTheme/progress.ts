@@ -2,8 +2,8 @@ export const progress = {
   track: {
     base: "lib:relative lib:overflow-hidden lib:bg-gray-300 lib:rounded-2xl",
     size: {
-      xs: "lib:h-0.5",
-      sm: "lib:h-1",
+      sm: "lib:h-0.5",
+      md: "lib:h-1",
       lg: "lib:h-2",
       xl: "lib:h-4",
     },

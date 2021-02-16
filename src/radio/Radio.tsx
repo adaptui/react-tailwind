@@ -1,9 +1,9 @@
-import React from "react";
 import {
   RadioHTMLProps,
   Radio as ReakitRadio,
   RadioProps as ReakitRadioProps,
 } from "reakit";
+import React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -29,6 +29,8 @@ export const RadioInput: React.FC<RadioHTMLProps & RadioCommonProps> = ({
   return <ReakitRadio className={radioStyles} {...radioState} {...rest} />;
 };
 
+RadioInput.displayName = "RadioInput";
+
 export const Radio = forwardRefWithAs<
   RadioHTMLProps &
     RadioCommonProps & {
@@ -53,3 +55,5 @@ export const Radio = forwardRefWithAs<
     </>
   );
 });
+
+Radio.displayName = "Radio";

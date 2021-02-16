@@ -29,7 +29,7 @@ export const avatar = {
     },
   },
   icon: {
-    base: "lib:inherit lib:text-gray-500",
+    base: "lib:inline-flex lib:text-gray-500",
     size: {
       xs: "lib:text-xxs",
       sm: "lib:text-xs",

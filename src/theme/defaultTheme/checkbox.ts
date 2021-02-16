@@ -7,8 +7,8 @@ export const checkbox = {
     base:
       " lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:rounded lib:select-none lib:transition-all ",
     size: {
-      xs: "lib:w-3.5 lib:h-3.5 lib:text-xxs",
-      sm: "lib:w-4 lib:h-4 lib:text-xs",
+      sm: "lib:w-3.5 lib:h-3.5 lib:text-xxs",
+      md: "lib:w-4 lib:h-4 lib:text-xs",
       lg: "lib:w-5 lib:h-5 lib:text-base",
     },
     unchecked: "lib:border-1.5 lib:border-solid lib:border-gray-400",
@@ -18,8 +18,8 @@ export const checkbox = {
   label: {
     base: "lib:ml-2 lib:text-gray-600 lib:select-none",
     size: {
-      xs: " lib:text-xs",
-      sm: "lib:text-sm",
+      sm: " lib:text-xs",
+      md: "lib:text-sm",
       lg: "lib:text-sm",
     },
   },

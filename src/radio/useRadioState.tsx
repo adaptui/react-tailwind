@@ -1,10 +1,10 @@
-import * as React from "react";
 import {
   CompositeState,
   CompositeActions,
   CompositeInitialState,
   useCompositeState,
 } from "reakit";
+import * as React from "react";
 import { useControllableState } from "@renderlesskit/react";
 
 type StateType = string | number | undefined;

@@ -1,11 +1,6 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { Button } from "../../button";
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
 import {
   RadioIcon,
   RadioInput,
@@ -14,14 +9,19 @@ import {
   Radio,
   RadioGroupProps,
 } from "../index";
+import { Button } from "../../button";
 import { WheelIcon } from "../../icons";
+import {
+  storyTemplate,
+  createUnionControl,
+} from "../../../.storybook/storybookUtils";
 import { InfoCircle } from "../../icon/stories/Icon.stories";
 
 export default {
   title: "Radio",
   component: Radio,
   argTypes: {
-    size: createUnionControl(["xs", "sm", "lg"]),
+    size: createUnionControl(["sm", "md", "lg"]),
   },
 } as Meta;
 
@@ -45,7 +45,7 @@ const base = storyTemplate<RadioGroupProps>(
   },
   {
     defaultState: "2",
-    size: "sm",
+    size: "md",
   },
 );
 
@@ -55,15 +55,15 @@ export const States = () => {
   return (
     <RadioGroup defaultState={"2"}>
       <div className="flex flex-col gap-2">
-        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+        <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
           <Radio value="1" />
           Unchecked
         </RadioLabel>
-        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+        <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
           <Radio value="2" />
           Checked
         </RadioLabel>
-        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+        <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
           <Radio value="3" disabled />
           Disabled
         </RadioLabel>
@@ -78,15 +78,15 @@ export const Controlled = () => {
     <>
       <RadioGroup state={state} onStateChange={e => setState(e as string)}>
         <div className="flex flex-col gap-2">
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
             <Radio value="1" />
             Unchecked
           </RadioLabel>
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
             <Radio value="2" />
             Checked
           </RadioLabel>
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
             <Radio value="3" />
             Disabled
           </RadioLabel>
@@ -103,7 +103,7 @@ export const CustomIcon = () => {
     <>
       <RadioGroup state={state} onStateChange={e => setState(e as string)}>
         <div className="flex flex-col gap-2">
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
             <RadioInput value="1" />
             <RadioIcon
               value="1"
@@ -112,7 +112,7 @@ export const CustomIcon = () => {
             />
             Two
           </RadioLabel>
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
+          <RadioLabel className="p-2 rounded-md hover:bg-gray-100">
             <RadioInput value="2" />
             <RadioIcon
               value="2"
