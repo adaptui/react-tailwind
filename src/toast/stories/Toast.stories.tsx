@@ -58,7 +58,7 @@ const base = storyTemplate<any>(
       <ToastTriggers />
     </ToastProvider>
   ),
-  { placement: "bottom-left" },
+  { placement: "bottom-center" },
 );
 
 export const Default = base({});

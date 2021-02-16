@@ -8,12 +8,24 @@ import {
   ToastProvider as RenderlesskitToastProvider,
 } from "@renderlesskit/react";
 
-import { Tag } from "../tag";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { InfoCircleIcon } from "../icons";
 import { ToastWrapper } from "./ToastWrapper";
 import { forwardRefWithAs } from "../utils/types";
+import { Alert, AlertProps } from "../alert";
+
+const createToastType = ({ status }: { status: AlertProps["status"] }) => {
+  return (({ hideToast, content, id }) => {
+    return (
+      <Alert
+        status={status}
+        title={typeof content === "string" ? content : ""}
+        closable
+        onClose={() => hideToast(id)}
+      />
+    );
+  }) as ToastProviderProps["toastTypes"][""];
+};
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
@@ -24,32 +36,8 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       {...props}
       toastWrapper={ToastWrapper}
       toastTypes={{
-        success: ({ hideToast, content, id }) => {
-          return (
-            <Tag
-              className="mb-2"
-              prefix={<InfoCircleIcon />}
-              variant="primary"
-              closable
-              onClose={() => hideToast(id)}
-            >
-              {content}
-            </Tag>
-          );
-        },
-        error: ({ hideToast, content, id }) => {
-          return (
-            <Tag
-              className="mb-2"
-              prefix={<InfoCircleIcon />}
-              variant="secondary"
-              closable
-              onClose={() => hideToast(id)}
-            >
-              {content}
-            </Tag>
-          );
-        },
+        success: createToastType({ status: "success" }),
+        error: createToastType({ status: "error" }),
       }}
     >
       {children}
