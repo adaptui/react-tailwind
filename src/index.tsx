@@ -4,7 +4,6 @@ export * from "./badge";
 export * from "./box";
 export * from "./button";
 export * from "./calendar";
-export * from "./common/Status";
 export * from "./datepicker";
 export * from "./icon";
 export * from "./icons";

@@ -1,9 +1,9 @@
 import React, {
-  ImgHTMLAttributes,
-  useCallback,
-  useEffect,
   useRef,
   useState,
+  useEffect,
+  useCallback,
+  ImgHTMLAttributes,
 } from "react";
 
 import { useSafeLayoutEffect } from "./useSafeLayoutEffect";

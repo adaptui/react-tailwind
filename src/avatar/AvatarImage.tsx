@@ -1,50 +1,32 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { AvatarProps } from ".";
 import { useTheme } from "../theme";
-import { GenericAvatar } from "../icons";
-import { useImage } from "../hooks";
+import { Box, BoxProps } from "../box";
+import { useAvatarContext } from "./Avatar";
+import { forwardRefWithAs } from "../utils/types";
 
-function getInitials(name: string) {
-  const [firstName, lastName] = name.split(" ");
-  return firstName && lastName
-    ? `${firstName.charAt(0)}${lastName.charAt(0)}`
-    : firstName.charAt(0);
-}
+export type AvatarImageProps = BoxProps & {};
 
-export type AvatarImageProps = Pick<
-  AvatarProps,
-  "name" | "src" | "onError" | "fallback"
->;
-
-export const AvatarImage: React.FC<AvatarImageProps> = ({
-  src,
-  onError,
-  name,
-  fallback = <GenericAvatar />,
-}) => {
-  const status = useImage({ src, onError });
-
-  const hasLoaded = status === "loaded";
-  const showFallback = !src || !hasLoaded;
+export const AvatarImage = forwardRefWithAs<
+  AvatarImageProps,
+  HTMLImageElement,
+  "img"
+>((props, ref) => {
+  const { className, ...rest } = props;
   const theme = useTheme();
-
-  if (showFallback) {
-    return <>{name ? (name ? getInitials?.(name) : null) : fallback}</>;
-  }
+  const { src, name, loading } = useAvatarContext();
 
   return (
-    <img
+    <Box
+      as="img"
+      ref={ref}
       data-testid="testid-avatarimg"
       src={src}
       alt={name}
-      className={cx(theme.avatar.image)}
-      style={{
-        borderRadius: "inherit",
-      }}
+      loading={loading}
+      className={cx(theme.avatar.image, className)}
+      {...rest}
     />
   );
-};
-
-export default AvatarImage;
+});
