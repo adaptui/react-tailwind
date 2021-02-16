@@ -18,6 +18,9 @@ const renderlesskitConfig = {
         sans: ["Inter"],
       },
       fontSize: {
+        1: ["0.25rem", { lineHeight: "0.25rem" }],
+        1.5: ["0.375rem", { lineHeight: "0.375rem" }],
+        2: ["0.5rem", { lineHeight: "0.5rem" }],
         xxs: ["0.625rem", { lineHeight: "0.625rem" }],
       },
       spacing: {
@@ -454,6 +457,17 @@ const renderlesskitConfig = {
     require("./tailwindPlugins/utilities"),
     require("./tailwindPlugins/variantPlugin"),
   ],
+  components: {
+    extend: {
+      avatar: {
+        badge: {
+          statuses: {
+            custom: "lib:text-red-500",
+          },
+        },
+      },
+    },
+  },
 };
 
 function arrayMergeFn(destinationArray, sourceArray) {

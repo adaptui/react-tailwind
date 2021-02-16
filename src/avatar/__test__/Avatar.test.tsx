@@ -1,7 +1,7 @@
 import * as React from "react";
 import { screen } from "@testing-library/react";
 
-import { Avatar, AvatarBadge } from "../Avatar";
+import { Avatar } from "../index";
 import { render, testA11y, mockImage } from "../../utils/testUtils";
 
 afterAll(() => {
@@ -17,23 +17,20 @@ describe("<Avatar />", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("should render with AvatarBadge", () => {
-    const { asFragment } = render(
-      <Avatar>
-        <AvatarBadge>*</AvatarBadge>
+  it("should render Avatar renderProps", () => {
+    render(
+      <Avatar name="Anurag hazra">
+        {({ name, getInitials }) => <p>{getInitials!(name)}</p>}
       </Avatar>,
     );
 
-    expect(asFragment()).toMatchSnapshot();
+    expect(screen.getByTestId("testid-avatar_children")).toHaveTextContent(
+      "Ah",
+    );
   });
 
-  it("should render with AvatarBadge & children", () => {
-    const { asFragment } = render(
-      <Avatar>
-        <p>Some Child Element</p>
-        <AvatarBadge>*</AvatarBadge>
-      </Avatar>,
-    );
+  it("should render with AvatarBadge", () => {
+    const { asFragment } = render(<Avatar status="online"></Avatar>);
 
     expect(asFragment()).toMatchSnapshot();
   });
