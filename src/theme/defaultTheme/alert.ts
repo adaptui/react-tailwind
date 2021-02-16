@@ -4,16 +4,21 @@ export const alert = {
   icon:
     "lib:inherit box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5",
   body: {
-    base: "lib:flex lib:text-sm",
+    base: "lib:flex lib:text-sm lib:flex-wrap",
+    desktop: "",
     mobile: "lib:flex-col",
   },
-  title: "lib:text-gray-800 font-medium",
+  title: "lib:text-gray-800 font-medium lib:mr-2",
   description: {
-    base: "lib:text-gray-600 font-light",
-    desktop: "lib:ml-2",
+    base: "lib:text-gray-600",
+    desktop: "",
     mobile: "lib:mt-0.5",
   },
-  actionsWrapper: { base: "lib:ml-auto flex", desktop: "lib:items-center" },
+  actionsWrapper: {
+    base: "lib:ml-auto lib:flex",
+    desktop: "",
+    mobile: "",
+  },
   actionButton: {
     base: "lib:shadow-none",
     desktop: "lib:-my-1.5",

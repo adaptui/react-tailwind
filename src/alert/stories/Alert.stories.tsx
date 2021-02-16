@@ -31,13 +31,22 @@ const base = storyTemplate<AlertProps>(
     return <Alert status={status} {...args} />;
   },
   {
-    actionButtonLabel: "Reach Out",
-    title: "Your browser is outdated.",
     status: "info",
+    title: "Your browser is outdated.",
+    description: "",
+    actionButtonLabel: "",
+    closable: false,
   },
 );
 
 export const Default = base({});
+export const Closable = base({ closable: true });
+export const ActionButtonLabel = base({
+  actionButtonLabel: "Reach Out",
+  closable: true,
+});
 export const WithDescription = base({
   description: "Your experience may be degraded.",
+  actionButtonLabel: "Reach Out",
+  closable: true,
 });

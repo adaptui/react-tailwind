@@ -56,6 +56,20 @@ export type AlertProps = BoxProps &
      * Description of the alert
      */
     description?: string;
+    /**
+     * Is Alert closable?
+     *
+     * @default false
+     */
+    closable?: boolean;
+    /**
+     * If added, Alert will show this icon as closable instead of the default `Close` icon.
+     */
+    closableIcon?: React.ReactElement;
+    /**
+     * Callback to fire when close icon is clicked?
+     */
+    onClose?: (e?: React.MouseEvent) => void;
   };
 
 export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
@@ -65,7 +79,10 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       description,
       actionButtonLabel,
       status = "info",
-      icon = <CloseIcon />,
+      icon,
+      closable,
+      closableIcon = <CloseIcon />,
+      onClose,
       className,
       children,
       ...rest
@@ -91,7 +108,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
             runIfFn(children, { status, styles: theme.alert })
           ) : (
             <>
-              <AlertIcon />
+              <AlertIcon>{icon}</AlertIcon>
               <AlertBody>
                 <AlertTitle>{title}</AlertTitle>
                 {description && (
@@ -103,7 +120,11 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
               </AlertBody>
               <AlertActions>
                 {!isMobile ? Action : null}
-                <AlertCloseButton>{icon}</AlertCloseButton>
+                {closable && (
+                  <AlertCloseButton onClick={onClose}>
+                    {closableIcon}
+                  </AlertCloseButton>
+                )}
               </AlertActions>
             </>
           )}

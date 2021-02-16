@@ -1,7 +1,7 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "..";
+import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
 import { useAlertContext } from "./Alert";
 import { forwardRefWithAs } from "../utils/types";
@@ -19,7 +19,9 @@ export const AlertActions = forwardRefWithAs<
   const theme = useTheme();
   const alertActionsStyles = cx(
     theme.alert.actionsWrapper.base,
-    isMobile ? "" : theme.alert.actionsWrapper.desktop,
+    isMobile
+      ? theme.alert.actionsWrapper.mobile
+      : theme.alert.actionsWrapper.desktop,
     className,
   );
 

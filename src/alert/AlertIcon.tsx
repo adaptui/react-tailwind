@@ -27,7 +27,7 @@ export const AlertIcon = forwardRefWithAs<
   "span"
 >((props, ref) => {
   const { status } = useAlertContext();
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
   const Icon = STATUS_ICONS[status];
 
   const theme = useTheme();
@@ -39,7 +39,7 @@ export const AlertIcon = forwardRefWithAs<
 
   return (
     <Box as="span" ref={ref} className={alertIconBaseStyles} {...rest}>
-      <Icon />
+      {children ? children : <Icon />}
     </Box>
   );
 });
