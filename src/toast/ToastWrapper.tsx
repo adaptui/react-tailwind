@@ -69,9 +69,9 @@ export const ToastWrapper: TToastWrapper = ({
       className={`stack-toast stack-toast-${sortIndex}`}
       style={
         {
-          "--index": sortIndex,
+          "--toast-index": sortIndex,
           ...(sortIndex > 1
-            ? { "--hover-offset-y": `-${hoverOffsetY.current}px` }
+            ? { "--toast-hover-offset-y": `-${hoverOffsetY.current}px` }
             : {}),
         } as React.CSSProperties
       }

@@ -6,7 +6,6 @@ import { ToastController } from "@renderlesskit/react";
 import { useToast } from "../Toast";
 import { ToastProvider } from "../Toast";
 import { Button } from "../../button";
-import { Alert } from "../../alert";
 
 export default {
   title: "Toast",
