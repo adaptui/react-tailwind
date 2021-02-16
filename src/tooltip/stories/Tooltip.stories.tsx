@@ -22,6 +22,6 @@ const base = storyTemplate<TooltipProps>(
 );
 
 export const Default = base({
-  children: <button>Tooltip</button>,
+  children: <Button>Tooltip</Button>,
   title: "Do you know this is a tooltip?",
 });
