@@ -13,7 +13,7 @@ type RadioContextType = {
 const [RadioProvider, useRadioContext] = createContext<RadioContextType>({
   errorMessage: "Radio must be used within RadioProvider",
   name: "RadioContext",
-  strict: true,
+  strict: false,
 });
 
 export { RadioProvider, useRadioContext };

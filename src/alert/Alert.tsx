@@ -81,7 +81,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       status = "info",
       icon,
       closable,
-      closableIcon = <CloseIcon />,
+      closableIcon,
       onClose,
       className,
       children,

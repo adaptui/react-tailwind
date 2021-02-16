@@ -19,7 +19,7 @@ const [
   useSliderContext,
 ] = createContext<SliderStateReturn>({
   name: "SliderState",
-  strict: true,
+  strict: false,
 });
 
 const [SliderPropsContext, useSliderPropsContext] = createContext<

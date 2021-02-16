@@ -95,7 +95,7 @@ export const CustomLoadingElement = base({
 const iconButtonBase = storyTemplate<IconButtonProps>(
   args => {
     return (
-      <IconButton aria-label="picture" {...args}>
+      <IconButton as="img" src="" aria-label="picture" {...args}>
         <SearchIcon />
       </IconButton>
     );

@@ -41,7 +41,7 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
       throw new Error(errorMessage);
     }
 
-    return context || {};
+    return context;
   }
 
   return [
