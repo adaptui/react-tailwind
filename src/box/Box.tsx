@@ -11,4 +11,6 @@ export const Box = forwardRefWithAs<BoxProps, HTMLDivElement, "div">(
   },
 );
 
+Box.displayName = "Box";
+
 export default Box;
