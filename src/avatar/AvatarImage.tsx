@@ -4,7 +4,7 @@ import { cx } from "@renderlesskit/react";
 import { AvatarProps } from ".";
 import { useTheme } from "../theme";
 import { GenericAvatar } from "../icons";
-import { useImage } from "../utils/useImage";
+import { useImage } from "../hooks";
 
 function getInitials(name: string) {
   const [firstName, lastName] = name.split(" ");

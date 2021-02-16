@@ -1,16 +1,15 @@
 import React from "react";
-
-import { useTheme } from "..";
-import { Box, BoxProps } from "../box";
 import { cx } from "@renderlesskit/react";
-import { forwardRefWithAs } from "../utils/types";
 
 import {
   InfoCircleIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from "../icons";
+import { useTheme } from "../index";
+import { Box, BoxProps } from "../box";
 import { useAlertContext } from "./Alert";
+import { forwardRefWithAs } from "../utils/types";
 
 const STATUS_ICONS = {
   neutral: InfoCircleIcon,
@@ -28,19 +27,19 @@ export const AlertIcon = forwardRefWithAs<
   "span"
 >((props, ref) => {
   const { status } = useAlertContext();
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
   const Icon = STATUS_ICONS[status];
+
   const theme = useTheme();
-  const alertIconBaseStyles = cx(theme.alert.icon.base, className);
-  const alertIconIconsStyles = cx(
-    theme.alert.icon.icons,
+  const alertIconBaseStyles = cx(
+    theme.alert.icon,
     theme.alert.status[status].icon,
     className,
   );
 
   return (
     <Box as="span" ref={ref} className={alertIconBaseStyles} {...rest}>
-      <Icon className={alertIconIconsStyles} />
+      {children ? children : <Icon />}
     </Box>
   );
 });

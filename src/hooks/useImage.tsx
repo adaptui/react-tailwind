@@ -6,11 +6,7 @@ import React, {
   useState,
 } from "react";
 
-const isBrowser = typeof window !== "undefined";
-
-export const useSafeLayoutEffect = isBrowser
-  ? React.useLayoutEffect
-  : React.useEffect;
+import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
 
 export interface UseImageProps {
   /**

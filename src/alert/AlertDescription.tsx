@@ -1,8 +1,9 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "..";
+import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
+import { useAlertContext } from "./Alert";
 import { forwardRefWithAs } from "../utils/types";
 
 export type AlertDescriptionProps = BoxProps & {};
@@ -13,8 +14,14 @@ export const AlertDescription = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
+  const { isMobile } = useAlertContext();
+
   const theme = useTheme();
-  const alertDescriptionStyles = cx(theme.alert.description, className);
+  const alertDescriptionStyles = cx(
+    theme.alert.description.base,
+    isMobile ? theme.alert.description.mobile : theme.alert.description.desktop,
+    className,
+  );
 
   return <Box className={alertDescriptionStyles} ref={ref} {...rest} />;
 });

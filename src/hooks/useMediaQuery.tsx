@@ -1,15 +1,7 @@
 import * as React from "react";
 
-export function canUseDOM() {
-  return !!(
-    typeof window !== "undefined" &&
-    window.document &&
-    window.document.createElement
-  );
-}
-
-export const isBrowser = canUseDOM();
-const useSafeLayoutEffect = isBrowser ? React.useLayoutEffect : React.useEffect;
+import { isBrowser } from "../utils";
+import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
 
 /**
  * React hook that tracks state of a CSS media query
@@ -39,14 +31,14 @@ export function useMediaQuery(query: string | string[]): boolean[] {
           ),
         );
 
-      mediaQuery.addListener(listener);
+      mediaQuery.addEventListener("change", listener);
 
       return listener;
     });
 
     return () => {
       mediaQueryList.forEach((mediaQuery, index) => {
-        mediaQuery.removeListener(listenerList[index]);
+        mediaQuery.removeEventListener("change", listenerList[index]);
       });
     };
   }, [query]);
