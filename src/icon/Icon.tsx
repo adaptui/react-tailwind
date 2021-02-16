@@ -73,4 +73,6 @@ export const Icon = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
   },
 );
 
+Icon.displayName = "Icon";
+
 export default Icon;
