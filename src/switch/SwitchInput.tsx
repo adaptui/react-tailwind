@@ -35,3 +35,5 @@ export const SwitchInput = forwardRefWithAs<
     />
   );
 });
+
+SwitchInput.displayName = "SwitchInput";

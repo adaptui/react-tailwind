@@ -91,3 +91,5 @@ export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(
     );
   },
 );
+
+Checkbox.displayName = "Checkbox";

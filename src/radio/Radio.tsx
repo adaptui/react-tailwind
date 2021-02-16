@@ -53,3 +53,5 @@ export const Radio = forwardRefWithAs<
     </>
   );
 });
+
+RadioInput.displayName = "RadioInput";

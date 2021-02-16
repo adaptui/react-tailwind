@@ -69,4 +69,6 @@ export const Progress = forwardRefWithAs<
   );
 });
 
+Progress.displayName = "Progress";
+
 export default Progress;

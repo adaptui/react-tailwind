@@ -72,4 +72,6 @@ export const CircularProgress = forwardRefWithAs<
   );
 });
 
+CircularProgress.displayName = "CircularProgress";
+
 export default CircularProgress;

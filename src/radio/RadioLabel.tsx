@@ -31,3 +31,5 @@ export const RadioLabel = forwardRefWithAs<
 
   return <Box as="label" ref={ref} className={radioStyles} {...rest} />;
 });
+
+RadioLabel.displayName = "RadioLabel";

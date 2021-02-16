@@ -59,6 +59,8 @@ export const AvatarBadge = forwardRefWithAs<
   );
 });
 
+AvatarBadge.displayName = "AvatarBadge";
+
 export type TypingAnimationProps = BoxProps & {
   circleStyle?: string;
 };
@@ -99,3 +101,5 @@ export const TypingAnimation = forwardRefWithAs<
     </Box>
   );
 });
+
+TypingAnimation.displayName = "TypingAnimation";

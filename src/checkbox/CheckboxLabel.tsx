@@ -25,3 +25,5 @@ export const CheckboxLabel = forwardRefWithAs<
 
   return <Box as="label" ref={ref} className={checkboxLabelStyles} {...rest} />;
 });
+
+CheckboxLabel.displayName = "CheckboxLabel";

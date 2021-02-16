@@ -80,3 +80,5 @@ export const SliderThumb = forwardRefWithAs<
     </>
   );
 });
+
+SliderThumb.displayName = "SliderThumb";

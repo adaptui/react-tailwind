@@ -29,3 +29,5 @@ export const ProgressTrack = forwardRefWithAs<
     />
   );
 });
+
+ProgressTrack.displayName = "ProgressTrack";

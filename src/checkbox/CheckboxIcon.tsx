@@ -53,3 +53,5 @@ export const CheckboxIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+CheckboxIcon.displayName = "CheckboxIcon";

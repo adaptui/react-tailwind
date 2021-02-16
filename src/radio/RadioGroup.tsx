@@ -38,3 +38,5 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     </RadioProvider>
   );
 };
+
+RadioGroup.displayName = "RadioGroup";

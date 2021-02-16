@@ -85,3 +85,5 @@ export const Switch = forwardRefWithAs<
     </SwitchProvider>
   );
 });
+
+Switch.displayName = "Switch";

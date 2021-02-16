@@ -19,3 +19,5 @@ export const SwitchLabel = forwardRefWithAs<
 
   return <Box as="label" ref={ref} className={switchStyles} {...rest} />;
 });
+
+SwitchLabel.displayName = "SwitchLabel";

@@ -34,3 +34,5 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
     return <Box as="span" ref={ref} className={badgeStyles} {...rest} />;
   },
 );
+
+Badge.displayName = "Badge";

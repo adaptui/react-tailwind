@@ -50,3 +50,5 @@ export const SwitchIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+SwitchIcon.displayName = "SwitchIcon";

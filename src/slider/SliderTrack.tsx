@@ -77,3 +77,5 @@ export const SliderTrack = forwardRefWithAs<
     </RenderlessSliderTrack>
   );
 });
+
+SliderTrack.displayName = "SliderTrack";

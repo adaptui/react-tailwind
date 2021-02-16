@@ -68,3 +68,5 @@ export const RadioIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+RadioIcon.displayName = "RadioIcon";

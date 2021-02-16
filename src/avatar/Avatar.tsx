@@ -177,6 +177,8 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
   },
 );
 
+Avatar.displayName = "Avatar";
+
 export function initials(name?: string) {
   if (!name) return;
   const [firstName, lastName] = name.split(" ");

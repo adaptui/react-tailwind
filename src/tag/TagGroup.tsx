@@ -62,4 +62,6 @@ export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
   },
 );
 
+TagGroup.displayName = "TagGroup";
+
 export default TagGroup;

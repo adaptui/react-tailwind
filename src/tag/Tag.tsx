@@ -101,6 +101,8 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
   },
 );
 
+Tag.displayName = "Tag";
+
 export type ClosableElementProps = Pick<TagProps, "size"> & {
   handleClick?: () => void;
 };
@@ -133,3 +135,5 @@ export const ClosableElement = forwardRefWithAs<
     </CompositeItem>
   );
 });
+
+ClosableElement.displayName = "ClosableElement";

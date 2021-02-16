@@ -113,3 +113,5 @@ export const Slider = forwardRefWithAs<
     </SliderPropsContext>
   );
 });
+
+Slider.displayName = "Slider";
