@@ -13,7 +13,7 @@ export default {
   title: "Tooltip",
   component: Tooltip,
   argTypes: {
-    size: createUnionControl(["xs", "sm", "md"]),
+    size: createUnionControl(["xs", "sm", "lg"]),
     variant: createUnionControl(["primary", "danger", "ghost"]),
     placement: createUnionControl(["left", "right", "top", "bottom", "auto"]),
   },
@@ -22,13 +22,10 @@ export default {
 const base = storyTemplate<TooltipProps>(
   args => (
     <div
+      className="flex items-center justify-center m-auto"
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         width: "90vw",
         height: "90vh",
-        margin: "auto",
       }}
     >
       <Tooltip {...args}>{args.children}</Tooltip>

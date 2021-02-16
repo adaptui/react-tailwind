@@ -32,10 +32,6 @@ export type TooltipProps = TooltipInitialState & {
    */
   variant?: keyof Renderlesskit.GetThemeValue<"tooltip", "variant">;
   /**
-   * size of the arrow
-   */
-  arrowSize?: number;
-  /**
    * prefix icon
    */
   icon?: React.ReactNode;
@@ -46,7 +42,6 @@ export const Tooltip = ({
   children,
   size = "sm",
   variant = "primary",
-  arrowSize = 20,
   ...props
 }: TooltipProps) => {
   const tooltip = useTooltipState({ ...props });

@@ -1,4 +1,3 @@
-// styles are same as Tag
 export const tooltip = {
   base:
     "lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none",
@@ -6,7 +5,7 @@ export const tooltip = {
     base: "lib:fill-current",
     variant: {
       primary: "lib:text-gray-800",
-      destroy: "lib:text-red-600",
+      danger: "lib:text-red-600",
       ghost: "lib:text-white",
     },
   },
@@ -20,7 +19,7 @@ export const tooltip = {
   },
   variant: {
     primary: "lib:bg-gray-800 lib:text-white rounded-md",
-    destroy: "lib:bg-red-600 lib:text-white rounded-md",
+    danger: "lib:bg-red-600 lib:text-white rounded-md",
     ghost: "lib:text-gray-800 lib:bg-white shadow-md rounded-md",
   },
   icon: {
