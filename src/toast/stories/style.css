@@ -3,16 +3,11 @@
 .toast__container {
   position: fixed;
   z-index: 5000;
-  height: 0;
   transition: all 0.4s ease;
   height: 160px;
   max-height: 160px;
   width: 300px;
-  overflow: hidden;
-}
-
-.toast__container:hover {
-  bottom: calc(var(--safe-area-gap, 0px) + 20px);
+  bottom: calc(var(--safe-area-gap, 0px) + 5px) !important;
 }
 
 .toast__container:hover > .stack-toast {

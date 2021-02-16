@@ -37,6 +37,7 @@ export const ToastWrapper: TToastWrapper = ({
   index,
   isVisible,
 }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
   const { toasts } = useToast();
   const totalToasts = Object.values(toasts).length;
 
@@ -48,23 +49,29 @@ export const ToastWrapper: TToastWrapper = ({
     sortIndex = 4;
   }
 
-  let hoverOffsetY = 0;
-  // TODO: Get dynamic height for each toast
-  const heights = new Array(3).fill(25);
-  if (sortIndex > 1) {
-    hoverOffsetY = heights
+  const hoverOffsetY = React.useRef(0);
+
+  const toastContainer = document.querySelector(".toast__container");
+  if (toastContainer) {
+    const heights = Array.from(toastContainer.children)
+      .reverse()
+      .slice(0, 4)
+      .map(e => e.getBoundingClientRect().height);
+
+    hoverOffsetY.current = heights
       .slice(0, sortIndex - 1)
       .reduce((res, next) => (res += next), 0);
   }
 
   return (
     <div
+      ref={ref}
       className={`stack-toast stack-toast-${sortIndex}`}
       style={
         {
           "--index": sortIndex,
           ...(sortIndex > 1
-            ? { "--hover-offset-y": `-${hoverOffsetY}px` }
+            ? { "--hover-offset-y": `-${hoverOffsetY.current}px` }
             : {}),
         } as React.CSSProperties
       }
