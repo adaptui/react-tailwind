@@ -14,19 +14,14 @@ import { ToastWrapper } from "./ToastWrapper";
 import { forwardRefWithAs } from "../utils/types";
 import { Alert, AlertProps } from "../alert";
 
-const createToastType = ({
-  status,
-  desc,
-}: {
-  status: AlertProps["status"];
-  desc: string;
-}) => {
+const createToastType = ({ status }: { status: AlertProps["status"] }) => {
   return (({ hideToast, content, id }) => {
     return (
       <Alert
-        description={desc}
+        description={content.description}
         status={status}
-        title={typeof content === "string" ? content : ""}
+        title={content.title}
+        actionButtonLabel={content.buttonLabel}
         closable
         onClose={() => hideToast(id)}
       />
@@ -45,9 +40,9 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
       toastTypes={{
         success: createToastType({
           status: "success",
-          desc: "This is a description",
         }),
-        error: createToastType({ status: "error", desc: "" }),
+        error: createToastType({ status: "error" }),
+        info: createToastType({ status: "info" }),
       }}
     >
       {children}

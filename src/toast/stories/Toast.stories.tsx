@@ -6,6 +6,7 @@ import { ToastController } from "@renderlesskit/react";
 import { useToast } from "../Toast";
 import { ToastProvider } from "../Toast";
 import { Button } from "../../button";
+import { Alert } from "../../alert";
 
 export default {
   title: "Toast",
@@ -31,7 +32,10 @@ const ToastTriggers = () => {
         onClick={() => {
           showToast({
             type: "success",
-            content: `Figma saves your work ${Math.random().toFixed(2)}`,
+            content: {
+              title: `Figma saves your work ${Math.random().toFixed(2)}`,
+              description: "This is description",
+            },
           });
         }}
       >
@@ -42,7 +46,11 @@ const ToastTriggers = () => {
         onClick={() => {
           showToast({
             type: "error",
-            content: `${Math.random().toFixed(2)} emails archived`,
+            content: {
+              buttonLabel: "Reach out",
+              title: `This is an error ${Math.random().toFixed(2)}`,
+              description: "Woops! Something went wrong",
+            },
           });
         }}
       >
