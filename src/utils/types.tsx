@@ -37,7 +37,7 @@ export function forwardRefWithAs<
   return (React.forwardRef(component) as unknown) as ComponentWithAs<
     Props,
     DefaultType
-  >;
+  > & { displayName?: string };
 }
 
 export type AnyString = string & { ignore?: any };

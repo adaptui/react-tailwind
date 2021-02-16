@@ -17,3 +17,5 @@ export const CloseButton = forwardRefWithAs<
     </IconButton>
   );
 });
+
+CloseButton.displayName = "CloseButton";

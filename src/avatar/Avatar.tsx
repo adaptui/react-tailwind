@@ -8,7 +8,7 @@ import { AvatarName } from "./AvatarName";
 import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
 import { AvatarBadge } from "./AvatarBadge";
-import { useImage } from "../utils/useImage";
+import { useImage } from "../hooks/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";

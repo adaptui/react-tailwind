@@ -5,7 +5,8 @@ import React, {
   useCallback,
   ImgHTMLAttributes,
 } from "react";
-import { useSafeLayoutEffect } from ".";
+
+import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
 
 export interface UseImageProps {
   /**

@@ -76,8 +76,13 @@ export function getValidChildren(children: React.ReactNode) {
   ) as React.ReactElement[];
 }
 
-export const isBrowser = typeof window !== "undefined";
+// SSR check
+export function canUseDOM() {
+  return !!(
+    typeof window !== "undefined" &&
+    window.document &&
+    window.document.createElement
+  );
+}
 
-export const useSafeLayoutEffect = isBrowser
-  ? React.useLayoutEffect
-  : React.useEffect;
+export const isBrowser = canUseDOM();
