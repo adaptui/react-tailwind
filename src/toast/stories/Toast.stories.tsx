@@ -1,4 +1,3 @@
-import "./style.css";
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { storyTemplate } from "../../../.storybook/storybookUtils";

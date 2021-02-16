@@ -14,7 +14,8 @@
   transform: translate3d(
     var(--toast-x-offset),
     calc(
-      var(--hover-offset-y) - var(--toast-stack-gap) * (var(--toast-index) - 1)
+      var(--toast-hover-offset-y) - var(--toast-stack-gap) *
+        (var(--toast-index) - 1)
     ),
     0
   );

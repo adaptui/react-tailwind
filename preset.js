@@ -59,6 +59,14 @@ const renderlesskitConfig = {
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
       },
       keyframes: {
+        toastFadeIn: {
+          "0%": { opacity: 0.5, transform: "translateY(50px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        toastFadeOut: {
+          "0%": { opacity: 1, transform: "translateY(0)" },
+          "100%": { opacity: 0.5, transform: "translateY(50px)" },
+        },
         progress: {
           "0%": { left: "-40%" },
           "100%": { left: "100%" },
