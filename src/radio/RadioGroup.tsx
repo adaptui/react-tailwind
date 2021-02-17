@@ -1,42 +1,83 @@
 import React from "react";
-import { RadioInitialState, RadioStateReturn } from "reakit";
+import { Composite } from "reakit";
 
+import {
+  useRadioState,
+  RadioInitialState,
+  RadioStateReturn,
+} from "./RadioState";
 import { createContext } from "../utils";
-import { RadioCommonProps } from "./Radio";
-import { useRadioState } from "./useRadioState";
+import { forwardRefWithAs } from "../utils/types";
 
-type RadioContextType = {
-  radioState?: RadioStateReturn;
-  radioSize?: RadioCommonProps["size"];
+export type RadioGroupContext = RadioStateReturn & {
+  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
 };
 
-const [RadioProvider, useRadioContext] = createContext<RadioContextType>({
+const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
   errorMessage: "Radio must be used within RadioProvider",
-  name: "RadioContext",
+  name: "RadioGroup",
   strict: false,
 });
 
-export { RadioProvider, useRadioContext };
+export { useRadioGroup };
 
 export type RadioGroupProps = RadioInitialState &
-  Pick<RadioCommonProps, "size"> & {
-    onStateChange?: (state: RadioCommonProps["value"]) => void;
-    state?: RadioCommonProps["value"];
-    defaultState?: RadioCommonProps["value"];
-  };
+  Pick<RadioGroupContext, "size">;
 
-export const RadioGroup: React.FC<RadioGroupProps> = ({
-  children,
-  size = "md",
-  ...props
-}) => {
-  const radioState = useRadioState(props);
+export const RadioGroup = forwardRefWithAs<
+  RadioGroupProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  // Extract InitialState & give it to the Radio State
+  // Extracting so they don't end up in the DOM
+  const {
+    state: initialState,
+    defaultState,
+    onStateChange,
+    unstable_virtual,
+    rtl,
+    orientation,
+    currentId,
+    wrap,
+    loop,
+    shift,
+    unstable_includesBaseElement,
+    baseId,
+    ...rest
+  } = props;
+  // Composite doesn't remove the `state` & `setState` from the DOM
+  // `state` & `setState` is not needed by the composite
+  const { state, setState, ...composite } = useRadioState({
+    state: initialState,
+    defaultState,
+    onStateChange,
+    unstable_virtual,
+    rtl,
+    orientation,
+    currentId,
+    wrap,
+    loop,
+    shift,
+    unstable_includesBaseElement,
+    baseId,
+  });
+
+  const { size, children, ...last } = rest;
 
   return (
-    <RadioProvider value={{ radioState: radioState, radioSize: size }}>
-      {children}
+    <RadioProvider value={{ state, setState, ...composite, size }}>
+      <Composite
+        ref={ref}
+        role="radiogroup"
+        aria-label="Radio Group"
+        {...composite}
+        {...last}
+      >
+        {children}
+      </Composite>
     </RadioProvider>
   );
-};
+});
 
 RadioGroup.displayName = "RadioGroup";

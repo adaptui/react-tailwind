@@ -1,59 +1,63 @@
-import {
-  RadioHTMLProps,
-  Radio as ReakitRadio,
-  RadioProps as ReakitRadioProps,
-} from "reakit";
 import React from "react";
-import { cx } from "@renderlesskit/react";
+import { RadioProps as ReakitRadioProps } from "reakit";
 
-import { useTheme } from "../theme";
+import { BoxProps } from "../box";
 import { RadioIcon } from "./RadioIcon";
-import { useRadioContext } from "./RadioGroup";
+import { RadioInput } from "./RadioInput";
+import { RadioLabel } from "./RadioLabel";
+import { useRadioGroup } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
+import { createContext, runIfFn } from "../utils";
 
-export type RadioCommonProps = Partial<
-  Pick<ReakitRadioProps, "value" | "disabled">
-> & {
-  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
-};
+export type RadioContext = Pick<
+  RadioProps,
+  "value" | "disabled" | "inputProps" | "iconProps"
+>;
 
-export const RadioInput: React.FC<RadioHTMLProps & RadioCommonProps> = ({
-  className,
-  ...rest
-}) => {
-  const theme = useTheme();
-  const { radioState } = useRadioContext();
-
-  const radioStyles = cx(theme.radio.input, className);
-
-  return <ReakitRadio className={radioStyles} {...radioState} {...rest} />;
-};
-
-RadioInput.displayName = "RadioInput";
-
-export const Radio = forwardRefWithAs<
-  RadioHTMLProps &
-    RadioCommonProps & {
-      checkedIcon?: React.ReactNode;
-      uncheckedIcon?: React.ReactNode;
-      disabledIcon?: React.ReactNode;
-    },
-  HTMLInputElement,
-  "input"
->((props, ref) => {
-  const { checkedIcon, uncheckedIcon, disabledIcon } = props;
-  return (
-    <>
-      <RadioInput ref={ref} {...props} />
-      <RadioIcon
-        value={props.value}
-        disabled={props.disabled}
-        checkedIcon={checkedIcon}
-        uncheckedIcon={uncheckedIcon}
-        disabledIcon={disabledIcon}
-      />
-    </>
-  );
+const [RadioProvider, useRadioContext] = createContext<RadioContext>({
+  errorMessage: "Radio must be used within RadioProvider",
+  name: "Radio",
+  strict: false,
 });
+
+export { useRadioContext };
+
+export type RadioProps = BoxProps & {
+  value: string | number;
+  disabled?: boolean;
+  inputProps?: Omit<ReakitRadioProps, "value" | "disabled">;
+  iconProps?: {
+    checkedIcon?: React.ReactNode;
+    uncheckedIcon?: React.ReactNode;
+    disabledIcon?: React.ReactNode;
+  };
+};
+
+export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
+  (props, ref) => {
+    const { value, disabled, inputProps, iconProps, children, ...rest } = props;
+    const { size, ...state } = useRadioGroup();
+
+    return (
+      <RadioProvider value={{ value, disabled, inputProps, iconProps }}>
+        {typeof children !== "string" ? (
+          runIfFn(children, {
+            value,
+            disabled,
+            inputProps,
+            iconProps,
+            ...state,
+          })
+        ) : (
+          <RadioLabel ref={ref} {...rest}>
+            <RadioInput />
+            <RadioIcon />
+            {children}
+          </RadioLabel>
+        )}
+      </RadioProvider>
+    );
+  },
+);
 
 Radio.displayName = "Radio";
