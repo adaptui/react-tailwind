@@ -4,7 +4,8 @@ import { storyTemplate } from "../../../.storybook/storybookUtils";
 import { ToastController } from "@renderlesskit/react";
 import { useToast } from "../Toast";
 import { ToastProvider } from "../Toast";
-import { Button } from "../../button";
+import { Button, CloseButton } from "../../button";
+import { AlertCloseButton } from "../..";
 
 export default {
   title: "Toast",
@@ -45,9 +46,12 @@ const ToastTriggers = () => {
           showToast({
             type: "error",
             content: {
-              buttonLabel: "Reach out",
               title: `This is an error ${Math.random().toFixed(2)}`,
               description: "Woops! Something went wrong",
+              actions: [
+                { label: "Reach Out", handler: () => alert(1) },
+                { label: <AlertCloseButton onClick={() => alert(2)} /> },
+              ],
             },
           });
         }}

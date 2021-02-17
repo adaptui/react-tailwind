@@ -31,6 +31,7 @@ export { AlertProvider, useAlertContext };
 
 type AlertRenderProps = RenderProp<{
   status: AlertStatus;
+  isMobile: boolean;
   styles: Renderlesskit.Theme["components"]["alert"];
 }>;
 
@@ -105,7 +106,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       <AlertProvider value={context}>
         <Box role="alert" className={alertStyles} ref={ref} {...rest}>
           {children ? (
-            runIfFn(children, { status, styles: theme.alert })
+            runIfFn(children, { isMobile, status, styles: theme.alert })
           ) : (
             <>
               <AlertIcon>{icon}</AlertIcon>
