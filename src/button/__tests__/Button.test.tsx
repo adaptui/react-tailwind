@@ -15,7 +15,10 @@ describe("Testing Button", () => {
     render(<Button>Hello World</Button>);
 
     const screenshot = await generateImage();
-    expect(screenshot).toMatchImageSnapshot();
+    expect(screenshot).toMatchImageSnapshot({
+      failureThreshold: 0.1,
+      failureThresholdType: "percent",
+    });
   });
 
   it("should render properly", () => {
