@@ -77,7 +77,7 @@ export const Switch = forwardRefWithAs<
       {children ? (
         runIfFn(children, state)
       ) : (
-        <SwitchLabel ref={ref} {...rest}>
+        <SwitchLabel ref={ref}>
           <SwitchInput />
           <SwitchIcon />
         </SwitchLabel>

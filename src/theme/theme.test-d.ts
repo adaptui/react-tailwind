@@ -20,9 +20,10 @@ expectType<Renderlesskit.GetThemeValue<"button", "size">>({
   xl: "",
 });
 expectType<Renderlesskit.GetThemeValue<"switch", "icon", "wrapper">["size"]>({
-  lg: "",
   sm: "",
-  xs: "",
+  md: "",
+  lg: "",
+  xl: "",
 });
 
 // user extended theme
