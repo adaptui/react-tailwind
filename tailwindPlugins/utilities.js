@@ -8,26 +8,25 @@ const utilities = plugin(function ({ addUtilities }) {
       transition: "all 0.4s ease",
       height: "160px",
       maxHeight: "160px",
-      width: "300px",
+      width: "420px",
       bottom: "calc(var(--toast-safe-area-gap, 0px) + 5px) !important",
     },
-    ".toast__container:hover > .stack-toast": {
-      transform: `
-        translate3d(
-          var(--toast-x-offset),
-          calc(
-            var(--toast-hover-offset-y) - var(--toast-stack-gap) *
-              (var(--toast-index) - 1)
-          ),
-          0
-        )
-      `,
+    ".toast__container:hover .stack-toast,\n.stack-toast:hover": {
+      transform: `translate3d(
+        var(--toast-x-offset),
+        calc(
+          var(--toast-hover-offset-y) - var(--toast-stack-gap) *
+            (var(--toast-index) - 1)
+        ),
+        0
+      )`,
     },
     ".stack-toast": {
       "--toast-x-offset": "-50%",
       "--toast-stack-gap": "20px",
       "--toast-safe-area-gap": "env(safe-area-inset-bottom)",
       position: "absolute",
+      maxWidth: "100%",
       width: "max-content",
       bottom: "0",
       left: "50%",
@@ -45,12 +44,15 @@ const utilities = plugin(function ({ addUtilities }) {
       scale(calc(1 - 0.05 * var(--toast-i)))`,
       opacity: 1,
     },
+    ".stack-toast:nth-last-child(n + 4)": {
+      pointerEvents: "none",
+      opacity: "0 !important",
+    },
     ".stack-toast-1": {
       transition: "all 0.4s ease",
       transform: "translate3d(var(--toast-x-offset), 0, 0) !important",
       opacity: "1 !important",
     },
-    ".stack-toast-4": { pointerEvents: "none", opacity: "0 !important" },
   };
 
   const utilities = {

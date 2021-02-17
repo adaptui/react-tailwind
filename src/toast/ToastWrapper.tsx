@@ -43,12 +43,6 @@ export const ToastWrapper: TToastWrapper = ({
 
   let sortIndex = totalToasts - index;
 
-  // Hide the toast if count is more than 3
-  // stack-toast-4 has opacity 0
-  if (sortIndex > 3) {
-    sortIndex = 4;
-  }
-
   const hoverOffsetY = React.useRef(0);
 
   const toastContainer = document.querySelector(".toast__container");
