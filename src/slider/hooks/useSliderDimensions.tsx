@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useSafeLayoutEffect } from "../../hooks/useSafeLayoutEffect";
+
 export const useSliderDimensions = () => {
   const thumbRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
@@ -7,7 +9,7 @@ export const useSliderDimensions = () => {
   const trackHeight = React.useRef({ height: 0 });
   const padding = thumbSize.current.height / 2 - trackHeight.current.height / 2;
 
-  React.useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     if (thumbRef.current) {
       const dimension = thumbRef?.current?.getBoundingClientRect();
       thumbSize.current.width = dimension.width;
@@ -15,7 +17,7 @@ export const useSliderDimensions = () => {
     }
   }, [thumbRef]);
 
-  React.useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     if (trackRef.current) {
       const dimension = trackRef?.current?.getBoundingClientRect();
       trackHeight.current.height = dimension.height;

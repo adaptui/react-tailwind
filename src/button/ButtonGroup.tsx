@@ -62,4 +62,6 @@ export const ButtonGroup = forwardRefWithAs<
   );
 });
 
+ButtonGroup.displayName = "ButtonGroup";
+
 export default ButtonGroup;

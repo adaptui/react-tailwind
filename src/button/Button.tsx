@@ -108,3 +108,5 @@ export const Button = forwardRefWithAs<
 
   return <ButtonComp />;
 });
+
+Button.displayName = "Button";

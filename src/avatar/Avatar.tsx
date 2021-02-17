@@ -2,10 +2,23 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
+import { GenericAvatar } from "../icons";
+import { AvatarName } from "./AvatarName";
+import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
+import { AvatarBadge } from "./AvatarBadge";
+import { useImage } from "../hooks/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
+import { createContext, runIfFn } from "../utils";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
-export type AvatarProps = {
+export type AvatarInitialProps = {
+  /**
+   * How large should avatar be?
+   * @default "md"
+   */
+  size?: keyof Renderlesskit.GetThemeValue<"avatar", "size">;
   /**
    * URL for the avatar image
    */
@@ -15,87 +28,174 @@ export type AvatarProps = {
    */
   name?: string;
   /**
-   * How large should avatar be?
+   * Defines loading strategy
    */
-  size?: keyof Renderlesskit.GetThemeValue<"avatar", "size">;
+  loading?: "eager" | "lazy";
   /**
-   * Custom fallback
+   * Function to get the initials to display
    */
-  fallback?: React.ReactNode;
+  getInitials?: (name?: string) => string | undefined;
   /**
    * Function called when image failed to load
    */
-  onError?: (e: any) => void;
-  className?: string;
+  onError?: () => void;
+  /**
+   * The default avatar used as fallback when `name`, and `src`
+   * is not specified.
+   * @type React.ReactElement
+   */
+  fallback?: React.ReactNode;
+  /**
+   * If `true`, the `Avatar` will show a `border` around it.
+   *
+   * Best for a group of avatars
+   */
+  showBorder?: boolean;
+  /**
+   * Color of the `border` to match it's parent background.
+   */
+  borderColor?: string;
+  /**
+   * Shows AvatarBadge with the given type
+   */
+  status?: keyof Renderlesskit.GetThemeValue<"avatar", "badge", "statuses">;
+  /**
+   * Position for the AvatarBadge
+   * @default "bottom-right"
+   */
+  position?: keyof Renderlesskit.GetThemeValue<"avatar", "badge", "position">;
 };
 
-export const Avatar: React.FC<AvatarProps> = ({
-  name,
-  src,
-  size,
-  onError,
-  className,
-  fallback,
-  children,
-  ...rest
-}) => {
-  const group = useAvatarGroup();
-  const _size = size || group?.size || "md";
-  const theme = useTheme();
-  const avatarStyles = cx(
-    theme.avatar.base,
-    theme.avatar.size[_size],
-    className,
-  );
+export type AvatarContext = AvatarInitialProps & { showFallback: boolean };
 
-  const _children = React.Children.toArray(children);
+const [AvatarProvider, useAvatarContext] = createContext<AvatarContext>({
+  name: "AvatarContext",
+  strict: false,
+});
 
-  const badges = _children.filter(child => {
-    return (child as JSX.Element).type === AvatarBadge;
-  });
-  const elements = _children.filter(child => {
-    return (child as JSX.Element).type !== AvatarBadge;
-  });
+export { useAvatarContext };
 
+type AvatarRenderProps = RenderProp<AvatarContext>;
+
+export type AvatarProps = Omit<BoxProps, "onError"> &
+  AvatarInitialProps &
+  AvatarRenderProps;
+
+export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
+  (props, ref) => {
+    const {
+      name,
+      src,
+      size,
+      onError,
+      fallback,
+      getInitials = initials,
+      loading,
+      status,
+      position,
+      showBorder,
+      borderColor,
+      children,
+      className,
+      ...rest
+    } = props;
+
+    const group = useAvatarGroup();
+    const _size = size || group?.size || "md";
+    const _showBorder = showBorder || group?.showBorder || false;
+    const _borderColor = borderColor || group?.borderColor || false;
+    const theme = useTheme();
+    const avatarStyles = cx(
+      theme.avatar.base,
+      theme.avatar.size[_size],
+      _showBorder ? theme.avatar.border.width[_size] : "",
+      _showBorder && _borderColor ? _borderColor : theme.avatar.border.color,
+      className,
+    );
+
+    /**
+     * Use the image hook to only show the image when it has loaded
+     */
+    const imageStatus = useImage({ src, onError });
+    const hasLoaded = imageStatus === "loaded";
+
+    /**
+     * Fallback avatar applies under 2 conditions:
+     * - If `src` was passed and the image has not loaded or failed to load
+     * - If `src` wasn't passed
+     *
+     * In this case, we'll show either the name avatar or default avatar
+     */
+    const showFallback = !src || !hasLoaded;
+
+    const context: AvatarContext = React.useMemo(
+      () => ({
+        size: _size,
+        src,
+        name,
+        loading,
+        getInitials,
+        onError,
+        fallback,
+        status,
+        position,
+        showFallback,
+      }),
+      [
+        _size,
+        src,
+        name,
+        loading,
+        getInitials,
+        onError,
+        fallback,
+        status,
+        position,
+        showFallback,
+      ],
+    );
+
+    return (
+      <AvatarProvider value={context}>
+        <Box
+          ref={ref}
+          className={avatarStyles}
+          {...rest}
+          data-testid="testid-avatar_children"
+        >
+          {children ? (
+            runIfFn(children, { ...context, getInitials })
+          ) : (
+            <>
+              <AvatarContents />
+              {status ? <AvatarBadge /> : null}
+            </>
+          )}
+        </Box>
+      </AvatarProvider>
+    );
+  },
+);
+
+export function initials(name?: string) {
+  if (!name) return;
+  const [firstName, lastName] = name.split(" ");
+  return firstName && lastName
+    ? `${firstName.charAt(0)}${lastName.charAt(0)}`
+    : firstName.charAt(0);
+}
+
+export const AvatarContents = () => {
+  const { showFallback, name, fallback } = useAvatarContext();
   return (
-    <div aria-label={name} {...rest} className={avatarStyles}>
-      <AvatarImage
-        src={src}
-        name={name}
-        onError={onError}
-        fallback={elements.length > 0 ? elements : fallback}
-      />
-      {React.Children.map(badges, badge => {
-        if (React.isValidElement(badge)) {
-          return React.cloneElement(badge, { size: _size });
-        }
-      })}
-    </div>
-  );
-};
-
-export type AvatarBadgeProps = {
-  position?: "top-left" | "top-right" | "bottom-right" | "bottom-left";
-} & Pick<AvatarProps, "size">;
-
-export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
-  position = "bottom-right",
-  size = "md",
-  children,
-  ...rest
-}) => {
-  const theme = useTheme();
-
-  return (
-    <div
-      {...rest}
-      className={cx(
-        theme.avatar.badge.size[size],
-        theme.avatar.badge.base,
-        theme.avatar.badge.position[position],
+    <>
+      {!showFallback ? (
+        <AvatarImage />
+      ) : name ? (
+        <AvatarName />
+      ) : (
+        <AvatarIcon>{fallback ? fallback : <GenericAvatar />}</AvatarIcon>
       )}
-    >
-      {children}
-    </div>
+    </>
   );
 };

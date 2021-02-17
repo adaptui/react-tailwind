@@ -41,7 +41,7 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
       throw new Error(errorMessage);
     }
 
-    return context;
+    return context || {};
   }
 
   return [
@@ -63,3 +63,26 @@ export function runIfFn<T, U>(
 ): T {
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
+
+/**
+ * Gets only the valid children of a component,
+ * and ignores any nullish or falsy child.
+ *
+ * @param children the children
+ */
+export function getValidChildren(children: React.ReactNode) {
+  return React.Children.toArray(children).filter(child =>
+    React.isValidElement(child),
+  ) as React.ReactElement[];
+}
+
+// SSR check
+export function canUseDOM() {
+  return !!(
+    typeof window !== "undefined" &&
+    window.document &&
+    window.document.createElement
+  );
+}
+
+export const isBrowser = canUseDOM();

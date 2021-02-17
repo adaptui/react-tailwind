@@ -61,3 +61,5 @@ export const IconButton = forwardRefWithAs<
     </ReakitButton>
   );
 });
+
+IconButton.displayName = "IconButton";
