@@ -44,16 +44,17 @@ export const Progress = forwardRefWithAs<
     value: defaultValue,
     min,
     max,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;
   const state = useProgressState({ min, max });
+  console.log({ state });
   const { setValue } = state;
   const context = React.useMemo(() => ({ state, size }), [state, size]);
 
   React.useEffect(() => {
-    if (defaultValue !== undefined) setValue(defaultValue);
+    if (defaultValue !== undefined && setValue) setValue(defaultValue);
   }, [defaultValue, setValue]);
 
   return (

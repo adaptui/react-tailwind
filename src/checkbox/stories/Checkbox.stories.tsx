@@ -20,11 +20,7 @@ export default {
   title: "Checkbox",
   component: Checkbox,
   argTypes: {
-    size: createUnionControl({
-      xs: "xs",
-      sm: "sm",
-      lg: "lg",
-    }),
+    size: createUnionControl(["sm", "md", "lg"]),
     defaultState: createUnionControl([true, false, "indeterminate"]),
     disabled: { control: { type: "boolean" } },
   },
@@ -36,7 +32,7 @@ const base = storyTemplate<CheckboxProps>(Checkbox, {
   defaultState: true,
 });
 
-export const ExtraSmall = base({ size: "xs" });
+export const ExtraSmall = base({ size: "sm" });
 
 export const Small = base({});
 

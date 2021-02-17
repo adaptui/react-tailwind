@@ -15,7 +15,7 @@ export const ProgressTrack = forwardRefWithAs<
 >((props, ref) => {
   const { className, ...rest } = props;
   const theme = useTheme();
-  const { size = "sm" } = useProgressContext();
+  const { size = "md" } = useProgressContext();
 
   return (
     <Box

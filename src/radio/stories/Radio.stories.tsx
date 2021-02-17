@@ -21,7 +21,7 @@ export default {
   title: "Radio",
   component: Radio,
   argTypes: {
-    size: createUnionControl(["xs", "sm", "lg"]),
+    size: createUnionControl(["sm", "md", "lg"]),
   },
 } as Meta;
 

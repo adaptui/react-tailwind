@@ -13,17 +13,8 @@ export default {
   title: "Switch",
   component: Switch,
   argTypes: {
-    size: createUnionControl({
-      xs: "xs",
-      sm: "sm",
-      lg: "lg",
-    }),
-    defaultState: {
-      control: {
-        type: "inline-radio",
-        options: [true, false],
-      },
-    },
+    size: createUnionControl(["sm", "md", "lg", "xl"]),
+    defaultState: createUnionControl([true, false]),
   },
 } as Meta;
 
@@ -32,7 +23,7 @@ const base = storyTemplate<SwitchProps>(Switch, {
   defaultState: true,
 });
 
-export const ExtraSmall = base({ size: "xs" });
+export const ExtraSmall = base({ size: "sm" });
 
 export const Small = base({});
 

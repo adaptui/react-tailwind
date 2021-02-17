@@ -46,7 +46,7 @@ export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(
       checked,
       disabled,
       focusable,
-      size = "sm",
+      size = "md",
       children,
       ...rest
     } = props;

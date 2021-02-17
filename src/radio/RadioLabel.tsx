@@ -19,7 +19,7 @@ export const RadioLabel = forwardRefWithAs<
   const { className, ...rest } = mainProps;
   const theme = useTheme();
   const { radioSize } = useRadioContext();
-  const _size = size || radioSize || "sm";
+  const _size = size || radioSize || "md";
 
   const radioStyles = cx(
     theme.radio.base,

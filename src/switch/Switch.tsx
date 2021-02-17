@@ -50,7 +50,7 @@ export const Switch = forwardRefWithAs<
     checked,
     disabled,
     focusable,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;

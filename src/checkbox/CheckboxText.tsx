@@ -15,7 +15,7 @@ export const CheckboxText = forwardRefWithAs<
 >((props, ref) => {
   const { className, ...rest } = props;
 
-  const { size = "sm" } = useCheckboxContext();
+  const { size = "md" } = useCheckboxContext();
 
   const theme = useTheme();
   const checkboxLabelStyles = cx(
