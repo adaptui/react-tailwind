@@ -33,7 +33,7 @@ const base = storyTemplate<TooltipProps>(
   ),
   {
     size: "sm",
-    variant: "primary",
+    variant: "danger",
     title: "Do you know this is a tooltip?",
     placement: "bottom",
   },
