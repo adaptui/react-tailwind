@@ -81,3 +81,16 @@
     transform: translateY(50px);
   }
 }
+
+@media all and (max-width: 480px) {
+  .toast__container {
+    width: 100%;
+  }
+  .stack-toast {
+    width: 95%;
+  }
+  .stack-toast:nth-last-child(n + 3) {
+    pointer-events: none;
+    opacity: 0 !important;
+  }
+}

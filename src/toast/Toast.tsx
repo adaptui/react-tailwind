@@ -34,8 +34,8 @@ const createToastType = ({ status }: Pick<AlertProps, "status">) => {
         {({ isMobile }) => {
           const Action = content.actions && (
             <ButtonGroup
-              style={{ boxShadow: "none" }}
-              size={isMobile ? "sm" : "md"}
+              size="md"
+              style={{ boxShadow: "none", alignItems: "center" }}
             >
               {content.actions.map((action: Record<string, any>) =>
                 isString(action.label) ? (

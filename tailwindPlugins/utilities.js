@@ -86,7 +86,7 @@ const utilities = plugin(function ({ addUtilities }) {
     ".touch-action-none": {
       "touch-action": "none",
     },
-    ...toast,
+    // ...toast,
   };
 
   addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
