@@ -60,7 +60,7 @@ export const Tooltip = ({
   const transformMap: Record<string, string> = {
     top: "rotateZ(180deg) translateY(0.5px)",
     right: "rotateZ(-90deg) translateY(0.5px)",
-    bottom: "rotateZ(360deg) translateY(0.5px)",
+    bottom: "rotateZ(360deg)",
     left: "rotateZ(90deg) translateY(0.5px)",
   };
 
@@ -76,7 +76,7 @@ export const Tooltip = ({
           <TooltipArrow {...tooltip} size={arrowSizeMap[size]}>
             <svg
               className={arrowStyles}
-              viewBox="0 0 31 31"
+              viewBox="0 0 30 30"
               style={{
                 transform: transformMap[tooltip.placement],
               }}
