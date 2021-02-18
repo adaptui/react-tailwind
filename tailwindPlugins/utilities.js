@@ -60,6 +60,10 @@ const utilities = plugin(function ({ addUtilities }) {
       ".stack-toast": {
         width: "95%",
       },
+      ".stack-toast:nth-last-child(n + 3)": {
+        pointerEvents: "none",
+        opacity: "0 !important",
+      },
     },
   };
 
