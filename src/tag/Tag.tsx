@@ -16,7 +16,7 @@ export type TagProps = Omit<BoxProps, "prefix"> & {
   /**
    * How large should the tag be?
    *
-   * @default "sm"
+   * @default "md"
    */
   size?: keyof Renderlesskit.GetThemeValue<"tag", "size">;
   /**
@@ -62,7 +62,7 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
     } = props;
 
     const group = useTagGroup();
-    const _size = size || group?.size || "sm";
+    const _size = size || group?.size || "md";
     const _variant = variant || group?.variant || "primary";
 
     const theme = useTheme();

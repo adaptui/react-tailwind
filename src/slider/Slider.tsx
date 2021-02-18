@@ -6,12 +6,12 @@ import {
   SliderInitialState,
 } from "@renderlesskit/react";
 
-import { useTheme } from "..";
+import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
 import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { createContext, runIfFn } from "../utils";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
 
 const [
@@ -19,7 +19,7 @@ const [
   useSliderContext,
 ] = createContext<SliderStateReturn>({
   name: "SliderState",
-  strict: true,
+  strict: false,
 });
 
 const [SliderPropsContext, useSliderPropsContext] = createContext<
@@ -62,7 +62,7 @@ export const Slider = forwardRefWithAs<
     thumbContent,
     children,
     origin,
-    size = "sm",
+    size = "md",
     className,
     values,
     min,

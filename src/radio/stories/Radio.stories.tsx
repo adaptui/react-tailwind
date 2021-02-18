@@ -1,129 +1,104 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
+import {
+  Radio,
+  RadioIcon,
+  RadioInput,
+  RadioGroup,
+  RadioLabel,
+  RadioProps,
+  RadioGroupProps,
+} from "../index";
+import { Box } from "../../box";
 import { Button } from "../../button";
 import {
   storyTemplate,
   createUnionControl,
 } from "../../../.storybook/storybookUtils";
-import {
-  RadioIcon,
-  RadioInput,
-  RadioGroup,
-  RadioLabel,
-  Radio,
-  RadioGroupProps,
-} from "../index";
-import { WheelIcon } from "../../icons";
-import { InfoCircle } from "../../icon/stories/Icon.stories";
+import { CheckCircleIcon } from "../../icons";
 
 export default {
   title: "Radio",
   component: Radio,
   argTypes: {
-    size: createUnionControl(["xs", "sm", "lg"]),
+    size: createUnionControl(["sm", "md", "lg"]),
   },
 } as Meta;
 
-const base = storyTemplate<RadioGroupProps>(
-  args => {
-    return (
-      <RadioGroup {...args}>
-        <div className="flex gap-3">
-          <RadioLabel>
-            <Radio value="1" />
-            label 1
-          </RadioLabel>
-
-          <RadioLabel>
-            <Radio value="2" />
-            label 2
-          </RadioLabel>
-        </div>
-      </RadioGroup>
-    );
-  },
-  {
-    defaultState: "2",
-    size: "sm",
-  },
-);
-
-export const Default = base({});
-
-export const States = () => {
+const BaseRadio: React.FC<RadioProps> = props => {
   return (
-    <RadioGroup defaultState={"2"}>
-      <div className="flex flex-col gap-2">
-        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-          <Radio value="1" />
-          Unchecked
-        </RadioLabel>
-        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-          <Radio value="2" />
-          Checked
-        </RadioLabel>
-        <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-          <Radio value="3" disabled />
-          Disabled
-        </RadioLabel>
-      </div>
+    <Radio
+      className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600"
+      {...props}
+    />
+  );
+};
+
+const CompleteRadio: React.FC<RadioGroupProps> = props => {
+  return (
+    <RadioGroup
+      aria-label="fruits"
+      className="flex flex-col space-y-2 w-36"
+      loop
+      {...props}
+    >
+      <BaseRadio value="apple">apple</BaseRadio>
+      <BaseRadio value="orange">Orange</BaseRadio>
+      <BaseRadio value="watermelon">Watermelon</BaseRadio>
+      <BaseRadio value="grapes" disabled>
+        Grapes
+      </BaseRadio>
     </RadioGroup>
   );
 };
 
+const base = storyTemplate<RadioGroupProps>(CompleteRadio, { size: "md" });
+
+export const Base = base({});
+export const DefaultState = base({ defaultState: "orange" });
+
 export const Controlled = () => {
-  const [state, setState] = React.useState("1");
+  const [state, setState] = React.useState("watermelon");
   return (
-    <>
-      <RadioGroup state={state} onStateChange={e => setState(e as string)}>
-        <div className="flex flex-col gap-2">
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-            <Radio value="1" />
-            Unchecked
-          </RadioLabel>
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-            <Radio value="2" />
-            Checked
-          </RadioLabel>
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-            <Radio value="3" />
-            Disabled
-          </RadioLabel>
-        </div>
-      </RadioGroup>
-      <Button onClick={() => setState("2")}>change</Button>
-    </>
+    <Box className="space-y-2">
+      <CompleteRadio state={state} onStateChange={e => setState(e as string)} />
+      <Button className="bg-orange-500" onClick={() => setState("orange")}>
+        Change to Orange
+      </Button>
+    </Box>
   );
 };
 
-export const CustomIcon = () => {
-  const [state, setState] = React.useState("1");
+const CustomRadio: React.FC<RadioProps> = props => {
   return (
-    <>
-      <RadioGroup state={state} onStateChange={e => setState(e as string)}>
-        <div className="flex flex-col gap-2">
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-            <RadioInput value="1" />
-            <RadioIcon
-              value="1"
-              checkedIcon={<WheelIcon />}
-              uncheckedIcon={<InfoCircle />}
-            />
-            Two
-          </RadioLabel>
-          <RadioLabel className="hover:bg-gray-100 p-2 rounded-md">
-            <RadioInput value="2" />
-            <RadioIcon
-              value="2"
-              checkedIcon={<WheelIcon />}
-              uncheckedIcon={<InfoCircle />}
-            />
-            Two
-          </RadioLabel>
-        </div>
-      </RadioGroup>
-      <Button onClick={() => setState("2")}>change</Button>
-    </>
+    <Radio {...props}>
+      <RadioLabel className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600">
+        <RadioInput />
+        <RadioIcon checkedIcon={<CheckCircleIcon />} />
+        {props.children}
+      </RadioLabel>
+    </Radio>
   );
 };
+
+const CompleteCustomRadio: React.FC<RadioGroupProps> = props => {
+  return (
+    <RadioGroup
+      aria-label="fruits"
+      className="flex flex-col space-y-2 w-36"
+      {...props}
+    >
+      <CustomRadio value="apple">apple</CustomRadio>
+      <CustomRadio value="orange">Orange</CustomRadio>
+      <CustomRadio value="watermelon">Watermelon</CustomRadio>
+      <CustomRadio value="grapes" disabled>
+        Grapes
+      </CustomRadio>
+    </RadioGroup>
+  );
+};
+
+export const Custom = storyTemplate<RadioGroupProps>(CompleteCustomRadio, {
+  size: "md",
+})({});

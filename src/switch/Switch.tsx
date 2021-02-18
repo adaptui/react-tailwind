@@ -39,8 +39,8 @@ export type SwitchProps = BoxProps &
 
 export const Switch = forwardRefWithAs<
   SwitchProps & SwitchRenderProps,
-  HTMLDivElement,
-  "div"
+  HTMLLabelElement,
+  "label"
 >((props, ref) => {
   const {
     defaultState,
@@ -50,7 +50,7 @@ export const Switch = forwardRefWithAs<
     checked,
     disabled,
     focusable,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;

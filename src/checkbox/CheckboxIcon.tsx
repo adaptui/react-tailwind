@@ -15,7 +15,7 @@ export const CheckboxIcon = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, children, ...rest } = props;
-  const { state, size = "sm" } = useCheckboxContext();
+  const { state, size = "md" } = useCheckboxContext();
 
   let stateProp = state?.state;
 

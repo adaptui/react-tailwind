@@ -3,28 +3,25 @@ import { BoxProps } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import { Box } from "../box";
-import { useTheme } from "..";
-import { RadioCommonProps } from "./Radio";
-import { useRadioContext } from "./RadioGroup";
+import { useTheme } from "../index";
+import { useRadioProps } from "./Radio";
 import { forwardRefWithAs } from "../utils/types";
 
-export type RadioLabelProps = BoxProps & Omit<RadioCommonProps, "value">;
+export type RadioLabelProps = BoxProps & {};
 
 export const RadioLabel = forwardRefWithAs<
   RadioLabelProps,
   HTMLLabelElement,
   "label"
 >((props, ref) => {
-  const { size, disabled = false, ...mainProps } = props;
-  const { className, ...rest } = mainProps;
-  const theme = useTheme();
-  const { radioSize } = useRadioContext();
-  const _size = size || radioSize || "sm";
+  const { className, ...rest } = props;
+  const { size = "md", disabled } = useRadioProps();
 
+  const theme = useTheme();
   const radioStyles = cx(
     theme.radio.base,
     theme.radio.label.base,
-    theme.radio.label.size[_size],
+    theme.radio.label.size[size],
     disabled ? theme.radio.disabled : "",
     className,
   );

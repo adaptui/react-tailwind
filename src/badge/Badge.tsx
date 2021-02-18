@@ -2,14 +2,14 @@ import React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box/Box";
+import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
 
 export type BadgeProps = BoxProps & {
   /**
    * How large should the badge be?
    *
-   * @default "sm"
+   * @default "md"
    */
   size?: keyof Renderlesskit.GetThemeValue<"badge", "size">;
   /**
@@ -20,9 +20,10 @@ export type BadgeProps = BoxProps & {
   variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
 };
 
-export const Badge = forwardRefWithAs<BadgeProps, HTMLButtonElement, "span">(
+export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
   (props, ref) => {
-    const { variant = "primary", size = "sm", className, ...rest } = props;
+    const { variant = "primary", size = "md", className, ...rest } = props;
+
     const theme = useTheme();
     const badgeStyles = cx(
       theme.badge.base,

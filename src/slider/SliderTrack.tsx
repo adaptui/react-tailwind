@@ -1,11 +1,11 @@
 import React from "react";
 import { cx, SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
 
-import { useTheme } from "..";
+import { BoxProps } from "../box";
+import { useTheme } from "../index";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
 import { SliderProps, useSliderPropsContext } from "./Slider";
-import { BoxProps } from "../box";
 
 export type SliderTrackProps = BoxProps &
   Omit<SliderProps, "thumbContent" | "size" | "orientation" | "origin">;
@@ -19,7 +19,7 @@ export const SliderTrack = forwardRefWithAs<
   const {
     padding,
     orientation = "horizontal",
-    size = "sm",
+    size = "md",
     origin = 0,
   } = useSliderPropsContext();
 

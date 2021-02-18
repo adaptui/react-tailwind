@@ -20,14 +20,14 @@ export default {
 } as Meta<TagProps>;
 
 const base = storyTemplate<TagProps>(args => <Tag {...args}>Chennai</Tag>, {
-  size: "sm",
+  size: "md",
   variant: "primary",
   closable: false,
   onClose: () => alert(1),
 });
 
-export const ExtraSmall = base({ size: "xs" });
-export const Small = base({});
+export const Small = base({ size: "sm" });
+export const Medium = base({});
 export const Large = base({ size: "lg" });
 
 export const Primary = base({ variant: "primary" });
@@ -58,7 +58,7 @@ export const WithAvatar = storyTemplate<TagProps>(
     );
   },
   {
-    size: "sm",
+    size: "md",
     variant: "primary",
     closable: true,
     onClose: () => alert(1),
@@ -76,7 +76,7 @@ const group = storyTemplate<TagGroupProps>(
     );
   },
   {
-    size: "sm",
+    size: "md",
     variant: "primary",
     allowArrowNavigation: true,
   },
@@ -106,7 +106,7 @@ export const TagGroupsListExample = storyTemplate<TagGroupProps>(
     );
   },
   {
-    size: "sm",
+    size: "md",
     variant: "primary",
     allowArrowNavigation: true,
   },

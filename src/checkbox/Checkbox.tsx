@@ -36,60 +36,62 @@ export type CheckboxProps = BoxProps &
     size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
   };
 
-export const Checkbox = forwardRefWithAs<CheckboxProps & CheckboxRenderProps>(
-  (props, ref) => {
-    const {
-      defaultState,
-      state: initialState,
-      onStateChange,
+export const Checkbox = forwardRefWithAs<
+  CheckboxProps & CheckboxRenderProps,
+  HTMLLabelElement,
+  "label"
+>((props, ref) => {
+  const {
+    defaultState,
+    state: initialState,
+    onStateChange,
+    value,
+    checked,
+    disabled,
+    focusable,
+    size = "md",
+    children,
+    ...rest
+  } = props;
+  const [checkboxState, setCheckboxStateChange] = useControllableState({
+    value: initialState,
+    defaultValue: defaultState,
+    onChange: onStateChange,
+  });
+
+  const state = React.useMemo(
+    () => ({
+      state: checkboxState,
+      setState: setCheckboxStateChange,
       value,
       checked,
       disabled,
       focusable,
-      size = "sm",
-      children,
-      ...rest
-    } = props;
-    const [checkboxState, setCheckboxStateChange] = useControllableState({
-      value: initialState,
-      defaultValue: defaultState,
-      onChange: onStateChange,
-    });
+    }),
+    [
+      checkboxState,
+      setCheckboxStateChange,
+      value,
+      checked,
+      disabled,
+      focusable,
+    ],
+  );
+  const context = React.useMemo(() => ({ state, size }), [state, size]);
 
-    const state = React.useMemo(
-      () => ({
-        state: checkboxState,
-        setState: setCheckboxStateChange,
-        value,
-        checked,
-        disabled,
-        focusable,
-      }),
-      [
-        checkboxState,
-        setCheckboxStateChange,
-        value,
-        checked,
-        disabled,
-        focusable,
-      ],
-    );
-    const context = React.useMemo(() => ({ state, size }), [state, size]);
-
-    return (
-      <CheckboxProvider value={context}>
-        {typeof children !== "string" ? (
-          runIfFn(children, state)
-        ) : (
-          <CheckboxLabel ref={ref} {...rest}>
-            <CheckboxInput />
-            <CheckboxIcon />
-            {children ? <CheckboxText>{children}</CheckboxText> : null}
-          </CheckboxLabel>
-        )}
-      </CheckboxProvider>
-    );
-  },
-);
+  return (
+    <CheckboxProvider value={context}>
+      {typeof children !== "string" ? (
+        runIfFn(children, state)
+      ) : (
+        <CheckboxLabel ref={ref} {...rest}>
+          <CheckboxInput />
+          <CheckboxIcon />
+          {children ? <CheckboxText>{children}</CheckboxText> : null}
+        </CheckboxLabel>
+      )}
+    </CheckboxProvider>
+  );
+});
 
 Checkbox.displayName = "Checkbox";

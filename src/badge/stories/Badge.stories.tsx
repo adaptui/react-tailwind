@@ -19,12 +19,12 @@ const base = storyTemplate<BadgeProps>(
   args => {
     return <Badge {...args}>Badge</Badge>;
   },
-  { variant: "primary", size: "sm" },
+  { variant: "primary", size: "md" },
 );
 
-export const ExtraSmall = base({ size: "xs" });
+export const Small = base({ size: "sm" });
 
-export const Small = base({});
+export const Medium = base({});
 
 export const Large = base({ size: "lg" });
 

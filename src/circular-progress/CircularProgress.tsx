@@ -46,7 +46,7 @@ export const CircularProgress = forwardRefWithAs<
     value: defaultValue,
     min,
     max,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;

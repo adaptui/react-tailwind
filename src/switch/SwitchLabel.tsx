@@ -3,10 +3,9 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { SwitchStateProps } from "./Switch";
 import { forwardRefWithAs } from "../utils/types";
 
-export type SwitchLabelProps = BoxProps & SwitchStateProps;
+export type SwitchLabelProps = BoxProps & {};
 
 export const SwitchLabel = forwardRefWithAs<
   SwitchLabelProps,

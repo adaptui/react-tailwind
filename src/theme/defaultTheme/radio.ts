@@ -7,8 +7,8 @@ export const radio = {
     base:
       "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:select-none lib:transition-all lib:mr-2",
     size: {
-      xs: "lib:w-3.5 lib:h-3.5 lib:text-xxs",
-      sm: "lib:w-4 lib:h-4 lib:text-xs",
+      sm: "lib:w-3.5 lib:h-3.5 lib:text-xxs",
+      md: "lib:w-4 lib:h-4 lib:text-xs",
       lg: "lib:w-5 lib:h-5 lib:text-base",
     },
     unchecked: "lib:text-gray-400",
@@ -18,8 +18,8 @@ export const radio = {
   label: {
     base: "lib:text-gray-600 lib:select-none",
     size: {
-      xs: "lib:text-xs",
-      sm: "lib:text-sm",
+      sm: "lib:text-xs",
+      md: "lib:text-sm",
       lg: "lib:text-sm",
     },
   },
