@@ -1,40 +1,52 @@
 import React from "react";
-import { RadioInitialState, RadioStateReturn } from "reakit";
+import { Composite } from "reakit";
 
+import {
+  useRadioState,
+  RadioInitialState,
+  RadioStateReturn,
+} from "./RadioState";
 import { createContext } from "../utils";
-import { RadioCommonProps } from "./Radio";
-import { useRadioState } from "./useRadioState";
+import { forwardRefWithAs } from "../utils/types";
 
-type RadioContextType = {
-  radioState?: RadioStateReturn;
-  radioSize?: RadioCommonProps["size"];
-};
+export type RadioGroupContext = RadioStateReturn &
+  Pick<RadioGroupProps, "size">;
 
-const [RadioProvider, useRadioContext] = createContext<RadioContextType>({
+const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
   errorMessage: "Radio must be used within RadioProvider",
-  name: "RadioContext",
-  strict: true,
+  name: "RadioGroup",
+  strict: false,
 });
 
-export { RadioProvider, useRadioContext };
+export { useRadioGroup };
 
-export type RadioGroupProps = RadioInitialState &
-  Pick<RadioCommonProps, "size"> & {
-    onStateChange?: (state: RadioCommonProps["value"]) => void;
-    state?: RadioCommonProps["value"];
-    defaultState?: RadioCommonProps["value"];
-  };
+export type RadioGroupProps = RadioInitialState & {
+  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
+  ariaLabel?: string;
+};
 
-export const RadioGroup: React.FC<RadioGroupProps> = ({
-  children,
-  size = "sm",
-  ...props
-}) => {
-  const radioState = useRadioState(props);
+export const RadioGroup = forwardRefWithAs<
+  RadioGroupProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const { size, className, style, ariaLabel = "Radio Group", children } = props;
+  const { state, setState, ...composite } = useRadioState(props);
 
   return (
-    <RadioProvider value={{ radioState: radioState, radioSize: size }}>
-      {children}
+    <RadioProvider value={{ state, setState, ...composite, size }}>
+      <Composite
+        ref={ref}
+        role="radiogroup"
+        aria-label={ariaLabel}
+        className={className}
+        style={style}
+        {...composite}
+      >
+        {children}
+      </Composite>
     </RadioProvider>
   );
-};
+});
+
+RadioGroup.displayName = "RadioGroup";

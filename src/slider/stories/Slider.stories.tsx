@@ -5,7 +5,6 @@ import {
   storyTemplate,
   createUnionControl,
 } from "../../../.storybook/storybookUtils";
-
 import { SliderTrack } from "../SliderTrack";
 import { SliderThumb } from "../SliderThumb";
 import { Slider, SliderProps } from "../Slider";
@@ -15,7 +14,7 @@ export default {
   title: "Slider",
   component: Slider,
   argTypes: {
-    size: createUnionControl(["xs", "sm", "lg"]),
+    size: createUnionControl(["sm", "md", "lg"]),
     currentColor: { defaultValue: "" },
   },
 } as Meta;
@@ -28,7 +27,7 @@ const base = storyTemplate<SliderProps>(args => {
   );
 }, {});
 
-export const Default = base({ size: "sm" });
+export const Default = base({ size: "md" });
 export const Origin = base({ origin: 50 });
 export const Range = base({ defaultValues: [30, 70] });
 
@@ -45,7 +44,7 @@ export const Reversed = base({ reversed: true });
 export const Vertical = () => {
   return (
     <div role="group" aria-labelledby="styled-slider" style={{ height: 200 }}>
-      <Slider size="lg" orientation="vertical" origin={0} />
+      <Slider size="md" orientation="vertical" origin={0} />
     </div>
   );
 };
@@ -53,7 +52,7 @@ export const Vertical = () => {
 export const Customization = () => {
   return (
     <div role="group" aria-labelledby="styled-slider" style={{ width: 400 }}>
-      <Slider size="xs">
+      <Slider size="md">
         {({ state, trackRef, thumbRef }) => (
           <>
             <span>
@@ -90,4 +89,4 @@ export const LableDesign = storyTemplate<
       />
     </div>
   );
-})({ currentColor: "text-blue-500", size: "sm" });
+})({ currentColor: "text-blue-500", size: "md" });

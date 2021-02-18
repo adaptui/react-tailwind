@@ -1,9 +1,9 @@
 export const badge = {
   base:
-    "lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full",
+    "lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all",
   size: {
-    xs: "lib:px-1.5 lib:text-xs lib:font-medium ",
-    sm: "lib:px-2 lib:text-sm lib:font-medium",
+    sm: "lib:px-1.5 lib:text-xs lib:font-medium",
+    md: "lib:px-2 lib:text-sm lib:font-medium",
     lg: "lib:px-2 lib:text-base lib:font-medium",
   },
   variant: {

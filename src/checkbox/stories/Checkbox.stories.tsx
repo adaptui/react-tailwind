@@ -21,8 +21,8 @@ export default {
   component: Checkbox,
   argTypes: {
     size: createUnionControl({
-      xs: "xs",
       sm: "sm",
+      md: "md",
       lg: "lg",
     }),
     defaultState: createUnionControl([true, false, "indeterminate"]),
@@ -32,13 +32,13 @@ export default {
 
 const base = storyTemplate<CheckboxProps>(Checkbox, {
   children: "Checkbox",
-  size: "sm",
+  size: "md",
   defaultState: true,
 });
 
-export const ExtraSmall = base({ size: "xs" });
+export const Small = base({ size: "sm" });
 
-export const Small = base({});
+export const Medium = base({});
 
 export const Large = base({ size: "lg" });
 
@@ -59,7 +59,7 @@ export const Controlled = storyTemplate<CheckboxProps>(args => {
       <div className="mt-2">{`Checked: ${state}`}</div>
     </>
   );
-})({ size: "sm" });
+})({ size: "md" });
 
 export const Group = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>([]);
@@ -95,7 +95,7 @@ export const Group = storyTemplate<CheckboxProps>(args => {
       </Checkbox>
     </>
   );
-})({ size: "sm" });
+})({ size: "md" });
 
 export const GroupIndeterminateSimple = storyTemplate<CheckboxProps>(args => {
   const [checkedItems, setCheckedItems] = React.useState<CheckboxStatus[]>([
@@ -132,7 +132,7 @@ export const GroupIndeterminateSimple = storyTemplate<CheckboxProps>(args => {
       </div>
     </>
   );
-})({ size: "sm" });
+})({ size: "md" });
 
 export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
   const values = React.useMemo(() => ["Apple", "Orange", "Watermelon"], []);
@@ -183,7 +183,7 @@ export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
       </div>
     </>
   );
-})({ size: "sm" });
+})({ size: "md" });
 
 const CheckboxCustom = (props: CheckboxProps) => {
   const [state, onStateChange] = React.useState<CheckboxStatus>(true);

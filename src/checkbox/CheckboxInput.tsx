@@ -34,3 +34,5 @@ export const CheckboxInput = forwardRefWithAs<
     />
   );
 });
+
+CheckboxInput.displayName = "CheckboxInput";

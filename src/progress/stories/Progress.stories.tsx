@@ -12,7 +12,7 @@ import { Progress, ProgressProps, ProgressTrack, ProgressBar } from "../index";
 export default {
   title: "Progress",
   component: Progress,
-  argTypes: { size: createUnionControl(["xs", "sm", "lg", "xl"]) },
+  argTypes: { size: createUnionControl(["sm", "md", "lg", "xl"]) },
 } as Meta;
 
 const base = storyTemplate<ProgressProps>(
@@ -29,8 +29,8 @@ const base = storyTemplate<ProgressProps>(
   { size: "sm" },
 );
 
-export const ExtraSmall = base({ size: "xs" });
-export const Small = base({});
+export const Small = base({ size: "sm" });
+export const Medium = base({});
 export const Large = base({ size: "lg" });
 export const ExtraLarge = base({ size: "xl" });
 
@@ -49,7 +49,7 @@ export const Custom = storyTemplate<ProgressProps>(
       </>
     );
   },
-  { size: "lg" },
+  { size: "md" },
 )({});
 
 const useProgressState = (initialValue: number | null = 0) => {

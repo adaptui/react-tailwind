@@ -2,7 +2,7 @@ export const alert = {
   base:
     "lib:flex lib:w-full lib:overflow-hidden lib:px-3 lib:py-2.5 lib:rounded-md",
   icon:
-    "lib:inherit box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5",
+    "lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5",
   body: {
     base: "lib:flex lib:text-sm lib:flex-wrap",
     desktop: "",
