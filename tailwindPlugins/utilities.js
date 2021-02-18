@@ -53,6 +53,14 @@ const utilities = plugin(function ({ addUtilities }) {
       transform: "translate3d(var(--toast-x-offset), 0, 0) !important",
       opacity: "1 !important",
     },
+    "@media all and (max-width: 480px)": {
+      ".toast__container": {
+        width: "100%",
+      },
+      ".stack-toast": {
+        width: "95%",
+      },
+    },
   };
 
   const utilities = {
