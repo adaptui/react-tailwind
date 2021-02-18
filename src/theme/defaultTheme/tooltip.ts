@@ -1,6 +1,6 @@
 export const tooltip = {
   base:
-    "lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none",
+    "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none",
   arrow: {
     base: "lib:fill-current",
     variant: {

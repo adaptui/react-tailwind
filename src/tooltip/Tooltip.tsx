@@ -76,7 +76,7 @@ export const Tooltip = ({
           <TooltipArrow {...tooltip} size={arrowSizeMap[size]}>
             <svg
               className={arrowStyles}
-              viewBox="0 0 30 30"
+              viewBox="0 0 31 31"
               style={{
                 transform: transformMap[tooltip.placement],
               }}
