@@ -9,9 +9,8 @@ import {
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 
-export type RadioGroupContext = RadioStateReturn & {
-  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
-};
+export type RadioGroupContext = RadioStateReturn &
+  Pick<RadioGroupProps, "size">;
 
 const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
   errorMessage: "Radio must be used within RadioProvider",
@@ -21,58 +20,28 @@ const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
 
 export { useRadioGroup };
 
-export type RadioGroupProps = RadioInitialState &
-  Pick<RadioGroupContext, "size">;
+export type RadioGroupProps = RadioInitialState & {
+  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
+  ariaLabel?: string;
+};
 
 export const RadioGroup = forwardRefWithAs<
   RadioGroupProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  // Extract InitialState & give it to the Radio State
-  // Extracting so they don't end up in the DOM
-  const {
-    state: initialState,
-    defaultState,
-    onStateChange,
-    unstable_virtual,
-    rtl,
-    orientation,
-    currentId,
-    wrap,
-    loop,
-    shift,
-    unstable_includesBaseElement,
-    baseId,
-    ...rest
-  } = props;
-  // Composite doesn't remove the `state` & `setState` from the DOM
-  // `state` & `setState` is not needed by the composite
-  const { state, setState, ...composite } = useRadioState({
-    state: initialState,
-    defaultState,
-    onStateChange,
-    unstable_virtual,
-    rtl,
-    orientation,
-    currentId,
-    wrap,
-    loop,
-    shift,
-    unstable_includesBaseElement,
-    baseId,
-  });
-
-  const { size, children, ...last } = rest;
+  const { size, className, style, ariaLabel = "Radio Group", children } = props;
+  const { state, setState, ...composite } = useRadioState(props);
 
   return (
     <RadioProvider value={{ state, setState, ...composite, size }}>
       <Composite
         ref={ref}
         role="radiogroup"
-        aria-label="Radio Group"
+        aria-label={ariaLabel}
+        className={className}
+        style={style}
         {...composite}
-        {...last}
       >
         {children}
       </Composite>

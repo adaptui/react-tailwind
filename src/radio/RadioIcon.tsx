@@ -8,9 +8,8 @@ import {
 } from "../icons/RadioIcons";
 import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
-import { useRadioGroup } from "./RadioGroup";
 import { forwardRefWithAs } from "../utils/types";
-import { RadioProps, useRadioContext } from "./Radio";
+import { RadioProps, useRadioProps, useRadioState } from "./Radio";
 
 export type RadioIconProps = BoxProps &
   Pick<RadioProps, "value" | "disabled"> & {
@@ -24,9 +23,9 @@ export const RadioIcon = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { size = "md", state } = useRadioGroup();
-  const { value, disabled } = useRadioContext();
   const { className, children, ...rest } = props;
+  const { value, disabled, size = "md" } = useRadioProps();
+  const { state } = useRadioState();
   const stateProp = state === value;
 
   const theme = useTheme();

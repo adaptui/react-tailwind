@@ -40,6 +40,7 @@ const CompleteRadio: React.FC<RadioGroupProps> = props => {
     <RadioGroup
       aria-label="fruits"
       className="flex flex-col space-y-2 w-36"
+      loop
       {...props}
     >
       <BaseRadio value="apple">apple</BaseRadio>
