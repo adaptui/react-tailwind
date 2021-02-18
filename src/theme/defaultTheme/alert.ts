@@ -15,7 +15,7 @@ export const alert = {
     mobile: "lib:mt-0.5",
   },
   actionsWrapper: {
-    base: "lib:ml-auto lib:flex",
+    base: "lib:flex lib:ml-3",
     desktop: "",
     mobile: "",
   },

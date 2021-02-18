@@ -86,3 +86,7 @@ export function canUseDOM() {
 }
 
 export const isBrowser = canUseDOM();
+
+export function isString(s: string): s is string {
+  return typeof s === "string";
+}

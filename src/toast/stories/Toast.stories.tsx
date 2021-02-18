@@ -1,11 +1,12 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import { storyTemplate } from "../../../.storybook/storybookUtils";
 import { ToastController } from "@renderlesskit/react";
+
 import { useToast } from "../Toast";
 import { ToastProvider } from "../Toast";
-import { Button, CloseButton } from "../../button";
 import { AlertCloseButton } from "../..";
+import { Button, ButtonGroup } from "../../button";
+import { storyTemplate } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Toast",
@@ -13,52 +14,56 @@ export default {
 } as Meta;
 
 const ToastTriggers = () => {
-  const { showToast, toasts, removeToast } = useToast();
+  const { showToast, removeAllToasts } = useToast();
+
+  const click = (type: string, title?: string, desc?: string) => {
+    showToast({
+      type: type,
+      content: {
+        title: title || `This is an ${type} ${Math.random().toFixed(2)}`,
+        description: desc || "Woops! Something went wrong",
+        actions: [
+          {
+            label: "Undo",
+            handler: (event, hide) => {
+              click("info", "Undo successful", "Don't click undo again");
+            },
+          },
+          {
+            label: hide => <AlertCloseButton onClick={() => hide(2)} />,
+          },
+        ],
+      },
+    });
+  };
 
   return (
-    <>
-      <button
-        onClick={() => {
-          Object.values(toasts).forEach(e => {
-            removeToast(e.id);
-          });
-        }}
-      >
-        Remove all
-      </button>
+    <ButtonGroup attached>
       <Button
         variant="primary"
         onClick={() => {
-          showToast({
-            type: "success",
-            content: {
-              title: `Figma saves your work ${Math.random().toFixed(2)}`,
-              description: "This is description",
-            },
-          });
+          click("success");
         }}
       >
-        Show toast
+        Show success
       </Button>
       <Button
         variant="secondary"
         onClick={() => {
-          showToast({
-            type: "error",
-            content: {
-              title: `This is an error ${Math.random().toFixed(2)}`,
-              description: "Woops! Something went wrong",
-              actions: [
-                { label: "Reach Out", handler: () => alert(1) },
-                { label: <AlertCloseButton onClick={() => alert(2)} /> },
-              ],
-            },
-          });
+          click("error");
         }}
       >
-        Show toast
+        Show error
       </Button>
-    </>
+      <Button
+        variant="ghost"
+        onClick={() => {
+          removeAllToasts();
+        }}
+      >
+        Remove all
+      </Button>
+    </ButtonGroup>
   );
 };
 

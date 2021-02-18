@@ -10,40 +10,40 @@ import {
 
 import {
   AlertIcon,
-  AlertTitle,
   AlertBody,
+  AlertTitle,
+  AlertActions,
   AlertDescription,
   AlertActionButton,
-  AlertActions,
 } from "../alert";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { ButtonGroup } from "../button";
+import { isString, runIfFn } from "../utils";
+import { Alert, AlertProps } from "../alert";
 import { ToastWrapper } from "./ToastWrapper";
 import { forwardRefWithAs } from "../utils/types";
-import { Alert, AlertProps } from "../alert";
-import { ButtonGroup } from "../button";
 
-const createToastType = ({ status }: { status: AlertProps["status"] }) => {
+const createToastType = ({ status }: Pick<AlertProps, "status">) => {
   return (({ hideToast, content, id }) => {
+    const hideFn = () => hideToast(id);
+
     return (
-      <Alert
-        description={content.description}
-        status={status}
-        title={content.title}
-        closable
-        onClose={() => hideToast(id)}
-      >
+      <Alert status={status}>
         {({ isMobile }) => {
           const Action = content.actions && (
-            <ButtonGroup size={isMobile ? "sm" : "md"}>
-              {content.actions.map(action =>
-                typeof action.label === "string" ? (
-                  <AlertActionButton onClick={action.handler}>
+            <ButtonGroup
+              style={{ boxShadow: "none" }}
+              size={isMobile ? "sm" : "md"}
+            >
+              {content.actions.map((action: Record<string, any>) =>
+                isString(action.label) ? (
+                  <AlertActionButton onClick={e => action.handler(e, hideFn)}>
                     {action.label}
                   </AlertActionButton>
                 ) : (
-                  action.label
+                  runIfFn(action.label, hideFn)
                 ),
               )}
             </ButtonGroup>
@@ -108,8 +108,23 @@ export const Toast = forwardRefWithAs<ToastProps, HTMLDivElement, "div">(
   },
 );
 
+type ToastAction = {
+  label: React.ReactNode | ((hide: Function) => JSX.Element);
+  handler?: (event: React.MouseEvent<any, MouseEvent>, hide: Function) => any;
+};
+
+type ToastContent = {
+  title: string;
+  description?: string;
+  actions?: ToastAction[];
+};
+
 type UseToast = () => Omit<ToastContextState, "showToast"> & {
-  showToast: (p: Partial<Omit<IToast, "isVisible" | "placement">>) => void;
+  showToast: (
+    config: Partial<Omit<IToast, "isVisible" | "placement" | "content">> & {
+      content: ToastContent;
+    },
+  ) => void;
 };
 
 export const useToast: UseToast = () => {
