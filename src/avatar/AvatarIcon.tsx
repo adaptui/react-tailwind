@@ -42,3 +42,5 @@ export const AvatarIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+AvatarIcon.displayName = "AvatarIcon";

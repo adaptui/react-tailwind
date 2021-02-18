@@ -8,7 +8,7 @@ exports[`<Avatar /> should render Avatar 1`] = `
   >
     <span
       aria-label="Avatar Icon"
-      class="lib:inherit lib:text-gray-500 lib:text-xs"
+      class="lib:inline-flex lib:text-gray-500 lib:text-xs"
     >
       <svg
         aria-hidden="true"
@@ -40,7 +40,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
   >
     <span
       aria-label="Avatar Icon"
-      class="lib:inherit lib:text-gray-500 lib:text-xs"
+      class="lib:inline-flex lib:text-gray-500 lib:text-xs"
     >
       <svg
         aria-hidden="true"

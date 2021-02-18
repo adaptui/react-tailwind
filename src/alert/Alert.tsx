@@ -81,7 +81,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       status = "info",
       icon,
       closable,
-      closableIcon = <CloseIcon />,
+      closableIcon,
       onClose,
       className,
       children,
@@ -114,7 +114,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
                 {description && (
                   <AlertDescription>{description}</AlertDescription>
                 )}
-                <Box as="span" style={{ display: "inherit" }}>
+                <Box as="span" style={{ display: "inline-flex" }}>
                   {isMobile ? Action : null}
                 </Box>
               </AlertBody>

@@ -77,18 +77,6 @@ export const Button = forwardRefWithAs<
     className,
   );
 
-  const ButtonComp = () => (
-    <ReakitButton
-      ref={ref}
-      className={buttonStyles}
-      disabled={_disabled}
-      style={_disabled ? { pointerEvents: "unset", ...style } : style}
-      {...rest}
-    >
-      {!loading ? <ButtonWithIcons /> : <ButtonSpinner />}
-    </ReakitButton>
-  );
-
   const ButtonWithIcons = () => (
     <>
       {prefix && (
@@ -106,7 +94,17 @@ export const Button = forwardRefWithAs<
     return <Spinner className={theme.button.spinner} />;
   };
 
-  return <ButtonComp />;
+  return (
+    <ReakitButton
+      ref={ref}
+      className={buttonStyles}
+      disabled={_disabled}
+      style={_disabled ? { pointerEvents: "unset", ...style } : style}
+      {...rest}
+    >
+      {!loading ? <ButtonWithIcons /> : <ButtonSpinner />}
+    </ReakitButton>
+  );
 });
 
 Button.displayName = "Button";

@@ -46,7 +46,7 @@ export const CircularProgress = forwardRefWithAs<
     value: defaultValue,
     min,
     max,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;
@@ -71,5 +71,7 @@ export const CircularProgress = forwardRefWithAs<
     </CircularProgressProvider>
   );
 });
+
+CircularProgress.displayName = "CircularProgress";
 
 export default CircularProgress;

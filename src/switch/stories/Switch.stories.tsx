@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 
 import { SwitchIcon } from "../SwitchIcon";
@@ -14,9 +15,10 @@ export default {
   component: Switch,
   argTypes: {
     size: createUnionControl({
-      xs: "xs",
       sm: "sm",
+      md: "md",
       lg: "lg",
+      xl: "xl",
     }),
     defaultState: {
       control: {
@@ -28,15 +30,14 @@ export default {
 } as Meta;
 
 const base = storyTemplate<SwitchProps>(Switch, {
-  size: "sm",
+  size: "md",
   defaultState: true,
 });
 
-export const ExtraSmall = base({ size: "xs" });
-
-export const Small = base({});
-
+export const Small = base({ size: "sm" });
+export const Medium = base({});
 export const Large = base({ size: "lg" });
+export const ExtraLarge = base({ size: "xl" });
 
 export const DefaultUnchecked = base({ defaultState: false });
 
@@ -58,5 +59,5 @@ export const Custom = storyTemplate<SwitchProps>(
       }}
     </Switch>
   ),
-  { size: "sm", defaultState: false },
+  { size: "md", defaultState: false },
 )({});

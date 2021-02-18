@@ -3,8 +3,8 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
 import { useCheckboxContext } from "./Checkbox";
+import { forwardRefWithAs } from "../utils/types";
 
 export type CheckboxLabelProps = BoxProps & {};
 
@@ -25,3 +25,5 @@ export const CheckboxLabel = forwardRefWithAs<
 
   return <Box as="label" ref={ref} className={checkboxLabelStyles} {...rest} />;
 });
+
+CheckboxLabel.displayName = "CheckboxLabel";

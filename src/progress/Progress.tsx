@@ -30,7 +30,7 @@ export type ProgressProps = BoxProps &
     /**
      * How large should the progress be?
      *
-     * @default "sm"
+     * @default "md"
      */
     size?: keyof Renderlesskit.GetThemeValue<"progress", "track", "size">;
   };
@@ -44,7 +44,7 @@ export const Progress = forwardRefWithAs<
     value: defaultValue,
     min,
     max,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;
@@ -68,5 +68,7 @@ export const Progress = forwardRefWithAs<
     </ProgressProvider>
   );
 });
+
+Progress.displayName = "Progress";
 
 export default Progress;

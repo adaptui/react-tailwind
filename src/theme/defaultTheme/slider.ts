@@ -15,8 +15,8 @@ export const slider = {
       base:
         "lib:absolute lib:z-1 lib:flex lib:items-center lib:bg-white lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-current lib:focus-within:ring-2 lib:focus-within:ring-current",
       size: {
-        xs: "lib:w-3 lib:h-3 lib:text-xxs",
-        sm: "lib:w-4 lib:h-4 lib:text-xs",
+        sm: "lib:w-3 lib:h-3 lib:text-xxs",
+        md: "lib:w-4 lib:h-4 lib:text-xs",
         lg: "lib:w-5 lib:h-5 lib:text-sm",
       },
     },
@@ -30,8 +30,8 @@ export const slider = {
       main: "",
       filled: "",
       size: {
-        xs: "lib:h-0.5",
-        sm: "lib:h-1",
+        sm: "lib:h-0.5",
+        md: "lib:h-1",
         lg: "lib:h-2",
       },
     },
@@ -48,8 +48,8 @@ export const slider = {
       main: "lib:h-full",
       filled: "lib:top-unset lib:bottom-0",
       size: {
-        xs: "lib:w-0.5",
-        sm: "lib:w-1",
+        sm: "lib:w-0.5",
+        md: "lib:w-1",
         lg: "lib:w-2",
       },
     },
