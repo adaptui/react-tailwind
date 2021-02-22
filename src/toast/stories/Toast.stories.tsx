@@ -9,41 +9,13 @@ export default {
   title: "Toast",
 } as Meta;
 
-const heights: number[] = [];
-
-const DEFAULT_PLACEMENTS: Record<string, React.CSSProperties> = {
-  "top-left": {
-    position: "fixed",
-    top: "10px",
-    left: "20px",
-  },
-  "top-center": {
-    position: "fixed",
-    top: "10px",
-    left: "50%",
-    transform: "translateX(-50%)",
-  },
-  "top-right": {
-    position: "fixed",
-    top: "10px",
-    right: "20px",
-  },
-  "bottom-left": {
-    position: "fixed",
-    bottom: "calc(var(--safe-area-gap, 0px) + 10px)",
-    left: "20px",
-  },
-  "bottom-center": {
-    position: "fixed",
-    bottom: "calc(var(--safe-area-gap, 0px) + 10px)",
-    left: "50%",
-    transform: "translateX(-50%)",
-  },
-  "bottom-right": {
-    position: "fixed",
-    bottom: "calc(var(--safe-area-gap, 0px) + 10px)",
-    right: "20px",
-  },
+const heights: Record<string, number[]> = {
+  "top-left": [],
+  "top-center": [],
+  "top-right": [],
+  "bottom-left": [],
+  "bottom-center": [],
+  "bottom-right": [],
 };
 
 export const Base = () => {
@@ -116,7 +88,7 @@ const ToastTriggers = () => {
             </Button>
             <Button
               onClick={() =>
-                showToast({ type: "warning", placement: "top-left" })
+                showToast({ type: "warning", placement: "bottom-left" })
               }
             >
               Bottom Left Toast
@@ -145,18 +117,24 @@ const ToastTriggers = () => {
 const ToastContainer = (props: any) => {
   const { placement } = props;
   return (
-    <div className="toast-container" style={DEFAULT_PLACEMENTS[placement]}>
+    <div
+      className={`toast-container ${placement.split("-")[0]} ${
+        placement.split("-")[1]
+      }`}
+    >
       {props.children}
     </div>
   );
 };
 
 const ToastWrapper = (props: any) => {
-  const { isVisible } = props;
+  const { isVisible, placement } = props;
 
   return (
     <div
-      className="toast-wrapper"
+      className={`toast-wrapper ${placement.split("-")[0]} ${
+        placement.split("-")[1]
+      }`}
       style={isVisible ? { transform: "translate3d(0, 0, 0)", opacity: 1 } : {}}
     >
       {props.children}
@@ -165,7 +143,8 @@ const ToastWrapper = (props: any) => {
 };
 
 const ToastAlert = (props: any) => {
-  const { index, toastsLength, id, hideToast, status } = props;
+  const { index, toastsLength, id, hideToast, status, placement } = props;
+
   const description =
     status === "neutral"
       ? "Mornings contain the secret to an extraordinarily successful life. Learning is a weightless treasure you can always carry easily."
@@ -174,6 +153,7 @@ const ToastAlert = (props: any) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const sortedIndex = toastsLength - index;
   const clampedIndex = sortedIndex > 4 ? 4 : sortedIndex;
+  const side = placement.split("-")[0];
 
   React.useEffect(() => {
     if (!ref.current) return;
@@ -182,20 +162,21 @@ const ToastAlert = (props: any) => {
     const height = +(el.getAttribute("data-height") || 0) || el.clientHeight;
     el.dataset.height = "" + height;
 
-    // console.log("%c toastsLength", "color: #bfffc8", toastsLength);
-    // console.log("%c index", "color: #997326", index);
-    // console.log("%c sortedIndex", "color: #e57373", sortedIndex);
-    heights[sortedIndex - 1] = height;
+    heights[placement][sortedIndex - 1] = height;
 
     el.dataset.height = "" + height;
     el.style.setProperty("--height", height + "px");
-    el.style.setProperty("--front-height", `${heights[0]}px`);
+    el.style.setProperty("--front-height", `${heights[placement][0]}px`);
 
     if (sortedIndex > 1) {
-      const hoverOffsetY = heights
+      const hoverOffsetY = heights[placement]
         .slice(0, sortedIndex - 1)
         .reduce((res, next) => (res += next), 0);
-      el.style.setProperty("--hover-offset-y", `-${hoverOffsetY}px`);
+      if (side === "bottom") {
+        el.style.setProperty("--hover-offset-y", `-${hoverOffsetY}px`);
+      } else {
+        el.style.setProperty("--hover-offset-y", `${hoverOffsetY}px`);
+      }
     } else {
       el.style.removeProperty("--hover-offset-y");
     }
@@ -203,14 +184,12 @@ const ToastAlert = (props: any) => {
 
   React.useEffect(() => {
     return () => {
-      console.log("%c ref.current", "color: #00ff88", ref.current);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       if (ref.current) return;
 
-      heights.splice(sortedIndex - 1, 1);
-      console.log("%c heights", "color: #7f7700", heights);
+      heights[placement].splice(sortedIndex - 1, 1);
     };
-  }, [sortedIndex]);
+  }, [sortedIndex, placement]);
 
   return (
     <div

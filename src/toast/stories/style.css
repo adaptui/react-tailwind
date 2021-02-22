@@ -8,49 +8,108 @@
   position: fixed;
   display: block;
   max-width: 468px;
-  bottom: calc(var(--safe-area-gap, 0px) + 10px);
-  right: 20px;
   z-index: 5000;
   transition: all 0.4s ease;
 
+  &.bottom {
+    bottom: calc(var(--safe-area-gap, 0px) + 10px);
+  }
+
+  &.top {
+    top: calc(var(--safe-area-gap, 0px) + 10px);
+  }
+
+  &.left {
+    left: 20px;
+  }
+
+  &.center {
+    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.right {
+    right: 20px;
+  }
+
   & .toast-wrapper {
     position: absolute;
-    bottom: 0;
-    right: 0;
     width: 468px;
     transition: all 0.3s ease;
-    transform: translate3d(0, 86px, 0);
     opacity: 0;
 
-    &:not(:last-child) {
-      & .toast {
-        --i: calc(var(--index) - 1);
-        transform: translate3d(0, calc(1px - (var(--stack-gap) * var(--i))), 0)
-          scale(calc(1 - 0.05 * var(--i)));
-        opacity: 1;
-        height: var(--front-height);
+    &.left {
+      left: 0;
+    }
 
-        & .toast-actual {
-          & .toast-text {
-            opacity: 0;
-          }
+    &.right {
+      right: 0;
+    }
+
+    &.bottom {
+      bottom: 0;
+      transform: translate3d(0, 86px, 0);
+
+      &:not(:last-child) {
+        & .toast {
+          transform: translate3d(
+              0,
+              calc(1px - (var(--stack-gap) * var(--i))),
+              0
+            )
+            scale(calc(1 - 0.05 * var(--i)));
+        }
+      }
+
+      & .toast {
+        &:after {
+          top: calc(100% + 1px);
         }
       }
     }
 
+    &.top {
+      top: 0;
+      transform: translate3d(0, -86px, 0);
+
+      &:not(:last-child) {
+        & .toast {
+          transform: translate3d(
+              0,
+              calc(1px + (var(--stack-gap) * var(--i))),
+              0
+            )
+            scale(calc(1 - 0.05 * var(--i)));
+        }
+      }
+
+      & .toast {
+        &:after {
+          bottom: calc(100% + 1px);
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      & .toast {
+        --i: calc(var(--index) - 1);
+        opacity: 1;
+        height: var(--front-height);
+      }
+    }
+
     & .toast {
-      transition: all 0.3s ease;
-      height: var(--height);
       display: flex;
+      height: var(--height);
+      transition: all 0.3s ease;
 
       &:after {
         content: "";
         position: absolute;
         left: 0;
         right: 0;
-        top: calc(100% + 1px);
         width: 100%;
-        /* This for destroy the middle toast, still keep `spread` */
         height: 1000px;
         background: transparent;
       }
@@ -63,14 +122,29 @@
 }
 
 .toast-container:hover {
-  bottom: calc(var(--safe-area-gap, 0px) + 20px);
+  &.bottom {
+    bottom: calc(var(--safe-area-gap, 0px) + 20px);
 
-  & .toast-wrapper .toast {
-    transform: translate3d(
-      0,
-      calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)),
-      0
-    );
-    height: var(--height);
+    & .toast-wrapper .toast {
+      transform: translate3d(
+        0,
+        calc(var(--hover-offset-y) - var(--stack-gap) * (var(--index) - 1)),
+        0
+      );
+      height: var(--height);
+    }
+  }
+
+  &.top {
+    top: calc(var(--safe-area-gap, 0px) + 20px);
+
+    & .toast-wrapper .toast {
+      transform: translate3d(
+        0,
+        calc(var(--hover-offset-y) + var(--stack-gap) * (var(--index) - 1)),
+        0
+      );
+      height: var(--height);
+    }
   }
 }
