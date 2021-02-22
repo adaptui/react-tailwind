@@ -8,7 +8,6 @@ import {
   AlertActionButton,
 } from "./index";
 import { useTheme } from "../theme";
-import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
 import { AlertBody } from "./AlertBody";
 import { useMediaQuery } from "../hooks";
