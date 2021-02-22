@@ -9,7 +9,9 @@ import {
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
 import { TooltipBody } from "./TooltipBody";
+import { forwardRefWithAs } from "../utils/types";
 
 export type TooltipProps = TooltipInitialState & {
   /**
@@ -35,6 +37,19 @@ export type TooltipProps = TooltipInitialState & {
    */
   icon?: React.ReactNode;
 };
+
+const TooltipArrowIcon = forwardRefWithAs<BoxProps, HTMLOrSVGElement, "svg">(
+  (props, ref) => {
+    return (
+      <Box as="svg" ref={ref} viewBox="0 0 30 30" {...props}>
+        <path
+          fill="currentColor"
+          d="M10.068 24.97C7.751 27.38 5.237 30 2.634 30H0v1h31v-1h-2.634c-2.568 0-5.079-2.606-7.398-5.013C18.976 22.92 17.125 21 15.5 21c-1.62 0-3.454 1.91-5.432 3.97z"
+        />
+      </Box>
+    );
+  },
+);
 
 export const Tooltip = ({
   title,
@@ -74,18 +89,12 @@ export const Tooltip = ({
       <ReakitTooltip {...tooltip} {...props}>
         <TooltipBody {...props} variant={variant} size={size}>
           <TooltipArrow {...tooltip} size={arrowSizeMap[size]}>
-            <svg
+            <TooltipArrowIcon
               className={arrowStyles}
-              viewBox="0 0 30 30"
               style={{
                 transform: transformMap[tooltip.placement],
               }}
-            >
-              <path
-                fill="currentColor"
-                d="M10.068 24.97C7.751 27.38 5.237 30 2.634 30H0v1h31v-1h-2.634c-2.568 0-5.079-2.606-7.398-5.013C18.976 22.92 17.125 21 15.5 21c-1.62 0-3.454 1.91-5.432 3.97z"
-              />
-            </svg>
+            />
           </TooltipArrow>
           {title}
         </TooltipBody>
