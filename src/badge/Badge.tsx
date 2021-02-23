@@ -18,7 +18,17 @@ export type BadgeProps = BoxProps & {
    * @default "primary"
    */
   variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
+  /**
+   * floats the badge on parent element's corners
+   *
+   * @default false
+   */
   floating?: boolean;
+  /**
+   * floating position
+   *
+   * @default "top-right"
+   */
   position?: keyof Renderlesskit.GetThemeValue<"badge", "position">;
 };
 
