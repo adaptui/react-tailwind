@@ -4,10 +4,12 @@ export const badge = {
   attached: "absolute",
   attachedParent: "relative",
   position: {
-    "top-right": "-top-2 -right-0 transform translate-x-1/2",
-    "top-left": "-top-2 -left-0 transform -translate-x-1/2",
-    "bottom-right": "-bottom-2 -right-0 transform translate-x-1/2",
-    "bottom-left": "-bottom-2 -left-0 transform -translate-x-1/2",
+    "top-right": "-top-0 -right-0 transform translate-x-1/2 -translate-y-1/2",
+    "top-left": "-top-0 -left-0 transform -translate-x-1/2 -translate-y-1/2",
+    "bottom-right":
+      "-bottom-0 -right-0 transform translate-x-1/2 translate-y-1/2",
+    "bottom-left":
+      "-bottom-0 -left-0 transform -translate-x-1/2 translate-y-1/2",
   },
   size: {
     sm: "lib:px-1.5 lib:text-xs lib:font-medium",
