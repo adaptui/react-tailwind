@@ -22,6 +22,7 @@ export type BadgeProps = BoxProps & {
   position?: keyof Renderlesskit.GetThemeValue<"badge", "position">;
 };
 
+const EMPTY_STRING = " ";
 export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
   (props, ref) => {
     const htmlref = React.useRef<HTMLSpanElement>();
@@ -29,18 +30,24 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
       position = "top-right",
       variant = "primary",
       size = "md",
-      isAttached,
+      isAttached = false,
       className,
+      children = EMPTY_STRING,
       ...rest
     } = props;
 
+    console.log(props.children);
     const theme = useTheme();
     const badgeStyles = cx(
       theme.badge.base,
       theme.badge.size[size],
       theme.badge.variant[variant],
       isAttached
-        ? cx(theme.badge.attached, theme.badge.position[position])
+        ? cx(
+            theme.badge.attached,
+            theme.badge.position[position],
+            children === EMPTY_STRING ? theme.badge.dot[size] : "",
+          )
         : "",
       className,
     );
@@ -63,7 +70,9 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
         }}
         className={badgeStyles}
         {...rest}
-      />
+      >
+        {children}
+      </Box>
     );
   },
 );

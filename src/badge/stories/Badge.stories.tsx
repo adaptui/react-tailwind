@@ -26,7 +26,7 @@ export default {
 
 const base = storyTemplate<BadgeProps>(
   args => {
-    return <Badge {...args}></Badge>;
+    return <Badge {...args}>Badge</Badge>;
   },
   { variant: "primary", size: "md" },
 );
