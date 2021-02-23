@@ -45,16 +45,22 @@ export const Outline = base({ variant: "outline" });
 
 export const Ghost = base({ variant: "ghost" });
 
-const attached = storyTemplate<BadgeProps>(
+const attached = storyTemplate<BadgeProps & { badgeValue?: string }>(
   args => {
     return (
       <Button variant="outline">
         Hello world
-        <Badge {...args}>1</Badge>
+        <Badge {...args}>{args.badgeValue}</Badge>
       </Button>
     );
   },
-  { variant: "primary", position: "top-right", isAttached: true, size: "sm" },
+  {
+    variant: "primary",
+    position: "top-right",
+    isAttached: true,
+    size: "sm",
+    badgeValue: "hello world",
+  },
 );
 
 export const Attached = attached({});
