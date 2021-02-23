@@ -26,7 +26,7 @@ export default {
 
 const base = storyTemplate<BadgeProps>(
   args => {
-    return <Badge {...args}>Badge</Badge>;
+    return <Badge {...args}></Badge>;
   },
   { variant: "primary", size: "md" },
 );
@@ -59,7 +59,7 @@ const attached = storyTemplate<BadgeProps & { badgeValue?: string }>(
     position: "top-right",
     isAttached: true,
     size: "sm",
-    badgeValue: "hello world",
+    badgeValue: "22",
   },
 );
 

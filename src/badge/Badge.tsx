@@ -49,7 +49,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
       if (!isAttached) return;
       if (ref && htmlref.current) {
         const parentElement = htmlref.current?.parentElement;
-        parentElement!.classList.add("relative");
+        parentElement!.classList.add(theme.badge.attachedParent);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
