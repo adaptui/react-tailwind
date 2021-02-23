@@ -18,7 +18,7 @@ export type BadgeProps = BoxProps & {
    * @default "primary"
    */
   variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
-  isAttached?: boolean;
+  floating?: boolean;
   position?: keyof Renderlesskit.GetThemeValue<"badge", "position">;
 };
 
@@ -29,7 +29,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
       position = "top-right",
       variant = "primary",
       size = "md",
-      isAttached = false,
+      floating = false,
       className,
       ...rest
     } = props;
@@ -39,7 +39,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
       theme.badge.base,
       theme.badge.size[size],
       theme.badge.variant[variant],
-      isAttached
+      floating
         ? cx(
             theme.badge.attached,
             theme.badge.position[position],
@@ -50,7 +50,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
     );
 
     React.useEffect(() => {
-      if (!isAttached) return;
+      if (!floating) return;
       if (ref && htmlref.current) {
         const parentElement = htmlref.current?.parentElement;
         parentElement!.classList.add(theme.badge.attachedParent);

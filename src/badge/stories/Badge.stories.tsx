@@ -20,7 +20,7 @@ export default {
       "bottom-left",
       "bottom-right",
     ]),
-    isAttached: { control: "boolean" },
+    floating: { control: "boolean" },
   },
 } as Meta;
 
@@ -57,7 +57,7 @@ const attached = storyTemplate<BadgeProps & { badgeValue?: string }>(
   {
     variant: "primary",
     position: "top-right",
-    isAttached: true,
+    floating: true,
     size: "sm",
     badgeValue: "22",
   },
