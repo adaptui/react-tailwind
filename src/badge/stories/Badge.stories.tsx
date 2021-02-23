@@ -2,17 +2,26 @@ import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 
 import {
-  createControls,
   storyTemplate,
+  createUnionControl,
 } from "../../../.storybook/storybookUtils";
 import { Badge, BadgeProps } from "../Badge";
+import { Button } from "../../button";
 
 export default {
   title: "Badge",
   component: Badge,
-  argTypes: createControls("badge", {
-    unions: ["size", "variant"],
-  }),
+  argTypes: {
+    size: createUnionControl(["sm", "md", "lg"]),
+    variant: createUnionControl(["primary", "secondary", "outline", "ghosts"]),
+    position: createUnionControl([
+      "top-left",
+      "top-right",
+      "bottom-left",
+      "bottom-right",
+    ]),
+    isAttached: { control: "boolean" },
+  },
 } as Meta;
 
 const base = storyTemplate<BadgeProps>(
@@ -35,3 +44,17 @@ export const Secondary = base({ variant: "secondary" });
 export const Outline = base({ variant: "outline" });
 
 export const Ghost = base({ variant: "ghost" });
+
+const attached = storyTemplate<BadgeProps>(
+  args => {
+    return (
+      <Button variant="outline">
+        Hello world
+        <Badge {...args}>1</Badge>
+      </Button>
+    );
+  },
+  { variant: "primary", position: "top-right", isAttached: true, size: "sm" },
+);
+
+export const Attached = attached({});

@@ -18,21 +18,53 @@ export type BadgeProps = BoxProps & {
    * @default "primary"
    */
   variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
+  isAttached?: boolean;
+  position?: keyof Renderlesskit.GetThemeValue<"badge", "position">;
 };
 
 export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
   (props, ref) => {
-    const { variant = "primary", size = "md", className, ...rest } = props;
+    const htmlref = React.useRef<HTMLSpanElement>();
+    const {
+      position = "top-right",
+      variant = "primary",
+      size = "md",
+      isAttached,
+      className,
+      ...rest
+    } = props;
 
     const theme = useTheme();
     const badgeStyles = cx(
       theme.badge.base,
       theme.badge.size[size],
       theme.badge.variant[variant],
+      isAttached
+        ? cx(theme.badge.attached, theme.badge.position[position])
+        : "",
       className,
     );
 
-    return <Box as="span" ref={ref} className={badgeStyles} {...rest} />;
+    React.useEffect(() => {
+      if (!isAttached) return;
+      if (ref && htmlref.current) {
+        const parentElement = htmlref.current?.parentElement;
+        parentElement!.classList.add("relative");
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return (
+      <Box
+        as="span"
+        ref={innerRef => {
+          ref = innerRef;
+          htmlref.current = innerRef;
+        }}
+        className={badgeStyles}
+        {...rest}
+      />
+    );
   },
 );
 
