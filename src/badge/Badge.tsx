@@ -4,6 +4,7 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
+import { useMergeRefs } from "../hooks/useMergeRefs";
 
 export type BadgeProps = BoxProps & {
   /**
@@ -61,7 +62,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
 
     React.useEffect(() => {
       if (!floating) return;
-      if (ref && htmlref.current) {
+      if (htmlref && htmlref.current) {
         const parentElement = htmlref.current?.parentElement;
         parentElement!.classList.add(theme.badge.attachedParent);
       }
@@ -71,10 +72,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
     return (
       <Box
         as="span"
-        ref={innerRef => {
-          ref = innerRef;
-          htmlref.current = innerRef;
-        }}
+        ref={useMergeRefs(htmlref, ref)}
         className={badgeStyles}
         {...rest}
       />

@@ -5,8 +5,9 @@ import {
   storyTemplate,
   createUnionControl,
 } from "../../../.storybook/storybookUtils";
-import { Badge, BadgeProps } from "../Badge";
+
 import { Button } from "../../button";
+import { Badge, BadgeProps } from "../Badge";
 
 export default {
   title: "Badge",
@@ -45,7 +46,7 @@ export const Outline = base({ variant: "outline" });
 
 export const Ghost = base({ variant: "ghost" });
 
-const attached = storyTemplate<BadgeProps & { badgeValue?: string }>(
+const floating = storyTemplate<BadgeProps & { badgeValue?: string }>(
   args => {
     return (
       <Button variant="outline">
@@ -63,4 +64,4 @@ const attached = storyTemplate<BadgeProps & { badgeValue?: string }>(
   },
 );
 
-export const Attached = attached({});
+export const Floating = floating({});
