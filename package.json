@@ -25,11 +25,16 @@
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "tailwindPlugins",
+    "preset.d.ts",
+    "preset.js"
   ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "concurrently yarn:build:*",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable",
     "build-storybook": "build-storybook",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx -d dist/esm --source-maps",
@@ -41,7 +46,7 @@
     "format:package": "sort-package-json",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js",
     "lint:fix": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
-    "prepublishOnly": "yarn test && yarn build",
+    "prepublishOnly": "yarn test && yarn build && pinst --disable",
     "release": "git add . && standard-version -a",
     "postrelease": "concurrently yarn:release:*",
     "release:github": "conventional-github-releaser -p angular",
@@ -64,6 +69,7 @@
   },
   "dependencies": {
     "@renderlesskit/react": "^0.2.0",
+    "lodash": "^4.17.21",
     "reakit": "^1.3.5"
   },
   "devDependencies": {
@@ -116,11 +122,10 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.10.1",
     "gacp": "^2.10.2",
-    "husky": "^4.3.8",
+    "husky": "^5.1.1",
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
     "lint-staged": "^10.5.4",
-    "lodash": "^4.17.21",
     "postcss": "^7.0.35",
     "prettier": "^2.2.1",
     "react": "^17.0.1",

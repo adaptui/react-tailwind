@@ -1,4 +1,3 @@
-import { GetEffectiveTypeRootsHost } from "tsd/libraries/typescript";
 import { DefaultTheme } from "..";
 
 // https://stackoverflow.com/questions/60795256/typescript-type-merging

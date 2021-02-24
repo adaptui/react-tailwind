@@ -73,6 +73,12 @@ for commit guidelines.
 - **tag:** added tag component
   ([#12](https://github.com/timelessco/renderlesskit-react-tailwind/issues/12))
   ([0d681f3](https://github.com/timelessco/renderlesskit-react-tailwind/commit/0d681f31de65e48e763a2e7e2c5474fb81dc56bf))
+- **babel:** ✨ add babel build
+  ([47e4e1c](https://github.com/timelessco/react-components-template/commit/47e4e1cc253ace6a1b4db9f473f5ec1cda4015b4))
+- **release:** 💥 add standard version release pipeline
+  ([ef8a7d7](https://github.com/timelessco/react-components-template/commit/ef8a7d73e0cb44cd20c0faff3ad7affc4a810e96))
+- **storybook:** ✨ add storybook & add button components
+  ([6dfd6be](https://github.com/timelessco/react-components-template/commit/6dfd6be8b17dce55d2f73eba6eb1bf25c9847748))
 
 ### Tests
 
@@ -191,14 +197,3 @@ for commit guidelines.
 - remove data-testid from production
   ([#42](https://github.com/timelessco/renderlesskit-react-tailwind/issues/42))
   ([7591816](https://github.com/timelessco/renderlesskit-react-tailwind/commit/7591816e63878a7bc40e35d382342920275955ec))
-
-## 1.0.0 (2020-12-07)
-
-### Features
-
-- **babel:** ✨ add babel build
-  ([47e4e1c](https://github.com/timelessco/react-components-template/commit/47e4e1cc253ace6a1b4db9f473f5ec1cda4015b4))
-- **release:** 💥 add standard version release pipeline
-  ([ef8a7d7](https://github.com/timelessco/react-components-template/commit/ef8a7d73e0cb44cd20c0faff3ad7affc4a810e96))
-- **storybook:** ✨ add storybook & add button components
-  ([6dfd6be](https://github.com/timelessco/react-components-template/commit/6dfd6be8b17dce55d2f73eba6eb1bf25c9847748))
