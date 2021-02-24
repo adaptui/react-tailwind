@@ -4,13 +4,13 @@ import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
 
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
-import { useRadioProps, useRadioState } from "./Radio";
+import { useRadioProps, useRadioStateContext } from "./Radio";
 
 export type RadioInputProps = Partial<ReakitRadioProps> & {};
 
 export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
   const { className, ...rest } = props;
-  const state = useRadioState();
+  const state = useRadioStateContext();
   const {
     size,
     checkedIcon,
