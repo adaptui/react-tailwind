@@ -1,9 +1,8 @@
-const { preset } = require("./preset");
+const preset = require("./preset");
 
 module.exports = preset({
   purge: {
     content: [
-      "./node_modules/@tailwindcss/forms/**/*",
       "./src/theme/defaultTheme/**/*",
       "./src/**/stories/*.stories.@(ts|tsx)",
     ],
