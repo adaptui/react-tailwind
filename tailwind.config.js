@@ -1,4 +1,4 @@
-const preset = require("./preset");
+const { preset } = require("./preset");
 
 module.exports = preset({
   purge: {
