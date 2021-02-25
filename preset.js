@@ -465,17 +465,6 @@ const renderlesskitConfig = {
     require("./tailwindPlugins/utilities"),
     require("./tailwindPlugins/variantPlugin"),
   ],
-  components: {
-    extend: {
-      avatar: {
-        badge: {
-          statuses: {
-            custom: "lib:text-red-500",
-          },
-        },
-      },
-    },
-  },
 };
 
 function arrayMergeFn(destinationArray, sourceArray) {
@@ -501,4 +490,4 @@ function preset(tailwindConfig) {
   });
 }
 
-module.exports = { preset };
+module.exports = preset;
