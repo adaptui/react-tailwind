@@ -16,6 +16,7 @@ const TOAST_LIMIT = 20;
 export enum ActionType {
   ADD_TOAST,
   UPDATE_TOAST,
+  UPDATE_ALL_TOAST,
   UPSERT_TOAST,
   DISMISS_TOAST,
   REMOVE_TOAST,
@@ -34,6 +35,10 @@ export type Action<T> =
     }
   | {
       type: ActionType.UPDATE_TOAST;
+      toast: Partial<T>;
+    }
+  | {
+      type: ActionType.UPDATE_ALL_TOAST;
       toast: Partial<T>;
     }
   | {
@@ -61,7 +66,7 @@ const reducer = <T extends Toast>(
     case ActionType.ADD_TOAST:
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+        toasts: [...state.toasts, action.toast].slice(0, TOAST_LIMIT),
       };
 
     case ActionType.UPDATE_TOAST:
@@ -70,6 +75,12 @@ const reducer = <T extends Toast>(
         toasts: state.toasts.map(t =>
           t.id === action.toast.id ? { ...t, ...action.toast } : t,
         ),
+      };
+
+    case ActionType.UPDATE_ALL_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t => ({ ...t, ...action.toast })),
       };
 
     case ActionType.UPSERT_TOAST:

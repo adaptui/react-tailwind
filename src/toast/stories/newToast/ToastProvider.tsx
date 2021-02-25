@@ -1,5 +1,5 @@
 import { Toast } from "./types";
-import { createContext } from "../utils";
+import { createContext } from "../../../utils";
 import { useStore, State, Action } from "./useToastsStore";
 
 export type ToastsStore = State<Toast> & {

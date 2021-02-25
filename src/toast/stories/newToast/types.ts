@@ -10,10 +10,11 @@ export interface Toast {
   createdAt: number;
   id: string;
   content: Content;
-  duration?: number;
   visible: boolean;
   pauseDuration: number;
   height?: number;
+  frontHeight?: number;
+  duration?: number;
 }
 
 export type ToastOptions = Partial<Pick<Toast, "id" | "duration">>;

@@ -133,8 +133,6 @@ const renderlesskitConfig = {
     ],
     backgroundImage: ["lib", "DEFAULT", "responsive"],
     backgroundOpacity: [
-      "lib",
-      "DEFAULT",
       "responsive",
       "group-hover",
       "lib:focus-within",
