@@ -17,9 +17,6 @@ type DeepDictionary<K> = {
 
 export type DefaultTheme = typeof defaultTheme;
 
-export type ExtendThemeType = DefaultTheme &
-  DeepPartial<{ extend: DefaultTheme }>;
-
 export type ThemeContext = DeepDictionary<DefaultTheme>;
 
 const [ThemeProvider, useTheme] = createContext<ThemeContext>({
@@ -29,11 +26,14 @@ const [ThemeProvider, useTheme] = createContext<ThemeContext>({
 
 export { useTheme };
 
+type PartialDefaultTheme = DeepPartial<DefaultTheme>;
+type ExtendableDefaultTheme = PartialDefaultTheme & {
+  extend?: PartialDefaultTheme;
+};
+
 export type RenderlesskitProviderProps = {
-  tailwindConfig?: any;
-  theme?: ExtendThemeType;
   children?: React.ReactNode;
-  tailwindProperties?: { [key: string]: string[] };
+  theme?: ExtendableDefaultTheme;
 };
 
 export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
@@ -43,12 +43,10 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
     mergeThemes([theme, defaultTheme]),
   );
 
-  console.log(finalTheme.button.variant.primary);
-
   return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
 };
 
-function mergeThemes(themes: ExtendThemeType[]) {
+function mergeThemes(themes: PartialDefaultTheme[]) {
   return {
     ...themes.reduce<DefaultTheme>(
       (merged, theme) => defaults(merged, theme),
@@ -61,9 +59,7 @@ function mergeThemes(themes: ExtendThemeType[]) {
   };
 }
 
-function collectExtends(
-  items: ExtendThemeType[],
-): { [Key: string]: ExtendThemeType[] } {
+function collectExtends(items: ExtendableDefaultTheme[]) {
   return items.reduce((merged, { extend }) => {
     return mergeWith(merged, extend, (mergedValue, extendValue) => {
       if (isUndefined(mergedValue)) {
@@ -79,7 +75,10 @@ function collectExtends(
   }, {});
 }
 
-function mergeExtensions({ extend, ...theme }: any): ExtendThemeType {
+function mergeExtensions({
+  extend,
+  ...theme
+}: DefaultTheme & { extend?: PartialDefaultTheme }) {
   return mergeWith(theme, extend, (themeValue, extendValue) => {
     return mergeWith(themeValue, ...extendValue, (merged: any, value: any) => {
       if (isString(merged) && isString(value)) {
