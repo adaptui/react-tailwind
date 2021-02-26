@@ -8,8 +8,7 @@ import * as React from "react";
 import { RunOptions } from "axe-core";
 import { configureAxe } from "jest-axe";
 
-// @ts-ignore
-import theme from "../../theme";
+import theme from "../../renderlesskit.config";
 import { RenderlesskitProvider } from "../theme";
 export * from "@testing-library/react";
 
