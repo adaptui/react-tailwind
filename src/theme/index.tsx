@@ -37,18 +37,13 @@ export type RenderlesskitProviderProps = {
 };
 
 export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
-  const {
-    children,
-    tailwindConfig = { components: { extend: {} } },
-    theme = defaultTheme,
-  } = props;
+  const { children, theme = defaultTheme } = props;
 
-  const {
-    components: userTheme,
-  }: { components: ExtendThemeType } = tailwindConfig;
   const finalTheme: DefaultTheme = mergeExtensions(
-    mergeThemes([userTheme, theme]),
+    mergeThemes([theme, defaultTheme]),
   );
+
+  console.log(finalTheme.button.variant.primary);
 
   return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
 };

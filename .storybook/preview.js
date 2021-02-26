@@ -1,5 +1,6 @@
+import React from "react";
 import "../src/button/stories/style.css";
-import tailwindConfig from "../tailwind.config";
+import theme from "../renderlesskit.config.ts";
 import { RenderlesskitProvider } from "../src/theme";
 
 export const parameters = {
@@ -9,7 +10,7 @@ export const parameters = {
 export const decorators = [
   (Story, context) => {
     return (
-      <RenderlesskitProvider tailwindConfig={tailwindConfig}>
+      <RenderlesskitProvider theme={theme}>
         <div className="box-border font-sans">
           <Story />
         </div>
