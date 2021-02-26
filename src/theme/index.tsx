@@ -46,7 +46,7 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
   return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
 };
 
-function mergeThemes(themes: PartialDefaultTheme[]) {
+export function mergeThemes(themes: PartialDefaultTheme[]) {
   return {
     ...themes.reduce<DefaultTheme>(
       (merged, theme) => defaults(merged, theme),
@@ -75,7 +75,7 @@ function collectExtends(items: ExtendableDefaultTheme[]) {
   }, {});
 }
 
-function mergeExtensions({
+export function mergeExtensions({
   extend,
   ...theme
 }: DefaultTheme & { extend?: PartialDefaultTheme }) {
