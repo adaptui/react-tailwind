@@ -20,6 +20,14 @@ describe("<Switch />", () => {
     expect(screen.getByRole("switch")).not.toBeChecked();
   });
 
+  it("can be disabled", () => {
+    render(<Switch disabled defaultState={true} />);
+
+    expect(screen.getByRole("switch")).toBeDisabled();
+    // toBeChecked is failing for this case
+    expect((screen.getByRole("switch") as HTMLInputElement).checked).toBe(true);
+  });
+
   it("should support controlled state", () => {
     const Controlled = () => {
       const [state, setState] = React.useState(false);
