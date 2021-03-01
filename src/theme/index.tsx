@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
-import { defaults, isString, isUndefined, mergeWith } from "lodash";
+import { defaults, cloneDeep, isString, isUndefined, mergeWith } from "lodash";
 
 import { createContext } from "../utils";
 import defaultTheme from "./defaultTheme";
@@ -39,8 +39,9 @@ export type RenderlesskitProviderProps = {
 export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
   const { children, theme = defaultTheme } = props;
 
-  const finalTheme: DefaultTheme = mergeExtensions(
-    mergeThemes([theme, defaultTheme]),
+  const finalTheme: DefaultTheme = React.useMemo(
+    () => mergeExtensions(mergeThemes([theme, cloneDeep(defaultTheme)])),
+    [theme],
   );
 
   return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
