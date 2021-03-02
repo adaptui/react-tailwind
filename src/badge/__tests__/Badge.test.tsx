@@ -1,6 +1,6 @@
 import React from "react";
-import { render, screen } from "../../utils/testUtils";
 import { Badge } from "../Badge";
+import { render, screen } from "../../utils/testUtils";
 
 describe("<Badge />", () => {
   it("should render properly", () => {
