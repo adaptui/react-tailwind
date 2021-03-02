@@ -61,3 +61,11 @@ export const Custom = storyTemplate<SwitchProps>(
   ),
   { size: "md", defaultState: false },
 )({});
+
+export const Controlled = storyTemplate<SwitchProps>(args => {
+  const [state, setState] = React.useState(false);
+
+  return (
+    <Switch state={state} onStateChange={() => setState(!state)} {...args} />
+  );
+})({});

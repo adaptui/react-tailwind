@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Switch /> should render correctly 1`] = `
+<DocumentFragment>
+  <label
+    class="lib:inline-block leading-normal lib:align-top lib:cursor-pointer"
+  >
+    <input
+      aria-checked="false"
+      class="lib:sr-only"
+      role="switch"
+      type="checkbox"
+    />
+    <span
+      aria-hidden="true"
+      class="lib:inline-flex lib:justify-start lib:flex-shrink-0 lib:rounded-full lib:p-0.5 lib:transition-all lib:h-4 lib:w-6.5 lib:bg-gray-300"
+      role="img"
+    >
+      <span
+        class="lib:transition-transform lib:transform lib:bg-white lib:rounded-full lib:shadow lib:h-3 lib:w-3 lib:translate-x-0"
+      />
+    </span>
+  </label>
+</DocumentFragment>
+`;
