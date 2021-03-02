@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Switch } from "../Switch";
-import { cleanup, fireEvent, render, screen } from "../../utils/testUtils";
 import { SwitchLabel, SwitchInput } from "..";
+import { cleanup, fireEvent, render, screen } from "../../utils/testUtils";
 
 afterEach(cleanup);
 
