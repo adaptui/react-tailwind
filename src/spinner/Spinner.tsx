@@ -5,7 +5,7 @@ import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
 
-export interface SpinnerProps extends BoxProps {
+export type SpinnerProps = BoxProps & {
   /**
    * For accessibility, it is important to add a fallback loading text.
    * This text will be visible to screen readers.
@@ -25,7 +25,7 @@ export interface SpinnerProps extends BoxProps {
    * @default "transparent"
    */
   stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
-}
+};
 
 export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
   (props, ref) => {
@@ -48,8 +48,10 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
 
     return (
       <Box ref={ref} className={spinnerStyles} {...rest}>
-        {label && <div className="sr-only">{label}</div>}
+        {label && <div className={theme.spinner.aria}>{label}</div>}
       </Box>
     );
   },
 );
+
+Spinner.displayName = "Spinner";

@@ -7,10 +7,9 @@ import { BoxProps } from "../box";
 import { SwitchIcon } from "./SwitchIcon";
 import { SwitchLabel } from "./SwitchLabel";
 import { SwitchInput } from "./SwitchInput";
+import { CheckboxStatus } from "../checkbox";
 import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
-
-export type CheckboxStatus = CheckboxStateReturn["state"];
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type SwitchContext = {
   state: ReakitCheckboxOptions;
@@ -24,9 +23,7 @@ const [SwitchProvider, useSwitchContext] = createContext<SwitchContext>({
 
 export { useSwitchContext };
 
-type SwitchRenderProps = {
-  children?: ((state: CheckboxStateReturn) => JSX.Element) | React.ReactNode;
-};
+type SwitchRenderProps = RenderProp<CheckboxStateReturn>;
 
 export type SwitchProps = BoxProps &
   Omit<ReakitCheckboxOptions, "size" | "setState"> & {
@@ -41,8 +38,8 @@ export type SwitchProps = BoxProps &
 
 export const Switch = forwardRefWithAs<
   SwitchProps & SwitchRenderProps,
-  HTMLDivElement,
-  "div"
+  HTMLLabelElement,
+  "label"
 >((props, ref) => {
   const {
     defaultState,
@@ -52,7 +49,7 @@ export const Switch = forwardRefWithAs<
     checked,
     disabled,
     focusable,
-    size = "sm",
+    size = "md",
     children,
     ...rest
   } = props;
@@ -87,3 +84,5 @@ export const Switch = forwardRefWithAs<
     </SwitchProvider>
   );
 });
+
+Switch.displayName = "Switch";

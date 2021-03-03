@@ -66,3 +66,5 @@ export const CircularProgressBar = forwardRefWithAs<
     </Box>
   );
 });
+
+CircularProgressBar.displayName = "CircularProgressBar";

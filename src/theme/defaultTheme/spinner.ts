@@ -5,6 +5,7 @@ export const spinner = {
     transparent: "lib:border-b-transparent lib:border-l-transparent",
     visible: "lib:border-b-gray-300 lib:border-l-gray-300",
   },
+  aria: "lib:sr-only",
   size: {
     xs: "lib:h-3 lib:w-3",
     sm: "lib:h-4 lib:w-4",

@@ -11,18 +11,18 @@ module.exports = function (api) {
       "@babel/env",
       {
         modules: isCommonJS ? "commonjs" : false,
+        loose: true,
         targets: {
           esmodules: isESM ? true : undefined,
         },
       },
     ],
-    "@babel/preset-typescript",
     "@babel/preset-react",
+    "@babel/preset-typescript",
   ];
 
   const plugins = [
-    "@chakra-ui/babel-plugin",
-    "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
     isBuild
       ? [
           "babel-plugin-jsx-remove-data-test-id",

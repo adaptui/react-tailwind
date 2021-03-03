@@ -26,7 +26,7 @@ export type TagGroupProps = BoxProps &
 export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
   (props, ref) => {
     const {
-      size = "sm",
+      size = "md",
       variant = "primary",
       baseId,
       allowArrowNavigation = true,
@@ -61,5 +61,7 @@ export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
     );
   },
 );
+
+TagGroup.displayName = "TagGroup";
 
 export default TagGroup;

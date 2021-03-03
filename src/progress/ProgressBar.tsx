@@ -37,3 +37,5 @@ export const ProgressBar = forwardRefWithAs<
     />
   );
 });
+
+ProgressBar.displayName = "ProgressBar";

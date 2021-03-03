@@ -15,9 +15,12 @@ const renderlesskitConfig = {
         gray: colors.gray,
       },
       fontFamily: {
-        sans: ["Inter"],
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
+        1: ["0.25rem", { lineHeight: "0.25rem" }],
+        1.5: ["0.375rem", { lineHeight: "0.375rem" }],
+        2: ["0.5rem", { lineHeight: "0.5rem" }],
         xxs: ["0.625rem", { lineHeight: "0.625rem" }],
       },
       spacing: {

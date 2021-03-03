@@ -1,5 +1,9 @@
 import * as React from "react";
 
+export type RenderProp<T> = {
+  children?: React.ReactNode | ((args: T) => JSX.Element);
+};
+
 export type As<Props = any> = React.ElementType<Props>;
 
 export type PropsWithAs<Props = {}, Type extends As = As> = Props &
@@ -12,6 +16,7 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
     props: PropsWithAs<Props, Type> & { as: Type },
   ): JSX.Element;
   (props: PropsWithAs<Props, DefaultType>): JSX.Element;
+  displayName?: string;
 };
 
 /**

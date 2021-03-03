@@ -9,6 +9,8 @@ export * from "./ExclamationTriangle";
 export * from "./GenericAvatar";
 export * from "./Indeterminate";
 export * from "./InfoCircle";
+export * from "./Moon";
+export * from "./Dot";
 export * from "./Photograph";
 export * from "./Search";
 export * from "./Wheel";

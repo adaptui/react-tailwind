@@ -33,6 +33,7 @@ export function createIcon(options: CreateIconOptions) {
     viewBox = "0 0 24 24",
     d: pathDefinition,
     path,
+    displayName,
     defaultProps = {},
   } = options;
 
@@ -45,6 +46,8 @@ export function createIcon(options: CreateIconOptions) {
       );
     },
   );
+
+  IconComponent.displayName = displayName;
 
   return IconComponent;
 }

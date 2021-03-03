@@ -1,17 +1,16 @@
 export const circularProgress = {
-  wrapper: "relative inline-flex",
+  wrapper: "lib:relative lib:inline-flex",
   bar: {
     size: {
-      xs: "w-3 h-3",
-      sm: "w-4 h-4",
-      lg: "w-5 h-5",
-      xl: "w-6 h-6",
+      sm: "lib:w-4 lib:h-4",
+      md: "lib:w-5 lib:h-5",
+      lg: "lib:w-6 lib:h-6",
     },
-    indeterminate: "animate-spin",
-    track: "text-gray-300",
+    indeterminate: "lib:animate-spin",
+    track: "lib:text-gray-300",
     innerTrack: {
-      base: "text-gray-800 transition-all",
-      indeterminate: "animate-circularProgress",
+      base: "lib:text-gray-800 lib:transition-all",
+      indeterminate: "lib:animate-circularProgress",
     },
   },
 };

@@ -24,7 +24,7 @@ export const SliderThumb = forwardRefWithAs<
   const {
     thumbSize,
     orientation = "horizontal",
-    size = "sm",
+    size = "md",
     origin = 0,
   } = useSliderPropsContext();
 
@@ -80,3 +80,5 @@ export const SliderThumb = forwardRefWithAs<
     </>
   );
 });
+
+SliderThumb.displayName = "SliderThumb";

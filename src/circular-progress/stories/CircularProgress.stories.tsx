@@ -14,7 +14,7 @@ import { CircularProgressWrapper } from "../CircularProgressWrapper";
 export default {
   title: "CircularProgress",
   component: CircularProgress,
-  argTypes: { size: createUnionControl(["xs", "sm", "lg", "xl"]) },
+  argTypes: { size: createUnionControl(["sm", "md", "lg"]) },
 } as Meta;
 
 const base = storyTemplate<CircularProgressProps>(
@@ -28,13 +28,12 @@ const base = storyTemplate<CircularProgressProps>(
       </>
     );
   },
-  { size: "sm" },
+  { size: "md" },
 );
 
-export const ExtraSmall = base({ size: "xs" });
-export const Small = base({});
+export const Small = base({ size: "sm" });
+export const Medium = base({});
 export const Large = base({ size: "lg" });
-export const ExtraLarge = base({ size: "xl" });
 
 export const Custom = storyTemplate<CircularProgressProps>(
   args => {
@@ -54,7 +53,7 @@ export const Custom = storyTemplate<CircularProgressProps>(
       </>
     );
   },
-  { size: "lg" },
+  { size: "md" },
 )({});
 
 const useCircularProgressState = (initialValue: number | null = 0) => {

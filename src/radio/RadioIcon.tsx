@@ -1,20 +1,18 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { Box, BoxProps, RadioState } from "reakit";
 
 import {
   RadioCheckedIcon,
   RadioDisabledIcon,
   RadioUncheckedIcon,
 } from "../icons/RadioIcons";
-import { useTheme } from "..";
-import { RadioCommonProps } from "./Radio";
-import { useRadioContext } from "./RadioGroup";
+import { useTheme } from "../index";
+import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
+import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
 
 export type RadioIconProps = BoxProps &
-  RadioState &
-  RadioCommonProps & {
+  Pick<RadioProps, "value" | "disabled"> & {
     checkedIcon?: React.ReactNode;
     uncheckedIcon?: React.ReactNode;
     disabledIcon?: React.ReactNode;
@@ -25,17 +23,15 @@ export const RadioIcon = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { radioState, radioSize } = useRadioContext();
-  const { value, size, disabled, ...mainProps } = props;
-  const { className, children, ...rest } = mainProps;
-
-  const _size = size || radioSize || "sm";
-  const stateProp = radioState?.state === value;
+  const { className, children, ...rest } = props;
+  const { value, disabled, size = "md" } = useRadioProps();
+  const { state } = useRadioStateContext();
+  const stateProp = state === value;
 
   const theme = useTheme();
   const radioIconStyles = cx(
     theme.radio.icon.base,
-    theme.radio.icon.size[_size],
+    theme.radio.icon.size[size],
     disabled
       ? theme.radio.icon.disabled
       : stateProp
@@ -68,3 +64,5 @@ export const RadioIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+RadioIcon.displayName = "RadioIcon";

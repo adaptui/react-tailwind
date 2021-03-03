@@ -2,11 +2,15 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { createContext } from "../utils";
-import { Avatar, AvatarProps } from "./Avatar";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs } from "../utils/types";
+import { createContext, getValidChildren } from "../utils";
+import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
 
-export type AvatarGroupProps = Pick<AvatarProps, "size"> & { limit?: number };
-export type AvatarGroupContext = Pick<AvatarProps, "size"> & {};
+export type AvatarGroupContext = Pick<
+  AvatarProps,
+  "size" | "showBorder" | "borderColor"
+> & {};
 
 const [AvatarGroupProvider, useAvatarGroup] = createContext<AvatarGroupContext>(
   {
@@ -17,39 +21,91 @@ const [AvatarGroupProvider, useAvatarGroup] = createContext<AvatarGroupContext>(
 
 export { useAvatarGroup };
 
-export const AvatarGroup: React.FC<AvatarGroupProps> = ({
-  limit = 100,
-  children,
-  size,
-  ...rest
-}) => {
-  const state = React.useMemo(() => ({ size }), [size]);
+export type AvatarGroupProps = BoxProps &
+  AvatarGroupContext & { limit?: number };
 
-  const avatars = React.Children.toArray(children);
-  const childrenCount = React.Children.count(children);
+export const AvatarGroup = forwardRefWithAs<
+  AvatarGroupProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const {
+    limit = 100,
+    size = "md",
+    showBorder = true,
+    borderColor,
+    className,
+    children,
+    ...rest
+  } = props;
   const theme = useTheme();
+  const context = React.useMemo(() => ({ size, showBorder, borderColor }), [
+    size,
+    showBorder,
+    borderColor,
+  ]);
 
-  const isOverLimit = childrenCount > limit && limit >= 0;
-  if (isOverLimit) {
-    avatars.splice(limit);
-  }
+  const validChildren = getValidChildren(children);
+
+  /**
+   * Get the avatars within the max
+   */
+  const childrenWithinMax = limit
+    ? validChildren.slice(0, limit)
+    : validChildren;
+
+  /**
+   * Get the remaining avatar count
+   */
+  const excess = limit != null && validChildren.length - limit;
 
   return (
-    <AvatarGroupProvider value={state}>
-      <div
+    <AvatarGroupProvider value={context}>
+      <Box
+        ref={ref}
         role="group"
         aria-label="Avatar group"
-        className={cx(theme.avatar.group.base)}
+        className={cx(theme.avatar.group.base, className)}
         {...rest}
       >
-        {avatars}
-        {isOverLimit ? (
-          <Avatar
-            data-testid="testid-truncated"
-            name={`+ ${childrenCount - limit}`}
+        {childrenWithinMax}
+        {excess > 0 ? (
+          <AvatarExcess
+            size={size}
+            excess={excess}
+            {...validChildren[limit].props}
           />
         ) : null}
-      </div>
+      </Box>
     </AvatarGroupProvider>
+  );
+});
+
+AvatarGroup.displayName = "AvatarGroup";
+
+const AvatarExcess = ({
+  excess,
+  size = "md",
+  ...props
+}: AvatarProps & {
+  excess: number | false;
+}) => {
+  const theme = useTheme();
+
+  const excessStyles = cx(
+    theme.avatar.group.excess.text.base,
+    theme.avatar.group.excess.text.size[size],
+  );
+
+  return (
+    <Avatar {...props}>
+      <>
+        <AvatarContents />
+        <Box className={theme.avatar.group.excess.bg} />
+        <Box data-testid="testid-excess_label" className={excessStyles}>
+          +{size === "xs" ? "" : excess}
+        </Box>
+      </>
+    </Avatar>
   );
 };
