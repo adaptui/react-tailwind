@@ -32,12 +32,9 @@ function toHaveFocus(element) {
   };
 }
 
-const customConfig = {
-  threshold: 0.01,
-  failureThresholdType: "percent",
-};
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
-  customDiffConfig: customConfig,
+  failureThreshold: 0.01,
+  failureThresholdType: "percent",
 });
 expect.extend({ toMatchImageSnapshot });
 
