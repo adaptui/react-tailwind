@@ -47,3 +47,9 @@ export const WithIcon = base({
   children: <Button>Tooltip</Button>,
   icon: <ExclamationTriangleIcon />,
 });
+
+export const WithoutArrow = base({
+  arrow: false,
+  children: <Button>Tooltip</Button>,
+  icon: <ExclamationTriangleIcon />,
+});

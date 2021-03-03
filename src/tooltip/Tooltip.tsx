@@ -18,7 +18,6 @@ export type TooltipProps = TooltipInitialState & {
    * title of the tooltip
    */
   title?: string;
-  className?: string;
   children: React.ReactNode;
   /**
    * How large should the tag be?
@@ -36,6 +35,12 @@ export type TooltipProps = TooltipInitialState & {
    * prefix icon
    */
   icon?: React.ReactNode;
+  /**
+   * show/hides the arrow
+   *
+   * @default true
+   */
+  arrow?: boolean;
 };
 
 const TooltipArrowIcon = forwardRefWithAs<BoxProps, HTMLOrSVGElement, "svg">(
@@ -56,6 +61,7 @@ export const Tooltip = ({
   children,
   size = "sm",
   variant = "primary",
+  arrow = true,
   ...props
 }: TooltipProps) => {
   const tooltip = useTooltipState({ ...props });
@@ -88,14 +94,16 @@ export const Tooltip = ({
       </TooltipReference>
       <ReakitTooltip {...tooltip} {...props}>
         <TooltipBody {...props} variant={variant} size={size}>
-          <TooltipArrow {...tooltip} size={arrowSizeMap[size]}>
-            <TooltipArrowIcon
-              className={arrowStyles}
-              style={{
-                transform: transformMap[tooltip.placement],
-              }}
-            />
-          </TooltipArrow>
+          {arrow && (
+            <TooltipArrow {...tooltip} size={arrowSizeMap[size]}>
+              <TooltipArrowIcon
+                className={arrowStyles}
+                style={{
+                  transform: transformMap[tooltip.placement],
+                }}
+              />
+            </TooltipArrow>
+          )}
           {title}
         </TooltipBody>
       </ReakitTooltip>
