@@ -40,7 +40,13 @@ module.exports = function (api) {
       },
     },
     ignore: isBuild
-      ? ["**/*/stories", "**/__tests__", "**/__test__", "**/testUtils.tsx"]
+      ? [
+          "**/*/stories",
+          "**/__tests__",
+          "**/__test__",
+          "**/testUtils.tsx",
+          "./renderlesskit.config.ts",
+        ]
       : [],
   };
 };
