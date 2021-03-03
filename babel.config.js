@@ -39,6 +39,8 @@ module.exports = function (api) {
         presets: [["@babel/env", { targets: { node: "current" } }]],
       },
     },
-    ignore: isBuild ? ["**/*/stories"] : [],
+    ignore: isBuild
+      ? ["**/*/stories", "**/__tests__", "**/__test__", "**/testUtils.tsx"]
+      : [],
   };
 };
