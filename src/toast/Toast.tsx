@@ -3,10 +3,12 @@ import { cx } from "@renderlesskit/react";
 
 import { Box, BoxProps } from "../box";
 import { useHover } from "../hooks";
-import { forwardRefWithAs } from "../utils/types";
+import { Dict, forwardRefWithAs } from "../utils/types";
 import { Toast as ToastType, useToasts } from "./RenderlessToast";
-import { Alert } from "../alert";
 import { useMergeRefs } from "../hooks/useMergeRefs";
+import { InfoCircleIcon } from "../icons";
+import { isFunction, isObject } from "../utils";
+import { Button } from "../button";
 
 export type ToastContainerProps = BoxProps & {};
 
@@ -83,8 +85,9 @@ export const ToastWrapper = forwardRefWithAs<
   );
 
   const clampedIndex = sortedIndex > 4 ? 4 : sortedIndex;
-  const translateYGap = -20 * clampedIndex;
+  const translateYGap = -10 * clampedIndex;
   const scalePercent = 1 - 0.05 * clampedIndex;
+  const showAlertContent = sortedIndex === 0 || isHovered;
 
   return (
     <ToastAnimationWrapper
@@ -100,13 +103,15 @@ export const ToastWrapper = forwardRefWithAs<
         scalePercent={scalePercent}
       >
         <ToastFill />
-        <Alert
-          status="success"
-          title="Vercel Toast"
-          description={toast.content as string}
-          closable
-          onClose={() => removeToast(toast.id)}
-        />
+        {isFunction(toast.content) ? (
+          toast.content({ ...toast, showAlertContent, removeToast })
+        ) : (
+          <ToastAlert
+            toast={toast}
+            showAlertContent={showAlertContent}
+            removeToast={removeToast}
+          />
+        )}
       </ToastHoverWrapper>
     </ToastAnimationWrapper>
   );
@@ -206,3 +211,164 @@ export const ToastFill = forwardRefWithAs<
 });
 
 ToastFill.displayName = "ToastFill";
+
+export type ToastAlertProps = BoxProps & {
+  toast: ToastType;
+  showAlertContent: boolean;
+  removeToast: (toastId?: string | undefined) => void;
+};
+
+export const ToastAlert = forwardRefWithAs<
+  ToastAlertProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const { toast, showAlertContent, removeToast, className, ...rest } = props;
+  const toastAlertStyles = cx(
+    "lib:flex lib:shadow-lg lib:bg-gray-800 lib:py-2 lib:px-3 lib:text-white lib:rounded-md lib:w-full",
+    className,
+  );
+
+  return (
+    <Box ref={ref} role="alert" className={toastAlertStyles} {...rest}>
+      {isObject(toast.content) ? (
+        <ToastContent
+          toast={toast}
+          showAlertContent={showAlertContent}
+          removeToast={removeToast}
+        />
+      ) : (
+        toast.content
+      )}
+    </Box>
+  );
+});
+
+ToastAlert.displayName = "ToastAlert";
+
+export type ToastContentProps = BoxProps & {
+  toast: ToastType;
+  showAlertContent: boolean;
+  removeToast: (toastId?: string | undefined) => void;
+};
+
+export const ToastContent = forwardRefWithAs<
+  ToastContentProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const { toast, showAlertContent, removeToast, className, ...rest } = props;
+  const {
+    title,
+    description,
+    ghostAction,
+    primaryAction,
+    secondaryAction,
+  } = toast.content as Dict;
+
+  if (!title) return null;
+
+  return (
+    <div
+      ref={ref}
+      className={cx(
+        "lib:flex w-full lib:transition-opacity",
+        showAlertContent ? "lib:opacity-100" : "lib:opacity-0",
+        className,
+      )}
+      {...rest}
+    >
+      <div className="lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5">
+        <InfoCircleIcon />
+      </div>
+      <div className="lib:flex lib:flex-col lib:text-sm lib:flex-wrap">
+        <div className="lib:font-medium">{title}</div>
+        {description ? (
+          <div className="lib:text-gray-300 lib:mt-0.5">{description}</div>
+        ) : null}
+      </div>
+      <div className="space-x-2 lib:ml-auto lib:flex">
+        {ghostAction ? (
+          <GhostActionButton
+            text={ghostAction}
+            onClick={() => removeToast(toast.id)}
+          />
+        ) : null}
+        {primaryAction ? (
+          <PrimaryActionButton
+            text={primaryAction}
+            onClick={() => removeToast(toast.id)}
+          />
+        ) : null}
+        {secondaryAction ? (
+          <SecondaryActionButton
+            text={secondaryAction}
+            onClick={() => removeToast(toast.id)}
+          />
+        ) : null}
+      </div>
+    </div>
+  );
+});
+
+ToastContent.displayName = "ToastContent";
+
+type GhostActionButtonProps = BoxProps & {
+  text: string;
+  onClick?: () => void;
+};
+
+const GhostActionButton = (props: GhostActionButtonProps) => {
+  const { text, onClick } = props;
+
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      className="text-white hover:text-gray-800 hover:bg-white"
+      onClick={onClick}
+    >
+      {text}
+    </Button>
+  );
+};
+
+type PrimaryActionButtonProps = BoxProps & {
+  text: string;
+  onClick?: () => void;
+};
+
+const PrimaryActionButton = (props: PrimaryActionButtonProps) => {
+  const { text, onClick } = props;
+
+  return (
+    <Button
+      variant="primary"
+      size="sm"
+      className="text-gray-800 bg-white"
+      onClick={onClick}
+    >
+      {text}
+    </Button>
+  );
+};
+
+type SecondaryActionButtonProps = BoxProps & {
+  text: string;
+  onClick?: () => void;
+};
+
+const SecondaryActionButton = (props: SecondaryActionButtonProps) => {
+  const { text, onClick } = props;
+
+  return (
+    <Button
+      variant="secondary"
+      size="sm"
+      className="text-white bg-gray-700"
+      onClick={onClick}
+    >
+      {text}
+    </Button>
+  );
+};

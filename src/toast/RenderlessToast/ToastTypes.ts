@@ -1,10 +1,20 @@
+import { Dict } from "../../utils/types";
+
 export type Renderable = JSX.Element | string | number | null;
 
 export type ValueFunction<Value, Arg> = (arg: Arg) => Value;
 
 export type ValueOrFunction<Value, Arg> = Value | ValueFunction<Value, Arg>;
 
-export type Content = ValueOrFunction<Renderable, Toast>;
+export type Content =
+  | ValueOrFunction<
+      Renderable,
+      Toast & {
+        showAlertContent: boolean;
+        removeToast: (toastId?: string | undefined) => void;
+      }
+    >
+  | Dict;
 
 export type ToastTypes = "info" | "success" | "warning" | "error";
 
@@ -21,7 +31,6 @@ export interface Toast {
   id: string;
   visible: boolean;
   pauseDuration: number;
-  content: Content;
   reverseOrder: boolean;
   pausedAt: number | null;
   type: ToastTypes;
@@ -31,6 +40,7 @@ export interface Toast {
   animationDuration: number;
   height: number | null;
   frontHeight: number | null;
+  content: Content;
 }
 
 type ConfigurableToastOptions = Pick<

@@ -42,3 +42,5 @@ export function forwardRefWithAs<
 }
 
 export type AnyString = string & { ignore?: any };
+
+export type Dict<T = any> = Record<string, T>;

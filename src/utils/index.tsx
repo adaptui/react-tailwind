@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Dict } from "./types";
+
 export interface CreateContextOptions {
   /**
    * If `true`, React will throw if context is `null` or `undefined`
@@ -86,3 +88,15 @@ export function canUseDOM() {
 }
 
 export const isBrowser = canUseDOM();
+
+// Array assertions
+export function isArray<T>(value: any): value is Array<T> {
+  return Array.isArray(value);
+}
+
+// Object assertions
+export const isObject = (value: any): value is Dict => {
+  const type = typeof value;
+
+  return value != null && type === "object" && !isArray(value);
+};

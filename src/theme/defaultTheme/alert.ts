@@ -20,11 +20,11 @@ export const alert = {
     mobile: "",
   },
   actionButton: {
-    base: "lib:shadow-none",
+    base: "",
     desktop: "lib:-my-1.5",
     mobile: "lib:-ml-3 lib:mt-0.5",
   },
-  closeButton: "lib:-my-1.5 lib:-mr-2 lib:shadow-none",
+  closeButton: "lib:-my-1.5 lib:-mr-2",
   status: {
     neutral: {
       base: "lib:bg-gray-100",

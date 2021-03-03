@@ -53,7 +53,7 @@ export const useToasts = () => {
 
       return visibleToasts
         .slice(index + 1)
-        .reduce((acc, t) => acc + (t.height || 0) + 20, 0);
+        .reduce((acc, t) => acc + (t.height || 0) + 10, 0);
     },
     [visibleToasts],
   );
