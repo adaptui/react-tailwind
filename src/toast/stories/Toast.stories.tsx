@@ -3,34 +3,87 @@ import { cx } from "@renderlesskit/react";
 import { Meta } from "@storybook/react/types-6-0";
 
 import { ToastContainer } from "../Toast";
+import { InfoCircleIcon } from "../../icons";
+import { useToastType } from "../ToastAlert";
 import { Button, ButtonGroup } from "../../button";
 import { ToastProvider, useToasters } from "../RenderlessToast/index";
-import { InfoCircleIcon } from "../../icons";
 
 export default {
   title: "Toast",
 } as Meta;
 
-export const Default = (props: any) => {
+export const Default = () => {
   return (
     <ToastProvider>
-      <div className="grid min-h-screen place-items-center">
-        <TriggerNotifications />
-      </div>
       <ToastContainer />
+      <TriggerNotifications />
     </ToastProvider>
   );
 };
 
 const TriggerNotifications = () => {
   const { showToast, removeToast } = useToasters();
+  const successToast = useToastType("success");
+  const infoToast = useToastType("info");
+  const warningToast = useToastType("warning");
+  const errorToast = useToastType("error");
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
       <ButtonGroup attached>
         <Button
           onClick={() =>
-            showToast({
+            successToast({
+              title: "Proper Vercel Toast with better state.",
+              description: "With both Title & Description",
+              primaryAction: "Delete",
+              secondaryAction: "Cancel",
+            })
+          }
+        >
+          Success Toast
+        </Button>
+        <Button
+          onClick={() =>
+            infoToast({
+              title: "Proper Vercel Toast with better state.",
+              description: "With both Title & Description",
+              primaryAction: "Delete",
+              secondaryAction: "Cancel",
+            })
+          }
+        >
+          Info Toast
+        </Button>
+        <Button
+          onClick={() =>
+            warningToast({
+              title: "Proper Vercel Toast with better state.",
+              description: "With both Title & Description",
+              primaryAction: "Delete",
+              secondaryAction: "Cancel",
+            })
+          }
+        >
+          Warning Toast
+        </Button>
+        <Button
+          onClick={() =>
+            errorToast({
+              title: "Proper Vercel Toast with better state.",
+              description: "With both Title & Description",
+              primaryAction: "Delete",
+              secondaryAction: "Cancel",
+            })
+          }
+        >
+          Error Toast
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup attached>
+        <Button
+          onClick={() =>
+            successToast({
               title: "Proper Vercel Toast with better state.",
             })
           }
@@ -39,7 +92,7 @@ const TriggerNotifications = () => {
         </Button>
         <Button
           onClick={() =>
-            showToast({
+            successToast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
             })
@@ -49,7 +102,7 @@ const TriggerNotifications = () => {
         </Button>
         <Button
           onClick={() =>
-            showToast({
+            successToast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
               ghostAction: "Undo",
@@ -60,7 +113,7 @@ const TriggerNotifications = () => {
         </Button>
         <Button
           onClick={() =>
-            showToast({
+            successToast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
               primaryAction: "Delete",
@@ -71,7 +124,7 @@ const TriggerNotifications = () => {
         </Button>
         <Button
           onClick={() =>
-            showToast({
+            successToast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
               primaryAction: "Delete",
@@ -116,12 +169,10 @@ const TriggerNotifications = () => {
         </Button>
         <Button
           onClick={() =>
-            showToast({
-              title: "Proper Vercel Toast with better state.",
-            })
+            successToast({ title: "Proper Vercel Toast with better state." })
           }
         >
-          Object Toast
+          Info Toast
         </Button>
       </ButtonGroup>
       <span>

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createContext } from "../../utils";
 
 import {
   Toast,
@@ -8,6 +7,7 @@ import {
   StateReturnType,
   DefaultToastOptions,
 } from "./index";
+import { createContext } from "../../utils";
 
 export interface ToastStore extends StateReturnType<Toast> {
   defaultOptions: DefaultToastOptions;
@@ -22,7 +22,6 @@ const [ToastStoreProvider, useToastStore] = createContext<ToastStore>({
 export { useToastStore };
 
 const defaultOptions: DefaultToastOptions = {
-  type: "info",
   placement: "bottom-center",
   autoDismiss: false,
   dismissDuration: 3000,

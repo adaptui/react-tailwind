@@ -10,11 +10,12 @@ import { datepicker } from "./datepicker";
 import { icon } from "./icon";
 import { iconButton } from "./iconButton";
 import { progress } from "./progress";
+import { radio } from "./radio";
+import { slider } from "./slider";
 import { spinner } from "./spinner";
 import { _switch } from "./switch";
 import { tag } from "./tag";
-import { radio } from "./radio";
-import { slider } from "./slider";
+import { toast } from "./toast";
 
 const theme = {
   alert,
@@ -34,6 +35,7 @@ const theme = {
   spinner,
   switch: _switch,
   tag,
+  toast,
 };
 
 export default theme;

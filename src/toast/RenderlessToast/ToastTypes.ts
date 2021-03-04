@@ -9,14 +9,12 @@ export type ValueOrFunction<Value, Arg> = Value | ValueFunction<Value, Arg>;
 export type Content =
   | ValueOrFunction<
       Renderable,
-      Toast & {
+      {
+        toast: Toast;
         showAlertContent: boolean;
-        removeToast: (toastId?: string | undefined) => void;
       }
     >
   | Dict;
-
-export type ToastTypes = "info" | "success" | "warning" | "error";
 
 export type ToastPlacement =
   | "top-left"
@@ -33,7 +31,6 @@ export interface Toast {
   pauseDuration: number;
   reverseOrder: boolean;
   pausedAt: number | null;
-  type: ToastTypes;
   placement: ToastPlacement;
   autoDismiss: boolean;
   dismissDuration: number;
@@ -48,7 +45,6 @@ type ConfigurableToastOptions = Pick<
   | "id"
   | "autoDismiss"
   | "dismissDuration"
-  | "type"
   | "placement"
   | "reverseOrder"
   | "animationDuration"
