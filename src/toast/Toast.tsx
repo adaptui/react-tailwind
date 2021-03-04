@@ -1,13 +1,17 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { useHover } from "../hooks";
+import {
+  Toast as ToastType,
+  ToastPlacement,
+  useToasts,
+} from "./RenderlessToast";
+import { useTheme } from "../theme";
 import { isFunction } from "../utils";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
+import { useHover, useMediaQuery } from "../hooks";
 import { useMergeRefs } from "../hooks/useMergeRefs";
-import { Toast as ToastType, useToasts } from "./RenderlessToast";
-import { useTheme } from "../theme";
+import { Dict, forwardRefWithAs } from "../utils/types";
 
 export type ToastContainerProps = BoxProps & {};
 
@@ -16,21 +20,65 @@ export const ToastContainer = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { className, children, ...rest } = props;
-  const { toasts, updateHeight, calculateOffset } = useToasts();
-  const { hoverProps, isHovered } = useHover({});
-  const theme = useTheme();
+  const { toasts } = useToasts();
+  const sortedToasts = getPlacementSortedToasts(toasts);
 
-  const toastContainerStyles = cx(
+  return (
+    <>
+      {objectKeys(sortedToasts).map(placement => {
+        return (
+          <ToastContainerWrapper
+            key={placement}
+            placement={placement}
+            sortedToasts={sortedToasts}
+          />
+        );
+      })}
+    </>
+  );
+});
+
+ToastContainer.displayName = "ToastContainer";
+
+export type ToastContainerWrapperProps = BoxProps & {
+  placement: ToastPlacement;
+  sortedToasts: SortedToastList;
+};
+
+export const ToastContainerWrapper = forwardRefWithAs<
+  ToastContainerWrapperProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const { placement, sortedToasts, className, children, ...rest } = props;
+  const toasts = sortedToasts[placement];
+  const [side, position] = placement.split("-");
+  console.log("%c side", "color: #d90000", side);
+  console.log("%c position", "color: #ffa640", position);
+  const { hoverProps, isHovered } = useHover({});
+  const { updateHeight, calculateOffset } = useToasts();
+
+  const theme = useTheme();
+  const toastContainerWrapperStyles = cx(
     theme.toast.container.base,
+    theme.toast[side].container.base,
+    theme.toast[side][position].container.base,
     isHovered
-      ? theme.toast.container.hovered
-      : theme.toast.container.notHovered,
+      ? cx(theme.toast.container.hovered, theme.toast[side].container.hovered)
+      : cx(
+          theme.toast.container.notHovered,
+          theme.toast[side].container.notHovered,
+        ),
     className,
   );
 
   return (
-    <Box ref={ref} className={toastContainerStyles} {...hoverProps} {...rest}>
+    <Box
+      ref={ref}
+      className={toastContainerWrapperStyles}
+      {...rest}
+      {...hoverProps}
+    >
       {toasts.map((toast: ToastType, index) => {
         const toastsLength = toasts.length;
         const sortedIndex = toastsLength - (index + 1);
@@ -50,7 +98,7 @@ export const ToastContainer = forwardRefWithAs<
   );
 });
 
-ToastContainer.displayName = "ToastContainer";
+ToastContainerWrapper.displayName = "ToastContainerWrapper";
 
 export type ToastWrapperProps = BoxProps & {
   toast: ToastType;
@@ -165,6 +213,8 @@ export const ToastHoverWrapper = forwardRefWithAs<
     ...rest
   } = props;
   const theme = useTheme();
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const isVisible = isMobile ? sortedIndex === 0 : sortedIndex <= 2;
 
   return (
     <Box
@@ -174,7 +224,7 @@ export const ToastHoverWrapper = forwardRefWithAs<
         transform: isHovered
           ? `translate3d(0, -${hoverOffset}px, 0)`
           : `translate3d(0, ${translateYGap}px, 0) scale(${scalePercent})`,
-        opacity: sortedIndex > 2 ? 0 : 1,
+        opacity: isVisible ? 1 : 0,
         height: isHovered ? `${toast.height}px` : `${toast.frontHeight}px`,
       }}
       {...rest}
@@ -202,3 +252,21 @@ export const ToastFill = forwardRefWithAs<
 });
 
 ToastFill.displayName = "ToastFill";
+
+export type SortedToastList = Record<ToastPlacement, ToastType[]>;
+
+export function getPlacementSortedToasts(toasts: ToastType[]) {
+  const sortedToasts: Dict = {};
+
+  for (const key in toasts) {
+    const toast = toasts[key];
+    const { placement } = toast;
+    sortedToasts[placement] || (sortedToasts[placement] = []);
+    sortedToasts[placement].push(toast);
+  }
+
+  return sortedToasts as SortedToastList;
+}
+
+export const objectKeys = <T extends Dict>(obj: T) =>
+  (Object.keys(obj) as unknown) as (keyof T)[];

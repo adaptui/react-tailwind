@@ -2,10 +2,10 @@ import React from "react";
 import { cx } from "@renderlesskit/react";
 import { Meta } from "@storybook/react/types-6-0";
 
+import { Button } from "../../button";
 import { ToastContainer } from "../Toast";
 import { InfoCircleIcon } from "../../icons";
 import { useToastType } from "../ToastAlert";
-import { Button, ButtonGroup } from "../../button";
 import { ToastProvider, useToasters } from "../RenderlessToast/index";
 
 export default {
@@ -30,8 +30,9 @@ const TriggerNotifications = () => {
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
-      <ButtonGroup attached>
+      <div className="space-x-2">
         <Button
+          className="my-2"
           onClick={() =>
             successToast({
               title: "Proper Vercel Toast with better state.",
@@ -44,6 +45,7 @@ const TriggerNotifications = () => {
           Success Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             infoToast({
               title: "Proper Vercel Toast with better state.",
@@ -56,6 +58,7 @@ const TriggerNotifications = () => {
           Info Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             warningToast({
               title: "Proper Vercel Toast with better state.",
@@ -68,6 +71,7 @@ const TriggerNotifications = () => {
           Warning Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             errorToast({
               title: "Proper Vercel Toast with better state.",
@@ -79,9 +83,11 @@ const TriggerNotifications = () => {
         >
           Error Toast
         </Button>
-      </ButtonGroup>
-      <ButtonGroup attached>
+      </div>
+
+      <div className="space-x-2">
         <Button
+          className="my-2"
           onClick={() =>
             successToast({
               title: "Proper Vercel Toast with better state.",
@@ -91,6 +97,7 @@ const TriggerNotifications = () => {
           Only Title Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             successToast({
               title: "Proper Vercel Toast with better state.",
@@ -101,6 +108,7 @@ const TriggerNotifications = () => {
           With Description Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             successToast({
               title: "Proper Vercel Toast with better state.",
@@ -112,6 +120,7 @@ const TriggerNotifications = () => {
           With Ghost Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             successToast({
               title: "Proper Vercel Toast with better state.",
@@ -123,6 +132,7 @@ const TriggerNotifications = () => {
           With Primary Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             successToast({
               title: "Proper Vercel Toast with better state.",
@@ -134,13 +144,17 @@ const TriggerNotifications = () => {
         >
           Both Primary and Secondary Action Toast
         </Button>
-      </ButtonGroup>
+      </div>
 
-      <ButtonGroup attached>
-        <Button onClick={() => showToast("Proper Vercel Toast.")}>
+      <div className="space-x-2">
+        <Button
+          className="my-2"
+          onClick={() => showToast("Proper Vercel Toast.")}
+        >
           String Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             showToast(({ showAlertContent }) => {
               return (
@@ -168,16 +182,82 @@ const TriggerNotifications = () => {
           JSX Toast
         </Button>
         <Button
+          className="my-2"
           onClick={() =>
             successToast({ title: "Proper Vercel Toast with better state." })
           }
         >
           Info Toast
         </Button>
-      </ButtonGroup>
-      <span>
-        <Button onClick={() => removeToast()}>Remove All Toast</Button>
-      </span>
+      </div>
+
+      <div className="space-x-2">
+        <Button
+          className="my-2"
+          onClick={() =>
+            showToast("Proper Vercel Toast with better state.", {
+              placement: "bottom-left",
+            })
+          }
+        >
+          Bottom Left Toast
+        </Button>
+        <Button
+          className="my-2"
+          onClick={() =>
+            showToast("Proper Vercel Toast with better state.", {
+              placement: "bottom-center",
+            })
+          }
+        >
+          Bottom Center Toast
+        </Button>
+        <Button
+          className="my-2"
+          onClick={() =>
+            showToast("Proper Vercel Toast with better state.", {
+              placement: "bottom-right",
+            })
+          }
+        >
+          Bottom Right Toast
+        </Button>
+        <Button
+          className="my-2"
+          onClick={() =>
+            showToast("Proper Vercel Toast with better state.", {
+              placement: "top-left",
+            })
+          }
+        >
+          Top Left Toast
+        </Button>
+        <Button
+          className="my-2"
+          onClick={() =>
+            showToast("Proper Vercel Toast with better state.", {
+              placement: "top-center",
+            })
+          }
+        >
+          Top Center Toast
+        </Button>
+        <Button
+          className="my-2"
+          onClick={() =>
+            showToast("Proper Vercel Toast with better state.", {
+              placement: "top-right",
+            })
+          }
+        >
+          Top Right Toast
+        </Button>
+      </div>
+      <div>
+        <Button className="my-2" onClick={() => removeToast()}>
+          Remove All Toast
+        </Button>
+      </div>
     </div>
   );
 };
