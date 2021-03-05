@@ -21,16 +21,15 @@ export const ToastContainer = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { toasts } = useToasts();
-  const sortedToasts = getPlacementSortedToasts(toasts);
 
   return (
     <>
-      {objectKeys(sortedToasts).map(placement => {
+      {objectKeys(toasts).map(placement => {
         return (
           <ToastContainerWrapper
             key={placement}
             placement={placement}
-            sortedToasts={sortedToasts}
+            toasts={toasts[placement]}
           />
         );
       })}
@@ -42,7 +41,7 @@ ToastContainer.displayName = "ToastContainer";
 
 export type ToastContainerWrapperProps = BoxProps & {
   placement: ToastPlacement;
-  sortedToasts: SortedToastList;
+  toasts: ToastType[];
 };
 
 export const ToastContainerWrapper = forwardRefWithAs<
@@ -50,11 +49,8 @@ export const ToastContainerWrapper = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { placement, sortedToasts, className, children, ...rest } = props;
-  const toasts = sortedToasts[placement];
+  const { placement, toasts, className, children, ...rest } = props;
   const [side, position] = placement.split("-");
-  console.log("%c side", "color: #d90000", side);
-  console.log("%c position", "color: #ffa640", position);
   const { hoverProps, isHovered } = useHover({});
   const { updateHeight, calculateOffset } = useToasts();
 
@@ -90,6 +86,7 @@ export const ToastContainerWrapper = forwardRefWithAs<
             toast={toast}
             updateHeight={updateHeight}
             isHovered={isHovered}
+            placement={placement}
             hoverOffset={calculateOffset(toast.id)}
           />
         );
@@ -102,6 +99,7 @@ ToastContainerWrapper.displayName = "ToastContainerWrapper";
 
 export type ToastWrapperProps = BoxProps & {
   toast: ToastType;
+  placement: ToastPlacement;
   sortedIndex: number;
   isHovered: boolean;
   hoverOffset: number;
@@ -113,7 +111,14 @@ export const ToastWrapper = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { toast, sortedIndex, updateHeight, isHovered, hoverOffset } = props;
+  const {
+    toast,
+    placement,
+    sortedIndex,
+    updateHeight,
+    isHovered,
+    hoverOffset,
+  } = props;
 
   const htmlRef = React.useCallback(
     (el: HTMLElement | null) => {
@@ -126,7 +131,7 @@ export const ToastWrapper = forwardRefWithAs<
   );
 
   const clampedIndex = sortedIndex > 4 ? 4 : sortedIndex;
-  const translateYGap = -10 * clampedIndex;
+  const translateYGap = 10 * clampedIndex;
   const scalePercent = 1 - 0.05 * clampedIndex;
   const showAlertContent = sortedIndex === 0 || isHovered;
   const theme = useTheme();
@@ -135,6 +140,7 @@ export const ToastWrapper = forwardRefWithAs<
     <ToastAnimationWrapper
       ref={useMergeRefs(htmlRef, ref)}
       isVisible={toast.visible}
+      placement={placement}
     >
       <ToastHoverWrapper
         toast={toast}
@@ -143,8 +149,9 @@ export const ToastWrapper = forwardRefWithAs<
         hoverOffset={hoverOffset}
         translateYGap={translateYGap}
         scalePercent={scalePercent}
+        placement={placement}
       >
-        <ToastFill />
+        <ToastFill placement={placement} />
         {isFunction(toast.content) ? (
           toast.content({ toast, showAlertContent })
         ) : (
@@ -161,6 +168,7 @@ ToastWrapper.displayName = "ToastWrapper";
 
 export type ToastAnimationWrapperProps = BoxProps & {
   isVisible: boolean;
+  placement: ToastPlacement;
 };
 
 export const ToastAnimationWrapper = forwardRefWithAs<
@@ -168,13 +176,23 @@ export const ToastAnimationWrapper = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { isVisible, className, children, ...rest } = props;
+  const { isVisible, placement, className, children, ...rest } = props;
+  const [side, position] = placement.split("-");
+
   const theme = useTheme();
   const toastAnimationWrapperStyles = cx(
     theme.toast.animationWrapper.base,
+    theme.toast[side].animationWrapper.base,
+    theme.toast[side][position].animationWrapper.base,
     isVisible
-      ? theme.toast.animationWrapper.visible
-      : theme.toast.animationWrapper.notVisible,
+      ? cx(
+          theme.toast.animationWrapper.visible,
+          theme.toast[side].animationWrapper.visible,
+        )
+      : cx(
+          theme.toast.animationWrapper.notVisible,
+          theme.toast[side].animationWrapper.notVisible,
+        ),
     className,
   );
 
@@ -194,6 +212,7 @@ export type ToastHoverWrapperProps = BoxProps & {
   hoverOffset: number;
   translateYGap: number;
   scalePercent: number;
+  placement: ToastPlacement;
 };
 
 export const ToastHoverWrapper = forwardRefWithAs<
@@ -202,6 +221,7 @@ export const ToastHoverWrapper = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const {
+    placement,
     isHovered,
     hoverOffset,
     translateYGap,
@@ -215,6 +235,9 @@ export const ToastHoverWrapper = forwardRefWithAs<
   const theme = useTheme();
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const isVisible = isMobile ? sortedIndex === 0 : sortedIndex <= 2;
+  const [side] = placement.split("-");
+  const hoverOffsetSide = side === "bottom" ? -hoverOffset : hoverOffset;
+  const translateYGapSide = side === "bottom" ? -translateYGap : translateYGap;
 
   return (
     <Box
@@ -222,8 +245,8 @@ export const ToastHoverWrapper = forwardRefWithAs<
       className={cx(theme.toast.hoverWrapper, className)}
       style={{
         transform: isHovered
-          ? `translate3d(0, -${hoverOffset}px, 0)`
-          : `translate3d(0, ${translateYGap}px, 0) scale(${scalePercent})`,
+          ? `translate3d(0, ${hoverOffsetSide}px, 0)`
+          : `translate3d(0, ${translateYGapSide}px, 0) scale(${scalePercent})`,
         opacity: isVisible ? 1 : 0,
         height: isHovered ? `${toast.height}px` : `${toast.frontHeight}px`,
       }}
@@ -236,18 +259,25 @@ export const ToastHoverWrapper = forwardRefWithAs<
 
 ToastHoverWrapper.displayName = "ToastHoverWrapper";
 
-export type ToastFillProps = BoxProps & {};
+export type ToastFillProps = BoxProps & {
+  placement: ToastPlacement;
+};
 
 export const ToastFill = forwardRefWithAs<
   ToastFillProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { className, children, ...rest } = props;
+  const { placement, className, children, ...rest } = props;
   const theme = useTheme();
+  const [side] = placement.split("-");
 
   return (
-    <Box ref={ref} className={cx(theme.toast.fill, className)} {...rest} />
+    <Box
+      ref={ref}
+      className={cx(theme.toast.fill, theme.toast[side].fill, className)}
+      {...rest}
+    />
   );
 });
 

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { usePrevious } from "../../hooks";
+import { getPlacementSortedToasts } from "../Toast";
 import { useToastStore, useToasters, getToast, Toast } from "./index";
 
 export const useToasts = () => {
@@ -104,8 +105,10 @@ export const useToasts = () => {
     });
   }
 
+  const sortedToasts = getPlacementSortedToasts(toasts);
+
   return {
-    toasts,
+    toasts: sortedToasts,
     pauseTimer,
     resumeTimer,
     removeToast,
