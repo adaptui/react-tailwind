@@ -160,6 +160,30 @@ const TriggerNotifications = () => {
       <span>
         <Button onClick={() => removeToast()}>Remove All Toast</Button>
       </span>
+
+      <span>
+        <Button
+          onClick={() =>
+            show({
+              type: "info",
+              title: "Proper Vercel Toast with better state.",
+              description: "With both Title & Description",
+              primaryAction: {
+                label: "Delete",
+                handleClick: toast => removeToast(toast?.id),
+              },
+              secondaryAction: {
+                label: "Undo",
+                handleClick: toast => {
+                  alert(`Toast id is ${toast?.id}`);
+                },
+              },
+            })
+          }
+        >
+          With Actions
+        </Button>
+      </span>
     </div>
   );
 };

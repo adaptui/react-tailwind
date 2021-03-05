@@ -2,7 +2,7 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
-import { Button } from "../button";
+import { Button, ButtonProps } from "../button";
 import { useTheme } from "../theme";
 import { InfoCircleIcon } from "../icons";
 import { Toast, ToastOptions } from "./RenderlessToast/ToastTypes";
@@ -15,15 +15,49 @@ export type ToastContentProps = BoxProps & {
 
 export type ToastTypes = "info" | "success" | "warning" | "error";
 
+type ToastAction =
+  | string
+  | ({
+      label: string;
+      handleClick?: (toast?: Toast) => void;
+    } & ButtonProps);
+
 type ToastAlertProps = {
   title?: string;
   description?: string;
-  ghostAction?: string;
-  primaryAction?: string;
-  secondaryAction?: string;
+  ghostAction?: ToastAction;
+  primaryAction?: ToastAction;
+  secondaryAction?: ToastAction;
   type?: ToastTypes;
   toast?: Toast;
   showAlertContent?: boolean;
+};
+
+type ToastActionButtonProps = {
+  action?: ToastAction;
+  type?: ToastTypes;
+  toast?: Toast;
+} & ButtonProps;
+
+const ToastActionButton: React.FC<ToastActionButtonProps> = ({
+  action,
+  type = "info",
+  toast,
+  ...props
+}) => {
+  const { removeToast } = useToasters();
+
+  if (!action) return null;
+
+  return typeof action === "string" ? (
+    <Button {...props} onClick={() => removeToast(toast?.id)}>
+      {action}
+    </Button>
+  ) : (
+    <Button {...props} onClick={() => action?.handleClick?.(toast)} {...action}>
+      {action?.label}
+    </Button>
+  );
 };
 
 export const ToastAlert: React.FC<ToastAlertProps> = ({
@@ -36,7 +70,6 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
   primaryAction,
   secondaryAction,
 }) => {
-  const { removeToast } = useToasters();
   const theme = useTheme();
 
   if (!title) return null;
@@ -68,45 +101,36 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
           ) : null}
         </div>
         <div className={theme.toast.actions.base}>
-          {ghostAction ? (
-            <Button
-              variant="ghost"
-              size="sm"
-              className={cx(
-                theme.toast.actions.button.ghost,
-                theme.toast[type].actions.button.ghost,
-              )}
-              onClick={() => removeToast(toast?.id)}
-            >
-              {ghostAction}
-            </Button>
-          ) : null}
-          {primaryAction ? (
-            <Button
-              variant="primary"
-              size="sm"
-              className={cx(
-                theme.toast.actions.button.primary,
-                theme.toast[type].actions.button.primary,
-              )}
-              onClick={() => removeToast(toast?.id)}
-            >
-              {primaryAction}
-            </Button>
-          ) : null}
-          {secondaryAction ? (
-            <Button
-              variant="secondary"
-              size="sm"
-              className={cx(
-                theme.toast.actions.button.secondary,
-                theme.toast[type].actions.button.secondary,
-              )}
-              onClick={() => removeToast(toast?.id)}
-            >
-              {primaryAction}
-            </Button>
-          ) : null}
+          <ToastActionButton
+            variant="ghost"
+            size="sm"
+            className={cx(
+              theme.toast.actions.button.ghost,
+              theme.toast[type].actions.button.ghost,
+            )}
+            toast={toast}
+            action={ghostAction}
+          />
+          <ToastActionButton
+            variant="primary"
+            size="sm"
+            className={cx(
+              theme.toast.actions.button.primary,
+              theme.toast[type].actions.button.primary,
+            )}
+            toast={toast}
+            action={primaryAction}
+          />
+          <ToastActionButton
+            variant="secondary"
+            size="sm"
+            className={cx(
+              theme.toast.actions.button.secondary,
+              theme.toast[type].actions.button.secondary,
+            )}
+            toast={toast}
+            action={secondaryAction}
+          />
         </div>
       </div>
     </div>
