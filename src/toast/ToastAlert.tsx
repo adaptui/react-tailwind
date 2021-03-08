@@ -25,9 +25,7 @@ type ToastAction =
 type ToastAlertProps = {
   title?: string;
   description?: string;
-  ghostAction?: ToastAction;
-  primaryAction?: ToastAction;
-  secondaryAction?: ToastAction;
+  actions?: ToastAction[];
   type?: ToastTypes;
   toast?: Toast;
   showAlertContent?: boolean;
@@ -60,15 +58,15 @@ const ToastActionButton: React.FC<ToastActionButtonProps> = ({
   );
 };
 
+type ButtonVariants = keyof Renderlesskit.GetThemeValue<"button", "variant">;
+
 export const ToastAlert: React.FC<ToastAlertProps> = ({
   type = "info",
   showAlertContent,
   toast,
   title,
   description,
-  ghostAction,
-  primaryAction,
-  secondaryAction,
+  actions,
 }) => {
   const theme = useTheme();
 
@@ -101,36 +99,28 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
           ) : null}
         </div>
         <div className={theme.toast.actions.base}>
-          <ToastActionButton
-            variant="ghost"
-            size="sm"
-            className={cx(
-              theme.toast.actions.button.ghost,
-              theme.toast[type].actions.button.ghost,
-            )}
-            toast={toast}
-            action={ghostAction}
-          />
-          <ToastActionButton
-            variant="primary"
-            size="sm"
-            className={cx(
-              theme.toast.actions.button.primary,
-              theme.toast[type].actions.button.primary,
-            )}
-            toast={toast}
-            action={primaryAction}
-          />
-          <ToastActionButton
-            variant="secondary"
-            size="sm"
-            className={cx(
-              theme.toast.actions.button.secondary,
-              theme.toast[type].actions.button.secondary,
-            )}
-            toast={toast}
-            action={secondaryAction}
-          />
+          {actions?.map(action => (
+            <ToastActionButton
+              size="sm"
+              className={
+                typeof action === "string"
+                  ? cx(
+                      theme.toast.actions.button.ghost,
+                      theme.toast[type].actions.button.ghost,
+                    )
+                  : cx(
+                      theme.toast.actions.button[
+                        action.variant as ButtonVariants
+                      ],
+                      theme.toast[type].actions.button[
+                        action.variant as ButtonVariants
+                      ],
+                    )
+              }
+              toast={toast}
+              action={action}
+            />
+          ))}
         </div>
       </div>
     </div>

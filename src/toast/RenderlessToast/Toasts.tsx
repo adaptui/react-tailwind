@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { usePrevious } from "../../hooks";
+import { usePrevious } from "../../hooks/usePrevious";
 import { useToastStore, useToasters, getToast, Toast } from "./index";
 
 export const useToasts = () => {

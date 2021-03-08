@@ -35,8 +35,7 @@ const TriggerNotifications = () => {
               type: "success",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: ["Delete"],
             })
           }
         >
@@ -48,8 +47,7 @@ const TriggerNotifications = () => {
               type: "info",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: ["Delete"],
             })
           }
         >
@@ -61,8 +59,7 @@ const TriggerNotifications = () => {
               type: "warning",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: ["Delete"],
             })
           }
         >
@@ -74,8 +71,7 @@ const TriggerNotifications = () => {
               type: "error",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: ["Delete"],
             })
           }
         >
@@ -107,7 +103,6 @@ const TriggerNotifications = () => {
             show({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              ghostAction: "Undo",
             })
           }
         >
@@ -119,7 +114,7 @@ const TriggerNotifications = () => {
               type: "info",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
+              actions: ["Delete"],
             })
           }
         >
@@ -130,8 +125,7 @@ const TriggerNotifications = () => {
             show({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: ["Delete"],
             })
           }
         >
@@ -168,16 +162,20 @@ const TriggerNotifications = () => {
               type: "info",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: {
-                label: "Delete",
-                handleClick: toast => removeToast(toast?.id),
-              },
-              secondaryAction: {
-                label: "Undo",
-                handleClick: toast => {
-                  alert(`Toast id is ${toast?.id}`);
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
                 },
-              },
+                {
+                  variant: "outline",
+                  label: "Undo",
+                  handleClick: toast => {
+                    alert(`Toast id is ${toast?.id}`);
+                  },
+                },
+              ],
             })
           }
         >
