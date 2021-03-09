@@ -1,76 +1,49 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { BoxProps } from "../box";
-import { Button, ButtonProps } from "../button";
 import { useTheme } from "../theme";
 import { InfoCircleIcon } from "../icons";
+import { Button, ButtonProps } from "../button";
+import { useShowToast } from "./RenderlessToast";
 import { Toast, ToastOptions } from "./RenderlessToast/ToastTypes";
-import { useShowToast, useToasters } from "./RenderlessToast";
 
-export type ToastContentProps = BoxProps & {
+export const useLibraryToast = () => {
+  const showToast = useShowToast();
+
+  return React.useCallback(
+    (alertProps: ToastAlertUserProps, options?: ToastOptions) => {
+      const toastId = showToast(
+        toastOptions => <ToastAlert {...toastOptions} {...alertProps} />,
+        options,
+      );
+
+      return toastId;
+    },
+    [showToast],
+  );
+};
+
+export type ToastAlertUserProps = {
+  type?: ToastTypes;
+  title: string;
+  description?: string;
+  actions?: ToastAction[];
+};
+
+export type ToastAlertProps = ToastAlertUserProps & {
   toast: Toast;
   showAlertContent: boolean;
 };
 
-export type ToastTypes = "info" | "success" | "warning" | "error";
-
-type ToastAction =
-  | string
-  | ({
-      label: string;
-      handleClick?: (toast?: Toast) => void;
-    } & ButtonProps);
-
-type ToastAlertProps = {
-  title?: string;
-  description?: string;
-  actions?: ToastAction[];
-  type?: ToastTypes;
-  toast?: Toast;
-  showAlertContent?: boolean;
-};
-
-type ToastActionButtonProps = {
-  action?: ToastAction;
-  type?: ToastTypes;
-  toast?: Toast;
-} & ButtonProps;
-
-const ToastActionButton: React.FC<ToastActionButtonProps> = ({
-  action,
-  type = "info",
-  toast,
-  ...props
-}) => {
-  const { removeToast } = useToasters();
-
-  if (!action) return null;
-
-  return typeof action === "string" ? (
-    <Button {...props} onClick={() => removeToast(toast?.id)}>
-      {action}
-    </Button>
-  ) : (
-    <Button {...props} onClick={() => action?.handleClick?.(toast)} {...action}>
-      {action?.label}
-    </Button>
-  );
-};
-
-type ButtonVariants = keyof Renderlesskit.GetThemeValue<"button", "variant">;
-
 export const ToastAlert: React.FC<ToastAlertProps> = ({
   type = "info",
-  showAlertContent,
-  toast,
   title,
   description,
   actions,
+  toast,
+  showAlertContent,
 }) => {
   const theme = useTheme();
-
-  if (!title) return null;
 
   return (
     <div role="alert" className={cx(theme.toast.base, theme.toast[type].base)}>
@@ -99,24 +72,10 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
           ) : null}
         </div>
         <div className={theme.toast.actions.base}>
-          {actions?.map(action => (
+          {actions?.map((action, index) => (
             <ToastActionButton
-              size="sm"
-              className={
-                typeof action === "string"
-                  ? cx(
-                      theme.toast.actions.button.ghost,
-                      theme.toast[type].actions.button.ghost,
-                    )
-                  : cx(
-                      theme.toast.actions.button[
-                        action.variant as ButtonVariants
-                      ],
-                      theme.toast[type].actions.button[
-                        action.variant as ButtonVariants
-                      ],
-                    )
-              }
+              key={index}
+              type={type}
               toast={toast}
               action={action}
             />
@@ -129,18 +88,41 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
 
 ToastAlert.displayName = "ToastAlert";
 
-export const useToastType = () => {
-  const showToast = useShowToast();
+export type ToastTypes = "info" | "success" | "warning" | "error";
 
-  return React.useCallback(
-    (alertProps: ToastAlertProps, options?: ToastOptions) => {
-      const toastId = showToast(
-        toastOptions => <ToastAlert {...toastOptions} {...alertProps} />,
-        options,
-      );
+export type ButtonVariants = "ghost" | "primary" | "secondary";
 
-      return toastId;
-    },
-    [showToast],
+export type ToastAction = {
+  variant: ButtonVariants;
+  label: string;
+  handleClick?: (toast?: Toast) => void;
+} & ButtonProps;
+
+export type ToastActionButtonProps = {
+  action: ToastAction;
+  type: ToastTypes;
+  toast?: Toast;
+};
+
+const ToastActionButton: React.FC<ToastActionButtonProps> = ({
+  type = "info",
+  toast,
+  action,
+}) => {
+  const theme = useTheme();
+  const { variant, label, handleClick } = action;
+
+  return (
+    <Button
+      size="sm"
+      className={cx(
+        theme.toast.actions.button[variant],
+        theme.toast[type].actions.button[variant],
+      )}
+      onClick={() => handleClick?.(toast)}
+      {...action}
+    >
+      {label}
+    </Button>
   );
 };

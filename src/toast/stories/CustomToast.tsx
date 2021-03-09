@@ -2,6 +2,7 @@
  * A Custom Toast Which User Might Write
  */
 import { cx } from "@renderlesskit/react";
+
 import React from "react";
 import { InfoCircleIcon } from "../../icons";
 import { Toast, ToastOptions, useShowToast } from "../RenderlessToast";
