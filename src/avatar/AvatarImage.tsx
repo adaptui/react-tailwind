@@ -30,3 +30,5 @@ export const AvatarImage = forwardRefWithAs<
     />
   );
 });
+
+AvatarImage.displayName = "AvatarImage";

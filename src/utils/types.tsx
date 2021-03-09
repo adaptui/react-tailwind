@@ -16,6 +16,7 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
     props: PropsWithAs<Props, Type> & { as: Type },
   ): JSX.Element;
   (props: PropsWithAs<Props, DefaultType>): JSX.Element;
+  displayName?: string;
 };
 
 /**

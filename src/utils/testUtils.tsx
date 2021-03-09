@@ -8,8 +8,7 @@ import * as React from "react";
 import { RunOptions } from "axe-core";
 import { configureAxe } from "jest-axe";
 
-// @ts-ignore
-import tailwindConfig from "../../tailwind.config";
+import theme from "../../renderlesskit.config";
 import { RenderlesskitProvider } from "../theme";
 export * from "@testing-library/react";
 
@@ -20,9 +19,7 @@ type Render = (
 
 export const render: Render = (children, options = {}) => {
   return RtlRender(
-    <RenderlesskitProvider tailwindConfig={tailwindConfig}>
-      {children}
-    </RenderlesskitProvider>,
+    <RenderlesskitProvider theme={theme}>{children}</RenderlesskitProvider>,
     options,
   );
 };

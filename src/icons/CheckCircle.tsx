@@ -3,13 +3,25 @@ import { createIcon } from "../icon";
 
 export const CheckCircleIcon = createIcon({
   displayName: "CheckCircleIcon",
-  viewBox: "0 0 16 16",
+  viewBox: "0 0 12 12",
   path: (
-    <path
-      fill="currentColor"
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M8 16A8 8 0 108-.001 8 8 0 008 16zm3.707-9.293a1 1 0 00-1.414-1.414L7 8.586 5.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-    />
+    <>
+      <path
+        d="M6.00048 11.3169C8.9024 11.3169 11.2549 8.96441 11.2549 6.06249C11.2549 3.16057 8.9024 0.808105 6.00048 0.808105C3.09856 0.808105 0.746094 3.16057 0.746094 6.06249C0.746094 8.96441 3.09856 11.3169 6.00048 11.3169Z"
+        stroke="currentColor"
+        fill="transparent"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.5 6.18182L5.10714 8L8.5 4"
+        stroke="currentColor"
+        fill="transparent"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
   ),
 });

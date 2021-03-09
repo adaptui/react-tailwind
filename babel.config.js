@@ -11,18 +11,18 @@ module.exports = function (api) {
       "@babel/env",
       {
         modules: isCommonJS ? "commonjs" : false,
+        loose: true,
         targets: {
           esmodules: isESM ? true : undefined,
         },
       },
     ],
-    "@babel/preset-typescript",
     "@babel/preset-react",
+    "@babel/preset-typescript",
   ];
 
   const plugins = [
-    "@chakra-ui/babel-plugin",
-    "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
     isBuild
       ? [
           "babel-plugin-jsx-remove-data-test-id",
@@ -39,6 +39,14 @@ module.exports = function (api) {
         presets: [["@babel/env", { targets: { node: "current" } }]],
       },
     },
-    ignore: isBuild ? ["**/*/stories"] : [],
+    ignore: isBuild
+      ? [
+          "**/*/stories",
+          "**/__tests__",
+          "**/__test__",
+          "**/testUtils.tsx",
+          "./renderlesskit.config.ts",
+        ]
+      : [],
   };
 };

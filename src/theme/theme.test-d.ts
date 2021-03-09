@@ -1,4 +1,5 @@
 import { expectAssignable, expectType } from "tsd";
+
 import theme from "./defaultTheme";
 
 // TODO: Test global renderlesskit namespace
@@ -14,15 +15,16 @@ expectType<Renderlesskit.GetThemeValue<"button", "variant">>({
   outline: "",
 });
 expectType<Renderlesskit.GetThemeValue<"button", "size">>({
+  sm: "",
   md: "",
   lg: "",
-  sm: "",
   xl: "",
 });
 expectType<Renderlesskit.GetThemeValue<"switch", "icon", "wrapper">["size"]>({
-  lg: "",
   sm: "",
-  xs: "",
+  md: "",
+  lg: "",
+  xl: "",
 });
 
 // user extended theme

@@ -106,3 +106,5 @@ export const Button = forwardRefWithAs<
     </ReakitButton>
   );
 });
+
+Button.displayName = "Button";

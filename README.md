@@ -1,6 +1,6 @@
-# React Typescript Template
+# Renderlesskit React Tailwind
 
-React Typescript Project Boilerplate
+React UI built with renderleskit-react & tailwind
 
 ## Get Started
 

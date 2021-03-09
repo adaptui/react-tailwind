@@ -29,3 +29,5 @@ export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
     </Box>
   );
 });
+
+AvatarName.displayName = "AvatarName";

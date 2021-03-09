@@ -81,6 +81,8 @@ export const AvatarGroup = forwardRefWithAs<
   );
 });
 
+AvatarGroup.displayName = "AvatarGroup";
+
 const AvatarExcess = ({
   excess,
   size = "md",

@@ -14,7 +14,7 @@ export const SwitchIcon = forwardRefWithAs<
   "span"
 >((props, ref) => {
   const { className, children, ...rest } = props;
-  const { state, size = "sm" } = useSwitchContext();
+  const { state, size = "md" } = useSwitchContext();
 
   const theme = useTheme();
   const switchIconWrapperStyles = cx(
@@ -50,3 +50,5 @@ export const SwitchIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+SwitchIcon.displayName = "SwitchIcon";

@@ -1,8 +1,8 @@
-import * as React from "react";
 import {
   Checkbox as ReakitSwitch,
   CheckboxProps as ReakitSwitchProps,
 } from "reakit";
+import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -35,3 +35,5 @@ export const SwitchInput = forwardRefWithAs<
     />
   );
 });
+
+SwitchInput.displayName = "SwitchInput";

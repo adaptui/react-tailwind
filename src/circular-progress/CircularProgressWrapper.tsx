@@ -30,3 +30,5 @@ export const CircularProgressWrapper = forwardRefWithAs<
     />
   );
 });
+
+CircularProgressWrapper.displayName = "CircularProgressWrapper";

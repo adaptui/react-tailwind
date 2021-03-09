@@ -1,32 +1,24 @@
 import * as React from "react";
-import { Role, RoleProps } from "reakit";
 import { cx } from "@renderlesskit/react";
 
 import {
-  BoltIcon,
-  InfoCircleIcon,
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-} from "../icons";
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  AlertActionButton,
+} from "./index";
 import { useTheme } from "../theme";
-import { createContext } from "../utils";
-import { Button, ButtonProps } from "../button";
-import { forwardRefWithAs } from "../utils/types";
-
-const STATUS_ICONS = {
-  info: InfoCircleIcon,
-  success: CheckCircleIcon,
-  warning: ExclamationTriangleIcon,
-  error: ExclamationCircleIcon,
-  offline: BoltIcon,
-};
+import { Box, BoxProps } from "../box";
+import { AlertBody } from "./AlertBody";
+import { useMediaQuery } from "../hooks";
+import { AlertActions } from "./AlertActions";
+import { createContext, runIfFn } from "../utils";
+import { AlertCloseButton } from "./AlertCloseButton";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
-type AlertContext = {
-  status: AlertStatus;
-};
+export type AlertContext = { status: AlertStatus; isMobile: boolean };
 
 const [AlertProvider, useAlertContext] = createContext<AlertContext>({
   name: "AlertContext",
@@ -34,16 +26,69 @@ const [AlertProvider, useAlertContext] = createContext<AlertContext>({
     "useAlertContext: `context` is undefined. Seems you forgot to wrap alert components in `<Alert />`",
 });
 
-export type AlertProps = RoleProps & {
-  /**
-   * The status of the alert
-   */
-  status?: AlertStatus;
-};
+export { AlertProvider, useAlertContext };
+
+type AlertRenderProps = RenderProp<{
+  status: AlertStatus;
+  styles: Renderlesskit.Theme["components"]["alert"];
+}>;
+
+export type AlertProps = BoxProps &
+  AlertRenderProps & {
+    /**
+     * The status of the alert
+     */
+    status?: AlertStatus;
+    /**
+     * button action icon
+     */
+    icon?: React.ReactNode;
+    /**
+     * Action button label
+     */
+    actionButtonLabel?: string;
+    /**
+     * Title of the alert
+     */
+    title?: string;
+    /**
+     * Description of the alert
+     */
+    description?: string;
+    /**
+     * Is Alert closable?
+     *
+     * @default false
+     */
+    closable?: boolean;
+    /**
+     * If added, Alert will show this icon as closable instead of the default `Close` icon.
+     */
+    closableIcon?: React.ReactElement;
+    /**
+     * Callback to fire when close icon is clicked?
+     */
+    onClose?: (e?: React.MouseEvent) => void;
+  };
 
 export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
   (props, ref) => {
-    const { status = "info", className, ...rest } = props;
+    const {
+      title,
+      description,
+      actionButtonLabel,
+      status = "info",
+      icon,
+      closable,
+      closableIcon,
+      onClose,
+      className,
+      children,
+      ...rest
+    } = props;
+    const [isMobile] = useMediaQuery("(max-width: 768px)");
+    const context = { status, isMobile };
+
     const theme = useTheme();
     const alertStyles = cx(
       theme.alert.base,
@@ -51,84 +96,43 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       className,
     );
 
+    const Action = actionButtonLabel && (
+      <AlertActionButton>{actionButtonLabel}</AlertActionButton>
+    );
+
     return (
-      <AlertProvider value={{ status }}>
-        <Role role="alert" className={alertStyles} ref={ref} {...rest} />
+      <AlertProvider value={context}>
+        <Box role="alert" className={alertStyles} ref={ref} {...rest}>
+          {children ? (
+            runIfFn(children, { status, styles: theme.alert })
+          ) : (
+            <>
+              <AlertIcon>{icon}</AlertIcon>
+              <AlertBody>
+                <AlertTitle>{title}</AlertTitle>
+                {description && (
+                  <AlertDescription>{description}</AlertDescription>
+                )}
+                <Box as="span" style={{ display: "inline-flex" }}>
+                  {isMobile ? Action : null}
+                </Box>
+              </AlertBody>
+              <AlertActions>
+                {!isMobile ? Action : null}
+                {closable && (
+                  <AlertCloseButton onClick={onClose}>
+                    {closableIcon}
+                  </AlertCloseButton>
+                )}
+              </AlertActions>
+            </>
+          )}
+        </Box>
       </AlertProvider>
     );
   },
 );
 
-export type AlertTitleProps = RoleProps & {};
-
-export const AlertTitle = forwardRefWithAs<
-  AlertTitleProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const alertTitleStyles = cx(theme.alert.title, className);
-
-  return <Role className={alertTitleStyles} ref={ref} {...rest} />;
-});
-
-export type AlertDescriptionProps = RoleProps & {};
-
-export const AlertDescription = forwardRefWithAs<
-  AlertDescriptionProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const alertDescriptionStyles = cx(theme.alert.description, className);
-
-  return <Role className={alertDescriptionStyles} ref={ref} {...rest} />;
-});
-
-export type AlertActionButtonProps = ButtonProps & {};
-
-export const AlertActionButton = forwardRefWithAs<
-  AlertActionButtonProps,
-  HTMLButtonElement,
-  "button"
->((props, ref) => {
-  const { status } = useAlertContext();
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const alertActionButtonStyles = cx(
-    theme.alert.actionButton,
-    theme.alert.status[status].actionButton,
-    className,
-  );
-
-  return <Button className={alertActionButtonStyles} ref={ref} {...rest} />;
-});
-
-export type AlertIconProps = RoleProps & {};
-
-export const AlertIcon = forwardRefWithAs<
-  AlertIconProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const { status } = useAlertContext();
-  const { className, ...rest } = props;
-  const Icon = STATUS_ICONS[status];
-  const theme = useTheme();
-  const alertIconBaseStyles = cx(theme.alert.icon.base, className);
-  const alertIconIconsStyles = cx(
-    theme.alert.icon.base,
-    theme.alert.status[status].icon,
-    className,
-  );
-
-  return (
-    <Role as="span" className={alertIconBaseStyles} ref={ref} {...rest}>
-      <Icon className={alertIconIconsStyles} />
-    </Role>
-  );
-});
+Alert.displayName = "Alert";
 
 export default Alert;

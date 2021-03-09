@@ -25,3 +25,5 @@ export const ButtonIcon = forwardRefWithAs<
     </Box>
   );
 });
+
+ButtonIcon.displayName = "ButtonIcon";
