@@ -113,6 +113,22 @@ export const useUpdateToast = () => {
   );
 };
 
+export const useUpdateFieldToast = () => {
+  const { dispatch } = useToastStore();
+
+  return React.useCallback(
+    (field: keyof Toast, fieldValue: any, toast: Partial<Toast>) => {
+      dispatch({
+        type: ActionType.UPDATE_FIELD_TOAST,
+        field,
+        fieldValue,
+        toast,
+      });
+    },
+    [dispatch],
+  );
+};
+
 export const useUpdateAllToast = () => {
   const { dispatch } = useToastStore();
 
@@ -156,6 +172,7 @@ export const useToasters = () => {
   const showToast = useShowToast();
   const updateToast = useUpdateToast();
   const updateAllToast = useUpdateAllToast();
+  const updateFieldToast = useUpdateFieldToast();
   const upsertToast = useUpsertToast();
   const dismissToast = useDismissToast();
   const removeToast = useRemoveToast();
@@ -166,6 +183,7 @@ export const useToasters = () => {
     upsertToast,
     updateToast,
     updateAllToast,
+    updateFieldToast,
     dismissToast,
     removeToast,
   };

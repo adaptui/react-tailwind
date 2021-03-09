@@ -3,7 +3,7 @@ import { cx } from "@renderlesskit/react";
 import { Meta } from "@storybook/react/types-6-0";
 
 import { Button } from "../../button";
-import { ToastContainer } from "../Toast";
+import { Toasts } from "../Toasts";
 import { InfoCircleIcon } from "../../icons";
 import { useToastType } from "../ToastAlert";
 import { ToastProvider, useToasters } from "../RenderlessToast/index";
@@ -15,13 +15,13 @@ export default {
 export const Default = () => {
   return (
     <ToastProvider>
-      <ToastContainer />
-      <TriggerNotifications />
+      <Toasts />
+      <TriggerToasts />
     </ToastProvider>
   );
 };
 
-const TriggerNotifications = () => {
+const TriggerToasts = () => {
   const { showToast, removeToast } = useToasters();
   const successToast = useToastType("success");
   const infoToast = useToastType("info");

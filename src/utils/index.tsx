@@ -100,3 +100,6 @@ export const isObject = (value: any): value is Dict => {
 
   return value != null && type === "object" && !isArray(value);
 };
+
+export const objectKeys = <T extends Dict>(obj: T) =>
+  (Object.keys(obj) as unknown) as (keyof T)[];

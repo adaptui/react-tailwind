@@ -1,26 +1,29 @@
 import * as React from "react";
 
 import { usePrevious } from "../../hooks";
-import { getPlacementSortedToasts } from "../Toast";
+import { ToastPlacement } from "./ToastTypes";
+import { getPlacementSortedToasts } from "./helpers";
 import { useToastStore, useToasters, getToast, Toast } from "./index";
 
 export const useToasts = () => {
   const { toasts } = useToastStore();
   const {
     updateToast,
-    updateAllToast,
+    updateFieldToast,
     upsertToast,
     removeToast,
     dismissToast,
   } = useToasters();
   const visibleToasts = toasts.filter(t => t.visible);
   const previousToasts = usePrevious<Toast[]>(visibleToasts);
+  const sortedToasts = getPlacementSortedToasts(toasts);
 
   const updateFrontHeight = React.useCallback(
-    (frontHeight: number) => {
-      updateAllToast({ frontHeight });
+    (placement: ToastPlacement, frontHeight: number) => {
+      updateFieldToast("placement", placement, { frontHeight });
     },
-    [updateAllToast],
+
+    [updateFieldToast],
   );
 
   React.useEffect(() => {
@@ -36,27 +39,28 @@ export const useToasts = () => {
     if (frontToast == null) return;
     if (frontToast.height == null) return;
 
-    updateFrontHeight(frontToast.height);
+    updateFrontHeight(frontToast.placement, frontToast.height);
   }, [visibleToasts, previousToasts, updateFrontHeight]);
 
   const updateHeight = React.useCallback(
-    (toastId: string, height: number) => {
+    (toastId: string, height: number, placement: ToastPlacement) => {
       updateToast(toastId, { height });
-      updateFrontHeight(height);
+      updateFrontHeight(placement, height);
     },
     [updateToast, updateFrontHeight],
   );
 
   const calculateOffset = React.useCallback(
-    (toastId: string) => {
-      const index = visibleToasts.findIndex(toast => toast.id === toastId);
+    (toastId: string, placement: ToastPlacement) => {
+      const toasts = sortedToasts[placement];
+      const index = toasts.findIndex(toast => toast.id === toastId);
       if (index === -1) return 0;
 
-      return visibleToasts
+      return toasts
         .slice(index + 1)
         .reduce((acc, t) => acc + (t.height || 0) + 10, 0);
     },
-    [visibleToasts],
+    [sortedToasts],
   );
 
   React.useEffect(() => {
@@ -83,29 +87,33 @@ export const useToasts = () => {
     };
   }, [toasts, dismissToast]);
 
-  function pauseTimer(toastId: string) {
-    const toast = getToast(toasts, toastId);
+  const pauseTimer = React.useCallback(
+    (toastId: string) => {
+      const toast = getToast(visibleToasts, toastId);
 
-    if (!toast.autoDismiss) return;
+      if (!toast.autoDismiss) return;
 
-    updateToast(toastId, { pausedAt: Date.now() });
-  }
+      updateToast(toastId, { pausedAt: Date.now() });
+    },
+    [visibleToasts, updateToast],
+  );
 
-  function resumeTimer(toastId: string) {
-    const toast = getToast(toasts, toastId);
+  const resumeTimer = React.useCallback(
+    (toastId: string) => {
+      const toast = getToast(visibleToasts, toastId);
 
-    if (!toast.autoDismiss) return;
+      if (!toast.autoDismiss) return;
 
-    const now = Date.now();
-    const diff = now - (toast.pausedAt || 0);
+      const now = Date.now();
+      const diff = now - (toast.pausedAt || 0);
 
-    updateToast(toastId, {
-      pausedAt: null,
-      pauseDuration: toast.pauseDuration + diff,
-    });
-  }
-
-  const sortedToasts = getPlacementSortedToasts(toasts);
+      updateToast(toastId, {
+        pausedAt: null,
+        pauseDuration: toast.pauseDuration + diff,
+      });
+    },
+    [visibleToasts, updateToast],
+  );
 
   return {
     toasts: sortedToasts,
@@ -120,3 +128,5 @@ export const useToasts = () => {
     updateFrontHeight,
   };
 };
+
+export type useToastsReturnType = ReturnType<typeof useToasts>;
