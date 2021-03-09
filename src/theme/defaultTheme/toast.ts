@@ -28,7 +28,7 @@ export const toast = {
     body: { description: "text-gray-300" },
     actions: {
       button: {
-        ghost: "text-white hover:text-gray-800 hover:bg-white",
+        ghost: "text-white bg-transparent hover:text-gray-800 hover:bg-white",
         primary: "text-gray-800 bg-white",
         secondary: "text-white bg-gray-700",
       },
@@ -39,7 +39,7 @@ export const toast = {
     body: { description: "text-blue-300" },
     actions: {
       button: {
-        ghost: "text-white hover:text-blue-800 hover:bg-white",
+        ghost: "text-white bg-transparent hover:text-blue-800 hover:bg-white",
         primary: "text-blue-800 bg-white",
         secondary: "text-white bg-blue-700",
       },
@@ -50,7 +50,7 @@ export const toast = {
     body: { description: "text-orange-300" },
     actions: {
       button: {
-        ghost: "text-white hover:text-orange-800 hover:bg-white",
+        ghost: "text-white bg-transparent hover:text-orange-800 hover:bg-white",
         primary: "text-orange-800 bg-white",
         secondary: "text-white bg-orange-700",
       },
@@ -61,7 +61,7 @@ export const toast = {
     body: { description: "text-red-300" },
     actions: {
       button: {
-        ghost: "text-white hover:text-red-800 hover:bg-white",
+        ghost: "text-white bg-transparent hover:text-red-800 hover:bg-white",
         primary: "text-red-800 bg-white",
         secondary: "text-white bg-red-700",
       },
