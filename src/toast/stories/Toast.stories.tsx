@@ -1,11 +1,10 @@
 import React from "react";
-import { cx } from "@renderlesskit/react";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Button } from "../../button";
 import { Toasts } from "../Toasts";
-import { InfoCircleIcon } from "../../icons";
-import { useToastType } from "../ToastAlert";
+import { Button } from "../../button";
+import { useCustomToast } from "./CustomToast";
+import { useLibraryToast } from "../ToastAlert";
 import { ToastProvider, useToasters } from "../RenderlessToast/index";
 
 export default {
@@ -22,23 +21,49 @@ export const Default = () => {
 };
 
 const TriggerToasts = () => {
+  const toast = useLibraryToast();
+  const showCustomToast = useCustomToast();
   const { showToast, removeToast } = useToasters();
-  const successToast = useToastType("success");
-  const infoToast = useToastType("info");
-  const warningToast = useToastType("warning");
-  const errorToast = useToastType("error");
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
       <div className="space-x-2">
         <Button
           className="my-2"
+          onClick={() => showToast("Proper Vercel Toast.")}
+        >
+          String Toast
+        </Button>
+        <Button
+          className="my-2"
           onClick={() =>
-            successToast({
+            toast({
+              title: "Proper Vercel Toast with better state.",
+            })
+          }
+        >
+          Info Toast
+        </Button>
+        <Button onClick={() => showCustomToast({ title: "Hello world" })}>
+          User Defined Custom Toast
+        </Button>
+      </div>
+
+      <div className="space-x-2">
+        <Button
+          className="my-2"
+          onClick={() =>
+            toast({
+              type: "success",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
@@ -47,11 +72,17 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            infoToast({
+            toast({
+              type: "info",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: [
+                {
+                  variant: "secondary",
+                  label: "Cancel",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
@@ -60,11 +91,17 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            warningToast({
+            toast({
+              type: "warning",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
@@ -73,11 +110,17 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            errorToast({
+            toast({
+              type: "error",
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: [
+                {
+                  variant: "ghost",
+                  label: "Undo",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
@@ -89,7 +132,7 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            successToast({
+            toast({
               title: "Proper Vercel Toast with better state.",
             })
           }
@@ -99,7 +142,7 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            successToast({
+            toast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
             })
@@ -110,10 +153,16 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            successToast({
+            toast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              ghostAction: "Undo",
+              actions: [
+                {
+                  variant: "ghost",
+                  label: "Undo",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
@@ -122,10 +171,16 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            successToast({
+            toast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
@@ -134,60 +189,25 @@ const TriggerToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            successToast({
+            toast({
               title: "Proper Vercel Toast with better state.",
               description: "With both Title & Description",
-              primaryAction: "Delete",
-              secondaryAction: "Cancel",
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+                {
+                  variant: "secondary",
+                  label: "Cancel",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
             })
           }
         >
           Both Primary and Secondary Action Toast
-        </Button>
-      </div>
-
-      <div className="space-x-2">
-        <Button
-          className="my-2"
-          onClick={() => showToast("Proper Vercel Toast.")}
-        >
-          String Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast(({ showAlertContent }) => {
-              return (
-                <div className="lib:flex lib:shadow-lg lib:bg-gray-800 lib:py-2 lib:px-3 lib:text-white lib:rounded-md lib:w-full">
-                  <div
-                    className={cx(
-                      "lib:flex w-full lib:justify-between lib:transition-opacity",
-                      showAlertContent ? "lib:opacity-100" : "lib:opacity-0",
-                    )}
-                  >
-                    <div className="lib:flex lib:flex-col lib:text-sm lib:flex-wrap">
-                      <div className="lib:font-medium">
-                        Proper Vercel Toast with better state.
-                      </div>
-                    </div>
-                    <div className="lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5">
-                      <InfoCircleIcon />
-                    </div>
-                  </div>
-                </div>
-              );
-            })
-          }
-        >
-          JSX Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            successToast({ title: "Proper Vercel Toast with better state." })
-          }
-        >
-          Info Toast
         </Button>
       </div>
 
@@ -253,6 +273,7 @@ const TriggerToasts = () => {
           Top Right Toast
         </Button>
       </div>
+
       <div>
         <Button className="my-2" onClick={() => removeToast()}>
           Remove All Toast
