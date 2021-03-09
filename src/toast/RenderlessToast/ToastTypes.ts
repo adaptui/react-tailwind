@@ -38,6 +38,10 @@ export interface Toast {
   height: number | null;
   frontHeight: number | null;
   content: Content;
+  offsetGap: number;
+  hoverOffsetGap: number;
+  visibleToasts: number;
+  visibleMobileToasts: number;
 }
 
 type ConfigurableToastOptions = Pick<
@@ -48,6 +52,10 @@ type ConfigurableToastOptions = Pick<
   | "placement"
   | "reverseOrder"
   | "animationDuration"
+  | "offsetGap"
+  | "hoverOffsetGap"
+  | "visibleToasts"
+  | "visibleMobileToasts"
 >;
 
 export type CreateToastOptions = Partial<ConfigurableToastOptions>;

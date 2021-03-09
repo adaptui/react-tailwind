@@ -101,7 +101,7 @@ export type ToastAction = {
 export type ToastActionButtonProps = {
   action: ToastAction;
   type: ToastTypes;
-  toast?: Toast;
+  toast: Toast;
 };
 
 const ToastActionButton: React.FC<ToastActionButtonProps> = ({
@@ -110,7 +110,7 @@ const ToastActionButton: React.FC<ToastActionButtonProps> = ({
   action,
 }) => {
   const theme = useTheme();
-  const { variant, label, handleClick } = action;
+  const { variant, label, handleClick, ...rest } = action;
 
   return (
     <Button
@@ -120,7 +120,7 @@ const ToastActionButton: React.FC<ToastActionButtonProps> = ({
         theme.toast[type].actions.button[variant],
       )}
       onClick={() => handleClick?.(toast)}
-      {...action}
+      {...rest}
     >
       {label}
     </Button>

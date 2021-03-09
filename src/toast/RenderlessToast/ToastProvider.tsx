@@ -23,10 +23,14 @@ export { useToastStore };
 
 const defaultOptions: DefaultToastOptions = {
   placement: "bottom-center",
-  autoDismiss: false,
+  autoDismiss: true,
   dismissDuration: 3000,
   animationDuration: 0,
   reverseOrder: true,
+  offsetGap: 10,
+  hoverOffsetGap: 10,
+  visibleToasts: 3,
+  visibleMobileToasts: 1,
 };
 
 export const ToastProvider: React.FC<ToastOptions> = props => {

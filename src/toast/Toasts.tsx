@@ -96,27 +96,40 @@ export const ToastBar = (props: ToastBarProps) => {
     hoverOffset,
     updateHeight,
   } = props;
+  const {
+    id,
+    height,
+    frontHeight,
+    content,
+    placement,
+    visibleToasts,
+    visibleMobileToasts,
+    offsetGap,
+    visible,
+  } = toast;
 
   const ref = React.useCallback(
     (el: HTMLElement | null) => {
       if (el) {
         const boundingRect = el.getBoundingClientRect();
-        toast.visible &&
-          updateHeight(toast.id, boundingRect.height, toast.placement);
+        visible && updateHeight(id, boundingRect.height, placement);
       }
     },
-    [updateHeight, toast.id, toast.visible, toast.placement],
+    [updateHeight, id, visible, placement],
   );
 
-  const isToastVisible = toast.visible;
-  const [side, position] = toast.placement.split("-");
+  const isToastVisible = visible;
+  const [side, position] = placement.split("-");
   const sortedIndex = toastsLength - (index + 1);
-  const clampedIndex = sortedIndex > 4 ? 4 : sortedIndex;
-  const translateYGap = 10 * clampedIndex;
+  const clampedIndex =
+    sortedIndex > visibleToasts ? visibleToasts : sortedIndex;
+  const translateYGap = offsetGap * clampedIndex;
   const scalePercent = 1 - 0.05 * clampedIndex;
   const showAlertContent = sortedIndex === 0 || isHovered;
 
-  const showToast = isMobile ? sortedIndex === 0 : sortedIndex <= 2;
+  const showToast = isMobile
+    ? sortedIndex <= visibleMobileToasts - 1
+    : sortedIndex <= visibleToasts - 1;
   const hoverOffsetSide = side === "bottom" ? -hoverOffset : hoverOffset;
   const translateYGapSide = side === "bottom" ? -translateYGap : translateYGap;
 
@@ -147,15 +160,15 @@ export const ToastBar = (props: ToastBarProps) => {
             ? `translate3d(0, ${hoverOffsetSide}px, 0)`
             : `translate3d(0, ${translateYGapSide}px, 0) scale(${scalePercent})`,
           opacity: showToast ? 1 : 0,
-          height: isHovered ? `${toast.height}px` : `${toast.frontHeight}px`,
+          height: isHovered ? `${height}px` : `${frontHeight}px`,
         }}
       >
         <div className={cx(theme.toast.fill, theme.toast[side].fill)} />
-        {isFunction(toast.content) ? (
-          toast.content({ toast, showAlertContent })
+        {isFunction(content) ? (
+          content({ toast, showAlertContent })
         ) : (
           <div role="alert" className={theme.toast.default}>
-            {toast.content}
+            {content}
           </div>
         )}
       </div>

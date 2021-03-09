@@ -117,7 +117,7 @@ export const toast = {
         base: "lib:right-0 lib:left-half lib:transform lib:-translate-x-half",
       },
       animationWrapper: {
-        base: "",
+        base: "lib:left-half lib:transform lib:-translate-x-half",
       },
     },
 
@@ -158,7 +158,7 @@ export const toast = {
         base: "lib:right-0 lib:left-half lib:transform lib:-translate-x-half",
       },
       animationWrapper: {
-        base: "",
+        base: "lib:left-half lib:transform lib:-translate-x-half",
       },
     },
 

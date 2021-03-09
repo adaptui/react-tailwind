@@ -59,7 +59,7 @@ export const useToasts = () => {
 
       return toasts
         .slice(index + 1)
-        .reduce((acc, t) => acc + (t.height || 0) + 10, 0);
+        .reduce((acc, t) => acc + (t.height || 0) + t.hoverOffsetGap, 0);
     },
     [sortedToasts],
   );
