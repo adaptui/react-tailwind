@@ -1,3 +1,4 @@
+import { objectKeys } from "../../../utils";
 import { Toast } from "../index";
 import { ToastPlacement } from "../ToastTypes";
 
@@ -21,3 +22,18 @@ export const getPlacementSortedToasts = (toasts: Toast[]) =>
     acc[curr.placement].push(curr);
     return acc;
   }, {} as SortedToastList);
+
+export const mobileSortedToasts = (sortedToasts: SortedToastList) =>
+  objectKeys(sortedToasts).reduce(
+    (acc, placement) => {
+      const [side] = placement.split("-");
+
+      acc[`${side}-center`] = [
+        ...acc[`${side}-center`],
+        ...sortedToasts[placement],
+      ];
+
+      return acc;
+    },
+    { "bottom-center": [] as Toast[], "top-center": [] as Toast[] },
+  );

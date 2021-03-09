@@ -40,12 +40,15 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   const { toasts, placement, updateHeight, calculateOffset } = props;
   const [side, position] = placement.split("-");
   const { hoverProps, isHovered } = useHover({});
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   const theme = useTheme();
   const toastsContainerStyles = cx(
     theme.toast.container.base,
     theme.toast[side].container.base,
-    theme.toast[side][position].container.base,
+    isMobile
+      ? theme.toast[side].center.container.base
+      : theme.toast[side][position].container.base,
     isHovered
       ? cx(theme.toast.container.hovered, theme.toast[side].container.hovered)
       : cx(
@@ -64,6 +67,7 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
             index={index}
             toastsLength={toasts.length}
             isHovered={isHovered}
+            isMobile={isMobile}
             hoverOffset={calculateOffset(toast.id, toast.placement)}
             updateHeight={updateHeight}
           />
@@ -78,6 +82,7 @@ export type ToastBarProps = {
   index: number;
   toastsLength: number;
   isHovered: boolean;
+  isMobile: boolean;
   hoverOffset: number;
 } & Pick<useToastsReturnType, "updateHeight">;
 
@@ -87,6 +92,7 @@ export const ToastBar = (props: ToastBarProps) => {
     index,
     toastsLength,
     isHovered,
+    isMobile,
     hoverOffset,
     updateHeight,
   } = props;
@@ -110,7 +116,6 @@ export const ToastBar = (props: ToastBarProps) => {
   const scalePercent = 1 - 0.05 * clampedIndex;
   const showAlertContent = sortedIndex === 0 || isHovered;
 
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
   const showToast = isMobile ? sortedIndex === 0 : sortedIndex <= 2;
   const hoverOffsetSide = side === "bottom" ? -hoverOffset : hoverOffset;
   const translateYGapSide = side === "bottom" ? -translateYGap : translateYGap;
@@ -119,7 +124,9 @@ export const ToastBar = (props: ToastBarProps) => {
   const toastAnimationStyles = cx(
     theme.toast.animationWrapper.base,
     theme.toast[side].animationWrapper.base,
-    theme.toast[side][position].animationWrapper.base,
+    isMobile
+      ? theme.toast[side].center.animationWrapper.base
+      : theme.toast[side][position].animationWrapper.base,
     isToastVisible
       ? cx(
           theme.toast.animationWrapper.visible,

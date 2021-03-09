@@ -7,9 +7,7 @@ import { useCustomToast } from "./CustomToast";
 import { useLibraryToast } from "../ToastAlert";
 import { ToastProvider, useToasters } from "../RenderlessToast/index";
 
-export default {
-  title: "Toast",
-} as Meta;
+export default { title: "Toast" } as Meta;
 
 export const Default = () => {
   return (

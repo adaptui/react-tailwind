@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { usePrevious } from "../../hooks";
 import { ToastPlacement } from "./ToastTypes";
-import { getPlacementSortedToasts } from "./helpers";
+import { useMediaQuery, usePrevious } from "../../hooks";
+import { getPlacementSortedToasts, mobileSortedToasts } from "./helpers";
 import { useToastStore, useToasters, getToast, Toast } from "./index";
 
 export const useToasts = () => {
@@ -16,6 +16,7 @@ export const useToasts = () => {
   } = useToasters();
   const visibleToasts = toasts.filter(t => t.visible);
   const previousToasts = usePrevious<Toast[]>(visibleToasts);
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
   const sortedToasts = getPlacementSortedToasts(toasts);
 
   const updateFrontHeight = React.useCallback(
@@ -116,7 +117,7 @@ export const useToasts = () => {
   );
 
   return {
-    toasts: sortedToasts,
+    toasts: isMobile ? mobileSortedToasts(sortedToasts) : sortedToasts,
     pauseTimer,
     resumeTimer,
     removeToast,
