@@ -3,8 +3,8 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useMergeRefs } from "../hooks";
 import { forwardRefWithAs } from "../utils/types";
-import { useMergeRefs } from "../hooks/useMergeRefs";
 
 export type BadgeProps = BoxProps & {
   /**

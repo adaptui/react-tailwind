@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Badge /> should render floating badge with position 1`] = `
+<DocumentFragment>
+  <div
+    class="relative"
+    data-testid="testid-badge_parent"
+  >
+    <span
+      class="lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all lib:px-2 lib:text-sm lib:font-medium lib:bg-gray-800 lib:text-white absolute -bottom-0 -left-0 transform -translate-x-1/2 translate-y-1/2"
+    >
+      Hello world
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<Badge /> should render properly 1`] = `
+<DocumentFragment>
+  <span
+    class="lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all lib:px-2 lib:text-sm lib:font-medium lib:bg-gray-800 lib:text-white"
+  >
+    Hello world
+  </span>
+</DocumentFragment>
+`;
