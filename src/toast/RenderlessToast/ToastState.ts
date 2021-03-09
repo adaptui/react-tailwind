@@ -17,6 +17,7 @@ export enum ActionType {
   ADD_TOAST,
   UPSERT_TOAST,
   UPDATE_TOAST,
+  UPDATE_FIELD_TOAST,
   UPDATE_ALL_TOAST,
   DISMISS_TOAST,
   REMOVE_TOAST,
@@ -33,6 +34,12 @@ export type Action<T> =
     }
   | {
       type: ActionType.UPDATE_TOAST;
+      toast: Partial<T>;
+    }
+  | {
+      type: ActionType.UPDATE_FIELD_TOAST;
+      field: keyof T;
+      fieldValue: any;
       toast: Partial<T>;
     }
   | {
@@ -66,6 +73,14 @@ const reducer = <T extends Toast>(
         ...state,
         toasts: state.toasts.map(t =>
           t.id === action.toast.id ? { ...t, ...action.toast } : t,
+        ),
+      };
+
+    case ActionType.UPDATE_FIELD_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t =>
+          t[action.field] === action.fieldValue ? { ...t, ...action.toast } : t,
         ),
       };
 

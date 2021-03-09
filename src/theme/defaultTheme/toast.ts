@@ -21,6 +21,8 @@ export const toast = {
       secondary: "",
     },
   },
+
+  // Types
   success: {
     base: "bg-gray-800 text-white",
     body: { description: "text-gray-300" },
@@ -73,17 +75,100 @@ export const toast = {
   // Container Vercel Toast animation styles
   container: {
     base:
-      "lib:fixed lib:z-50 lib:max-w-sm lib:transition-all lib:duration-300 lib:right-5",
-    hovered: "lib:bottom-5",
-    notHovered: "lib:bottom-2.5",
+      "lib:fixed lib:z-50 lib:max-w-xs lib:sm:max-w-sm lib:transition-all lib:duration-300",
+    notHovered: "",
+    hovered: "",
   },
   animationWrapper: {
     base:
-      "lib:absolute lib:bottom-0 lib:right-0 lib:w-96 lib:transition-all lib:duration-300 lib:transform-gpu",
-    visible: "lib:translate-y-0 lib:opacity-100",
-    notVisible: "lib:translate-y-20 lib:opacity-0",
+      "lib:absolute lib:w-80 lib:sm:w-96 lib:transition-all lib:duration-300 lib:transform-gpu",
+    notVisible: "",
+    visible: "",
   },
   hoverWrapper: "lib:flex lib:transition-all lib:duration-300",
   fill:
-    "lib:absolute lib:left-0 lib:right-0 lib:w-full lib:h-full lib:bg-transparent lib:top-full",
+    "lib:absolute lib:left-0 lib:right-0 lib:w-full lib:h-full lib:bg-transparent",
+
+  // Placements
+  bottom: {
+    container: {
+      base: "",
+      notHovered: "lib:bottom-2.5",
+      hovered: "lib:bottom-5",
+    },
+    animationWrapper: {
+      base: "lib:bottom-0",
+      notVisible: "lib:translate-y-20 lib:opacity-0",
+      visible: "lib:translate-y-0 lib:opacity-100",
+    },
+    fill: "lib:top-full",
+
+    left: {
+      container: {
+        base: "lib:left-5",
+      },
+      animationWrapper: {
+        base: "lib:left-0",
+      },
+    },
+
+    center: {
+      container: {
+        base: "lib:right-0 lib:left-half lib:transform lib:-translate-x-half",
+      },
+      animationWrapper: {
+        base: "",
+      },
+    },
+
+    right: {
+      container: {
+        base: "lib:right-5",
+      },
+      animationWrapper: {
+        base: "lib:right-0",
+      },
+    },
+  },
+
+  top: {
+    container: {
+      base: "",
+      notHovered: "lib:top-2.5",
+      hovered: "lib:top-5",
+    },
+    animationWrapper: {
+      base: "lib:top-0",
+      notVisible: "lib:-translate-y-20 lib:opacity-0",
+      visible: "lib:translate-y-0 lib:opacity-100",
+    },
+    fill: "lib:bottom-full",
+
+    left: {
+      container: {
+        base: "lib:left-5",
+      },
+      animationWrapper: {
+        base: "lib:left-0",
+      },
+    },
+
+    center: {
+      container: {
+        base: "lib:right-0 lib:left-half lib:transform lib:-translate-x-half",
+      },
+      animationWrapper: {
+        base: "",
+      },
+    },
+
+    right: {
+      container: {
+        base: "lib:right-5",
+      },
+      animationWrapper: {
+        base: "lib:right-0",
+      },
+    },
+  },
 };
