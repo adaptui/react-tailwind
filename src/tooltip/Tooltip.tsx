@@ -27,25 +27,39 @@ export type TooltipProps = TooltipInitialState & {
    *
    * @default true
    */
-  arrow?: boolean;
+  hasArrow?: boolean;
   /**
    * How large should the arrow be?
    *
    * @default "30"
    */
-  size?: string | number | undefined;
+  arrowSize?: string | number | undefined;
+  /**
+   * ClassNames for the Tooltip Body
+   */
+  className?: string;
+  /**
+   * Styles for the Tooltip Body
+   */
+  style?: React.CSSProperties;
+  /**
+   * Trigger for the Tooltip
+   */
   children: React.ReactNode;
 };
 
 export const Tooltip = ({
   title,
-  children,
-  size = 17,
+  hasArrow = false,
+  arrowSize = 17,
   prefix,
-  arrow = true,
+  className,
+  style,
+  children,
   ...rest
 }: TooltipProps) => {
   const tooltip = useTooltipState(rest);
+  const [side] = tooltip.placement.split("-");
 
   const theme = useTheme();
   const arrowStyles = cx(theme.tooltip.arrow.base);
@@ -53,30 +67,36 @@ export const Tooltip = ({
   const transformMap: Record<string, string> = {
     top: "rotateZ(180deg)",
     right: "rotateZ(-90deg)",
-    bottom: "rotateZ(360deg)",
+    bottom: "",
     left: "rotateZ(90deg)",
   };
 
   return (
     <>
       {/* @ts-ignore */}
-      <TooltipReference {...tooltip} ref={children?.ref} {...children?.props}>
+      <TooltipReference {...tooltip} ref={children?.ref}>
         {referenceProps =>
           React.cloneElement(children as React.ReactElement, referenceProps)
         }
       </TooltipReference>
-      <ReakitTooltip {...tooltip}>
-        <TooltipBody prefix={prefix}>
-          {arrow && (
-            <TooltipArrow {...tooltip} size={size}>
-              <TooltipArrowIcon
-                className={arrowStyles}
-                style={{
-                  transform: transformMap[tooltip.placement],
-                }}
-              />
-            </TooltipArrow>
-          )}
+      <ReakitTooltip
+        {...tooltip}
+        style={{
+          ...tooltip.unstable_popoverStyles,
+          display: tooltip.visible ? "flex" : "none",
+        }}
+      >
+        {hasArrow && (
+          <TooltipArrow {...tooltip} size={arrowSize}>
+            <TooltipArrowIcon
+              className={arrowStyles}
+              style={{
+                transform: transformMap[side],
+              }}
+            />
+          </TooltipArrow>
+        )}
+        <TooltipBody prefix={prefix} className={className} style={style}>
           {title}
         </TooltipBody>
       </ReakitTooltip>

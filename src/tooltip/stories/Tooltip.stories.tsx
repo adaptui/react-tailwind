@@ -13,7 +13,23 @@ export default {
   title: "Tooltip",
   component: Tooltip,
   argTypes: {
-    placement: createUnionControl(["left", "right", "top", "bottom", "auto"]),
+    placement: createUnionControl([
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "auto",
+      "auto-start",
+      "auto-end",
+      "top-start",
+      "top-end",
+      "bottom-start",
+      "bottom-end",
+      "right-start",
+      "right-end",
+      "left-start",
+      "left-end",
+    ]),
   },
 } as Meta<TooltipProps>;
 
@@ -45,9 +61,51 @@ export const WithIcon = base({
   prefix: <ExclamationTriangleIcon />,
 });
 
-export const WithoutArrow = base({
-  children: <Button>Tooltip</Button>,
-  title: "Tooltip without arrow",
-  arrow: false,
+export const WithArrow = base({
+  children: (
+    <Button variant="secondary" className="bg-red">
+      Tooltip
+    </Button>
+  ),
+  title: "Tooltip with arrow",
+  hasArrow: true,
   prefix: <ExclamationTriangleIcon />,
 });
+
+export const WithLessGutter = base({
+  children: <Button>Tooltip</Button>,
+  title: "Tooltip with arrow",
+  hasArrow: true,
+  gutter: 5,
+  prefix: <ExclamationTriangleIcon />,
+});
+
+export const InitiallyVisible = base({
+  children: <Button>Tooltip</Button>,
+  title: "Tooltip with arrow",
+  hasArrow: true,
+  visible: true,
+  prefix: <ExclamationTriangleIcon />,
+});
+
+export const Test = () => {
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    console.log(ref);
+  }, []);
+
+  return (
+    <div
+      className="flex items-center justify-center m-auto"
+      style={{
+        width: "90vw",
+        height: "90vh",
+      }}
+    >
+      <Tooltip title="I am a popover">
+        <Button ref={ref}>Tooltip</Button>
+      </Tooltip>
+    </div>
+  );
+};
