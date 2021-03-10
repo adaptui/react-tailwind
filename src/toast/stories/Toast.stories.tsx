@@ -5,8 +5,8 @@ import { Meta } from "@storybook/react/types-6-0";
 import { Toasts } from "../Toasts";
 import { Button } from "../../button";
 import { useCustomToast } from "./CustomToast";
-import { useLibraryToast } from "../ToastAlert";
-import { ToastProvider, useToasters } from "../RenderlessToast/index";
+import { useToast } from "../ToastAlert";
+import { ToastProvider, useToastHandlers } from "@renderlesskit/react/toast";
 
 export default { title: "Toast" } as Meta;
 
@@ -66,9 +66,9 @@ export const ToastPlacements = () => {
 };
 
 const TriggerDefaultToasts = () => {
-  const toast = useLibraryToast();
+  const toast = useToast();
   const showCustomToast = useCustomToast();
-  const { showToast, removeToast } = useToasters();
+  const { showToast, removeToast } = useToastHandlers();
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
@@ -124,8 +124,8 @@ const TriggerDefaultToasts = () => {
 };
 
 const TriggerOptionsToasts = () => {
-  const toast = useLibraryToast();
-  const { removeToast } = useToasters();
+  const toast = useToast();
+  const { removeToast } = useToastHandlers();
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
@@ -227,100 +227,40 @@ const TriggerOptionsToasts = () => {
 };
 
 const TriggerTypesToasts = () => {
-  const toast = useLibraryToast();
-  const { removeToast } = useToasters();
+  const toast = useToast();
+  const { removeToast } = useToastHandlers();
+
+  const types = ["success", "info", "warning", "error"] as const;
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
       <div className="space-x-2">
-        <Button
-          className="my-2"
-          onClick={() =>
-            toast(
-              {
-                type: "success",
-                title: "Proper Vercel Toast with better state.",
-                description: "With both Title & Description",
-                actions: [
+        {types.map(type => {
+          return (
+            <Button
+              className="my-2"
+              onClick={() =>
+                toast(
                   {
-                    variant: "primary",
-                    label: "Delete",
-                    handleClick: toast => removeToast(toast?.id),
+                    type: type,
+                    title: "Proper Vercel Toast with better state.",
+                    description: "With both Title & Description",
+                    actions: [
+                      {
+                        variant: "primary",
+                        label: "Delete",
+                        handleClick: toast => removeToast(toast?.id),
+                      },
+                    ],
                   },
-                ],
-              },
-              { autoDismiss: false },
-            )
-          }
-        >
-          Success Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            toast(
-              {
-                type: "info",
-                title: "Proper Vercel Toast with better state.",
-                description: "With both Title & Description",
-                actions: [
-                  {
-                    variant: "secondary",
-                    label: "Cancel",
-                    handleClick: toast => removeToast(toast?.id),
-                  },
-                ],
-              },
-              { autoDismiss: false },
-            )
-          }
-        >
-          Info Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            toast(
-              {
-                type: "warning",
-                title: "Proper Vercel Toast with better state.",
-                description: "With both Title & Description",
-                actions: [
-                  {
-                    variant: "primary",
-                    label: "Delete",
-                    handleClick: toast => removeToast(toast?.id),
-                  },
-                ],
-              },
-              { autoDismiss: false },
-            )
-          }
-        >
-          Warning Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            toast(
-              {
-                type: "error",
-                title: "Proper Vercel Toast with better state.",
-                description: "With both Title & Description",
-                actions: [
-                  {
-                    variant: "ghost",
-                    label: "Undo",
-                    handleClick: toast => removeToast(toast?.id),
-                  },
-                ],
-              },
-              { autoDismiss: false },
-            )
-          }
-        >
-          Error Toast
-        </Button>
+                  { autoDismiss: false },
+                )
+              }
+            >
+              {type} toast
+            </Button>
+          );
+        })}
       </div>
 
       <div>
@@ -333,8 +273,8 @@ const TriggerTypesToasts = () => {
 };
 
 const TriggerAlertOptionsToasts = () => {
-  const toast = useLibraryToast();
-  const { removeToast } = useToasters();
+  const toast = useToast();
+  const { removeToast } = useToastHandlers();
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
@@ -440,71 +380,34 @@ const TriggerAlertOptionsToasts = () => {
 };
 
 const TriggerPlacementToasts = () => {
-  const { showToast, removeToast } = useToasters();
+  const { showToast, removeToast } = useToastHandlers();
+
+  const placements = [
+    "bottom-left",
+    "bottom-center",
+    "bottom-right",
+    "top-left",
+    "top-center",
+    "top-right",
+  ] as const;
 
   return (
     <div className="flex flex-col space-y-2 justify-items-center">
       <div className="space-x-2">
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast("Proper Vercel Toast with better state.", {
-              placement: "bottom-left",
-            })
-          }
-        >
-          Bottom Left Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast("Proper Vercel Toast with better state.", {
-              placement: "bottom-center",
-            })
-          }
-        >
-          Bottom Center Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast("Proper Vercel Toast with better state.", {
-              placement: "bottom-right",
-            })
-          }
-        >
-          Bottom Right Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast("Proper Vercel Toast with better state.", {
-              placement: "top-left",
-            })
-          }
-        >
-          Top Left Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast("Proper Vercel Toast with better state.", {
-              placement: "top-center",
-            })
-          }
-        >
-          Top Center Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            showToast("Proper Vercel Toast with better state.", {
-              placement: "top-right",
-            })
-          }
-        >
-          Top Right Toast
-        </Button>
+        {placements.map(placement => {
+          return (
+            <Button
+              className="my-2"
+              onClick={() =>
+                showToast("Proper Vercel Toast with better state.", {
+                  placement: placement,
+                })
+              }
+            >
+              {placement} toast
+            </Button>
+          );
+        })}
       </div>
 
       <div>

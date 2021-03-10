@@ -5,7 +5,7 @@ import { cx } from "@renderlesskit/react";
 
 import React from "react";
 import { InfoCircleIcon } from "../../icons";
-import { Toast, ToastOptions, useShowToast } from "../RenderlessToast";
+import { Toast, ToastOptions, useShowToast } from "@renderlesskit/react/toast";
 
 type CustomToastProps = {
   title: string;

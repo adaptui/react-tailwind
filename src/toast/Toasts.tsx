@@ -6,8 +6,10 @@ import {
   ToastPlacement,
   useToasts,
   useToastsReturnType,
-} from "./RenderlessToast";
+} from "@renderlesskit/react/toast";
+
 import { useTheme } from "../theme";
+import { Split } from "../utils/types";
 import { isFunction, objectKeys } from "../utils";
 import { useHover, useMediaQuery } from "../hooks";
 
@@ -38,30 +40,29 @@ export type ToastsContainerProps = {
 
 export const ToastsContainer = (props: ToastsContainerProps) => {
   const { toasts, placement, updateHeight, calculateOffset } = props;
-  const [side, position] = placement.split("-");
+  const [side, position] = placement.split("-") as Split<typeof placement, "-">;
+
   const { hoverProps, isHovered } = useHover({});
   const [isMobile] = useMediaQuery("(max-width: 640px)");
 
   const theme = useTheme();
+  const hoveredStyle = isHovered ? "hovered" : "notHovered";
+  const mobileStyle = isMobile ? "center" : position;
   const toastsContainerStyles = cx(
     theme.toast.container.base,
     theme.toast[side].container.base,
-    isMobile
-      ? theme.toast[side].center.container.base
-      : theme.toast[side][position].container.base,
-    isHovered
-      ? cx(theme.toast.container.hovered, theme.toast[side].container.hovered)
-      : cx(
-          theme.toast.container.notHovered,
-          theme.toast[side].container.notHovered,
-        ),
+    theme.toast[side][mobileStyle].container.base,
+    cx(
+      theme.toast.container[hoveredStyle],
+      theme.toast[side].container[hoveredStyle],
+    ),
   );
 
   return (
     <div className={toastsContainerStyles} {...hoverProps}>
       {toasts.map((toast, index) => {
         return (
-          <ToastBar
+          <StackableToast
             key={toast.id}
             toast={toast}
             index={index}
@@ -77,7 +78,7 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   );
 };
 
-export type ToastBarProps = {
+export type StackableToastProps = {
   toast: Toast;
   index: number;
   toastsLength: number;
@@ -86,7 +87,7 @@ export type ToastBarProps = {
   hoverOffset: number;
 } & Pick<useToastsReturnType, "updateHeight">;
 
-export const ToastBar = (props: ToastBarProps) => {
+export const StackableToast = (props: StackableToastProps) => {
   const {
     toast,
     index,
@@ -119,7 +120,7 @@ export const ToastBar = (props: ToastBarProps) => {
   );
 
   const isToastVisible = visible;
-  const [side, position] = placement.split("-");
+  const [side, position] = placement.split("-") as Split<typeof placement, "-">;
   const sortedIndex = toastsLength - (index + 1);
   const clampedIndex =
     sortedIndex > visibleToasts ? visibleToasts : sortedIndex;
@@ -134,21 +135,16 @@ export const ToastBar = (props: ToastBarProps) => {
   const translateYGapSide = side === "bottom" ? -translateYGap : translateYGap;
 
   const theme = useTheme();
+  const visibleStyle = isToastVisible ? "visible" : "notVisible";
+  const mobileStyle = isMobile ? "center" : position;
   const toastAnimationStyles = cx(
     theme.toast.animationWrapper.base,
     theme.toast[side].animationWrapper.base,
-    isMobile
-      ? theme.toast[side].center.animationWrapper.base
-      : theme.toast[side][position].animationWrapper.base,
-    isToastVisible
-      ? cx(
-          theme.toast.animationWrapper.visible,
-          theme.toast[side].animationWrapper.visible,
-        )
-      : cx(
-          theme.toast.animationWrapper.notVisible,
-          theme.toast[side].animationWrapper.notVisible,
-        ),
+    theme.toast[side][mobileStyle].animationWrapper.base,
+    cx(
+      theme.toast.animationWrapper[visibleStyle],
+      theme.toast[side].animationWrapper[visibleStyle],
+    ),
   );
 
   return (

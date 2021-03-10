@@ -196,7 +196,7 @@ export const useRemoveToast = () => {
 };
 
 // Toast Triggers
-export const useToasters = () => {
+export const useToastHandlers = () => {
   const addToast = useAddToast();
   const showToast = useShowToast();
   const updateToast = useUpdateToast();
