@@ -16,7 +16,7 @@ export const useToasts = () => {
   } = useToasters();
   const visibleToasts = toasts.filter(t => t.visible);
   const previousToasts = usePrevious<Toast[]>(visibleToasts);
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
   const sortedToasts = getPlacementSortedToasts(toasts);
 
   const updateFrontHeight = React.useCallback(
