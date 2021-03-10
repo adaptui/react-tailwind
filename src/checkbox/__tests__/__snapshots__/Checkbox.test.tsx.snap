@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Checkbox /> should render correctly 1`] = `
+<DocumentFragment>
+  <label
+    class="lib:relative lib:inline-flex lib:items-center lib:align-top lib:cursor-pointer"
+  >
+    <input
+      aria-checked="false"
+      class="lib:sr-only"
+      type="checkbox"
+      value="apple"
+    />
+    <div
+      aria-hidden="true"
+      class=" lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:rounded lib:select-none lib:transition-all  lib:w-4 lib:h-4 lib:text-xs lib:border-1.5 lib:border-solid lib:border-gray-400"
+      role="img"
+    />
+    <div
+      class="lib:ml-2 lib:text-gray-600 lib:select-none lib:text-sm"
+    >
+      Checkbox
+    </div>
+  </label>
+</DocumentFragment>
+`;
