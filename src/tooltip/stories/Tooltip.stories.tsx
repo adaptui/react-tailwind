@@ -13,8 +13,6 @@ export default {
   title: "Tooltip",
   component: Tooltip,
   argTypes: {
-    size: createUnionControl(["xs", "sm", "lg"]),
-    variant: createUnionControl(["primary", "danger", "ghost"]),
     placement: createUnionControl(["left", "right", "top", "bottom", "auto"]),
   },
 } as Meta<TooltipProps>;
@@ -32,24 +30,24 @@ const base = storyTemplate<TooltipProps>(
     </div>
   ),
   {
-    size: "sm",
-    variant: "danger",
-    title: "Do you know this is a tooltip?",
     placement: "bottom",
   },
 );
 
 export const Default = base({
+  title: "Playground",
   children: <Button>Tooltip</Button>,
 });
 
 export const WithIcon = base({
+  title: "Icon placed Tooltip",
   children: <Button>Tooltip</Button>,
   icon: <ExclamationTriangleIcon />,
 });
 
 export const WithoutArrow = base({
-  arrow: false,
   children: <Button>Tooltip</Button>,
+  title: "Tooltip without arrow",
+  arrow: false,
   icon: <ExclamationTriangleIcon />,
 });
