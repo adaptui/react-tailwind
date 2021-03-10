@@ -1,22 +1,22 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "..";
+import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
 import { TooltipProps } from "./Tooltip";
 import { forwardRefWithAs } from "../utils/types";
 
-type TooltipBodyProps = BoxProps & Pick<TooltipProps, "icon"> & {};
+type TooltipBodyProps = BoxProps & Pick<TooltipProps, "icon">;
 
 export const TooltipBody = forwardRefWithAs<
   TooltipBodyProps,
   HTMLSpanElement,
   "span"
 >((props, ref) => {
-  const { id, icon, className, children, ...rest } = props;
+  const { icon, className, children, ...rest } = props;
 
   const theme = useTheme();
-  const tooltipStyles = cx(theme.tooltip.base);
+  const tooltipStyles = cx(theme.tooltip.base, className);
 
   return (
     <Box as="span" ref={ref} className={tooltipStyles} {...rest}>

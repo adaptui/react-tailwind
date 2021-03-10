@@ -13,7 +13,23 @@ export default {
   title: "Tooltip",
   component: Tooltip,
   argTypes: {
-    placement: createUnionControl(["left", "right", "top", "bottom", "auto"]),
+    placement: createUnionControl([
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "auto",
+      "auto-start",
+      "auto-end",
+      "top-start",
+      "top-end",
+      "bottom-start",
+      "bottom-end",
+      "right-start",
+      "right-end",
+      "left-start",
+      "left-end",
+    ]),
   },
 } as Meta<TooltipProps>;
 
@@ -45,9 +61,25 @@ export const WithIcon = base({
   icon: <ExclamationTriangleIcon />,
 });
 
-export const WithoutArrow = base({
+export const WithArrow = base({
   children: <Button>Tooltip</Button>,
-  title: "Tooltip without arrow",
-  arrow: false,
+  title: "Tooltip with arrow",
+  hasArrow: true,
+  icon: <ExclamationTriangleIcon />,
+});
+
+export const WithLessGutter = base({
+  children: <Button>Tooltip</Button>,
+  title: "Tooltip with arrow",
+  hasArrow: true,
+  gutter: 5,
+  icon: <ExclamationTriangleIcon />,
+});
+
+export const InitiallyVisible = base({
+  children: <Button>Tooltip</Button>,
+  title: "Tooltip with arrow",
+  hasArrow: true,
+  visible: true,
   icon: <ExclamationTriangleIcon />,
 });
