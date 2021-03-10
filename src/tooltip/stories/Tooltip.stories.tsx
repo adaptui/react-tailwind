@@ -68,14 +68,14 @@ export const WithArrow = base({
     </Button>
   ),
   title: "Tooltip with arrow",
-  hasArrow: true,
+  showArrow: true,
   prefix: <ExclamationTriangleIcon />,
 });
 
 export const WithLessGutter = base({
   children: <Button>Tooltip</Button>,
   title: "Tooltip with arrow",
-  hasArrow: true,
+  showArrow: true,
   gutter: 5,
   prefix: <ExclamationTriangleIcon />,
 });
@@ -83,7 +83,7 @@ export const WithLessGutter = base({
 export const InitiallyVisible = base({
   children: <Button>Tooltip</Button>,
   title: "Tooltip with arrow",
-  hasArrow: true,
+  showArrow: true,
   visible: true,
   prefix: <ExclamationTriangleIcon />,
 });

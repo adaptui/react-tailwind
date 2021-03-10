@@ -27,7 +27,7 @@ export type TooltipProps = TooltipInitialState & {
    *
    * @default true
    */
-  hasArrow?: boolean;
+  showArrow?: boolean;
   /**
    * How large should the arrow be?
    *
@@ -50,7 +50,7 @@ export type TooltipProps = TooltipInitialState & {
 
 export const Tooltip = ({
   title,
-  hasArrow = false,
+  showArrow = false,
   arrowSize = 17,
   prefix,
   className,
@@ -86,7 +86,7 @@ export const Tooltip = ({
           display: tooltip.visible ? "flex" : "none",
         }}
       >
-        {hasArrow && (
+        {showArrow && (
           <TooltipArrow {...tooltip} size={arrowSize}>
             <TooltipArrowIcon
               className={arrowStyles}
