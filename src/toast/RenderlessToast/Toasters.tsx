@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useMediaQuery } from "../../hooks";
 
 import {
   genId,
@@ -80,6 +81,34 @@ export const useShowToast = (): ToastHandler => {
       return toast.id;
     },
     [dispatch, createToast],
+  );
+};
+
+export const useInternalShowToast = (): ToastHandler => {
+  const { dispatch } = useToastStore();
+  const createToast = useCreateToast();
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+
+  return React.useCallback(
+    (content, options) => {
+      const toast = createToast(content, options);
+
+      dispatch({
+        type: ActionType.ADD_TOAST,
+        toast,
+        maxToasts: isMobile ? 1 : 20,
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: ActionType.UPDATE_TOAST,
+          toast: { ...toast, visible: true },
+        });
+      }, 0);
+
+      return toast.id;
+    },
+    [dispatch, createToast, isMobile],
   );
 };
 
