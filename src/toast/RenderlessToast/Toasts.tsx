@@ -3,7 +3,7 @@ import * as React from "react";
 import { ToastPlacement } from "./ToastTypes";
 import { useMediaQuery, usePrevious } from "../../hooks";
 import { getPlacementSortedToasts, mobileSortedToasts } from "./helpers";
-import { useToastStore, useToasters, getToast, Toast } from "./index";
+import { useToastStore, useToastHandlers, getToast, Toast } from "./index";
 
 export const useToasts = () => {
   const { toasts } = useToastStore();
@@ -13,7 +13,7 @@ export const useToasts = () => {
     upsertToast,
     removeToast,
     dismissToast,
-  } = useToasters();
+  } = useToastHandlers();
   const visibleToasts = toasts.filter(t => t.visible);
   const previousToasts = usePrevious<Toast[]>(visibleToasts);
   const [isMobile] = useMediaQuery("(max-width: 768px)");

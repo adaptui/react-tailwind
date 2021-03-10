@@ -4,10 +4,9 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { InfoCircleIcon } from "../icons";
 import { Button, ButtonProps } from "../button";
-import { useShowToast } from "./RenderlessToast";
-import { Toast, ToastOptions } from "./RenderlessToast/ToastTypes";
+import { useShowToast, Toast, ToastOptions } from "@renderlesskit/react/toast";
 
-export const useLibraryToast = () => {
+export const useToast = () => {
   const showToast = useShowToast();
 
   return React.useCallback(
@@ -90,7 +89,11 @@ ToastAlert.displayName = "ToastAlert";
 
 export type ToastTypes = "info" | "success" | "warning" | "error";
 
-export type ButtonVariants = "ghost" | "primary" | "secondary";
+export type ButtonVariants = keyof Renderlesskit.GetThemeValue<
+  "toast",
+  "actions",
+  "button"
+>;
 
 export type ToastAction = {
   variant: ButtonVariants;

@@ -6,7 +6,8 @@ import {
   ToastPlacement,
   useToasts,
   useToastsReturnType,
-} from "./RenderlessToast";
+} from "@renderlesskit/react/toast";
+
 import { useTheme } from "../theme";
 import { isFunction, objectKeys } from "../utils";
 import { useHover, useMediaQuery } from "../hooks";
@@ -61,7 +62,7 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
     <div className={toastsContainerStyles} {...hoverProps}>
       {toasts.map((toast, index) => {
         return (
-          <ToastBar
+          <StackableToast
             key={toast.id}
             toast={toast}
             index={index}
@@ -77,7 +78,7 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   );
 };
 
-export type ToastBarProps = {
+export type StackableToastProps = {
   toast: Toast;
   index: number;
   toastsLength: number;
@@ -86,7 +87,7 @@ export type ToastBarProps = {
   hoverOffset: number;
 } & Pick<useToastsReturnType, "updateHeight">;
 
-export const ToastBar = (props: ToastBarProps) => {
+export const StackableToast = (props: StackableToastProps) => {
   const {
     toast,
     index,

@@ -31,5 +31,10 @@ module.exports = ({ config }) => {
     ],
   });
 
+  // temporary alias
+  config.resolve.alias["@renderlesskit/react/toast"] = path.resolve(
+    __dirname,
+    "../src/toast/RenderlessToast",
+  );
   return config;
 };
