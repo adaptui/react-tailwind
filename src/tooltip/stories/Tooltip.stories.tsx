@@ -42,12 +42,12 @@ export const Default = base({
 export const WithIcon = base({
   title: "Icon placed Tooltip",
   children: <Button>Tooltip</Button>,
-  icon: <ExclamationTriangleIcon />,
+  prefix: <ExclamationTriangleIcon />,
 });
 
 export const WithoutArrow = base({
   children: <Button>Tooltip</Button>,
   title: "Tooltip without arrow",
   arrow: false,
-  icon: <ExclamationTriangleIcon />,
+  prefix: <ExclamationTriangleIcon />,
 });

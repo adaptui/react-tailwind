@@ -19,9 +19,9 @@ export type TooltipProps = TooltipInitialState & {
    */
   title: string;
   /**
-   * prefix icon
+   * prefix element
    */
-  icon?: React.ReactNode;
+  prefix?: React.ReactNode;
   /**
    * Show/Hide the arrow
    *
@@ -41,7 +41,7 @@ export const Tooltip = ({
   title,
   children,
   size = 17,
-  icon,
+  prefix,
   arrow = true,
   ...rest
 }: TooltipProps) => {
@@ -66,7 +66,7 @@ export const Tooltip = ({
         }
       </TooltipReference>
       <ReakitTooltip {...tooltip}>
-        <TooltipBody icon={icon}>
+        <TooltipBody prefix={prefix}>
           {arrow && (
             <TooltipArrow {...tooltip} size={size}>
               <TooltipArrowIcon
