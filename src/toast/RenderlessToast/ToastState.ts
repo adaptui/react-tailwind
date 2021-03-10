@@ -27,6 +27,7 @@ export type Action<T> =
   | {
       type: ActionType.ADD_TOAST;
       toast: T;
+      maxToasts?: number;
     }
   | {
       type: ActionType.UPSERT_TOAST;
@@ -60,13 +61,17 @@ const reducer = <T extends Toast>(
   action: Action<T>,
 ): State<T> => {
   switch (action.type) {
-    case ActionType.ADD_TOAST:
+    case ActionType.ADD_TOAST: {
+      const maxToasts = action.maxToasts || TOAST_LIMIT;
+      console.log("%c maxToasts", "color: #eeff00", maxToasts);
+
       return {
         ...state,
         toasts: action.toast.reverseOrder
-          ? [...state.toasts, action.toast].slice(0, TOAST_LIMIT)
-          : [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+          ? [...state.toasts, action.toast].slice(-maxToasts)
+          : [action.toast, ...state.toasts].slice(-maxToasts),
       };
+    }
 
     case ActionType.UPDATE_TOAST:
       return {

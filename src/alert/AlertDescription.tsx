@@ -14,12 +14,12 @@ export const AlertDescription = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { isMobile } = useAlertContext();
+  const { isTablet } = useAlertContext();
 
   const theme = useTheme();
   const alertDescriptionStyles = cx(
     theme.alert.description.base,
-    isMobile ? theme.alert.description.mobile : theme.alert.description.desktop,
+    isTablet ? theme.alert.description.mobile : theme.alert.description.desktop,
     className,
   );
 

@@ -40,7 +40,7 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   const { toasts, placement, updateHeight, calculateOffset } = props;
   const [side, position] = placement.split("-");
   const { hoverProps, isHovered } = useHover({});
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
 
   const theme = useTheme();
   const toastsContainerStyles = cx(
