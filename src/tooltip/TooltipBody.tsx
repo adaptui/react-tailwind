@@ -6,7 +6,7 @@ import { Box, BoxProps } from "../box";
 import { TooltipProps } from "./Tooltip";
 import { forwardRefWithAs } from "../utils/types";
 
-type TooltipBodyProps = BoxProps & Pick<TooltipProps, "prefix">;
+type TooltipBodyProps = Omit<BoxProps, "prefix"> & Pick<TooltipProps, "prefix">;
 
 export const TooltipBody = forwardRefWithAs<
   TooltipBodyProps,
