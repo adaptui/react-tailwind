@@ -62,7 +62,11 @@ export const WithIcon = base({
 });
 
 export const WithArrow = base({
-  children: <Button>Tooltip</Button>,
+  children: (
+    <Button variant="secondary" className="bg-red">
+      Tooltip
+    </Button>
+  ),
   title: "Tooltip with arrow",
   hasArrow: true,
   icon: <ExclamationTriangleIcon />,
@@ -83,3 +87,25 @@ export const InitiallyVisible = base({
   visible: true,
   icon: <ExclamationTriangleIcon />,
 });
+
+export const Test = () => {
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    console.log(ref);
+  }, []);
+
+  return (
+    <div
+      className="flex items-center justify-center m-auto"
+      style={{
+        width: "90vw",
+        height: "90vh",
+      }}
+    >
+      <Tooltip title="I am a popover">
+        <Button ref={ref}>Tooltip</Button>
+      </Tooltip>
+    </div>
+  );
+};
