@@ -75,13 +75,13 @@ export const toast = {
   // Container Vercel Toast animation styles
   container: {
     base:
-      "lib:fixed lib:z-50 lib:max-w-xs lib:sm:max-w-sm lib:transition-all lib:duration-300",
+      "lib:fixed lib:z-50 sm:lib:max-w-xs lib:max-w-screen90 lib:transition-all lib:duration-300",
     notHovered: "",
     hovered: "",
   },
   animationWrapper: {
     base:
-      "lib:absolute lib:w-80 lib:sm:w-96 lib:transition-all lib:duration-300 lib:transform-gpu",
+      "lib:absolute sm:lib:w-80 lib:w-screen90 lib:transition-all lib:duration-300 lib:transform-gpu",
     notVisible: "",
     visible: "",
   },

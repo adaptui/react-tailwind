@@ -63,7 +63,6 @@ const reducer = <T extends Toast>(
   switch (action.type) {
     case ActionType.ADD_TOAST: {
       const maxToasts = action.maxToasts || TOAST_LIMIT;
-      console.log("%c maxToasts", "color: #eeff00", maxToasts);
 
       return {
         ...state,
