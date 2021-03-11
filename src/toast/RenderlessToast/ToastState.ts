@@ -1,10 +1,9 @@
 import * as React from "react";
 
-interface Toast {
+export interface DefaultToast {
   id: string;
   visible: boolean;
-  pauseDuration: number;
-  reverseOrder?: boolean;
+  reverseOrder: boolean;
 }
 
 export interface State<T> {
@@ -56,7 +55,7 @@ export type Action<T> =
       toastId?: string;
     };
 
-const reducer = <T extends Toast>(
+const reducer = <T extends DefaultToast>(
   state: State<T>,
   action: Action<T>,
 ): State<T> => {
@@ -130,7 +129,7 @@ const reducer = <T extends Toast>(
 
 const initialState = { toasts: [] };
 
-export const useToastState = <T extends Toast>(): StateReturnType<T> => {
+export const useToastState = <T extends DefaultToast>(): StateReturnType<T> => {
   const [state, dispatch] = React.useReducer<
     React.Reducer<State<T>, Action<T>>
   >(reducer, initialState);

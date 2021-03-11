@@ -25,12 +25,8 @@ export const useCreateToast = (): CreateToastHandler => {
 
   return React.useCallback(
     (content, opts) => ({
-      createdAt: Date.now(),
       visible: false,
-      pausedAt: null,
-      pauseDuration: 0,
-      height: null,
-      frontHeight: null,
+      reverseOrder: true,
       content,
       ...defaultOptions,
       ...opts,

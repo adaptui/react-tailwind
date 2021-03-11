@@ -1,41 +1,42 @@
-import * as React from "react";
+import { DefaultToast } from "./ToastState";
+import { Content, ToastPlacement } from "./ToastTypes";
+import { createToastContext, DefaultToastOptions } from "./CreateToastContext";
 
-import {
-  Toast,
-  ToastOptions,
-  useToastState,
-  StateReturnType,
-  DefaultToastOptions,
-} from "./index";
-import { createContext } from "../../utils";
-
-export interface ToastStore extends StateReturnType<Toast> {
-  defaultOptions: DefaultToastOptions;
-}
-
-const [ToastStoreProvider, useToastStore] = createContext<ToastStore>({
-  strict: false,
-  name: "ToastsState",
-  errorMessage: "useToastStore must be used within ToastProvider",
-});
-
-export { useToastStore };
-
-const defaultOptions: DefaultToastOptions = {
+const defaultOptions: DefaultToastOptions<Toast> = {
+  createdAt: Date.now(),
+  pausedAt: null,
+  pauseDuration: 0,
+  height: null,
+  frontHeight: null,
   placement: "bottom-center",
-  autoDismiss: true,
+  autoDismiss: false,
   dismissDuration: 3000,
   animationDuration: 0,
-  reverseOrder: true,
   offsetGap: 10,
   hoverOffsetGap: 10,
   visibleToasts: 3,
 };
 
-export const ToastProvider: React.FC<ToastOptions> = props => {
-  const { children, ...rest } = props;
-  const store = useToastState<Toast>();
-  const context = { ...store, defaultOptions: { ...defaultOptions, ...rest } };
+export interface Toast extends DefaultToast {
+  createdAt: number;
+  content?: Content;
+  placement: ToastPlacement;
+  pauseDuration: number;
+  pausedAt: number | null;
+  autoDismiss: boolean;
+  dismissDuration: number;
+  animationDuration: number;
+  height: number | null;
+  frontHeight: number | null;
+  offsetGap: number;
+  hoverOffsetGap: number;
+  visibleToasts: number;
+}
 
-  return <ToastStoreProvider value={context}>{children}</ToastStoreProvider>;
-};
+const [
+  ToastProvider,
+  useToastStore,
+  useToastHandler,
+] = createToastContext<Toast>(defaultOptions);
+
+export { ToastProvider, useToastStore, useToastHandler };

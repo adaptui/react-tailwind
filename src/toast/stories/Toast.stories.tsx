@@ -6,7 +6,11 @@ import { Toasts } from "../Toasts";
 import { Button } from "../../button";
 import { useCustomToast } from "./CustomToast";
 import { useToast } from "../ToastAlert";
-import { ToastProvider, useToastHandlers } from "@renderlesskit/react/toast";
+import {
+  ToastProvider,
+  useToastHandler,
+  useToastHandlers,
+} from "@renderlesskit/react/toast";
 
 export default { title: "Toast" } as Meta;
 
@@ -68,6 +72,7 @@ export const ToastPlacements = () => {
 const TriggerDefaultToasts = () => {
   const toast = useToast();
   const showCustomToast = useCustomToast();
+  const { addToast } = useToastHandler();
   const { showToast, removeToast } = useToastHandlers();
 
   return (
@@ -75,7 +80,7 @@ const TriggerDefaultToasts = () => {
       <div className="space-x-2">
         <Button
           className="my-2"
-          onClick={() => showToast("Proper Vercel Toast.")}
+          onClick={() => addToast("Proper Vercel Toast.")}
         >
           String Toast
         </Button>
