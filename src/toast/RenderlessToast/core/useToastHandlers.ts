@@ -1,23 +1,22 @@
 import * as React from "react";
-import { useMediaQuery } from "../../hooks";
+import { genId } from "./utils";
 
 import {
-  genId,
   Toast,
   Content,
   ActionType,
   useToastStore,
   CreateToastOptions,
-} from "./index";
+} from "./";
 
-export type ToastHandler = (
+export type ToastHandler<T = {}> = (
   content: Content,
-  options?: CreateToastOptions,
+  options?: CreateToastOptions & Partial<T>,
 ) => string;
 
-export type CreateToastHandler = (
+export type CreateToastHandler<T = {}> = (
   content: Content,
-  options?: CreateToastOptions,
+  options?: CreateToastOptions & Partial<T>,
 ) => Toast;
 
 export const useCreateToast = (): CreateToastHandler => {
@@ -81,34 +80,6 @@ export const useShowToast = (): ToastHandler => {
       return toast.id;
     },
     [dispatch, createToast],
-  );
-};
-
-export const useInternalShowToast = (): ToastHandler => {
-  const { dispatch } = useToastStore();
-  const createToast = useCreateToast();
-  const [isMobile] = useMediaQuery("(max-width: 640px)");
-
-  return React.useCallback(
-    (content, options) => {
-      const toast = createToast(content, options);
-
-      dispatch({
-        type: ActionType.ADD_TOAST,
-        toast,
-        maxToasts: isMobile ? 1 : 20,
-      });
-
-      setTimeout(() => {
-        dispatch({
-          type: ActionType.UPDATE_TOAST,
-          toast: { ...toast, visible: true },
-        });
-      }, 0);
-
-      return toast.id;
-    },
-    [dispatch, createToast, isMobile],
   );
 };
 

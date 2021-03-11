@@ -6,13 +6,20 @@ import { Toasts } from "../Toasts";
 import { Button } from "../../button";
 import { useCustomToast } from "./CustomToast";
 import { useToast } from "../ToastAlert";
-import { ToastProvider, useToastHandlers } from "@renderlesskit/react/toast";
+import { useToastHandlers, ToastProvider } from "../RenderlessToast/core";
 
 export default { title: "Toast" } as Meta;
 
 export const Default = () => {
   return (
-    <ToastProvider>
+    <ToastProvider
+      defaultOptions={{
+        reverseOrder: true,
+        offsetGap: 10,
+        hoverOffsetGap: 10,
+        visibleToasts: 3,
+      }}
+    >
       <Portal>
         <Toasts />
       </Portal>
@@ -23,7 +30,14 @@ export const Default = () => {
 
 export const ToastOptions = () => {
   return (
-    <ToastProvider>
+    <ToastProvider
+      defaultOptions={{
+        reverseOrder: true,
+        offsetGap: 10,
+        hoverOffsetGap: 10,
+        visibleToasts: 3,
+      }}
+    >
       <Portal>
         <Toasts />
       </Portal>
@@ -34,7 +48,14 @@ export const ToastOptions = () => {
 
 export const ToastTypes = () => {
   return (
-    <ToastProvider>
+    <ToastProvider
+      defaultOptions={{
+        reverseOrder: true,
+        offsetGap: 10,
+        hoverOffsetGap: 10,
+        visibleToasts: 3,
+      }}
+    >
       <Portal>
         <Toasts />
       </Portal>
@@ -45,7 +66,14 @@ export const ToastTypes = () => {
 
 export const ToastAlertOptions = () => {
   return (
-    <ToastProvider>
+    <ToastProvider
+      defaultOptions={{
+        reverseOrder: true,
+        offsetGap: 10,
+        hoverOffsetGap: 10,
+        visibleToasts: 3,
+      }}
+    >
       <Portal>
         <Toasts />
       </Portal>
@@ -56,7 +84,14 @@ export const ToastAlertOptions = () => {
 
 export const ToastPlacements = () => {
   return (
-    <ToastProvider>
+    <ToastProvider
+      defaultOptions={{
+        reverseOrder: true,
+        offsetGap: 10,
+        hoverOffsetGap: 10,
+        visibleToasts: 3,
+      }}
+    >
       <Portal>
         <Toasts />
       </Portal>
@@ -133,19 +168,16 @@ const TriggerOptionsToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            toast(
-              {
-                title: "Proper Vercel Toast with better state.",
-                actions: [
-                  {
-                    variant: "primary",
-                    label: "Delete",
-                    handleClick: toast => removeToast(toast?.id),
-                  },
-                ],
-              },
-              { autoDismiss: false, visibleToasts: 5 },
-            )
+            toast({
+              title: "Proper Vercel Toast with better state.",
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
+            })
           }
         >
           5 Visible Toast
@@ -153,19 +185,16 @@ const TriggerOptionsToasts = () => {
         <Button
           className="my-2"
           onClick={() =>
-            toast(
-              {
-                title: "Proper Vercel Toast with better state.",
-                actions: [
-                  {
-                    variant: "primary",
-                    label: "Delete",
-                    handleClick: toast => removeToast(toast?.id),
-                  },
-                ],
-              },
-              { autoDismiss: false, visibleToasts: 5, offsetGap: 30 },
-            )
+            toast({
+              title: "Proper Vercel Toast with better state.",
+              actions: [
+                {
+                  variant: "primary",
+                  label: "Delete",
+                  handleClick: toast => removeToast(toast?.id),
+                },
+              ],
+            })
           }
         >
           Bigger OffsetGap Toast
@@ -186,9 +215,6 @@ const TriggerOptionsToasts = () => {
               },
               {
                 autoDismiss: false,
-                visibleToasts: 5,
-                offsetGap: 30,
-                hoverOffsetGap: 30,
               },
             )
           }

@@ -1,6 +1,6 @@
-export * from "./Toasts";
-export * from "./helpers";
-export * from "./Toasters";
+export * from "./useToastTimer";
+export * from "./useToastHandlers";
+export * from "./utils";
 export * from "./ToastState";
 export * from "./ToastProvider";
 export type {

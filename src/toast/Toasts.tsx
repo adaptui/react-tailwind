@@ -1,17 +1,13 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import {
-  Toast,
-  ToastPlacement,
-  useToasts,
-  useToastsReturnType,
-} from "@renderlesskit/react/toast";
+import { ToastPlacement } from "./RenderlessToast/core";
 
 import { useTheme } from "../theme";
 import { Split } from "../utils/types";
 import { isFunction, objectKeys } from "../utils";
 import { useHover, useMediaQuery } from "../hooks";
+import { Toast, useToasts, useToastsReturnType } from "./VercelToast";
 
 export const Toasts = () => {
   const { toasts, updateHeight, calculateOffset } = useToasts();

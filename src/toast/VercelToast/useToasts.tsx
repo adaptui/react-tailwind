@@ -1,21 +1,31 @@
 import * as React from "react";
 
-import { ToastPlacement } from "./ToastTypes";
 import { useMediaQuery, usePrevious } from "../../hooks";
 import { getPlacementSortedToasts, mobileSortedToasts } from "./helpers";
-import { useToastStore, useToastHandlers, getToast, Toast } from "./index";
+import {
+  useToastStore,
+  useToastTimer,
+  ToastPlacement,
+  useToastHandlers,
+} from "../RenderlessToast/core";
+import { Toast } from "./types";
 
 export const useToasts = () => {
-  const { toasts } = useToastStore();
+  const state = useToastStore();
+  const toasts = state.toasts as Toast[];
+
   const {
     updateToast,
     updateFieldToast,
     upsertToast,
     removeToast,
     dismissToast,
+    ...restHandlers
   } = useToastHandlers();
+
   const visibleToasts = toasts.filter(t => t.visible);
   const previousToasts = usePrevious<Toast[]>(visibleToasts);
+  const { pauseTimer, resumeTimer } = useToastTimer(visibleToasts);
   const [isMobile] = useMediaQuery("(max-width: 640px)");
   const sortedToasts = getPlacementSortedToasts(toasts);
 
@@ -64,58 +74,6 @@ export const useToasts = () => {
     [sortedToasts],
   );
 
-  React.useEffect(() => {
-    const now = Date.now();
-    const timeouts = toasts.map(t => {
-      if (!t.autoDismiss) return undefined;
-      if (t.pausedAt) return undefined;
-
-      const durationLeft =
-        (t.dismissDuration || 0) + t.pauseDuration - (now - t.createdAt);
-
-      if (durationLeft < 0) {
-        if (t.visible) {
-          dismissToast(t.id);
-        }
-        return undefined;
-      }
-
-      return setTimeout(() => dismissToast(t.id), durationLeft);
-    });
-
-    return () => {
-      timeouts.forEach(timeout => timeout && clearTimeout(timeout));
-    };
-  }, [toasts, dismissToast]);
-
-  const pauseTimer = React.useCallback(
-    (toastId: string) => {
-      const toast = getToast(visibleToasts, toastId);
-
-      if (!toast.autoDismiss) return;
-
-      updateToast(toastId, { pausedAt: Date.now() });
-    },
-    [visibleToasts, updateToast],
-  );
-
-  const resumeTimer = React.useCallback(
-    (toastId: string) => {
-      const toast = getToast(visibleToasts, toastId);
-
-      if (!toast.autoDismiss) return;
-
-      const now = Date.now();
-      const diff = now - (toast.pausedAt || 0);
-
-      updateToast(toastId, {
-        pausedAt: null,
-        pauseDuration: toast.pauseDuration + diff,
-      });
-    },
-    [visibleToasts, updateToast],
-  );
-
   return {
     toasts: isMobile ? mobileSortedToasts(sortedToasts) : sortedToasts,
     pauseTimer,
@@ -125,6 +83,7 @@ export const useToasts = () => {
     updateToast,
     upsertToast,
     updateHeight,
+    ...restHandlers,
     calculateOffset,
     updateFrontHeight,
   };

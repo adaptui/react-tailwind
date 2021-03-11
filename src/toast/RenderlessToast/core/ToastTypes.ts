@@ -1,4 +1,4 @@
-import { Dict } from "../../utils/types";
+import { Dict } from "../../../utils/types";
 
 export type Renderable = JSX.Element | string | number | null;
 
@@ -36,11 +36,8 @@ export interface Toast {
   dismissDuration: number;
   animationDuration: number;
   height: number | null;
-  frontHeight: number | null;
   content: Content;
-  offsetGap: number;
-  hoverOffsetGap: number;
-  visibleToasts: number;
+  [x: string]: any;
 }
 
 type ConfigurableToastOptions = Pick<
@@ -51,9 +48,6 @@ type ConfigurableToastOptions = Pick<
   | "placement"
   | "reverseOrder"
   | "animationDuration"
-  | "offsetGap"
-  | "hoverOffsetGap"
-  | "visibleToasts"
 >;
 
 export type CreateToastOptions = Partial<ConfigurableToastOptions>;

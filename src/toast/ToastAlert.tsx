@@ -4,11 +4,8 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { InfoCircleIcon } from "../icons";
 import { Button, ButtonProps } from "../button";
-import {
-  Toast,
-  ToastOptions,
-  useInternalShowToast,
-} from "@renderlesskit/react/toast";
+import { Toast, ToastOptions } from "./RenderlessToast/core";
+import { useInternalShowToast } from "./VercelToast";
 
 export const useToast = () => {
   const showToast = useInternalShowToast();
