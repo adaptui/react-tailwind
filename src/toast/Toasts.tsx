@@ -42,8 +42,8 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   const { toasts, placement, updateHeight, calculateOffset } = props;
   const [side, position] = placement.split("-") as Split<typeof placement, "-">;
 
-  const { hoverProps, isHovered } = useHover({});
   const [isMobile] = useMediaQuery("(max-width: 640px)");
+  const { hoverProps, isHovered } = useHover();
 
   const theme = useTheme();
   const hoveredStyle = isHovered ? "hovered" : "notHovered";
@@ -59,7 +59,7 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   );
 
   return (
-    <div className={toastsContainerStyles} {...hoverProps}>
+    <div className={toastsContainerStyles} {...(isMobile ? {} : hoverProps)}>
       {toasts.map((toast, index) => {
         return (
           <StackableToast
@@ -104,7 +104,6 @@ export const StackableToast = (props: StackableToastProps) => {
     content,
     placement,
     visibleToasts,
-    visibleMobileToasts,
     offsetGap,
     visible,
   } = toast;
@@ -128,9 +127,7 @@ export const StackableToast = (props: StackableToastProps) => {
   const scalePercent = 1 - 0.05 * clampedIndex;
   const showAlertContent = sortedIndex === 0 || isHovered;
 
-  const showToast = isMobile
-    ? sortedIndex <= visibleMobileToasts - 1
-    : sortedIndex <= visibleToasts - 1;
+  const showToast = sortedIndex <= visibleToasts - 1;
   const hoverOffsetSide = side === "bottom" ? -hoverOffset : hoverOffset;
   const translateYGapSide = side === "bottom" ? -translateYGap : translateYGap;
 

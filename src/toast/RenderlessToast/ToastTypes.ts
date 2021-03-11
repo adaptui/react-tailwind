@@ -41,7 +41,6 @@ export interface Toast {
   offsetGap: number;
   hoverOffsetGap: number;
   visibleToasts: number;
-  visibleMobileToasts: number;
 }
 
 type ConfigurableToastOptions = Pick<
@@ -55,7 +54,6 @@ type ConfigurableToastOptions = Pick<
   | "offsetGap"
   | "hoverOffsetGap"
   | "visibleToasts"
-  | "visibleMobileToasts"
 >;
 
 export type CreateToastOptions = Partial<ConfigurableToastOptions>;

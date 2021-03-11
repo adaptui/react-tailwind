@@ -30,7 +30,6 @@ const defaultOptions: DefaultToastOptions = {
   offsetGap: 10,
   hoverOffsetGap: 10,
   visibleToasts: 3,
-  visibleMobileToasts: 1,
 };
 
 export const ToastProvider: React.FC<ToastOptions> = props => {

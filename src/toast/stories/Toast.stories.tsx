@@ -164,26 +164,6 @@ const TriggerOptionsToasts = () => {
                   },
                 ],
               },
-              { autoDismiss: false, visibleToasts: 5, visibleMobileToasts: 3 },
-            )
-          }
-        >
-          3 Mobile Visible Toast
-        </Button>
-        <Button
-          className="my-2"
-          onClick={() =>
-            toast(
-              {
-                title: "Proper Vercel Toast with better state.",
-                actions: [
-                  {
-                    variant: "primary",
-                    label: "Delete",
-                    handleClick: toast => removeToast(toast?.id),
-                  },
-                ],
-              },
               { autoDismiss: false, visibleToasts: 5, offsetGap: 30 },
             )
           }
