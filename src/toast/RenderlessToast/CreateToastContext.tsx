@@ -11,7 +11,7 @@ import { createContext } from "../../utils";
 
 export type DefaultToastOptions<T extends DefaultToast> = Omit<
   T,
-  "id" | "visible" | "reverseOrder"
+  "id" | "visible" | "reverseOrder" | "createdAt"
 >;
 
 export type DefaultToastProviderOptions<T extends DefaultToast> = Partial<
@@ -78,7 +78,7 @@ export type ToastHandlers<T extends DefaultToast, Content> = {
   removeToast: RemoveToast;
 };
 
-export function createToastContext<T extends DefaultToast, Content>(
+export function createToastStore<T extends DefaultToast, Content>(
   defaultOptions: DefaultToastOptions<T>,
 ) {
   const [ToastStoreProvider, useToastStore] = createContext<ToastStore<T>>({
@@ -106,84 +106,109 @@ export function createToastContext<T extends DefaultToast, Content>(
   const ToastProvider: React.FC<DefaultToastProviderOptions<T>> = props => {
     const { children, ...rest } = props;
     const { toasts, dispatch } = useToastState<T>();
-    const context = {
-      toasts,
-      dispatch,
-    };
+    const context = React.useMemo(
+      () => ({
+        toasts,
+        dispatch,
+      }),
+      [toasts, dispatch],
+    );
 
     // @ts-ignore
-    const createToast: CreateToastHandler<T, Content> = (content, opts) => ({
-      visible: false,
-      reverseOrder: true,
-      ...defaultOptions,
-      ...rest,
-      ...opts,
-      content,
-      id: opts?.id || genId(),
-    });
+    const createToast: CreateToastHandler<T, Content> = React.useCallback(
+      (content, opts) => ({
+        visible: false,
+        reverseOrder: true,
+        createdAt: Date.now(),
+        ...defaultOptions,
+        ...rest,
+        ...opts,
+        content,
+        id: opts?.id || genId(),
+      }),
+      // Since its only a few object https://twitter.com/dan_abramov/status/1104414272753487872
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [JSON.stringify(rest)],
+    );
 
-    const addToast: AddToast<T, Content> = (content, options) => {
-      const toast = createToast(content, options);
+    const addToast: AddToast<T, Content> = React.useCallback(
+      (content, options) => {
+        const toast = createToast(content, options);
 
-      dispatch({
-        type: ActionType.ADD_TOAST,
-        toast: { ...toast, visible: true },
-      });
-
-      return toast.id;
-    };
-
-    const showToast: ShowToast<T, Content> = (content, options) => {
-      const toast = createToast(content, options);
-
-      dispatch({ type: ActionType.ADD_TOAST, toast });
-
-      setTimeout(() => {
         dispatch({
-          type: ActionType.UPDATE_TOAST,
+          type: ActionType.ADD_TOAST,
           toast: { ...toast, visible: true },
         });
-      }, 0);
 
-      return toast.id;
-    };
+        return toast.id;
+      },
+      [createToast, dispatch],
+    );
 
-    const updateToast: UpdateToast<T> = (toastId, toast) => {
-      dispatch({
-        type: ActionType.UPDATE_TOAST,
-        toast: { ...toast, id: toastId },
-      });
-    };
+    const showToast: ShowToast<T, Content> = React.useCallback(
+      (content, options) => {
+        const toast = createToast(content, options);
 
-    const updateFieldToast: UpdateFieldToast<T> = (
-      field,
-      fieldValue,
-      toast,
-    ) => {
-      dispatch({
-        type: ActionType.UPDATE_FIELD_TOAST,
-        field,
-        fieldValue,
-        toast,
-      });
-    };
+        dispatch({ type: ActionType.ADD_TOAST, toast });
 
-    const updateAllToast: UpdateAllToast<T> = toast => {
-      dispatch({ type: ActionType.UPDATE_ALL_TOAST, toast });
-    };
+        setTimeout(() => {
+          dispatch({
+            type: ActionType.UPDATE_TOAST,
+            toast: { ...toast, visible: true },
+          });
+        }, 0);
 
-    const dismissToast: DismissToast = toastId => {
-      const unmountDuration = defaultOptions.animationDuration;
+        return toast.id;
+      },
+      [createToast, dispatch],
+    );
 
-      dispatch({ type: ActionType.DISMISS_TOAST, toastId });
+    const updateToast: UpdateToast<T> = React.useCallback(
+      (toastId, toast) => {
+        dispatch({
+          type: ActionType.UPDATE_TOAST,
+          toast: { ...toast, id: toastId },
+        });
+      },
+      [dispatch],
+    );
 
-      setTimeout(() => {
-        dispatch({ type: ActionType.REMOVE_TOAST, toastId });
-      }, unmountDuration);
-    };
+    const updateFieldToast: UpdateFieldToast<T> = React.useCallback(
+      (field, fieldValue, toast) => {
+        dispatch({
+          type: ActionType.UPDATE_FIELD_TOAST,
+          field,
+          fieldValue,
+          toast,
+        });
+      },
+      [dispatch],
+    );
 
-    const removeToast: RemoveToast = toastId =>
-      dispatch({ type: ActionType.REMOVE_TOAST, toastId });
+    const updateAllToast: UpdateAllToast<T> = React.useCallback(
+      toast => {
+        dispatch({ type: ActionType.UPDATE_ALL_TOAST, toast });
+      },
+      [dispatch],
+    );
+
+    const dismissToast: DismissToast = React.useCallback(
+      toastId => {
+        const unmountDuration = defaultOptions.animationDuration;
+
+        dispatch({ type: ActionType.DISMISS_TOAST, toastId });
+
+        setTimeout(() => {
+          dispatch({ type: ActionType.REMOVE_TOAST, toastId });
+        }, unmountDuration);
+      },
+      [dispatch],
+    );
+
+    const removeToast: RemoveToast = React.useCallback(
+      toastId => dispatch({ type: ActionType.REMOVE_TOAST, toastId }),
+      [dispatch],
+    );
 
     return (
       <ToastStoreProvider value={context}>
@@ -213,10 +238,10 @@ export function createToastContext<T extends DefaultToast, Content>(
     useToastStore,
     useCreateToast,
     useToastHandlers,
-  ] as CreateToastContextReturn<T, Content>;
+  ] as CreateToastStoreReturn<T, Content>;
 }
 
-export type CreateToastContextReturn<T extends DefaultToast, Content> = [
+export type CreateToastStoreReturn<T extends DefaultToast, Content> = [
   React.FC<Partial<DefaultToastOptions<T>>>,
   () => ToastStore<T>,
   () => CreateToast<T, Content>,

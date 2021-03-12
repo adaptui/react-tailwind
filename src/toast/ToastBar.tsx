@@ -1,127 +1,165 @@
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
-import {
-  getPlacementSortedToasts,
-  getToast,
-  mobileSortedToasts,
-} from "./helpers";
+import { useTheme } from "../theme";
+import { Split } from "../utils/types";
+import { isFunction, objectKeys } from "../utils";
+import { useHover, useMediaQuery } from "../hooks";
 import { Toast, ToastPlacement } from "./ToastTypes";
-import { useMediaQuery, usePrevious } from "../hooks";
-import { useToastHandlers, useToastStore } from "./ToastProvider";
+import { useToasts, useToastsReturnType } from "./ToastBarHelpers";
 
-export const useToasts = () => {
-  const { toasts } = useToastStore();
-  const { updateToast, updateFieldToast, dismissToast } = useToastHandlers();
-  const visibleToasts = toasts.filter(t => t.visible);
-  const previousToasts = usePrevious<Toast[]>(visibleToasts);
-  const [isMobile] = useMediaQuery("(max-width: 640px)");
-  const sortedToasts = getPlacementSortedToasts(toasts);
+export const Toasts = () => {
+  const { toasts, updateHeight, calculateOffset } = useToasts();
 
-  const updateFrontHeight = React.useCallback(
-    (placement: ToastPlacement, frontHeight: number) => {
-      updateFieldToast("placement", placement, { frontHeight });
-    },
-
-    [updateFieldToast],
+  return (
+    <>
+      {objectKeys(toasts).map(placement => {
+        return (
+          <ToastsContainer
+            key={placement}
+            toasts={toasts[placement]}
+            placement={placement}
+            updateHeight={updateHeight}
+            calculateOffset={calculateOffset}
+          />
+        );
+      })}
+    </>
   );
-
-  React.useEffect(() => {
-    if (previousToasts == null) return;
-
-    const previousToastsLength = previousToasts.length;
-    const toastsLength = visibleToasts.length;
-
-    if (toastsLength >= previousToastsLength) return;
-
-    const frontToast = visibleToasts[toastsLength - 1];
-
-    if (frontToast == null) return;
-    if (frontToast.height == null) return;
-
-    updateFrontHeight(frontToast.placement, frontToast.height);
-  }, [visibleToasts, previousToasts, updateFrontHeight]);
-
-  const updateHeight = React.useCallback(
-    (toastId: string, height: number, placement: ToastPlacement) => {
-      updateToast(toastId, { height });
-      updateFrontHeight(placement, height);
-    },
-    [updateToast, updateFrontHeight],
-  );
-
-  const calculateOffset = React.useCallback(
-    (toastId: string, placement: ToastPlacement) => {
-      const toasts = sortedToasts[placement];
-      const index = toasts.findIndex(toast => toast.id === toastId);
-      if (index === -1) return 0;
-
-      return toasts
-        .slice(index + 1)
-        .reduce((acc, t) => acc + (t.height || 0) + t.hoverOffsetGap, 0);
-    },
-    [sortedToasts],
-  );
-
-  React.useEffect(() => {
-    const now = Date.now();
-    const timeouts = toasts.map(t => {
-      if (!t.autoDismiss) return undefined;
-      if (t.pausedAt) return undefined;
-
-      const durationLeft =
-        (t.dismissDuration || 0) + t.pauseDuration - (now - t.createdAt);
-
-      if (durationLeft < 0) {
-        if (t.visible) {
-          dismissToast(t.id);
-        }
-        return undefined;
-      }
-
-      return setTimeout(() => dismissToast(t.id), durationLeft);
-    });
-
-    return () => {
-      timeouts.forEach(timeout => timeout && clearTimeout(timeout));
-    };
-  }, [toasts, dismissToast]);
-
-  const pauseTimer = React.useCallback(
-    (toastId: string) => {
-      const toast = getToast(visibleToasts, toastId);
-
-      if (!toast.autoDismiss) return;
-
-      updateToast(toastId, { pausedAt: Date.now() });
-    },
-    [visibleToasts, updateToast],
-  );
-
-  const resumeTimer = React.useCallback(
-    (toastId: string) => {
-      const toast = getToast(visibleToasts, toastId);
-
-      if (!toast.autoDismiss) return;
-
-      const now = Date.now();
-      const diff = now - (toast.pausedAt || 0);
-
-      updateToast(toastId, {
-        pausedAt: null,
-        pauseDuration: toast.pauseDuration + diff,
-      });
-    },
-    [visibleToasts, updateToast],
-  );
-
-  return {
-    toasts: isMobile ? mobileSortedToasts(sortedToasts) : sortedToasts,
-    pauseTimer,
-    resumeTimer,
-    updateHeight,
-    calculateOffset,
-    updateFrontHeight,
-  };
 };
 
-export type useToastsReturnType = ReturnType<typeof useToasts>;
+export type ToastsContainerProps = {
+  toasts: Toast[];
+  placement: ToastPlacement;
+} & Pick<useToastsReturnType, "updateHeight" | "calculateOffset">;
+
+export const ToastsContainer = (props: ToastsContainerProps) => {
+  const { toasts, placement, updateHeight, calculateOffset } = props;
+  const [side, position] = placement.split("-") as Split<typeof placement, "-">;
+
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+  const { hoverProps, isHovered } = useHover();
+
+  const theme = useTheme();
+  const hoveredStyle = isHovered ? "hovered" : "notHovered";
+  const mobileStyle = isMobile ? "center" : position;
+  const toastsContainerStyles = cx(
+    theme.toast.container.base,
+    theme.toast[side].container.base,
+    theme.toast[side][mobileStyle].container.base,
+    cx(
+      theme.toast.container[hoveredStyle],
+      theme.toast[side].container[hoveredStyle],
+    ),
+  );
+
+  return (
+    <div className={toastsContainerStyles} {...(isMobile ? {} : hoverProps)}>
+      {toasts.map((toast, index) => {
+        return (
+          <StackableToast
+            key={toast.id}
+            toast={toast}
+            index={index}
+            toastsLength={toasts.length}
+            isHovered={isHovered}
+            isMobile={isMobile}
+            hoverOffset={calculateOffset(toast.id, toast.placement)}
+            updateHeight={updateHeight}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export type StackableToastProps = {
+  toast: Toast;
+  index: number;
+  toastsLength: number;
+  isHovered: boolean;
+  isMobile: boolean;
+  hoverOffset: number;
+} & Pick<useToastsReturnType, "updateHeight">;
+
+export const StackableToast = (props: StackableToastProps) => {
+  const {
+    toast,
+    index,
+    toastsLength,
+    isHovered,
+    isMobile,
+    hoverOffset,
+    updateHeight,
+  } = props;
+  const {
+    id,
+    height,
+    frontHeight,
+    content,
+    placement,
+    visibleToasts,
+    offsetGap,
+    visible,
+  } = toast;
+
+  const ref = React.useCallback(
+    (el: HTMLElement | null) => {
+      if (el) {
+        const boundingRect = el.getBoundingClientRect();
+        visible && updateHeight(id, boundingRect.height, placement);
+      }
+    },
+    [updateHeight, id, visible, placement],
+  );
+
+  const isToastVisible = visible;
+  const [side, position] = placement.split("-") as Split<typeof placement, "-">;
+  const sortedIndex = toastsLength - (index + 1);
+  const clampedIndex =
+    sortedIndex > visibleToasts ? visibleToasts : sortedIndex;
+  const translateYGap = offsetGap * clampedIndex;
+  const scalePercent = 1 - 0.05 * clampedIndex;
+  const showAlertContent = sortedIndex === 0 || isHovered;
+
+  const showToast = sortedIndex <= visibleToasts - 1;
+  const hoverOffsetSide = side === "bottom" ? -hoverOffset : hoverOffset;
+  const translateYGapSide = side === "bottom" ? -translateYGap : translateYGap;
+
+  const theme = useTheme();
+  const visibleStyle = isToastVisible ? "visible" : "notVisible";
+  const mobileStyle = isMobile ? "center" : position;
+  const toastAnimationStyles = cx(
+    theme.toast.animationWrapper.base,
+    theme.toast[side].animationWrapper.base,
+    theme.toast[side][mobileStyle].animationWrapper.base,
+    cx(
+      theme.toast.animationWrapper[visibleStyle],
+      theme.toast[side].animationWrapper[visibleStyle],
+    ),
+  );
+
+  return (
+    <div ref={ref} className={toastAnimationStyles}>
+      <div
+        className={theme.toast.hoverWrapper}
+        style={{
+          transform: isHovered
+            ? `translate3d(0, ${hoverOffsetSide}px, 0)`
+            : `translate3d(0, ${translateYGapSide}px, 0) scale(${scalePercent})`,
+          opacity: showToast ? 1 : 0,
+          height: isHovered ? `${height}px` : `${frontHeight}px`,
+        }}
+      >
+        <div className={cx(theme.toast.fill, theme.toast[side].fill)} />
+        {isFunction(content) ? (
+          content({ toast, showAlertContent })
+        ) : (
+          <div role="alert" className={theme.toast.default}>
+            {content}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

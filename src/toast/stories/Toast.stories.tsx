@@ -2,7 +2,7 @@ import React from "react";
 import { Portal } from "reakit";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Toasts } from "../Toasts";
+import { Toasts } from "../ToastBar";
 import { Button } from "../../button";
 import { useToast } from "../ToastAlert";
 import { useCustomToast } from "./CustomToast";

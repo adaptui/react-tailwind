@@ -1,16 +1,15 @@
 import { Toast, Content } from "./ToastTypes";
-import { createToastContext, DefaultToastOptions } from "./RenderlessToast";
+import { createToastStore, DefaultToastOptions } from "./RenderlessToast";
 
 const defaultOptions: DefaultToastOptions<Toast> = {
-  createdAt: Date.now(),
+  animationDuration: 0,
   pausedAt: null,
   pauseDuration: 0,
   height: null,
   frontHeight: null,
   placement: "bottom-center",
-  autoDismiss: false,
+  autoDismiss: true,
   dismissDuration: 3000,
-  animationDuration: 0,
   offsetGap: 10,
   hoverOffsetGap: 10,
   visibleToasts: 3,
@@ -21,6 +20,6 @@ const [
   useToastStore,
   useCreateToast,
   useToastHandlers,
-] = createToastContext<Toast, Content>(defaultOptions);
+] = createToastStore<Toast, Content>(defaultOptions);
 
 export { ToastProvider, useToastStore, useCreateToast, useToastHandlers };
