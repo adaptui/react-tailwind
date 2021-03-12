@@ -7,6 +7,7 @@ import {
 } from "reakit/Tooltip";
 import React from "react";
 import { cx } from "@renderlesskit/react";
+import { Transition } from "@headlessui/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
@@ -83,22 +84,32 @@ export const Tooltip = ({
         {...tooltip}
         style={{
           ...tooltip.unstable_popoverStyles,
-          display: tooltip.visible ? "flex" : "none",
+          display: "flex",
         }}
       >
-        {showArrow && (
-          <TooltipArrow {...tooltip} size={arrowSize}>
-            <TooltipArrowIcon
-              className={arrowStyles}
-              style={{
-                transform: transformMap[side],
-              }}
-            />
-          </TooltipArrow>
-        )}
-        <TooltipBody prefix={prefix} className={className} style={style}>
-          {title}
-        </TooltipBody>
+        <Transition
+          show={tooltip.visible}
+          enter="transition-all transform-gpu duration-300"
+          enterFrom="opacity-0 translate-y-2"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition-all transform-gpu duration-300"
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0  translate-y-2"
+        >
+          <TooltipBody prefix={prefix} className={className} style={style}>
+            {showArrow && (
+              <TooltipArrow {...tooltip} size={arrowSize}>
+                <TooltipArrowIcon
+                  className={arrowStyles}
+                  style={{
+                    transform: transformMap[side],
+                  }}
+                />
+              </TooltipArrow>
+            )}
+            {title}
+          </TooltipBody>
+        </Transition>
       </ReakitTooltip>
     </>
   );

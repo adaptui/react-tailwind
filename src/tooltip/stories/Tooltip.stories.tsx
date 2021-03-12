@@ -103,7 +103,7 @@ export const Test = () => {
         height: "90vh",
       }}
     >
-      <Tooltip title="I am a popover">
+      <Tooltip title="I am a popover" className="text-xl bg-red-500">
         <Button ref={ref}>Tooltip</Button>
       </Tooltip>
     </div>
