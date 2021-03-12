@@ -4,17 +4,44 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { InfoCircleIcon } from "../icons";
 import { Button, ButtonProps } from "../button";
-import {
-  Toast,
-  ToastOptions,
-  useInternalShowToast,
-} from "@renderlesskit/react/toast";
+import { useMediaQuery } from "../hooks";
+import { ActionType, AddToast, ToastOptions } from "./RenderlessToast";
+import { Content, Toast } from "./ToastTypes";
+import { useToastStore, useCreateToast } from "./ToastProvider";
+
+export const useInternalShowToast = (): AddToast<Toast, Content> => {
+  const { dispatch } = useToastStore();
+  const { createToast } = useCreateToast();
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+
+  return React.useCallback(
+    (content, options) => {
+      const toast = createToast(content, options);
+
+      dispatch({
+        type: ActionType.ADD_TOAST,
+        toast,
+        maxToasts: isMobile ? 1 : 20,
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: ActionType.UPDATE_TOAST,
+          toast: { ...toast, visible: true },
+        });
+      }, 0);
+
+      return toast.id;
+    },
+    [dispatch, createToast, isMobile],
+  );
+};
 
 export const useToast = () => {
   const showToast = useInternalShowToast();
 
   return React.useCallback(
-    (alertProps: ToastAlertUserProps, options?: ToastOptions) => {
+    (alertProps: ToastAlertUserProps, options?: ToastOptions<Toast>) => {
       const toastId = showToast(
         toastOptions => <ToastAlert {...toastOptions} {...alertProps} />,
         options,

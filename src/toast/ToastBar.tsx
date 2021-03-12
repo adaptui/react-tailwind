@@ -1,19 +1,17 @@
 import * as React from "react";
 
-import { ToastPlacement } from "./ToastTypes";
-import { useMediaQuery, usePrevious } from "../../hooks";
-import { getPlacementSortedToasts, mobileSortedToasts } from "./helpers";
-import { useToastStore, useToastHandlers, getToast, Toast } from "./index";
+import {
+  getPlacementSortedToasts,
+  getToast,
+  mobileSortedToasts,
+} from "./helpers";
+import { Toast, ToastPlacement } from "./ToastTypes";
+import { useMediaQuery, usePrevious } from "../hooks";
+import { useToastHandlers, useToastStore } from "./ToastProvider";
 
 export const useToasts = () => {
   const { toasts } = useToastStore();
-  const {
-    updateToast,
-    updateFieldToast,
-    upsertToast,
-    removeToast,
-    dismissToast,
-  } = useToastHandlers();
+  const { updateToast, updateFieldToast, dismissToast } = useToastHandlers();
   const visibleToasts = toasts.filter(t => t.visible);
   const previousToasts = usePrevious<Toast[]>(visibleToasts);
   const [isMobile] = useMediaQuery("(max-width: 640px)");
@@ -120,10 +118,6 @@ export const useToasts = () => {
     toasts: isMobile ? mobileSortedToasts(sortedToasts) : sortedToasts,
     pauseTimer,
     resumeTimer,
-    removeToast,
-    dismissToast,
-    updateToast,
-    upsertToast,
     updateHeight,
     calculateOffset,
     updateFrontHeight,

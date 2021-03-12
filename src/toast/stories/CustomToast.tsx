@@ -5,7 +5,9 @@ import { cx } from "@renderlesskit/react";
 
 import React from "react";
 import { InfoCircleIcon } from "../../icons";
-import { Toast, ToastOptions, useShowToast } from "@renderlesskit/react/toast";
+import { ConfigurableToastOptions } from "../RenderlessToast";
+import { useToastHandlers } from "../ToastProvider";
+import { Toast } from "../ToastTypes";
 
 type CustomToastProps = {
   title: string;
@@ -37,10 +39,13 @@ const CustomToast: React.FC<CustomToastProps> = ({
 };
 
 export const useCustomToast = () => {
-  const showToast = useShowToast();
+  const { showToast } = useToastHandlers();
 
   return React.useCallback(
-    (alertDetails: CustomToastProps, options?: ToastOptions) => {
+    (
+      alertDetails: CustomToastProps,
+      options?: ConfigurableToastOptions<Toast>,
+    ) => {
       const toastId = showToast(
         props => <CustomToast {...props} {...alertDetails} />,
         options,

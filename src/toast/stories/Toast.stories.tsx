@@ -4,13 +4,9 @@ import { Meta } from "@storybook/react/types-6-0";
 
 import { Toasts } from "../Toasts";
 import { Button } from "../../button";
-import { useCustomToast } from "./CustomToast";
 import { useToast } from "../ToastAlert";
-import {
-  ToastProvider,
-  useToastHandler,
-  useToastHandlers,
-} from "@renderlesskit/react/toast";
+import { useCustomToast } from "./CustomToast";
+import { ToastProvider, useToastHandlers } from "../ToastProvider";
 
 export default { title: "Toast" } as Meta;
 
@@ -72,7 +68,6 @@ export const ToastPlacements = () => {
 const TriggerDefaultToasts = () => {
   const toast = useToast();
   const showCustomToast = useCustomToast();
-  const { addToast } = useToastHandler();
   const { showToast, removeToast } = useToastHandlers();
 
   return (
@@ -80,7 +75,7 @@ const TriggerDefaultToasts = () => {
       <div className="space-x-2">
         <Button
           className="my-2"
-          onClick={() => addToast("Proper Vercel Toast.")}
+          onClick={() => showToast("Proper Vercel Toast.")}
         >
           String Toast
         </Button>

@@ -1,13 +1,21 @@
 import * as React from "react";
 
-import { genId } from "./helpers";
-import { Content } from "./ToastTypes";
-import { ActionType, DefaultToast } from "./ToastState";
-import { useToastState, StateReturnType } from "./index";
+import {
+  useToastState,
+  StateReturnType,
+  DefaultToast,
+  genId,
+  ActionType,
+} from "./index";
+import { createContext } from "../../utils";
 
 export type DefaultToastOptions<T extends DefaultToast> = Omit<
   T,
   "id" | "visible" | "reverseOrder"
+>;
+
+export type DefaultToastProviderOptions<T extends DefaultToast> = Partial<
+  DefaultToastOptions<T>
 >;
 
 export type ConfigurableToastOptions<T extends DefaultToast> = Omit<
@@ -16,99 +24,105 @@ export type ConfigurableToastOptions<T extends DefaultToast> = Omit<
 >;
 
 export type ToastOptions<T extends DefaultToast> = Partial<
-  DefaultToastOptions<T>
+  ConfigurableToastOptions<T>
 >;
 
-export interface ToastStore<T extends DefaultToast> extends StateReturnType<T> {
-  defaultOptions: DefaultToastOptions<T>;
+export interface ToastStore<T extends DefaultToast>
+  extends StateReturnType<T> {}
+
+export interface CreateToast<T extends DefaultToast, Content> {
+  createToast: CreateToastHandler<T, Content>;
 }
 
-export interface ToastHandlerContext<T extends DefaultToast> {
-  createToast: CreateToastHandler<T>;
-  addToast: ToastHandler<T>;
-}
-
-export type CreateToastContextReturn<T extends DefaultToast> = [
-  React.FC<Partial<DefaultToastOptions<T>>>,
-  () => ToastStore<T>,
-  () => ToastHandlerContext<T>,
-];
-
-export type CreateToastHandler<T extends DefaultToast> = (
+export type CreateToastHandler<T extends DefaultToast, Content> = (
   content: Content,
-  options?: ConfigurableToastOptions<T>,
+  options?: ToastOptions<T>,
 ) => T;
 
-export type ToastHandler<T extends DefaultToast> = (
+export type AddToast<T extends DefaultToast, Content> = (
   content: Content,
-  options?: ConfigurableToastOptions<T>,
+  options?: ToastOptions<T>,
 ) => string;
 
-/**
- * Creates a named context, provider, and hook.
- *
- * @param options create context options
- */
-export function createToastContext<T extends DefaultToast>(
+export type ShowToast<T extends DefaultToast, Content> = (
+  content: Content,
+  options?: ToastOptions<T>,
+) => string;
+
+export type UpdateToast<T extends DefaultToast> = (
+  toastId: string,
+  toast: Partial<T>,
+) => void;
+
+export type UpdateFieldToast<T extends DefaultToast> = (
+  field: keyof T,
+  fieldValue: any,
+  toast: Partial<T>,
+) => void;
+
+export type UpdateAllToast<T extends DefaultToast> = (
+  toast: Partial<T>,
+) => void;
+
+export type DismissToast = (toastId?: string) => void;
+
+export type RemoveToast = (toastId?: string) => void;
+
+export type ToastHandlers<T extends DefaultToast, Content> = {
+  addToast: AddToast<T, Content>;
+  showToast: ShowToast<T, Content>;
+  updateToast: UpdateToast<T>;
+  updateFieldToast: UpdateFieldToast<T>;
+  updateAllToast: UpdateAllToast<T>;
+  dismissToast: DismissToast;
+  removeToast: RemoveToast;
+};
+
+export function createToastContext<T extends DefaultToast, Content>(
   defaultOptions: DefaultToastOptions<T>,
 ) {
-  const options = {
-    strict: true,
-    errorMessage:
-      "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
-    name: "ToastStore",
-  };
+  const [ToastStoreProvider, useToastStore] = createContext<ToastStore<T>>({
+    strict: false,
+    name: "ToastsState",
+    errorMessage: "useToastStore must be used within ToastProvider",
+  });
 
-  const Context = React.createContext<ToastStore<T> | undefined>(undefined);
+  const [CreateToastProvider, useCreateToast] = createContext<
+    CreateToast<T, Content>
+  >({
+    strict: false,
+    name: "CreateToast",
+    errorMessage: "useCreateToast must be used within ToastProvider",
+  });
 
-  Context.displayName = options.name;
+  const [ToastHandlersProvider, useToastHandlers] = createContext<
+    ToastHandlers<T, Content>
+  >({
+    strict: false,
+    name: "ToastHandlers",
+    errorMessage: "useToastHandlers must be used within ToastProvider",
+  });
 
-  function useToastStore() {
-    const context = React.useContext(Context);
-
-    if (!context && options.strict) {
-      throw new Error(options.errorMessage);
-    }
-
-    return context;
-  }
-
-  const HandlerContext = React.createContext<
-    ToastHandlerContext<T> | undefined
-  >(undefined);
-
-  HandlerContext.displayName = options.name;
-
-  function useToastHandler() {
-    const context = React.useContext(HandlerContext);
-
-    if (!context && options.strict) {
-      throw new Error(options.errorMessage);
-    }
-
-    return context;
-  }
-
-  const ToastStoreProvider: React.FC<ToastOptions<T>> = props => {
+  const ToastProvider: React.FC<DefaultToastProviderOptions<T>> = props => {
     const { children, ...rest } = props;
     const { toasts, dispatch } = useToastState<T>();
-    console.log("%c toasts", "color: #cc7033", toasts);
     const context = {
       toasts,
       dispatch,
-      defaultOptions: { ...defaultOptions, ...rest },
     };
 
-    const createToast: CreateToastHandler<T> = (content, opts) => ({
+    // @ts-ignore
+    const createToast: CreateToastHandler<T, Content> = (content, opts) => ({
       visible: false,
       reverseOrder: true,
       ...defaultOptions,
+      ...rest,
       ...opts,
       content,
       id: opts?.id || genId(),
     });
 
-    const addToast: ToastHandler<T> = (content, options) => {
+    const addToast: AddToast<T, Content> = (content, options) => {
       const toast = createToast(content, options);
 
       dispatch({
@@ -119,20 +133,92 @@ export function createToastContext<T extends DefaultToast>(
       return toast.id;
     };
 
+    const showToast: ShowToast<T, Content> = (content, options) => {
+      const toast = createToast(content, options);
+
+      dispatch({ type: ActionType.ADD_TOAST, toast });
+
+      setTimeout(() => {
+        dispatch({
+          type: ActionType.UPDATE_TOAST,
+          toast: { ...toast, visible: true },
+        });
+      }, 0);
+
+      return toast.id;
+    };
+
+    const updateToast: UpdateToast<T> = (toastId, toast) => {
+      dispatch({
+        type: ActionType.UPDATE_TOAST,
+        toast: { ...toast, id: toastId },
+      });
+    };
+
+    const updateFieldToast: UpdateFieldToast<T> = (
+      field,
+      fieldValue,
+      toast,
+    ) => {
+      dispatch({
+        type: ActionType.UPDATE_FIELD_TOAST,
+        field,
+        fieldValue,
+        toast,
+      });
+    };
+
+    const updateAllToast: UpdateAllToast<T> = toast => {
+      dispatch({ type: ActionType.UPDATE_ALL_TOAST, toast });
+    };
+
+    const dismissToast: DismissToast = toastId => {
+      const unmountDuration = defaultOptions.animationDuration;
+
+      dispatch({ type: ActionType.DISMISS_TOAST, toastId });
+
+      setTimeout(() => {
+        dispatch({ type: ActionType.REMOVE_TOAST, toastId });
+      }, unmountDuration);
+    };
+
+    const removeToast: RemoveToast = toastId =>
+      dispatch({ type: ActionType.REMOVE_TOAST, toastId });
+
     return (
-      <Context.Provider value={context}>
-        <HandlerContext.Provider value={{ createToast, addToast }}>
-          {children}
-        </HandlerContext.Provider>
-      </Context.Provider>
+      <ToastStoreProvider value={context}>
+        <CreateToastProvider value={{ createToast }}>
+          <ToastHandlersProvider
+            value={{
+              addToast,
+              showToast,
+              updateToast,
+              updateFieldToast,
+              updateAllToast,
+              dismissToast,
+              removeToast,
+            }}
+          >
+            {children}
+          </ToastHandlersProvider>
+        </CreateToastProvider>
+      </ToastStoreProvider>
     );
   };
 
-  ToastStoreProvider.displayName = "ToastStoreProvider";
+  ToastProvider.displayName = "ToastStoreProvider";
 
   return [
-    ToastStoreProvider,
+    ToastProvider,
     useToastStore,
-    useToastHandler,
-  ] as CreateToastContextReturn<T>;
+    useCreateToast,
+    useToastHandlers,
+  ] as CreateToastContextReturn<T, Content>;
 }
+
+export type CreateToastContextReturn<T extends DefaultToast, Content> = [
+  React.FC<Partial<DefaultToastOptions<T>>>,
+  () => ToastStore<T>,
+  () => CreateToast<T, Content>,
+  () => ToastHandlers<T, Content>,
+];

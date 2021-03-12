@@ -1,13 +1,5 @@
-import { objectKeys } from "../../../utils";
-import { Toast } from "../index";
-import { ToastPlacement } from "../ToastTypes";
-
-export const genId = (() => {
-  let count = 0;
-  return () => {
-    return (++count).toString();
-  };
-})();
+import { objectKeys } from "../utils";
+import { Toast, ToastPlacement } from "./ToastTypes";
 
 export const getToast = (toasts: Toast[], toastId: string) => {
   const index = toasts.findIndex(toast => toast.id === toastId);
@@ -28,7 +20,9 @@ export const mobileSortedToasts = (sortedToasts: SortedToastList) =>
     (acc, placement) => {
       const [side] = placement.split("-");
 
+      // @ts-ignore
       acc[`${side}-center`] = [
+        // @ts-ignore
         ...acc[`${side}-center`],
         ...sortedToasts[placement],
       ];
