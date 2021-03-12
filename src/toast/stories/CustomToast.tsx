@@ -1,13 +1,12 @@
 /**
  * A Custom Toast Which User Might Write
  */
+import React from "react";
 import { cx } from "@renderlesskit/react";
 
-import React from "react";
 import { InfoCircleIcon } from "../../icons";
+import { Toast, useToastHandlers } from "../index";
 import { ConfigurableToastOptions } from "../RenderlessToast";
-import { useToastHandlers } from "../ToastProvider";
-import { Toast } from "../ToastTypes";
 
 type CustomToastProps = {
   title: string;

@@ -5,8 +5,7 @@ import { useTheme } from "../theme";
 import { Split } from "../utils/types";
 import { isFunction, objectKeys } from "../utils";
 import { useHover, useMediaQuery } from "../hooks";
-import { Toast, ToastPlacement } from "./ToastTypes";
-import { useToasts, useToastsReturnType } from "./ToastBarHelpers";
+import { Toast, ToastPlacement, useToasts, useToastsReturnType } from "./index";
 
 export const Toasts = () => {
   const { toasts, updateHeight, calculateOffset } = useToasts();
