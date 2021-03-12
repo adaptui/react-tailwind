@@ -2,7 +2,7 @@ import React from "react";
 
 import { getToast } from "./helpers";
 import { DefaultToast } from "./ToastTypes";
-import { ToastHandlers } from "./CreateToastContext";
+import { DismissToast, UpdateToast } from "./CreateToastContext";
 
 export type TimerToast = DefaultToast & {
   createdAt: number;
@@ -12,12 +12,11 @@ export type TimerToast = DefaultToast & {
   dismissDuration: number;
 };
 
-export const useToastTimer = <T extends TimerToast, Content>(
+export const useToastTimer = <T extends TimerToast>(
   toasts: T[],
-  handlers: ToastHandlers<T, Content>,
+  updateToast: UpdateToast<T>,
+  dismissToast: DismissToast,
 ) => {
-  const { dismissToast, updateToast } = handlers;
-
   React.useEffect(() => {
     const now = Date.now();
     const timeouts = toasts.map(t => {
