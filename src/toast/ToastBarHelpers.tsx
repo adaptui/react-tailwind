@@ -59,7 +59,7 @@ export const useToasts = () => {
     [sortedToasts],
   );
 
-  const timerHandlers = useToastTimer(toasts, updateToast, dismissToast);
+  const timerHandlers = useToastTimer(visibleToasts, updateToast, dismissToast);
 
   return {
     toasts: isMobile ? mobileSortedToasts(sortedToasts) : sortedToasts,
