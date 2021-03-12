@@ -1,13 +1,10 @@
 import * as React from "react";
 
-import {
-  getPlacementSortedToasts,
-  getToast,
-  mobileSortedToasts,
-} from "./helpers";
+import { getToast } from "./RenderlessToast";
 import { Toast, ToastPlacement } from "./ToastTypes";
 import { useMediaQuery, usePrevious } from "../hooks";
 import { useToastHandlers, useToastStore } from "./ToastProvider";
+import { getPlacementSortedToasts, mobileSortedToasts } from "./helpers";
 
 export const useToasts = () => {
   const { toasts } = useToastStore();

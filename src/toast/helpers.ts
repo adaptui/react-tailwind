@@ -1,11 +1,6 @@
 import { objectKeys } from "../utils";
 import { Toast, ToastPlacement } from "./ToastTypes";
 
-export const getToast = (toasts: Toast[], toastId: string) => {
-  const index = toasts.findIndex(toast => toast.id === toastId);
-  return toasts[index];
-};
-
 export type SortedToastList = Record<ToastPlacement, Toast[]>;
 
 export const getPlacementSortedToasts = (toasts: Toast[]) =>
