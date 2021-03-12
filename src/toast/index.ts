@@ -1,1 +1,1 @@
-export * from "./Toasts";
+export * from "./ToastBar";

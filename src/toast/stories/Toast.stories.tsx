@@ -2,11 +2,11 @@ import React from "react";
 import { Portal } from "reakit";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Toasts } from "../Toasts";
+import { Toasts } from "../ToastBar";
 import { Button } from "../../button";
-import { useCustomToast } from "./CustomToast";
 import { useToast } from "../ToastAlert";
-import { ToastProvider, useToastHandlers } from "@renderlesskit/react/toast";
+import { useCustomToast } from "./CustomToast";
+import { ToastProvider, useToastHandlers } from "../ToastProvider";
 
 export default { title: "Toast" } as Meta;
 
