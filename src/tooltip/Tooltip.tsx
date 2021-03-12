@@ -7,7 +7,6 @@ import {
 } from "reakit/Tooltip";
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { Transition } from "@headlessui/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
@@ -16,11 +15,11 @@ import { forwardRefWithAs } from "../utils/types";
 
 export type TooltipProps = TooltipInitialState & {
   /**
-   * title of the tooltip
+   * Title of the tooltip
    */
   title: string;
   /**
-   * prefix element
+   * Prefix element
    */
   prefix?: React.ReactNode;
   /**
@@ -35,6 +34,10 @@ export type TooltipProps = TooltipInitialState & {
    * @default "30"
    */
   arrowSize?: string | number | undefined;
+  /**
+   * Whether to render tooltip in portal or not?
+   */
+  unstablePortal?: boolean;
   /**
    * ClassNames for the Tooltip Body
    */
@@ -53,6 +56,7 @@ export const Tooltip = ({
   title,
   showArrow = false,
   arrowSize = 17,
+  unstablePortal,
   prefix,
   className,
   style,
@@ -81,35 +85,31 @@ export const Tooltip = ({
         }
       </TooltipReference>
       <ReakitTooltip
+        unstable_portal={unstablePortal}
         {...tooltip}
         style={{
           ...tooltip.unstable_popoverStyles,
           display: "flex",
         }}
       >
-        <Transition
-          show={tooltip.visible}
-          enter="transition-all transform-gpu duration-300"
-          enterFrom="opacity-0 translate-y-2"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition-all transform-gpu duration-300"
-          leaveFrom="opacity-100 translate-y-0"
-          leaveTo="opacity-0  translate-y-2"
+        <TooltipBody
+          prefix={prefix}
+          visible={tooltip.visible}
+          className={className}
+          style={style}
         >
-          <TooltipBody prefix={prefix} className={className} style={style}>
-            {showArrow && (
-              <TooltipArrow {...tooltip} size={arrowSize}>
-                <TooltipArrowIcon
-                  className={arrowStyles}
-                  style={{
-                    transform: transformMap[side],
-                  }}
-                />
-              </TooltipArrow>
-            )}
-            {title}
-          </TooltipBody>
-        </Transition>
+          {showArrow && (
+            <TooltipArrow {...tooltip} size={arrowSize}>
+              <TooltipArrowIcon
+                className={arrowStyles}
+                style={{
+                  transform: transformMap[side],
+                }}
+              />
+            </TooltipArrow>
+          )}
+          {title}
+        </TooltipBody>
       </ReakitTooltip>
     </>
   );
