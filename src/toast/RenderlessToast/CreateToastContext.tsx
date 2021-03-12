@@ -114,18 +114,14 @@ export function createToastStore<T extends DefaultToast, Content>(
       [toasts, dispatch],
     );
 
-    // @ts-ignore
-    const createToast: CreateToastHandler<T, Content> = React.useCallback(
-      (content, opts) => ({
-        visible: false,
-        reverseOrder: true,
-        createdAt: Date.now(),
-        ...defaultOptions,
-        ...rest,
-        ...opts,
-        content,
-        id: opts?.id || genId(),
-      }),
+    const createToast = React.useCallback(
+      (content: Content, opts?: ToastOptions<T>) =>
+        ({
+          visible: false,
+          reverseOrder: true,
+          createdAt: Date.now(),
+          id: genId(),
+        } as T),
       // Since its only a few object https://twitter.com/dan_abramov/status/1104414272753487872
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [JSON.stringify(rest)],

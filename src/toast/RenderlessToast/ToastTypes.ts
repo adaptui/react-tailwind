@@ -5,6 +5,14 @@ export interface DefaultToast {
   animationDuration: number;
 }
 
+export type TimerToast = DefaultToast & {
+  createdAt: number;
+  pauseDuration: number;
+  pausedAt: number | null;
+  autoDismiss: boolean;
+  dismissDuration: number;
+};
+
 export interface State<T> {
   toasts: T[];
 }

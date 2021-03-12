@@ -1,14 +1,9 @@
 import { Dict } from "../utils/types";
-import { DefaultToast } from "./RenderlessToast";
+import { TimerToast } from "./RenderlessToast";
 
-export interface Toast extends DefaultToast {
-  createdAt: number;
+export interface Toast extends TimerToast {
   content?: Content;
   placement: ToastPlacement;
-  pauseDuration: number;
-  pausedAt: number | null;
-  autoDismiss: boolean;
-  dismissDuration: number;
   height: number | null;
   frontHeight: number | null;
   offsetGap: number;

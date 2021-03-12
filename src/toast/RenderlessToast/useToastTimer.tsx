@@ -1,20 +1,12 @@
 import React from "react";
 
 import { getToast } from "./helpers";
-import { DefaultToast } from "./ToastTypes";
+import { TimerToast } from "./ToastTypes";
 import { DismissToast, UpdateToast } from "./CreateToastContext";
 
-export type TimerToast = DefaultToast & {
-  createdAt: number;
-  pauseDuration: number;
-  pausedAt: number | null;
-  autoDismiss: boolean;
-  dismissDuration: number;
-};
-
-export const useToastTimer = <T extends TimerToast>(
-  toasts: T[],
-  updateToast: UpdateToast<T>,
+export const useToastTimer = (
+  toasts: TimerToast[],
+  updateToast: UpdateToast<TimerToast>,
   dismissToast: DismissToast,
 ) => {
   React.useEffect(() => {
@@ -43,7 +35,7 @@ export const useToastTimer = <T extends TimerToast>(
 
   const pauseTimer = React.useCallback(
     (toastId: string) => {
-      const toast = getToast<T>(toasts, toastId);
+      const toast = getToast<TimerToast>(toasts, toastId);
 
       if (!toast.autoDismiss) return;
 
