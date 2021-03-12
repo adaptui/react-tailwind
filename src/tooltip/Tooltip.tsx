@@ -35,6 +35,10 @@ export type TooltipProps = TooltipInitialState & {
    */
   arrowSize?: string | number | undefined;
   /**
+   * Props for Arrow
+   */
+  arrowClassname?: string;
+  /**
    * Whether to render tooltip in portal or not?
    */
   unstablePortal?: boolean;
@@ -56,6 +60,7 @@ export const Tooltip = ({
   title,
   showArrow = false,
   arrowSize = 17,
+  arrowClassname,
   unstablePortal,
   prefix,
   className,
@@ -67,7 +72,7 @@ export const Tooltip = ({
   const [side] = tooltip.placement.split("-");
 
   const theme = useTheme();
-  const arrowStyles = cx(theme.tooltip.arrow.base);
+  const arrowStyles = cx(theme.tooltip.arrow.base, arrowClassname);
 
   const transformMap: Record<string, string> = {
     top: "rotateZ(180deg)",

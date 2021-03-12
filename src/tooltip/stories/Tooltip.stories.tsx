@@ -94,4 +94,5 @@ export const Custom = base({
   showArrow: true,
   prefix: <ExclamationTriangleIcon />,
   className: "text-xl bg-red-500",
+  arrowClassname: "text-red-500",
 });
