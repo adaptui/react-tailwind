@@ -13,13 +13,13 @@ export const AlertActionButton = forwardRefWithAs<
   HTMLButtonElement,
   "button"
 >((props, ref) => {
-  const { status, isMobile } = useAlertContext();
+  const { status, isTablet } = useAlertContext();
   const { className, ...rest } = props;
 
   const theme = useTheme();
   const alertActionButtonStyles = cx(
     theme.alert.actionButton.base,
-    isMobile
+    isTablet
       ? theme.alert.actionButton.mobile
       : theme.alert.actionButton.desktop,
     theme.alert.status[status].actionButton,

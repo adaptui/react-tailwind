@@ -14,12 +14,12 @@ export const AlertActions = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { isMobile } = useAlertContext();
+  const { isTablet } = useAlertContext();
 
   const theme = useTheme();
   const alertActionsStyles = cx(
     theme.alert.actionsWrapper.base,
-    isMobile
+    isTablet
       ? theme.alert.actionsWrapper.mobile
       : theme.alert.actionsWrapper.desktop,
     className,

@@ -37,9 +37,13 @@ const renderlesskitConfig = {
       },
       width: {
         fit: "fit-content",
+        screen90: "90vw",
       },
       height: {
         fit: "fit-content",
+      },
+      maxWidth: {
+        screen90: "90vw",
       },
       minWidth: {
         ...defaultTheme.spacing,

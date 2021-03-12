@@ -18,7 +18,7 @@ import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
-export type AlertContext = { status: AlertStatus; isMobile: boolean };
+export type AlertContext = { status: AlertStatus; isTablet: boolean };
 
 const [AlertProvider, useAlertContext] = createContext<AlertContext>({
   name: "AlertContext",
@@ -86,8 +86,8 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
       children,
       ...rest
     } = props;
-    const [isMobile] = useMediaQuery("(max-width: 768px)");
-    const context = { status, isMobile };
+    const [isTablet] = useMediaQuery("(max-width: 768px)");
+    const context = { status, isTablet };
 
     const theme = useTheme();
     const alertStyles = cx(
@@ -114,11 +114,11 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
                   <AlertDescription>{description}</AlertDescription>
                 )}
                 <Box as="span" style={{ display: "inline-flex" }}>
-                  {isMobile ? Action : null}
+                  {isTablet ? Action : null}
                 </Box>
               </AlertBody>
               <AlertActions>
-                {!isMobile ? Action : null}
+                {!isTablet ? Action : null}
                 {closable && (
                   <AlertCloseButton onClick={onClose}>
                     {closableIcon}

@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Dict } from "./types";
+
 export interface CreateContextOptions {
   /**
    * If `true`, React will throw if context is `null` or `undefined`
@@ -16,7 +18,11 @@ export interface CreateContextOptions {
   name?: string;
 }
 
-type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>];
+export type CreateContextReturn<T> = [
+  React.Provider<T>,
+  () => T,
+  React.Context<T>,
+];
 
 /**
  * Creates a named context, provider, and hook.
@@ -86,3 +92,18 @@ export function canUseDOM() {
 }
 
 export const isBrowser = canUseDOM();
+
+// Array assertions
+export function isArray<T>(value: any): value is Array<T> {
+  return Array.isArray(value);
+}
+
+// Object assertions
+export const isObject = (value: any): value is Dict => {
+  const type = typeof value;
+
+  return value != null && type === "object" && !isArray(value);
+};
+
+export const objectKeys = <T extends Dict>(obj: T) =>
+  (Object.keys(obj) as unknown) as (keyof T)[];
