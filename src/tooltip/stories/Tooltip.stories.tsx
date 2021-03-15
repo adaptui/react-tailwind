@@ -88,24 +88,11 @@ export const InitiallyVisible = base({
   prefix: <ExclamationTriangleIcon />,
 });
 
-export const Test = () => {
-  const ref = React.useRef(null);
-
-  React.useEffect(() => {
-    console.log(ref);
-  }, []);
-
-  return (
-    <div
-      className="flex items-center justify-center m-auto"
-      style={{
-        width: "90vw",
-        height: "90vh",
-      }}
-    >
-      <Tooltip title="I am a popover">
-        <Button ref={ref}>Tooltip</Button>
-      </Tooltip>
-    </div>
-  );
-};
+export const Custom = base({
+  children: <Button>Tooltip</Button>,
+  title: "Tooltip with arrow",
+  showArrow: true,
+  prefix: <ExclamationTriangleIcon />,
+  className: "text-xl bg-red-500",
+  arrowClassname: "text-red-500",
+});
