@@ -16,6 +16,7 @@ import { tag } from "./tag";
 import { radio } from "./radio";
 import { slider } from "./slider";
 import { tooltip } from "./tooltip";
+import { toast } from "./toast";
 
 const theme = {
   alert,
@@ -36,6 +37,7 @@ const theme = {
   switch: _switch,
   tag,
   tooltip,
+  toast,
 };
 
 export default theme;
