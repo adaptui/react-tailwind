@@ -16,6 +16,7 @@ import { spinner } from "./spinner";
 import { _switch } from "./switch";
 import { tag } from "./tag";
 import { toast } from "./toast";
+import { input } from "./input";
 
 const theme = {
   alert,
@@ -36,6 +37,7 @@ const theme = {
   switch: _switch,
   tag,
   toast,
+  input,
 };
 
 export default theme;

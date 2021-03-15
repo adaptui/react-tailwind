@@ -301,6 +301,8 @@ const renderlesskitConfig = {
       "DEFAULT",
       "responsive",
       "dark",
+      "hover",
+      "lib:hover",
       "lib:focus-within",
       "focus-within",
       "lib:focus",
