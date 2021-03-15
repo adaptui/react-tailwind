@@ -13,7 +13,6 @@ const renderlesskitConfig = {
       colors: {
         orange: colors.orange,
         gray: colors.gray,
-        inherit: "inherit",
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
