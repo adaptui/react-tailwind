@@ -13,7 +13,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     />
     <div
       aria-hidden="true"
-      class=" lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:rounded lib:select-none lib:transition-all  lib:w-4 lib:h-4 lib:text-xs lib:border-1.5 lib:border-solid lib:border-gray-400"
+      class=" lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:rounded lib:select-none lib:transition-all  lib:w-4 lib:h-4 lib:text-xs lib:border-[1.5px] lib:border-solid lib:border-gray-400"
       role="img"
     />
     <div

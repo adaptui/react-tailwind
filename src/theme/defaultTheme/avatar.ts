@@ -31,7 +31,7 @@ export const avatar = {
   icon: {
     base: "lib:inline-flex lib:text-gray-500",
     size: {
-      xs: "lib:text-xxs",
+      xs: "lib:text-[0.625rem]",
       sm: "lib:text-xs",
       md: "lib:text-xs",
       lg: "lib:text-xs",
@@ -49,15 +49,15 @@ export const avatar = {
       "bottom-left": "lib:bottom-0 lib:left-0",
     },
     size: {
-      xs: "lib:text-1 lib:ring-1",
-      sm: "lib:text-1 lib:ring-1",
-      md: "lib:text-1 lib:ring-2",
-      lg: "lib:text-1.5 lib:ring-2",
-      xl: "lib:text-2 lib:ring-2",
+      xs: "lib:text-[0.25rem] lib:ring-1",
+      sm: "lib:text-[0.25rem] lib:ring-1",
+      md: "lib:text-[0.25rem] lib:ring-2",
+      lg: "lib:text-[0.375rem] lib:ring-2",
+      xl: "lib:text-[0.5rem] lib:ring-2",
     },
     statuses: {
-      online: "lib:text-green-500",
-      sleep: "lib:text-gray-500",
+      online: "text-green-500",
+      sleep: "text-gray-500",
       typing: {
         base:
           "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",

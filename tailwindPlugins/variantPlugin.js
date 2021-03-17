@@ -27,10 +27,10 @@ const variantPlugin = plugin(function ({ addVariant, e }) {
       });
     });
   });
-  addVariant("lib:hover", generatePseudoClassVariant("hover"));
-  addVariant("lib:focus-within", generatePseudoClassVariant("focus-within"));
-  addVariant("lib:focus", generatePseudoClassVariant("focus"));
-  addVariant("lib:disabled", generatePseudoClassVariant("disabled"));
+  // addVariant("lib:hover", generatePseudoClassVariant("hover"));
+  // addVariant("lib:focus-within", generatePseudoClassVariant("focus-within"));
+  // addVariant("lib:focus", generatePseudoClassVariant("focus"));
+  // addVariant("lib:disabled", generatePseudoClassVariant("disabled"));
 
   function generateDataClassVariant(dataName, dataBool, variant) {
     // lib:aria-selected OR aria-selected
@@ -66,15 +66,15 @@ const variantPlugin = plugin(function ({ addVariant, e }) {
   }
 
   generateDataClassVariant("aria-selected", false);
-  generateDataClassVariant("aria-selected", false, "lib");
+  // generateDataClassVariant("aria-selected", false, "lib");
   generateDataClassVariant("aria-disabled", false);
-  generateDataClassVariant("aria-disabled", false, "lib");
+  // generateDataClassVariant("aria-disabled", false, "lib");
   generateDataClassVariant("is-range-selection", true);
-  generateDataClassVariant("is-range-selection", true, "lib");
+  // generateDataClassVariant("is-range-selection", true, "lib");
   generateDataClassVariant("is-selection-start", true);
-  generateDataClassVariant("is-selection-start", true, "lib");
+  // generateDataClassVariant("is-selection-start", true, "lib");
   generateDataClassVariant("is-selection-end", true);
-  generateDataClassVariant("is-selection-end", true, "lib");
+  // generateDataClassVariant("is-selection-end", true, "lib");
 });
 
 module.exports = variantPlugin;
