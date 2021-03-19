@@ -1,10 +1,11 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
-import { Input, InputProps } from "../Input";
+
 import InputGroup from "../InputGroup";
-import { InputAddonPrefix, InputAddonSuffix } from "../InputAddons";
 import { EyeClose, EyeOpen } from "../..";
+import { Input, InputProps } from "../Input";
+import { InputAddonPrefix, InputAddonSuffix } from "../InputAddons";
 
 export default {
   title: "Input",
@@ -43,12 +44,10 @@ export const PasswordInput = () => {
   return (
     <InputGroup>
       <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputAddonSuffix>
-        {show ? (
-          <EyeClose onClick={handleClick} />
-        ) : (
-          <EyeOpen onClick={handleClick} />
-        )}
+      <InputAddonSuffix allowPointerEvents>
+        <button tabIndex={0} onClick={handleClick}>
+          {show ? <EyeClose /> : <EyeOpen />}
+        </button>
       </InputAddonSuffix>
     </InputGroup>
   );
@@ -57,7 +56,7 @@ export const PasswordInput = () => {
 export const WithSelect = () => {
   return (
     <InputGroup>
-      <InputAddonPrefix>
+      <InputAddonPrefix allowPointerEvents>
         <label htmlFor="country" className="sr-only">
           Country
         </label>

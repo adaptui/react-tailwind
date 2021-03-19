@@ -5,38 +5,45 @@ import { forwardRefWithAs } from "../utils/types";
 import { Box, BoxProps } from "../box";
 import { useMergeRefs } from "../hooks";
 
-type InputAddonProps = BoxProps & {
+type InputAddonProps = {
   type: "prefix" | "suffix";
+  allowPointerEvents?: boolean;
 };
 
-const InputAddon = forwardRefWithAs<InputAddonProps, HTMLDivElement, "div">(
-  (props, ref) => {
-    const htmlRef = React.useRef<HTMLDivElement>();
-    const { children, type } = props;
-    const theme = useTheme();
+const InputAddon = forwardRefWithAs<
+  BoxProps & InputAddonProps,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const htmlRef = React.useRef<HTMLDivElement>();
+  const { allowPointerEvents, children, type } = props;
+  const theme = useTheme();
 
-    const prefixStyles = cx(theme.input.addon[type]);
+  const prefixStyles = cx(
+    theme.input.addon[type],
+    allowPointerEvents ? "" : theme.input.addon.pointerEventsNone,
+  );
 
-    return (
-      <Box ref={useMergeRefs(ref, htmlRef)} className={prefixStyles}>
-        {children}
-      </Box>
-    );
-  },
-);
+  return (
+    <Box ref={useMergeRefs(ref, htmlRef)} className={prefixStyles}>
+      {children}
+    </Box>
+  );
+});
 
 type AddonElement = React.ForwardRefExoticComponent<
-  {
-    children?: React.ReactNode;
-  } & React.RefAttributes<HTMLDivElement>
+  Pick<InputAddonProps, "allowPointerEvents"> &
+    Omit<React.RefAttributes<HTMLDivElement>, "type"> & {
+      children?: React.ReactNode;
+    }
 > & { id?: string };
 
 export const InputAddonPrefix: AddonElement = React.forwardRef((props, ref) => {
-  return <InputAddon type="prefix" {...props} ref={ref} />;
+  return <InputAddon {...props} type="prefix" ref={ref} />;
 });
 InputAddonPrefix.id = "InputAddonPrefix";
 
 export const InputAddonSuffix: AddonElement = React.forwardRef((props, ref) => {
-  return <InputAddon type="suffix" {...props} ref={ref} />;
+  return <InputAddon {...props} type="suffix" ref={ref} />;
 });
 InputAddonSuffix.id = "InputAddonSuffix";

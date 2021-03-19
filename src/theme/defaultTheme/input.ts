@@ -9,5 +9,6 @@ export const input = {
   addon: {
     prefix: "absolute inset-y-0 left-0 pl-3 flex items-center text-xs",
     suffix: "absolute inset-y-0 right-0 pr-3 flex items-center text-xs",
+    pointerEventsNone: "pointer-events-none",
   },
 };

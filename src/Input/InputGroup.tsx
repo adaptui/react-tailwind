@@ -51,7 +51,7 @@ export const InputGroup = forwardRefWithAs<
         return child;
       }),
     );
-  }, []);
+  }, [children]);
 
   // apply styles & childrens
   React.useLayoutEffect(() => {
