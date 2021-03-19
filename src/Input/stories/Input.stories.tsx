@@ -1,8 +1,10 @@
-import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
+import { Meta } from "@storybook/react";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
-import { EyeOpen, EyeClose, InfoCircleIcon, SearchIcon } from "../../icons";
 import { Input, InputProps } from "../Input";
+import InputGroup from "../InputGroup";
+import { InputAddonPrefix, InputAddonSuffix } from "../InputAddons";
+import { EyeClose, EyeOpen } from "../..";
 
 export default {
   title: "Input",
@@ -12,61 +14,64 @@ export default {
 const base = storyTemplate<InputProps>(Input, {});
 
 export const Default = base({ placeholder: "Enter username" });
-export const Prefix = base({
-  placeholder: "Enter username",
-  prefix: <SearchIcon />,
-});
-export const Suffix = base({
-  placeholder: "Enter username",
-  suffix: <InfoCircleIcon />,
-});
-export const PrefixSuffix = base({
-  placeholder: "Enter username",
-  suffix: <InfoCircleIcon />,
-  prefix: <SearchIcon />,
-});
+
 export const Disabled = base({
   disabled: true,
   placeholder: "Enter username",
-  suffix: <InfoCircleIcon />,
 });
+
 export const Invalid = base({
   invalid: true,
   placeholder: "Enter username",
-  suffix: <InfoCircleIcon />,
 });
+
+export const Group = () => {
+  return (
+    <div className="w-max">
+      <InputGroup>
+        <InputAddonPrefix>https://</InputAddonPrefix>
+        <Input placeholder="Enter website" />
+        <InputAddonSuffix>.com</InputAddonSuffix>
+      </InputGroup>
+    </div>
+  );
+};
 
 export const PasswordInput = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-
   return (
-    <Input
-      type={show ? "text" : "password"}
-      placeholder="Enter password"
-      suffix={
-        <span className="inline-flex items-center" onClick={handleClick}>
-          {show ? <EyeClose /> : <EyeOpen />}
-        </span>
-      }
-    />
+    <InputGroup>
+      <Input type={show ? "text" : "password"} placeholder="Enter password" />
+      <InputAddonSuffix>
+        {show ? (
+          <EyeClose onClick={handleClick} />
+        ) : (
+          <EyeOpen onClick={handleClick} />
+        )}
+      </InputAddonSuffix>
+    </InputGroup>
   );
 };
 
-export const Everything = () => {
+export const WithSelect = () => {
   return (
-    <div className="flex flex-col gap-2 w-52">
-      <Input placeholder="Username" />
-      <Input placeholder="Username" prefix={<SearchIcon />} />
-      <Input placeholder="Username" suffix={<InfoCircleIcon />} />
-      <Input
-        placeholder="Username"
-        prefix={<SearchIcon />}
-        suffix={<InfoCircleIcon />}
-      />
-      <Input disabled placeholder="Username" />
-      <Input invalid placeholder="Username" />
-      <PasswordInput />
-    </div>
+    <InputGroup>
+      <InputAddonPrefix>
+        <label htmlFor="country" className="sr-only">
+          Country
+        </label>
+        <select
+          id="country"
+          name="country"
+          className="focus:ring-indigo-500 focus:border-indigo-500 h-full px-3 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+        >
+          <option>US</option>
+          <option>CA</option>
+          <option>EU</option>
+        </select>
+      </InputAddonPrefix>
+      <Input placeholder="Enter country" />
+    </InputGroup>
   );
 };
