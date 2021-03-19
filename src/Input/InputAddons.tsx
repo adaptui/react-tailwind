@@ -16,34 +16,46 @@ const InputAddon = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const htmlRef = React.useRef<HTMLDivElement>();
-  const { allowPointerEvents, children, type } = props;
+  const { as, allowPointerEvents, className, children, type, ...rest } = props;
   const theme = useTheme();
 
   const prefixStyles = cx(
     theme.input.addon[type],
+    typeof children === "string"
+      ? type === "prefix"
+        ? theme.input.addon.prefixPadding
+        : theme.input.addon.suffixPadding
+      : "",
     allowPointerEvents ? "" : theme.input.addon.pointerEventsNone,
+    className,
   );
 
   return (
-    <Box ref={useMergeRefs(ref, htmlRef)} className={prefixStyles}>
+    <Box
+      as={as}
+      ref={useMergeRefs(ref, htmlRef)}
+      className={prefixStyles}
+      {...rest}
+    >
       {children}
     </Box>
   );
 });
 
-type AddonElement = React.ForwardRefExoticComponent<
-  Pick<InputAddonProps, "allowPointerEvents"> &
-    Omit<React.RefAttributes<HTMLDivElement>, "type"> & {
-      children?: React.ReactNode;
-    }
-> & { id?: string };
-
-export const InputAddonPrefix: AddonElement = React.forwardRef((props, ref) => {
+export const InputAddonPrefix = forwardRefWithAs<
+  Omit<InputAddonProps, "type">,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
   return <InputAddon {...props} type="prefix" ref={ref} />;
 });
-InputAddonPrefix.id = "InputAddonPrefix";
+(InputAddonPrefix as any).id = "InputAddonPrefix";
 
-export const InputAddonSuffix: AddonElement = React.forwardRef((props, ref) => {
+export const InputAddonSuffix = forwardRefWithAs<
+  Omit<InputAddonProps, "type">,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
   return <InputAddon {...props} type="suffix" ref={ref} />;
 });
-InputAddonSuffix.id = "InputAddonSuffix";
+(InputAddonSuffix as any).id = "InputAddonSuffix";

@@ -33,8 +33,6 @@ export const InputGroup = forwardRefWithAs<
   const [refs, setRefs] = React.useState<React.RefObject<HTMLElement>[]>([]);
 
   const inputInlineStyles: Record<string, any> = {};
-  // extra padding
-  const offset = 5;
 
   // register refs
   React.useLayoutEffect(() => {
@@ -62,13 +60,13 @@ export const InputGroup = forwardRefWithAs<
       if (child.type.id === "InputAddonPrefix") {
         const width = refs[0]?.current?.getBoundingClientRect()
           ?.width as number;
-        inputInlineStyles.paddingLeft = width + offset;
+        inputInlineStyles.paddingLeft = width;
       }
 
       if (child.type.id === "InputAddonSuffix") {
-        const width = refs[0]?.current?.getBoundingClientRect()
+        const width = refs[1]?.current?.getBoundingClientRect()
           ?.width as number;
-        inputInlineStyles.paddingRight = width + offset;
+        inputInlineStyles.paddingRight = width;
       }
     });
 

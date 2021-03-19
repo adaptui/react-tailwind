@@ -7,8 +7,10 @@ export const input = {
   disabled: "bg-gray-100",
   invalid: "border-red-300 hover:border-red-400",
   addon: {
-    prefix: "absolute inset-y-0 left-0 pl-3 flex items-center text-xs",
-    suffix: "absolute inset-y-0 right-0 pr-3 flex items-center text-xs",
+    prefixPadding: "pl-2",
+    suffixPadding: "pr-2",
+    prefix: "absolute inset-y-0 left-0 pr-1 flex items-center text-xs",
+    suffix: "absolute inset-y-0 right-0 pl-1 flex items-center text-xs",
     pointerEventsNone: "pointer-events-none",
   },
 };

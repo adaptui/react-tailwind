@@ -44,10 +44,13 @@ export const PasswordInput = () => {
   return (
     <InputGroup>
       <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputAddonSuffix allowPointerEvents>
-        <button tabIndex={0} onClick={handleClick}>
-          {show ? <EyeClose /> : <EyeOpen />}
-        </button>
+      <InputAddonSuffix
+        as={"button"}
+        allowPointerEvents
+        className="pr-2"
+        onClick={handleClick}
+      >
+        {show ? <EyeClose /> : <EyeOpen />}
       </InputAddonSuffix>
     </InputGroup>
   );
