@@ -9,8 +9,8 @@ export const input = {
   addon: {
     prefixPadding: "pl-2",
     suffixPadding: "pr-2",
-    prefix: "absolute inset-y-0 left-0 pr-1 flex items-center text-xs",
-    suffix: "absolute inset-y-0 right-0 pl-1 flex items-center text-xs",
+    prefix: "absolute inset-y-0 left-0 pr-2 flex items-center text-xs",
+    suffix: "absolute inset-y-0 right-0 pl-2 flex items-center text-xs",
     pointerEventsNone: "pointer-events-none",
   },
 };
