@@ -75,13 +75,13 @@ export const toast = {
   // Container Vercel Toast animation styles
   container: {
     base:
-      "lib:fixed lib:z-50 sm:lib:max-w-xs lib:max-w-screen90 lib:transition-all lib:duration-300",
+      "lib:fixed lib:z-50 sm:lib:max-w-xs lib:max-w-[90vw] lib:transition-all lib:duration-300",
     notHovered: "",
     hovered: "",
   },
   animationWrapper: {
     base:
-      "lib:absolute sm:lib:w-80 lib:w-screen90 lib:transition-all lib:duration-300 lib:transform-gpu",
+      "lib:absolute sm:lib:w-80 lib:w-[90vw] lib:transition-all lib:duration-300 lib:transform-gpu",
     notVisible: "",
     visible: "",
   },
@@ -114,10 +114,10 @@ export const toast = {
 
     center: {
       container: {
-        base: "lib:right-0 lib:left-half lib:transform lib:-translate-x-half",
+        base: "lib:right-0 lib:left-[50%] lib:transform lib:translate-x-[-50%]",
       },
       animationWrapper: {
-        base: "lib:left-half lib:transform lib:-translate-x-half",
+        base: "lib:left-[50%] lib:transform lib:translate-x-[-50%]",
       },
     },
 
@@ -155,10 +155,10 @@ export const toast = {
 
     center: {
       container: {
-        base: "lib:right-0 lib:left-half lib:transform lib:-translate-x-half",
+        base: "lib:right-0 lib:left-[50%] lib:transform lib:translate-x-[-50%]",
       },
       animationWrapper: {
-        base: "lib:left-half lib:transform lib:-translate-x-half",
+        base: "lib:left-[50%] lib:transform lib:translate-x-[-50%]",
       },
     },
 

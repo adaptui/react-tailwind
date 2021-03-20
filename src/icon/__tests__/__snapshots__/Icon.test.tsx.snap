@@ -3,7 +3,7 @@
 exports[`<Icon /> should render 1`] = `
 <DocumentFragment>
   <svg
-    class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+    class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
     data-testid="testid-icon"
     focusable="false"
     viewBox="0 0 24 24"

@@ -17,7 +17,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       >
         <svg
           aria-hidden="true"
-          class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -40,11 +40,11 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-xxs"
+        class="lib:inline-flex lib:text-gray-500 lib:text-[0.625rem]"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -82,7 +82,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -109,7 +109,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -147,7 +147,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -174,7 +174,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"

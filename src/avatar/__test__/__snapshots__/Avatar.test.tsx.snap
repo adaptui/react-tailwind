@@ -12,7 +12,7 @@ exports[`<Avatar /> should render Avatar 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
         data-testid="testid-icon"
         focusable="false"
         role="img"
@@ -44,7 +44,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle"
+        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
         data-testid="testid-icon"
         focusable="false"
         role="img"
@@ -61,11 +61,11 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       </svg>
     </span>
     <div
-      class="lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full lib:text-1 lib:ring-2 lib:bottom-0 lib:right-0"
+      class="lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full lib:text-[0.25rem] lib:ring-2 lib:bottom-0 lib:right-0"
       data-testid="testid-avatar-badge"
     >
       <svg
-        class="lib:w-em lib:h-em lib:inline-block lib:leading-em lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500"
+        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle text-green-500"
         data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 9 9"

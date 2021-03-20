@@ -18,7 +18,7 @@ export const button = {
     ghost: "lib:text-gray-800 lib:hover:bg-gray-100",
   },
   disabled: "lib:cursor-not-allowed lib:opacity-40",
-  group: "lib:focus:z-1 lib:-mr-px",
+  group: "lib:focus:z-10 lib:-mr-px",
   prefix: {
     sm: "inline-flex mr-1.5",
     md: "inline-flex mr-2",
@@ -31,5 +31,5 @@ export const button = {
     lg: "inline-flex ml-2",
     xl: "inline-flex ml-2",
   },
-  spinner: "w-em h-em text-current",
+  spinner: "w-[1em] h-[1em] text-current",
 };
