@@ -9,6 +9,7 @@ const hash = require('object-hash')
 const dlv = require('dlv')
 const selectorParser = require('postcss-selector-parser')
 const LRU = require('quick-lru')
+const normalizePath = require('normalize-path')
 
 const transformThemeValue = require('tailwindcss/lib/util/transformThemeValue').default
 const parseObjectStyles = require('tailwindcss/lib/util/parseObjectStyles').default
@@ -185,7 +186,7 @@ function trackModified(files) {
 
   for (let file of files) {
     let pathname = url.parse(file).pathname
-    let newModified = fs.statSync(pathname).mtimeMs
+    let newModified = fs.statSync(decodeURIComponent(pathname)).mtimeMs
 
     if (!fileModifiedMap.has(file) || newModified > fileModifiedMap.get(file)) {
       changed = true
@@ -702,9 +703,10 @@ function setupContext(configOrPath) {
       configPath: userConfigPath,
       tailwindConfig: tailwindConfig,
       configDependencies: new Set(),
-      candidateFiles: Array.isArray(tailwindConfig.purge)
+      candidateFiles: (Array.isArray(tailwindConfig.purge)
         ? tailwindConfig.purge
-        : tailwindConfig.purge.content,
+        : tailwindConfig.purge.content
+      ).map((path) => normalizePath(path)),
       variantMap: new Map(),
       stylesheetCache: null,
     }
