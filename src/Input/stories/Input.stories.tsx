@@ -35,23 +35,11 @@ export const Invalid = base({
 
 export const PrefixAddonIcon = () => {
   return (
-    <InputGroup className="w-80">
+    <Input className="w-80" placeholder="Username">
       <InputAddonPrefix className="pl-2">
         <GenericAvatar />
       </InputAddonPrefix>
-      <Input placeholder="Enter website" />
-    </InputGroup>
-  );
-};
-
-export const PrefixAddonWithSelect = () => {
-  return (
-    <InputGroup className="w-80">
-      <InputAddonPrefix className="pl-2">
-        <GenericAvatar />
-      </InputAddonPrefix>
-      <Input placeholder="Enter website" />
-    </InputGroup>
+    </Input>
   );
 };
 
@@ -59,9 +47,9 @@ export const Group = () => {
   return (
     <div className="w-80">
       <InputGroup>
-        <InputAddonPrefix>https://</InputAddonPrefix>
+        <InputPrefix>https://</InputPrefix>
         <Input placeholder="Enter website" />
-        <InputAddonSuffix>.com</InputAddonSuffix>
+        <InputSuffix>.com</InputSuffix>
       </InputGroup>
     </div>
   );
@@ -73,14 +61,11 @@ export const PasswordInput = () => {
   return (
     <InputGroup className="w-80">
       <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputAddonSuffix
-        as={"button"}
-        allowPointerEvents
-        className="pr-2"
-        onClick={handleClick}
-      >
-        {show ? <EyeClose /> : <EyeOpen />}
-      </InputAddonSuffix>
+      <InputSuffix allowPointerEvents className="pr-2">
+        <button onClick={handleClick} className="focus:outline-none">
+          {show ? <EyeClose /> : <EyeOpen />}
+        </button>
+      </InputSuffix>
     </InputGroup>
   );
 };
@@ -88,21 +73,22 @@ export const PasswordInput = () => {
 export const WithSelect = () => {
   return (
     <InputGroup className="w-80">
-      <InputAddonPrefix allowPointerEvents className="pl-2">
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <select
-          id="country"
-          name="country"
-          className="h-full px-1 text-gray-500 text-xs outline-none"
-        >
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
-        </select>
-      </InputAddonPrefix>
-      <Input placeholder="Enter country" />
+      <Input placeholder="Enter country">
+        <InputAddonPrefix allowPointerEvents className="pl-2">
+          <label htmlFor="country" className="sr-only">
+            Country
+          </label>
+          <select
+            id="country"
+            name="country"
+            className="h-full px-1 text-gray-500 text-xs outline-none bg-transparent"
+          >
+            <option>US</option>
+            <option>CA</option>
+            <option>EU</option>
+          </select>
+        </InputAddonPrefix>
+      </Input>
     </InputGroup>
   );
 };
@@ -110,23 +96,24 @@ export const WithSelect = () => {
 export const WithAvatarAndSelect = () => {
   return (
     <InputGroup className="w-80">
-      <InputAddonPrefix allowPointerEvents className="pl-2">
-        <Avatar src="https://bit.ly/ryan-florence" size="xs" />
-      </InputAddonPrefix>
-      <Input placeholder="Username" />
-      <InputAddonSuffix allowPointerEvents as="div" className="pr-2">
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <select
-          id="permission"
-          name="permission"
-          className="h-full px-1 text-gray-500 text-xs outline-none"
-        >
-          <option>Can View</option>
-          <option>Can Edit</option>
-        </select>
-      </InputAddonSuffix>
+      <Input placeholder="Username">
+        <InputAddonPrefix allowPointerEvents className="pl-2">
+          <Avatar src="https://bit.ly/ryan-florence" size="xs" />
+        </InputAddonPrefix>
+        <InputAddonSuffix allowPointerEvents as="div" className="pr-2">
+          <label htmlFor="country" className="sr-only">
+            Permissions
+          </label>
+          <select
+            id="permission"
+            name="permission"
+            className="h-full px-1 text-gray-500 text-xs outline-none"
+          >
+            <option>Can View</option>
+            <option>Can Edit</option>
+          </select>
+        </InputAddonSuffix>
+      </Input>
     </InputGroup>
   );
 };
@@ -184,5 +171,18 @@ export const PrefixSuffixElement = () => {
         </InputAddonSuffix>
       </InputGroup>
     </div>
+  );
+};
+
+export const Combined = () => {
+  return (
+    <InputGroup>
+      <InputPrefix>Continue</InputPrefix>
+      <Input>
+        <InputAddonPrefix>https://</InputAddonPrefix>
+        <InputAddonSuffix>.com</InputAddonSuffix>
+      </Input>
+      <InputSuffix>Continue</InputSuffix>
+    </InputGroup>
   );
 };
