@@ -2,7 +2,7 @@ const deepMerge = require("deepmerge");
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-// autocomplete support
+// Autocomplete support
 /** @typedef { import('tailwindcss/defaultConfig') } DefaultConfig */
 /** @typedef { import('tailwindcss/defaultTheme') } DefaultTheme */
 
