@@ -90,11 +90,11 @@ export const WithSelect = () => {
         <select
           id="country"
           name="country"
-          className="h-full px-2 bg-transparent text-gray-500 rounded-md border-transparent border focus:outline-none focus:text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="h-full px-1 text-gray-500 text-xs outline-none"
         >
-          <option className="text-sm">US</option>
-          <option className="text-sm">CA</option>
-          <option className="text-sm">EU</option>
+          <option>US</option>
+          <option>CA</option>
+          <option>EU</option>
         </select>
       </InputAddonPrefix>
       <Input placeholder="Enter country" />
@@ -109,23 +109,29 @@ export const WithAvatarAndSelect = () => {
         <Avatar src="https://bit.ly/ryan-florence" size="xs" />
       </InputAddonPrefix>
       <Input placeholder="Username" />
-      <InputAddonSuffix
-        allowPointerEvents
-        as="div"
-        className="rounded-md pr-2 focus-within:text-gray-800 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500"
-      >
+      <InputAddonSuffix allowPointerEvents as="div" className="pr-2">
         <label htmlFor="country" className="sr-only">
           Permissions
         </label>
         <select
-          id="country"
-          name="country"
-          className="h-full bg-transparent text-gray-500 focus:outline-none"
+          id="permission"
+          name="permission"
+          className="h-full px-1 text-gray-500 text-xs outline-none"
         >
-          <option className="text-sm">Can View</option>
-          <option className="text-sm">Can Edit</option>
+          <option>Can View</option>
+          <option>Can Edit</option>
         </select>
       </InputAddonSuffix>
+    </InputGroup>
+  );
+};
+
+export const PrefixSolidElement = () => {
+  return (
+    <InputGroup className="w-80">
+      <InputAddonPrefix className="bg-gray-100">http://</InputAddonPrefix>
+      <Input placeholder="Enter country" />
+      <InputAddonSuffix>.com</InputAddonSuffix>
     </InputGroup>
   );
 };

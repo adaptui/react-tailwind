@@ -32,6 +32,10 @@ export const InputGroup = forwardRefWithAs<
   const [clones, setClones] = React.useState<any[]>([]);
   const [refs, setRefs] = React.useState<React.RefObject<HTMLElement>[]>([]);
 
+  // 2px extra padding needed since,
+  // in some cases the edge of the addon
+  // is too close to the input's text content
+  const offset = 2;
   const inputInlineStyles: Record<string, any> = {};
 
   // register refs
@@ -60,13 +64,13 @@ export const InputGroup = forwardRefWithAs<
       if (child.type.id === "InputAddonPrefix") {
         const width = refs[0]?.current?.getBoundingClientRect()
           ?.width as number;
-        inputInlineStyles.paddingLeft = width;
+        inputInlineStyles.paddingLeft = width + offset;
       }
 
       if (child.type.id === "InputAddonSuffix") {
         const width = refs[1]?.current?.getBoundingClientRect()
           ?.width as number;
-        inputInlineStyles.paddingRight = width;
+        inputInlineStyles.paddingRight = width + offset;
       }
     });
 
