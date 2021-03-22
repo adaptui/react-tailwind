@@ -28,7 +28,7 @@ jspm_packages/
 yarn-error.log
 .pnp/
 .pnp.*
-.yarn/
+.yarn/*
 !.yarn/cache
 !.yarn/patches
 !.yarn/plugins
