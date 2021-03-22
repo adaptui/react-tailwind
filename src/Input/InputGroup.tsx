@@ -37,12 +37,13 @@ export const InputGroup = forwardRefWithAs<
   // is too close to the input's text content
   const offset = 2;
   const inputInlineStyles: Record<string, any> = {};
+  const groupInlineStyles: Record<string, any> = {};
 
   // register refs
   React.useLayoutEffect(() => {
     setClones(
       validChildren.map((child: any) => {
-        if (child.type.id !== "Input") {
+        if (["InputAddonPrefix", "InputAddonSuffix"].includes(child.type.id)) {
           const ref = React.createRef<HTMLElement>();
           setRefs(prev => prev && [...prev, ref]);
           return React.cloneElement(child, {
@@ -72,13 +73,26 @@ export const InputGroup = forwardRefWithAs<
           ?.width as number;
         inputInlineStyles.paddingRight = width + offset;
       }
+
+      if (child.type.id === "InputPrefix") {
+        groupInlineStyles.borderTopLeftRadius = 0;
+        groupInlineStyles.borderBottomLeftRadius = 0;
+      }
+
+      if (child.type.id === "InputSuffix") {
+        groupInlineStyles.borderTopRightRadius = 0;
+        groupInlineStyles.borderBottomRightRadius = 0;
+      }
     });
 
     setClones(
       clones.map((child: any) => {
         return child.type.id === "Input"
           ? React.cloneElement(child, {
-              style: inputInlineStyles,
+              style: {
+                ...inputInlineStyles,
+                ...groupInlineStyles,
+              },
             })
           : child;
       }),

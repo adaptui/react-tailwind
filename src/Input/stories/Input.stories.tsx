@@ -5,7 +5,12 @@ import { storyTemplate } from "../../../.storybook/storybookUtils";
 import InputGroup from "../InputGroup";
 import { EyeClose, EyeOpen } from "../..";
 import { Input, InputProps } from "../Input";
-import { InputAddonPrefix, InputAddonSuffix } from "../InputAddons";
+import {
+  InputAddonPrefix,
+  InputAddonSuffix,
+  InputSuffix,
+  InputPrefix,
+} from "../InputAddons";
 import { GenericAvatar } from "../../icons";
 import { Avatar } from "../../avatar";
 
@@ -122,6 +127,20 @@ export const WithAvatarAndSelect = () => {
           <option>Can Edit</option>
         </select>
       </InputAddonSuffix>
+    </InputGroup>
+  );
+};
+
+export const PrefixSuffixElement = () => {
+  return (
+    <InputGroup className="w-80">
+      <InputAddonPrefix className="pl-2">
+        <GenericAvatar />
+      </InputAddonPrefix>
+      <Input placeholder="Company website" />
+      <InputSuffix allowPointerEvents className="pr-2">
+        <button>Sort</button>
+      </InputSuffix>
     </InputGroup>
   );
 };
