@@ -3,7 +3,7 @@ export const input = {
     base: "relative inline-flex collapse-border",
   },
   base:
-    "z-0 block w-full outline-none px-2 py-1 text-xs font-medium text-gray-500 bg-transparent shadow-sm rounded-md border border-gray-300 hover:border-gray-400 focus:text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-60",
+    "block w-full outline-none px-2 py-1 text-xs font-medium text-gray-500 bg-transparent shadow-sm rounded-md border border-gray-300 hover:border-gray-400 focus:text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-60",
   disabled: "bg-gray-100",
   invalid: "border-red-300 hover:border-red-400",
   addon: {

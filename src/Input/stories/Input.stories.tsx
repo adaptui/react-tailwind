@@ -139,7 +139,7 @@ export const PrefixSuffixElement = () => {
       </InputAddonPrefix>
       <Input placeholder="Company website" />
       <InputSuffix allowPointerEvents className="pr-2">
-        <button>Sort</button>
+        <button className="focus:outline-none">Sort</button>
       </InputSuffix>
     </InputGroup>
   );
