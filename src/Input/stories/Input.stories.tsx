@@ -6,10 +6,10 @@ import InputGroup from "../InputGroup";
 import { EyeClose, EyeOpen } from "../..";
 import { Input, InputProps } from "../Input";
 import {
-  InputAddonPrefix,
-  InputAddonSuffix,
-  InputSuffix,
   InputPrefix,
+  InputSuffix,
+  InputGroupSuffix,
+  InputGroupPrefix,
 } from "../InputAddons";
 import { GenericAvatar } from "../../icons";
 import { Avatar } from "../../avatar";
@@ -36,9 +36,9 @@ export const Invalid = base({
 export const PrefixAddonIcon = () => {
   return (
     <Input className="w-80" placeholder="Username">
-      <InputAddonPrefix className="pl-2">
+      <InputPrefix className="pl-2">
         <GenericAvatar />
-      </InputAddonPrefix>
+      </InputPrefix>
     </Input>
   );
 };
@@ -47,9 +47,9 @@ export const Group = () => {
   return (
     <div className="w-80">
       <InputGroup>
-        <InputPrefix>https://</InputPrefix>
+        <InputGroupPrefix>https://</InputGroupPrefix>
         <Input placeholder="Enter website" />
-        <InputSuffix>.com</InputSuffix>
+        <InputGroupSuffix>.com</InputGroupSuffix>
       </InputGroup>
     </div>
   );
@@ -61,11 +61,11 @@ export const PasswordInput = () => {
   return (
     <InputGroup className="w-80">
       <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputSuffix allowPointerEvents className="pr-2">
+      <InputGroupSuffix allowPointerEvents className="pr-2">
         <button onClick={handleClick} className="focus:outline-none">
           {show ? <EyeClose /> : <EyeOpen />}
         </button>
-      </InputSuffix>
+      </InputGroupSuffix>
     </InputGroup>
   );
 };
@@ -74,7 +74,7 @@ export const WithSelect = () => {
   return (
     <InputGroup className="w-80">
       <Input placeholder="Enter country">
-        <InputAddonPrefix allowPointerEvents className="pl-2">
+        <InputPrefix allowPointerEvents className="pl-2">
           <label htmlFor="country" className="sr-only">
             Country
           </label>
@@ -87,7 +87,7 @@ export const WithSelect = () => {
             <option>CA</option>
             <option>EU</option>
           </select>
-        </InputAddonPrefix>
+        </InputPrefix>
       </Input>
     </InputGroup>
   );
@@ -97,10 +97,10 @@ export const WithAvatarAndSelect = () => {
   return (
     <InputGroup className="w-80">
       <Input placeholder="Username">
-        <InputAddonPrefix allowPointerEvents className="pl-2">
+        <InputPrefix allowPointerEvents className="pl-2">
           <Avatar src="https://bit.ly/ryan-florence" size="xs" />
-        </InputAddonPrefix>
-        <InputAddonSuffix allowPointerEvents as="div" className="pr-2">
+        </InputPrefix>
+        <InputSuffix allowPointerEvents as="div" className="pr-2">
           <label htmlFor="country" className="sr-only">
             Permissions
           </label>
@@ -112,7 +112,7 @@ export const WithAvatarAndSelect = () => {
             <option>Can View</option>
             <option>Can Edit</option>
           </select>
-        </InputAddonSuffix>
+        </InputSuffix>
       </Input>
     </InputGroup>
   );
@@ -122,22 +122,22 @@ export const PrefixSuffixElement = () => {
   return (
     <div className="flex flex-col gap-2">
       <InputGroup className="w-80">
-        <InputPrefix className="pl-2">https://</InputPrefix>
+        <InputGroupPrefix className="pl-2">https://</InputGroupPrefix>
         <Input placeholder="Company website" />
-        <InputSuffix className="pr-2">.com</InputSuffix>
-      </InputGroup>
-      <InputGroup className="w-80">
-        <InputAddonPrefix className="pl-2">https://</InputAddonPrefix>
-        <Input placeholder="Company website" />
-        <InputSuffix className="pr-2">.com</InputSuffix>
+        <InputGroupSuffix className="pr-2">.com</InputGroupSuffix>
       </InputGroup>
       <InputGroup className="w-80">
         <InputPrefix className="pl-2">https://</InputPrefix>
         <Input placeholder="Company website" />
-        <InputAddonSuffix className="pr-2">.com</InputAddonSuffix>
+        <InputGroupSuffix className="pr-2">.com</InputGroupSuffix>
       </InputGroup>
       <InputGroup className="w-80">
-        <InputAddonPrefix allowPointerEvents as="div" className="pl-2">
+        <InputGroupPrefix className="pl-2">https://</InputGroupPrefix>
+        <Input placeholder="Company website" />
+        <InputSuffix className="pr-2">.com</InputSuffix>
+      </InputGroup>
+      <InputGroup className="w-80">
+        <InputPrefix allowPointerEvents as="div" className="pl-2">
           <label htmlFor="country" className="sr-only">
             Permissions
           </label>
@@ -149,14 +149,14 @@ export const PrefixSuffixElement = () => {
             <option>Can View</option>
             <option>Can Edit</option>
           </select>
-        </InputAddonPrefix>
+        </InputPrefix>
         <Input placeholder="Company website" />
-        <InputSuffix className="pr-2">.com</InputSuffix>
+        <InputGroupSuffix className="pr-2">.com</InputGroupSuffix>
       </InputGroup>
       <InputGroup className="w-80">
-        <InputPrefix className="pl-2">.com</InputPrefix>
+        <InputGroupPrefix className="pl-2">.com</InputGroupPrefix>
         <Input placeholder="Company website" />
-        <InputAddonSuffix allowPointerEvents as="div" className="pr-2">
+        <InputSuffix allowPointerEvents as="div" className="pr-2">
           <label htmlFor="country" className="sr-only">
             Permissions
           </label>
@@ -168,7 +168,7 @@ export const PrefixSuffixElement = () => {
             <option>Can View</option>
             <option>Can Edit</option>
           </select>
-        </InputAddonSuffix>
+        </InputSuffix>
       </InputGroup>
     </div>
   );
@@ -177,12 +177,12 @@ export const PrefixSuffixElement = () => {
 export const Combined = () => {
   return (
     <InputGroup>
-      <InputPrefix>Continue</InputPrefix>
+      <InputGroupPrefix>Continue</InputGroupPrefix>
       <Input>
-        <InputAddonPrefix>https://</InputAddonPrefix>
-        <InputAddonSuffix>.com</InputAddonSuffix>
+        <InputPrefix>https://</InputPrefix>
+        <InputSuffix>.com</InputSuffix>
       </Input>
-      <InputSuffix>Continue</InputSuffix>
+      <InputGroupSuffix>Continue</InputGroupSuffix>
     </InputGroup>
   );
 };

@@ -79,36 +79,18 @@ const InputElement = forwardRefWithAs<
 });
 
 export enum AddonTypes {
-  InputAddonPrefix = "InputAddonPrefix",
-  InputAddonSuffix = "InputAddonSuffix",
-  InputPrefix = "InputPrefix",
-  InputSuffix = "InputSuffix",
+  InputPrefix = "InputAddonPrefix",
+  InputSuffix = "InputAddonSuffix",
+  InputGroupPrefix = "InputPrefix",
+  InputGroupSuffix = "InputSuffix",
 }
-
-export const InputAddonPrefix = forwardRefWithAs<
-  Omit<InputAddonProps, "type">,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  return <InputAddon {...props} type="prefix" ref={ref} />;
-});
-(InputAddonPrefix as any).id = AddonTypes.InputAddonPrefix;
-
-export const InputAddonSuffix = forwardRefWithAs<
-  Omit<InputAddonProps, "type">,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  return <InputAddon {...props} type="suffix" ref={ref} />;
-});
-(InputAddonSuffix as any).id = AddonTypes.InputAddonSuffix;
 
 export const InputPrefix = forwardRefWithAs<
   Omit<InputAddonProps, "type">,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  return <InputElement {...props} type="prefix" ref={ref} />;
+  return <InputAddon {...props} type="prefix" ref={ref} />;
 });
 (InputPrefix as any).id = AddonTypes.InputPrefix;
 
@@ -117,6 +99,24 @@ export const InputSuffix = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  return <InputElement {...props} type="suffix" ref={ref} />;
+  return <InputAddon {...props} type="suffix" ref={ref} />;
 });
 (InputSuffix as any).id = AddonTypes.InputSuffix;
+
+export const InputGroupPrefix = forwardRefWithAs<
+  Omit<InputAddonProps, "type">,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  return <InputElement {...props} type="prefix" ref={ref} />;
+});
+(InputGroupPrefix as any).id = AddonTypes.InputGroupPrefix;
+
+export const InputGroupSuffix = forwardRefWithAs<
+  Omit<InputAddonProps, "type">,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  return <InputElement {...props} type="suffix" ref={ref} />;
+});
+(InputGroupSuffix as any).id = AddonTypes.InputGroupSuffix;

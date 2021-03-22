@@ -35,12 +35,12 @@ export const InputGroup = forwardRefWithAs<
   const inputInlineStyles: Record<string, any> = {};
 
   function calculateBorderRadius(child: any) {
-    if (child.type.id === AddonTypes.InputPrefix) {
+    if (child.type.id === AddonTypes.InputGroupPrefix) {
       inputInlineStyles.borderTopLeftRadius = 0;
       inputInlineStyles.borderBottomLeftRadius = 0;
     }
 
-    if (child.type.id === AddonTypes.InputSuffix) {
+    if (child.type.id === AddonTypes.InputGroupSuffix) {
       inputInlineStyles.borderTopRightRadius = 0;
       inputInlineStyles.borderBottomRightRadius = 0;
     }
@@ -63,10 +63,9 @@ export const InputGroup = forwardRefWithAs<
   React.useLayoutEffect(() => {
     const addons = validChildren.filter((child: any) => {
       calculateBorderRadius(child);
-      return [
-        AddonTypes.InputAddonPrefix,
-        AddonTypes.InputAddonSuffix,
-      ].includes(child.type.id);
+      return [AddonTypes.InputPrefix, AddonTypes.InputSuffix].includes(
+        child.type.id,
+      );
     });
     if (addons.length == 0) {
       populateClones();

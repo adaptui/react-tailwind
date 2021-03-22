@@ -49,7 +49,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setClones(
         validChildren.map((child: any) => {
           if (
-            [AddonTypes.InputAddonPrefix, AddonTypes.InputAddonSuffix].includes(
+            [AddonTypes.InputPrefix, AddonTypes.InputSuffix].includes(
               child.type.id,
             )
           ) {
@@ -72,13 +72,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
       // set widths
       validChildren.forEach((child: any) => {
-        if (child.type.id === AddonTypes.InputAddonPrefix) {
+        if (child.type.id === AddonTypes.InputPrefix) {
           const width = refs[0]?.current?.getBoundingClientRect()
             ?.width as number;
           paddingLeft.current = width + offset;
         }
 
-        if (child.type.id === AddonTypes.InputAddonSuffix) {
+        if (child.type.id === AddonTypes.InputSuffix) {
           const width = refs[1]?.current?.getBoundingClientRect()
             ?.width as number;
           paddingRight.current = width + offset;
@@ -95,7 +95,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={inputGroupStyles}>
-        {clones.filter(child => child.type.id === AddonTypes.InputAddonPrefix)}
+        {clones.filter(child => child.type.id === AddonTypes.InputPrefix)}
         <ReakitInput
           aria-invalid={invalid}
           className={inputStyles}
@@ -107,7 +107,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           }}
           {...rest}
         />
-        {clones.filter(child => child.type.id === AddonTypes.InputAddonSuffix)}
+        {clones.filter(child => child.type.id === AddonTypes.InputSuffix)}
       </div>
     );
   },
