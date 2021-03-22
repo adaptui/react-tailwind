@@ -67,9 +67,10 @@ export const InputGroup = forwardRefWithAs<
         child.type.id,
       );
     });
-    if (addons.length == 0) {
+    if (addons.length === 0) {
       populateClones();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children]);
 
   return (

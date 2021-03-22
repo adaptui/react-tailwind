@@ -1,9 +1,10 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
+
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
 import { Box, BoxProps } from "../box";
 import { useMergeRefs } from "../hooks";
+import { ComponentWithAs, forwardRefWithAs } from "../utils/types";
 
 type InputAddonProps = {
   type: "prefix" | "suffix";
@@ -85,38 +86,28 @@ export enum AddonTypes {
   InputGroupSuffix = "InputGroupSuffix",
 }
 
-export const InputPrefix = forwardRefWithAs<
-  Omit<InputAddonProps, "type">,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  return <InputAddon {...props} type="prefix" ref={ref} />;
-});
-(InputPrefix as any).id = AddonTypes.InputPrefix;
+type AddonElement = ComponentWithAs<Omit<InputAddonProps, "type">, "div"> & {
+  id?: string;
+};
 
-export const InputSuffix = forwardRefWithAs<
-  Omit<InputAddonProps, "type">,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  return <InputAddon {...props} type="suffix" ref={ref} />;
-});
-(InputSuffix as any).id = AddonTypes.InputSuffix;
+// InputPrefixes
+export const InputPrefix: AddonElement = forwardRefWithAs((props, ref) => (
+  <InputAddon {...props} type="prefix" ref={ref} />
+));
+InputPrefix.id = AddonTypes.InputPrefix;
 
-export const InputGroupPrefix = forwardRefWithAs<
-  Omit<InputAddonProps, "type">,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  return <InputElement {...props} type="prefix" ref={ref} />;
-});
-(InputGroupPrefix as any).id = AddonTypes.InputGroupPrefix;
+export const InputSuffix: AddonElement = forwardRefWithAs((props, ref) => (
+  <InputAddon {...props} type="suffix" ref={ref} />
+));
+InputSuffix.id = AddonTypes.InputSuffix;
 
-export const InputGroupSuffix = forwardRefWithAs<
-  Omit<InputAddonProps, "type">,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  return <InputElement {...props} type="suffix" ref={ref} />;
-});
-(InputGroupSuffix as any).id = AddonTypes.InputGroupSuffix;
+// GroupPrefixes
+export const InputGroupPrefix: AddonElement = forwardRefWithAs((props, ref) => (
+  <InputElement {...props} type="prefix" ref={ref} />
+));
+InputGroupPrefix.id = AddonTypes.InputGroupPrefix;
+
+export const InputGroupSuffix: AddonElement = forwardRefWithAs((props, ref) => (
+  <InputElement {...props} type="suffix" ref={ref} />
+));
+InputGroupSuffix.id = AddonTypes.InputGroupSuffix;

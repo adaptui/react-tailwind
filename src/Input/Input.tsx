@@ -33,16 +33,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     // in some cases the edge of the addon
     // is too close to the input's text content
     const offset = 2;
-    let paddingLeft = React.useRef(0);
-    let paddingRight = React.useRef(0);
-
-    function populateClones() {
-      setClones(
-        validChildren.map((child: any) => {
-          return child;
-        }),
-      );
-    }
+    const inputInlineStyles = React.useRef<Record<string, any>>({});
 
     // register refs & calculate border radius
     React.useLayoutEffect(() => {
@@ -62,40 +53,35 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           return child;
         }),
       );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [children]);
 
     // set widths from refs & setClones with Input's styles
     React.useLayoutEffect(() => {
-      if (!refs[0]?.current) {
-        return;
-      }
+      if (!refs[0]?.current) return;
 
       // set widths
       validChildren.forEach((child: any) => {
         if (child.type.id === AddonTypes.InputPrefix) {
-          const width = refs[0]?.current?.getBoundingClientRect()
-            ?.width as number;
-          paddingLeft.current = width + offset;
+          inputInlineStyles.current.paddingLeft =
+            (refs[0]?.current?.getBoundingClientRect()?.width as number) +
+            offset;
         }
 
         if (child.type.id === AddonTypes.InputSuffix) {
-          const width = refs[1]?.current?.getBoundingClientRect()
-            ?.width as number;
-          paddingRight.current = width + offset;
+          inputInlineStyles.current.paddingRight =
+            (refs[1]?.current?.getBoundingClientRect()?.width as number) +
+            offset;
         }
       });
 
-      populateClones();
+      setClones(validChildren);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refs]);
-
-    const inputInlineStyles = {
-      paddingLeft: paddingLeft.current > 0 ? paddingLeft.current : undefined,
-      paddingRight: paddingRight.current > 0 ? paddingRight.current : undefined,
-    };
 
     return (
       <div className={inputGroupStyles}>
-        {clones.filter(child => child.type.id === AddonTypes.InputPrefix)}
+        {clones.find(child => child.type.id === AddonTypes.InputPrefix)}
         <ReakitInput
           aria-invalid={invalid}
           className={inputStyles}
@@ -103,11 +89,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           style={{
             ...style,
-            ...inputInlineStyles,
+            ...inputInlineStyles.current,
           }}
           {...rest}
         />
-        {clones.filter(child => child.type.id === AddonTypes.InputSuffix)}
+        {clones.find(child => child.type.id === AddonTypes.InputSuffix)}
       </div>
     );
   },

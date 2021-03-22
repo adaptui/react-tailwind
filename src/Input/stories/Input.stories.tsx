@@ -11,7 +11,7 @@ import {
   InputGroupSuffix,
   InputGroupPrefix,
 } from "../InputAddons";
-import { GenericAvatar } from "../../icons";
+import { GenericAvatar, SearchIcon } from "../../icons";
 import { Avatar } from "../../avatar";
 
 export default {
@@ -181,6 +181,45 @@ export const Combined = () => {
       <Input>
         <InputPrefix>https://</InputPrefix>
         <InputSuffix>.com</InputSuffix>
+      </Input>
+      <InputGroupSuffix>Continue</InputGroupSuffix>
+    </InputGroup>
+  );
+};
+
+export const Example = () => {
+  return (
+    <InputGroup>
+      <InputGroupPrefix className="pl-2">
+        <SearchIcon />
+      </InputGroupPrefix>
+      <Input>
+        <InputPrefix allowPointerEvents>
+          <label htmlFor="country" className="sr-only">
+            Permissions
+          </label>
+          <select
+            id="permission"
+            name="permission"
+            className="h-full px-1 bg-transparent text-gray-500 text-xs outline-none"
+          >
+            <option>Can View</option>
+            <option>Can Edit</option>
+          </select>
+        </InputPrefix>
+        <InputSuffix allowPointerEvents className="pr-2">
+          <label htmlFor="country" className="sr-only">
+            Permissions
+          </label>
+          <select
+            id="permission"
+            name="permission"
+            className="h-full px-1 bg-transparent text-gray-500 text-xs outline-none"
+          >
+            <option>Can View</option>
+            <option>Can Edit</option>
+          </select>
+        </InputSuffix>
       </Input>
       <InputGroupSuffix>Continue</InputGroupSuffix>
     </InputGroup>
