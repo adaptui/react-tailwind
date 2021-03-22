@@ -204,6 +204,7 @@ export const CustomCheckbox = storyTemplate<CheckboxProps>(CheckboxCustom)({});
 // Inspired from https://codepen.io/geertsdev/pen/yLaGLJq
 const CheckboxCustomComplete = (props: CheckboxProps) => {
   const { className, children, ...rest } = props;
+
   return (
     <Checkbox {...props}>
       <CheckboxLabel
