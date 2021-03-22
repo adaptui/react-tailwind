@@ -83,7 +83,7 @@ export const PasswordInput = () => {
 export const WithSelect = () => {
   return (
     <InputGroup className="w-80">
-      <InputAddonPrefix allowPointerEvents>
+      <InputAddonPrefix allowPointerEvents className="pl-2">
         <label htmlFor="country" className="sr-only">
           Country
         </label>
@@ -122,16 +122,6 @@ export const WithAvatarAndSelect = () => {
           <option>Can Edit</option>
         </select>
       </InputAddonSuffix>
-    </InputGroup>
-  );
-};
-
-export const PrefixSolidElement = () => {
-  return (
-    <InputGroup className="w-80">
-      <InputAddonPrefix className="bg-gray-100">http://</InputAddonPrefix>
-      <Input placeholder="Enter country" />
-      <InputAddonSuffix>.com</InputAddonSuffix>
     </InputGroup>
   );
 };

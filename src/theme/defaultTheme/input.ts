@@ -8,11 +8,13 @@ export const input = {
   invalid: "border-red-300 hover:border-red-400",
   addon: {
     focus:
-      "rounded-md border-transparent border focus-within:outline-none focus-within:text-gray-800 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500",
+      "border-transparent border focus-within:outline-none focus-within:text-gray-800 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500",
     prefixPadding: "pl-2",
     suffixPadding: "pr-2",
-    prefix: "absolute inset-y-0 left-0 pr-2 flex items-center text-xs ",
-    suffix: "absolute inset-y-0 right-0 pl-2 flex items-center text-xs",
+    prefix:
+      "absolute inset-y-0 left-0 pr-2 flex items-center text-xs rounded-md",
+    suffix:
+      "absolute inset-y-0 right-0 pl-2 flex items-center text-xs rounded-md",
     pointerEventsNone: "pointer-events-none",
   },
 };
