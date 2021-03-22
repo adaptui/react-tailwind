@@ -17,22 +17,18 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const { disabled, children, invalid, style, className, ...rest } = props;
     const theme = useTheme();
 
+    const inputGroupStyles = cx(theme.input.input.base);
     const inputStyles = cx(
-      theme.input.base,
-      invalid ? theme.input.invalid : "",
-      disabled ? theme.input.disabled : "",
+      theme.input.input.input,
+      invalid ? theme.input.input.invalid : "",
+      disabled ? theme.input.input.disabled : "",
       className,
     );
-    const inputGroupStyles = cx(theme.input.group.base);
 
     const validChildren = getValidChildren(children);
     const [clones, setClones] = React.useState<any[]>([]);
     const [refs, setRefs] = React.useState<React.RefObject<HTMLElement>[]>([]);
 
-    // 2px extra padding needed since,
-    // in some cases the edge of the addon
-    // is too close to the input's text content
-    const offset = 2;
     let paddingLeft = React.useRef(0);
     let paddingRight = React.useRef(0);
 
@@ -75,13 +71,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         if (child.type.id === AddonTypes.InputPrefix) {
           const width = refs[0]?.current?.getBoundingClientRect()
             ?.width as number;
-          paddingLeft.current = width + offset;
+          paddingLeft.current = width;
         }
 
         if (child.type.id === AddonTypes.InputSuffix) {
           const width = refs[1]?.current?.getBoundingClientRect()
             ?.width as number;
-          paddingRight.current = width + offset;
+          paddingRight.current = width;
         }
       });
 

@@ -1,37 +1,25 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
+
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
 import { Box, BoxProps } from "../box";
 import { useMergeRefs } from "../hooks";
+import { forwardRefWithAs } from "../utils/types";
 
 type InputAddonProps = {
   type: "prefix" | "suffix";
-  allowPointerEvents?: boolean;
 };
 
-const InputAddon = forwardRefWithAs<
+const InputElement = forwardRefWithAs<
   BoxProps & InputAddonProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
   const htmlRef = React.useRef<HTMLDivElement>();
-  const { as, allowPointerEvents, className, children, type, ...rest } = props;
-  const theme = useTheme();
+  const { as, className, children, type, ...rest } = props;
 
-  const prefixStyles = cx(
-    theme.input.addon.base,
-    theme.input.addon[type],
-    typeof children === "string"
-      ? type === "prefix"
-        ? theme.input.addon.prefixPadding
-        : theme.input.addon.suffixPadding
-      : "",
-    allowPointerEvents
-      ? theme.input.addon.focus
-      : theme.input.addon.pointerEventsNone,
-    className,
-  );
+  const theme = useTheme();
+  const prefixStyles = cx(theme.input.input[type], className);
 
   return (
     <Box
@@ -45,26 +33,16 @@ const InputAddon = forwardRefWithAs<
   );
 });
 
-const InputElement = forwardRefWithAs<
+const InputAddon = forwardRefWithAs<
   BoxProps & Pick<InputAddonProps, "type">,
   HTMLDivElement,
   "div"
 >((props, ref) => {
   const htmlRef = React.useRef<HTMLDivElement>();
   const { as, className, children, type, ...rest } = props;
-  const theme = useTheme();
 
-  const prefixStyles = cx(
-    theme.input.addonElement.base,
-    theme.input.addonElement[type],
-    typeof children === "string"
-      ? type === "prefix"
-        ? theme.input.addonElement.prefixPadding
-        : theme.input.addonElement.suffixPadding
-      : "",
-    theme.input.addon.focus,
-    className,
-  );
+  const theme = useTheme();
+  const prefixStyles = cx(theme.input.group[type], className);
 
   return (
     <Box
@@ -90,7 +68,7 @@ export const InputPrefix = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  return <InputAddon {...props} type="prefix" ref={ref} />;
+  return <InputElement {...props} type="prefix" ref={ref} />;
 });
 (InputPrefix as any).id = AddonTypes.InputPrefix;
 
@@ -99,7 +77,7 @@ export const InputSuffix = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  return <InputAddon {...props} type="suffix" ref={ref} />;
+  return <InputElement {...props} type="suffix" ref={ref} />;
 });
 (InputSuffix as any).id = AddonTypes.InputSuffix;
 
@@ -108,7 +86,7 @@ export const InputGroupPrefix = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  return <InputElement {...props} type="prefix" ref={ref} />;
+  return <InputAddon {...props} type="prefix" ref={ref} />;
 });
 (InputGroupPrefix as any).id = AddonTypes.InputGroupPrefix;
 
@@ -117,6 +95,6 @@ export const InputGroupSuffix = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  return <InputElement {...props} type="suffix" ref={ref} />;
+  return <InputAddon {...props} type="suffix" ref={ref} />;
 });
 (InputGroupSuffix as any).id = AddonTypes.InputGroupSuffix;
