@@ -133,14 +133,56 @@ export const WithAvatarAndSelect = () => {
 
 export const PrefixSuffixElement = () => {
   return (
-    <InputGroup className="w-80">
-      <InputAddonPrefix className="pl-2">
-        <GenericAvatar />
-      </InputAddonPrefix>
-      <Input placeholder="Company website" />
-      <InputSuffix allowPointerEvents className="pr-2">
-        <button className="focus:outline-none">Sort</button>
-      </InputSuffix>
-    </InputGroup>
+    <div className="flex flex-col gap-2">
+      <InputGroup className="w-80">
+        <InputPrefix className="pl-2">https://</InputPrefix>
+        <Input placeholder="Company website" />
+        <InputSuffix className="pr-2">.com</InputSuffix>
+      </InputGroup>
+      <InputGroup className="w-80">
+        <InputAddonPrefix className="pl-2">https://</InputAddonPrefix>
+        <Input placeholder="Company website" />
+        <InputSuffix className="pr-2">.com</InputSuffix>
+      </InputGroup>
+      <InputGroup className="w-80">
+        <InputPrefix className="pl-2">https://</InputPrefix>
+        <Input placeholder="Company website" />
+        <InputAddonSuffix className="pr-2">.com</InputAddonSuffix>
+      </InputGroup>
+      <InputGroup className="w-80">
+        <InputAddonPrefix allowPointerEvents as="div" className="pl-2">
+          <label htmlFor="country" className="sr-only">
+            Permissions
+          </label>
+          <select
+            id="permission"
+            name="permission"
+            className="h-full px-1 text-gray-500 text-xs outline-none"
+          >
+            <option>Can View</option>
+            <option>Can Edit</option>
+          </select>
+        </InputAddonPrefix>
+        <Input placeholder="Company website" />
+        <InputSuffix className="pr-2">.com</InputSuffix>
+      </InputGroup>
+      <InputGroup className="w-80">
+        <InputPrefix className="pl-2">.com</InputPrefix>
+        <Input placeholder="Company website" />
+        <InputAddonSuffix allowPointerEvents as="div" className="pr-2">
+          <label htmlFor="country" className="sr-only">
+            Permissions
+          </label>
+          <select
+            id="permission"
+            name="permission"
+            className="h-full px-1 text-gray-500 text-xs outline-none"
+          >
+            <option>Can View</option>
+            <option>Can Edit</option>
+          </select>
+        </InputAddonSuffix>
+      </InputGroup>
+    </div>
   );
 };

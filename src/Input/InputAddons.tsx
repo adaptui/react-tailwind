@@ -78,6 +78,13 @@ const InputElement = forwardRefWithAs<
   );
 });
 
+export enum AddonTypes {
+  InputAddonPrefix = "InputAddonPrefix",
+  InputAddonSuffix = "InputAddonSuffix",
+  InputPrefix = "InputPrefix",
+  InputSuffix = "InputSuffix",
+}
+
 export const InputAddonPrefix = forwardRefWithAs<
   Omit<InputAddonProps, "type">,
   HTMLDivElement,
@@ -85,7 +92,7 @@ export const InputAddonPrefix = forwardRefWithAs<
 >((props, ref) => {
   return <InputAddon {...props} type="prefix" ref={ref} />;
 });
-(InputAddonPrefix as any).id = "InputAddonPrefix";
+(InputAddonPrefix as any).id = AddonTypes.InputAddonPrefix;
 
 export const InputAddonSuffix = forwardRefWithAs<
   Omit<InputAddonProps, "type">,
@@ -94,7 +101,7 @@ export const InputAddonSuffix = forwardRefWithAs<
 >((props, ref) => {
   return <InputAddon {...props} type="suffix" ref={ref} />;
 });
-(InputAddonSuffix as any).id = "InputAddonSuffix";
+(InputAddonSuffix as any).id = AddonTypes.InputAddonSuffix;
 
 export const InputPrefix = forwardRefWithAs<
   Omit<InputAddonProps, "type">,
@@ -103,7 +110,7 @@ export const InputPrefix = forwardRefWithAs<
 >((props, ref) => {
   return <InputElement {...props} type="prefix" ref={ref} />;
 });
-(InputPrefix as any).id = "InputPrefix";
+(InputPrefix as any).id = AddonTypes.InputPrefix;
 
 export const InputSuffix = forwardRefWithAs<
   Omit<InputAddonProps, "type">,
@@ -112,4 +119,4 @@ export const InputSuffix = forwardRefWithAs<
 >((props, ref) => {
   return <InputElement {...props} type="suffix" ref={ref} />;
 });
-(InputSuffix as any).id = "InputSuffix";
+(InputSuffix as any).id = AddonTypes.InputSuffix;
