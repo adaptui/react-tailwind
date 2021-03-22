@@ -195,7 +195,7 @@ export const Example = () => {
       <InputGroupPrefix className="pl-2">
         <SearchIcon />
       </InputGroupPrefix>
-      <Input>
+      <Input placeholder="Enter some stuff">
         <InputPrefix allowPointerEvents>
           <label htmlFor="country" className="sr-only">
             Permissions

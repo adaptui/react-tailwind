@@ -1,6 +1,7 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
+
 import { useTheme } from "../theme";
 import { AddonTypes } from "./InputAddons";
 import { getValidChildren } from "../utils";
@@ -25,7 +26,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
     const inputGroupStyles = cx(theme.input.group.base);
 
-    const validChildren = getValidChildren(children);
+    const validChildren = getValidChildren(
+      React.Children.toArray(children).filter((child: any) =>
+        isPrefixSuffix(child.type.id),
+      ),
+    );
     const [clones, setClones] = React.useState<any[]>([]);
     const [refs, setRefs] = React.useState<React.RefObject<HTMLElement>[]>([]);
 
@@ -35,15 +40,24 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const offset = 2;
     const inputInlineStyles = React.useRef<Record<string, any>>({});
 
-    // register refs & calculate border radius
+    function calculatePadding(child: any, index: number) {
+      if (clones[index]?.ref?.current === refs[index]?.current) {
+        let key = "";
+        if (isPrefix(child.type.id)) key = "paddingLeft";
+        if (isSuffix(child.type.id)) key = "paddingRight";
+        if (!key) return;
+
+        inputInlineStyles.current[key] =
+          (refs[index]?.current?.getBoundingClientRect()?.width as number) +
+          offset;
+      }
+    }
+
+    // register refs
     React.useLayoutEffect(() => {
       setClones(
         validChildren.map((child: any) => {
-          if (
-            [AddonTypes.InputPrefix, AddonTypes.InputSuffix].includes(
-              child.type.id,
-            )
-          ) {
+          if (isPrefixSuffix(child.type.id)) {
             const ref = React.createRef<HTMLElement>();
             setRefs(prev => prev && [...prev, ref]);
             return React.cloneElement(child, {
@@ -60,18 +74,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     React.useLayoutEffect(() => {
       if (!refs[0]?.current) return;
 
-      // set widths
-      validChildren.forEach((child: any, index) => {
-        if (clones[index].ref.current === refs[index].current) {
-          let key = "";
-          if (child.type.id === AddonTypes.InputPrefix) key = "paddingLeft";
-          if (child.type.id === AddonTypes.InputSuffix) key = "paddingRight";
-          if (!key) return;
-          inputInlineStyles.current[key] =
-            (refs[index]?.current?.getBoundingClientRect()?.width as number) +
-            offset;
-        }
-      });
+      validChildren.forEach((child: any, index) =>
+        calculatePadding(child, index),
+      );
 
       setClones(validChildren);
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +84,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={inputGroupStyles}>
-        {clones.find(child => child.type.id === AddonTypes.InputPrefix)}
+        {clones.find(child => isPrefix(child.type.id))}
         <ReakitInput
           aria-invalid={invalid}
           className={inputStyles}
@@ -91,10 +96,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           }}
           {...rest}
         />
-        {clones.find(child => child.type.id === AddonTypes.InputSuffix)}
+        {clones.find(child => isSuffix(child.type.id))}
       </div>
     );
   },
 );
 
 (Input as any).id = "Input";
+
+const isPrefix = (id: any) => AddonTypes.InputPrefix === id;
+const isSuffix = (id: any) => AddonTypes.InputSuffix === id;
+const isPrefixSuffix = (id: any) =>
+  [AddonTypes.InputPrefix, AddonTypes.InputSuffix].includes(id);
