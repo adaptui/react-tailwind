@@ -79,10 +79,10 @@ const InputElement = forwardRefWithAs<
 });
 
 export enum AddonTypes {
-  InputPrefix = "InputAddonPrefix",
-  InputSuffix = "InputAddonSuffix",
-  InputGroupPrefix = "InputPrefix",
-  InputGroupSuffix = "InputSuffix",
+  InputPrefix = "InputPrefix",
+  InputSuffix = "InputSuffix",
+  InputGroupPrefix = "InputGroupPrefix",
+  InputGroupSuffix = "InputGroupSuffix",
 }
 
 export const InputPrefix = forwardRefWithAs<
