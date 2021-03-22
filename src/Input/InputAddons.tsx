@@ -21,6 +21,7 @@ const InputAddon = forwardRefWithAs<
 
   const prefixStyles = cx(
     theme.input.addon[type],
+    theme.input.addon.focus,
     typeof children === "string"
       ? type === "prefix"
         ? theme.input.addon.prefixPadding
