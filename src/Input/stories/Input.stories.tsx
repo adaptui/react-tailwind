@@ -2,17 +2,18 @@ import React from "react";
 import { Meta } from "@storybook/react";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
 
-import InputGroup from "../InputGroup";
-import { EyeClose, EyeOpen } from "../..";
-import { Input, InputProps } from "../Input";
 import {
+  Input,
+  InputGroup,
+  InputProps,
   InputPrefix,
   InputSuffix,
   InputGroupSuffix,
   InputGroupPrefix,
-} from "../InputAddons";
-import { GenericAvatar, SearchIcon } from "../../icons";
+} from "../";
 import { Avatar } from "../../avatar";
+import { EyeClose, EyeOpen } from "../..";
+import { GenericAvatar, SearchIcon } from "../../icons";
 
 export default {
   title: "Input",
@@ -39,6 +40,7 @@ export const PrefixAddonIcon = () => {
       <InputPrefix className="pl-2">
         <GenericAvatar />
       </InputPrefix>
+      <InputSuffix className="pr-2">Hello world</InputSuffix>
     </Input>
   );
 };

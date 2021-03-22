@@ -4,9 +4,9 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { InputProps } from "./Input";
 import { Box, BoxProps } from "../box";
+import { AddonTypes } from "./InputAddons";
 import { forwardRefWithAs } from "../utils/types";
 import { createContext, getValidChildren } from "../utils";
-import { AddonTypes } from "./InputAddons";
 
 export type InputGroupContext = InputGroupProps;
 

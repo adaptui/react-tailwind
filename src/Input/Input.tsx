@@ -61,16 +61,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (!refs[0]?.current) return;
 
       // set widths
-      validChildren.forEach((child: any) => {
-        if (child.type.id === AddonTypes.InputPrefix) {
-          inputInlineStyles.current.paddingLeft =
-            (refs[0]?.current?.getBoundingClientRect()?.width as number) +
-            offset;
-        }
-
-        if (child.type.id === AddonTypes.InputSuffix) {
-          inputInlineStyles.current.paddingRight =
-            (refs[1]?.current?.getBoundingClientRect()?.width as number) +
+      validChildren.forEach((child: any, index) => {
+        if (clones[index].ref.current === refs[index].current) {
+          let key = "";
+          if (child.type.id === AddonTypes.InputPrefix) key = "paddingLeft";
+          if (child.type.id === AddonTypes.InputSuffix) key = "paddingRight";
+          if (!key) return;
+          inputInlineStyles.current[key] =
+            (refs[index]?.current?.getBoundingClientRect()?.width as number) +
             offset;
         }
       });
