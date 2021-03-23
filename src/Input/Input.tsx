@@ -22,10 +22,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const { disabled, children, invalid, style, className, ...rest } = props;
 
     const theme = useTheme();
-    const inputGroupStyles = cx(theme.input.base);
+    const inputWrapperStyles = cx(theme.input.wrapper);
     const inputStyles = cx(
-      theme.input.input,
-      invalid ? theme.input.invalid : "",
+      theme.input.base,
+      invalid ? theme.input.disabled : "",
       disabled ? theme.input.disabled : "",
       className,
     );
@@ -79,7 +79,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }, [isRefsAvailable]);
 
     return (
-      <div className={inputGroupStyles}>
+      <div className={inputWrapperStyles}>
         {clones.find(child => isPrefix(child?.type?.id))}
         <ReakitInput
           aria-invalid={invalid}

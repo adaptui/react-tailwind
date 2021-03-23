@@ -20,7 +20,11 @@ const InputElement = forwardRefWithAs<
   const { as, className, children, type, ...rest } = props;
 
   const theme = useTheme();
-  const prefixStyles = cx(theme.input[type], className);
+  const prefixStyles = cx(
+    theme.input.children.base,
+    theme.input.children[type],
+    className,
+  );
 
   return (
     <Box
@@ -43,7 +47,11 @@ const InputAddon = forwardRefWithAs<
   const { as, className, children, type, ...rest } = props;
 
   const theme = useTheme();
-  const prefixStyles = cx(theme.input.group[type], className);
+  const prefixStyles = cx(
+    theme.input.group.children.base,
+    theme.input.group.children[type],
+    className,
+  );
 
   return (
     <Box

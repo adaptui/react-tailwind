@@ -145,7 +145,7 @@ export const CombinedFocusable = () => {
 
 export const InputKitchenSink = () => {
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-start gap-4">
       <Input placeholder="Username" />
       <Input placeholder="Username">
         <InputPrefix>
@@ -239,7 +239,7 @@ export const InputKitchenSink = () => {
 
 export const GroupKitchenSink = () => {
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-start gap-4">
       <InputGroup>
         <InputGroupPrefix>https://</InputGroupPrefix>
         <Input placeholder="Company website" />
@@ -328,7 +328,7 @@ export const GroupKitchenSink = () => {
 
 export const CombinedKitchenSink = () => {
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-start gap-4">
       <InputGroup>
         <InputGroupPrefix>https://</InputGroupPrefix>
         <Input placeholder="Company website">
