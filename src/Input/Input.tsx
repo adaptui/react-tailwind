@@ -5,6 +5,7 @@ import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 import { useTheme } from "../theme";
 import { AddonTypes } from "./InputAddons";
 import { getValidChildren } from "../utils";
+import { useSafeLayoutEffect } from "../hooks";
 
 export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   /**
@@ -51,7 +52,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }
 
     // register refs
-    React.useLayoutEffect(() => {
+    useSafeLayoutEffect(() => {
       setClones(
         validChildren.map((child: any) => {
           if (isPrefixSuffix(child.type.id)) {
@@ -63,11 +64,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         }),
       );
       setRefsAvailable(true);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [children]);
 
     // set widths from refs & setClones with Input's styles
-    React.useLayoutEffect(() => {
+    useSafeLayoutEffect(() => {
       if (!isRefsAvailable) return;
 
       validChildren.forEach((child: any, index) =>
@@ -75,7 +75,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       );
 
       setClones(validChildren);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isRefsAvailable]);
 
     return (

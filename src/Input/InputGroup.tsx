@@ -7,6 +7,7 @@ import { AddonTypes } from "./InputAddons";
 import { forwardRefWithAs } from "../utils/types";
 import { InputProps, ReactFiberNode } from "./Input";
 import { createContext, getValidChildren } from "../utils";
+import { useSafeLayoutEffect } from "../hooks";
 
 export type InputGroupContext = InputGroupProps;
 
@@ -60,17 +61,18 @@ export const InputGroup = forwardRefWithAs<
 
   // if there are no addons, apply the input styles anyways
   // ie: when both elements are addons
-  React.useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     const addons = validChildren.filter((child: any) => {
       calculateBorderRadius(child);
+
       return [AddonTypes.InputPrefix, AddonTypes.InputSuffix].includes(
         child.type.id,
       );
     });
+
     if (addons.length === 0) {
       populateClones();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children]);
 
   return (
