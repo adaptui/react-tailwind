@@ -1,23 +1,23 @@
 export const input = {
-  wrapper: "relative inline-flex shadow-sm",
+  wrapper: "lib:relative lib:inline-flex lib:shadow-sm",
   base:
-    "appearance-none w-full outline-none px-2 py-1 text-xs font-medium text-gray-500 border h-6 border-gray-300 hover:border-gray-400 rounded-md focus:text-gray-800 focus:border-blue-500 focus:shadow-input",
-  disabled: "bg-gray-100",
-  invalid: "border-red-300 hover:border-red-400",
+    "lib:appearance-none lib:w-full lib:outline-none lib:px-2 lib:py-1 lib:text-xs lib:font-medium lib:text-gray-500 lib:border lib:h-6 lib:border-gray-300 lib:hover:border-gray-400 lib:rounded-md lib:focus:text-gray-800 lib:focus:border-blue-500 lib:focus:shadow-input",
+  disabled: "lib:bg-gray-100",
+  invalid: "lib:border-red-300 lib:hover:border-red-400",
   children: {
     base:
-      "flex items-center justify-center text-xs absolute inset-y-0 h-6 px-2 text-gray-800 bg-transparent border border-transparent rounded-md focus:outline-none focus:border-blue-500 focus:shadow-input ",
-    prefix: "left-0",
-    suffix: "right-0",
+      "lib:flex lib:items-center lib:justify-center lib:text-xs lib:absolute lib:inset-y-0 lib:h-6 lib:px-2 lib:text-gray-800 lib:bg-transparent lib:border lib:border-transparent lib:rounded-md lib:focus:outline-none lib:focus:border-blue-500 lib:focus:shadow-input ",
+    prefix: "lib:left-0",
+    suffix: "lib:right-0",
   },
 
   group: {
-    base: "inline-flex items-center justify-center rounded-md",
+    base: "lib:inline-flex lib:items-center lib:justify-center lib:rounded-md",
     children: {
       base:
-        "inline-flex items-center bg-gray-100 h-6 text-xs font-medium text-gray-800 px-2 border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-input focus:z-10",
-      prefix: "-mr-px rounded-l-md",
-      suffix: "-ml-px rounded-r-md",
+        "lib:inline-flex lib:items-center lib:bg-gray-100 lib:h-6 lib:text-xs lib:font-medium lib:text-gray-800 lib:px-2 lib:border lib:border-gray-300 lib:shadow-sm lib:focus:outline-none lib:focus:border-blue-500 lib:focus:shadow-input lib:focus:z-10",
+      prefix: "lib:-mr-px lib:rounded-l-md",
+      suffix: "lib:-ml-px lib:rounded-r-md",
     },
   },
 };
