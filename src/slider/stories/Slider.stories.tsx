@@ -32,7 +32,7 @@ export const Origin = base({ origin: 50 });
 export const Range = base({ defaultValues: [30, 70] });
 
 export const ThumbContent = base({
-  thumbContent: v => <small className="text-xxs">{v[0]}</small>,
+  thumbContent: v => <small className="text-[0.625rem]">{v[0]}</small>,
 });
 
 export const ThumbIcon = base({

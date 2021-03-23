@@ -20,9 +20,6 @@
     "skipLibCheck": true,
     "declaration": true,
     "sourceMap": true,
-    "declarationDir": "dist/types",
-    "paths": {
-      "@renderlesskit/react/toast": ["./src/toast/RenderlessToast"]
-    }
+    "declarationDir": "dist/types"
   }
 }

@@ -1,0 +1,131 @@
+diff --git a/node_modules/@tailwindcss/jit/src/lib/generateRules.js b/node_modules/@tailwindcss/jit/src/lib/generateRules.js
+index 7c98014..42a357f 100644
+--- a/node_modules/@tailwindcss/jit/src/lib/generateRules.js
++++ b/node_modules/@tailwindcss/jit/src/lib/generateRules.js
+@@ -65,16 +65,21 @@ function applyPrefix(matches, context) {
+ // and `focus:hover:text-center` in the same project, but it doesn't feel
+ // worth the complexity for that case.
+ 
+-function applyVariant(variant, matches, context) {
++function applyVariant(variant, matches, hasLibVariant, context) {
+   if (matches.length === 0) {
+     return matches
+   }
+ 
+   if (context.variantMap.has(variant)) {
++    let updateSort =
++      hasLibVariant &&
++      !['sm', 'md', 'lg', 'xl', '2xl', 'motion-safe', 'dark', 'motion-reduce'].includes(variant)
++
+     let [variantSort, applyThisVariant] = context.variantMap.get(variant)
+     let result = []
+ 
+     for (let [{ sort, layer, options }, rule] of matches) {
++
+       if (options.respectVariants === false) {
+         result.push([{ sort, layer, options }, rule])
+         continue
+@@ -110,7 +115,10 @@ function applyVariant(variant, matches, context) {
+         continue
+       }
+ 
+-      let withOffset = [{ sort: variantSort | sort, layer, options }, container.nodes[0]]
++      let withOffset = [
++        { sort: updateSort ? 0n : variantSort | sort, layer, options },
++        container.nodes[0],
++      ]
+       result.push(withOffset)
+     }
+ 
+@@ -171,6 +179,7 @@ function sortAgainst(toSort, against) {
+ function* resolveMatches(candidate, context) {
+   let separator = context.tailwindConfig.separator
+   let [classCandidate, ...variants] = candidate.split(separator).reverse()
++  let hasLibVariant = variants.includes('lib')
+ 
+   // Strip prefix
+   // md:hover:tw-bg-black
+@@ -196,7 +205,14 @@ function* resolveMatches(candidate, context) {
+         for (let ruleSet of [].concat(plugin(modifier, pluginHelpers))) {
+           let [rules, options] = parseRules(ruleSet, context.postCssNodeCache)
+           for (let rule of rules) {
+-            matches.push([{ ...sort, options: { ...sort.options, ...options } }, rule])
++            matches.push([
++              {
++                ...sort,
++                options: { ...sort.options, ...options },
++                sort: hasLibVariant ? 0n : sort.sort,
++              },
++              rule,
++            ])
+           }
+         }
+       }
+@@ -205,7 +221,14 @@ function* resolveMatches(candidate, context) {
+         let ruleSet = plugin
+         let [rules, options] = parseRules(ruleSet, context.postCssNodeCache)
+         for (let rule of rules) {
+-          matches.push([{ ...sort, options: { ...sort.options, ...options } }, rule])
++          matches.push([
++              {
++                ...sort,
++                options: { ...sort.options, ...options },
++                sort: hasLibVariant ? 0n : sort.sort,
++              },
++              rule,
++            ])
+         }
+       }
+     }
+@@ -213,7 +236,7 @@ function* resolveMatches(candidate, context) {
+     matches = applyPrefix(matches, context)
+ 
+     for (let variant of variants) {
+-      matches = applyVariant(variant, matches, context)
++      matches = applyVariant(variant, matches, hasLibVariant, context)
+     }
+ 
+     for (let match of matches) {
+diff --git a/node_modules/@tailwindcss/jit/src/lib/setupContext.js b/node_modules/@tailwindcss/jit/src/lib/setupContext.js
+index c2a4133..68b3c9f 100644
+--- a/node_modules/@tailwindcss/jit/src/lib/setupContext.js
++++ b/node_modules/@tailwindcss/jit/src/lib/setupContext.js
+@@ -559,10 +559,11 @@ function collectLayerPlugins(root) {
+ function registerPlugins(tailwindConfig, plugins, context) {
+   let variantList = []
+   let variantMap = new Map()
++  let reservedBits = 20n
+   let offsets = {
+-    base: 0n,
+-    components: 0n,
+-    utilities: 0n,
++    base: (1n << reservedBits) << 0n,
++    components: (1n << reservedBits) << 1n,
++    utilities: (1n << reservedBits) << 2n,
+   }
+ 
+   let pluginApi = buildPluginApi(tailwindConfig, context, {
+@@ -586,7 +587,7 @@ function registerPlugins(tailwindConfig, plugins, context) {
+     offsets.components,
+     offsets.utilities,
+   ])
+-  let reservedBits = BigInt(highestOffset.toString(2).length)
++  reservedBits = BigInt(highestOffset.toString(2).length)
+ 
+   context.layerOrder = {
+     base: (1n << reservedBits) << 0n,
+@@ -595,10 +596,10 @@ function registerPlugins(tailwindConfig, plugins, context) {
+   }
+ 
+   reservedBits += 3n
+-  context.variantOrder = variantList.reduce(
+-    (map, variant, i) => map.set(variant, (1n << BigInt(i)) << reservedBits),
+-    new Map()
+-  )
++  context.variantOrder = variantList.reduce((map, variant, i) => {
++    if (variant.includes('lib')) return map.set(variant, 1n)
++    return map.set(variant, (1n << BigInt(i)) << reservedBits)
++  }, new Map())
+ 
+   context.minimumScreen = [...context.variantOrder.values()].shift()
+ 

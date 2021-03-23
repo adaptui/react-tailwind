@@ -2,7 +2,7 @@ const deepMerge = require("deepmerge");
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-// autocomplete support
+// Autocomplete support
 /** @typedef { import('tailwindcss/defaultConfig') } DefaultConfig */
 /** @typedef { import('tailwindcss/defaultTheme') } DefaultTheme */
 
@@ -17,46 +17,20 @@ const renderlesskitConfig = {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
-      fontSize: {
-        1: ["0.25rem", { lineHeight: "0.25rem" }],
-        1.5: ["0.375rem", { lineHeight: "0.375rem" }],
-        2: ["0.5rem", { lineHeight: "0.5rem" }],
-        xxs: ["0.625rem", { lineHeight: "0.625rem" }],
-      },
-      spacing: {
-        em: "1em",
-        6.5: "1.625rem",
-        8.5: "2.125rem",
-        half: "50%",
-      },
-      lineHeight: {
-        em: "1em",
-      },
       inset: {
         unset: "unset",
       },
       width: {
         fit: "fit-content",
-        screen90: "90vw",
       },
       height: {
         fit: "fit-content",
       },
-      maxWidth: {
-        screen90: "90vw",
-      },
       minWidth: {
         ...defaultTheme.spacing,
-        half: "50%",
       },
       minHeight: {
         ...defaultTheme.spacing,
-      },
-      zIndex: {
-        1: 1,
-      },
-      borderWidth: {
-        1.5: "1.5px",
       },
       boxShadow: {
         thumb:
