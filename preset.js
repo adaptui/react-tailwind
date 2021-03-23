@@ -35,6 +35,7 @@ const renderlesskitConfig = {
       boxShadow: {
         thumb:
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
+        input: "0px 0px 2px rgba(59, 130, 246, 0.6);",
       },
       keyframes: {
         progress: {
