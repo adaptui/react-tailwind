@@ -13,7 +13,7 @@ export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   invalid?: boolean;
 };
 
-type ReactFiberNode = React.ReactElement<any, any> & {
+export type ReactFiberNode = React.ReactElement<any, any> & {
   ref?: React.MutableRefObject<HTMLElement>;
 };
 

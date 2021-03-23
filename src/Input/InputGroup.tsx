@@ -2,10 +2,10 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { InputProps } from "./Input";
 import { Box, BoxProps } from "../box";
 import { AddonTypes } from "./InputAddons";
 import { forwardRefWithAs } from "../utils/types";
+import { InputProps, ReactFiberNode } from "./Input";
 import { createContext, getValidChildren } from "../utils";
 
 export type InputGroupContext = InputGroupProps;
@@ -30,11 +30,11 @@ export const InputGroup = forwardRefWithAs<
   const theme = useTheme();
   const inputGroupStyles = cx(theme.input.group.base, className);
   const validChildren = getValidChildren(children);
-  const [clones, setClones] = React.useState<any[]>([]);
+  const [clones, setClones] = React.useState<ReactFiberNode[]>([]);
 
   const inputInlineStyles: Record<string, any> = {};
 
-  function calculateBorderRadius(child: any) {
+  function calculateBorderRadius(child: ReactFiberNode) {
     if (child.type.id === AddonTypes.InputGroupPrefix) {
       inputInlineStyles.borderTopLeftRadius = 0;
       inputInlineStyles.borderBottomLeftRadius = 0;
