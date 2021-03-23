@@ -77,3 +77,5 @@ yarn-error.log*
 size-plugin.json
 stats-react.json
 stats.html
+
+tailwind-jit.css
