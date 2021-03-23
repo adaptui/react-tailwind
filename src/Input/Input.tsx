@@ -13,6 +13,10 @@ export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   invalid?: boolean;
 };
 
+type ReactFiberNode = React.ReactElement<any, any> & {
+  ref?: React.MutableRefObject<HTMLElement>;
+};
+
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
     const { disabled, children, invalid, style, className, ...rest } = props;
@@ -31,8 +35,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         isPrefixSuffix(child.type.id),
       ),
     );
-    const [clones, setClones] = React.useState<any[]>([]);
-    const [refs, setRefs] = React.useState<React.RefObject<HTMLElement>[]>([]);
+    const [clones, setClones] = React.useState<ReactFiberNode[]>([]);
+    const [isRefsAvailable, setRefsAvailable] = React.useState(false);
 
     // 2px extra padding needed since,
     // in some cases the edge of the addon
@@ -41,16 +45,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputInlineStyles = React.useRef<Record<string, any>>({});
 
     function calculatePadding(child: any, index: number) {
-      if (clones[index]?.ref?.current === refs[index]?.current) {
-        let key = "";
-        if (isPrefix(child.type.id)) key = "paddingLeft";
-        if (isSuffix(child.type.id)) key = "paddingRight";
-        if (!key) return;
+      let key = "";
+      if (isPrefix(child.type.id)) key = "paddingLeft";
+      if (isSuffix(child.type.id)) key = "paddingRight";
+      if (!key) return;
 
-        inputInlineStyles.current[key] =
-          (refs[index]?.current?.getBoundingClientRect()?.width as number) +
-          offset;
-      }
+      const bbbox = clones[index]?.ref?.current?.getBoundingClientRect();
+      inputInlineStyles.current[key] = (bbbox?.width as number) + offset;
     }
 
     // register refs
@@ -58,21 +59,20 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setClones(
         validChildren.map((child: any) => {
           if (isPrefixSuffix(child.type.id)) {
-            const ref = React.createRef<HTMLElement>();
-            setRefs(prev => prev && [...prev, ref]);
             return React.cloneElement(child, {
-              ref,
+              ref: React.createRef<HTMLElement>(),
             });
           }
           return child;
         }),
       );
+      setRefsAvailable(true);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [children]);
 
     // set widths from refs & setClones with Input's styles
     React.useLayoutEffect(() => {
-      if (!refs[0]?.current) return;
+      if (!isRefsAvailable) return;
 
       validChildren.forEach((child: any, index) =>
         calculatePadding(child, index),
@@ -80,11 +80,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
       setClones(validChildren);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refs]);
+    }, [isRefsAvailable]);
 
     return (
       <div className={inputGroupStyles}>
-        {clones.find(child => isPrefix(child.type.id))}
+        {clones.find(child => isPrefix(child?.type?.id))}
         <ReakitInput
           aria-invalid={invalid}
           className={inputStyles}
@@ -96,7 +96,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           }}
           {...rest}
         />
-        {clones.find(child => isSuffix(child.type.id))}
+        {clones.find(child => isSuffix(child?.type?.id))}
       </div>
     );
   },
