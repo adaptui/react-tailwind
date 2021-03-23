@@ -7,7 +7,7 @@ export const radio = {
     base:
       "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:select-none lib:transition-all lib:mr-2",
     size: {
-      sm: "lib:w-3.5 lib:h-3.5 lib:text-xxs",
+      sm: "lib:w-3.5 lib:h-3.5 lib:text-[0.625rem]",
       md: "lib:w-4 lib:h-4 lib:text-xs",
       lg: "lib:w-5 lib:h-5 lib:text-base",
     },

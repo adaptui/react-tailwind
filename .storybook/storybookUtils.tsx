@@ -14,14 +14,15 @@ export const storyTemplate = <ComponentProps,>(
 
 export const createUnionControl = (keys: any) => {
   return {
+    options: Array.isArray(keys) ? keys : Object.keys(keys),
     control: {
       type: "inline-radio",
-      options: Array.isArray(keys) ? keys : Object.keys(keys),
     },
   };
 };
 
 type CreateControlsOptions = { unions?: string[]; ignore?: string[] };
+
 export const createControls = (
   component: string,
   options?: CreateControlsOptions,

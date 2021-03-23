@@ -23,7 +23,14 @@ export const RadioIcon = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { className, children, ...rest } = props;
+  const {
+    checkedIcon,
+    uncheckedIcon,
+    disabledIcon,
+    className,
+    children,
+    ...rest
+  } = props;
   const { value, disabled, size = "md" } = useRadioProps();
   const { state } = useRadioStateContext();
   const stateProp = state === value;
@@ -41,9 +48,9 @@ export const RadioIcon = forwardRefWithAs<
   );
 
   const iconMap = {
-    checked: props.checkedIcon || <RadioCheckedIcon />,
-    unchecked: props.uncheckedIcon || <RadioUncheckedIcon />,
-    disabled: props.disabledIcon || <RadioDisabledIcon />,
+    checked: checkedIcon || <RadioCheckedIcon />,
+    unchecked: uncheckedIcon || <RadioUncheckedIcon />,
+    disabled: disabledIcon || <RadioDisabledIcon />,
   };
 
   return (

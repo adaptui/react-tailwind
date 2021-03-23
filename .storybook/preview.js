@@ -1,5 +1,6 @@
 import React from "react";
-import "../src/button/stories/style.css";
+
+import "./tailwind.css";
 import theme from "../renderlesskit.config.ts";
 import { RenderlesskitProvider } from "../src/theme";
 

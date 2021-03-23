@@ -7,8 +7,8 @@ export const _switch = {
         "lib:inline-flex lib:justify-start lib:flex-shrink-0 lib:rounded-full lib:p-0.5 lib:transition-all",
       size: {
         sm: "lib:h-3.5 lib:w-5",
-        md: "lib:h-4 lib:w-6.5",
-        lg: "lib:h-5 lib:w-8.5",
+        md: "lib:h-4 lib:w-[1.625rem]",
+        lg: "lib:h-5 lib:w-[2.125rem",
         xl: "lib:h-6 lib:w-10",
       },
       unchecked: "lib:bg-gray-300",
