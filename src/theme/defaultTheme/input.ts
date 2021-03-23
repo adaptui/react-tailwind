@@ -1,27 +1,23 @@
 export const input = {
-  group: {
-    base: "relative inline-flex collapse-border",
-  },
+  wrapper: "lib:relative lib:inline-flex lib:shadow-sm",
   base:
-    "block w-full outline-none px-2 py-1 text-xs font-medium text-gray-500 bg-transparent shadow-sm rounded-md border border-gray-300 hover:border-gray-400 focus:text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-60",
-  disabled: "bg-gray-100",
-  invalid: "border-red-300 hover:border-red-400",
-  addon: {
-    base: "absolute inset-y-0 flex items-center text-xs rounded-md",
-    focus:
-      "border-transparent border focus-within:outline-none focus-within:text-gray-800 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500",
-    prefixPadding: "pl-2",
-    suffixPadding: "pr-2",
-    prefix: "left-0 pr-2",
-    suffix: "right-0 pl-2",
-    pointerEventsNone: "pointer-events-none",
-  },
-  addonElement: {
+    "lib:appearance-none lib:w-full lib:outline-none lib:px-2 lib:py-1 lib:text-xs lib:font-medium lib:text-gray-500 lib:border lib:h-6 lib:border-gray-300 lib:hover:border-gray-400 lib:rounded-md lib:focus:text-gray-800 lib:focus:border-blue-500 lib:focus:shadow-input",
+  disabled: "lib:bg-gray-100",
+  invalid: "lib:border-red-300 lib:hover:border-red-400",
+  children: {
     base:
-      "flex items-center text-xs rounded-md border border-gray-300 bg-gray-100 text-gray-500",
-    prefixPadding: "pl-2",
-    suffixPadding: "pr-2",
-    prefix: "pr-2",
-    suffix: "pl-2",
+      "lib:flex lib:items-center lib:justify-center lib:text-xs lib:absolute lib:inset-y-0 lib:h-6 lib:px-2 lib:text-gray-800 lib:bg-transparent lib:border lib:border-transparent lib:rounded-md lib:focus:outline-none lib:focus:border-blue-500 lib:focus:shadow-input ",
+    prefix: "lib:left-0",
+    suffix: "lib:right-0",
+  },
+
+  group: {
+    base: "lib:inline-flex lib:items-center lib:justify-center lib:rounded-md",
+    children: {
+      base:
+        "lib:inline-flex lib:items-center lib:bg-gray-100 lib:h-6 lib:text-xs lib:font-medium lib:text-gray-800 lib:px-2 lib:border lib:border-gray-300 lib:shadow-sm lib:focus:outline-none lib:focus:border-blue-500 lib:focus:shadow-input lib:focus:z-10",
+      prefix: "lib:-mr-px lib:rounded-l-md",
+      suffix: "lib:-ml-px lib:rounded-r-md",
+    },
   },
 };
