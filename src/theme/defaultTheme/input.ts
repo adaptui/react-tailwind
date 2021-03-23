@@ -15,7 +15,7 @@ export const input = {
     base: "inline-flex items-center justify-center rounded-md",
     children: {
       base:
-        "inline-flex items-center bg-gray-100 h-6 text-xs font-medium text-gray-800 px-2 border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-input  focus:z-10",
+        "inline-flex items-center bg-gray-100 h-6 text-xs font-medium text-gray-800 px-2 border border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:shadow-input focus:z-10",
       prefix: "-mr-px rounded-l-md",
       suffix: "-ml-px rounded-r-md",
     },

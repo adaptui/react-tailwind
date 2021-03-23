@@ -346,12 +346,7 @@ export const CombinedKitchenSink = () => {
         <label htmlFor="country" className="sr-only">
           Permissions
         </label>
-        <InputGroupPrefix
-          as="select"
-          id="permission"
-          name="permission"
-          className="rounded-r-none appearance-none"
-        >
+        <InputGroupPrefix as="select" id="permission" name="permission">
           <option>Can View</option>
           <option>Can Edit</option>
         </InputGroupPrefix>
