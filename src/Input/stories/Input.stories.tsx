@@ -120,14 +120,14 @@ export const WithAvatarAndSelect = () => {
 export const CombinedStatic = () => {
   return (
     <InputGroup>
-      <InputGroupPrefix className="inline-block truncate">
+      <InputGroupPrefix className="whitespace-nowrap">
         Group Prefix
       </InputGroupPrefix>
-      <Input>
+      <Input placeholder="Enter some stuff">
         <InputPrefix>Prefix</InputPrefix>
         <InputSuffix>Suffix</InputSuffix>
       </Input>
-      <InputGroupSuffix className="inline-block truncate">
+      <InputGroupSuffix className="whitespace-nowrap">
         Group Suffix
       </InputGroupSuffix>
     </InputGroup>
@@ -137,14 +137,14 @@ export const CombinedStatic = () => {
 export const CombinedFocusable = () => {
   return (
     <InputGroup>
-      <InputGroupPrefix as="button" className="inline-block truncate">
+      <InputGroupPrefix as="button" className="whitespace-nowrap">
         Group Prefix
       </InputGroupPrefix>
       <Input placeholder="Enter some stuff">
         <InputPrefix as="button">Prefix</InputPrefix>
         <InputSuffix as="button">Suffix</InputSuffix>
       </Input>
-      <InputGroupSuffix as="button" className="inline-block truncate">
+      <InputGroupSuffix as="button" className="whitespace-nowrap">
         Group Suffix
       </InputGroupSuffix>
     </InputGroup>
