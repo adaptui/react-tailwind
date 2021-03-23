@@ -25,7 +25,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputWrapperStyles = cx(theme.input.wrapper);
     const inputStyles = cx(
       theme.input.base,
-      invalid ? theme.input.disabled : "",
+      invalid ? theme.input.invalid : "",
       disabled ? theme.input.disabled : "",
       className,
     );
