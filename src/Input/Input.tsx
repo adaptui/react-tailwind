@@ -20,15 +20,15 @@ export type ReactFiberNode = React.ReactElement<any, any> & {
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
     const { disabled, children, invalid, style, className, ...rest } = props;
-    const theme = useTheme();
 
+    const theme = useTheme();
+    const inputGroupStyles = cx(theme.input.base);
     const inputStyles = cx(
-      theme.input.base,
+      theme.input.input,
       invalid ? theme.input.invalid : "",
       disabled ? theme.input.disabled : "",
       className,
     );
-    const inputGroupStyles = cx(theme.input.group.base);
 
     const validChildren = getValidChildren(
       React.Children.toArray(children).filter((child: any) =>
@@ -38,10 +38,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [clones, setClones] = React.useState<ReactFiberNode[]>([]);
     const [isRefsAvailable, setRefsAvailable] = React.useState(false);
 
-    // 2px extra padding needed since,
-    // in some cases the edge of the addon
-    // is too close to the input's text content
-    const offset = 2;
     const inputInlineStyles = React.useRef<Record<string, any>>({});
 
     function calculatePadding(child: any, index: number) {
@@ -51,7 +47,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (!key) return;
 
       const bbbox = clones[index]?.ref?.current?.getBoundingClientRect();
-      inputInlineStyles.current[key] = (bbbox?.width as number) + offset;
+      inputInlineStyles.current[key] = bbbox?.width as number;
     }
 
     // register refs

@@ -11,28 +11,16 @@ type InputAddonProps = {
   allowPointerEvents?: boolean;
 };
 
-const InputAddon = forwardRefWithAs<
+const InputElement = forwardRefWithAs<
   BoxProps & InputAddonProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
   const htmlRef = React.useRef<HTMLDivElement>();
-  const { as, allowPointerEvents, className, children, type, ...rest } = props;
-  const theme = useTheme();
+  const { as, className, children, type, ...rest } = props;
 
-  const prefixStyles = cx(
-    theme.input.addon.base,
-    theme.input.addon[type],
-    typeof children === "string"
-      ? type === "prefix"
-        ? theme.input.addon.prefixPadding
-        : theme.input.addon.suffixPadding
-      : "",
-    allowPointerEvents
-      ? theme.input.addon.focus
-      : theme.input.addon.pointerEventsNone,
-    className,
-  );
+  const theme = useTheme();
+  const prefixStyles = cx(theme.input[type], className);
 
   return (
     <Box
@@ -46,26 +34,16 @@ const InputAddon = forwardRefWithAs<
   );
 });
 
-const InputElement = forwardRefWithAs<
+const InputAddon = forwardRefWithAs<
   BoxProps & Pick<InputAddonProps, "type">,
   HTMLDivElement,
   "div"
 >((props, ref) => {
   const htmlRef = React.useRef<HTMLDivElement>();
   const { as, className, children, type, ...rest } = props;
-  const theme = useTheme();
 
-  const prefixStyles = cx(
-    theme.input.addonElement.base,
-    theme.input.addonElement[type],
-    typeof children === "string"
-      ? type === "prefix"
-        ? theme.input.addonElement.prefixPadding
-        : theme.input.addonElement.suffixPadding
-      : "",
-    theme.input.addon.focus,
-    className,
-  );
+  const theme = useTheme();
+  const prefixStyles = cx(theme.input.group[type], className);
 
   return (
     <Box
@@ -90,24 +68,24 @@ type AddonElement = ComponentWithAs<Omit<InputAddonProps, "type">, "div"> & {
   id?: string;
 };
 
-// InputPrefixes
+// InputParts
 export const InputPrefix: AddonElement = forwardRefWithAs((props, ref) => (
-  <InputAddon {...props} type="prefix" ref={ref} />
+  <InputElement {...props} type="prefix" ref={ref} />
 ));
 InputPrefix.id = AddonTypes.InputPrefix;
 
 export const InputSuffix: AddonElement = forwardRefWithAs((props, ref) => (
-  <InputAddon {...props} type="suffix" ref={ref} />
+  <InputElement {...props} type="suffix" ref={ref} />
 ));
 InputSuffix.id = AddonTypes.InputSuffix;
 
-// GroupPrefixes
+// GroupParts
 export const InputGroupPrefix: AddonElement = forwardRefWithAs((props, ref) => (
-  <InputElement {...props} type="prefix" ref={ref} />
+  <InputAddon {...props} type="prefix" ref={ref} />
 ));
 InputGroupPrefix.id = AddonTypes.InputGroupPrefix;
 
 export const InputGroupSuffix: AddonElement = forwardRefWithAs((props, ref) => (
-  <InputElement {...props} type="suffix" ref={ref} />
+  <InputAddon {...props} type="suffix" ref={ref} />
 ));
 InputGroupSuffix.id = AddonTypes.InputGroupSuffix;
