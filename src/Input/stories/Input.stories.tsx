@@ -145,7 +145,7 @@ export const CombinedFocusable = () => {
 
 export const InputKitchenSink = () => {
   return (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start space-y-2">
       <Input placeholder="Username" />
       <Input placeholder="Username">
         <InputPrefix>
@@ -239,7 +239,7 @@ export const InputKitchenSink = () => {
 
 export const GroupKitchenSink = () => {
   return (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start space-y-2">
       <InputGroup>
         <InputGroupPrefix>https://</InputGroupPrefix>
         <Input placeholder="Company website" />
@@ -328,7 +328,7 @@ export const GroupKitchenSink = () => {
 
 export const CombinedKitchenSink = () => {
   return (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start space-y-2">
       <InputGroup>
         <InputGroupPrefix>https://</InputGroupPrefix>
         <Input placeholder="Company website">
@@ -346,7 +346,12 @@ export const CombinedKitchenSink = () => {
         <label htmlFor="country" className="sr-only">
           Permissions
         </label>
-        <InputGroupPrefix as="select" id="permission" name="permission">
+        <InputGroupPrefix
+          as="select"
+          id="permission"
+          name="permission"
+          className="rounded-r-none appearance-none"
+        >
           <option>Can View</option>
           <option>Can Edit</option>
         </InputGroupPrefix>
