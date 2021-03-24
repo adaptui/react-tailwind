@@ -16,18 +16,18 @@ export default {
 
 const base = storyTemplate<
   FormFieldProps & { labelText: string; hintText: string; errorText: string }
->(args => {
+>(({ labelText, hintText, errorText, children, ...args }) => {
   return (
     <FormField className="w-60" {...args}>
-      <FormLabel htmlFor="email">{args.labelText}</FormLabel>
-      {args.children}
+      <FormLabel htmlFor="email">{labelText}</FormLabel>
+      {children}
       <FormHelperText id="hint">
         <InfoCircleIcon />
-        <span>{args.hintText}</span>
+        <span>{hintText}</span>
       </FormHelperText>
       <FormErrorMessage>
         <InfoCircleIcon />
-        <span>{args.errorText}</span>
+        <span>{errorText}</span>
       </FormErrorMessage>
     </FormField>
   );
