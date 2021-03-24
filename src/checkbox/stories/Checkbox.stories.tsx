@@ -31,7 +31,6 @@ export default {
 } as Meta;
 
 const base = storyTemplate<CheckboxProps>(Checkbox, {
-  children: "Checkbox",
   size: "md",
   defaultState: true,
 });

@@ -107,3 +107,8 @@ export const isObject = (value: any): value is Dict => {
 
 export const objectKeys = <T extends Dict>(obj: T) =>
   (Object.keys(obj) as unknown) as (keyof T)[];
+
+// String assertions
+export function isString(value: any): value is string {
+  return Object.prototype.toString.call(value) === "[object String]";
+}

@@ -14,6 +14,7 @@ import {
 import { Avatar } from "../../avatar";
 import { EyeClose, EyeOpen } from "../..";
 import { GenericAvatar } from "../../icons";
+import { Button } from "../../button";
 
 export default {
   title: "Input",
@@ -22,7 +23,9 @@ export default {
 
 const base = storyTemplate<InputProps>(Input, {});
 
-export const Default = base({ placeholder: "Enter username" });
+export const Default = base({});
+
+export const Placeholder = base({ placeholder: "Enter username" });
 
 export const Disabled = base({
   disabled: true,
@@ -37,10 +40,12 @@ export const Invalid = base({
 export const PrefixSuffixStatic = () => {
   return (
     <Input placeholder="Username">
-      <InputPrefix>
+      <InputPrefix className="px-2">
         <GenericAvatar />
       </InputPrefix>
-      <InputSuffix>Hello world</InputSuffix>
+      <InputSuffix className="px-2">
+        <EyeOpen />
+      </InputSuffix>
     </Input>
   );
 };
@@ -50,17 +55,16 @@ export const PrefixSuffixFocusable = () => {
   const handleClick = () => setShow(!show);
 
   return (
-    <Input placeholder="Enter country">
-      <label htmlFor="country" className="sr-only">
-        Country
-      </label>
-      <InputPrefix as="select" id="country" name="country">
-        <option>US</option>
-        <option>CA</option>
-        <option>EU</option>
+    <Input placeholder="Enter country" type={show ? "text" : "password"}>
+      <InputPrefix>
+        <InputButton>
+          <GenericAvatar />
+        </InputButton>
       </InputPrefix>
-      <InputSuffix as="button" onClick={handleClick}>
-        {show ? <EyeClose /> : <EyeOpen />}
+      <InputSuffix>
+        <InputButton onClick={handleClick}>
+          {show ? <EyeClose /> : <EyeOpen />}
+        </InputButton>
       </InputSuffix>
     </Input>
   );
@@ -70,9 +74,9 @@ export const GroupStatic = () => {
   return (
     <div>
       <InputGroup>
-        <InputGroupPrefix>https://</InputGroupPrefix>
+        <InputGroupPrefix className="px-2">https://</InputGroupPrefix>
         <Input placeholder="Enter website" />
-        <InputGroupSuffix>.com</InputGroupSuffix>
+        <InputGroupSuffix className="px-2">.com</InputGroupSuffix>
       </InputGroup>
     </div>
   );
@@ -84,50 +88,32 @@ export const GroupFocusable = () => {
 
   return (
     <InputGroup>
-      <label htmlFor="country" className="sr-only">
-        Country
-      </label>
-      <InputGroupPrefix as="select" id="country" name="country">
-        <option>US</option>
-        <option>CA</option>
-        <option>EU</option>
+      <InputGroupPrefix>
+        <InputButton>
+          <GenericAvatar />
+        </InputButton>
       </InputGroupPrefix>
       <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputGroupSuffix as="button" onClick={handleClick}>
-        {show ? <EyeClose /> : <EyeOpen />}
+      <InputGroupSuffix>
+        <InputButton onClick={handleClick}>
+          {show ? <EyeClose /> : <EyeOpen />}
+        </InputButton>
       </InputGroupSuffix>
     </InputGroup>
-  );
-};
-
-export const WithAvatarAndSelect = () => {
-  return (
-    <Input placeholder="Username">
-      <InputPrefix>
-        <Avatar src="https://bit.ly/ryan-florence" size="xs" />
-      </InputPrefix>
-      <label htmlFor="country" className="sr-only">
-        Permissions
-      </label>
-      <InputSuffix as="select" id="permission" name="permission">
-        <option>Can View</option>
-        <option>Can Edit</option>
-      </InputSuffix>
-    </Input>
   );
 };
 
 export const CombinedStatic = () => {
   return (
     <InputGroup>
-      <InputGroupPrefix className="whitespace-nowrap">
+      <InputGroupPrefix className="px-2 whitespace-nowrap">
         Group Prefix
       </InputGroupPrefix>
       <Input placeholder="Enter some stuff">
-        <InputPrefix>Prefix</InputPrefix>
-        <InputSuffix>Suffix</InputSuffix>
+        <InputPrefix className="px-2">Prefix</InputPrefix>
+        <InputSuffix className="px-2">Suffix</InputSuffix>
       </Input>
-      <InputGroupSuffix className="whitespace-nowrap">
+      <InputGroupSuffix className="px-2 whitespace-nowrap">
         Group Suffix
       </InputGroupSuffix>
     </InputGroup>
@@ -137,17 +123,34 @@ export const CombinedStatic = () => {
 export const CombinedFocusable = () => {
   return (
     <InputGroup>
-      <InputGroupPrefix as="button" className="whitespace-nowrap">
-        Group Prefix
+      <InputGroupPrefix>
+        <InputButton>Group Prefix</InputButton>
       </InputGroupPrefix>
       <Input placeholder="Enter some stuff">
-        <InputPrefix as="button">Prefix</InputPrefix>
-        <InputSuffix as="button">Suffix</InputSuffix>
+        <InputPrefix>
+          <InputButton>Prefix</InputButton>
+        </InputPrefix>
+        <InputSuffix>
+          <InputButton>Suffix</InputButton>
+        </InputSuffix>
       </Input>
-      <InputGroupSuffix as="button" className="whitespace-nowrap">
-        Group Suffix
+      <InputGroupSuffix>
+        <InputButton>Group Suffix</InputButton>
       </InputGroupSuffix>
     </InputGroup>
+  );
+};
+
+export const WithAvatarAndSelect = () => {
+  return (
+    <Input placeholder="Username">
+      <InputPrefix className="px-2">
+        <Avatar src="https://bit.ly/ryan-florence" size="xs" />
+      </InputPrefix>
+      <InputSuffix className="px-2">
+        <PermissionSelect />
+      </InputSuffix>
+    </Input>
   );
 };
 
@@ -156,88 +159,61 @@ export const InputKitchenSink = () => {
     <div className="flex flex-col items-start space-y-2">
       <Input placeholder="Username" />
       <Input placeholder="Username">
-        <InputPrefix>
+        <InputPrefix className="px-2">
           <GenericAvatar />
         </InputPrefix>
       </Input>
 
       <Input placeholder="Username">
-        <InputSuffix>
+        <InputSuffix className="px-2">
           <Avatar src="https://bit.ly/ryan-florence" size="xs" />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <InputPrefix>
+        <InputPrefix className="px-2">
           <GenericAvatar />
         </InputPrefix>
-        <InputSuffix>
+        <InputSuffix className="px-2">
           <Avatar src="https://bit.ly/ryan-florence" size="xs" />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputPrefix className="px-2">
+          <PermissionSelect />
         </InputPrefix>
       </Input>
 
       <Input placeholder="Username">
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <InputSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputSuffix className="px-2">
+          <CountrySelect />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputPrefix className="px-2">
+          <PermissionSelect />
         </InputPrefix>
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <InputSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputSuffix className="px-2">
+          <CountrySelect />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <InputPrefix>
+        <InputPrefix className="px-2">
           <GenericAvatar />
         </InputPrefix>
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputSuffix className="px-2">
+          <CountrySelect />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputPrefix className="px-2">
+          <PermissionSelect />
         </InputPrefix>
-        <InputSuffix>
+        <InputSuffix className="px-2">
           <Avatar src="https://bit.ly/ryan-florence" size="xs" />
         </InputSuffix>
       </Input>
@@ -249,86 +225,59 @@ export const GroupKitchenSink = () => {
   return (
     <div className="flex flex-col items-start space-y-2">
       <InputGroup>
-        <InputGroupPrefix>https://</InputGroupPrefix>
+        <InputGroupPrefix className="px-2">https://</InputGroupPrefix>
         <Input placeholder="Company website" />
       </InputGroup>
 
       <InputGroup>
         <Input placeholder="Company website" />
-        <InputGroupSuffix>.com</InputGroupSuffix>
+        <InputGroupSuffix className="px-2">.com</InputGroupSuffix>
       </InputGroup>
 
       <InputGroup>
-        <InputGroupPrefix>https://</InputGroupPrefix>
+        <InputGroupPrefix className="px-2">https://</InputGroupPrefix>
         <Input placeholder="Company website" />
-        <InputGroupSuffix>.com</InputGroupSuffix>
+        <InputGroupSuffix className="px-2">.com</InputGroupSuffix>
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputGroupPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputGroupPrefix className="px-2">
+          <PermissionSelect />
         </InputGroupPrefix>
         <Input placeholder="Company website"></Input>
       </InputGroup>
 
       <InputGroup>
         <Input placeholder="Company website"></Input>
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <InputGroupSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputGroupSuffix className="px-2">
+          <CountrySelect />
         </InputGroupSuffix>
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputGroupPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputGroupPrefix className="px-2">
+          <PermissionSelect />
         </InputGroupPrefix>
         <Input placeholder="Company website"></Input>
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <InputGroupSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputGroupSuffix className="px-2">
+          <CountrySelect />
         </InputGroupSuffix>
       </InputGroup>
 
       <InputGroup>
-        <InputGroupPrefix>https://</InputGroupPrefix>
+        <InputGroupPrefix className="px-2">https://</InputGroupPrefix>
         <Input placeholder="Company website" />
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <InputGroupSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputGroupSuffix className="px-2">
+          <CountrySelect />
         </InputGroupSuffix>
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputGroupPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputGroupPrefix className="px-2">
+          <PermissionSelect />
         </InputGroupPrefix>
         <Input placeholder="Company website" />
-        <InputGroupSuffix>.com</InputGroupSuffix>
+        <InputGroupSuffix className="px-2">.com</InputGroupSuffix>
       </InputGroup>
     </div>
   );
@@ -338,52 +287,78 @@ export const CombinedKitchenSink = () => {
   return (
     <div className="flex flex-col items-start space-y-2">
       <InputGroup>
-        <InputGroupPrefix>https://</InputGroupPrefix>
+        <InputGroupPrefix className="px-2">https://</InputGroupPrefix>
         <Input placeholder="Company website">
-          <InputPrefix>
+          <InputPrefix className="px-2">
             <GenericAvatar />
           </InputPrefix>
-          <InputSuffix>
+          <InputSuffix className="px-2">
             <Avatar src="https://bit.ly/ryan-florence" size="xs" />
           </InputSuffix>
         </Input>
-        <InputGroupSuffix>.com</InputGroupSuffix>
+        <InputGroupSuffix className="px-2">.com</InputGroupSuffix>
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="country" className="sr-only">
-          Permissions
-        </label>
-        <InputGroupPrefix as="select" id="permission" name="permission">
-          <option>Can View</option>
-          <option>Can Edit</option>
+        <InputGroupPrefix className="px-2">
+          <PermissionSelect />
         </InputGroupPrefix>
         <Input placeholder="Company website">
-          <label htmlFor="country" className="sr-only">
-            Permissions
-          </label>
-          <InputPrefix as="select" id="permission" name="permission">
-            <option>Can View</option>
-            <option>Can Edit</option>
+          <InputPrefix className="px-2">
+            <PermissionSelect />
           </InputPrefix>
-          <label htmlFor="country" className="sr-only">
-            Country
-          </label>
-          <InputSuffix as="select" id="country" name="country">
-            <option>US</option>
-            <option>CA</option>
-            <option>EU</option>
+          <InputSuffix className="px-2">
+            <CountrySelect />
           </InputSuffix>
         </Input>
-        <label htmlFor="country" className="sr-only">
-          Country
-        </label>
-        <InputGroupSuffix as="select" id="country" name="country">
-          <option>US</option>
-          <option>CA</option>
-          <option>EU</option>
+        <InputGroupSuffix className="px-2">
+          <CountrySelect />
         </InputGroupSuffix>
       </InputGroup>
     </div>
+  );
+};
+
+const InputButton: React.FC<any> = props => {
+  return (
+    <Button
+      size="sm"
+      variant="ghost"
+      className="transition-none focus:outline-none hover:bg-transparent"
+      {...props}
+    />
+  );
+};
+
+const PermissionSelect = () => {
+  return (
+    <>
+      <label htmlFor="permission" className="sr-only">
+        Permissions
+      </label>
+      <select
+        id="permission"
+        name="permission"
+        className="pr-1 focus:outline-none"
+      >
+        <option>Can View</option>
+        <option>Can Edit</option>
+      </select>
+    </>
+  );
+};
+
+const CountrySelect = () => {
+  return (
+    <>
+      <label htmlFor="country" className="sr-only">
+        Country
+      </label>
+      <select id="country" name="country" className="pr-1 focus:outline-none">
+        <option>US</option>
+        <option>CA</option>
+        <option>EU</option>
+      </select>
+    </>
   );
 };
