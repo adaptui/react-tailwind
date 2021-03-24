@@ -12,9 +12,10 @@ import { iconButton } from "./iconButton";
 import { progress } from "./progress";
 import { spinner } from "./spinner";
 import { _switch } from "./switch";
-import { tag } from "./tag";
 import { radio } from "./radio";
 import { slider } from "./slider";
+import { tag } from "./tag";
+import { textarea } from "./textarea";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
 
@@ -36,6 +37,7 @@ const theme = {
   spinner,
   switch: _switch,
   tag,
+  textarea,
   tooltip,
   toast,
 };
