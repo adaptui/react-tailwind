@@ -44,7 +44,7 @@ export const Invalid = base({
 export const PrefixSuffixStatic = () => {
   return (
     <Input placeholder="Username">
-      <InputPrefix allowPointerEvents className="px-2">
+      <InputPrefix className="px-2">
         <GenericAvatar />
       </InputPrefix>
       <InputSuffix className="px-2">
