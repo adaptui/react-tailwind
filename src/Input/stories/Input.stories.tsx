@@ -60,12 +60,12 @@ export const PrefixSuffixFocusable = () => {
 
   return (
     <Input placeholder="Enter country" type={show ? "text" : "password"}>
-      <InputPrefix>
+      <InputPrefix allowPointerEvents>
         <InputButton>
           <GenericAvatar />
         </InputButton>
       </InputPrefix>
-      <InputSuffix>
+      <InputSuffix allowPointerEvents>
         <InputButton onClick={handleClick}>
           {show ? <EyeClose /> : <EyeOpen />}
         </InputButton>
@@ -131,10 +131,10 @@ export const CombinedFocusable = () => {
         <InputButton>Group Prefix</InputButton>
       </InputGroupPrefix>
       <Input placeholder="Enter some stuff">
-        <InputPrefix>
+        <InputPrefix allowPointerEvents>
           <InputButton>Prefix</InputButton>
         </InputPrefix>
-        <InputSuffix>
+        <InputSuffix allowPointerEvents>
           <InputButton>Suffix</InputButton>
         </InputSuffix>
       </Input>
@@ -184,22 +184,22 @@ export const InputKitchenSink = () => {
       </Input>
 
       <Input placeholder="Username">
-        <InputPrefix className="px-2">
+        <InputPrefix allowPointerEvents className="px-2">
           <PermissionSelect />
         </InputPrefix>
       </Input>
 
       <Input placeholder="Username">
-        <InputSuffix className="px-2">
+        <InputSuffix allowPointerEvents className="px-2">
           <CountrySelect />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <InputPrefix className="px-2">
+        <InputPrefix allowPointerEvents className="px-2">
           <PermissionSelect />
         </InputPrefix>
-        <InputSuffix className="px-2">
+        <InputSuffix allowPointerEvents className="px-2">
           <CountrySelect />
         </InputSuffix>
       </Input>
@@ -208,13 +208,13 @@ export const InputKitchenSink = () => {
         <InputPrefix className="px-2">
           <GenericAvatar />
         </InputPrefix>
-        <InputSuffix className="px-2">
+        <InputSuffix allowPointerEvents className="px-2">
           <CountrySelect />
         </InputSuffix>
       </Input>
 
       <Input placeholder="Username">
-        <InputPrefix className="px-2">
+        <InputPrefix allowPointerEvents className="px-2">
           <PermissionSelect />
         </InputPrefix>
         <InputSuffix className="px-2">
