@@ -2,12 +2,12 @@ import React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
 import { useId } from "../hooks/useId";
+import { Box, BoxProps } from "../box";
 import { useBoolean } from "../hooks/useBoolean";
+import { useFormControl } from "./useFormControl";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
-import { useFormControl } from "./useFormControl";
 
 export type CommonFieldProps = {
   id?: string;

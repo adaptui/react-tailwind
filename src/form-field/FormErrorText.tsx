@@ -3,9 +3,9 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useSafeLayoutEffect } from "../hooks";
 import { forwardRefWithAs } from "../utils/types";
 import { useFormFieldContext } from "./FormField";
-import { useSafeLayoutEffect } from "../hooks";
 
 type FormErrorTextProps = BoxProps & {};
 
