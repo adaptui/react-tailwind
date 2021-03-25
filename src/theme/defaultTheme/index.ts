@@ -18,6 +18,7 @@ import { tag } from "./tag";
 import { textarea } from "./textarea";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
+import { input } from "./input";
 
 const theme = {
   alert,
@@ -40,6 +41,7 @@ const theme = {
   textarea,
   tooltip,
   toast,
+  input,
 };
 
 export default theme;
