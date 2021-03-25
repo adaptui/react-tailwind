@@ -14,12 +14,12 @@ export const FormRequiredText = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { children, className, ...rest } = props;
-  const { required } = useFormFieldContext();
+  const { isRequired } = useFormFieldContext();
 
   const theme = useTheme();
   const requiredStyles = cx(theme.formField.requiredText, className);
 
-  return required ? (
+  return isRequired ? (
     <Box ref={ref} className={requiredStyles} aria-hidden={true} {...rest}>
       {children}
     </Box>

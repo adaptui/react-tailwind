@@ -15,7 +15,7 @@ export const FormErrorText = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { id, children, className, ...rest } = props;
-  const { errorTextId, setHasErrorText, invalid } = useFormFieldContext();
+  const { errorTextId, setHasErrorText, isInvalid } = useFormFieldContext();
   const theme = useTheme();
   const errorStyles = cx(theme.formField.errorText, className);
 
@@ -24,7 +24,7 @@ export const FormErrorText = forwardRefWithAs<
     return () => setHasErrorText.off();
   }, []);
 
-  return invalid ? (
+  return isInvalid ? (
     <Box
       aria-live="polite"
       ref={ref}
