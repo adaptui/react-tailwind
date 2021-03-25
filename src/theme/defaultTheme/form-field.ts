@@ -4,6 +4,7 @@ export const formField = {
     size: {},
   },
   labelText: "text-xs text-gray-900 inline-flex items-center justify-between",
+  labelValueText: "text-xs text-gray-500",
   helperText:
     "text-xs text-gray-500 inline-flex items-center space-x-1 leading-4",
   errorText:

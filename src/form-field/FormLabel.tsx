@@ -14,11 +14,10 @@ export const FormLabel = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const { id, children, htmlFor, className, ...rest } = props;
-  const { labelId, required, fieldId } = useFormFieldContext();
+  const { labelId, fieldId } = useFormFieldContext();
 
   const theme = useTheme();
   const labelStyles = cx(theme.formField.labelText, className);
-  const requiredStyles = cx(theme.formField.requiredText, className);
 
   return (
     <Box
@@ -30,7 +29,6 @@ export const FormLabel = forwardRefWithAs<
       {...rest}
     >
       {children}
-      {required && <div className={requiredStyles}>Required</div>}
     </Box>
   );
 });

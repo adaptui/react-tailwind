@@ -4,17 +4,23 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useId } from "../hooks/useId";
-import { createContext } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { useBoolean } from "../hooks/useBoolean";
+import { createContext, runIfFn } from "../utils";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { useFormControl } from "./useFormControl";
 
-type FormFieldContextProps = {
-  fieldId: string;
-  labelId: string;
-  errorTextId: string;
-  helpTextId: string;
+export type CommonFieldProps = {
+  id?: string;
+  disabled?: boolean;
   invalid?: boolean;
+  readonly?: boolean;
   required?: boolean;
 };
+
+type FormFieldContextProps = Omit<
+  ReturnType<typeof useFormContextValues>,
+  "htmlProps"
+>;
 
 const [
   FormFieldContextProvider,
@@ -23,26 +29,8 @@ const [
 
 export { useFormFieldContext };
 
-export type FormFieldProps = BoxProps & {
-  invalid?: boolean;
-  required?: boolean;
-};
-
-export const FormField = forwardRefWithAs<
-  FormFieldProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const {
-    id,
-    children,
-    className,
-    invalid = false,
-    required = false,
-    ...rest
-  } = props;
-
-  const theme = useTheme();
+const useFormContextValues = (props: FormFieldProps) => {
+  const { id, required, invalid, disabled, readonly, ...htmlProps } = props;
   const uuid = useId(id);
   const idProp = `field-${uuid}`;
 
@@ -50,27 +38,88 @@ export const FormField = forwardRefWithAs<
   const errorTextId = `${idProp}-error-text`;
   const helpTextId = `${idProp}-help-text`;
 
+  const [hasHelpText, setHasHelpText] = useBoolean();
+  const [hasErrorText, setHasErrorText] = useBoolean();
+
   const context = {
+    required,
+    invalid,
+    readonly,
+    disabled,
     fieldId: idProp,
     labelId,
     errorTextId,
     helpTextId,
-    required,
-    invalid,
+    hasHelpText,
+    hasErrorText,
+    setHasHelpText,
+    setHasErrorText,
+    htmlProps,
   };
+
+  return context;
+};
+
+export type FormFieldProps = BoxProps & CommonFieldProps;
+
+export const FormField = forwardRefWithAs<
+  FormFieldProps &
+    RenderProp<
+      FormFieldContextProps & {
+        inputProps: ReturnType<typeof useFormControl>;
+      }
+    >,
+  HTMLDivElement,
+  "div"
+>((props, ref) => {
+  const { children, className, ...rest } = props;
+
+  const theme = useTheme();
+  const {
+    htmlProps,
+    errorTextId,
+    helpTextId,
+    setHasErrorText,
+    setHasHelpText,
+    hasErrorText,
+    hasHelpText,
+    ...context
+  } = useFormContextValues(rest);
 
   const formFieldStyles = cx(theme.formField.wrapper.base, className);
 
+  const controlProps = useFormControl(context, {
+    errorTextId,
+    helpTextId,
+    setHasErrorText,
+    setHasHelpText,
+    hasErrorText,
+    hasHelpText,
+  });
+
+  const originalContext = {
+    ...context,
+    errorTextId,
+    helpTextId,
+    setHasErrorText,
+    setHasHelpText,
+    hasErrorText,
+    hasHelpText,
+  };
+
   return (
-    <FormFieldContextProvider value={context}>
+    <FormFieldContextProvider value={originalContext}>
       <Box
-        id={idProp}
-        role="group"
         ref={ref}
+        role="group"
+        id={context.fieldId}
         className={formFieldStyles}
-        {...rest}
+        {...htmlProps}
       >
-        {children}
+        {runIfFn(children, {
+          ...originalContext,
+          inputProps: controlProps,
+        })}
       </Box>
     </FormFieldContextProvider>
   );
