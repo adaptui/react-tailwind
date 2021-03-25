@@ -23,15 +23,15 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
 
   const theme = useTheme();
   const radioStyles = cx(theme.radio.input, className);
-  const fieldInputProps = useFormControl({ disabled });
+  const { id, ...fieldInputProps } = useFormControl({ disabled });
 
   return (
     <ReakitRadio
       ref={ref}
       className={radioStyles}
-      {...state}
       {...iconProps}
       {...fieldInputProps}
+      {...state}
       {...rest}
     />
   );

@@ -112,10 +112,10 @@ export const WithRadioGroups = () => {
   return (
     <FormField as="fieldset" id="radios">
       <FormLabel as="legend">Favorite Browser</FormLabel>
-      <RadioGroup defaultState="Chrome" className="flex gap-2">
-        <Radio value="Chrome">Chrome</Radio>
-        <Radio value="FireFox">FireFox</Radio>
-        <Radio value="Safari">Safari</Radio>
+      <RadioGroup defaultState="chrome" className="flex gap-2">
+        <Radio value="chrome">Chrome</Radio>
+        <Radio value="fireFox">FireFox</Radio>
+        <Radio value="safari">Safari</Radio>
       </RadioGroup>
       <FormHelperText>Select which browser you use.</FormHelperText>
     </FormField>
