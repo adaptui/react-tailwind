@@ -27,7 +27,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputStyles = cx(
       theme.input.base,
       invalid ? theme.input.invalid : "",
-      disabled ? theme.input.disabled : "",
       className,
     );
 
@@ -77,6 +76,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setClones(validChildren);
     }, [isRefsAvailable]);
 
+    const inputStyle = { ...style, ...inputInlineStyles.current };
+
     return (
       <div className={inputWrapperStyles}>
         {clones.find(child => isPrefix(child?.type?.id))}
@@ -85,10 +86,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={inputStyles}
           disabled={disabled}
           ref={ref}
-          style={{
-            ...style,
-            ...inputInlineStyles.current,
-          }}
+          style={
+            disabled ? { pointerEvents: "unset", ...inputStyle } : inputStyle
+          }
           {...rest}
         />
         {clones.find(child => isSuffix(child?.type?.id))}
