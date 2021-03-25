@@ -13,7 +13,9 @@ import {
 } from "..";
 import { Button } from "../../button";
 import { Slider } from "../../slider";
+import { Switch } from "../../switch";
 import { InfoCircleIcon } from "../../icons";
+import { Radio, RadioGroup } from "../../radio";
 import { FormLabelValue } from "../FormLabelValue";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
 
@@ -22,15 +24,12 @@ export default {
   component: FormField,
 } as Meta;
 
+const inputStyles =
+  "w-full outline-none px-2 py-1 text-xs shadow-sm font-medium text-gray-500 border h-6 border-gray-300 hover:border-gray-400 rounded-md focus:text-gray-800 focus:border-blue-500";
+
 const Input = React.forwardRef<HTMLInputElement, any>((props, ref) => {
   const inputProps = useFormControl(props);
-  return (
-    <input
-      {...inputProps}
-      ref={ref}
-      className="w-full outline-none px-2 py-1 text-xs shadow-sm font-medium text-gray-500 border h-6 border-gray-300 hover:border-gray-400 rounded-md focus:text-gray-800 focus:border-blue-500"
-    />
-  );
+  return <input {...inputProps} ref={ref} className={inputStyles} />;
 });
 
 const base = storyTemplate<
@@ -40,16 +39,16 @@ const base = storyTemplate<
     errorText: string;
     value?: any;
   }
->(({ labelText, hintText, errorText, value, children, ...args }) => {
+>(({ labelText, hintText, errorText, value, children, id, ...args }) => {
   return (
-    <FormField className="w-60" {...args}>
-      <FormLabel htmlFor="email">
+    <FormField id={id} className="w-60" {...args}>
+      <FormLabel>
         {labelText}
         <FormRequiredText>Required</FormRequiredText>
         {value && <FormLabelValue>{value}</FormLabelValue>}
       </FormLabel>
       {children}
-      <FormHelperText id="hint">
+      <FormHelperText>
         <InfoCircleIcon />
         <span>{hintText}</span>
       </FormHelperText>
@@ -62,6 +61,7 @@ const base = storyTemplate<
 });
 
 export const Default = base({
+  id: "email",
   required: false,
   invalid: false,
   labelText: "Enter Email",
@@ -71,25 +71,31 @@ export const Default = base({
 });
 
 export const WthSlider = base({
+  id: "slider",
   required: false,
   invalid: false,
   labelText: "Enter value",
   hintText: "Value should be valid",
   errorText: "Value is invalid",
-  children: <Slider size="sm" />,
+  children: <Slider id="slider" size="sm" />,
 });
 
 export const WithSliderValueLabel = () => {
   const [value, setValue] = React.useState(0);
   return (
-    <FormField className="w-60" invalid={value > 80}>
+    <FormField id="slider" className="w-60" invalid={value > 80}>
       {({ invalid }) => (
         <>
-          <FormLabel htmlFor="email">
+          <FormLabel>
             Slider value
             <FormLabelValue>{value}</FormLabelValue>
           </FormLabel>
-          <Slider size="sm" values={[value]} onChange={v => setValue(v[0])} />
+          <Slider
+            id="slider"
+            size="sm"
+            values={[value]}
+            onChange={v => setValue(v[0])}
+          />
           {!invalid && <FormHelperText id="hint">Hint text</FormHelperText>}
           <FormErrorText>Value is above 80</FormErrorText>
         </>
@@ -98,8 +104,32 @@ export const WithSliderValueLabel = () => {
   );
 };
 
+export const WithRadioGroups = () => {
+  return (
+    <FormField as="fieldset" id="radios">
+      <FormLabel as="legend">Favorite Browser</FormLabel>
+      <RadioGroup defaultState="Chrome" className="flex gap-2">
+        <Radio value="Chrome">Chrome</Radio>
+        <Radio value="FireFox">FireFox</Radio>
+        <Radio value="Safari">Safari</Radio>
+      </RadioGroup>
+      <FormHelperText>Select which browser you use.</FormHelperText>
+    </FormField>
+  );
+};
+
+export const WithSwitch = () => {
+  return (
+    <FormField id="switch">
+      <FormLabel>Enable darkmode?</FormLabel>
+      <Switch />
+      <FormHelperText>Switch darkmode</FormHelperText>
+    </FormField>
+  );
+};
+
 type Inputs = {
-  email: string;
+  username: string;
 };
 export const ReactHookFormTest = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>();
@@ -110,25 +140,25 @@ export const ReactHookFormTest = () => {
 
   return (
     <form className="w-60" onSubmit={handleSubmit(onSubmit)}>
-      <FormField required invalid={!!errors.email}>
+      <FormField id="username" required invalid={!!errors.username}>
         {({ inputProps }) => (
           <>
-            <FormLabel htmlFor="email">
-              Enter email
+            <FormLabel>
+              Enter username
               <FormRequiredText>Required</FormRequiredText>
             </FormLabel>
             <input
               {...inputProps}
-              name="email"
-              type="email"
               ref={register({
-                required: { message: "Email is required", value: true },
+                maxLength: { value: 10, message: "Username is too long" },
+                minLength: { value: 2, message: "Username is too short" },
               })}
+              type="text"
+              name="username"
+              className={inputStyles}
             />
-            {!errors.email && (
-              <FormHelperText id="hint">Hint text</FormHelperText>
-            )}
-            <FormErrorText>{errors.email?.message}</FormErrorText>
+            {!errors.username && <FormHelperText>Hint text</FormHelperText>}
+            <FormErrorText>{errors.username?.message}</FormErrorText>
           </>
         )}
       </FormField>

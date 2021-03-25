@@ -14,7 +14,7 @@ export const FormLabel = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const { id, children, htmlFor, className, ...rest } = props;
-  const { labelId, fieldId } = useFormFieldContext();
+  const { labelId, inputId } = useFormFieldContext();
 
   const theme = useTheme();
   const labelStyles = cx(theme.formField.labelText, className);
@@ -24,7 +24,7 @@ export const FormLabel = forwardRefWithAs<
       as="label"
       ref={ref}
       id={id || labelId}
-      htmlFor={props.htmlFor ?? fieldId}
+      htmlFor={props.htmlFor ?? inputId}
       className={labelStyles}
       {...rest}
     >

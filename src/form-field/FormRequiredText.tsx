@@ -20,7 +20,7 @@ export const FormRequiredText = forwardRefWithAs<
   const requiredStyles = cx(theme.formField.requiredText, className);
 
   return required ? (
-    <Box ref={ref} className={requiredStyles} {...rest}>
+    <Box ref={ref} className={requiredStyles} aria-hidden={true} {...rest}>
       {children}
     </Box>
   ) : null;

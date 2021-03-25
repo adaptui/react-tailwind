@@ -5,6 +5,7 @@ import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { useRadioProps, useRadioStateContext } from "./Radio";
+import { useFormControl } from "../form-field";
 
 export type RadioInputProps = Partial<ReakitRadioProps> & {};
 
@@ -21,6 +22,7 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
 
   const theme = useTheme();
   const radioStyles = cx(theme.radio.input, className);
+  const fieldInputProps = useFormControl();
 
   return (
     <ReakitRadio
@@ -28,6 +30,7 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
       className={radioStyles}
       {...state}
       {...iconProps}
+      {...fieldInputProps}
       {...rest}
     />
   );

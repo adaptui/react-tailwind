@@ -23,7 +23,7 @@ export function useFormControl(props: UseFormControlProps = {}, _field?: any) {
 
   return {
     ...cleanProps,
-    id: props.id ?? field?.fieldId,
+    id: props.id ?? field?.inputId,
     disabled: props.disabled || field?.disabled,
     readOnly: props.readonly || field?.readonly,
     required: props.required || field?.required,

@@ -38,14 +38,15 @@ const useFormContextValues = (props: FormFieldProps) => {
   const errorTextId = `${idProp}-error-text`;
   const helpTextId = `${idProp}-help-text`;
 
-  const [hasHelpText, setHasHelpText] = useBoolean();
-  const [hasErrorText, setHasErrorText] = useBoolean();
+  const [hasHelpText, setHasHelpText] = useBoolean(false);
+  const [hasErrorText, setHasErrorText] = useBoolean(false);
 
   const context = {
     required,
     invalid,
     readonly,
     disabled,
+    inputId: id,
     fieldId: idProp,
     labelId,
     errorTextId,
@@ -75,40 +76,12 @@ export const FormField = forwardRefWithAs<
   const { children, className, ...rest } = props;
 
   const theme = useTheme();
-  const {
-    htmlProps,
-    errorTextId,
-    helpTextId,
-    setHasErrorText,
-    setHasHelpText,
-    hasErrorText,
-    hasHelpText,
-    ...context
-  } = useFormContextValues(rest);
+  const { htmlProps, ...context } = useFormContextValues(rest);
 
   const formFieldStyles = cx(theme.formField.wrapper.base, className);
 
-  const controlProps = useFormControl(context, {
-    errorTextId,
-    helpTextId,
-    setHasErrorText,
-    setHasHelpText,
-    hasErrorText,
-    hasHelpText,
-  });
-
-  const originalContext = {
-    ...context,
-    errorTextId,
-    helpTextId,
-    setHasErrorText,
-    setHasHelpText,
-    hasErrorText,
-    hasHelpText,
-  };
-
   return (
-    <FormFieldContextProvider value={originalContext}>
+    <FormFieldContextProvider value={context}>
       <Box
         ref={ref}
         role="group"
@@ -116,11 +89,25 @@ export const FormField = forwardRefWithAs<
         className={formFieldStyles}
         {...htmlProps}
       >
-        {runIfFn(children, {
-          ...originalContext,
-          inputProps: controlProps,
-        })}
+        <FormRenderProp children={children} htmlProps={htmlProps} />
       </Box>
     </FormFieldContextProvider>
   );
 });
+
+const FormRenderProp: React.FC<{ htmlProps: FormFieldProps }> = ({
+  children,
+  htmlProps,
+}) => {
+  const context = useFormFieldContext();
+  const controlProps = useFormControl(htmlProps);
+
+  return (
+    <>
+      {runIfFn(children, {
+        ...context,
+        inputProps: controlProps,
+      })}
+    </>
+  );
+};
