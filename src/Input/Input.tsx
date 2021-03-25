@@ -1,5 +1,5 @@
 import React from "react";
-import { cx } from "@renderlesskit/react";
+import { ariaAttr, cx } from "@renderlesskit/react";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { useTheme } from "../theme";
@@ -9,9 +9,17 @@ import { useSafeLayoutEffect } from "../hooks";
 
 export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   /**
-   * Is Input invalid?
+   * if `true` Input will be invalid
    */
-  invalid?: boolean;
+  isInvalid?: boolean;
+  /**
+   * if `true` Input will be disabled
+   */
+  isDisabled?: boolean;
+  /**
+   * if `true` Input will be readonly
+   */
+  isReadOnly?: boolean;
 };
 
 export type ReactFiberNode = React.ReactElement<any, any> & {
@@ -20,13 +28,24 @@ export type ReactFiberNode = React.ReactElement<any, any> & {
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
-    const { disabled, children, invalid, style, className, ...rest } = props;
+    const {
+      style,
+      children,
+      isDisabled,
+      isInvalid,
+      isReadOnly,
+      className,
+      ...rest
+    } = props;
+
+    const disabled = isDisabled || props.disabled;
+    const readOnly = isReadOnly || props.readOnly;
 
     const theme = useTheme();
     const inputWrapperStyles = cx(theme.input.wrapper);
     const inputStyles = cx(
       theme.input.base,
-      invalid ? theme.input.invalid : "",
+      isInvalid ? theme.input.invalid : "",
       className,
     );
 
@@ -82,9 +101,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={inputWrapperStyles}>
         {clones.find(child => isPrefix(child?.type?.id))}
         <ReakitInput
-          aria-invalid={invalid}
-          className={inputStyles}
+          aria-invalid={ariaAttr(isInvalid)}
+          aria-readonly={ariaAttr(readOnly)}
+          readOnly={readOnly}
           disabled={disabled}
+          className={inputStyles}
           ref={ref}
           style={
             disabled ? { pointerEvents: "unset", ...inputStyle } : inputStyle

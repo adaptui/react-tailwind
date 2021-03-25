@@ -17,12 +17,13 @@ const InputElement = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const htmlRef = React.useRef<HTMLDivElement>();
-  const { as, className, children, type, ...rest } = props;
+  const { as, className, children, type, allowPointerEvents, ...rest } = props;
 
   const theme = useTheme();
   const prefixStyles = cx(
     theme.input.children.base,
     theme.input.children[type],
+    allowPointerEvents ? "" : theme.input.children.pointerEventsNone,
     className,
   );
 

@@ -21,26 +21,30 @@ export default {
   component: Input,
 } as Meta;
 
-const base = storyTemplate<InputProps>(Input, {});
+const base = storyTemplate<InputProps>(Input, {
+  isDisabled: false,
+  isReadOnly: false,
+  isInvalid: false,
+});
 
 export const Default = base({});
 
 export const Placeholder = base({ placeholder: "Enter username" });
 
 export const Disabled = base({
-  disabled: true,
+  isDisabled: true,
   placeholder: "Enter username",
 });
 
 export const Invalid = base({
-  invalid: true,
+  isInvalid: true,
   placeholder: "Enter username",
 });
 
 export const PrefixSuffixStatic = () => {
   return (
     <Input placeholder="Username">
-      <InputPrefix className="px-2">
+      <InputPrefix allowPointerEvents className="px-2">
         <GenericAvatar />
       </InputPrefix>
       <InputSuffix className="px-2">
