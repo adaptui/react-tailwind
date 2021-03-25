@@ -76,14 +76,14 @@ export const Textarea = forwardRefWithAs<
       inputShallow.value += " ";
     }
 
-    // @ts-ignore
-    const boxSizing = computedStyle["box-sizing"];
+    const boxSizing = computedStyle["boxSizing"];
+    console.log(boxSizing);
     const padding =
-      getStyleValue(computedStyle, "padding-bottom") +
-      getStyleValue(computedStyle, "padding-top");
+      getStyleValue(computedStyle, "paddingBottom") +
+      getStyleValue(computedStyle, "paddingTop");
     const border =
-      getStyleValue(computedStyle, "border-bottom-width") +
-      getStyleValue(computedStyle, "border-top-width");
+      getStyleValue(computedStyle, "borderBottomWidth") +
+      getStyleValue(computedStyle, "borderTopWidth");
 
     // The height of the inner content
     const innerHeight = inputShallow.scrollHeight - padding;
@@ -217,7 +217,9 @@ Textarea.displayName = "Textarea";
 
 export default Textarea;
 
-function getStyleValue(computedStyle: CSSStyleDeclaration, property: string) {
-  // @ts-ignore
-  return parseInt(computedStyle[property], 10) || 0;
+function getStyleValue(
+  computedStyle: CSSStyleDeclaration,
+  property: keyof CSSStyleDeclaration,
+) {
+  return parseInt(computedStyle[property] as string, 10) || 0;
 }
