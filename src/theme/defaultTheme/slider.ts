@@ -20,6 +20,7 @@ export const slider = {
         lg: "lib:w-5 lib:h-5 lib:text-sm",
       },
     },
+    minmax: "flex items-center mt-0.5 justify-between text-xs text-gray-400",
   },
   horizontal: {
     wrapper: {

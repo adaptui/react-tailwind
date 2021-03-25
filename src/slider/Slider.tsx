@@ -13,6 +13,7 @@ import { SliderThumb } from "./SliderThumb";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
+import { SliderMinMax } from "./SliderMinMax";
 
 const [
   SliderStateProvider,
@@ -23,7 +24,7 @@ const [
 });
 
 const [SliderPropsContext, useSliderPropsContext] = createContext<
-  Pick<SliderProps, "orientation" | "size" | "origin"> & {
+  Pick<SliderProps, "orientation" | "size" | "origin" | "showMinMax"> & {
     thumbSize: React.MutableRefObject<{
       width: number;
       height: number;
@@ -44,6 +45,7 @@ export type SliderProps = Omit<BoxProps, "onChange"> &
       "slider",
       "common"
     >["thumb"]["size"];
+    showMinMax?: boolean;
   };
 
 type SliderRenderProps = RenderProp<{
@@ -75,6 +77,7 @@ export const Slider = forwardRefWithAs<
     onChangeStart,
     formatOptions,
     defaultValues,
+    showMinMax,
     ...rest
   } = props;
 
@@ -89,8 +92,8 @@ export const Slider = forwardRefWithAs<
   );
 
   const contextProps = React.useMemo(
-    () => ({ size, orientation, origin, thumbSize, padding }),
-    [size, orientation, origin, thumbSize, padding],
+    () => ({ size, orientation, origin, thumbSize, padding, showMinMax }),
+    [size, orientation, origin, thumbSize, padding, showMinMax],
   );
 
   return (
@@ -98,15 +101,18 @@ export const Slider = forwardRefWithAs<
       <SliderStateProvider value={state}>
         <Box ref={ref} className={sliderWrapperStyles} {...rest}>
           {children ? (
-            runIfFn(children, { state, trackRef, thumbRef })
+            runIfFn(children, { state, trackRef, thumbRef, showMinMax })
           ) : (
-            <SliderTrack ref={trackRef}>
-              <SliderThumb ref={thumbRef}>
-                {thumbContent
-                  ? runIfFn(thumbContent, state.values)
-                  : thumbContent}
-              </SliderThumb>
-            </SliderTrack>
+            <>
+              <SliderTrack ref={trackRef}>
+                <SliderThumb ref={thumbRef}>
+                  {thumbContent
+                    ? runIfFn(thumbContent, state.values)
+                    : thumbContent}
+                </SliderThumb>
+              </SliderTrack>
+              {showMinMax ? <SliderMinMax /> : null}
+            </>
           )}
         </Box>
       </SliderStateProvider>
