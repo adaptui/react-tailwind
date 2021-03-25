@@ -62,8 +62,10 @@ const base = storyTemplate<
 
 export const Default = base({
   id: "email",
-  required: false,
-  invalid: false,
+  isDisabled: false,
+  isRequired: false,
+  isInvalid: false,
+  isReadOnly: false,
   labelText: "Enter Email",
   hintText: "Email should be valid",
   errorText: "Email is invalid",
@@ -72,8 +74,10 @@ export const Default = base({
 
 export const WthSlider = base({
   id: "slider",
-  required: false,
-  invalid: false,
+  isDisabled: false,
+  isReadOnly: false,
+  isRequired: false,
+  isInvalid: false,
   labelText: "Enter value",
   hintText: "Value should be valid",
   errorText: "Value is invalid",
@@ -83,8 +87,8 @@ export const WthSlider = base({
 export const WithSliderValueLabel = () => {
   const [value, setValue] = React.useState(0);
   return (
-    <FormField id="slider" className="w-60" invalid={value > 80}>
-      {({ invalid }) => (
+    <FormField id="slider" className="w-60" isInvalid={value > 80}>
+      {({ isInvalid }) => (
         <>
           <FormLabel>
             Slider value
@@ -96,7 +100,7 @@ export const WithSliderValueLabel = () => {
             values={[value]}
             onChange={v => setValue(v[0])}
           />
-          {!invalid && <FormHelperText id="hint">Hint text</FormHelperText>}
+          {!isInvalid && <FormHelperText id="hint">Hint text</FormHelperText>}
           <FormErrorText>Value is above 80</FormErrorText>
         </>
       )}
@@ -140,7 +144,7 @@ export const ReactHookFormTest = () => {
 
   return (
     <form className="w-60" onSubmit={handleSubmit(onSubmit)}>
-      <FormField id="username" required invalid={!!errors.username}>
+      <FormField id="username" isRequired isInvalid={!!errors.username}>
         {({ inputProps }) => (
           <>
             <FormLabel>

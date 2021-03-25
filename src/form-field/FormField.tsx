@@ -11,10 +11,10 @@ import { useFormControl } from "./useFormControl";
 
 export type CommonFieldProps = {
   id?: string;
-  disabled?: boolean;
-  invalid?: boolean;
-  readonly?: boolean;
-  required?: boolean;
+  isDisabled?: boolean;
+  isInvalid?: boolean;
+  isReadOnly?: boolean;
+  isRequired?: boolean;
 };
 
 type FormFieldContextProps = Omit<
@@ -30,7 +30,14 @@ const [
 export { useFormFieldContext };
 
 const useFormContextValues = (props: FormFieldProps) => {
-  const { id, required, invalid, disabled, readonly, ...htmlProps } = props;
+  const {
+    id,
+    isRequired,
+    isInvalid,
+    isDisabled,
+    isReadOnly,
+    ...htmlProps
+  } = props;
   const uuid = useId(id);
   const idProp = `field-${uuid}`;
 
@@ -42,10 +49,10 @@ const useFormContextValues = (props: FormFieldProps) => {
   const [hasErrorText, setHasErrorText] = useBoolean(false);
 
   const context = {
-    required,
-    invalid,
-    readonly,
-    disabled,
+    isRequired,
+    isInvalid,
+    isReadOnly,
+    isDisabled,
     inputId: id,
     fieldId: idProp,
     labelId,

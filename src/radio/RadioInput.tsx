@@ -17,12 +17,13 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
     checkedIcon,
     disabledIcon,
     uncheckedIcon,
+    disabled,
     ...iconProps
   } = useRadioProps();
 
   const theme = useTheme();
   const radioStyles = cx(theme.radio.input, className);
-  const fieldInputProps = useFormControl();
+  const fieldInputProps = useFormControl({ disabled });
 
   return (
     <ReakitRadio

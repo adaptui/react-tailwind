@@ -25,7 +25,7 @@ export const SwitchInput = forwardRefWithAs<
 
   const theme = useTheme();
   const switchInputStyles = cx(theme.switch.input, className);
-  const fieldInputProps = useFormControl();
+  const fieldInputProps = useFormControl({ disabled: state.disabled });
 
   return (
     <ReakitSwitch

@@ -1,7 +1,12 @@
 import { ariaAttr } from "@renderlesskit/react";
 import { CommonFieldProps, useFormFieldContext } from "./FormField";
 
-export interface UseFormControlProps extends CommonFieldProps {}
+export interface UseFormControlProps extends CommonFieldProps {
+  disabled?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
+  invalid?: boolean;
+}
 
 /**
  * React hook that provides the props that should be spread on to
@@ -19,17 +24,23 @@ export function useFormControl(props: UseFormControlProps = {}, _field?: any) {
   if (field?.hasHelpText) describedBy.push(field?.helpTextId);
   const ariaDescribedBy = describedBy.join(" ");
 
-  const { invalid, disabled, readonly, required, ...cleanProps } = props;
+  const {
+    isInvalid,
+    isDisabled,
+    isReadOnly,
+    isRequired,
+    ...cleanProps
+  } = props;
 
   return {
     ...cleanProps,
     id: props.id ?? field?.inputId,
-    disabled: props.disabled || field?.disabled,
-    readOnly: props.readonly || field?.readonly,
-    required: props.required || field?.required,
-    "aria-invalid": ariaAttr(props.invalid || field?.invalid),
-    "aria-required": ariaAttr(props.required || field?.required),
-    "aria-readonly": ariaAttr(props.readonly || field?.readonly),
+    disabled: props.disabled || props?.isDisabled || field?.isDisabled,
+    readOnly: props.readOnly || props?.isReadOnly || field?.isReadOnly,
+    required: props.required || props?.isRequired || field?.isRequired,
+    "aria-invalid": ariaAttr(props.invalid || field?.isInvalid),
+    "aria-required": ariaAttr(props.required || field?.isRequired),
+    "aria-readonly": ariaAttr(props.readOnly || field?.isReadOnly),
     "aria-describedby": ariaDescribedBy || undefined,
   };
 }
