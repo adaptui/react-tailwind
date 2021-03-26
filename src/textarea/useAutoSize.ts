@@ -6,8 +6,14 @@ import { useMergeRefs, useSafeLayoutEffect } from "../hooks";
 
 type UseAutoSizeProps = Pick<
   TextareaProps,
-  "autoSize" | "value" | "rowsMax" | "onChange" | "ref" | "placeholder"
-> & { rowsMin?: number };
+  | "autoSize"
+  | "value"
+  | "rowsMax"
+  | "onChange"
+  | "ref"
+  | "placeholder"
+  | "rowsMin"
+>;
 
 export const useAutoSize = (props: UseAutoSizeProps) => {
   const {
