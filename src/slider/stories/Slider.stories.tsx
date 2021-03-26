@@ -19,13 +19,16 @@ export default {
   },
 } as Meta;
 
-const base = storyTemplate<SliderProps>(args => {
-  return (
-    <div role="group" aria-labelledby="styled-slider" style={{ width: 200 }}>
-      <Slider {...args} />
-    </div>
-  );
-}, {});
+const base = storyTemplate<SliderProps>(
+  args => {
+    return (
+      <div role="group" aria-labelledby="styled-slider" style={{ width: 200 }}>
+        <Slider {...args} />
+      </div>
+    );
+  },
+  { showMinMax: true },
+);
 
 export const Default = base({ size: "md" });
 export const Origin = base({ origin: 50 });
