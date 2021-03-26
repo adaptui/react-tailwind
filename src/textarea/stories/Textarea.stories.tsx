@@ -11,6 +11,9 @@ export default {
   component: Textarea,
 } as Meta;
 
+const lorem =
+  "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.";
+
 const base = storyTemplate<TextareaProps>(
   args => <Textarea {...args} aria-label="Textarea Story Default Example" />,
   {
@@ -32,13 +35,11 @@ export const Default = base({});
 export const Placeholder = base({ placeholder: "Sample placeholder" });
 export const Content = base({
   placeholder: "Sample placeholder",
-  defaultValue:
-    "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.",
+  defaultValue: lorem,
 });
 export const Disabled = base({
   isDisabled: true,
-  defaultValue:
-    "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.",
+  defaultValue: lorem,
 });
 
 export const Controlled = () => {

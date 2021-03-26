@@ -44,12 +44,12 @@ export const Textarea = forwardRefWithAs<
   const rowsMinProp = rows || rowsMin;
 
   const { handleChange, handleRef, shadowRef, state } = useAutoSize({
-    autoSize,
+    ref,
     value,
     rowsMax,
-    rowsMinProp,
+    autoSize,
     onChange,
-    ref,
+    rowsMinProp,
     placeholder: props.placeholder,
   });
 
@@ -60,6 +60,13 @@ export const Textarea = forwardRefWithAs<
     className,
   );
   const shadowTextareaStyles = cx(textaresStyles, theme.textarea.shadow);
+  const textareaInlineStyles = {
+    height: state.outerHeightStyle,
+    // Need a large enough difference to allow scrolling.
+    // This prevents infinite rendering loop.
+    overflow: state.overflow ? "hidden" : undefined,
+    ...style,
+  };
 
   const formFieldProps = useFormControl({
     isDisabled: isDisabled || props.disabled,
@@ -69,21 +76,15 @@ export const Textarea = forwardRefWithAs<
   });
 
   return (
-    <React.Fragment>
+    <>
       <ReakitInput
         as="textarea"
         ref={handleRef}
         value={value}
-        onChange={handleChange}
-        rows={rowsMinProp}
         cols={cols}
-        style={{
-          height: state.outerHeightStyle,
-          // Need a large enough difference to allow scrolling.
-          // This prevents infinite rendering loop.
-          overflow: state.overflow ? "hidden" : undefined,
-          ...style,
-        }}
+        rows={rowsMinProp}
+        onChange={handleChange}
+        style={textareaInlineStyles}
         className={textaresStyles}
         {...formFieldProps}
       />
@@ -95,7 +96,7 @@ export const Textarea = forwardRefWithAs<
         tabIndex={-1}
         className={shadowTextareaStyles}
       />
-    </React.Fragment>
+    </>
   );
 });
 

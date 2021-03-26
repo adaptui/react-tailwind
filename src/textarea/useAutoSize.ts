@@ -8,15 +8,16 @@ type UseAutoSizeProps = Pick<
   "autoSize" | "value" | "rowsMax" | "onChange" | "ref" | "placeholder"
 > & { rowsMinProp?: number | undefined };
 
-export const useAutoSize = ({
-  autoSize,
-  value,
-  rowsMax,
-  rowsMinProp,
-  onChange,
-  ref,
-  placeholder,
-}: UseAutoSizeProps) => {
+export const useAutoSize = (props: UseAutoSizeProps) => {
+  const {
+    ref,
+    value,
+    rowsMax,
+    onChange,
+    autoSize,
+    rowsMinProp,
+    placeholder,
+  } = props;
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const handleRef = useMergeRefs(ref, inputRef);
   const shadowRef = React.useRef<HTMLTextAreaElement>(null);
@@ -51,7 +52,6 @@ export const useAutoSize = ({
     }
 
     const boxSizing = computedStyle["boxSizing"];
-    console.log(boxSizing);
     const padding =
       getStyleValue(computedStyle, "paddingBottom") +
       getStyleValue(computedStyle, "paddingTop");
@@ -152,9 +152,7 @@ export const useAutoSize = ({
       syncHeight();
     }
 
-    if (onChange) {
-      onChange(event);
-    }
+    onChange?.(event);
   };
 
   return { handleChange, state, handleRef, shadowRef };
