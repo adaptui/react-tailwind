@@ -14,11 +14,11 @@ import { Input } from "../../Input";
 import { Button } from "../../button";
 import { Slider } from "../../slider";
 import { Switch } from "../../switch";
+import { Textarea } from "../../textarea";
 import { InfoCircleIcon } from "../../icons";
 import { Radio, RadioGroup } from "../../radio";
 import { FormLabelValue } from "../FormLabelValue";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
-import { Textarea } from "../../textarea";
 
 export default {
   title: "FormField",

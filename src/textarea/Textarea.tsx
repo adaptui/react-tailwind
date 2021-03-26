@@ -4,9 +4,9 @@ import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { Box } from "../box";
 import { useTheme } from "../theme";
+import { useAutoSize } from "./useAutoSize";
 import { useFormControl } from "../form-field";
 import { forwardRefWithAs } from "../utils/types";
-import { useAutoSize } from "./useAutoSize";
 
 export type TextareaProps = ReakitInputProps & {
   resize?: keyof Renderlesskit.GetThemeValue<"textarea", "resize">;
@@ -32,7 +32,7 @@ export const Textarea = forwardRefWithAs<
     resize = "horizontal",
     rows,
     rowsMax,
-    rowsMin = 1,
+    rowsMin = rows || 1,
     cols,
     value,
     className,
@@ -41,16 +41,20 @@ export const Textarea = forwardRefWithAs<
     onChange,
     ...rest
   } = props;
-  const rowsMinProp = rows || rowsMin;
-
-  const { handleChange, handleRef, shadowRef, state } = useAutoSize({
+  const { handleChange, handleRef, shadowRef, inlineStyles } = useAutoSize({
     ref,
     value,
     rowsMax,
     autoSize,
+    rowsMin,
     onChange,
-    rowsMinProp,
     placeholder: props.placeholder,
+  });
+  const formFieldProps = useFormControl({
+    isDisabled: isDisabled || props.disabled,
+    isReadOnly: isReadOnly || props.readOnly,
+    isInvalid,
+    ...rest,
   });
 
   const theme = useTheme();
@@ -61,19 +65,12 @@ export const Textarea = forwardRefWithAs<
   );
   const shadowTextareaStyles = cx(textaresStyles, theme.textarea.shadow);
   const textareaInlineStyles = {
-    height: state.outerHeightStyle,
+    height: inlineStyles.outerHeightStyle,
     // Need a large enough difference to allow scrolling.
     // This prevents infinite rendering loop.
-    overflow: state.overflow ? "hidden" : undefined,
+    overflow: inlineStyles.overflow ? "hidden" : undefined,
     ...style,
   };
-
-  const formFieldProps = useFormControl({
-    isDisabled: isDisabled || props.disabled,
-    isReadOnly: isReadOnly || props.readOnly,
-    isInvalid: isInvalid,
-    ...rest,
-  });
 
   return (
     <>
@@ -81,9 +78,9 @@ export const Textarea = forwardRefWithAs<
         as="textarea"
         ref={handleRef}
         value={value}
-        cols={cols}
-        rows={rowsMinProp}
         onChange={handleChange}
+        rows={rowsMin}
+        cols={cols}
         style={textareaInlineStyles}
         className={textaresStyles}
         {...formFieldProps}

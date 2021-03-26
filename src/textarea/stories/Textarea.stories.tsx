@@ -1,9 +1,9 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 
-import { Textarea, TextareaProps } from "../index";
-import { Radio, RadioGroup } from "../../radio";
 import { Box } from "../../box";
+import { Radio, RadioGroup } from "../../radio";
+import { Textarea, TextareaProps } from "../index";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
 
 export default {
@@ -33,13 +33,23 @@ const base = storyTemplate<TextareaProps>(
 export const Default = base({});
 
 export const Placeholder = base({ placeholder: "Sample placeholder" });
+
 export const Content = base({
   placeholder: "Sample placeholder",
   defaultValue: lorem,
 });
+
 export const Disabled = base({
   isDisabled: true,
   defaultValue: lorem,
+});
+
+export const AutoSize = base({
+  autoSize: true,
+  resize: "none",
+  cols: 50,
+  defaultValue:
+    "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.",
 });
 
 export const Controlled = () => {

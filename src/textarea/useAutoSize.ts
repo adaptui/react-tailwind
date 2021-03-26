@@ -1,12 +1,13 @@
 import React from "react";
+
 import { debounce } from "../utils";
-import { TextareaProps } from ".";
-import { useMergeRefs, useSafeLayoutEffect } from "..";
+import { TextareaProps } from "./index";
+import { useMergeRefs, useSafeLayoutEffect } from "../hooks";
 
 type UseAutoSizeProps = Pick<
   TextareaProps,
   "autoSize" | "value" | "rowsMax" | "onChange" | "ref" | "placeholder"
-> & { rowsMinProp?: number | undefined };
+> & { rowsMin?: number };
 
 export const useAutoSize = (props: UseAutoSizeProps) => {
   const {
@@ -15,7 +16,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     rowsMax,
     onChange,
     autoSize,
-    rowsMinProp,
+    rowsMin,
     placeholder,
   } = props;
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
@@ -25,7 +26,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
   const { current: isControlled } = React.useRef(value != null);
   const renders = React.useRef(0);
 
-  const [state, setState] = React.useState<{
+  const [inlineStyles, setInlineStyles] = React.useState<{
     outerHeightStyle?: number;
     overflow?: boolean;
   }>({});
@@ -69,11 +70,8 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     // The height of the outer content
     let outerHeight = innerHeight;
 
-    if (rowsMinProp) {
-      outerHeight = Math.max(
-        Number(rowsMinProp) * singleRowHeight,
-        outerHeight,
-      );
+    if (rowsMin) {
+      outerHeight = Math.max(Number(rowsMin) * singleRowHeight, outerHeight);
     }
     if (rowsMax) {
       outerHeight = Math.min(Number(rowsMax) * singleRowHeight, outerHeight);
@@ -85,7 +83,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
       outerHeight + (boxSizing === "border-box" ? padding + border : 0);
     const overflow = Math.abs(outerHeight - innerHeight) <= 1;
 
-    setState(prevState => {
+    setInlineStyles(prevState => {
       // Need a large enough difference to update the height.
       // This prevents infinite rendering loop.
       if (
@@ -116,7 +114,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
       return prevState;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rowsMax, rowsMinProp, placeholder]);
+  }, [rowsMax, rowsMin, placeholder]);
 
   React.useEffect(() => {
     if (!autoSize) return;
@@ -143,19 +141,22 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     renders.current = 0;
   }, [value]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    renders.current = 0;
+  const handleChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      renders.current = 0;
 
-    if (!isControlled) {
-      if (!autoSize) return;
+      if (!isControlled) {
+        if (!autoSize) return;
 
-      syncHeight();
-    }
+        syncHeight();
+      }
 
-    onChange?.(event);
-  };
+      onChange?.(event);
+    },
+    [autoSize, isControlled, onChange, syncHeight],
+  );
 
-  return { handleChange, state, handleRef, shadowRef };
+  return { handleChange, inlineStyles, handleRef, shadowRef };
 };
 
 function getStyleValue(
