@@ -3,8 +3,8 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
 import { useSliderPropsContext } from "./Slider";
+import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
 
 export type SliderMinMaxProps = BoxProps & {};
@@ -14,7 +14,7 @@ export const SliderMinMax = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { className, ...rest } = props;
+  const { className, children, ...rest } = props;
   const { orientation = "horizontal", origin = 0 } = useSliderPropsContext();
   const { isReversed } = useSliderValues({
     orientation: orientation,
@@ -30,8 +30,14 @@ export const SliderMinMax = forwardRefWithAs<
 
   return (
     <Box className={sliderMinMaxStyles} ref={ref} {...rest}>
-      <span>Min</span>
-      <span>Max</span>
+      {children ? (
+        children
+      ) : (
+        <>
+          <span>Min</span>
+          <span>Max</span>
+        </>
+      )}
     </Box>
   );
 });
