@@ -10,7 +10,7 @@ import {
   FormFieldProps,
   FormRequiredText,
 } from "..";
-import { Input } from "../../Input";
+import { Input } from "../../input";
 import { Button } from "../../button";
 import { Slider } from "../../slider";
 import { Switch } from "../../switch";

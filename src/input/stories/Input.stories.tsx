@@ -10,7 +10,7 @@ import {
   InputSuffix,
   InputGroupSuffix,
   InputGroupPrefix,
-} from "../";
+} from "../index";
 import { Avatar } from "../../avatar";
 import { EyeClose, EyeOpen } from "../..";
 import { GenericAvatar } from "../../icons";
