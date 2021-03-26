@@ -17,6 +17,7 @@ import { radio } from "./radio";
 import { slider } from "./slider";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
+import { formField } from "./form-field";
 import { input } from "./input";
 
 const theme = {
@@ -39,6 +40,7 @@ const theme = {
   tag,
   tooltip,
   toast,
+  formField,
   input,
 };
 
