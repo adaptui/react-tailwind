@@ -370,6 +370,7 @@ const renderlesskitConfig = {
       "hover",
       "lib:focus",
       "focus",
+      "disabled",
       "lib:aria-selected",
       "aria-selected",
       "lib:aria-disabled",

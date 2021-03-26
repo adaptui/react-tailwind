@@ -14,6 +14,7 @@ import { Input } from "../../Input";
 import { Button } from "../../button";
 import { Slider } from "../../slider";
 import { Switch } from "../../switch";
+import { Textarea } from "../../textarea";
 import { InfoCircleIcon } from "../../icons";
 import { Radio, RadioGroup } from "../../radio";
 import { FormLabelValue } from "../FormLabelValue";
@@ -26,38 +27,48 @@ export default {
 
 const base = storyTemplate<
   FormFieldProps & {
-    labelText: string;
-    hintText: string;
-    errorText: string;
+    labelText?: string;
+    hintText?: string;
+    errorText?: string;
     value?: any;
   }
->(({ labelText, hintText, errorText, value, children, id, ...args }) => {
-  return (
-    <FormField id={id} className="w-60" {...args}>
-      <FormLabel>
-        {labelText}
-        <FormRequiredText>Required</FormRequiredText>
-        {value && <FormLabelValue>{value}</FormLabelValue>}
-      </FormLabel>
-      {children}
-      <FormHelperText>
-        <InfoCircleIcon />
-        <span>{hintText}</span>
-      </FormHelperText>
-      <FormErrorText>
-        <InfoCircleIcon />
-        <span>{errorText}</span>
-      </FormErrorText>
-    </FormField>
-  );
-});
+>(
+  ({ labelText, hintText, errorText, value, children, id, ...args }) => {
+    return (
+      <FormField id={id} className="w-60" {...args}>
+        {labelText && (
+          <FormLabel>
+            {labelText}
+            <FormRequiredText>Required</FormRequiredText>
+            {value && <FormLabelValue>{value}</FormLabelValue>}
+          </FormLabel>
+        )}
+        {children}
+        {hintText && (
+          <FormHelperText>
+            <InfoCircleIcon />
+            <span>{hintText}</span>
+          </FormHelperText>
+        )}
+        {errorText && (
+          <FormErrorText>
+            <InfoCircleIcon />
+            <span>{errorText}</span>
+          </FormErrorText>
+        )}
+      </FormField>
+    );
+  },
+  {
+    isDisabled: false,
+    isRequired: false,
+    isInvalid: false,
+    isReadOnly: false,
+  },
+);
 
 export const Default = base({
   id: "email",
-  isDisabled: false,
-  isRequired: false,
-  isInvalid: false,
-  isReadOnly: false,
   labelText: "Enter Email",
   hintText: "Email should be valid",
   errorText: "Email is invalid",
@@ -114,15 +125,19 @@ export const WithRadioGroups = () => {
   );
 };
 
-export const WithSwitch = () => {
-  return (
-    <FormField id="switch">
-      <FormLabel>Enable darkmode?</FormLabel>
-      <Switch />
-      <FormHelperText>Switch darkmode</FormHelperText>
-    </FormField>
-  );
-};
+export const WithSwitch = base({
+  id: "switch",
+  labelText: "Enable darkmode?",
+  hintText: "Switch darkmode",
+  children: <Switch />,
+});
+
+export const WithTextarea = base({
+  id: "switch",
+  labelText: "Add description",
+  hintText: "Describe the bug",
+  children: <Textarea />,
+});
 
 type Inputs = {
   username: string;
