@@ -18,6 +18,7 @@ import { InfoCircleIcon } from "../../icons";
 import { Radio, RadioGroup } from "../../radio";
 import { FormLabelValue } from "../FormLabelValue";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
+import { Textarea } from "../../textarea";
 
 export default {
   title: "FormField",
@@ -120,6 +121,16 @@ export const WithSwitch = () => {
       <FormLabel>Enable darkmode?</FormLabel>
       <Switch />
       <FormHelperText>Switch darkmode</FormHelperText>
+    </FormField>
+  );
+};
+
+export const WithTextarea = () => {
+  return (
+    <FormField id="textarea">
+      <FormLabel>Add description</FormLabel>
+      <Textarea />
+      <FormHelperText>Describe the bug</FormHelperText>
     </FormField>
   );
 };
