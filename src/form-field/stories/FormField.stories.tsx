@@ -7,10 +7,10 @@ import {
   FormLabel,
   FormErrorText,
   FormHelperText,
-  useFormControl,
   FormFieldProps,
   FormRequiredText,
 } from "..";
+import { Input } from "../../Input";
 import { Button } from "../../button";
 import { Slider } from "../../slider";
 import { Switch } from "../../switch";
@@ -23,14 +23,6 @@ export default {
   title: "FormField",
   component: FormField,
 } as Meta;
-
-const inputStyles =
-  "w-full outline-none px-2 py-1 text-xs shadow-sm font-medium text-gray-500 border h-6 border-gray-300 hover:border-gray-400 rounded-md focus:text-gray-800 focus:border-blue-500";
-
-const Input = React.forwardRef<HTMLInputElement, any>((props, ref) => {
-  const inputProps = useFormControl(props);
-  return <input {...inputProps} ref={ref} className={inputStyles} />;
-});
 
 const base = storyTemplate<
   FormFieldProps & {
@@ -151,7 +143,7 @@ export const ReactHookFormTest = () => {
               Enter username
               <FormRequiredText>Required</FormRequiredText>
             </FormLabel>
-            <input
+            <Input
               {...inputProps}
               ref={register({
                 maxLength: { value: 10, message: "Username is too long" },
@@ -159,7 +151,6 @@ export const ReactHookFormTest = () => {
               })}
               type="text"
               name="username"
-              className={inputStyles}
             />
             {!errors.username && <FormHelperText>Hint text</FormHelperText>}
             <FormErrorText>{errors.username?.message}</FormErrorText>

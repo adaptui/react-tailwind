@@ -11,9 +11,6 @@ export interface UseFormControlProps extends CommonFieldProps {
 /**
  * React hook that provides the props that should be spread on to
  * input fields (`input`, `select`, `textarea`, etc.).
- *
- * It provides a convenient way to control a form fields, validation
- * and helper text.
  */
 export function useFormControl(props: UseFormControlProps = {}, _field?: any) {
   const field = useFormFieldContext() || _field;
@@ -29,18 +26,23 @@ export function useFormControl(props: UseFormControlProps = {}, _field?: any) {
     isDisabled,
     isReadOnly,
     isRequired,
-    ...cleanProps
+    ...cleanHtmlProps
   } = props;
 
+  const _invalid = props?.invalid || isInvalid || field?.isInvalid;
+  const _disabled = props?.disabled || isDisabled || field?.isDisabled;
+  const _required = props?.required || isRequired || field?.isRequired;
+  const _readOnly = props?.readOnly || isReadOnly || field?.isReadOnly;
+
   return {
-    ...cleanProps,
-    id: props.id ?? field?.inputId,
-    disabled: props.disabled || props?.isDisabled || field?.isDisabled,
-    readOnly: props.readOnly || props?.isReadOnly || field?.isReadOnly,
-    required: props.required || props?.isRequired || field?.isRequired,
-    "aria-invalid": ariaAttr(props.invalid || field?.isInvalid),
-    "aria-required": ariaAttr(props.required || field?.isRequired),
-    "aria-readonly": ariaAttr(props.readOnly || field?.isReadOnly),
+    ...cleanHtmlProps,
+    id: props?.id ?? field?.inputId,
+    disabled: _disabled,
+    readOnly: _readOnly,
+    required: _required,
+    "aria-invalid": ariaAttr(_invalid),
+    "aria-required": ariaAttr(_required),
+    "aria-readonly": ariaAttr(_readOnly),
     "aria-describedby": ariaDescribedBy || undefined,
   };
 }

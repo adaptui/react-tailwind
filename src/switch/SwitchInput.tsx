@@ -25,7 +25,10 @@ export const SwitchInput = forwardRefWithAs<
 
   const theme = useTheme();
   const switchInputStyles = cx(theme.switch.input, className);
-  const fieldInputProps = useFormControl({ disabled: state.disabled });
+  const fieldInputProps = useFormControl({
+    isDisabled: state.disabled,
+    ...rest,
+  });
 
   return (
     <ReakitSwitch
@@ -34,7 +37,6 @@ export const SwitchInput = forwardRefWithAs<
       className={switchInputStyles}
       {...state}
       {...fieldInputProps}
-      {...rest}
     />
   );
 });
