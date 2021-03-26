@@ -8,6 +8,7 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { useSwitchContext } from "./Switch";
 import { forwardRefWithAs } from "../utils/types";
+import { useFormControl } from "../form-field";
 
 export type SwitchInputProps = ReakitSwitchProps & {};
 
@@ -24,6 +25,10 @@ export const SwitchInput = forwardRefWithAs<
 
   const theme = useTheme();
   const switchInputStyles = cx(theme.switch.input, className);
+  const fieldInputProps = useFormControl({
+    isDisabled: state.disabled,
+    ...rest,
+  });
 
   return (
     <ReakitSwitch
@@ -31,7 +36,7 @@ export const SwitchInput = forwardRefWithAs<
       role="switch"
       className={switchInputStyles}
       {...state}
-      {...rest}
+      {...fieldInputProps}
     />
   );
 });

@@ -18,6 +18,7 @@ import { tag } from "./tag";
 import { textarea } from "./textarea";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
+import { formField } from "./form-field";
 import { input } from "./input";
 
 const theme = {
@@ -41,6 +42,7 @@ const theme = {
   textarea,
   tooltip,
   toast,
+  formField,
   input,
 };
 

@@ -1,11 +1,12 @@
 import React from "react";
-import { ariaAttr, cx } from "@renderlesskit/react";
+import { cx } from "@renderlesskit/react";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { useTheme } from "../theme";
 import { AddonTypes } from "./InputAddons";
 import { getValidChildren } from "../utils";
 import { useSafeLayoutEffect } from "../hooks";
+import { useFormControl } from "../form-field";
 
 export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   /**
@@ -40,6 +41,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const disabled = isDisabled || props.disabled;
     const readOnly = isReadOnly || props.readOnly;
+    const fieldInputProps = useFormControl({
+      ...rest,
+      isDisabled: disabled,
+      isReadOnly: readOnly,
+      isInvalid: isInvalid,
+    });
 
     const theme = useTheme();
     const inputWrapperStyles = cx(theme.input.wrapper);
@@ -101,16 +108,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={inputWrapperStyles}>
         {clones.find(child => isPrefix(child?.type?.id))}
         <ReakitInput
-          aria-invalid={ariaAttr(isInvalid)}
-          aria-readonly={ariaAttr(readOnly)}
-          readOnly={readOnly}
-          disabled={disabled}
           className={inputStyles}
           ref={ref}
           style={
             disabled ? { pointerEvents: "unset", ...inputStyle } : inputStyle
           }
-          {...rest}
+          {...fieldInputProps}
         />
         {clones.find(child => isSuffix(child?.type?.id))}
       </div>
