@@ -4,48 +4,42 @@ import { Meta } from "@storybook/react/types-6-0";
 import { Textarea, TextareaProps } from "../index";
 import { Radio, RadioGroup } from "../../radio";
 import { Box } from "../../box";
+import { storyTemplate } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Textarea",
   component: Textarea,
 } as Meta;
 
-export const Default = () => (
-  <Textarea aria-label="Textarea Story Default Example" />
+const base = storyTemplate<TextareaProps>(
+  args => <Textarea {...args} aria-label="Textarea Story Default Example" />,
+  {
+    isReadOnly: false,
+    isDisabled: false,
+    isInvalid: false,
+    placeholder: "",
+    defaultValue: "",
+    rowsMax: 100,
+    rowsMin: 0,
+    cols: 10,
+    resize: "both",
+    autoSize: false,
+  },
 );
 
-export const Placeholder = () => (
-  <Textarea
-    aria-label="Textarea Story Placeholder Example"
-    placeholder="Sample placeholder"
-  />
-);
+export const Default = base({});
 
-export const Content = () => (
-  <Textarea
-    aria-label="Textarea Story Content Example"
-    placeholder="Enter a description"
-    defaultValue="Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam."
-  />
-);
-
-export const Autosize = () => (
-  <Textarea
-    autoSize
-    aria-label="Textarea Story Autosize Example"
-    placeholder="Enter a description"
-    defaultValue="Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam."
-  />
-);
-
-export const Disabled = () => (
-  <Textarea
-    aria-label="Textarea Story Disabled Example"
-    disabled
-    placeholder="Enter a description"
-    defaultValue="Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam."
-  />
-);
+export const Placeholder = base({ placeholder: "Sample placeholder" });
+export const Content = base({
+  placeholder: "Sample placeholder",
+  defaultValue:
+    "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.",
+});
+export const Disabled = base({
+  isDisabled: true,
+  defaultValue:
+    "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.",
+});
 
 export const Controlled = () => {
   const [text, setText] = React.useState<string>("");
@@ -108,7 +102,7 @@ export const RowsCols = () => {
             type="number"
             placeholder="Enter no. of rows"
             value={rows}
-            onChange={e => setRows(e.target.value)}
+            onChange={e => setRows(e.target.valueAsNumber)}
           />
         </label>
         <label htmlFor="cols" className="flex flex-col space-y-2">
@@ -118,7 +112,7 @@ export const RowsCols = () => {
             type="number"
             placeholder="Enter no. of cols"
             value={cols}
-            onChange={e => setCols(e.target.value)}
+            onChange={e => setCols(e.target.valueAsNumber)}
           />
         </label>
       </div>

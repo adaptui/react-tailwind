@@ -1,18 +1,23 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
+import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
+import { Box } from "../box";
 import { useTheme } from "../theme";
 import { debounce } from "../utils";
-import { Box, BoxProps } from "../box";
+import { useFormControl } from "../form-field";
 import { forwardRefWithAs } from "../utils/types";
 import { useMergeRefs, useSafeLayoutEffect } from "../hooks";
 
-export type TextareaProps = BoxProps & {
+export type TextareaProps = ReakitInputProps & {
   resize?: keyof Renderlesskit.GetThemeValue<"textarea", "resize">;
   cols?: number;
   rowsMin?: number;
   rowsMax?: number;
   autoSize?: boolean;
+  isDisabled?: boolean;
+  isReadOnly?: boolean;
+  isInvalid?: boolean;
 };
 
 export const Textarea = forwardRefWithAs<
@@ -21,6 +26,9 @@ export const Textarea = forwardRefWithAs<
   "textarea"
 >((props, ref) => {
   const {
+    isDisabled,
+    isReadOnly,
+    isInvalid,
     autoSize,
     resize = "horizontal",
     rows,
@@ -54,6 +62,13 @@ export const Textarea = forwardRefWithAs<
     className,
   );
   const shadowTextareaStyles = cx(textaresStyles, theme.textarea.shadow);
+
+  const formFieldProps = useFormControl({
+    isDisabled: isDisabled || props.disabled,
+    isReadOnly: isReadOnly || props.readOnly,
+    isInvalid: isInvalid,
+    ...rest,
+  });
 
   // Logic from https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/TextareaAutosize/TextareaAutosize.js
   const syncHeight = React.useCallback(() => {
@@ -184,7 +199,7 @@ export const Textarea = forwardRefWithAs<
 
   return (
     <React.Fragment>
-      <Box
+      <ReakitInput
         as="textarea"
         ref={handleRef}
         value={value}
@@ -199,7 +214,7 @@ export const Textarea = forwardRefWithAs<
           ...style,
         }}
         className={textaresStyles}
-        {...rest}
+        {...formFieldProps}
       />
       <Box
         as="textarea"
