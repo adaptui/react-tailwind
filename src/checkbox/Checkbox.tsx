@@ -79,6 +79,17 @@ export const Checkbox = forwardRefWithAs<
   );
   const context = React.useMemo(() => ({ state, size }), [state, size]);
 
+  if (!children) {
+    return (
+      <CheckboxProvider value={context}>
+        <CheckboxLabel ref={ref} {...rest}>
+          <CheckboxInput />
+          <CheckboxIcon />
+        </CheckboxLabel>
+      </CheckboxProvider>
+    );
+  }
+
   return (
     <CheckboxProvider value={context}>
       {typeof children !== "string" ? (
@@ -87,7 +98,7 @@ export const Checkbox = forwardRefWithAs<
         <CheckboxLabel ref={ref} {...rest}>
           <CheckboxInput />
           <CheckboxIcon />
-          {children ? <CheckboxText>{children}</CheckboxText> : null}
+          {<CheckboxText>{children}</CheckboxText>}
         </CheckboxLabel>
       )}
     </CheckboxProvider>
