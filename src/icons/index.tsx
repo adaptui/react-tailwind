@@ -15,3 +15,4 @@ export * from "./Photograph";
 export * from "./Search";
 export * from "./Wheel";
 export * from "./Check";
+export * from "./EyesIcon";

@@ -5,6 +5,7 @@ import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { useRadioProps, useRadioStateContext } from "./Radio";
+import { useFormControl } from "../form-field";
 
 export type RadioInputProps = Partial<ReakitRadioProps> & {};
 
@@ -16,18 +17,24 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
     checkedIcon,
     disabledIcon,
     uncheckedIcon,
+    disabled,
     ...iconProps
   } = useRadioProps();
 
   const theme = useTheme();
   const radioStyles = cx(theme.radio.input, className);
+  const { id, ...fieldInputProps } = useFormControl({
+    isDisabled: disabled,
+    ...rest,
+  });
 
   return (
     <ReakitRadio
       ref={ref}
       className={radioStyles}
-      {...state}
       {...iconProps}
+      {...fieldInputProps}
+      {...state}
       {...rest}
     />
   );

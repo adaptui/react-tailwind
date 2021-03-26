@@ -13,11 +13,11 @@ import { SliderThumb } from "./SliderThumb";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
+import { useFormControl } from "../form-field";
 
-const [
-  SliderStateProvider,
-  useSliderContext,
-] = createContext<SliderStateReturn>({
+const [SliderStateProvider, useSliderContext] = createContext<
+  SliderStateReturn & { isReadOnly?: boolean }
+>({
   name: "SliderState",
   strict: false,
 });
@@ -36,8 +36,9 @@ const [SliderPropsContext, useSliderPropsContext] = createContext<
 
 export { useSliderContext, useSliderPropsContext };
 
-export type SliderProps = Omit<BoxProps, "onChange"> &
-  SliderInitialState & {
+export type SliderProps = Omit<BoxProps, "onChange"> & {
+  isReadOnly?: boolean;
+} & SliderInitialState & {
     origin?: number;
     thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
     size?: keyof Renderlesskit.GetThemeValue<
@@ -75,11 +76,21 @@ export const Slider = forwardRefWithAs<
     onChangeStart,
     formatOptions,
     defaultValues,
+    isReadOnly,
     ...rest
   } = props;
 
   const theme = useTheme();
-  const state = useSliderState({ ...props, orientation });
+
+  const { readOnly: fieldReadOnly, disabled: fieldDisabled } = useFormControl({
+    isReadOnly,
+    isDisabled,
+  });
+  const state = useSliderState({
+    ...props,
+    orientation,
+    isDisabled: fieldReadOnly || fieldDisabled,
+  });
   const { thumbSize, padding, thumbRef, trackRef } = useSliderDimensions();
 
   const sliderWrapperStyles = cx(

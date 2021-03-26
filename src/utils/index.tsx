@@ -128,3 +128,8 @@ export const debounce = (func, wait = 166) => {
 
   return debounced;
 };
+
+// String assertions
+export function isString(value: any): value is string {
+  return Object.prototype.toString.call(value) === "[object String]";
+}

@@ -8,8 +8,9 @@ import {
 import { useTheme } from "..";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
-import { SliderProps, useSliderPropsContext } from "./Slider";
+import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";
 import { BoxProps } from "../box";
+import { useFormControl } from "../form-field";
 
 type SliderThumbProps = BoxProps &
   Omit<SliderProps, "size" | "orientation" | "origin">;
@@ -39,6 +40,12 @@ export const SliderThumb = forwardRefWithAs<
     theme.slider[orientation].thumb.base,
     className,
   );
+
+  const { isDisabled, isReadOnly } = useSliderContext();
+  const fieldInputProps = useFormControl({
+    isDisabled,
+    isReadOnly,
+  });
 
   const thumbDynamicStyles = (index: number) => {
     const percent = getThumbPercent(index) * 100;
@@ -71,6 +78,7 @@ export const SliderThumb = forwardRefWithAs<
             <SliderInput
               className={theme.slider.common.input}
               index={index}
+              {...fieldInputProps}
               {...state}
             />
             {children}

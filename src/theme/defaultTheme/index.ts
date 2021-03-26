@@ -18,6 +18,8 @@ import { tag } from "./tag";
 import { textarea } from "./textarea";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
+import { formField } from "./form-field";
+import { input } from "./input";
 
 const theme = {
   alert,
@@ -40,6 +42,8 @@ const theme = {
   textarea,
   tooltip,
   toast,
+  formField,
+  input,
 };
 
 export default theme;
