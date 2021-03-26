@@ -108,7 +108,7 @@ export const isObject = (value: any): value is Dict => {
 export const objectKeys = <T extends Dict>(obj: T) =>
   (Object.keys(obj) as unknown) as (keyof T)[];
 
-// Corresponds to 10 frames at 60 Hz.
+// Corresponds to 10 frames at 60 Hz
 // A few bytes payload overhead when lodash/debounce is ~3 kB and debounce ~300 B.
 export const debounce = (func: any, wait = 166) => {
   let timeout: NodeJS.Timeout;
