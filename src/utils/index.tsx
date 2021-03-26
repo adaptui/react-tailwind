@@ -110,9 +110,9 @@ export const objectKeys = <T extends Dict>(obj: T) =>
 
 // Corresponds to 10 frames at 60 Hz.
 // A few bytes payload overhead when lodash/debounce is ~3 kB and debounce ~300 B.
-export const debounce = (func, wait = 166) => {
-  let timeout;
-  function debounced(...args) {
+export const debounce = (func: Function, wait = 166) => {
+  let timeout: any;
+  function debounced(this: any, ...args: any) {
     // eslint-disable-next-line consistent-this
     const that = this;
     const later = () => {
