@@ -17,7 +17,7 @@ import {
 } from "../../../.storybook/storybookUtils";
 
 export default {
-  title: "Checkbox",
+  title: "Forms/Checkbox",
   component: Checkbox,
   argTypes: {
     size: createUnionControl({

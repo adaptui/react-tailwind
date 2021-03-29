@@ -6,7 +6,7 @@ import { Button } from "../../button";
 import { useCustomToast } from "./CustomToast";
 import { Toasts, useToast, ToastProvider, useToastHandlers } from "../index";
 
-export default { title: "Toast" } as Meta;
+export default { title: "Popups/Toast" } as Meta;
 
 export const Default = () => {
   return (

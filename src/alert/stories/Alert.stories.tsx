@@ -8,7 +8,7 @@ import {
 import { Alert, AlertProps } from "../index";
 
 export default {
-  title: "Alert",
+  title: "Primitives/Alert",
   component: Alert,
   argTypes: {
     status: createUnionControl([

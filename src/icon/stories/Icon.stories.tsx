@@ -17,7 +17,7 @@ import {
 import { Icon } from "../index";
 
 export default {
-  title: "Icon",
+  title: "Primitives/Icon",
   component: Icon,
 } as Meta;
 

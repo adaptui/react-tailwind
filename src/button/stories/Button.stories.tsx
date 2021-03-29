@@ -26,7 +26,7 @@ import {
 } from "../../../.storybook/storybookUtils";
 
 export default {
-  title: "Button",
+  title: "Primitives/Button",
   component: Button,
   argTypes: createControls("button", {
     unions: ["size", "variant"],

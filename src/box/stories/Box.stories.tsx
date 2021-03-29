@@ -5,7 +5,7 @@ import { Box, BoxProps } from "../index";
 import { Button as ButtonComponent } from "../../button";
 
 export default {
-  title: "Box",
+  title: "Primitives/Box",
   component: Box,
 } as Meta;
 

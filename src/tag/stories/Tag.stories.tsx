@@ -11,7 +11,7 @@ import {
 import { Tag, TagProps, TagGroupProps, TagGroup } from "..";
 
 export default {
-  title: "Tag",
+  title: "Primitives/Tag",
   component: Tag,
   argTypes: createControls("tag", {
     unions: ["size", "variant"],
