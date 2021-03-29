@@ -7,8 +7,11 @@ import { calendar } from "./calendar";
 import { checkbox } from "./checkbox";
 import { circularProgress } from "./circularProgress";
 import { datepicker } from "./datepicker";
+import { formField } from "./form-field";
 import { icon } from "./icon";
 import { iconButton } from "./iconButton";
+import { input } from "./input";
+import { list } from "./list";
 import { progress } from "./progress";
 import { spinner } from "./spinner";
 import { _switch } from "./switch";
@@ -18,8 +21,6 @@ import { tag } from "./tag";
 import { textarea } from "./textarea";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
-import { formField } from "./form-field";
-import { input } from "./input";
 
 const theme = {
   alert,
@@ -31,8 +32,11 @@ const theme = {
   checkbox,
   circularProgress,
   datepicker,
+  formField,
   icon,
   iconButton,
+  input,
+  list,
   progress,
   radio,
   slider,
@@ -42,8 +46,6 @@ const theme = {
   textarea,
   tooltip,
   toast,
-  formField,
-  input,
 };
 
 export default theme;
