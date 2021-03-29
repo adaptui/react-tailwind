@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormField /> should render FormField 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col space-y-2"
+    id="field-email"
+    role="group"
+  >
+    <label
+      class="text-xs text-gray-900 inline-flex items-center justify-between"
+      data-testid="testid-label"
+      for="email"
+      id="field-email-label"
+    >
+      Form label
+    </label>
+    <div
+      class="lib:relative lib:inline-flex"
+    >
+      <input
+        aria-describedby="field-email-error-text field-email-help-text"
+        class="lib:appearance-none lib:w-full lib:outline-none lib:px-2 lib:py-1 lib:text-xs lib:shadow-sm lib:font-medium lib:placeholder-text-gray-500 lib:border lib:h-6 lib:border-gray-300 lib:hover:border-gray-400 lib:rounded-md lib:text-gray-800 lib:focus:border-blue-500 lib:focus:shadow-input lib:disabled:bg-gray-100 lib:disabled:shadow-none lib:disabled:cursor-not-allowed lib:disabled:border-gray-300"
+        data-testid="testid-input"
+        id="email"
+      />
+    </div>
+    <div
+      class="text-xs text-gray-500 inline-flex items-center space-x-1 leading-4"
+      data-testid="testid-hint"
+      id="field-email-help-text"
+    >
+      This is hint text
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<FormField /> should support render props 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col space-y-2"
+    id="field-email"
+    role="group"
+  >
+    <label
+      class="text-xs text-gray-900 inline-flex items-center justify-between"
+      for="email"
+      id="field-email-label"
+    >
+      Form label
+    </label>
+    <input
+      aria-describedby="field-email-help-text"
+      aria-invalid="true"
+      aria-readonly="true"
+      aria-required="true"
+      disabled=""
+      id="email"
+      readonly=""
+      required=""
+    />
+    <div
+      class="text-xs text-gray-500 inline-flex items-center space-x-1 leading-4"
+      id="field-email-help-text"
+    >
+      This is hint text
+    </div>
+    {
+  "isRequired": true,
+  "isInvalid": true,
+  "isReadOnly": true,
+  "isDisabled": true,
+  "inputId": "email",
+  "fieldId": "field-email",
+  "labelId": "field-email-label",
+  "errorTextId": "field-email-error-text",
+  "helpTextId": "field-email-help-text",
+  "hasHelpText": true,
+  "hasErrorText": false
+}
+  </div>
+</DocumentFragment>
+`;
