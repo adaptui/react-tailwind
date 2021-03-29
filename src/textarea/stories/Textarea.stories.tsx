@@ -7,7 +7,7 @@ import { Textarea, TextareaProps } from "../index";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
 
 export default {
-  title: "Textarea",
+  title: "Forms/Textarea",
   component: Textarea,
 } as Meta;
 

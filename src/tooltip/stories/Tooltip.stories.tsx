@@ -10,7 +10,7 @@ import { Tooltip, TooltipProps } from "../Tooltip";
 import { ExclamationTriangleIcon } from "../../icons";
 
 export default {
-  title: "Tooltip",
+  title: "Popups/Tooltip",
   component: Tooltip,
   argTypes: {
     placement: createUnionControl([

@@ -10,7 +10,7 @@ import {
 import { Progress, ProgressProps, ProgressTrack, ProgressBar } from "../index";
 
 export default {
-  title: "Progress",
+  title: "Feedback/Progress",
   component: Progress,
   argTypes: { size: createUnionControl(["sm", "md", "lg", "xl"]) },
 } as Meta;

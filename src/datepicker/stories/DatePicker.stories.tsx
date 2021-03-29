@@ -8,7 +8,7 @@ import {
 } from "../DatePicker";
 
 export default {
-  title: "DatePicker",
+  title: "Forms/DatePicker",
   component: CDatePicker,
   argTypes: {},
 } as Meta;

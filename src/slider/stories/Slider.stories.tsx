@@ -11,7 +11,7 @@ import { Slider, SliderProps } from "../Slider";
 import { SliderThumbHandle } from "../../icons/SliderThumbHandle";
 
 export default {
-  title: "Slider",
+  title: "Forms/Slider",
   component: Slider,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),

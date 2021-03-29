@@ -48,3 +48,13 @@ export type Dict<T = any> = Record<string, T>;
 export type Split<T, K extends string> = T extends `${infer P1}${K}${infer P2}`
   ? [P1, ...Split<P2, K>]
   : [T];
+
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
+
+export type DeepDictionary<K> = {
+  [P in keyof K]: K[P] extends object
+    ? DeepDictionary<K[P]> & { [x: string]: any }
+    : K[P];
+};

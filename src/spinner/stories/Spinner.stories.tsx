@@ -8,7 +8,7 @@ import {
 import { Spinner, SpinnerProps } from "../index";
 
 export default {
-  title: "Spinner",
+  title: "Feedback/Spinner",
   component: Spinner,
   argTypes: createControls("spinner", { unions: ["size", "stroke"] }),
 } as Meta;
