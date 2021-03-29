@@ -1,19 +1,10 @@
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
-import { defaults, cloneDeep, isString, isUndefined, mergeWith } from "lodash";
+import { defaults, cloneDeep, mergeWith, isString, isUndefined } from "lodash";
 
-import { createContext } from "../utils";
 import defaultTheme from "./defaultTheme";
-
-type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>;
-};
-
-type DeepDictionary<K> = {
-  [P in keyof K]: K[P] extends object
-    ? DeepDictionary<K[P]> & { [x: string]: any }
-    : K[P];
-};
+import { createContext } from "../utils";
+import { DeepDictionary, DeepPartial } from "../utils/types";
 
 export type DefaultTheme = typeof defaultTheme;
 
