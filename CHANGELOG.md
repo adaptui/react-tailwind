@@ -4,6 +4,76 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.0.1-alpha.3](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2021-03-31)
+
+### Features
+
+- **jit:** ✨ add tailwind jit build
+  ([#101](https://github.com/timelessco/renderlesskit-react-tailwind/issues/101))
+  ([b604c8e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b604c8e2e98adac6aa4d2841f5a2c114b84fcb3c))
+- **list:** ✨ add list & list item comp
+  ([#110](https://github.com/timelessco/renderlesskit-react-tailwind/issues/110))
+  ([f702e51](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f702e516fd40c692e840bd0de6e6f419844e5d9d))
+- added initial tooltip
+  ([#74](https://github.com/timelessco/renderlesskit-react-tailwind/issues/74))
+  ([86c59be](https://github.com/timelessco/renderlesskit-react-tailwind/commit/86c59be9d9b13fbf7a6254e977cd99d0fa06322e)),
+  closes
+  [#99](https://github.com/timelessco/renderlesskit-react-tailwind/issues/99)
+- **toast:** ✨ add toast with inbuilt state
+  ([#90](https://github.com/timelessco/renderlesskit-react-tailwind/issues/90))
+  ([11d0aef](https://github.com/timelessco/renderlesskit-react-tailwind/commit/11d0aef5a01714636f3f03291bd575cdf4aa5dbf))
+
+### Bug Fixes
+
+- exclude tests & testUtils from final build
+  ([#91](https://github.com/timelessco/renderlesskit-react-tailwind/issues/91))
+  ([3bb57e7](https://github.com/timelessco/renderlesskit-react-tailwind/commit/3bb57e763a6ef38c76f72b502735c9499fb3a135))
+- separate theme from tailwind config
+  ([#87](https://github.com/timelessco/renderlesskit-react-tailwind/issues/87))
+  ([cafe7ee](https://github.com/timelessco/renderlesskit-react-tailwind/commit/cafe7eef4b9e9e00a0bca137bf18aaf2c0a4513d))
+- typescript preset theme
+  ([#84](https://github.com/timelessco/renderlesskit-react-tailwind/issues/84))
+  ([8a9c2ef](https://github.com/timelessco/renderlesskit-react-tailwind/commit/8a9c2ef66388b95a0b0057cb459a149e0a52966f))
+
+### Others
+
+- add missing entrypoints
+  ([#108](https://github.com/timelessco/renderlesskit-react-tailwind/issues/108))
+  ([b227531](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b227531bc01c1315bbce29b87ced861429fb269e))
+- **deps:** ➕ add pinst to remove postinstall while publishing
+  ([65c8d3d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/65c8d3dc7c2e5f48b932153a19a5b3a052ddd93a))
+- **release:** 0.0.1-alpha.2
+  ([ef2423d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ef2423d14c58b75df553937336ddb68588fa0dfc))
+
+### Tests
+
+- added badge tests
+  ([#89](https://github.com/timelessco/renderlesskit-react-tailwind/issues/89))
+  ([3507410](https://github.com/timelessco/renderlesskit-react-tailwind/commit/3507410d6f1d30b101233f9b2119a1d023c9cd80))
+- added switch tests
+  ([#88](https://github.com/timelessco/renderlesskit-react-tailwind/issues/88))
+  ([97bd83e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/97bd83e4c00f838e9270263deca39c954ca056af))
+- added test for checkbox
+  ([#93](https://github.com/timelessco/renderlesskit-react-tailwind/issues/93))
+  ([b41ae05](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b41ae05c53e37b004e3b9bdbb97dc9fad1fea67b))
+- added tests for form-field
+  ([#109](https://github.com/timelessco/renderlesskit-react-tailwind/issues/109))
+  ([17d1342](https://github.com/timelessco/renderlesskit-react-tailwind/commit/17d134200c107f1496f0d40eec7ef45bc8f654ba))
+
+### Code Refactoring
+
+- **input:** ♻️ rename Input to input
+  ([#107](https://github.com/timelessco/renderlesskit-react-tailwind/issues/107))
+  ([8489fae](https://github.com/timelessco/renderlesskit-react-tailwind/commit/8489faed27749c681d7289eb5ef13d2c9139bc7c))
+- **jit:** ♻️ update jit & patch
+  ([4d86a65](https://github.com/timelessco/renderlesskit-react-tailwind/commit/4d86a655f6b6f2e8aea5494cd04e0337383ad714))
+- **slider:** 💄 update slider minmax component
+  ([#106](https://github.com/timelessco/renderlesskit-react-tailwind/issues/106))
+  ([290ca4d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/290ca4dbe6230553b71fc30bfef16820a4b5f826))
+- **textarea:** ♻️ add textarea
+  ([#105](https://github.com/timelessco/renderlesskit-react-tailwind/issues/105))
+  ([c21144f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c21144fb4983c3b28e5ff6b5882471d2451ccc3a))
+
 ### [0.0.1-alpha.2](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.0...v0.0.1-alpha.2) (2021-02-24)
 
 ### Build System
