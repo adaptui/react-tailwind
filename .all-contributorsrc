@@ -9,6 +9,16 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "navin-moorthy",
+      "name": "Navin Moorthy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39694575?v=4",
+      "profile": "https://navinmoorthy.me/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
   "contributorsPerLine": 7
 }
