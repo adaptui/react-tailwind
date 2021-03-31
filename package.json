@@ -88,8 +88,8 @@
     "@storybook/addon-links": "^6.2.1",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "^6.2.1",
-    "@tailwindcss/jit": "^0.1.7",
-    "@testing-library/dom": "^7.30.2",
+    "@tailwindcss/jit": "^0.1.17",
+    "@testing-library/dom": "^7.30.3",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/react-hooks": "^5.1.1",
@@ -150,6 +150,9 @@
   "peerDependencies": {
     "react": "16.x || 17.x",
     "react-dom": "16.x || 17.x"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "tsd": {
     "directory": "src/theme"
