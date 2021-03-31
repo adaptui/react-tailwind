@@ -1,11 +1,10 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
+import { cx, ActionType, AddToast, ToastOptions } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { useMediaQuery } from "../hooks";
 import { InfoCircleIcon } from "../icons";
 import { Button, ButtonProps } from "../button";
-import { ActionType, AddToast, ToastOptions } from "./RenderlessToast";
 import { Content, Toast, useToastStore, useCreateToast } from "./index";
 
 export const useInternalShowToast = (): AddToast<Toast, Content> => {

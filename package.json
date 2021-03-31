@@ -49,8 +49,7 @@
     "prepublishOnly": "yarn test && yarn build && pinst --disable",
     "release": "git add . && standard-version -a",
     "postrelease": "concurrently \"yarn:release:*\"",
-    "release:github": "conventional-github-releaser -p angular",
-    "release:tags": "git push --follow-tags origin main",
+    "release:github": "conventional-github-releaser -p angular && git push",
     "storybook": "cross-env DEBUG=true start-storybook -p 6006",
     "test": "jest --config ./jest.config.ts --no-cache",
     "typecheck": "tsc --noEmit --project tsconfig.prod.json && tsd",
@@ -69,7 +68,7 @@
     ]
   },
   "dependencies": {
-    "@renderlesskit/react": "^0.2.0",
+    "@renderlesskit/react": "^0.3.0",
     "lodash": "^4.17.21",
     "reakit": "^1.3.6"
   },

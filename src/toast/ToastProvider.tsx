@@ -1,5 +1,6 @@
+import { createToastStore, DefaultToastOptions } from "@renderlesskit/react";
+
 import { Toast, Content } from "./index";
-import { createToastStore, DefaultToastOptions } from "./RenderlessToast";
 
 const defaultOptions: DefaultToastOptions<Toast> = {
   animationDuration: 0,

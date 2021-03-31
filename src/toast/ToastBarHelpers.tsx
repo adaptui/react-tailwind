@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useToastTimer } from "@renderlesskit/react";
 
 import {
   Toast,
@@ -8,7 +9,6 @@ import {
   getPlacementSortedToasts,
   mobileSortedToasts,
 } from "./index";
-import { useToastTimer } from "./RenderlessToast";
 import { useMediaQuery, usePrevious } from "../hooks";
 
 export const useToasts = () => {
