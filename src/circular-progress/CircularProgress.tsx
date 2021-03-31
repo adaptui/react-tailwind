@@ -42,22 +42,9 @@ export const CircularProgress = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const {
-    value: defaultValue,
-    min,
-    max,
-    size = "md",
-    children,
-    ...rest
-  } = props;
-  const state = useProgressState({ min, max });
-  const { setValue } = state;
-
+  const { value, min, max, size = "md", children, ...rest } = props;
+  const state = useProgressState({ value, min, max });
   const context = React.useMemo(() => ({ state, size }), [state, size]);
-
-  React.useEffect(() => {
-    if (defaultValue !== undefined) setValue(defaultValue);
-  }, [defaultValue, setValue]);
 
   return (
     <CircularProgressProvider value={context}>
