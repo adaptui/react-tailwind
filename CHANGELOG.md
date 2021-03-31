@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.0.1-alpha.6](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.5...v0.0.1-alpha.6) (2021-03-31)
+
+### Docs
+
+- add [@anuraghazra](https://github.com/anuraghazra) as a contributor
+  ([2eb0f90](https://github.com/timelessco/renderlesskit-react-tailwind/commit/2eb0f904c44dae9e52f808b78a7cf7e6df0d0360))
+- add [@navin-moorthy](https://github.com/navin-moorthy) as a contributor
+  ([75a902b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/75a902be602cc4a0eddca853373de5b17c920cb1))
+
+### Build System
+
+- **dx:** 🎨 improve folder structure & type generation
+  ([db8f223](https://github.com/timelessco/renderlesskit-react-tailwind/commit/db8f22325bf887e3c020a6645c8d36e7630cc36d))
+- **vscode:** 🏗 add project extensions for vscodoe
+  ([7894c45](https://github.com/timelessco/renderlesskit-react-tailwind/commit/7894c45b974cdd93ea9e408937653a90f69fb028))
+
 ### [0.0.1-alpha.5](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.4...v0.0.1-alpha.5) (2021-03-31)
 
 ### Bug Fixes
