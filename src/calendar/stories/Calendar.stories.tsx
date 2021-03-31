@@ -25,7 +25,7 @@ import {
 } from "../Calendar";
 
 export default {
-  title: "Calendar",
+  title: "Primitives/Calendar",
   component: Calendar,
 } as Meta;
 

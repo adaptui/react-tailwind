@@ -21,7 +21,7 @@ import { FormLabelValue } from "../FormLabelValue";
 import { storyTemplate } from "../../../.storybook/storybookUtils";
 
 export default {
-  title: "FormField",
+  title: "Forms/FormField",
   component: FormField,
 } as Meta;
 

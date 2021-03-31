@@ -19,7 +19,7 @@ import {
 import { CheckCircleIcon } from "../../icons";
 
 export default {
-  title: "Radio",
+  title: "Forms/Radio",
   component: Radio,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),

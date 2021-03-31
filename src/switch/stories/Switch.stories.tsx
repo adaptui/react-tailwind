@@ -11,7 +11,7 @@ import { SwitchInput } from "../SwitchInput";
 import { Switch, SwitchProps } from "../Switch";
 
 export default {
-  title: "Switch",
+  title: "Forms/Switch",
   component: Switch,
   argTypes: {
     size: createUnionControl({

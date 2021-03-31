@@ -10,7 +10,7 @@ import { Button } from "../../button";
 import { Badge, BadgeProps } from "../Badge";
 
 export default {
-  title: "Badge",
+  title: "Primitives/Badge",
   component: Badge,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),

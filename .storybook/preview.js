@@ -6,6 +6,11 @@ import { RenderlesskitProvider } from "../src/theme";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+
+  storySort: {
+    method: "alphabetical",
+    order: ["Primitives", "Forms", "Popups"],
+  },
 };
 
 export const decorators = [

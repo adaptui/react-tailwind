@@ -12,7 +12,7 @@ import { AvatarContents } from "../Avatar";
 import { AvatarBadge } from "../AvatarBadge";
 
 export default {
-  title: "Avatar",
+  title: "Primitives/Avatar",
   component: Avatar,
   argTypes: createControls("avatar", { unions: ["size"] }),
 } as Meta;

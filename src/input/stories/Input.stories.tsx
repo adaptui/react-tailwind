@@ -17,7 +17,7 @@ import { GenericAvatar } from "../../icons";
 import { Button } from "../../button";
 
 export default {
-  title: "Input",
+  title: "Forms/Input",
   component: Input,
 } as Meta;
 

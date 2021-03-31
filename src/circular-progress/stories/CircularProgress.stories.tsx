@@ -12,7 +12,7 @@ import { CircularProgress, CircularProgressProps } from "../index";
 import { CircularProgressWrapper } from "../CircularProgressWrapper";
 
 export default {
-  title: "CircularProgress",
+  title: "Feedback/CircularProgress",
   component: CircularProgress,
   argTypes: { size: createUnionControl(["sm", "md", "lg"]) },
 } as Meta;
