@@ -1,11 +1,5 @@
 {
   "extends": "./tsconfig.json",
   "include": ["src"],
-  "exclude": [
-    "**/*/stories",
-    "**/*/__tests__",
-    "**/*/__test__",
-    "**/testUtils.tsx",
-    "./renderlesskit.config.ts"
-  ]
+  "exclude": ["**/*/stories", "**/*/__tests__", "**/*/utils"]
 }

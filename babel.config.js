@@ -43,7 +43,6 @@ module.exports = function (api) {
       ? [
           "**/*/stories",
           "**/__tests__",
-          "**/__test__",
           "**/testUtils.tsx",
           "./renderlesskit.config.ts",
         ]

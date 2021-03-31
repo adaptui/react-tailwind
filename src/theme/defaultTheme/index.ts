@@ -22,6 +22,8 @@ import { textarea } from "./textarea";
 import { tooltip } from "./tooltip";
 import { toast } from "./toast";
 
+// font-sans
+// To build css for the storybook body
 const theme = {
   alert,
   avatar,

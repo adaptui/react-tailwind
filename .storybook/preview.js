@@ -15,11 +15,11 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => {
+    document.body.classList.add("font-sans");
+
     return (
       <RenderlesskitProvider theme={theme}>
-        <div className="box-border font-sans">
-          <Story />
-        </div>
+        <Story />
       </RenderlesskitProvider>
     );
   },

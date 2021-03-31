@@ -1,4 +1,6 @@
 const path = require("path");
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 const { preset } = require("./preset");
 
 module.exports = preset({
@@ -9,6 +11,10 @@ module.exports = preset({
   ],
 
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
 });
