@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.0.1-alpha.4](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2021-03-31)
+
+### Code Refactoring
+
+- **toast:** ♻️ add renderless toast state
+  ([22c9629](https://github.com/timelessco/renderlesskit-react-tailwind/commit/22c9629fe0dd3ac52deaf3e7761eac1c5ad9ff9d))
+
 ### [0.0.1-alpha.3](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2021-03-31)
 
 ### Features
