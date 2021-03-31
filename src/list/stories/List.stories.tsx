@@ -16,7 +16,7 @@ import {
 } from "../index";
 
 export default {
-  title: "List",
+  title: "Primitives/List",
   component: List,
   argTypes: { size: createUnionControl(["sm", "md", "lg"]) },
 } as Meta;
