@@ -2,7 +2,7 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { Split } from "../utils/types";
+// import { Split } from "../utils/types";
 import { isFunction, objectKeys } from "../utils";
 import { useHover, useMediaQuery } from "../hooks";
 import { Toast, ToastPlacement, useToasts, useToastsReturnType } from "./index";
@@ -34,7 +34,7 @@ export type ToastsContainerProps = {
 
 export const ToastsContainer = (props: ToastsContainerProps) => {
   const { toasts, placement, updateHeight, calculateOffset } = props;
-  const [side, position] = placement.split("-") as Split<typeof placement, "-">;
+  const [side, position] = placement.split("-") as any;
 
   const [isMobile] = useMediaQuery("(max-width: 640px)");
   const { hoverProps, isHovered } = useHover();
@@ -113,7 +113,7 @@ export const StackableToast = (props: StackableToastProps) => {
   );
 
   const isToastVisible = visible;
-  const [side, position] = placement.split("-") as Split<typeof placement, "-">;
+  const [side, position] = placement.split("-") as any;
   const sortedIndex = toastsLength - (index + 1);
   const clampedIndex =
     sortedIndex > visibleToasts ? visibleToasts : sortedIndex;
