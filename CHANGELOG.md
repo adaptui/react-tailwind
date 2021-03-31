@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.0.1-alpha.5](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.4...v0.0.1-alpha.5) (2021-03-31)
+
+### Bug Fixes
+
+- **progress:** 🐛 fix progress api to match renderless
+  ([352988e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/352988edba58e4ef373b2ac8c75e85f4ee1c7dc9))
+
 ### [0.0.1-alpha.4](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2021-03-31)
 
 ### Code Refactoring
