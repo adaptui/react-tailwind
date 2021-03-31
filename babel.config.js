@@ -10,8 +10,8 @@ module.exports = function (api) {
     [
       "@babel/env",
       {
-        modules: isCommonJS ? "commonjs" : false,
         loose: true,
+        modules: isCommonJS ? "commonjs" : false,
         targets: {
           esmodules: isESM ? true : undefined,
         },
