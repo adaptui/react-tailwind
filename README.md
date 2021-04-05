@@ -4,16 +4,8 @@ React UI built with renderleskit-react & tailwind
 
 ## Get Started
 
-`yarn`
+[Documentation & Getting Started](https://renderlesskit-react-tailwind-docs.vercel.app/docs/getting-started)
 
-## Eslint
-
-> Uses **Create React App** configs
-
-## Prettier
-
-> Uses in conjuction with Eslint with `eslint-plugin-prettier` &
-> `eslint-config-prettier`
 
 ## Storybook
 
