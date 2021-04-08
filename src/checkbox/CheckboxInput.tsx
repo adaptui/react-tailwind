@@ -27,7 +27,6 @@ export const CheckboxInput = forwardRefWithAs<
   const theme = useTheme();
   const checkboxInputStyles = cx(theme.checkbox.input, className);
 
-  console.log(props);
   const formFieldProps = useFormControl({
     isDisabled: state.disabled || props.isDisabled || props.disabled,
     isInvalid: props.isInvalid || (props["aria-invalid"] as boolean),

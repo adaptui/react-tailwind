@@ -47,7 +47,7 @@ describe("<Checkbox />", () => {
 
   it("can be disabled", () => {
     render(
-      <Checkbox disabled defaultState={true}>
+      <Checkbox isDisabled defaultState={true}>
         Checkbox
       </Checkbox>,
     );
