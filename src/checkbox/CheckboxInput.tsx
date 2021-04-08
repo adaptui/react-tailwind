@@ -8,8 +8,10 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { useCheckboxContext } from "./Checkbox";
 import { forwardRefWithAs } from "../utils/types";
+import { useFormControl, CommonFieldProps } from "../form-field";
 
-export type CheckboxInputProps = ReakitCheckboxProps & {};
+export type CheckboxInputProps = ReakitCheckboxProps &
+  Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 export const CheckboxInput = forwardRefWithAs<
   CheckboxInputProps,
@@ -25,12 +27,20 @@ export const CheckboxInput = forwardRefWithAs<
   const theme = useTheme();
   const checkboxInputStyles = cx(theme.checkbox.input, className);
 
+  console.log(props);
+  const formFieldProps = useFormControl({
+    isDisabled: state.disabled || props.isDisabled || props.disabled,
+    isInvalid: props.isInvalid || (props["aria-invalid"] as boolean),
+    isRequired: props.isRequired || props.required,
+    ...rest,
+  });
+
   return (
     <ReakitCheckbox
       ref={ref}
       className={checkboxInputStyles}
       {...state}
-      {...rest}
+      {...formFieldProps}
     />
   );
 });

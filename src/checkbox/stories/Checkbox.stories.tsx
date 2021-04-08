@@ -15,6 +15,9 @@ import {
   createUnionControl,
   storyTemplate,
 } from "../../../.storybook/storybookUtils";
+import { Controller, useForm } from "react-hook-form";
+import { Button } from "../../button";
+import { FormField } from "../../form-field";
 
 export default {
   title: "Forms/Checkbox",
@@ -272,3 +275,35 @@ export const CompleteCustomCheckbox = storyTemplate<CheckboxProps>(args => {
     </>
   );
 })({});
+
+type FormData = {
+  darkmode: boolean;
+};
+export const ReactHookForm = () => {
+  const { control, handleSubmit } = useForm<FormData>({
+    defaultValues: { darkmode: false },
+  });
+  const onSubmit = handleSubmit(data => console.log(data));
+
+  return (
+    <form onSubmit={onSubmit}>
+      <FormField>
+        <Controller
+          name="darkmode"
+          control={control}
+          render={({ field: { value, onChange, name, ref } }) => (
+            <Checkbox
+              isRequired
+              state={value}
+              onStateChange={onChange}
+              name={name}
+              inputRef={ref}
+            />
+          )}
+        />
+      </FormField>
+      <br />
+      <Button type="submit">submit</Button>
+    </form>
+  );
+};

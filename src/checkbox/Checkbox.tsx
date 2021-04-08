@@ -12,6 +12,7 @@ import { CheckboxLabel } from "./CheckboxLabel";
 import { CheckboxInput } from "./CheckboxInput";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { CommonFieldProps } from "../form-field";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
@@ -30,10 +31,13 @@ export { useCheckboxContext };
 type CheckboxRenderProps = RenderProp<ReakitCheckboxOptions>;
 
 export type CheckboxProps = BoxProps &
+  Omit<CommonFieldProps, "id" | "isReadOnly"> &
   Omit<ReakitCheckboxOptions, "size" | "setState"> & {
     defaultState?: ReakitCheckboxOptions["state"];
     onStateChange?: (value: CheckboxStatus) => void;
     size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+    name?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
   };
 
 export const Checkbox = forwardRefWithAs<
@@ -48,9 +52,14 @@ export const Checkbox = forwardRefWithAs<
     value,
     checked,
     disabled,
+    isDisabled,
+    isRequired,
+    isInvalid,
     focusable,
     size = "md",
+    name,
     children,
+    inputRef,
     ...rest
   } = props;
   const [checkboxState, setCheckboxStateChange] = useControllableState({
@@ -65,7 +74,7 @@ export const Checkbox = forwardRefWithAs<
       setState: setCheckboxStateChange,
       value,
       checked,
-      disabled,
+      disabled: isDisabled || disabled,
       focusable,
     }),
     [
@@ -73,6 +82,7 @@ export const Checkbox = forwardRefWithAs<
       setCheckboxStateChange,
       value,
       checked,
+      isDisabled,
       disabled,
       focusable,
     ],
@@ -83,7 +93,13 @@ export const Checkbox = forwardRefWithAs<
     return (
       <CheckboxProvider value={context}>
         <CheckboxLabel ref={ref} {...rest}>
-          <CheckboxInput />
+          <CheckboxInput
+            ref={inputRef}
+            name={name}
+            isDisabled={isDisabled}
+            isRequired={isRequired}
+            isInvalid={isInvalid}
+          />
           <CheckboxIcon />
         </CheckboxLabel>
       </CheckboxProvider>
@@ -96,7 +112,13 @@ export const Checkbox = forwardRefWithAs<
         runIfFn(children, state)
       ) : (
         <CheckboxLabel ref={ref} {...rest}>
-          <CheckboxInput />
+          <CheckboxInput
+            ref={inputRef}
+            name={name}
+            isDisabled={isDisabled}
+            isRequired={isRequired}
+            isInvalid={isInvalid}
+          />
           <CheckboxIcon />
           {<CheckboxText>{children}</CheckboxText>}
         </CheckboxLabel>
