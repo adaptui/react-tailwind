@@ -18,10 +18,18 @@ type Render = (
 ) => RenderResult;
 
 export const render: Render = (children, options = {}) => {
-  return RtlRender(
+  const result = RtlRender(
     <RenderlesskitProvider theme={theme}>{children}</RenderlesskitProvider>,
     options,
   );
+
+  const _rerender = (rerenderUi: any) => {
+    result.rerender(
+      <RenderlesskitProvider theme={theme}>{rerenderUi}</RenderlesskitProvider>,
+    );
+  };
+
+  return { ...result, rerender: _rerender };
 };
 
 export const axe = configureAxe({

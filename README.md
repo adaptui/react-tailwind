@@ -6,7 +6,6 @@ React UI built with renderleskit-react & tailwind
 
 [Documentation & Getting Started](https://renderlesskit-react-tailwind-docs.vercel.app/docs/getting-started)
 
-
 ## Storybook
 
 > Start the development server
