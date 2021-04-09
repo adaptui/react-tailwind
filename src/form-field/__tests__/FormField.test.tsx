@@ -48,53 +48,74 @@ describe("<FormField />", () => {
   });
 
   it("should render FormErrorText when isInvalid is true", () => {
-    render(<FormFieldComponent isInvalid id="email" />);
+    const { rerender } = render(<FormFieldComponent isInvalid id="email" />);
+    expect(screen.queryByTestId(ERROR_TESTID)).toBeInTheDocument();
 
-    expect(screen.getByTestId(ERROR_TESTID)).toBeInTheDocument();
+    rerender(<FormFieldComponent id="email" />);
+    expect(screen.queryByTestId(ERROR_TESTID)).not.toBeInTheDocument();
   });
 
   it("should render RequiredText when isRequired is true", () => {
-    render(<FormFieldComponent isRequired id="email" />);
+    const { rerender } = render(<FormFieldComponent isRequired id="email" />);
 
-    expect(screen.getByTestId(REQUIRED_TESTID)).toBeInTheDocument();
+    expect(screen.queryByTestId(REQUIRED_TESTID)).toBeInTheDocument();
+
+    rerender(<FormFieldComponent id="email" />);
+    expect(screen.queryByTestId(REQUIRED_TESTID)).not.toBeInTheDocument();
   });
 
   it("should set proper aria attributes to input on isDisabled", () => {
-    render(<FormFieldComponent isDisabled id="email" />);
+    const { rerender } = render(<FormFieldComponent isDisabled id="email" />);
 
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute("disabled");
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute(
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute("disabled");
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute(
       "aria-disabled",
       "true",
     );
+
+    rerender(<FormFieldComponent id="email" />);
+    expect(screen.queryByTestId(INPUT_TESTID)).not.toHaveAttribute("disabled");
   });
 
   it("should set proper aria attributes to input on isRequired", () => {
-    render(<FormFieldComponent isRequired id="email" />);
+    const { rerender } = render(<FormFieldComponent isRequired id="email" />);
 
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute("required");
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute(
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute("required");
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute(
       "aria-required",
       "true",
     );
+
+    rerender(<FormFieldComponent id="email" />);
+    expect(screen.queryByTestId(INPUT_TESTID)).not.toHaveAttribute("required");
   });
 
   it("should set proper aria attributes to input on isInvalid", () => {
-    render(<FormFieldComponent isInvalid id="email" />);
+    const { rerender } = render(<FormFieldComponent isInvalid id="email" />);
 
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute(
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute(
       "aria-invalid",
       "true",
+    );
+
+    rerender(<FormFieldComponent id="email" />);
+    expect(screen.queryByTestId(INPUT_TESTID)).not.toHaveAttribute(
+      "aria-invalid",
     );
   });
 
   it("should set proper aria attributes to input on isReadOnly", () => {
-    render(<FormFieldComponent isReadOnly id="email" />);
+    const { rerender } = render(<FormFieldComponent isReadOnly id="email" />);
 
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute("readonly");
-    expect(screen.getByTestId(INPUT_TESTID)).toHaveAttribute(
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute("readonly");
+    expect(screen.queryByTestId(INPUT_TESTID)).toHaveAttribute(
       "aria-readonly",
       "true",
+    );
+
+    rerender(<FormFieldComponent id="email" />);
+    expect(screen.queryByTestId(INPUT_TESTID)).not.toHaveAttribute(
+      "aria-readonly",
     );
   });
 
