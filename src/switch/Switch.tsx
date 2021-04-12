@@ -39,7 +39,7 @@ type CommonSwitchProps = {
   onChange?: (v?: boolean) => void;
 };
 
-export type SwitchProps = BoxProps &
+export type SwitchProps = Omit<BoxProps, "onChange"> &
   Omit<CommonFieldProps, "id"> &
   Omit<ReakitCheckboxOptions, "size" | "setState" | "value"> &
   CommonSwitchProps;

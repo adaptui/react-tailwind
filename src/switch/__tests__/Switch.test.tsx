@@ -45,7 +45,7 @@ describe("<Switch />", () => {
     const Controlled = () => {
       const [state, setState] = React.useState(false);
 
-      return <Switch checked={state} onChange={e => setState(!state)} />;
+      return <Switch checked={state} onChange={() => setState(!state)} />;
     };
     render(<Controlled />);
 
