@@ -2,32 +2,27 @@ import * as React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Controller, useForm } from "react-hook-form";
 
-import { SwitchIcon } from "../SwitchIcon";
 import {
-  createUnionControl,
   storyTemplate,
+  createUnionControl,
 } from "../../../.storybook/storybookUtils";
 import { Button } from "../../button";
 import { FormErrorText, FormField } from "../../form-field";
-import { Switch, SwitchProps, SwitchLabel, SwitchInput } from "..";
-import { SwitchText } from "../SwitchText";
+import {
+  Switch,
+  SwitchText,
+  SwitchIcon,
+  SwitchProps,
+  SwitchLabel,
+  SwitchInput,
+} from "..";
 
 export default {
   title: "Forms/Switch",
   component: Switch,
   argTypes: {
-    size: createUnionControl({
-      sm: "sm",
-      md: "md",
-      lg: "lg",
-      xl: "xl",
-    }),
-    defaultChecked: {
-      control: {
-        type: "inline-radio",
-        options: [true, false],
-      },
-    },
+    size: createUnionControl(["sm", "md", "lg", "xl"]),
+    defaultChecked: createUnionControl([true, false]),
   },
 } as Meta;
 
@@ -41,26 +36,23 @@ const base = storyTemplate<SwitchProps>(Switch, {
 });
 
 export const Small = base({ size: "sm" });
-export const Medium = base({});
+export const Medium = base({ size: "md" });
 export const Large = base({ size: "lg" });
 export const ExtraLarge = base({ size: "xl" });
 
 export const DefaultUnchecked = base({ defaultChecked: false });
-
 export const DefaultChecked = base({ defaultChecked: true });
 
 export const Custom = storyTemplate<SwitchProps>(
   args => (
     <Switch {...args}>
-      {({ checked }) => {
-        return (
-          <SwitchLabel className="inline-flex items-center px-4 py-3 bg-gray-100 rounded-lg">
-            <SwitchInput />
-            <SwitchIcon />
-            <SwitchText>{checked ? "Dark Mode" : "Light Mode"}</SwitchText>
-          </SwitchLabel>
-        );
-      }}
+      {({ checked }) => (
+        <SwitchLabel className="inline-flex items-center px-4 py-3 bg-gray-100 rounded-lg">
+          <SwitchInput />
+          <SwitchIcon />
+          <SwitchText>{checked ? "Dark Mode" : "Light Mode"}</SwitchText>
+        </SwitchLabel>
+      )}
     </Switch>
   ),
   { size: "md", defaultChecked: false },

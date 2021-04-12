@@ -1,21 +1,24 @@
 import * as React from "react";
-import { CheckboxOptions as ReakitCheckboxOptions } from "reakit";
 import { useControllableState } from "@renderlesskit/react";
+import { CheckboxOptions as ReakitCheckboxOptions } from "reakit";
 
 import { BoxProps } from "../box";
-import { SwitchIcon } from "./SwitchIcon";
-import { SwitchLabel } from "./SwitchLabel";
-import { SwitchInput } from "./SwitchInput";
+import { CommonFieldProps } from "../form-field";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
-import { CommonFieldProps } from "../form-field";
-import { SwitchText } from "./SwitchText";
+import { SwitchText, SwitchIcon, SwitchLabel, SwitchInput } from "./";
+
+type Size = keyof Renderlesskit.GetThemeValue<
+  "switch",
+  "icon",
+  "wrapper"
+>["size"];
 
 export type SwitchContext = {
   state: CommonSwitchProps & {
     setState: (e: boolean) => void;
   };
-  size: SwitchProps["size"];
+  size: Size;
 };
 
 const [SwitchProvider, useSwitchContext] = createContext<SwitchContext>({
@@ -27,24 +30,18 @@ export { useSwitchContext };
 
 type SwitchRenderProps = RenderProp<SwitchContext["state"]>;
 
-type Size = keyof Renderlesskit.GetThemeValue<
-  "switch",
-  "icon",
-  "wrapper"
->["size"];
-
 type CommonSwitchProps = {
-  defaultChecked?: boolean;
-  checked?: boolean;
-  onChange?: (value: boolean) => void;
   size?: Size;
   name?: string;
   value?: boolean;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (v?: boolean) => void;
 };
 
 export type SwitchProps = BoxProps &
   Omit<CommonFieldProps, "id"> &
-  Omit<ReakitCheckboxOptions, "size" | "setState" | "value" | "onChange"> &
+  Omit<ReakitCheckboxOptions, "size" | "setState" | "value"> &
   CommonSwitchProps;
 
 export const Switch = forwardRefWithAs<
@@ -53,17 +50,17 @@ export const Switch = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const {
-    onChange,
+    name,
     value,
     checked,
-    defaultChecked,
-    name,
-    isDisabled,
+    onChange,
+    children,
+    focusable,
     isInvalid,
     isRequired,
-    focusable,
+    isDisabled,
     size = "md",
-    children,
+    defaultChecked,
     ...rest
   } = props;
 
