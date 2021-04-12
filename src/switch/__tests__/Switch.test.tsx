@@ -13,7 +13,7 @@ describe("<Switch />", () => {
   });
 
   it("should toggle switch state", () => {
-    render(<Switch defaultState={true} />);
+    render(<Switch defaultChecked={true} />);
 
     expect(screen.getByRole("switch")).toBeChecked();
     fireEvent.click(screen.getByRole("switch"));
@@ -21,7 +21,7 @@ describe("<Switch />", () => {
   });
 
   it("can be disabled", () => {
-    render(<Switch disabled defaultState={true} />);
+    render(<Switch isDisabled defaultChecked={true} />);
 
     expect(screen.getByRole("switch")).toBeDisabled();
     // toBeChecked is failing for this case
@@ -32,7 +32,7 @@ describe("<Switch />", () => {
     const Controlled = () => {
       const [state, setState] = React.useState(false);
 
-      return <Switch state={state} onStateChange={() => setState(!state)} />;
+      return <Switch checked={state} onChange={() => setState(!state)} />;
     };
     render(<Controlled />);
 
@@ -58,13 +58,13 @@ describe("<Switch />", () => {
     const DARK_MODE = "Dark Mode";
     const LIGHT_MODE = "Light Mode";
     render(
-      <Switch defaultState={true}>
-        {({ state }) => {
+      <Switch defaultChecked={true}>
+        {({ checked }) => {
           return (
             <SwitchLabel>
               <SwitchInput />
               <span data-testid="testid-mode">
-                {state ? DARK_MODE : LIGHT_MODE}
+                {checked ? DARK_MODE : LIGHT_MODE}
               </span>
             </SwitchLabel>
           );
