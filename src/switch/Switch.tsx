@@ -1,18 +1,20 @@
 import * as React from "react";
 import { CheckboxOptions as ReakitCheckboxOptions } from "reakit";
-import { CheckboxStateReturn } from "reakit";
 import { useControllableState } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
 import { SwitchIcon } from "./SwitchIcon";
 import { SwitchLabel } from "./SwitchLabel";
 import { SwitchInput } from "./SwitchInput";
-import { CheckboxStatus } from "../checkbox";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { CommonFieldProps } from "../form-field";
+import { SwitchText } from "./SwitchText";
 
 export type SwitchContext = {
-  state: ReakitCheckboxOptions;
+  state: CommonSwitchProps & {
+    setState: (e: boolean) => void;
+  };
   size: SwitchProps["size"];
 };
 
@@ -23,18 +25,27 @@ const [SwitchProvider, useSwitchContext] = createContext<SwitchContext>({
 
 export { useSwitchContext };
 
-type SwitchRenderProps = RenderProp<CheckboxStateReturn>;
+type SwitchRenderProps = RenderProp<SwitchContext["state"]>;
+
+type Size = keyof Renderlesskit.GetThemeValue<
+  "switch",
+  "icon",
+  "wrapper"
+>["size"];
+
+type CommonSwitchProps = {
+  defaultChecked?: boolean;
+  checked?: boolean;
+  onChange?: (value: boolean) => void;
+  size?: Size;
+  name?: string;
+  value?: boolean;
+};
 
 export type SwitchProps = BoxProps &
-  Omit<ReakitCheckboxOptions, "size" | "setState"> & {
-    defaultState?: ReakitCheckboxOptions["state"];
-    onStateChange?: (value: CheckboxStatus) => void;
-    size?: keyof Renderlesskit.GetThemeValue<
-      "switch",
-      "icon",
-      "wrapper"
-    >["size"];
-  };
+  Omit<CommonFieldProps, "id"> &
+  Omit<ReakitCheckboxOptions, "size" | "setState" | "value" | "onChange"> &
+  CommonSwitchProps;
 
 export const Switch = forwardRefWithAs<
   SwitchProps & SwitchRenderProps,
@@ -42,43 +53,69 @@ export const Switch = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const {
-    defaultState,
-    state: initialState,
-    onStateChange,
+    onChange,
     value,
     checked,
-    disabled,
+    defaultChecked,
+    name,
+    isDisabled,
+    isInvalid,
+    isRequired,
     focusable,
     size = "md",
     children,
     ...rest
   } = props;
+
   const [switchState, setSwitchStateChange] = useControllableState({
-    value: initialState,
-    defaultValue: defaultState,
-    onChange: onStateChange,
+    value: value || checked,
+    defaultValue: defaultChecked,
+    onChange: onChange,
   });
+
   const state = React.useMemo(
     () => ({
-      state: switchState,
       setState: setSwitchStateChange,
-      value,
-      checked,
-      disabled,
+      value: switchState,
+      checked: switchState,
       focusable,
     }),
-    [switchState, setSwitchStateChange, value, checked, disabled, focusable],
+    [setSwitchStateChange, switchState, focusable],
   );
   const context = React.useMemo(() => ({ state, size }), [state, size]);
 
+  if (!children) {
+    return (
+      <SwitchProvider value={context}>
+        <SwitchLabel {...rest}>
+          <SwitchInput
+            ref={ref}
+            name={name}
+            isDisabled={isDisabled}
+            isRequired={isRequired}
+            isInvalid={isInvalid}
+          />
+          <SwitchIcon />
+        </SwitchLabel>
+      </SwitchProvider>
+    );
+  }
+
   return (
     <SwitchProvider value={context}>
-      {children ? (
+      {typeof children !== "string" ? (
         runIfFn(children, state)
       ) : (
-        <SwitchLabel ref={ref} {...rest}>
-          <SwitchInput />
+        <SwitchLabel {...rest}>
+          <SwitchInput
+            ref={ref}
+            name={name}
+            isDisabled={isDisabled}
+            isRequired={isRequired}
+            isInvalid={isInvalid}
+          />
           <SwitchIcon />
+          <SwitchText>{children}</SwitchText>
         </SwitchLabel>
       )}
     </SwitchProvider>

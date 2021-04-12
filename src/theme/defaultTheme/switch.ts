@@ -1,6 +1,15 @@
 export const _switch = {
-  label: "lib:inline-block leading-normal lib:align-top lib:cursor-pointer",
   input: "lib:sr-only",
+  label: "lib:inline-block lib:leading-normal lib:align-top lib:cursor-pointer",
+  labelText: {
+    base: "lib:ml-2 text-gray-800",
+    size: {
+      sm: "lib:text-xs",
+      md: "lib:text-sm",
+      lg: "lib:text-lg",
+      xl: "lib:text-xl",
+    },
+  },
   icon: {
     wrapper: {
       base:
@@ -8,7 +17,7 @@ export const _switch = {
       size: {
         sm: "lib:h-3.5 lib:w-5",
         md: "lib:h-4 lib:w-[1.625rem]",
-        lg: "lib:h-5 lib:w-[2.125rem",
+        lg: "lib:h-5 lib:w-[2.125rem]",
         xl: "lib:h-6 lib:w-10",
       },
       unchecked: "lib:bg-gray-300",
