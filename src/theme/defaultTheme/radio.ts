@@ -1,6 +1,6 @@
 export const radio = {
   base:
-    "lib:relative lib:inline-flex lib:items-center lib:align-top lib:cursor-pointer",
+    "lib:relative lib:inline-flex lib:items-center lib:align-top lib:cursor-pointer lib:outline-none lib:focus:outline-none",
   disabled: "lib:cursor-not-allowed",
   input: "lib:sr-only",
   icon: {

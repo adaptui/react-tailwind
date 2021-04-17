@@ -1,6 +1,6 @@
 export const formField = {
   wrapper: {
-    base: "flex flex-col space-y-2",
+    base: "flex flex-col space-y-2 lib:outline-none lib:focus:outline-none",
     size: {},
   },
   labelText: "text-xs text-gray-900 inline-flex items-center justify-between",

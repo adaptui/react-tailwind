@@ -16,7 +16,7 @@ export const _switch = {
     },
     content: {
       base:
-        "lib:transition-transform lib:transform lib:bg-white lib:rounded-full lib:shadow",
+        "lib:transition-transform lib:transform lib:bg-white lib:rounded-full lib:shadow lib:outline-none lib:focus:outline-none",
       size: {
         sm: "lib:h-2.5 lib:w-2.5",
         md: "lib:h-3 lib:w-3",
