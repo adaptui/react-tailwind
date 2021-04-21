@@ -1,4 +1,4 @@
-import { mergeThemes, mergeExtensions } from "./index";
+import { mergeExtensions, mergeThemes } from "./mergeThemes";
 
 describe("mergeThemes", () => {
   test("merges two empty themes together", () => {
