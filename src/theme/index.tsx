@@ -18,7 +18,7 @@ const [ThemeProvider, useTheme] = createContext<ThemeContext>({
 export { useTheme };
 
 type PartialDefaultTheme = DeepPartial<DefaultTheme>;
-type ExtendableDefaultTheme = PartialDefaultTheme & {
+export type ExtendableDefaultTheme = PartialDefaultTheme & {
   extend?: PartialDefaultTheme;
 };
 
