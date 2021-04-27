@@ -1,4 +1,6 @@
-const theme = {
+import { extendTheme } from "./src/theme/extendTheme";
+
+const theme = extendTheme({
   // This only affected the Storybook, doesn't go or merge when used this config as preset
   extend: {
     button: {
@@ -19,6 +21,6 @@ const theme = {
     //   },
     // },
   },
-};
+});
 
 export default theme;
