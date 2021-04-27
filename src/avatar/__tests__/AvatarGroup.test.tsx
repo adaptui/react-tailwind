@@ -100,8 +100,8 @@ describe("<AvatarGroup />", () => {
   it("should not have a11y violations", async () => {
     await testA11y(
       <AvatarGroup>
-        <Avatar />
-        <Avatar />
+        <Avatar name="Anurag Hazra" />
+        <Avatar name="Navin Moorthy" />
       </AvatarGroup>,
     );
   });
