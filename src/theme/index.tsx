@@ -1,6 +1,12 @@
+import {
+  defaults,
+  cloneDeep,
+  mergeWith,
+  isString,
+  isUndefined,
+} from "lodash-es";
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
-import { defaults, cloneDeep, mergeWith, isString, isUndefined } from "lodash";
 
 import defaultTheme from "./defaultTheme";
 import { createContext } from "../utils";
