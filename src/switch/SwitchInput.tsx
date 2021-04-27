@@ -1,16 +1,16 @@
+import * as React from "react";
 import {
   Checkbox as ReakitSwitch,
   CheckboxProps as ReakitSwitchProps,
 } from "reakit";
-import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { useSwitchContext } from "./Switch";
 import { forwardRefWithAs } from "../utils/types";
-import { useFormControl } from "../form-field";
+import { CommonFieldProps, useFormControl } from "../form-field";
 
-export type SwitchInputProps = ReakitSwitchProps & {};
+export type SwitchInputProps = ReakitSwitchProps & Omit<CommonFieldProps, "id">;
 
 export const SwitchInput = forwardRefWithAs<
   SwitchInputProps,
@@ -25,18 +25,17 @@ export const SwitchInput = forwardRefWithAs<
 
   const theme = useTheme();
   const switchInputStyles = cx(theme.switch.input, className);
-  const fieldInputProps = useFormControl({
-    isDisabled: state.disabled,
-    ...rest,
-  });
+
+  const formFieldProps = useFormControl(rest);
 
   return (
     <ReakitSwitch
       ref={ref}
       role="switch"
       className={switchInputStyles}
-      {...state}
-      {...fieldInputProps}
+      state={state?.checked}
+      setState={state.setState as any}
+      {...formFieldProps}
     />
   );
 });

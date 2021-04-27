@@ -3,7 +3,7 @@
 exports[`<Switch /> should render correctly 1`] = `
 <DocumentFragment>
   <label
-    class="lib:inline-block leading-normal lib:align-top lib:cursor-pointer"
+    class="lib:inline-block lib:leading-normal lib:align-top lib:cursor-pointer"
   >
     <input
       aria-checked="false"

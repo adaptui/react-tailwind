@@ -20,7 +20,7 @@ export const SwitchIcon = forwardRefWithAs<
   const switchIconWrapperStyles = cx(
     theme.switch.icon.wrapper.base,
     theme.switch.icon.wrapper.size[size],
-    state?.state
+    state?.checked
       ? theme.switch.icon.wrapper.checked
       : theme.switch.icon.wrapper.unchecked,
     className,
@@ -28,7 +28,7 @@ export const SwitchIcon = forwardRefWithAs<
   const switchIconContentStyles = cx(
     theme.switch.icon.content.base,
     theme.switch.icon.content.size[size],
-    state?.state
+    state?.checked
       ? theme.switch.icon.content.checked[size]
       : theme.switch.icon.content.unchecked,
   );
