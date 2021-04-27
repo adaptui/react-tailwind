@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cloneDeep } from "lodash";
+import { cloneDeep } from "lodash-es";
 
 import defaultTheme from "./defaultTheme";
 import { createContext } from "../utils";

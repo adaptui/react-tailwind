@@ -19,4 +19,5 @@ export default {
   },
   coveragePathIgnorePatterns: ["node_modules", "__mocks__", "stories"],
   clearMocks: true,
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
 };
