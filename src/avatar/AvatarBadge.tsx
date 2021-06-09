@@ -33,10 +33,32 @@ export const AvatarBadge = forwardRefWithAs<
 
   const Status = () => {
     if (_status === "online")
-      return <DotIcon className={theme.avatar.badge.statuses.online} />;
-    if (_status === "sleep")
-      return <MoonIcon className={theme.avatar.badge.statuses.sleep} />;
-    if (_status === "typing") return <TypingAnimation />;
+      return (
+        <DotIcon
+          className={cx(
+            theme.avatar.status.online.base,
+            theme.avatar.status.online[size],
+          )}
+        />
+      );
+    if (_status === "offline")
+      return (
+        <MoonIcon
+          className={cx(
+            theme.avatar.status.offline.base,
+            theme.avatar.status.offline[size],
+          )}
+        />
+      );
+    if (_status === "typing")
+      return (
+        <TypingAnimation
+          className={cx(
+            theme.avatar.status.typing.base,
+            theme.avatar.status.typing[size],
+          )}
+        />
+      );
 
     return null;
   };
@@ -50,7 +72,7 @@ export const AvatarBadge = forwardRefWithAs<
     >
       {children ? (
         React.cloneElement(children as React.ReactElement, {
-          className: theme.avatar.badge.statuses[_status],
+          className: theme.avatar.status?.[_status]?.base,
         })
       ) : (
         <Status />
@@ -75,14 +97,11 @@ export const TypingAnimation = forwardRefWithAs<
   const { size = "md" } = useAvatarContext();
 
   const baseStyles = cx(
-    theme.avatar.badge.statuses.typing.base,
-    theme.avatar.badge.statuses.typing.size[size],
+    theme.avatar.status.typing.base,
+    theme.avatar.status.typing.size[size],
     className,
   );
-  const typingStyles = cx(
-    theme.avatar.badge.statuses.typing.circle,
-    circleStyle,
-  );
+  const typingStyles = cx(theme.avatar.status.typing.circle, circleStyle);
 
   return (
     <Box ref={ref} className={baseStyles} {...rest}>

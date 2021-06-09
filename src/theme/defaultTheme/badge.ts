@@ -21,7 +21,7 @@ export const badge = {
     md: "lib:px-2 lib:text-sm lib:font-medium",
     lg: "lib:px-2 lib:text-base lib:font-medium",
   },
-  variant: {
+  state: {
     primary: "lib:bg-gray-800 lib:text-white",
     secondary: "lib:bg-gray-100 lib:text-gray-800",
     outline: "lib:text-gray-800 lib:border lib:border-gray-300 lib:bg-white",

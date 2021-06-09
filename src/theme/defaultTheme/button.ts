@@ -20,16 +20,32 @@ export const button = {
   disabled: "lib:cursor-not-allowed lib:opacity-40",
   group: "lib:focus:z-10 lib:-mr-px",
   prefix: {
-    sm: "inline-flex mr-1.5",
-    md: "inline-flex mr-2",
-    lg: "inline-flex mr-2",
-    xl: "inline-flex mr-2",
+    size: {
+      sm: "inline-flex mr-1.5",
+      md: "inline-flex mr-2",
+      lg: "inline-flex mr-2",
+      xl: "inline-flex mr-2",
+    },
+    variant: {
+      ghost: "lib:text-current",
+      secondary: "lib:text-current",
+      outline: "lib:text-current",
+      primary: "lib:text-current",
+    },
   },
   suffix: {
-    sm: "inline-flex ml-1.5",
-    md: "inline-flex ml-2",
-    lg: "inline-flex ml-2",
-    xl: "inline-flex ml-2",
+    size: {
+      sm: "inline-flex ml-1.5",
+      md: "inline-flex ml-2",
+      lg: "inline-flex ml-2",
+      xl: "inline-flex ml-2",
+    },
+    variant: {
+      ghost: "lib:text-current",
+      secondary: "lib:text-current",
+      outline: "lib:text-current",
+      primary: "lib:text-current",
+    },
   },
   spinner: "w-[1em] h-[1em] text-current",
 };

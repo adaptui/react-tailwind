@@ -8,17 +8,62 @@ export const avatar = {
     lg: "lib:h-8 lib:w-8",
     xl: "lib:h-10 lib:w-10",
   },
-  border: {
-    width: {
-      xs: "lib:ring-1",
-      sm: "lib:ring-1",
-      md: "lib:ring-2",
-      lg: "lib:ring-2",
-      xl: "lib:ring-2",
+  image: "lib:rounded-full lib:w-full lib:h-full lib:object-cover",
+  badge: {
+    base:
+      "lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full",
+    position: {
+      "top-left": "lib:top-0 lib:left-0",
+      "top-right": "lib:top-0 lib:right-0",
+      "bottom-right": "lib:bottom-0 lib:right-0",
+      "bottom-left": "lib:bottom-0 lib:left-0",
     },
-    color: "lib:ring-white",
+    size: {
+      xs: "lib:text-[0.25rem] lib:ring-1",
+      sm: "lib:text-[0.25rem] lib:ring-1",
+      md: "lib:text-[0.25rem] lib:ring-2",
+      lg: "lib:text-[0.375rem] lib:ring-2",
+      xl: "lib:text-[0.5rem] lib:ring-2",
+    },
   },
-  name: {
+  status: {
+    online: {
+      base:
+        "lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
+      size: {
+        "2xl": "lib:text-[9px]",
+        xl: "lib:text-[7px]",
+        lg: "lib:text-[5px]",
+        md: "lib:text-[5px]",
+        sm: "lib:text-[3px]",
+      },
+    },
+    offline: {
+      base:
+        "lib:text-yellow-500 lib:bg-white lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
+      size: {
+        "2xl": "lib:text-[9px]",
+        xl: "lib:text-[7px]",
+        lg: "lib:text-[5px]",
+        md: "lib:text-[5px]",
+        sm: "lib:text-[4px]",
+      },
+    },
+    typing: {
+      base:
+        "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",
+      size: {
+        xs: "lib:h-1 lib:p-px",
+        sm: "lib:h-1.5 lib:p-0.5",
+        md: "lib:h-1.5 lib:p-0.5",
+        lg: "lib:h-1.5 lib:p-0.5",
+        xl: "lib:h-2 lib:p-1",
+      },
+      circle:
+        "lib:bg-white lib:w-0.5 lib:h-0.5 lib:rounded-full lib:animate-pulse",
+    },
+  },
+  initials: {
     base: "lib:text-center lib:uppercase lib:text-gray-500",
     size: {
       xs: "lib:text-xs",
@@ -38,40 +83,15 @@ export const avatar = {
       xl: "lib:text-xs",
     },
   },
-  image: "lib:rounded-full lib:w-full lib:h-full lib:object-cover",
-  badge: {
-    base:
-      "lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full",
-    position: {
-      "top-left": "lib:top-0 lib:left-0",
-      "top-right": "lib:top-0 lib:right-0",
-      "bottom-right": "lib:bottom-0 lib:right-0",
-      "bottom-left": "lib:bottom-0 lib:left-0",
+  border: {
+    width: {
+      xs: "lib:ring-1",
+      sm: "lib:ring-1",
+      md: "lib:ring-2",
+      lg: "lib:ring-2",
+      xl: "lib:ring-2",
     },
-    size: {
-      xs: "lib:text-[0.25rem] lib:ring-1",
-      sm: "lib:text-[0.25rem] lib:ring-1",
-      md: "lib:text-[0.25rem] lib:ring-2",
-      lg: "lib:text-[0.375rem] lib:ring-2",
-      xl: "lib:text-[0.5rem] lib:ring-2",
-    },
-    statuses: {
-      online: "text-green-500",
-      sleep: "text-gray-500",
-      typing: {
-        base:
-          "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",
-        size: {
-          xs: "lib:h-1 lib:p-px",
-          sm: "lib:h-1.5 lib:p-0.5",
-          md: "lib:h-1.5 lib:p-0.5",
-          lg: "lib:h-1.5 lib:p-0.5",
-          xl: "lib:h-2 lib:p-1",
-        },
-        circle:
-          "lib:bg-white lib:w-0.5 lib:h-0.5 lib:rounded-full lib:animate-pulse",
-      },
-    },
+    color: "lib:ring-white",
   },
   group: {
     base: "lib:inline-flex lib:items-center lib:-space-x-1.5",

@@ -20,8 +20,10 @@ export const _switch = {
         lg: "lib:h-5 lib:w-[2.125rem]",
         xl: "lib:h-6 lib:w-10",
       },
-      unchecked: "lib:bg-gray-300",
-      checked: "lib:bg-gray-800",
+      state: {
+        false: "lib:bg-gray-300",
+        true: "lib:bg-gray-800",
+      },
     },
     content: {
       base:
@@ -32,13 +34,15 @@ export const _switch = {
         lg: "lib:h-4 lib:w-4",
         xl: "lib:h-5 lib:w-5",
       },
-      checked: {
-        sm: "lib:translate-x-1.5",
-        md: "lib:translate-x-2.5",
-        lg: "lib:translate-x-3.5",
-        xl: "lib:translate-x-4",
+      state: {
+        true: {
+          sm: "lib:translate-x-1.5",
+          md: "lib:translate-x-2.5",
+          lg: "lib:translate-x-3.5",
+          xl: "lib:translate-x-4",
+        },
+        false: "lib:translate-x-0",
       },
-      unchecked: "lib:translate-x-0",
     },
   },
 };

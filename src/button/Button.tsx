@@ -80,11 +80,25 @@ export const Button = forwardRefWithAs<
   const ButtonWithIcons = () => (
     <>
       {prefix && (
-        <ButtonIcon className={theme.button.prefix[_size]}>{prefix}</ButtonIcon>
+        <ButtonIcon
+          className={cx(
+            theme.button.prefix.size[_size],
+            theme.button.prefix.variant[_variant],
+          )}
+        >
+          {prefix}
+        </ButtonIcon>
       )}
       {children}
       {suffix && (
-        <ButtonIcon className={theme.button.suffix[_size]}>{suffix}</ButtonIcon>
+        <ButtonIcon
+          className={cx(
+            theme.button.suffix.size[_size],
+            theme.button.suffix.variant[_variant],
+          )}
+        >
+          {suffix}
+        </ButtonIcon>
       )}
     </>
   );

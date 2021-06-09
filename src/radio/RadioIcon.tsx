@@ -40,10 +40,10 @@ export const RadioIcon = forwardRefWithAs<
     theme.radio.icon.base,
     theme.radio.icon.size[size],
     disabled
-      ? theme.radio.icon.disabled
+      ? theme.radio.icon.state.disabled
       : stateProp
-      ? theme.radio.icon.checked
-      : theme.radio.icon.unchecked,
+      ? theme.radio.icon.state.checked
+      : theme.radio.icon.state.unchecked,
     className,
   );
 
