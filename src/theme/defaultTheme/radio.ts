@@ -11,9 +11,11 @@ export const radio = {
       md: "lib:w-4 lib:h-4 lib:text-xs",
       lg: "lib:w-5 lib:h-5 lib:text-base",
     },
-    unchecked: "lib:text-gray-400",
-    checked: "lib:text-gray-800",
-    disabled: "lib:text-gray-400",
+    state: {
+      unchecked: "lib:text-gray-400",
+      checked: "lib:text-gray-800",
+      disabled: "lib:text-gray-400",
+    },
   },
   label: {
     base: "lib:text-gray-600 lib:select-none",

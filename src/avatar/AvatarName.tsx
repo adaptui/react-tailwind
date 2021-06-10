@@ -18,8 +18,8 @@ export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
   if (!initial) return null;
 
   const nameStyles = cx(
-    theme.avatar.name.base,
-    theme.avatar.name.size[size],
+    theme.avatar.initials.base,
+    theme.avatar.initials.size[size],
     className,
   );
 

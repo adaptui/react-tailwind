@@ -43,10 +43,10 @@ export const OnlineBadge = base({
   name: "Ryan Florence",
   status: "online",
 });
-export const SleepBadge = base({
+export const OfflineBadge = base({
   src: "https://bit.ly/ryan-florence",
   name: "Ryan Florence",
-  status: "sleep",
+  status: "offline",
 });
 export const CustomBadge = base({
   src: "https://bit.ly/ryan-florence",
@@ -107,7 +107,7 @@ export const Group = storyTemplate<AvatarProps>(
       <Avatar
         src="https://bit.ly/kent-c-dodds"
         name="Kent Dodds"
-        status="sleep"
+        status="offline"
       />
       <Avatar
         src="https://bit.ly/code-beast"

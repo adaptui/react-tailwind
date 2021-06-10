@@ -28,10 +28,12 @@ export const CheckboxIcon = forwardRefWithAs<
     theme.checkbox.icon.base,
     theme.checkbox.icon.size[size],
     state?.disabled
-      ? theme.checkbox.icon.disabled
+      ? theme.checkbox.icon.state.disabled
+      : stateProp === "indeterminate"
+      ? theme.checkbox.icon.state.indeterminate
       : stateProp
-      ? theme.checkbox.icon.checked
-      : theme.checkbox.icon.unchecked,
+      ? theme.checkbox.icon.state.checked
+      : theme.checkbox.icon.state.unchecked,
     className,
   );
 

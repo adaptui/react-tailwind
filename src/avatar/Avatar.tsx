@@ -58,7 +58,7 @@ export type AvatarInitialProps = {
   /**
    * Shows AvatarBadge with the given type
    */
-  status?: keyof Renderlesskit.GetThemeValue<"avatar", "badge", "statuses">;
+  status?: keyof Renderlesskit.GetThemeValue<"avatar", "status">;
   /**
    * Position for the AvatarBadge
    * @default "bottom-right"

@@ -18,7 +18,7 @@ export type BadgeProps = BoxProps & {
    *
    * @default "primary"
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
+  variant?: keyof Renderlesskit.GetThemeValue<"badge", "state">;
   /**
    * floats the badge on parent element's corners
    *
@@ -49,7 +49,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
     const badgeStyles = cx(
       theme.badge.base,
       theme.badge.size[size],
-      theme.badge.variant[variant],
+      theme.badge.state[variant],
       floating
         ? cx(
             theme.badge.attached,
