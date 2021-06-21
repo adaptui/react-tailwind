@@ -1,0 +1,133 @@
+diff --git a/node_modules/tailwindcss/lib/jit/lib/generateRules.js b/node_modules/tailwindcss/lib/jit/lib/generateRules.js
+index 9b59423..d510b77 100644
+--- a/node_modules/tailwindcss/lib/jit/lib/generateRules.js
++++ b/node_modules/tailwindcss/lib/jit/lib/generateRules.js
+@@ -117,12 +117,15 @@ function applyImportant(matches) {
+ // worth the complexity for that case.
+ 
+ 
+-function applyVariant(variant, matches, context) {
++function applyVariant(variant, matches, hasLibVariant, context) {
+   if (matches.length === 0) {
+     return matches;
+   }
+ 
+   if (context.variantMap.has(variant)) {
++    let updateSort =
++      hasLibVariant &&
++      !['sm', 'md', 'lg', 'xl', '2xl', 'motion-safe', 'dark', 'motion-reduce'].includes(variant)
+     let variantFunctionTuples = context.variantMap.get(variant);
+     let result = [];
+ 
+@@ -176,11 +179,10 @@ function applyVariant(variant, matches, context) {
+           continue;
+         }
+ 
+-        let withOffset = [{
+-          sort: variantSort | sort,
+-          layer,
+-          options
+-        }, clone.nodes[0]];
++        let withOffset = [
++          { sort: updateSort ? 0n : variantSort | sort, layer, options },
++          clone.nodes[0],
++        ]
+         result.push(withOffset);
+       }
+     }
+@@ -240,6 +242,7 @@ function splitWithSeparator(input, separator) {
+ function* resolveMatches(candidate, context) {
+   let separator = context.tailwindConfig.separator;
+   let [classCandidate, ...variants] = splitWithSeparator(candidate, separator).reverse();
++  let hasLibVariant = variants.includes('lib')
+   let important = false;
+ 
+   if (classCandidate.startsWith('!')) {
+@@ -268,11 +271,14 @@ function* resolveMatches(candidate, context) {
+           let [rules, options] = parseRules(ruleSet, context.postCssNodeCache);
+ 
+           for (let rule of rules) {
+-            matches.push([{ ...sort,
+-              options: { ...sort.options,
+-                ...options
+-              }
+-            }, rule]);
++            matches.push([
++              {
++                ...sort,
++                options: { ...sort.options, ...options },
++                sort: hasLibVariant ? 0n : sort.sort,
++              },
++              rule,
++            ])
+           }
+         }
+       } // Only process static plugins on exact matches
+@@ -281,11 +287,14 @@ function* resolveMatches(candidate, context) {
+           let [rules, options] = parseRules(ruleSet, context.postCssNodeCache);
+ 
+           for (let rule of rules) {
+-            matches.push([{ ...sort,
+-              options: { ...sort.options,
+-                ...options
+-              }
+-            }, rule]);
++            matches.push([
++              {
++                ...sort,
++                options: { ...sort.options, ...options },
++                sort: hasLibVariant ? 0n : sort.sort,
++              },
++              rule,
++            ])
+           }
+         }
+     }
+@@ -297,7 +306,7 @@ function* resolveMatches(candidate, context) {
+     }
+ 
+     for (let variant of variants) {
+-      matches = applyVariant(variant, matches, context);
++      matches = applyVariant(variant, matches, hasLibVariant, context)
+     }
+ 
+     for (let match of matches) {
+diff --git a/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js b/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js
+index a7d739d..b5d51a1 100644
+--- a/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js
++++ b/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js
+@@ -467,11 +467,12 @@ function resolvePlugins(context, tailwindDirectives, root) {
+ function registerPlugins(plugins, context) {
+   let variantList = [];
+   let variantMap = new Map();
++  let reservedBits = 20n
+   let offsets = {
+-    base: 0n,
+-    components: 0n,
+-    utilities: 0n
+-  };
++    base: (1n << reservedBits) << 0n,
++    components: (1n << reservedBits) << 1n,
++    utilities: (1n << reservedBits) << 2n,
++  }
+   let pluginApi = buildPluginApi(context.tailwindConfig, context, {
+     variantList,
+     variantMap,
+@@ -490,7 +491,8 @@ function registerPlugins(plugins, context) {
+ 
+   let highestOffset = (args => args.reduce((m, e) => e > m ? e : m))([offsets.base, offsets.components, offsets.utilities]);
+ 
+-  let reservedBits = BigInt(highestOffset.toString(2).length);
++  reservedBits = BigInt(highestOffset.toString(2).length)
++
+   context.layerOrder = {
+     base: 1n << reservedBits << 0n,
+     components: 1n << reservedBits << 1n,
+@@ -499,6 +501,7 @@ function registerPlugins(plugins, context) {
+   reservedBits += 3n;
+   let offset = 0;
+   context.variantOrder = new Map(variantList.map((variant, i) => {
++    if (variant.includes('lib')) return [variant, 1n]
+     let variantFunctions = variantMap.get(variant).length;
+     let bits = 1n << BigInt(i + offset) << reservedBits;
+     offset += variantFunctions - 1;

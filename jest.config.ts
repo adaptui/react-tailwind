@@ -9,6 +9,7 @@ const pkg = require("./package.json");
 export default {
   rootDir: __dirname,
   displayName: pkg.name,
+  testEnvironment: "jsdom",
   testMatch: [join(__dirname, "src/**/*.test.{js,ts,tsx}")],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleNameMapper: {
