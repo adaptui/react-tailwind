@@ -46,6 +46,8 @@ interface _ComponentDefaultTheme {
   components: DefaultTheme;
 }
 
+declare const _brand: unique symbol;
+
 declare global {
   namespace Renderlesskit {
     export interface Theme extends _ComponentDefaultTheme {}
@@ -60,18 +62,33 @@ declare global {
       U extends { [x: string]: any } ? U : {}
     >;
 
-    type _Comps = Renderlesskit.Theme["components"];
+    type Brand<Type, Name = "ThemeKey"> = Type & { [_brand]: Name };
+
+    type Comps = Renderlesskit.Theme["components"];
 
     /**
      * @template C component name
-     * @template K key
+     * @template K theme key
+     * @template L theme key
+     * @template M theme key
+     * @template N theme key
      */
     export type GetThemeValue<
-      C extends keyof _Comps,
-      K extends keyof _Comps[C],
-      L extends keyof _Comps[C][K] = keyof _Comps[C][K] & { _s: string }
-    > = L extends { [x: string]: any; _s: string }
-      ? _Comps[C][K]
-      : _Comps[C][K][L];
+      C extends keyof Comps,
+      K extends keyof Comps[C] = Brand<keyof Comps[C]>,
+      L extends keyof Comps[C][K] = Brand<keyof Comps[C][K]>,
+      M extends keyof Comps[C][K][L] = Brand<keyof Comps[C][K][L]>,
+      N extends keyof Comps[C][K][L][M] = Brand<keyof Comps[C][K][L][M]>
+    > = [C, K, L, M, N] extends [string, Brand<K>, Brand<L>, Brand<M>, Brand<N>]
+      ? Comps[C]
+      : [C, K, L, M, N] extends [string, string, Brand<L>, Brand<M>, Brand<N>]
+      ? Comps[C][K]
+      : [C, K, L, M, N] extends [string, string, string, Brand<M>, Brand<N>]
+      ? Comps[C][K][L]
+      : [C, K, L, M, N] extends [string, string, string, string, Brand<N>]
+      ? Comps[C][K][L][M]
+      : [C, K, L, M, N] extends [string, string, string, string, string]
+      ? Comps[C][K][L][M][N]
+      : never;
   }
 }
