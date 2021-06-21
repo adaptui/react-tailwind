@@ -1,7 +1,6 @@
 import {
   render as RtlRender,
   RenderOptions,
-  waitFor,
   RenderResult,
 } from "@testing-library/react";
 import * as React from "react";
@@ -60,7 +59,7 @@ export const testA11y = async (
   expect(results).toHaveNoViolations();
 };
 
-const DELAY = 0;
+const DELAY = 1;
 const LOAD_IMAGE = "load.png";
 const ERROR_IMAGE = "error.png";
 const orignalImage = window.Image;
@@ -96,7 +95,6 @@ mockImage.load = () => mockImage(LOAD_IMAGE);
 mockImage.error = () => mockImage(ERROR_IMAGE);
 mockImage.restoreMock = () => (window.Image = orignalImage);
 mockImage.advanceTimer = async () => {
-  return await waitFor(() => {
-    jest.advanceTimersByTime(mockImage.DELAY);
-  });
+  // https://github.com/facebook/jest/issues/7151#issuecomment-622134853
+  await Promise.resolve().then(() => jest.advanceTimersByTime(mockImage.DELAY));
 };

@@ -4,7 +4,8 @@ import { screen } from "@testing-library/react";
 import { Avatar } from "../index";
 import { render, testA11y, mockImage } from "../../utils/testUtils";
 
-afterAll(() => {
+jest.useFakeTimers();
+afterEach(() => {
   mockImage.restoreMock();
 });
 
@@ -87,7 +88,6 @@ describe("<Avatar />", () => {
 
   it("Avatar Image loads", async () => {
     mockImage.load();
-    await testA11y(<Avatar>Ally</Avatar>);
     render(<Avatar src={"demo.png"}></Avatar>);
 
     await mockImage.advanceTimer();
