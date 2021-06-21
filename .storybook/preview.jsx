@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import "./tailwind.css";
 import theme from "../renderlesskit.config.ts";

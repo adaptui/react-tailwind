@@ -1,3 +1,4 @@
+import * as React from "react";
 import { CloseIcon } from "../icons";
 import { forwardRefWithAs } from "../utils/types";
 import { IconButton, IconButtonProps } from "./IconButton";
