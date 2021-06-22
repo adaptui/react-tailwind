@@ -71,9 +71,8 @@ export const Controlled = () => {
 };
 
 export const Resizes = () => {
-  const [resize, setResize] = React.useState<TextareaProps["resize"]>(
-    "horizontal",
-  );
+  const [resize, setResize] =
+    React.useState<TextareaProps["resize"]>("horizontal");
 
   return (
     <>

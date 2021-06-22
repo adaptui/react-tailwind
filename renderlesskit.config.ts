@@ -8,8 +8,7 @@ const theme = extendTheme({
         tertiary: "bg-purple-600 lib:text-white",
       },
       size: {
-        xxl:
-          "h-16 min-w-16 text-xl px-8 w-auto font-medium rounded-lg shadow-sm",
+        xxl: "h-16 min-w-16 text-xl px-8 w-auto font-medium rounded-lg shadow-sm",
       },
     },
     // alert: {

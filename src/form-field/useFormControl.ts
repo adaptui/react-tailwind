@@ -22,13 +22,8 @@ export function useFormControl(props: UseFormControlProps = {}, _field?: any) {
   if (field?.hasHelpText) describedBy.push(field?.helpTextId);
   const ariaDescribedBy = describedBy.join(" ");
 
-  const {
-    isInvalid,
-    isDisabled,
-    isReadOnly,
-    isRequired,
-    ...cleanHtmlProps
-  } = props;
+  const { isInvalid, isDisabled, isReadOnly, isRequired, ...cleanHtmlProps } =
+    props;
 
   const _invalid = props?.invalid || isInvalid || field?.isInvalid;
   const _disabled = props?.disabled || isDisabled || field?.isDisabled;

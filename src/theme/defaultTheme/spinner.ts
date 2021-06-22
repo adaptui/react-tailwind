@@ -1,6 +1,5 @@
 export const spinner = {
-  base:
-    "lib:inline-block lib:border-2 lib:border-solid lib:border-current lib:rounded-full lib:animate-spin lib:text-gray-800",
+  base: "lib:inline-block lib:border-2 lib:border-solid lib:border-current lib:rounded-full lib:animate-spin lib:text-gray-800",
   stroke: {
     transparent: "lib:border-b-transparent lib:border-l-transparent",
     visible: "lib:border-b-gray-300 lib:border-l-gray-300",

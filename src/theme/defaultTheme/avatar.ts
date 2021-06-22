@@ -1,6 +1,5 @@
 export const avatar = {
-  base:
-    "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100",
+  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100",
   size: {
     xs: "lib:h-4 lib:w-4",
     sm: "lib:h-5 lib:w-5",
@@ -10,8 +9,7 @@ export const avatar = {
   },
   image: "lib:rounded-full lib:w-full lib:h-full lib:object-cover",
   badge: {
-    base:
-      "lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full",
+    base: "lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full",
     position: {
       "top-left": "lib:top-0 lib:left-0",
       "top-right": "lib:top-0 lib:right-0",
@@ -28,8 +26,7 @@ export const avatar = {
   },
   status: {
     online: {
-      base:
-        "lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
+      base: "lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
       size: {
         "2xl": "lib:text-[9px]",
         xl: "lib:text-[7px]",
@@ -39,8 +36,7 @@ export const avatar = {
       },
     },
     offline: {
-      base:
-        "lib:text-yellow-500 lib:bg-white lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
+      base: "lib:text-yellow-500 lib:bg-white lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
       size: {
         "2xl": "lib:text-[9px]",
         xl: "lib:text-[7px]",
@@ -50,8 +46,7 @@ export const avatar = {
       },
     },
     typing: {
-      base:
-        "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",
+      base: "lib:flex lib:items-center lib:justify-center lib:bg-gray-500 lib:rounded-full lib:space-x-px",
       size: {
         xs: "lib:h-1 lib:p-px",
         sm: "lib:h-1.5 lib:p-0.5",
@@ -96,11 +91,9 @@ export const avatar = {
   group: {
     base: "lib:inline-flex lib:items-center lib:-space-x-1.5",
     excess: {
-      bg:
-        "lib:absolute lib:inset-0 lib:bg-black lib:rounded-full lib:opacity-50",
+      bg: "lib:absolute lib:inset-0 lib:bg-black lib:rounded-full lib:opacity-50",
       text: {
-        base:
-          "lib:absolute lib:inset-0 lib:flex lib:items-center lib:justify-center lib:text-white lib:rounded-full lib:font-semibold",
+        base: "lib:absolute lib:inset-0 lib:flex lib:items-center lib:justify-center lib:text-white lib:rounded-full lib:font-semibold",
         size: {
           xs: "lib:text-xs",
           sm: "lib:text-xs",

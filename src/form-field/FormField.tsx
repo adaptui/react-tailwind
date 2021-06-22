@@ -22,22 +22,14 @@ type FormFieldContextProps = Omit<
   "htmlProps"
 >;
 
-const [
-  FormFieldContextProvider,
-  useFormFieldContext,
-] = createContext<FormFieldContextProps>({ strict: false });
+const [FormFieldContextProvider, useFormFieldContext] =
+  createContext<FormFieldContextProps>({ strict: false });
 
 export { useFormFieldContext };
 
 const useFormContextValues = (props: FormFieldProps) => {
-  const {
-    id,
-    isRequired,
-    isInvalid,
-    isDisabled,
-    isReadOnly,
-    ...htmlProps
-  } = props;
+  const { id, isRequired, isInvalid, isDisabled, isReadOnly, ...htmlProps } =
+    props;
   const uuid = useId(id);
   const idProp = `field-${uuid}`;
 

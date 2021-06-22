@@ -16,15 +16,8 @@ type UseAutoSizeProps = Pick<
 >;
 
 export const useAutoSize = (props: UseAutoSizeProps) => {
-  const {
-    ref,
-    value,
-    rowsMax,
-    onChange,
-    autoSize,
-    rowsMin,
-    placeholder,
-  } = props;
+  const { ref, value, rowsMax, onChange, autoSize, rowsMin, placeholder } =
+    props;
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const handleRef = useMergeRefs(ref, inputRef);
   const shadowRef = React.useRef<HTMLTextAreaElement>(null);
@@ -42,9 +35,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     const input = inputRef.current;
     if (input == null) return;
 
-    const computedStyle = window.getComputedStyle(
-      (input as unknown) as Element,
-    );
+    const computedStyle = window.getComputedStyle(input as unknown as Element);
 
     const inputShallow = shadowRef.current;
     if (inputShallow == null) return;

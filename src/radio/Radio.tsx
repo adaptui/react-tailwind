@@ -11,14 +11,12 @@ import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type RadioStateContext = RadioInitialState;
 
-const [
-  RadioStateProvider,
-  useRadioStateContext,
-] = createContext<RadioStateContext>({
-  errorMessage: "RadioState must be used within RadioStateProvider",
-  name: "RadioState",
-  strict: false,
-});
+const [RadioStateProvider, useRadioStateContext] =
+  createContext<RadioStateContext>({
+    errorMessage: "RadioState must be used within RadioStateProvider",
+    name: "RadioState",
+    strict: false,
+  });
 
 export { useRadioStateContext };
 

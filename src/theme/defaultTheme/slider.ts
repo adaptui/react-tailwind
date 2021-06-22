@@ -2,8 +2,7 @@ export const slider = {
   common: {
     input: "lib:sr-only",
     wrapper: {
-      base:
-        "lib:text-gray-800 lib:relative lib:inline-block touch-action-none lib:select-none lib:outline-none",
+      base: "lib:text-gray-800 lib:relative lib:inline-block touch-action-none lib:select-none lib:outline-none",
     },
     track: {
       base: "lib:relative lib:top-0 lib:cursor-pointer",
@@ -12,8 +11,7 @@ export const slider = {
         "lib:absolute lib:bg-current lib:pointer-events-none lib:rounded-full",
     },
     thumb: {
-      base:
-        "lib:absolute lib:z-10 lib:flex lib:items-center lib:bg-white lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-current lib:focus-within:ring-2 lib:focus-within:ring-current",
+      base: "lib:absolute lib:z-10 lib:flex lib:items-center lib:bg-white lib:justify-center lib:rounded-full lib:select-none lib:cursor-pointer lib:shadow-thumb lib:text-current lib:focus-within:ring-2 lib:focus-within:ring-current",
       size: {
         sm: "lib:w-3 lib:h-3 lib:text-[0.625rem]",
         md: "lib:w-4 lib:h-4 lib:text-xs",
@@ -58,8 +56,7 @@ export const slider = {
       },
     },
     thumb: {
-      base:
-        "lib:flex-row lib:top-unset lib:left-1/2 lib:transform lib:-translate-x-1/2",
+      base: "lib:flex-row lib:top-unset lib:left-1/2 lib:transform lib:-translate-x-1/2",
     },
   },
 };

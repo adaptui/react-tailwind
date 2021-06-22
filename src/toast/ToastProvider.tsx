@@ -16,11 +16,7 @@ const defaultOptions: DefaultToastOptions<Toast> = {
   visibleToasts: 3,
 };
 
-const [
-  ToastProvider,
-  useToastStore,
-  useCreateToast,
-  useToastHandlers,
-] = createToastStore<Toast, Content>(defaultOptions);
+const [ToastProvider, useToastStore, useCreateToast, useToastHandlers] =
+  createToastStore<Toast, Content>(defaultOptions);
 
 export { ToastProvider, useToastStore, useCreateToast, useToastHandlers };

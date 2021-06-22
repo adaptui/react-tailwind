@@ -1,7 +1,7 @@
 const plugin = require("tailwindcss/plugin");
 const selectorParser = require("postcss-selector-parser");
-const buildSelectorVariant = require("tailwindcss/lib/util/buildSelectorVariant")
-  .default;
+const buildSelectorVariant =
+  require("tailwindcss/lib/util/buildSelectorVariant").default;
 
 function generatePseudoClassVariant(pseudoClass, selectorPrefix = pseudoClass) {
   return ({ modifySelectors, separator }) => {

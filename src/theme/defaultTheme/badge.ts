@@ -1,6 +1,5 @@
 export const badge = {
-  base:
-    "lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all",
+  base: "lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all",
   attached: "absolute",
   attachedParent: "relative",
   position: {

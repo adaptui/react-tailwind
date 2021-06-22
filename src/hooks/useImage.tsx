@@ -61,15 +61,8 @@ type ImageEvent = React.SyntheticEvent<HTMLImageElement, Event>;
  * ```
  */
 export function useImage(props: UseImageProps) {
-  const {
-    src,
-    srcSet,
-    onLoad,
-    onError,
-    crossOrigin,
-    sizes,
-    ignoreFallback,
-  } = props;
+  const { src, srcSet, onLoad, onError, crossOrigin, sizes, ignoreFallback } =
+    props;
 
   const [status, setStatus] = useState<Status>("pending");
 
@@ -103,7 +96,7 @@ export function useImage(props: UseImageProps) {
     img.onload = event => {
       flush();
       setStatus("loaded");
-      onLoad?.((event as unknown) as ImageEvent);
+      onLoad?.(event as unknown as ImageEvent);
     };
     img.onerror = error => {
       flush();
