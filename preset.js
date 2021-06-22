@@ -441,7 +441,6 @@ const renderlesskitConfig = {
     ],
   },
   plugins: [
-    require("./tailwindPlugins/borderColor"),
     require("./tailwindPlugins/utilities"),
     require("./tailwindPlugins/variantPlugin"),
   ],
