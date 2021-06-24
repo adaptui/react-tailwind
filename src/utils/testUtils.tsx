@@ -65,7 +65,7 @@ const ERROR_IMAGE = "error.png";
 const orignalImage = window.Image;
 
 export const mockImage = (loadState: string) => {
-  jest.useFakeTimers();
+  jest.useFakeTimers("modern");
 
   (window.Image as unknown) = class MockImage {
     onload: () => void = () => {};

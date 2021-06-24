@@ -4,7 +4,7 @@ import { screen } from "@testing-library/react";
 import { Avatar } from "../index";
 import { render, testA11y, mockImage } from "../../utils/testUtils";
 
-jest.useFakeTimers();
+jest.useFakeTimers("modern");
 afterEach(() => {
   mockImage.restoreMock();
 });

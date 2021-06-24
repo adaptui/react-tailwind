@@ -1,5 +1,5 @@
 diff --git a/node_modules/tailwindcss/lib/jit/lib/generateRules.js b/node_modules/tailwindcss/lib/jit/lib/generateRules.js
-index 9b59423..d510b77 100644
+index 9b59423..c2f8660 100644
 --- a/node_modules/tailwindcss/lib/jit/lib/generateRules.js
 +++ b/node_modules/tailwindcss/lib/jit/lib/generateRules.js
 @@ -117,12 +117,15 @@ function applyImportant(matches) {
@@ -93,7 +93,7 @@ index 9b59423..d510b77 100644
  
      for (let match of matches) {
 diff --git a/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js b/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js
-index a7d739d..b5d51a1 100644
+index a7d739d..782f46d 100644
 --- a/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js
 +++ b/node_modules/tailwindcss/lib/jit/lib/setupContextUtils.js
 @@ -467,11 +467,12 @@ function resolvePlugins(context, tailwindDirectives, root) {
