@@ -13,9 +13,11 @@ import { SliderThumbHandle } from "../../icons/SliderThumbHandle";
 export default {
   title: "Forms/Slider",
   component: Slider,
+  args: {
+    currentColor: "",
+  },
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),
-    currentColor: { defaultValue: "" },
   },
 } as Meta;
 

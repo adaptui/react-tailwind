@@ -10,7 +10,6 @@ module.exports = function (api) {
     [
       "@babel/env",
       {
-        loose: true,
         modules: isCommonJS ? "commonjs" : false,
         targets: {
           esmodules: isESM ? true : undefined,
@@ -22,7 +21,7 @@ module.exports = function (api) {
   ];
 
   const plugins = [
-    ["@babel/plugin-proposal-class-properties", { loose: true }],
+    ["@babel/plugin-proposal-class-properties"],
     isBuild
       ? [
           "babel-plugin-jsx-remove-data-test-id",

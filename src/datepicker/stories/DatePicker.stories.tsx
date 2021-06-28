@@ -10,7 +10,6 @@ import {
 export default {
   title: "Forms/DatePicker",
   component: CDatePicker,
-  argTypes: {},
 } as Meta;
 
 const Base: Story = () => <CDatePicker />;

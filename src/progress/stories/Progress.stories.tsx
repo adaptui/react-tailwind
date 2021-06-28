@@ -1,6 +1,6 @@
 import React from "react";
 import { isNull } from "@renderlesskit/react";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 
 import { Button } from "../../button";
 import {

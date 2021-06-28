@@ -37,16 +37,10 @@ export type AlertProps = BoxProps &
   AlertRenderProps & {
     /**
      * The status of the alert
+     *
+     * @default info
      */
     status?: AlertStatus;
-    /**
-     * button action icon
-     */
-    icon?: React.ReactNode;
-    /**
-     * Action button label
-     */
-    actionButtonLabel?: string;
     /**
      * Title of the alert
      */
@@ -55,6 +49,14 @@ export type AlertProps = BoxProps &
      * Description of the alert
      */
     description?: string;
+    /**
+     * Action button label
+     */
+    actionButtonLabel?: string;
+    /**
+     * Button action icon
+     */
+    icon?: React.ReactNode;
     /**
      * Is Alert closable?
      *
