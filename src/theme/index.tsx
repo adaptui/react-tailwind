@@ -37,3 +37,5 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
 
   return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
 };
+
+export * from "./extendTheme";
