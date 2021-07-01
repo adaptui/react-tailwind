@@ -15,13 +15,11 @@ export type CircularProgressContext = Pick<CircularProgressProps, "size"> & {
   state: ProgressStateReturn;
 };
 
-const [
-  CircularProgressProvider,
-  useCircularProgressContext,
-] = createContext<CircularProgressContext>({
-  name: "CircularProgressContext",
-  strict: false,
-});
+const [CircularProgressProvider, useCircularProgressContext] =
+  createContext<CircularProgressContext>({
+    name: "CircularProgressContext",
+    strict: false,
+  });
 
 export { useCircularProgressContext };
 

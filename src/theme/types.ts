@@ -78,7 +78,7 @@ declare global {
       K extends keyof Comps[C] = Brand<keyof Comps[C]>,
       L extends keyof Comps[C][K] = Brand<keyof Comps[C][K]>,
       M extends keyof Comps[C][K][L] = Brand<keyof Comps[C][K][L]>,
-      N extends keyof Comps[C][K][L][M] = Brand<keyof Comps[C][K][L][M]>
+      N extends keyof Comps[C][K][L][M] = Brand<keyof Comps[C][K][L][M]>,
     > = [C, K, L, M, N] extends [string, Brand<K>, Brand<L>, Brand<M>, Brand<N>]
       ? Comps[C]
       : [C, K, L, M, N] extends [string, string, Brand<L>, Brand<M>, Brand<N>]

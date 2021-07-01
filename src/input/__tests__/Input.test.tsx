@@ -9,7 +9,7 @@ import {
   InputGroupPrefix,
   InputGroupSuffix,
 } from "../../input";
-import { render, testA11y, fireEvent, cleanup } from "../../utils/testUtils";
+import { render, testA11y, cleanup } from "../../utils/testUtils";
 
 afterEach(cleanup);
 

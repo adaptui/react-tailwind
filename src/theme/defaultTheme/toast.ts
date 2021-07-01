@@ -6,8 +6,7 @@ export const toast = {
     show: "lib:opacity-100",
     hide: "lib:opacity-0",
   },
-  icon:
-    "lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5",
+  icon: "lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5",
   body: {
     base: "lib:flex lib:flex-col lib:text-sm lib:flex-wrap lib:mr-2",
     title: "lib:font-medium",
@@ -74,20 +73,17 @@ export const toast = {
 
   // Container Vercel Toast animation styles
   container: {
-    base:
-      "lib:fixed lib:z-50 sm:lib:max-w-xs lib:max-w-[90vw] lib:transition-all lib:duration-300",
+    base: "lib:fixed lib:z-50 sm:lib:max-w-xs lib:max-w-[90vw] lib:transition-all lib:duration-300",
     notHovered: "",
     hovered: "",
   },
   animationWrapper: {
-    base:
-      "lib:absolute sm:lib:w-80 lib:w-[90vw] lib:transition-all lib:duration-300 lib:transform-gpu",
+    base: "lib:absolute sm:lib:w-80 lib:w-[90vw] lib:transition-all lib:duration-300 lib:transform-gpu",
     notVisible: "",
     visible: "",
   },
   hoverWrapper: "lib:flex lib:transition-all lib:duration-300",
-  fill:
-    "lib:absolute lib:left-0 lib:right-0 lib:w-full lib:h-full lib:bg-transparent",
+  fill: "lib:absolute lib:left-0 lib:right-0 lib:w-full lib:h-full lib:bg-transparent",
 
   // Placements
   bottom: {

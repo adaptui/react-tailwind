@@ -28,14 +28,14 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
 export function forwardRefWithAs<
   Props,
   RefProp = any,
-  DefaultType extends As = any
+  DefaultType extends As = any,
 >(
   component: React.ForwardRefRenderFunction<
     RefProp,
     PropsWithAs<Props, DefaultType>
   >,
 ) {
-  return (React.forwardRef(component) as unknown) as ComponentWithAs<
+  return React.forwardRef(component) as unknown as ComponentWithAs<
     Props,
     DefaultType
   >;

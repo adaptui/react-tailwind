@@ -42,7 +42,6 @@ export type AvatarInitialProps = {
   /**
    * The default avatar used as fallback when `name`, and `src`
    * is not specified.
-   * @type React.ReactElement
    */
   fallback?: React.ReactNode;
   /**

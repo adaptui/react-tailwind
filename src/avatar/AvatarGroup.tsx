@@ -39,11 +39,10 @@ export const AvatarGroup = forwardRefWithAs<
     ...rest
   } = props;
   const theme = useTheme();
-  const context = React.useMemo(() => ({ size, showBorder, borderColor }), [
-    size,
-    showBorder,
-    borderColor,
-  ]);
+  const context = React.useMemo(
+    () => ({ size, showBorder, borderColor }),
+    [size, showBorder, borderColor],
+  );
 
   const validChildren = getValidChildren(children);
 

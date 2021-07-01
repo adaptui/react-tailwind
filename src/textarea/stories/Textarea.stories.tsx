@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 
 import { Box } from "../../box";
 import { Radio, RadioGroup } from "../../radio";
@@ -71,9 +71,8 @@ export const Controlled = () => {
 };
 
 export const Resizes = () => {
-  const [resize, setResize] = React.useState<TextareaProps["resize"]>(
-    "horizontal",
-  );
+  const [resize, setResize] =
+    React.useState<TextareaProps["resize"]>("horizontal");
 
   return (
     <>

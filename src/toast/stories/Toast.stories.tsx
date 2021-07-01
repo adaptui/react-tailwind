@@ -1,6 +1,6 @@
 import React from "react";
 import { Portal } from "reakit";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 
 import { Button } from "../../button";
 import { useCustomToast } from "./CustomToast";

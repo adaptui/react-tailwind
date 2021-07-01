@@ -12,8 +12,7 @@ export const _switch = {
   },
   icon: {
     wrapper: {
-      base:
-        "lib:inline-flex lib:justify-start lib:flex-shrink-0 lib:rounded-full lib:p-0.5 lib:transition-all",
+      base: "lib:inline-flex lib:justify-start lib:flex-shrink-0 lib:rounded-full lib:p-0.5 lib:transition-all",
       size: {
         sm: "lib:h-3.5 lib:w-5",
         md: "lib:h-4 lib:w-[1.625rem]",
@@ -26,8 +25,7 @@ export const _switch = {
       },
     },
     content: {
-      base:
-        "lib:transition-transform lib:transform lib:bg-white lib:rounded-full lib:shadow",
+      base: "lib:transition-transform lib:transform lib:bg-white lib:rounded-full lib:shadow",
       size: {
         sm: "lib:h-2.5 lib:w-2.5",
         md: "lib:h-3 lib:w-3",

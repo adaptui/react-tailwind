@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 
 import {
   storyTemplate,
@@ -10,6 +10,11 @@ import { Alert, AlertProps } from "../index";
 export default {
   title: "Primitives/Alert",
   component: Alert,
+  args: {
+    title: "",
+    description: "",
+    actionButtonLabel: "",
+  },
   argTypes: {
     status: createUnionControl([
       "neutral",
@@ -18,9 +23,6 @@ export default {
       "warning",
       "error",
     ]),
-    title: { defaultValue: "" },
-    description: { defaultValue: "" },
-    actionButtonLabel: { defaultValue: "" },
   },
 } as Meta;
 

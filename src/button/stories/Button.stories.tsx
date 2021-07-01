@@ -1,6 +1,6 @@
 import React from "react";
 import { cx } from "@renderlesskit/react";
-import { Meta } from "@storybook/react/types-6-0";
+import { Meta } from "@storybook/react";
 import { useTabState, Tab, TabList, TabPanel } from "reakit/Tab";
 
 import {

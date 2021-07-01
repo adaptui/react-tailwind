@@ -29,14 +29,11 @@ React UI built with renderleskit-react & tailwind
 
 `yarn release`
 
-> **Note:** to release a package
+> **Note:** Before running,
 
-> For Github Release, we use
-> [conventional-github-releaser](https://github.com/conventional-changelog/releaser-tools/tree/master/packages/conventional-github-releaser).
 > Create a new Github Token as per the
 > [docs](https://github.com/conventional-changelog/releaser-tools/tree/master/packages/conventional-github-releaser#setup-token-for-cli)
-> and export to the CLI env like
-> `export CONVENTIONAL_GITHUB_RELEASER_TOKEN=xxxx`
+> and export to the CLI env like `export GITHUB_TOKEN=xxxx`
 
 ## Commit
 

@@ -34,11 +34,10 @@ export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
       ...rest
     } = props;
     const composite = useCompositeState({ baseId });
-    const context = React.useMemo(() => ({ size, variant, composite }), [
-      size,
-      variant,
-      composite,
-    ]);
+    const context = React.useMemo(
+      () => ({ size, variant, composite }),
+      [size, variant, composite],
+    );
 
     return (
       <TagGroupProvider value={context}>
