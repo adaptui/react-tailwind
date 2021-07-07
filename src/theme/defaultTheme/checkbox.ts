@@ -10,8 +10,10 @@ export const checkbox = {
       lg: "lib:w-5 lib:h-5 lib:text-base",
     },
     state: {
-      stroke_invalid: "lib:border-red-600 group-hover:lib:border-red-500",
-      fill_invalid: "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500",
+      stroke_invalid:
+        "lib:border-red-600 group-hover:lib:border-red-500 lib:ring-red-300",
+      fill_invalid:
+        "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500 lib:ring-red-300",
       indeterminate: "lib:bg-gray-800 lib:text-white",
       unchecked:
         "lib:border-[1.5px] lib:border-solid lib:border-gray-400 group-hover:lib:border-gray-500",
@@ -29,11 +31,11 @@ export const checkbox = {
     },
   },
   label: {
-    base: "lib:text-gray-700 lib:leading-none lib:select-none lib:font-medium",
+    base: "lib:text-gray-700 lib:select-none lib:font-medium",
     size: {
       sm: "lib:text-xs",
-      md: "lib:text-sm",
-      lg: "lib:text-sm",
+      md: "lib:text-sm lib:leading-4",
+      lg: "lib:text-sm lib:leading-5",
     },
   },
 };

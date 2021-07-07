@@ -45,6 +45,29 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
     <>
       <Checkbox
         {...args}
+        size="sm"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Checked state
+      </Checkbox>
+      <br />
+      <br />
+      <Checkbox
+        {...args}
+        size="md"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Checked state
+      </Checkbox>
+      <br />
+      <br />
+      <Checkbox
+        {...args}
+        size="lg"
         description={
           "Used when the checkbox is selected and will use its value for the form submission."
         }
@@ -53,7 +76,7 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       </Checkbox>
     </>
   );
-})({ size: "sm" });
+})({ size: "md" });
 
 export const WithoutDescription = storyTemplate<CheckboxProps>(args => {
   return (
