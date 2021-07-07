@@ -12,6 +12,7 @@ import { icon } from "./icon";
 import { iconButton } from "./iconButton";
 import { input } from "./input";
 import { list } from "./list";
+import { newButton } from "./newButton";
 import { progress } from "./progress";
 import { spinner } from "./spinner";
 import { _switch } from "./switch";
@@ -39,6 +40,7 @@ const theme = {
   iconButton,
   input,
   list,
+  newButton,
   progress,
   radio,
   slider,

@@ -108,6 +108,19 @@ export const Button = forwardRefWithAs<
     return <Spinner className={theme.button.spinner} />;
   };
 
+  // const IconButton = () => {
+  //   return (
+  //     <ButtonIcon
+  //       className={cx(
+  //         theme.button.iconOnly.size[_size],
+  //         theme.button.IconOnly.variant[_variant],
+  //       )}
+  //     >
+  //       {icon}
+  //     </ButtonIcon>
+  //   );
+  // };
+
   return (
     <ReakitButton
       ref={ref}
@@ -116,7 +129,15 @@ export const Button = forwardRefWithAs<
       style={_disabled ? { pointerEvents: "unset", ...style } : style}
       {...rest}
     >
-      {!loading ? <ButtonWithIcons /> : <ButtonSpinner />}
+      {!loading ? (
+        false ? (
+          <ButtonWithIcons />
+        ) : (
+          <ButtonWithIcons />
+        )
+      ) : (
+        <ButtonSpinner />
+      )}
     </ReakitButton>
   );
 });
