@@ -74,6 +74,18 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Checked state
       </Checkbox>
+      <br />
+      <br />
+      <Checkbox
+        {...args}
+        isInvalid
+        size="lg"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Invalid state
+      </Checkbox>
     </>
   );
 })({ size: "md" });
