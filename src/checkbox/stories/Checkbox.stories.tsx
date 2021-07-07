@@ -38,17 +38,40 @@ const base = storyTemplate<CheckboxProps>(Checkbox, {
   defaultState: true,
 });
 
-export const Small = base({ size: "sm" });
-
-export const Medium = base({});
-
-export const Large = base({ size: "lg" });
-
-export const DefaultUnchecked = base({ defaultState: false });
-
-export const DefaultChecked = base({ defaultState: true });
-
 export const Disabled = base({ disabled: true });
+
+export const WithDescription = storyTemplate<CheckboxProps>(args => {
+  return (
+    <>
+      <Checkbox
+        {...args}
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Checked state
+      </Checkbox>
+    </>
+  );
+})({ size: "sm" });
+
+export const WithoutDescription = storyTemplate<CheckboxProps>(args => {
+  return (
+    <>
+      <Checkbox {...args}>Checked state</Checkbox>
+    </>
+  );
+})({ size: "md" });
+
+export const Invalid = storyTemplate<CheckboxProps>(args => {
+  return (
+    <>
+      <Checkbox {...args} isInvalid>
+        Checked state
+      </Checkbox>
+    </>
+  );
+})({ size: "md" });
 
 export const Controlled = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>(false);

@@ -7,7 +7,7 @@ import { useCheckboxContext } from "./Checkbox";
 import { forwardRefWithAs } from "../utils/types";
 import { CheckIcon, IndeterminateIcon } from "../icons";
 
-export type CheckboxIconProps = BoxProps & {};
+export type CheckboxIconProps = BoxProps & { isInvalid?: boolean };
 
 export const CheckboxIcon = forwardRefWithAs<
   CheckboxIconProps,
@@ -30,10 +30,19 @@ export const CheckboxIcon = forwardRefWithAs<
     state?.disabled
       ? theme.checkbox.icon.state.disabled
       : stateProp === "indeterminate"
-      ? theme.checkbox.icon.state.indeterminate
+      ? cx(
+          theme.checkbox.icon.state.indeterminate,
+          props.isInvalid && theme.checkbox.icon.state.fill_invalid,
+        )
       : stateProp
-      ? theme.checkbox.icon.state.checked
-      : theme.checkbox.icon.state.unchecked,
+      ? cx(
+          theme.checkbox.icon.state.checked,
+          props.isInvalid && theme.checkbox.icon.state.fill_invalid,
+        )
+      : cx(
+          theme.checkbox.icon.state.unchecked,
+          props.isInvalid && theme.checkbox.icon.state.stroke_invalid,
+        ),
     className,
   );
 
