@@ -1,7 +1,7 @@
 const field = {
   base: "flex flex-col",
   description: {
-    base: "lib:text-gray-500 lib:leading-loose lib:text-sm",
+    base: "lib:text-gray-500 lib:mt-1 lib:text-sm",
     size: {
       sm: "lib:text-xs",
       md: "lib:text-sm",
