@@ -18,8 +18,8 @@ export const CheckboxDescription = forwardRefWithAs<
 
   const theme = useTheme();
   const checkboxDescCheckboxDescriptionStyles = cx(
-    theme.checkbox.description.base,
-    theme.checkbox.description.size[size],
+    theme.checkbox.field.description.base,
+    theme.checkbox.field.description.size[size],
     className,
   );
 

@@ -7,7 +7,6 @@ import { useControllableState } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { CheckboxIcon, CheckboxIconRenderPropValues } from "./CheckboxIcon";
 import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { CheckboxInput } from "./CheckboxInput";
@@ -15,6 +14,7 @@ import { createContext, runIfFn } from "../utils";
 import { CommonFieldProps } from "../form-field";
 import { CheckboxDescription } from "./CheckboxDescription";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { CheckboxIcon, CheckboxIconRenderPropValues } from "./CheckboxIcon";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
@@ -102,7 +102,7 @@ export const Checkbox = forwardRefWithAs<
   const context = React.useMemo(() => ({ state, size }), [state, size]);
 
   const theme = useTheme();
-  const checkboxTextWrapperStyles = theme.checkbox.textWrapper;
+  const checkboxTextWrapperStyles = theme.checkbox.field.base;
 
   if (!children) {
     return (

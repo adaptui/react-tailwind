@@ -19,13 +19,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button } from "../../button";
 import { FormField } from "../../form-field";
 import { CheckboxDescription } from "../CheckboxDescription";
-import {
-  BoltIcon,
-  CloseIcon,
-  EyeClose,
-  EyeOpen,
-  IndeterminateIcon,
-} from "../../icons";
+import { CloseIcon, EyeClose, EyeOpen, IndeterminateIcon } from "../../icons";
 
 export default {
   title: "Forms/Checkbox",
@@ -160,7 +154,7 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       </Checkbox>
     </>
   );
-})({ size: "md" });
+})({});
 
 export const WithoutDescription = storyTemplate<CheckboxProps>(args => {
   return (
