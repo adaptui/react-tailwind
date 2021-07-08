@@ -16,6 +16,7 @@ export const parameters = {
 export const decorators = [
   (Story, context) => {
     document.body.classList.add("font-sans");
+    document.body.classList.add("antialiased");
 
     return (
       <RenderlesskitProvider theme={theme}>
