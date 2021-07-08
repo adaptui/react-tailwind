@@ -2,6 +2,11 @@ import * as React from "react";
 import { Meta } from "@storybook/react";
 import { Button } from "../index";
 import { createControls } from "../../../.storybook/storybookUtils";
+import { ButtonProps } from "reakit/ts";
+import { screen } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
+
+console.log("%c userEvent", "color: #917399", userEvent);
 
 export default {
   title: "Primitives/NewButton",
@@ -15,27 +20,30 @@ export default {
       "wrapElement",
     ],
   }),
+  parameters: {
+    layout: "centered",
+  },
 } as Meta;
 
-export const Small = {
-  args: { children: "Button", size: "sm", variant: "solid" },
-};
-console.log("%c Small", "color: #0088cc", Small);
-
-export const Medium = {
-  args: { ...Small.args, size: "md" },
+export const Default = {
+  render: (args: ButtonProps) => <Button {...args} />,
+  args: { children: "Button", size: "md", variant: "solid" },
 };
 
-export const Large = {
-  args: { ...Small.args, size: "lg" },
-};
+export const Small = { args: { ...Default.args, size: "sm" } };
+export const Medium = { args: { ...Default.args } };
+export const Large = { args: { ...Default.args, size: "lg" } };
+export const ExtraLarge = { args: { ...Default.args, size: "xl" } };
 
-export const ExtraLarge = {
-  args: { ...Small.args, size: "xl" },
-};
+export const Solid = { ...Default };
+export const Subtle = { args: { ...Default.args, variant: "subtle" } };
+export const Outline = { args: { ...Default.args, variant: "outline" } };
+export const Ghost = { args: { ...Default.args, variant: "ghost" } };
 
-export const Solid = { ...Small };
-
-export const Playground = () => {
-  return <Button type="button">Button</Button>;
+export const Hover = {
+  ...Default,
+  play: async () => {
+    const button = screen.getByText("Button");
+    await userEvent.hover(button);
+  },
 };

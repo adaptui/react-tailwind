@@ -7,6 +7,10 @@ export const newButton = {
     xl: "lib:h-11 lib:min-w-11 lib:px-4 lib:rounded-xl lib:text-base",
   },
   variant: {
-    solid: "lib:bg-gray-800 lib:text-white",
+    solid:
+      "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 active:lib:bg-gray-900",
+    subtle: "lib:bg-gray-100 lib:text-gray-600",
+    outline: "lib:text-gray-600 lib:border lib:border-gray-200",
+    ghost: "hover:lib:bg-gray-100 lib:text-gray-600 ",
   },
 };
