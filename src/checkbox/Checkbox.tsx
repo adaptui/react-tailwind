@@ -19,7 +19,7 @@ import { forwardRefWithAs, RenderProp } from "../utils/types";
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
 export type CheckboxContext = {
-  state: ReakitCheckboxOptions;
+  state: ReakitCheckboxOptions & { isInvalid?: boolean };
   size: CheckboxProps["size"];
 };
 
@@ -32,16 +32,19 @@ export { useCheckboxContext };
 
 type CheckboxRenderProps = RenderProp<ReakitCheckboxOptions>;
 
+type CheckboxExtraProps = {
+  description?: string;
+  defaultState?: ReakitCheckboxOptions["state"];
+  onStateChange?: (value: CheckboxStatus) => void;
+  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+  name?: string;
+  inputRef?: React.Ref<HTMLInputElement>;
+};
+
 export type CheckboxProps = BoxProps &
   Omit<CommonFieldProps, "id" | "isReadOnly"> &
-  Omit<ReakitCheckboxOptions, "size" | "setState"> & {
-    description?: string;
-    defaultState?: ReakitCheckboxOptions["state"];
-    onStateChange?: (value: CheckboxStatus) => void;
-    size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
-    name?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
-  };
+  Omit<ReakitCheckboxOptions, "size" | "setState"> &
+  CheckboxExtraProps;
 
 export const Checkbox = forwardRefWithAs<
   CheckboxProps & CheckboxRenderProps,
@@ -79,6 +82,7 @@ export const Checkbox = forwardRefWithAs<
       setState: setCheckboxStateChange,
       value,
       checked,
+      isInvalid,
       disabled: isDisabled || disabled,
       focusable,
     }),
@@ -88,6 +92,7 @@ export const Checkbox = forwardRefWithAs<
       value,
       checked,
       isDisabled,
+      isInvalid,
       disabled,
       focusable,
     ],
@@ -108,7 +113,7 @@ export const Checkbox = forwardRefWithAs<
             isRequired={isRequired}
             isInvalid={isInvalid}
           />
-          <CheckboxIcon isInvalid={isInvalid} />
+          <CheckboxIcon />
         </CheckboxLabel>
       </CheckboxProvider>
     );
@@ -127,7 +132,7 @@ export const Checkbox = forwardRefWithAs<
             isRequired={isRequired}
             isInvalid={isInvalid}
           />
-          <CheckboxIcon isInvalid={isInvalid} />
+          <CheckboxIcon />
           {description ? (
             <div className={checkboxTextWrapperStyles}>
               <CheckboxText>{children}</CheckboxText>

@@ -10,15 +10,19 @@ export const checkbox = {
       lg: "lib:w-5 lib:h-5 lib:text-base",
     },
     state: {
-      stroke_invalid:
-        "lib:border-red-600 group-hover:lib:border-red-500 lib:ring-red-300",
-      fill_invalid:
-        "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500 lib:ring-red-300",
-      indeterminate: "lib:bg-gray-800 lib:text-white",
-      unchecked:
-        "lib:border-[1.5px] lib:border-solid lib:border-gray-400 group-hover:lib:border-gray-500",
-      checked: "lib:text-white lib:bg-gray-800 group-hover:lib:bg-gray-700",
       disabled: "lib:text-gray-400 lib:bg-gray-200",
+      checked: "lib:text-white",
+      unchecked: "lib:border-[1.5px] lib:border-solid",
+      indeterminate: "lib:text-white",
+      checked_valid: "lib:bg-gray-800 group-hover:lib:bg-gray-700",
+      unchecked_valid: "lib:border-gray-400 group-hover:lib:border-gray-500",
+      indeterminate_valid: "lib:bg-gray-800",
+      checked_invalid:
+        "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500 lib:ring-red-300",
+      unchecked_invalid:
+        "lib:border-red-600 group-hover:lib:border-red-500 lib:ring-red-300",
+      indeterminate_invalid:
+        "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500 lib:ring-red-300",
     },
   },
   textWrapper: "flex flex-col",
