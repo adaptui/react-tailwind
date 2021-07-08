@@ -19,8 +19,8 @@ export const calendar = {
       base: "",
       row: "",
       data: {
-        base: "lib:text-center lib:rounded-lg lib:text-sm lib:h-8 lib:w-8 lib:min-h-8 lib:min-w-8 lib:focus-within:bg-gray-100 lib:focus-within:text-black lib:aria-selected:text-white lib:aria-selected:bg-blue-400 lib:is-range-selection:bg-blue-100 lib:is-range-selection:rounded-none lib:is-range-selection:text-gray-800 lib:is-selection-start:text-white lib:is-selection-start:bg-blue-500 lib:is-selection-end:text-white lib:is-selection-end:bg-blue-500 lib:is-selection-start:rounded-l-lg lib:is-selection-end:rounded-r-lg",
-        button: "lib:p-2 lib:outline-none lib:aria-disabled:text-gray-400",
+        base: "lib:text-center lib:rounded-lg lib:text-sm lib:h-8 lib:w-8 lib:min-h-8 lib:min-w-8 focus-within:lib:bg-gray-100 focus-within:lib:text-black aria-selected:lib:text-white aria-selected:lib:bg-blue-400 is-range-selection:lib:bg-blue-100 is-range-selection:lib:rounded-none is-range-selection:lib:text-gray-800 is-selection-start:lib:text-white is-selection-start:lib:bg-blue-500 is-selection-end:lib:text-white is-selection-end:lib:bg-blue-500 is-selection-start:lib:rounded-l-lg is-selection-end:lib:rounded-r-lg",
+        button: "lib:p-2 lib:outline-none aria-disabled:lib:text-gray-400",
       },
     },
   },

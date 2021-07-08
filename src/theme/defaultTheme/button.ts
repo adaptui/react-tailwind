@@ -10,10 +10,10 @@ export const button = {
     primary: "lib:bg-gray-800 lib:text-white",
     secondary: "lib:bg-gray-100 lib:text-gray-800",
     outline: "lib:text-gray-800 lib:border lib:border-gray-300",
-    ghost: "lib:text-gray-800 lib:hover:bg-gray-100",
+    ghost: "lib:text-gray-800 hover:lib:bg-gray-100",
   },
   disabled: "lib:cursor-not-allowed lib:opacity-40",
-  group: "lib:focus:z-10 lib:-mr-px",
+  group: "focus:lib:z-10 lib:-mr-px",
   prefix: {
     size: {
       sm: "inline-flex mr-1.5",
