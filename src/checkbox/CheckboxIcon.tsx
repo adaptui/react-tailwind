@@ -4,10 +4,21 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useCheckboxContext } from "./Checkbox";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { CheckIcon, IndeterminateIcon } from "../icons";
+import { runIfFn } from "../utils";
 
-export type CheckboxIconProps = BoxProps & { isInvalid?: boolean };
+export type CheckboxIconRenderPropValues = {
+  isInvalid: boolean;
+  isDisabled: boolean;
+  isChecked: boolean;
+  isIndeterminate: boolean;
+};
+
+export type CheckboxIconProps = BoxProps &
+  RenderProp<CheckboxIconRenderPropValues> & {
+    isInvalid?: boolean;
+  };
 
 export const CheckboxIcon = forwardRefWithAs<
   CheckboxIconProps,
@@ -22,8 +33,8 @@ export const CheckboxIcon = forwardRefWithAs<
     stateProp = stateProp.includes(state?.value);
   }
 
-  const invalid = props.isInvalid || state?.isInvalid;
-  const isDisabled = state?.disabled;
+  const invalid = !!(props.isInvalid || state?.isInvalid);
+  const isDisabled = !!state?.disabled;
   const isIndeterminate = stateProp === "indeterminate";
   const isChecked = !!stateProp;
   const isUnchecked = !stateProp;
@@ -57,7 +68,12 @@ export const CheckboxIcon = forwardRefWithAs<
       {...rest}
     >
       {children ? (
-        children
+        runIfFn(children, {
+          isChecked,
+          isIndeterminate,
+          isInvalid: invalid,
+          isDisabled,
+        })
       ) : stateProp === "indeterminate" ? (
         <IndeterminateIcon />
       ) : stateProp ? (

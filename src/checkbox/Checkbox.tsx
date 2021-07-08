@@ -7,7 +7,7 @@ import { useControllableState } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { CheckboxIcon } from "./CheckboxIcon";
+import { CheckboxIcon, CheckboxIconRenderPropValues } from "./CheckboxIcon";
 import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { CheckboxInput } from "./CheckboxInput";
@@ -33,12 +33,13 @@ export { useCheckboxContext };
 type CheckboxRenderProps = RenderProp<ReakitCheckboxOptions>;
 
 type CheckboxExtraProps = {
-  description?: string;
-  defaultState?: ReakitCheckboxOptions["state"];
-  onStateChange?: (value: CheckboxStatus) => void;
-  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
   name?: string;
+  description?: string;
   inputRef?: React.Ref<HTMLInputElement>;
+  defaultState?: ReakitCheckboxOptions["state"];
+  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+  onStateChange?: (value: CheckboxStatus) => void;
+  icon?: (props: CheckboxIconRenderPropValues) => React.ReactNode;
 };
 
 export type CheckboxProps = BoxProps &
@@ -67,6 +68,7 @@ export const Checkbox = forwardRefWithAs<
     children,
     inputRef,
     description,
+    icon,
     ...rest
   } = props;
 
@@ -113,7 +115,7 @@ export const Checkbox = forwardRefWithAs<
             isRequired={isRequired}
             isInvalid={isInvalid}
           />
-          <CheckboxIcon />
+          <CheckboxIcon children={icon} />
         </CheckboxLabel>
       </CheckboxProvider>
     );
@@ -132,7 +134,7 @@ export const Checkbox = forwardRefWithAs<
             isRequired={isRequired}
             isInvalid={isInvalid}
           />
-          <CheckboxIcon />
+          <CheckboxIcon children={icon} />
           {description ? (
             <div className={checkboxTextWrapperStyles}>
               <CheckboxText>{children}</CheckboxText>

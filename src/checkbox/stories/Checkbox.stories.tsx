@@ -18,6 +18,14 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "../../button";
 import { FormField } from "../../form-field";
+import { CheckboxDescription } from "../CheckboxDescription";
+import {
+  BoltIcon,
+  CloseIcon,
+  EyeClose,
+  EyeOpen,
+  IndeterminateIcon,
+} from "../../icons";
 
 export default {
   title: "Forms/Checkbox",
@@ -110,6 +118,45 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
         }
       >
         Indeterminate invalid
+      </Checkbox>
+      <br />
+      <br />
+      <Checkbox
+        icon={props =>
+          props.isIndeterminate ? (
+            <IndeterminateIcon />
+          ) : props.isChecked ? (
+            <EyeOpen />
+          ) : (
+            <EyeClose />
+          )
+        }
+        description="Used when the checkbox is selected and will use its value for the form submission."
+      >
+        Custom icon prop
+      </Checkbox>
+      <br />
+      <br />
+      <Checkbox>
+        <CheckboxLabel>
+          <CheckboxInput />
+          <CheckboxIcon>
+            {props =>
+              props.isIndeterminate ? (
+                <IndeterminateIcon />
+              ) : props.isChecked ? (
+                <CloseIcon />
+              ) : null
+            }
+          </CheckboxIcon>
+          <div>
+            <CheckboxText>Custom checkbox</CheckboxText>
+            <CheckboxDescription>
+              Used when the checkbox is selected and will use its value for the
+              form submission.
+            </CheckboxDescription>
+          </div>
+        </CheckboxLabel>
       </Checkbox>
     </>
   );
