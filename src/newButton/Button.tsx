@@ -11,7 +11,7 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    *
-   * @default sm
+   * @default md
    */
   size?: keyof Renderlesskit.GetThemeValue<"newButton", "size">;
   /**
