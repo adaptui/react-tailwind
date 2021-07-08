@@ -1,5 +1,7 @@
 module.exports = {
-  core: { builder: "storybook-builder-vite" },
+  features: {
+    previewCsfV3: true,
+  },
   async viteFinal(config, { configType }) {
     // customize the Vite config here
     return config;

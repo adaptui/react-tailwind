@@ -9,6 +9,7 @@ module.exports = preset({
     path.resolve(__dirname, "./src/theme/defaultTheme/**/*"),
     path.resolve(__dirname, "./src/**/stories/*.stories.@(ts|tsx)"),
     path.resolve(__dirname, "./renderlesskit.config.ts"),
+    path.resolve(__dirname, "./.storybook/**/*"),
   ],
 
   theme: {

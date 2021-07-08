@@ -11,13 +11,13 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
    * How large should the button be?
    *
-   * @default "md"
+   * @default sm
    */
   size?: keyof Renderlesskit.GetThemeValue<"newButton", "size">;
   /**
-   * How the button should be styled?
+   * How the button should look?
    *
-   * @default "primary"
+   * @default solid
    */
   variant?: keyof Renderlesskit.GetThemeValue<"newButton", "variant">;
 };
@@ -33,7 +33,11 @@ export const Button = forwardRefWithAs<
 
   const baseStyles = cx(base, _size[size], _variant[variant]);
 
-  return <ReakitButton className={baseStyles}>{children}</ReakitButton>;
+  return (
+    <ReakitButton className={baseStyles} ref={ref}>
+      {children}
+    </ReakitButton>
+  );
 });
 
 Button.displayName = "Button";
