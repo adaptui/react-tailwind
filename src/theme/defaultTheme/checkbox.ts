@@ -1,5 +1,5 @@
 const field = {
-  base: "flex flex-col",
+  base: "lib:flex lib:flex-col",
   description: {
     base: "lib:text-gray-500 lib:mt-1 lib:text-sm",
     size: {
@@ -19,9 +19,9 @@ const field = {
 };
 
 export const checkbox = {
-  base: "group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer",
+  base: "lib:group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer",
   disabled: "lib:cursor-not-allowed",
-  input: "peer lib:sr-only",
+  input: "lib:peer lib:sr-only",
   icon: {
     base: "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:rounded lib:select-none lib:transition-all lib:ring-0 lib:ring-gray-300 peer-focus:lib:ring-2",
     size: {

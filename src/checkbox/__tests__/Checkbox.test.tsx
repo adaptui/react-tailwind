@@ -45,9 +45,23 @@ describe("<Checkbox />", () => {
     expect(screen.getByRole("checkbox")).not.toBeChecked();
   });
 
-  it("can be disabled", () => {
+  it("can be isDisabled", () => {
     render(
       <Checkbox isDisabled defaultState={true}>
+        Checkbox
+      </Checkbox>,
+    );
+
+    expect(screen.getByRole("checkbox")).toBeDisabled();
+    // toBeChecked is failing for this case
+    expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(
+      true,
+    );
+  });
+
+  it("can be disabled", () => {
+    render(
+      <Checkbox disabled defaultState={true}>
         Checkbox
       </Checkbox>,
     );
