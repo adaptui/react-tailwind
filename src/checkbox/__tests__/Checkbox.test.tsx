@@ -45,6 +45,68 @@ describe("<Checkbox />", () => {
     expect(screen.getByRole("checkbox")).not.toBeChecked();
   });
 
+  it("can have custom icons", async () => {
+    const WithIcon = (args: CheckboxProps) => (
+      <Checkbox
+        {...args}
+        icon={({ isChecked, isIndeterminate, isDisabled, isInvalid }) => {
+          console.log(isChecked, isIndeterminate);
+          return (
+            <div
+              data-testid="testid-icon"
+              data-disabled={isDisabled}
+              data-invalid={isInvalid}
+            >
+              {isIndeterminate
+                ? "indeterminate"
+                : isChecked
+                ? "checked"
+                : "unchecked"}
+            </div>
+          );
+        }}
+      >
+        Checkbox
+      </Checkbox>
+    );
+    const { rerender } = render(<WithIcon />);
+
+    expect(screen.getByTestId("testid-icon")).toHaveTextContent("unchecked");
+
+    rerender(<WithIcon defaultState={true} />);
+    expect(screen.getByTestId("testid-icon")).toHaveTextContent("checked");
+
+    rerender(<WithIcon defaultState={false} />);
+    expect(screen.getByTestId("testid-icon")).toHaveTextContent("unchecked");
+
+    rerender(<WithIcon defaultState={"indeterminate"} />);
+    expect(screen.getByTestId("testid-icon")).toHaveTextContent("unchecked");
+
+    rerender(<WithIcon isInvalid />);
+    expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-invalid");
+
+    rerender(<WithIcon isDisabled />);
+    expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-disabled");
+
+    rerender(<WithIcon defaultState={true} isDisabled isInvalid />);
+    expect(screen.getByTestId("testid-icon")).toHaveTextContent("checked");
+    expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-disabled");
+    expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-invalid");
+
+    rerender(<WithIcon defaultState={false} isDisabled isInvalid />);
+    expect(screen.getByTestId("testid-icon")).toHaveTextContent("unchecked");
+    expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-disabled");
+    expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-invalid");
+
+    // TODO: Fix it
+    // rerender(<WithIcon defaultState={"indeterminate"} isDisabled isInvalid />);
+    // expect(screen.getByTestId("testid-icon")).toHaveTextContent(
+    //   "indeterminate",
+    // );
+    // expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-disabled");
+    // expect(screen.getByTestId("testid-icon")).toHaveAttribute("data-invalid");
+  });
+
   it("can be isDisabled", () => {
     render(
       <Checkbox isDisabled defaultState={true}>

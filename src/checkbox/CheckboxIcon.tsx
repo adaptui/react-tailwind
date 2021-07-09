@@ -36,8 +36,8 @@ export const CheckboxIcon = forwardRefWithAs<
   const invalid = !!(props.isInvalid || state?.isInvalid);
   const isDisabled = !!state?.disabled;
   const isIndeterminate = stateProp === "indeterminate";
-  const isChecked = !!stateProp;
-  const isUnchecked = !stateProp;
+  const isChecked = stateProp === true;
+  const isUnchecked = stateProp === false || stateProp === undefined;
 
   const compoundStyles = (key: string) => {
     return cx(
