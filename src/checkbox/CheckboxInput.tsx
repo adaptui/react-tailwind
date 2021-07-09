@@ -30,11 +30,11 @@ export const CheckboxInput = forwardRefWithAs<
   const checkboxInputStyles = cx(theme.checkbox.input, className);
 
   const formFieldProps = useFormControl({
+    ...rest,
     isDisabled: state.disabled || props.isDisabled || props.disabled,
     isInvalid:
       isInvalid || props.isInvalid || (props["aria-invalid"] as boolean),
     isRequired: props.isRequired || props.required,
-    ...rest,
   });
 
   return (

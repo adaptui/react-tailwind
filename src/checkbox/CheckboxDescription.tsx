@@ -17,19 +17,14 @@ export const CheckboxDescription = forwardRefWithAs<
   const { size = "md" } = useCheckboxContext();
 
   const theme = useTheme();
-  const checkboxDescCheckboxDescriptionStyles = cx(
+  const checkboxDescriptionStyles = cx(
     theme.checkbox.field.description.base,
     theme.checkbox.field.description.size[size],
     className,
   );
 
   return (
-    <Box
-      as="span"
-      ref={ref}
-      className={checkboxDescCheckboxDescriptionStyles}
-      {...rest}
-    />
+    <Box as="span" ref={ref} className={checkboxDescriptionStyles} {...rest} />
   );
 });
 

@@ -78,6 +78,8 @@ export const Checkbox = forwardRefWithAs<
     onChange: onStateChange,
   });
 
+  const isTrulyDisabled = isDisabled || disabled;
+
   const state = React.useMemo(
     () => ({
       state: checkboxState,
@@ -85,7 +87,7 @@ export const Checkbox = forwardRefWithAs<
       value,
       checked,
       isInvalid,
-      disabled: isDisabled || disabled,
+      disabled: isTrulyDisabled,
       focusable,
     }),
     [
@@ -93,9 +95,8 @@ export const Checkbox = forwardRefWithAs<
       setCheckboxStateChange,
       value,
       checked,
-      isDisabled,
+      isTrulyDisabled,
       isInvalid,
-      disabled,
       focusable,
     ],
   );
