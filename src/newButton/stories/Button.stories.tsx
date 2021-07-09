@@ -2,7 +2,8 @@ import * as React from "react";
 import { Meta } from "@storybook/react";
 import { Button, ButtonProps } from "../index";
 import { createControls } from "../../../.storybook/storybookUtils";
-import { SearchIcon } from "../../icons";
+import { CaretRightIcon, ClockIcon } from "../../icons";
+
 export default {
   title: "Primitives/NewButton",
   component: Button,
@@ -12,11 +13,12 @@ export default {
       "unstable_clickOnEnter",
       "unstable_clickOnSpace",
       "wrapElement",
-      "disabled",
       "focusable",
       "as",
       "iconOnly",
       "spinner",
+      "suffix",
+      "prefix",
     ],
   }),
   parameters: {
@@ -26,7 +28,7 @@ export default {
 
 export const Default = {
   render: (args: ButtonProps) => <Button {...args} />,
-  args: { children: "Buttons", size: "md", variant: "solid" },
+  args: { children: "Continue", size: "md", variant: "solid" },
   parameters: {
     options: {
       showPanel: true,
@@ -63,95 +65,63 @@ export const ButtonStack = {
       <div className="flex flex-col space-y-2">
         <div className="space-x-2">
           <Button {...args} size="sm" variant="solid">
-            Button
+            Continue
           </Button>
           <Button {...args} size="md" variant="solid">
-            Button
+            Continue
           </Button>
           <Button {...args} size="lg" variant="solid">
-            Button
+            Continue
           </Button>
           <Button {...args} size="xl" variant="solid">
-            Button
+            Continue
           </Button>
         </div>
         <div className="space-x-2">
           <Button {...args} size="sm" variant="subtle">
-            Button
+            Continue
           </Button>
           <Button {...args} size="md" variant="subtle">
-            Button
+            Continue
           </Button>
           <Button {...args} size="lg" variant="subtle">
-            Button
+            Continue
           </Button>
           <Button {...args} size="xl" variant="subtle">
-            Button
+            Continue
           </Button>
         </div>
         <div className="space-x-2">
           <Button {...args} size="sm" variant="outline">
-            Button
+            Continue
           </Button>
           <Button {...args} size="md" variant="outline">
-            Button
+            Continue
           </Button>
           <Button {...args} size="lg" variant="outline">
-            Button
+            Continue
           </Button>
           <Button {...args} size="xl" variant="outline">
-            Button
+            Continue
           </Button>
         </div>
         <div className="space-x-2">
           <Button {...args} size="sm" variant="ghost">
-            Button
+            Continue
           </Button>
           <Button {...args} size="md" variant="ghost">
-            Button
+            Continue
           </Button>
           <Button {...args} size="lg" variant="ghost">
-            Button
+            Continue
           </Button>
           <Button {...args} size="xl" variant="ghost">
-            Button
+            Continue
           </Button>
         </div>
       </div>
     );
   },
-  parameters: { options: { showPanel: false } },
-};
-
-export const Hover = {
-  ...ButtonStack,
-  parameters: { ...ButtonStack.parameters, pseudo: { hover: true } },
-};
-export const Active = {
-  ...ButtonStack,
-  parameters: { ...ButtonStack.parameters, pseudo: { active: true } },
-};
-export const Focus = {
-  ...ButtonStack,
-  parameters: { ...ButtonStack.parameters, pseudo: { focusVisible: true } },
-};
-export const Disabled = {
-  ...ButtonStack,
-  args: { disabled: true },
-};
-export const Loading = {
-  ...ButtonStack,
-  args: { loading: true },
-};
-
-export const IconOnly = {
-  ...Default,
-  args: { ...Default.args, iconOnly: <SearchIcon /> },
-};
-
-export const IconOnlyStack = {
-  ...ButtonStack,
-  args: { iconOnly: <SearchIcon /> },
   argTypes: {
     loading: { table: { disable: false } },
     disabled: { table: { disable: false } },
@@ -159,4 +129,67 @@ export const IconOnlyStack = {
     variant: { table: { disable: true } },
   },
   parameters: { options: { showPanel: true } },
+};
+
+export const Hover = {
+  ...ButtonStack,
+  parameters: { options: { showPanel: false }, pseudo: { hover: true } },
+};
+export const Active = {
+  ...ButtonStack,
+  parameters: { options: { showPanel: false }, pseudo: { active: true } },
+};
+export const Focus = {
+  ...ButtonStack,
+  parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
+};
+export const Disabled = {
+  ...ButtonStack,
+  args: { disabled: true },
+  parameters: { options: { showPanel: false } },
+};
+export const Loading = {
+  ...ButtonStack,
+  args: { loading: true },
+  parameters: { options: { showPanel: false } },
+};
+
+export const IconOnly = {
+  ...Default,
+  args: { ...Default.args, iconOnly: <ClockIcon /> },
+};
+
+export const IconOnlyStack = {
+  ...ButtonStack,
+  args: { iconOnly: <ClockIcon /> },
+};
+
+export const Suffix = {
+  ...Default,
+  args: { ...Default.args, suffix: <CaretRightIcon /> },
+};
+
+export const SuffixStack = {
+  ...ButtonStack,
+  args: { suffix: <CaretRightIcon /> },
+};
+
+export const Prefix = {
+  ...Default,
+  args: { ...Default.args, prefix: <ClockIcon /> },
+};
+
+export const PrefixStack = {
+  ...ButtonStack,
+  args: { prefix: <ClockIcon /> },
+};
+
+export const PrefixSuffix = {
+  ...Default,
+  args: { ...Default.args, prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
+};
+
+export const PrefixSuffixStack = {
+  ...ButtonStack,
+  args: { prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
 };

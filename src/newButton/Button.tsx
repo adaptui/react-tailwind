@@ -8,7 +8,6 @@ import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Dict, forwardRefWithAs } from "../utils/types";
 import { runIfFn } from "../utils";
-import { spinner } from "../theme/defaultTheme/spinner";
 
 export type NonNullable<T> = Exclude<T, null | undefined>;
 
@@ -30,6 +29,14 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
    */
   iconOnly?: React.ReactElement;
   /**
+   * If added, the button will show an icon before the button's text.
+   */
+  suffix?: React.ReactElement;
+  /**
+   * If added, the button will show an icon before the button's text.
+   */
+  prefix?: React.ReactElement;
+  /**
    * If `true`, the button will be disabled.
    *
    * @default false
@@ -47,14 +54,9 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   spinner?: React.ReactElement;
 };
 
-const spinnerButtonSizeMap = {
-  sm: "xs",
-  md: "xs",
-  lg: "xs",
-  xl: "sm",
-} as const;
-
 export const addIconA11y = (icon: React.ReactElement, props?: Dict) => {
+  console.log("%c props", "color: #408059", props);
+
   return React.isValidElement(icon)
     ? React.cloneElement(icon, {
         // @ts-ignore
@@ -76,6 +78,8 @@ export const Button = forwardRefWithAs<
     size = "sm",
     variant = "solid",
     iconOnly,
+    suffix,
+    prefix,
     loading = false,
     spinner,
     disabled = false,
@@ -83,14 +87,12 @@ export const Button = forwardRefWithAs<
     ...rest
   } = props;
   const _disabled = disabled || loading;
-  const hasIconOnly = !!iconOnly;
 
   const theme = useTheme();
   const {
     base,
     size: _size,
     variant: _variant,
-    spinner: spinnerStyle,
     iconOnly: _iconOnly,
   } = theme.newButton;
   const baseStyles = cx(
@@ -107,23 +109,35 @@ export const Button = forwardRefWithAs<
       disabled={_disabled}
       {...rest}
     >
-      {loading ? (
-        <ButtonSpinner
-          spinner={spinner}
-          hasIconOnly={hasIconOnly}
-          size={size}
-          spinnerStyle={spinnerStyle}
-        />
-      ) : null}
-
-      {!loading ? (
-        <ChildrenOrIconOnly iconOnly={iconOnly}>{children}</ChildrenOrIconOnly>
+      {loading && !suffix && !prefix ? (
+        <>
+          <ButtonSpinnerWrapper>
+            <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
+          </ButtonSpinnerWrapper>
+          <div className="opacity-0">
+            <ButtonChildren
+              iconOnly={iconOnly}
+              suffix={suffix}
+              prefix={prefix}
+              size={size}
+              loading={loading}
+              spinner={spinner}
+            >
+              {children}
+            </ButtonChildren>
+          </div>
+        </>
       ) : (
-        <div className="opacity-0">
-          <ChildrenOrIconOnly iconOnly={iconOnly}>
-            {children}
-          </ChildrenOrIconOnly>
-        </div>
+        <ButtonChildren
+          iconOnly={iconOnly}
+          suffix={suffix}
+          prefix={prefix}
+          size={size}
+          loading={loading}
+          spinner={spinner}
+        >
+          {children}
+        </ButtonChildren>
       )}
     </ReakitButton>
   );
@@ -131,42 +145,94 @@ export const Button = forwardRefWithAs<
 
 Button.displayName = "Button";
 
-type ChildrenOrIconOnlyProps = {
-  iconOnly?: React.ReactElement;
+type ChildrenWithPrefixSuffixProps = {
+  suffix?: React.ReactElement;
+  prefix?: React.ReactElement;
+  spinner?: React.ReactElement;
+  size: NonNullable<ButtonProps["size"]>;
+  loading?: boolean;
 };
 
-const ChildrenOrIconOnly: React.FC<ChildrenOrIconOnlyProps> = props => {
-  const { children, iconOnly } = props;
-  if (!iconOnly) return <>{children}</>;
+const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
+  props => {
+    const { suffix, prefix, children, size, loading, spinner } = props;
+    const { newButton } = useTheme();
+    const { suffix: suffixStyle, prefix: prefixStyle } = newButton;
+    const suffixStyles = cx(suffixStyle.size[size]);
+    const prefixStyles = cx(prefixStyle.size[size]);
 
-  // Removed ButtonIcon with span which causing small displacement
-  // If the icon is only a vaid element add the required accessibility attrs
-  // If they are passing a function meaning they are passing a custom icon
-  // which they need to add the custom styles
-  // @ts-ignore
-  return <>{runIfFn(addIconA11y(iconOnly))}</>;
+    return (
+      <>
+        {prefix ? (
+          loading && !suffix ? (
+            <ButtonSpinner spinner={spinner} size={size} />
+          ) : (
+            <>{runIfFn(addIconA11y(prefix, { className: prefixStyles }))}</>
+          )
+        ) : null}
+        <span>{children}</span>
+        {suffix ? (
+          loading ? (
+            <ButtonSpinner spinner={spinner} size={size} />
+          ) : (
+            <>{runIfFn(addIconA11y(suffix, { className: suffixStyles }))}</>
+          )
+        ) : null}
+      </>
+    );
+  };
+
+type ButtonChildrenProps = {
+  iconOnly?: React.ReactElement;
+  spinner?: React.ReactElement;
+  suffix?: React.ReactElement;
+  prefix?: React.ReactElement;
+  size: NonNullable<ButtonProps["size"]>;
+  loading?: boolean;
+};
+
+const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
+  const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
+
+  if (iconOnly)
+    // Removed ButtonIcon with span which causing small displacement
+    // If the icon is only a vaid element add the required accessibility attrs
+    // If they are passing a function meaning they are passing a custom icon
+    // which they need to add the custom styles
+    // @ts-ignore
+    return <>{runIfFn(addIconA11y(iconOnly))}</>;
+
+  return (
+    <ChildrenWithPrefixSuffix
+      suffix={suffix}
+      prefix={prefix}
+      size={size}
+      loading={loading}
+      spinner={spinner}
+    >
+      {children}
+    </ChildrenWithPrefixSuffix>
+  );
 };
 
 type ButtonSpinnerProps = {
   spinner?: React.ReactElement;
-  hasIconOnly: boolean;
+  iconOnly?: React.ReactElement;
   size: NonNullable<ButtonProps["size"]>;
-  spinnerStyle: Renderlesskit.GetThemeValue<"newButton", "spinner">;
 };
 
 const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const { spinner, hasIconOnly, spinnerStyle, size } = props;
+  const { spinner, iconOnly, size } = props;
+  const { newButton } = useTheme();
+  const { spinner: spinnerStyle } = newButton;
+
   if (spinner) return <ButtonSpinnerWrapper>{spinner}</ButtonSpinnerWrapper>;
 
   const spinnerStyles = cx(
-    !hasIconOnly ? spinnerStyle.size[size] : spinnerStyle.iconOnly.size[size],
+    !iconOnly ? spinnerStyle.size[size] : spinnerStyle.iconOnly.size[size],
   );
 
-  return (
-    <ButtonSpinnerWrapper>
-      <Spinner className={spinnerStyles} size="em" />
-    </ButtonSpinnerWrapper>
-  );
+  return <Spinner className={spinnerStyles} size="em" />;
 };
 
 const ButtonSpinnerWrapper: React.FC = props => (
