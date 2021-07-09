@@ -26,7 +26,7 @@ export default {
 
 export const Default = {
   render: (args: ButtonProps) => <Button {...args} />,
-  args: { children: "Button", size: "md", variant: "solid" },
+  args: { children: "Buttons", size: "md", variant: "solid" },
   parameters: {
     options: {
       showPanel: true,
@@ -62,69 +62,65 @@ export const ButtonStack = {
     return (
       <div className="flex flex-col space-y-2">
         <div className="space-x-2">
-          <Button size="sm" variant="solid" {...args}>
+          <Button {...args} size="sm" variant="solid">
             Button
           </Button>
-          <Button size="md" variant="solid" {...args}>
+          <Button {...args} size="md" variant="solid">
             Button
           </Button>
-          <Button size="lg" variant="solid" {...args}>
+          <Button {...args} size="lg" variant="solid">
             Button
           </Button>
-          <Button size="xl" variant="solid" {...args}>
-            Button
-          </Button>
-        </div>
-        <div className="space-x-2">
-          <Button size="sm" variant="subtle" {...args}>
-            Button
-          </Button>
-          <Button size="md" variant="subtle" {...args}>
-            Button
-          </Button>
-          <Button size="lg" variant="subtle" {...args}>
-            Button
-          </Button>
-          <Button size="xl" variant="subtle" {...args}>
+          <Button {...args} size="xl" variant="solid">
             Button
           </Button>
         </div>
         <div className="space-x-2">
-          <Button size="sm" variant="outline" {...args}>
+          <Button {...args} size="sm" variant="subtle">
             Button
           </Button>
-          <Button size="md" variant="outline" {...args}>
+          <Button {...args} size="md" variant="subtle">
             Button
           </Button>
-          <Button size="lg" variant="outline" {...args}>
+          <Button {...args} size="lg" variant="subtle">
             Button
           </Button>
-          <Button size="xl" variant="outline" {...args}>
+          <Button {...args} size="xl" variant="subtle">
             Button
           </Button>
         </div>
         <div className="space-x-2">
-          <Button size="sm" variant="ghost" {...args}>
+          <Button {...args} size="sm" variant="outline">
             Button
           </Button>
-          <Button size="md" variant="ghost" {...args}>
+          <Button {...args} size="md" variant="outline">
             Button
           </Button>
-          <Button size="lg" variant="ghost" {...args}>
+          <Button {...args} size="lg" variant="outline">
             Button
           </Button>
-          <Button size="xl" variant="ghost" {...args}>
+          <Button {...args} size="xl" variant="outline">
+            Button
+          </Button>
+        </div>
+        <div className="space-x-2">
+          <Button {...args} size="sm" variant="ghost">
+            Button
+          </Button>
+          <Button {...args} size="md" variant="ghost">
+            Button
+          </Button>
+          <Button {...args} size="lg" variant="ghost">
+            Button
+          </Button>
+          <Button {...args} size="xl" variant="ghost">
             Button
           </Button>
         </div>
       </div>
     );
   },
-  parameters: {
-    options: {
-      showPanel: false,
-    },
-  },
+  parameters: { options: { showPanel: false } },
 };
 
 export const Hover = {
@@ -137,7 +133,7 @@ export const Active = {
 };
 export const Focus = {
   ...ButtonStack,
-  parameters: { ...ButtonStack.parameters, pseudo: { focus: true } },
+  parameters: { ...ButtonStack.parameters, pseudo: { focusVisible: true } },
 };
 export const Disabled = {
   ...ButtonStack,
@@ -156,4 +152,11 @@ export const IconOnly = {
 export const IconOnlyStack = {
   ...ButtonStack,
   args: { iconOnly: <SearchIcon /> },
+  argTypes: {
+    loading: { table: { disable: false } },
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
+    variant: { table: { disable: true } },
+  },
+  parameters: { options: { showPanel: true } },
 };

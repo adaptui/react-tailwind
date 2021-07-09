@@ -25,7 +25,11 @@ export const createUnionControl = (keys: any) => {
   };
 };
 
-type CreateControlsOptions = { unions?: string[]; ignore?: string[] };
+type CreateControlsOptions = {
+  unions?: string[];
+  ignore?: string[];
+  allow?: string[];
+};
 
 export const createControls = (
   component: string,
@@ -49,7 +53,15 @@ export const createControls = (
       };
     }, {});
 
-    return { ...controls, ...ignoredControls };
+    const allowedControls = (options?.allow || []).reduce((cur, key) => {
+      return {
+        ...cur,
+        [key]: { table: { disable: true } },
+      };
+    }, {});
+    console.log("%c allowedControls", "color: #731d6d", allowedControls);
+
+    return { ...controls, ...ignoredControls, ...allowedControls };
   } catch (e) {
     console.log(e);
   }

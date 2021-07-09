@@ -4,9 +4,9 @@ export const datepicker = {
     "lib:flex lib:gap-4 lib:justify-between lib:p-2 lib:pr-4 lib:pl-4 lib:rounded-md",
   segment_field: "lib:flex lib:justify-between lib:gap-1",
   segment:
-    "focus:lib:text-blue-500 focus:lib:outline-none lib:font-mono lib:font-normal",
+    "focus-visible:lib:text-blue-500 focus-visible:lib:outline-none lib:font-mono lib:font-normal",
   trigger:
-    "lib:text-gray-700 focus:lib:outline-none focus:text-blue-500 lib:relative lib:inline-block",
+    "lib:text-gray-700 focus-visible:lib:outline-none focus:text-blue-500 lib:relative lib:inline-block",
   badge: {
     base: "lib:font-sans lib:font-medium lib:text-xs lib:rounded-full lib:py-1",
     variant: {

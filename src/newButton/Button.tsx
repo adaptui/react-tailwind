@@ -8,6 +8,9 @@ import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Dict, forwardRefWithAs } from "../utils/types";
 import { runIfFn } from "../utils";
+import { spinner } from "../theme/defaultTheme/spinner";
+
+export type NonNullable<T> = Exclude<T, null | undefined>;
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -80,6 +83,7 @@ export const Button = forwardRefWithAs<
     ...rest
   } = props;
   const _disabled = disabled || loading;
+  const hasIconOnly = !!iconOnly;
 
   const theme = useTheme();
   const {
@@ -87,27 +91,14 @@ export const Button = forwardRefWithAs<
     size: _size,
     variant: _variant,
     spinner: spinnerStyle,
+    iconOnly: _iconOnly,
   } = theme.newButton;
-  const baseStyles = cx(base, _size[size], _variant[variant], className);
-
-  const spinnerElement = () => {
-    if (spinner) return <>{spinner}</>;
-
-    const spinnerStyles = cx(spinnerStyle.base, spinnerStyle[size]);
-    const spinnerSize = spinnerButtonSizeMap[size];
-
-    return <Spinner className={spinnerStyles} size={spinnerSize} />;
-  };
-
-  const iconOnlyChildren = () => {
-    if (!iconOnly) return <>{children}</>;
-
-    // Removed ButtonIcon with span which causing small displacement
-    // If the icon is only a vaid element add the required accessibility attrs
-    // If they are passing a function meaning they are passing a custom icon
-    // which they need to add the custom styles
-    return <>{runIfFn(addIconA11y(iconOnly))}</>;
-  };
+  const baseStyles = cx(
+    base,
+    !iconOnly ? _size[size] : _iconOnly.size[size],
+    _variant[variant],
+    className,
+  );
 
   return (
     <ReakitButton
@@ -116,9 +107,68 @@ export const Button = forwardRefWithAs<
       disabled={_disabled}
       {...rest}
     >
-      {!loading ? iconOnlyChildren() : spinnerElement()}
+      {loading ? (
+        <ButtonSpinner
+          spinner={spinner}
+          hasIconOnly={hasIconOnly}
+          size={size}
+          spinnerStyle={spinnerStyle}
+        />
+      ) : null}
+
+      {!loading ? (
+        <ChildrenOrIconOnly iconOnly={iconOnly}>{children}</ChildrenOrIconOnly>
+      ) : (
+        <div className="opacity-0">
+          <ChildrenOrIconOnly iconOnly={iconOnly}>
+            {children}
+          </ChildrenOrIconOnly>
+        </div>
+      )}
     </ReakitButton>
   );
 });
 
 Button.displayName = "Button";
+
+type ChildrenOrIconOnlyProps = {
+  iconOnly?: React.ReactElement;
+};
+
+const ChildrenOrIconOnly: React.FC<ChildrenOrIconOnlyProps> = props => {
+  const { children, iconOnly } = props;
+  if (!iconOnly) return <>{children}</>;
+
+  // Removed ButtonIcon with span which causing small displacement
+  // If the icon is only a vaid element add the required accessibility attrs
+  // If they are passing a function meaning they are passing a custom icon
+  // which they need to add the custom styles
+  // @ts-ignore
+  return <>{runIfFn(addIconA11y(iconOnly))}</>;
+};
+
+type ButtonSpinnerProps = {
+  spinner?: React.ReactElement;
+  hasIconOnly: boolean;
+  size: NonNullable<ButtonProps["size"]>;
+  spinnerStyle: Renderlesskit.GetThemeValue<"newButton", "spinner">;
+};
+
+const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
+  const { spinner, hasIconOnly, spinnerStyle, size } = props;
+  if (spinner) return <ButtonSpinnerWrapper>{spinner}</ButtonSpinnerWrapper>;
+
+  const spinnerStyles = cx(
+    !hasIconOnly ? spinnerStyle.size[size] : spinnerStyle.iconOnly.size[size],
+  );
+
+  return (
+    <ButtonSpinnerWrapper>
+      <Spinner className={spinnerStyles} size="em" />
+    </ButtonSpinnerWrapper>
+  );
+};
+
+const ButtonSpinnerWrapper: React.FC = props => (
+  <div className="absolute flex items-center justify-center" {...props} />
+);

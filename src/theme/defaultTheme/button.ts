@@ -13,7 +13,7 @@ export const button = {
     ghost: "lib:text-gray-800 hover:lib:bg-gray-100",
   },
   disabled: "lib:cursor-not-allowed lib:opacity-40",
-  group: "focus:lib:z-10 lib:-mr-px",
+  group: "focus-visible:lib:z-10 lib:-mr-px",
   prefix: {
     size: {
       sm: "inline-flex mr-1.5",
