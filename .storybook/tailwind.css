@@ -10,4 +10,8 @@
   .button-hover:hover {
     transform: translateY(-1px);
   }
+
+  .button-hover:active {
+    transform: translateY(0px);
+  }
 }
