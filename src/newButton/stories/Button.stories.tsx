@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
+
 import { Button, ButtonProps } from "../index";
-import { createControls } from "../../../.storybook/storybookUtils";
 import { CaretRightIcon, ClockIcon } from "../../icons";
+import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Primitives/NewButton",
@@ -60,7 +61,6 @@ export const Ghost = {
 
 export const ButtonStack = {
   render: (args: ButtonProps) => {
-    console.log("%c args", "color: #f200e2", args);
     return (
       <div className="flex flex-col space-y-2">
         <div className="space-x-2">

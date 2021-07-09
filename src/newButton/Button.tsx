@@ -1,15 +1,14 @@
-import { cx } from "@renderlesskit/react";
-import * as React from "react";
 import {
   Button as ReakitButton,
   ButtonProps as ReakitButtonProps,
 } from "reakit";
+import * as React from "react";
+import { cx } from "@renderlesskit/react";
+
+import { runIfFn } from "../utils";
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { Dict, forwardRefWithAs } from "../utils/types";
-import { runIfFn } from "../utils";
-
-export type NonNullable<T> = Exclude<T, null | undefined>;
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -54,9 +53,7 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   spinner?: React.ReactElement;
 };
 
-export const addIconA11y = (icon: React.ReactElement, props?: Dict) => {
-  console.log("%c props", "color: #408059", props);
-
+export const withIconA11y = (icon: React.ReactElement, props?: Dict) => {
   return React.isValidElement(icon)
     ? React.cloneElement(icon, {
         // @ts-ignore
@@ -89,16 +86,12 @@ export const Button = forwardRefWithAs<
   const _disabled = disabled || loading;
 
   const theme = useTheme();
-  const {
-    base,
-    size: _size,
-    variant: _variant,
-    iconOnly: _iconOnly,
-  } = theme.newButton;
   const baseStyles = cx(
-    base,
-    !iconOnly ? _size[size] : _iconOnly.size[size],
-    _variant[variant],
+    theme.newButton.base,
+    !iconOnly
+      ? theme.newButton.size[size]
+      : theme.newButton.iconOnly.size[size],
+    theme.newButton.variant[variant],
     className,
   );
 
@@ -156,10 +149,9 @@ type ChildrenWithPrefixSuffixProps = {
 const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
   props => {
     const { suffix, prefix, children, size, loading, spinner } = props;
-    const { newButton } = useTheme();
-    const { suffix: suffixStyle, prefix: prefixStyle } = newButton;
-    const suffixStyles = cx(suffixStyle.size[size]);
-    const prefixStyles = cx(prefixStyle.size[size]);
+    const theme = useTheme();
+    const suffixStyles = cx(theme.newButton.suffix.size[size]);
+    const prefixStyles = cx(theme.newButton.prefix.size[size]);
 
     return (
       <>
@@ -167,7 +159,7 @@ const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
           loading && !suffix ? (
             <ButtonSpinner spinner={spinner} size={size} />
           ) : (
-            <>{runIfFn(addIconA11y(prefix, { className: prefixStyles }))}</>
+            runIfFn(withIconA11y(prefix, { className: prefixStyles }))
           )
         ) : null}
         <span>{children}</span>
@@ -175,7 +167,7 @@ const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
           loading ? (
             <ButtonSpinner spinner={spinner} size={size} />
           ) : (
-            <>{runIfFn(addIconA11y(suffix, { className: suffixStyles }))}</>
+            runIfFn(withIconA11y(suffix, { className: suffixStyles }))
           )
         ) : null}
       </>
@@ -194,13 +186,14 @@ type ButtonChildrenProps = {
 const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
   const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
 
-  if (iconOnly)
+  if (iconOnly) {
     // Removed ButtonIcon with span which causing small displacement
     // If the icon is only a vaid element add the required accessibility attrs
     // If they are passing a function meaning they are passing a custom icon
     // which they need to add the custom styles
     // @ts-ignore
-    return <>{runIfFn(addIconA11y(iconOnly))}</>;
+    return runIfFn(withIconA11y(iconOnly));
+  }
 
   return (
     <ChildrenWithPrefixSuffix
@@ -223,13 +216,14 @@ type ButtonSpinnerProps = {
 
 const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const { spinner, iconOnly, size } = props;
-  const { newButton } = useTheme();
-  const { spinner: spinnerStyle } = newButton;
+  const theme = useTheme();
 
   if (spinner) return <ButtonSpinnerWrapper>{spinner}</ButtonSpinnerWrapper>;
 
   const spinnerStyles = cx(
-    !iconOnly ? spinnerStyle.size[size] : spinnerStyle.iconOnly.size[size],
+    !iconOnly
+      ? theme.newButton.spinner.size[size]
+      : theme.newButton.spinner.iconOnly.size[size],
   );
 
   return <Spinner className={spinnerStyles} size="em" />;
