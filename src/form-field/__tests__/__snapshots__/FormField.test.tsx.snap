@@ -20,7 +20,7 @@ exports[`<FormField /> should render FormField 1`] = `
     >
       <input
         aria-describedby="field-email-error-text field-email-help-text"
-        class="lib:appearance-none lib:w-full lib:outline-none lib:px-2 lib:py-1 lib:text-xs lib:shadow-sm lib:font-medium lib:placeholder-text-gray-500 lib:border lib:h-6 lib:border-gray-300 hover:lib:border-gray-400 lib:rounded-md lib:text-gray-800 focus:lib:border-blue-500 focus:lib:shadow-input disabled:lib:bg-gray-100 disabled:lib:shadow-none disabled:lib:cursor-not-allowed disabled:lib:border-gray-300"
+        class="lib:appearance-none lib:w-full lib:outline-none lib:px-2 lib:py-1 lib:text-xs lib:shadow-sm lib:font-medium lib:placeholder-text-gray-500 lib:border lib:h-6 lib:border-gray-300 hover:lib:border-gray-400 lib:rounded-md lib:text-gray-800 focus-visible:lib:border-blue-500 focus-visible:lib:shadow-input disabled:lib:bg-gray-100 disabled:lib:shadow-none disabled:lib:cursor-not-allowed disabled:lib:border-gray-300"
         data-testid="testid-input"
         id="email"
       />

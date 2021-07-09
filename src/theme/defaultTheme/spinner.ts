@@ -11,5 +11,6 @@ export const spinner = {
     md: "lib:h-6 lib:w-6",
     lg: "lib:h-8 lib:w-8",
     xl: "lib:h-12 lib:w-12",
+    em: "lib:text-current lib:h-[1em] lib:w-[1em]",
   },
 };
