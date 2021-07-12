@@ -99,7 +99,6 @@ export const Button = forwardRefWithAs<
       ref={ref}
       className={baseStyles}
       disabled={_disabled}
-      style={_disabled ? { pointerEvents: "unset", ...style } : style}
       {...rest}
     >
       <ButtonChildren
