@@ -12,7 +12,7 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const { spinner, iconOnly, size } = props;
   const theme = useTheme();
 
-  if (spinner) return <ButtonSpinnerWrapper>{spinner}</ButtonSpinnerWrapper>;
+  if (spinner) return <>{spinner}</>;
 
   const spinnerStyles = cx(
     !iconOnly
@@ -20,11 +20,7 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
       : theme.newButton.spinner.iconOnly.size[size],
   );
 
-  return (
-    <ButtonSpinnerWrapper>
-      <Spinner className={spinnerStyles} size="em" />
-    </ButtonSpinnerWrapper>
-  );
+  return <Spinner className={spinnerStyles} size="em" />;
 };
 
 export const ButtonSpinnerWrapper: React.FC = props => (

@@ -3,8 +3,8 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { ButtonProps } from "./Button";
-import { ButtonSpinner } from "./ButtonSpinner";
 import { runIfFn, withIconA11y } from "../utils";
+import { ButtonSpinner, ButtonSpinnerWrapper } from "./ButtonSpinner";
 
 export interface ButtonChildrenProps
   extends Pick<
@@ -17,10 +17,15 @@ export interface ButtonChildrenProps
 export const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
   const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
 
-  if (loading && !prefix && !suffix) {
+  if (!prefix && !suffix) {
+    if (!loading)
+      return <>{iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}</>;
+
     return (
       <>
-        <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
+        <ButtonSpinnerWrapper>
+          <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
+        </ButtonSpinnerWrapper>
         <div className="opacity-0">
           {iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}
         </div>
