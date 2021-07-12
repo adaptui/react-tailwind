@@ -6,12 +6,10 @@ import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { Spinner } from "../spinner";
-import { runIfFn, withIconA11y } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
-import { rest, size } from "lodash-es";
-import { spinner } from "../theme/defaultTheme/spinner";
 import { usePrevious } from "../hooks";
+import { ButtonChildren } from "./ButtonChildren";
+import { forwardRefWithAs } from "../utils/types";
+import { announce } from "@react-aria/live-announcer";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -83,10 +81,17 @@ export const Button = forwardRefWithAs<
       ? theme.newButton.size[size]
       : theme.newButton.iconOnly.size[size],
     theme.newButton.variant[variant],
+    _disabled ? "pointer-events-none" : "pointer-events-auto",
     className,
   );
 
   const prevLoading = usePrevious(loading);
+
+  React.useEffect(() => {
+    if (loading) announce("Started loading...");
+
+    if (!loading && prevLoading) announce("Stopped loading...");
+  }, [loading, prevLoading]);
 
   return (
     <ReakitButton
@@ -95,153 +100,18 @@ export const Button = forwardRefWithAs<
       aria-disabled={_disabled}
       {...rest}
     >
-      <span aria-live="assertive" className="sr-only">
-        {loading ? <FlashMessage>"Started loading"</FlashMessage> : ""}
-        {prevLoading && !loading ? (
-          <FlashMessage>"Stopped loading"</FlashMessage>
-        ) : (
-          ""
-        )}
-      </span>
-      {loading && !suffix && !prefix ? (
-        <>
-          <ButtonSpinnerWrapper>
-            <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
-          </ButtonSpinnerWrapper>
-          <div className="opacity-0">
-            <ButtonChildren
-              iconOnly={iconOnly}
-              suffix={suffix}
-              prefix={prefix}
-              size={size}
-              loading={loading}
-              spinner={spinner}
-            >
-              {children}
-            </ButtonChildren>
-          </div>
-        </>
-      ) : (
-        <ButtonChildren
-          iconOnly={iconOnly}
-          suffix={suffix}
-          prefix={prefix}
-          size={size}
-          loading={loading}
-          spinner={spinner}
-        >
-          {children}
-        </ButtonChildren>
-      )}
+      <ButtonChildren
+        iconOnly={iconOnly}
+        suffix={suffix}
+        prefix={prefix}
+        size={size}
+        loading={loading}
+        spinner={spinner}
+      >
+        {children}
+      </ButtonChildren>
     </ReakitButton>
   );
 });
 
 Button.displayName = "Button";
-
-interface ButtonChildrenCommonProps
-  extends Pick<
-    ButtonProps,
-    "suffix" | "prefix" | "spinner" | "size" | "loading"
-  > {
-  size: NonNullable<ButtonProps["size"]>;
-}
-
-interface ChildrenWithPrefixSuffixProps extends ButtonChildrenCommonProps {}
-
-const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
-  props => {
-    const { suffix, prefix, children, size, loading, spinner } = props;
-    const theme = useTheme();
-    const suffixStyles = cx(theme.newButton.suffix.size[size]);
-    const prefixStyles = cx(theme.newButton.prefix.size[size]);
-
-    return (
-      <>
-        {prefix ? (
-          loading && !suffix ? (
-            <ButtonSpinner spinner={spinner} size={size} />
-          ) : (
-            runIfFn(withIconA11y(prefix, { className: prefixStyles }))
-          )
-        ) : null}
-        <span>{children}</span>
-        {suffix ? (
-          loading ? (
-            <ButtonSpinner spinner={spinner} size={size} />
-          ) : (
-            runIfFn(withIconA11y(suffix, { className: suffixStyles }))
-          )
-        ) : null}
-      </>
-    );
-  };
-
-interface ButtonChildrenProps extends ButtonChildrenCommonProps {
-  iconOnly?: ButtonProps["iconOnly"];
-}
-
-const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
-  const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
-
-  if (iconOnly) {
-    // Removed ButtonIcon with span which causing small displacement
-    // If the icon is only a vaid element add the required accessibility attrs
-    // If they are passing a function meaning they are passing a custom icon
-    // which they need to add the custom styles
-    // @ts-ignore
-    return runIfFn(withIconA11y(iconOnly));
-  }
-
-  return (
-    <ChildrenWithPrefixSuffix
-      suffix={suffix}
-      prefix={prefix}
-      size={size}
-      loading={loading}
-      spinner={spinner}
-    >
-      {children}
-    </ChildrenWithPrefixSuffix>
-  );
-};
-
-interface ButtonSpinnerProps
-  extends Pick<ButtonChildrenCommonProps, "spinner" | "size"> {
-  iconOnly?: ButtonProps["iconOnly"];
-}
-
-const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const { spinner, iconOnly, size } = props;
-  const theme = useTheme();
-
-  if (spinner) return <ButtonSpinnerWrapper>{spinner}</ButtonSpinnerWrapper>;
-
-  const spinnerStyles = cx(
-    !iconOnly
-      ? theme.newButton.spinner.size[size]
-      : theme.newButton.spinner.iconOnly.size[size],
-  );
-
-  return <Spinner className={spinnerStyles} size="em" />;
-};
-
-const ButtonSpinnerWrapper: React.FC = props => (
-  <div className="absolute flex items-center justify-center" {...props} />
-);
-
-export const FlashMessage: React.FC = props => {
-  const { children } = props;
-
-  const [message, setMessage] = React.useState(children);
-
-  React.useEffect(() => {
-    let timer = setTimeout(() => setMessage(""), 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  return <span>{message}</span>;
-};

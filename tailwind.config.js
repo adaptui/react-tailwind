@@ -6,8 +6,7 @@ const { preset } = require("./preset");
 module.exports = preset({
   mode: "jit",
   purge: [
-    path.resolve(__dirname, "./src/theme/defaultTheme/**/*"),
-    path.resolve(__dirname, "./src/**/stories/*.stories.@(ts|tsx)"),
+    path.resolve(__dirname, "./src/**/*"),
     path.resolve(__dirname, "./renderlesskit.config.ts"),
     path.resolve(__dirname, "./.storybook/**/*"),
   ],
