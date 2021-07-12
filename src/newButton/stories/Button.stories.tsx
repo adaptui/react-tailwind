@@ -202,17 +202,27 @@ export const ButtonExtras = () => {
   const [state, setState] = React.useState(false);
 
   React.useEffect(() => {
-    if (state) window.setTimeout(() => setState(prev => !prev), 1000);
+    if (state) window.setTimeout(() => setState(prev => !prev), 5000);
   }, [state]);
 
   return (
-    <Button
-      size="md"
-      variant="solid"
-      loading={state}
-      onClick={() => setState(!state)}
-    >
-      Email
-    </Button>
+    <div className="space-x-2">
+      <Button size="md" variant="solid">
+        Previous Button
+      </Button>
+      <Button
+        size="md"
+        variant="solid"
+        loading={state}
+        prefix={<ClockIcon />}
+        suffix={<CaretRightIcon />}
+        onClick={() => setState(!state)}
+      >
+        Button
+      </Button>
+      <Button size="md" variant="solid">
+        Next Button
+      </Button>
+    </div>
   );
 };
