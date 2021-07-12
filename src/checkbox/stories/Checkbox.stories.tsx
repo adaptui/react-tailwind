@@ -44,7 +44,7 @@ export const Disabled = base({ disabled: true });
 
 export const WithDescription = storyTemplate<CheckboxProps>(args => {
   return (
-    <>
+    <div className="flex flex-col space-y-6">
       <Checkbox
         {...args}
         size="sm"
@@ -54,8 +54,6 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Checked state
       </Checkbox>
-      <br />
-      <br />
       <Checkbox
         {...args}
         size="md"
@@ -65,8 +63,6 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Checked state
       </Checkbox>
-      <br />
-      <br />
       <Checkbox
         {...args}
         size="lg"
@@ -76,8 +72,6 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Checked state
       </Checkbox>
-      <br />
-      <br />
       <Checkbox
         {...args}
         isInvalid
@@ -88,8 +82,6 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Invalid state
       </Checkbox>
-      <br />
-      <br />
       <Checkbox
         {...args}
         defaultState="indeterminate"
@@ -100,8 +92,6 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Indeterminate state
       </Checkbox>
-      <br />
-      <br />
       <Checkbox
         {...args}
         isInvalid
@@ -113,9 +103,8 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Indeterminate invalid
       </Checkbox>
-      <br />
-      <br />
       <Checkbox
+        size="lg"
         icon={props =>
           props.isIndeterminate ? (
             <IndeterminateIcon />
@@ -129,9 +118,7 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
       >
         Custom icon prop
       </Checkbox>
-      <br />
-      <br />
-      <Checkbox>
+      <Checkbox size="lg">
         <CheckboxLabel>
           <CheckboxInput />
           <CheckboxIcon>
@@ -152,7 +139,7 @@ export const WithDescription = storyTemplate<CheckboxProps>(args => {
           </div>
         </CheckboxLabel>
       </Checkbox>
-    </>
+    </div>
   );
 })({});
 
