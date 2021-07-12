@@ -9,6 +9,8 @@ import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { runIfFn, withIconA11y } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+import { rest, size } from "lodash-es";
+import { spinner } from "../theme/defaultTheme/spinner";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -87,7 +89,8 @@ export const Button = forwardRefWithAs<
     <ReakitButton
       ref={ref}
       className={baseStyles}
-      disabled={_disabled}
+      aria-disabled={_disabled}
+      style={{ pointerEvents: _disabled ? "none" : "auto" }}
       {...rest}
     >
       {loading && !suffix && !prefix ? (
