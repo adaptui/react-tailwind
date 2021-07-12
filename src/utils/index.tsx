@@ -133,3 +133,16 @@ export const debounce = (func: Function, wait = 166) => {
 export function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === "[object String]";
 }
+
+// Add a11y to the icon passed
+export const withIconA11y = (icon: React.ReactElement, props?: Dict) => {
+  return React.isValidElement(icon)
+    ? React.cloneElement(icon, {
+        // @ts-ignore
+        role: "img",
+        focusable: false,
+        "aria-hidden": true,
+        ...props,
+      })
+    : icon;
+};

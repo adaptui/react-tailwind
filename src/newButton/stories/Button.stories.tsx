@@ -201,12 +201,16 @@ export const PrefixSuffixStack = {
 export const ButtonExtras = () => {
   const [state, setState] = React.useState(false);
 
+  React.useEffect(() => {
+    if (state) window.setTimeout(() => setState(prev => !prev), 1000);
+  }, [state]);
+
   return (
     <Button
       size="md"
       variant="solid"
       loading={state}
-      onClick={e => setState(!state)}
+      onClick={() => setState(!state)}
     >
       Email
     </Button>

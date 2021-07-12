@@ -5,10 +5,10 @@ import {
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
-import { runIfFn } from "../utils";
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
-import { Dict, forwardRefWithAs } from "../utils/types";
+import { runIfFn, withIconA11y } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -51,18 +51,6 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
    * If added, the button will show this spinner components
    */
   spinner?: React.ReactElement;
-};
-
-export const withIconA11y = (icon: React.ReactElement, props?: Dict) => {
-  return React.isValidElement(icon)
-    ? React.cloneElement(icon, {
-        // @ts-ignore
-        role: "img",
-        focusable: false,
-        "aria-hidden": true,
-        ...props,
-      })
-    : icon;
 };
 
 export const Button = forwardRefWithAs<
@@ -138,13 +126,15 @@ export const Button = forwardRefWithAs<
 
 Button.displayName = "Button";
 
-type ChildrenWithPrefixSuffixProps = {
-  suffix?: React.ReactElement;
-  prefix?: React.ReactElement;
-  spinner?: React.ReactElement;
+interface ButtonChildrenCommonProps
+  extends Pick<
+    ButtonProps,
+    "suffix" | "prefix" | "spinner" | "size" | "loading"
+  > {
   size: NonNullable<ButtonProps["size"]>;
-  loading?: boolean;
-};
+}
+
+interface ChildrenWithPrefixSuffixProps extends ButtonChildrenCommonProps {}
 
 const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
   props => {
@@ -174,14 +164,9 @@ const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
     );
   };
 
-type ButtonChildrenProps = {
-  iconOnly?: React.ReactElement;
-  spinner?: React.ReactElement;
-  suffix?: React.ReactElement;
-  prefix?: React.ReactElement;
-  size: NonNullable<ButtonProps["size"]>;
-  loading?: boolean;
-};
+interface ButtonChildrenProps extends ButtonChildrenCommonProps {
+  iconOnly?: ButtonProps["iconOnly"];
+}
 
 const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
   const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
@@ -208,11 +193,10 @@ const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
   );
 };
 
-type ButtonSpinnerProps = {
-  spinner?: React.ReactElement;
-  iconOnly?: React.ReactElement;
-  size: NonNullable<ButtonProps["size"]>;
-};
+interface ButtonSpinnerProps
+  extends Pick<ButtonChildrenCommonProps, "spinner" | "size"> {
+  iconOnly?: ButtonProps["iconOnly"];
+}
 
 const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const { spinner, iconOnly, size } = props;
