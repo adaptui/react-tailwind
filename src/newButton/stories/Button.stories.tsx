@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
+// @ts-ignore
+import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
 
 import { Button, ButtonProps } from "../index";
 import { CaretRightIcon, ClockIcon } from "../../icons";
@@ -30,6 +32,7 @@ export default {
 export const Default = {
   render: (args: ButtonProps) => <Button {...args} />,
   args: { children: "Continue", size: "md", variant: "solid" },
+  decorators: [withPseudoState],
   parameters: {
     options: {
       showPanel: true,
@@ -128,6 +131,7 @@ export const ButtonStack = {
     size: { table: { disable: true } },
     variant: { table: { disable: true } },
   },
+  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
@@ -192,4 +196,19 @@ export const PrefixSuffix = {
 export const PrefixSuffixStack = {
   ...ButtonStack,
   args: { prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
+};
+
+export const ButtonExtras = () => {
+  const [state, setState] = React.useState(false);
+
+  return (
+    <Button
+      size="md"
+      variant="solid"
+      loading={state}
+      onClick={e => setState(!state)}
+    >
+      Email
+    </Button>
+  );
 };
