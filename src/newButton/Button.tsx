@@ -11,6 +11,7 @@ import { runIfFn, withIconA11y } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 import { rest, size } from "lodash-es";
 import { spinner } from "../theme/defaultTheme/spinner";
+import { usePrevious } from "../hooks";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -85,14 +86,23 @@ export const Button = forwardRefWithAs<
     className,
   );
 
+  const prevLoading = usePrevious(loading);
+
   return (
     <ReakitButton
       ref={ref}
       className={baseStyles}
       aria-disabled={_disabled}
-      style={{ pointerEvents: _disabled ? "none" : "auto" }}
       {...rest}
     >
+      <span aria-live="assertive" className="sr-only">
+        {loading ? <FlashMessage>"Started loading"</FlashMessage> : ""}
+        {prevLoading && !loading ? (
+          <FlashMessage>"Stopped loading"</FlashMessage>
+        ) : (
+          ""
+        )}
+      </span>
       {loading && !suffix && !prefix ? (
         <>
           <ButtonSpinnerWrapper>
@@ -219,3 +229,19 @@ const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
 const ButtonSpinnerWrapper: React.FC = props => (
   <div className="absolute flex items-center justify-center" {...props} />
 );
+
+export const FlashMessage: React.FC = props => {
+  const { children } = props;
+
+  const [message, setMessage] = React.useState(children);
+
+  React.useEffect(() => {
+    let timer = setTimeout(() => setMessage(""), 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return <span>{message}</span>;
+};
