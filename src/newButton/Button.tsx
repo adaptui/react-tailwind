@@ -70,6 +70,7 @@ export const Button = forwardRefWithAs<
     spinner,
     disabled = false,
     className,
+    style,
     ...rest
   } = props;
   const _disabled = disabled || loading;
@@ -97,7 +98,8 @@ export const Button = forwardRefWithAs<
     <ReakitButton
       ref={ref}
       className={baseStyles}
-      aria-disabled={_disabled}
+      disabled={_disabled}
+      style={_disabled ? { pointerEvents: "unset", ...style } : style}
       {...rest}
     >
       <ButtonChildren

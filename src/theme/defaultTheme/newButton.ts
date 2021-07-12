@@ -1,5 +1,5 @@
 export const newButton = {
-  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:leading-[115%] lib:w-auto lib:outline-none focus-visible:lib:ring-2 aria-disabled:lib:text-gray-400 button-hover lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:transition-all",
+  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:leading-[115%] lib:w-auto lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed button-hover lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:transition-all",
   size: {
     sm: "lib:h-[26px] lib:min-w-[26px] lib:px-2 lib:rounded-lg lib:text-[length:13px]",
     md: "lib:h-[30px] lib:min-w-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm",
@@ -8,9 +8,9 @@ export const newButton = {
   },
   variant: {
     solid:
-      "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 aria-disabled:lib:bg-gray-100 active:lib:bg-gray-800 focus-visible:lib:ring-gray-300",
+      "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 disabled:lib:bg-gray-100 active:lib:bg-gray-800 focus-visible:lib:ring-gray-300",
     subtle:
-      "lib:bg-gray-100 lib:text-gray-600 hover:lib:bg-gray-200 active:lib:bg-gray-100 aria-disabled:lib:bg-gray-100 focus-visible:lib:ring-gray-300",
+      "lib:bg-gray-100 lib:text-gray-600 hover:lib:bg-gray-200 active:lib:bg-gray-100 disabled:lib:bg-gray-100 focus-visible:lib:ring-gray-300",
     outline:
       "lib:text-gray-600 lib:ring-1 lib:ring-gray-200 hover:lib:ring-gray-300 hover:shadow-sm active:lib:bg-gray-100 focus-visible:lib:ring-gray-200",
     ghost:
