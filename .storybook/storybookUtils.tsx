@@ -59,7 +59,6 @@ export const createControls = (
         [key]: { table: { disable: true } },
       };
     }, {});
-    console.log("%c allowedControls", "color: #731d6d", allowedControls);
 
     return { ...controls, ...ignoredControls, ...allowedControls };
   } catch (e) {

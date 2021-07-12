@@ -12,7 +12,7 @@ export const newButton = {
     subtle:
       "lib:bg-gray-100 lib:text-gray-600 hover:lib:bg-gray-200 active:lib:bg-gray-100 disabled:lib:bg-gray-100 focus-visible:lib:ring-gray-300",
     outline:
-      "lib:text-gray-600 lib:border lib:border-gray-200 hover:lib:border-gray-300 hover:shadow-sm active:lib:bg-gray-100 focus-visible:lib:ring-gray-200",
+      "lib:text-gray-600 lib:ring-1 lib:ring-gray-200 hover:lib:ring-gray-300 hover:shadow-sm active:lib:bg-gray-100 focus-visible:lib:ring-gray-200",
     ghost:
       "lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-gray-200",
   },
