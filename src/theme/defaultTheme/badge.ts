@@ -18,7 +18,7 @@ export const badge = {
       primary: "lib:bg-blue-50 lib:text-blue-500",
       secondary: "lib:bg-purple-50 lib:text-purple-500",
       success: "lib:bg-emarald-50 lib:text-emarald-500",
-      danger: "lib:bg-red-50 lib:text-emarald-500",
+      danger: "lib:bg-red-50 lib:text-red-500",
     },
     outline: {
       default: "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200",
