@@ -39,11 +39,7 @@ export const Default = {
   render: (args: ButtonProps) => <Button {...args} />,
   args: { children: "Continue", size: "md", variant: "solid" },
   decorators: [withPseudoState],
-  parameters: {
-    options: {
-      showPanel: true,
-    },
-  },
+  parameters: { options: { showPanel: true } },
 };
 
 export const Small = {
@@ -251,7 +247,12 @@ export const LoadingAlly = () => {
   const [state, setState] = React.useState(false);
 
   React.useEffect(() => {
-    if (state) window.setTimeout(() => setState(prev => !prev), 3000);
+    let timeout: number;
+    if (state) {
+      timeout = window.setTimeout(() => setState(prev => !prev), 3000);
+    }
+
+    return () => window.clearTimeout(timeout);
   }, [state]);
 
   return (
@@ -275,3 +276,4 @@ export const LoadingAlly = () => {
     </div>
   );
 };
+LoadingAlly.parameters = { options: { showPanel: false } };

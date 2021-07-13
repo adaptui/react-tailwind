@@ -1,7 +1,8 @@
 import * as React from "react";
+
 import { CloseIcon } from "../icons";
-import { forwardRefWithAs } from "../utils/types";
 import { Button, ButtonProps } from "./Button";
+import { forwardRefWithAs } from "../utils/types";
 
 export type CloseButtonProps = ButtonProps & {};
 
