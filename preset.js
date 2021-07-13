@@ -37,6 +37,11 @@ const renderlesskitConfig = {
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
         input: "0px 0px 2px rgba(59, 130, 246, 0.6);",
       },
+      animation: {
+        progress: "progress 1s ease infinite normal none running",
+        circularProgress:
+          "circularProgress 2s ease infinite normal none running",
+      },
       keyframes: {
         progress: {
           "0%": { left: "-40%" },
@@ -56,11 +61,6 @@ const renderlesskitConfig = {
             strokeDashoffset: "-260",
           },
         },
-      },
-      animation: {
-        progress: "progress 1s ease infinite normal none running",
-        circularProgress:
-          "circularProgress 2s ease infinite normal none running",
       },
     },
   },

@@ -95,7 +95,7 @@ export const ReactHookForm = () => {
         }}
       />
       <Button className="my-2" type="submit">
-        submit
+        Submit
       </Button>
       <pre>{JSON.stringify(watch())}</pre>
     </form>

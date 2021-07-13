@@ -1,46 +1,59 @@
 export const button = {
-  base: "lib:inline-flex lib:items-center lib:justify-center lib:appearance-none lib:transition-all lib:whitespace-nowrap lib:align-middle lib:select-none",
+  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:leading-[115%] lib:w-auto lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed button-hover lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:transition-all",
   size: {
-    sm: "lib:h-6 lib:w-auto lib:min-w-6 lib:px-2 lib:text-xs lib:font-medium lib:rounded-md",
-    md: "lib:h-8 lib:w-auto lib:min-w-8 lib:px-3 lib:text-sm lib:font-medium lib:rounded-md",
-    lg: "lib:h-10 lib:w-auto lib:min-w-10 lib:px-4 lib:text-sm lib:font-medium lib:rounded-lg",
-    xl: "lib:h-12 lib:w-auto lib:min-w-12 lib:px-4 lib:text-base lib:font-medium lib:rounded-lg",
+    sm: "lib:h-[26px] lib:min-w-[26px] lib:px-2 lib:rounded-lg lib:text-[length:13px]",
+    md: "lib:h-[30px] lib:min-w-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm",
+    lg: "lib:h-9 lib:min-w-9 lib:px-3 lib:rounded-[10px] lib:text-sm",
+    xl: "lib:h-11 lib:min-w-11 lib:px-4 lib:rounded-xl lib:text-base",
   },
   variant: {
-    primary: "lib:bg-gray-800 lib:text-white",
-    secondary: "lib:bg-gray-100 lib:text-gray-800",
-    outline: "lib:text-gray-800 lib:border lib:border-gray-300",
-    ghost: "lib:text-gray-800 hover:lib:bg-gray-100",
+    solid:
+      "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 disabled:lib:bg-gray-100 active:lib:bg-gray-800 focus-visible:lib:ring-gray-300",
+    subtle:
+      "lib:bg-gray-100 lib:text-gray-600 hover:lib:bg-gray-200 active:lib:bg-gray-100 disabled:lib:bg-gray-100 focus-visible:lib:ring-gray-300",
+    outline:
+      "lib:text-gray-600 lib:ring-1 lib:ring-gray-200 hover:lib:ring-gray-300 hover:shadow-sm active:lib:bg-gray-100 focus-visible:lib:ring-gray-200",
+    ghost:
+      "lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-gray-200",
   },
-  disabled: "lib:cursor-not-allowed lib:opacity-40",
-  group: "focus-visible:lib:z-10 lib:-mr-px",
-  prefix: {
+  iconOnly: {
     size: {
-      sm: "inline-flex mr-1.5",
-      md: "inline-flex mr-2",
-      lg: "inline-flex mr-2",
-      xl: "inline-flex mr-2",
-    },
-    variant: {
-      ghost: "lib:text-current",
-      secondary: "lib:text-current",
-      outline: "lib:text-current",
-      primary: "lib:text-current",
+      sm: "lib:text-base lib:h-[26px] lib:w-[26px] lib:rounded-lg",
+      md: "lib:text-base lib:h-[30px] lib:w-[30px] lib:rounded-lg",
+      lg: "lib:text-base lib:h-9 lib:w-9 lib:rounded-[10px]",
+      xl: "lib:text-xl lib:h-11 lib:w-11 lib:rounded-xl",
     },
   },
   suffix: {
     size: {
-      sm: "inline-flex ml-1.5",
-      md: "inline-flex ml-2",
-      lg: "inline-flex ml-2",
-      xl: "inline-flex ml-2",
-    },
-    variant: {
-      ghost: "lib:text-current",
-      secondary: "lib:text-current",
-      outline: "lib:text-current",
-      primary: "lib:text-current",
+      sm: "lib:text-xs",
+      md: "lib:text-xs",
+      lg: "lib:text-xs",
+      xl: "lib:text-base",
     },
   },
-  spinner: "w-[1em] h-[1em] text-current",
+  prefix: {
+    size: {
+      sm: "lib:text-xs",
+      md: "lib:text-xs",
+      lg: "lib:text-xs",
+      xl: "lib:text-base",
+    },
+  },
+  spinner: {
+    size: {
+      sm: "lib:text-xs",
+      md: "lib:text-xs",
+      lg: "lib:text-xs",
+      xl: "lib:text-base",
+    },
+    iconOnly: {
+      size: {
+        sm: "lib:text-base",
+        md: "lib:text-base",
+        lg: "lib:text-base",
+        xl: "lib:text-xl",
+      },
+    },
+  },
 };
