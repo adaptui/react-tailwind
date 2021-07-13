@@ -38,11 +38,11 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
       ...rest
     } = props;
 
-    const theme = useTheme();
+    const badge = useTheme("badge") as Renderlesskit.GetThemeValue<"badge">;
     const badgeStyles = cx(
-      theme.badge.base,
-      theme.badge.size[size],
-      theme.badge.variant[variant][themeColor],
+      badge.base,
+      badge.size[size],
+      badge.variant[variant][themeColor],
       className,
     );
 
