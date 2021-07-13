@@ -1,3 +1,5 @@
+// Credits to https://github.com/chakra-ui/chakra-ui/tree/main/packages/icon
+
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
@@ -9,8 +11,8 @@ const fallbackIcon = {
   path: (
     <g stroke="currentColor" strokeWidth="1.5">
       <path
-        strokeLinecap="round"
         fill="none"
+        strokeLinecap="round"
         d="M9,9a3,3,0,1,1,4,2.829,1.5,1.5,0,0,0-1,1.415V14.25"
       />
       <path
@@ -60,9 +62,9 @@ export const Icon = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
 
     return (
       <Box
+        ref={ref}
         data-testid="testid-icon"
         as={element}
-        ref={ref}
         viewBox={_viewBox}
         {...shared}
         {...rest}

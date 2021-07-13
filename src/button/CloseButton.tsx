@@ -1,9 +1,9 @@
 import * as React from "react";
 import { CloseIcon } from "../icons";
 import { forwardRefWithAs } from "../utils/types";
-import { IconButton, IconButtonProps } from "./IconButton";
+import { Button, ButtonProps } from "./Button";
 
-export type CloseButtonProps = IconButtonProps & {};
+export type CloseButtonProps = ButtonProps & {};
 
 export const CloseButton = forwardRefWithAs<
   CloseButtonProps,
@@ -13,9 +13,12 @@ export const CloseButton = forwardRefWithAs<
   const { children, ...rest } = props;
 
   return (
-    <IconButton aria-label="Close" ref={ref} {...rest}>
-      {children || <CloseIcon />}
-    </IconButton>
+    <Button
+      ref={ref}
+      aria-label="Close"
+      iconOnly={(children as React.ReactElement) || <CloseIcon />}
+      {...rest}
+    />
   );
 });
 

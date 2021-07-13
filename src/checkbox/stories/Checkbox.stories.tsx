@@ -303,7 +303,7 @@ export const ReactHookForm = () => {
         />
       </FormField>
       <br />
-      <Button type="submit">submit</Button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 };

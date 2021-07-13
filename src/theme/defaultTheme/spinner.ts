@@ -1,5 +1,5 @@
 export const spinner = {
-  base: "lib:inline-block lib:border-2 lib:border-solid lib:border-current lib:rounded-full lib:animate-spin lib:text-gray-800",
+  base: "lib:inline-block lib:border-2 lib:border-solid lib:border-current lib:rounded-full lib:animate-spin lib:text-current",
   stroke: {
     transparent: "lib:border-b-transparent lib:border-l-transparent",
     visible: "lib:border-b-gray-300 lib:border-l-gray-300",
@@ -11,6 +11,6 @@ export const spinner = {
     md: "lib:h-6 lib:w-6",
     lg: "lib:h-8 lib:w-8",
     xl: "lib:h-12 lib:w-12",
-    em: "lib:text-current lib:h-[1em] lib:w-[1em]",
+    em: "lib:h-[1em] lib:w-[1em]",
   },
 };

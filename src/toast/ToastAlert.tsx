@@ -128,7 +128,7 @@ export type ToastAction = {
   variant: ButtonVariants;
   label: string;
   handleClick?: (toast?: Toast) => void;
-} & ButtonProps;
+} & Omit<ButtonProps, "variant">;
 
 export type ToastActionButtonProps = {
   action: ToastAction;

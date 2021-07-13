@@ -16,8 +16,8 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
 
   const spinnerStyles = cx(
     !iconOnly
-      ? theme.newButton.spinner.size[size]
-      : theme.newButton.spinner.iconOnly.size[size],
+      ? theme.button.spinner.size[size]
+      : theme.button.spinner.iconOnly.size[size],
   );
 
   return <Spinner className={spinnerStyles} size="em" />;

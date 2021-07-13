@@ -1,3 +1,4 @@
+// Credits to https://github.com/chakra-ui/chakra-ui/tree/main/packages/icon
 import * as React from "react";
 
 import { Icon, IconProps } from "./Icon";
@@ -6,11 +7,13 @@ import { forwardRefWithAs, PropsWithAs } from "../utils/types";
 export interface CreateIconOptions {
   /**
    * The icon `svg` viewBox
+   *
    * @default "0 0 24 24"
    */
   viewBox?: string;
   /**
    * The `svg` path or group element
+   *
    * @type React.ReactElement | React.ReactElement[]
    */
   path?: React.ReactElement | React.ReactElement[];

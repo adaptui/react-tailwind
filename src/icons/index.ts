@@ -14,6 +14,5 @@ export * from "./CaretRight";
 export * from "./CheckCircle";
 export * from "./GenericAvatar";
 export * from "./Indeterminate";
-export * from "./ArrowNarrowRight";
 export * from "./ExclamationCircle";
 export * from "./ExclamationTriangle";

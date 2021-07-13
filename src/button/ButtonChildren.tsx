@@ -56,8 +56,8 @@ const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
   props => {
     const { suffix, prefix, children, size, loading, spinner } = props;
     const theme = useTheme();
-    const suffixStyles = cx(theme.newButton.suffix.size[size]);
-    const prefixStyles = cx(theme.newButton.prefix.size[size]);
+    const suffixStyles = cx(theme.button.suffix.size[size]);
+    const prefixStyles = cx(theme.button.prefix.size[size]);
 
     return (
       <>

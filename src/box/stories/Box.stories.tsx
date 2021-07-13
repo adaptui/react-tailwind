@@ -2,23 +2,33 @@ import React from "react";
 import { Story, Meta } from "@storybook/react";
 
 import { Box, BoxProps } from "../index";
-import { Button as ButtonComponent } from "../../button";
+import { cx } from "@renderlesskit/react";
+import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Primitives/Box",
   component: Box,
+  argTypes: createControls("box", {
+    ignore: ["unstable_system", "wrapElement", "as"],
+  }),
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+    layout: "centered",
+  },
 } as Meta;
 
-const Base: Story<BoxProps> = args => <Box {...args}>This is the Box</Box>;
+const Base: Story<BoxProps> = args => <Box {...args}>This is the div</Box>;
 
 export const Default = Base.bind({});
 Default.args = {};
 
-const BoxStyled: Story<BoxProps> = args => (
+export const Styled: Story<BoxProps> = args => (
   <Box
-    {...args}
     as="figure"
     className="p-8 overflow-hidden bg-gray-100 md:flex rounded-xl md:p-0"
+    {...args}
   >
     <Box
       as="img"
@@ -44,28 +54,26 @@ const BoxStyled: Story<BoxProps> = args => (
   </Box>
 );
 
-export const Styled = BoxStyled.bind({});
-Styled.args = {};
+export const AsButton: Story<BoxProps> = args => {
+  const { className, ...rest } = args;
 
-const BoxButton: Story<BoxProps> = args => (
-  <Box
-    as="button"
-    type="button"
-    className="h-8 px-4 text-white bg-red-500 rounded-md"
-    {...args}
-  >
+  return (
+    <Box
+      as="button"
+      type="button"
+      className={cx(
+        "h-8 px-4 text-base font-bold text-white lib:bg-red-500 lib:rounded-md",
+        className,
+      )}
+      {...rest}
+    >
+      Button
+    </Box>
+  );
+};
+
+export const AsPrevButtonComp: Story<BoxProps> = args => (
+  <Box as={AsButton} className="bg-green-500" {...args}>
     Button
   </Box>
 );
-
-export const Button = BoxButton.bind({});
-Button.args = {};
-
-const BoxButtonComp: Story<BoxProps> = args => (
-  <Box as={ButtonComponent} {...args}>
-    Button
-  </Box>
-);
-
-export const ButtonComp = BoxButtonComp.bind({});
-Button.args = {};
