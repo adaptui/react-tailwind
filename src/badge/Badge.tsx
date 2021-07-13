@@ -14,7 +14,7 @@ export type BadgeProps = BoxProps & {
   size?: keyof Renderlesskit.GetThemeValue<"badge", "size">;
 
   /**
-   * How the badge should be styled?
+   * How the badge should look?
    *
    * @default solid
    */

@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { createControls } from "../../../.storybook/storybookUtils";
 import { Badge, BadgeProps } from "../Badge";
+import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Primitives/Badge",
@@ -30,7 +30,7 @@ export const Small = {
   ...Default,
   args: { ...Default.args, size: "sm" },
 };
-export const Medium = { ...Default, args: { ...Default.args } };
+export const Medium = { ...Default };
 export const Large = { ...Default, args: { ...Default.args, size: "lg" } };
 
 export const Solid = { ...Default };

@@ -46,7 +46,7 @@ export const Small = {
   ...Default,
   args: { ...Default.args, size: "sm" },
 };
-export const Medium = { ...Default, args: { ...Default.args } };
+export const Medium = { ...Default };
 export const Large = { ...Default, args: { ...Default.args, size: "lg" } };
 export const ExtraLarge = { ...Default, args: { ...Default.args, size: "xl" } };
 
