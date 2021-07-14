@@ -1,67 +1,62 @@
-import React from "react";
-import { Meta } from "@storybook/react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
-
-import { Button } from "../../button";
-import { Badge, BadgeProps } from "../Badge";
+import { Badge } from "../Badge";
+import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Primitives/Badge",
   component: Badge,
-  argTypes: {
-    size: createUnionControl(["sm", "md", "lg"]),
-    variant: createUnionControl(["primary", "secondary", "outline", "ghosts"]),
-    position: createUnionControl([
-      "top-left",
-      "top-right",
-      "bottom-left",
-      "bottom-right",
-    ]),
-    floating: { control: "boolean" },
+  argTypes: createControls("badge", {
+    ignore: ["unstable_system", "wrapElement", "as"],
+  }),
+  parameters: {
+    layout: "centered",
   },
-} as Meta;
+} as ComponentMeta<typeof Badge>;
 
-const base = storyTemplate<BadgeProps>(
-  args => {
-    return <Badge {...args}>Badge</Badge>;
+export const Default: ComponentStory<typeof Badge> = {
+  args: {
+    children: "Beta",
+    size: "md",
+    variant: "solid",
+    themeColor: "default",
   },
-  { variant: "primary", size: "md" },
-);
+  parameters: { options: { showPanel: true } },
+};
 
-export const Small = base({ size: "sm" });
+export const Small: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, size: "sm" },
+};
+export const Medium: ComponentStory<typeof Badge> = { ...Default };
+export const Large: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+};
 
-export const Medium = base({});
+export const Solid: ComponentStory<typeof Badge> = { ...Default };
+export const Subtle: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, variant: "subtle" },
+};
+export const Outline: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, variant: "outline" },
+};
 
-export const Large = base({ size: "lg" });
-
-export const Primary = base({});
-
-export const Secondary = base({ variant: "secondary" });
-
-export const Outline = base({ variant: "outline" });
-
-export const Ghost = base({ variant: "ghost" });
-
-const floating = storyTemplate<BadgeProps & { badgeValue?: string }>(
-  args => {
-    return (
-      <Button variant="outline">
-        Hello world
-        <Badge {...args}>{args.badgeValue}</Badge>
-      </Button>
-    );
-  },
-  {
-    variant: "primary",
-    position: "top-right",
-    floating: true,
-    size: "sm",
-    badgeValue: "22",
-  },
-);
-
-export const Floating = floating({});
+export const Primary: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+export const Seconday: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, themeColor: "secondary" },
+};
+export const Success: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, themeColor: "success" },
+};
+export const Danger: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger" },
+};

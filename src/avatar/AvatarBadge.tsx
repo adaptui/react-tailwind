@@ -37,7 +37,7 @@ export const AvatarBadge = forwardRefWithAs<
         <DotIcon
           className={cx(
             theme.avatar.status.online.base,
-            theme.avatar.status.online[size],
+            theme.avatar.status.online.size[size],
           )}
         />
       );
@@ -46,7 +46,7 @@ export const AvatarBadge = forwardRefWithAs<
         <MoonIcon
           className={cx(
             theme.avatar.status.offline.base,
-            theme.avatar.status.offline[size],
+            theme.avatar.status.offline.size[size],
           )}
         />
       );
@@ -55,7 +55,7 @@ export const AvatarBadge = forwardRefWithAs<
         <TypingAnimation
           className={cx(
             theme.avatar.status.typing.base,
-            theme.avatar.status.typing[size],
+            theme.avatar.status.typing.size[size],
           )}
         />
       );

@@ -2,17 +2,14 @@ const deepMerge = require("deepmerge");
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-// Autocomplete support
-/** @typedef { import('tailwindcss/defaultConfig') } DefaultConfig */
-/** @typedef { import('tailwindcss/defaultTheme') } DefaultTheme */
-
-/** @type { DefaultConfig & { theme: { extend: DefaultTheme } } } */
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 const renderlesskitConfig = {
   theme: {
     extend: {
       colors: {
         orange: colors.orange,
         gray: colors.gray,
+        emarald: colors.emerald,
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],

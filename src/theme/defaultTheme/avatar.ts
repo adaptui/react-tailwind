@@ -28,21 +28,21 @@ export const avatar = {
     online: {
       base: "lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
       size: {
-        "2xl": "lib:text-[9px]",
-        xl: "lib:text-[7px]",
-        lg: "lib:text-[5px]",
+        xl: "lib:text-[9px]",
+        lg: "lib:text-[7px]",
         md: "lib:text-[5px]",
-        sm: "lib:text-[3px]",
+        sm: "lib:text-[5px]",
+        xs: "lib:text-[4px]",
       },
     },
     offline: {
       base: "lib:text-yellow-500 lib:bg-white lib:ring-white lib:ring-opacity-100 lib:ring-1.5",
       size: {
-        "2xl": "lib:text-[9px]",
-        xl: "lib:text-[7px]",
-        lg: "lib:text-[5px]",
+        xl: "lib:text-[9px]",
+        lg: "lib:text-[7px]",
         md: "lib:text-[5px]",
-        sm: "lib:text-[4px]",
+        sm: "lib:text-[5px]",
+        xs: "lib:text-[4px]",
       },
     },
     typing: {

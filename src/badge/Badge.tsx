@@ -3,80 +3,50 @@ import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useMergeRefs } from "../hooks";
 import { forwardRefWithAs } from "../utils/types";
 
 export type BadgeProps = BoxProps & {
   /**
    * How large should the badge be?
    *
-   * @default "md"
+   * @default md
    */
   size?: keyof Renderlesskit.GetThemeValue<"badge", "size">;
+
   /**
-   * How the badge should be styled?
+   * How the badge should look?
    *
-   * @default "primary"
+   * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"badge", "state">;
+  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
+
   /**
-   * floats the badge on parent element's corners
+   * How the badge should be themed?
    *
-   * @default false
+   * @default default
    */
-  floating?: boolean;
-  /**
-   * floating position
-   *
-   * @default "top-right"
-   */
-  position?: keyof Renderlesskit.GetThemeValue<"badge", "position">;
+  themeColor?: keyof Renderlesskit.GetThemeValue<"badge", "variant", "solid">;
 };
 
 export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
   (props, ref) => {
-    const htmlref = React.useRef<HTMLSpanElement>();
     const {
-      position = "top-right",
-      variant = "primary",
       size = "md",
-      floating = false,
+      variant = "solid",
+      themeColor = "default",
       className,
       ...rest
     } = props;
 
-    const theme = useTheme();
+    const badge = useTheme("badge");
     const badgeStyles = cx(
-      theme.badge.base,
-      theme.badge.size[size],
-      theme.badge.state[variant],
-      floating
-        ? cx(
-            theme.badge.attached,
-            theme.badge.position[position],
-            !props.children ? theme.badge.dot[size] : "",
-          )
-        : "",
+      badge.base,
+      badge.size[size],
+      badge.variant[variant][themeColor],
       className,
     );
 
-    React.useEffect(() => {
-      if (!floating) return;
-      if (htmlref && htmlref.current) {
-        const parentElement = htmlref.current?.parentElement;
-        parentElement!.classList.add(theme.badge.attachedParent);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return (
-      <Box
-        as="span"
-        ref={useMergeRefs(htmlref, ref)}
-        className={badgeStyles}
-        {...rest}
-      />
-    );
+    return <Box ref={ref} as="span" className={badgeStyles} {...rest} />;
   },
 );
 

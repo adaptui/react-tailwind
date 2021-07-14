@@ -2,20 +2,34 @@ import * as React from "react";
 import { cloneDeep } from "lodash-es";
 
 import defaultTheme from "./defaultTheme";
-import { createContext } from "../utils";
 import { mergeExtensions, mergeThemes } from "./mergeThemes";
 import { DeepDictionary, DeepPartial } from "../utils/types";
 
 export type DefaultTheme = typeof defaultTheme;
 
-export type ThemeContext = DeepDictionary<DefaultTheme>;
+export type ThemeContextType = DeepDictionary<DefaultTheme>;
 
-const [ThemeProvider, useTheme] = createContext<ThemeContext>({
-  strict: false,
-  name: "ThemeProvider",
-});
+const ThemeContext = React.createContext<ThemeContextType | undefined>(
+  undefined,
+);
 
-export { useTheme };
+type ThemeKeys = keyof DefaultTheme;
+export function useTheme(): DefaultTheme;
+export function useTheme<T extends ThemeKeys>(component?: T): DefaultTheme[T];
+export function useTheme<T extends ThemeKeys>(component?: T) {
+  const context = React.useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error(
+      "useTheme: `ThemeContext` is undefined. Seems you forgot to wrap component within the RenderlesskitProvider",
+    );
+  }
+
+  // Introduce a new theme prop while not breaking the existing one
+  if (component && context[component]) return context[component];
+
+  return context;
+}
 
 export type PartialDefaultTheme = DeepPartial<DefaultTheme>;
 export type ExtendableDefaultTheme = PartialDefaultTheme & {
@@ -35,7 +49,9 @@ export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
     [theme],
   );
 
-  return <ThemeProvider value={finalTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeContext.Provider value={finalTheme}>{children}</ThemeContext.Provider>
+  );
 };
 
 export * from "./extendTheme";
