@@ -62,8 +62,7 @@
       "yarn lint:fix"
     ],
     "**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}": [
-      "yarn format",
-      "git add"
+      "yarn format"
     ],
     "package.json": [
       "yarn format:package"
