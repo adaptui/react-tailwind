@@ -13,7 +13,7 @@ const ThemeContext = React.createContext<ThemeContextType | undefined>(
   undefined,
 );
 
-type ThemeKeys = keyof DeepDictionary<DefaultTheme>;
+type ThemeKeys = keyof DefaultTheme;
 export function useTheme(): DefaultTheme;
 export function useTheme<T extends ThemeKeys>(component?: T): DefaultTheme[T];
 export function useTheme<T extends ThemeKeys>(component?: T) {
