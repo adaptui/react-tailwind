@@ -1,5 +1,5 @@
 export const button = {
-  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:w-auto lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed button-hover lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:transition-all",
+  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:w-auto lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed  lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none  lib:transform lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:transition-all",
   size: {
     sm: "lib:h-[26px] lib:min-w-[26px] lib:px-2 lib:rounded-lg lib:text-[length:13px] lib:leading-[100%] pb-px",
     md: "lib:h-[30px] lib:min-w-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm lib:leading-[115%]",
