@@ -75,11 +75,11 @@ export const Button = forwardRefWithAs<
   } = props;
   const _disabled = disabled || loading;
 
-  const theme = useTheme();
+  const button = useTheme("button") as Renderlesskit.GetThemeValue<"button">;
   const baseStyles = cx(
-    theme.button.base,
-    !iconOnly ? theme.button.size[size] : theme.button.iconOnly.size[size],
-    theme.button.variant[variant],
+    button.base,
+    !iconOnly ? button.size[size] : button.iconOnly.size[size],
+    button.variant[variant],
     _disabled ? "pointer-events-none" : "pointer-events-auto",
     className,
   );

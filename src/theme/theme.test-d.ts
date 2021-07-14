@@ -10,8 +10,8 @@ expectType<Renderlesskit.Theme>({ components: theme });
 expectAssignable<Renderlesskit.GetThemeValue<"button", "base">>("");
 expectType<Renderlesskit.GetThemeValue<"button", "variant">>({
   ghost: "",
-  primary: "",
-  secondary: "",
+  solid: "",
+  subtle: "",
   outline: "",
 });
 expectType<Renderlesskit.GetThemeValue<"button", "size">>({

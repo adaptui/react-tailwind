@@ -24,7 +24,7 @@ export type TagProps = Omit<BoxProps, "prefix"> & {
    *
    * @default "primary"
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
+  variant?: keyof Renderlesskit.GetThemeValue<"tag", "variant">;
   /**
    * If added, tag will show prefix the content before the tag's label
    */

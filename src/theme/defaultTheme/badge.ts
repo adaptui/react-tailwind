@@ -1,29 +1,33 @@
 export const badge = {
-  base: "lib:inline-block lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all",
-  attached: "absolute",
-  attachedParent: "relative",
-  position: {
-    "top-right": "-top-0 -right-0 transform translate-x-1/2 -translate-y-1/2",
-    "top-left": "-top-0 -left-0 transform -translate-x-1/2 -translate-y-1/2",
-    "bottom-right":
-      "-bottom-0 -right-0 transform translate-x-1/2 translate-y-1/2",
-    "bottom-left":
-      "-bottom-0 -left-0 transform -translate-x-1/2 translate-y-1/2",
-  },
-  dot: {
-    sm: "py-1.5",
-    md: "py-2",
-    lg: "py-2",
-  },
+  base: "lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all",
   size: {
-    sm: "lib:px-1.5 lib:text-xs lib:font-medium",
-    md: "lib:px-2 lib:text-sm lib:font-medium",
-    lg: "lib:px-2 lib:text-base lib:font-medium",
+    sm: "lib:py-px lib:px-1.5 lib:text-xs lib:leading-[115%]",
+    md: "lib:py-[3px] lib:px-1.5 lib:text-xs lib:leading-[115%]",
+    lg: "lib:py-[4.5px] lib:px-2 lib:text-[length:13px] lib:leading-[100%]",
   },
-  state: {
-    primary: "lib:bg-gray-800 lib:text-white",
-    secondary: "lib:bg-gray-100 lib:text-gray-800",
-    outline: "lib:text-gray-800 lib:border lib:border-gray-300 lib:bg-white",
-    ghost: "lib:text-gray-800 hover:lib:bg-gray-100",
+  variant: {
+    solid: {
+      default: "lib:bg-gray-800 lib:text-white",
+      primary: "lib:bg-blue-500 lib:text-white",
+      secondary: "lib:bg-purple-500 lib:text-white",
+      success: "lib:bg-emarald-500 lib:text-white",
+      danger: "lib:bg-red-500 lib:text-white",
+    },
+    subtle: {
+      default: "lib:bg-gray-100 lib:text-gray-600",
+      primary: "lib:bg-blue-50 lib:text-blue-500",
+      secondary: "lib:bg-purple-50 lib:text-purple-500",
+      success: "lib:bg-emarald-50 lib:text-emarald-500",
+      danger: "lib:bg-red-50 lib:text-red-500",
+    },
+    outline: {
+      default: "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200",
+      primary: "lib:bg-white lib:text-blue-500 lib:ring-1 lib:ring-blue-200",
+      secondary:
+        "lib:bg-white lib:text-purple-500 lib:ring-1 lib:ring-purple-200",
+      success:
+        "lib:bg-white lib:text-emarald-500 lib:ring-1 lib:ring-emarald-200",
+      danger: "lib:bg-white lib:text-red-500 lib:ring-1 lib:ring-red-200",
+    },
   },
 };
