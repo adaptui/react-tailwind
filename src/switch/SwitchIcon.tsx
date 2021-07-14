@@ -20,6 +20,7 @@ export const SwitchIcon = forwardRefWithAs<
   const switchIconWrapperStyles = cx(
     theme.switch.icon.wrapper.base,
     theme.switch.icon.wrapper.size[size],
+    // @ts-ignore
     theme.switch.icon.wrapper.state[`${state.checked}`],
     className,
   );
