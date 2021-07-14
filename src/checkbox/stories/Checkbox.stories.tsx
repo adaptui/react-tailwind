@@ -18,6 +18,8 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "../../button";
 import { FormField } from "../../form-field";
+import { CheckboxDescription } from "../CheckboxDescription";
+import { CloseIcon, EyeClose, EyeOpen, IndeterminateIcon } from "../../icons";
 
 export default {
   title: "Forms/Checkbox",
@@ -38,17 +40,126 @@ const base = storyTemplate<CheckboxProps>(Checkbox, {
   defaultState: true,
 });
 
-export const Small = base({ size: "sm" });
-
-export const Medium = base({});
-
-export const Large = base({ size: "lg" });
-
-export const DefaultUnchecked = base({ defaultState: false });
-
-export const DefaultChecked = base({ defaultState: true });
-
 export const Disabled = base({ disabled: true });
+
+export const WithDescription = storyTemplate<CheckboxProps>(args => {
+  return (
+    <div className="flex flex-col space-y-6">
+      <Checkbox
+        {...args}
+        size="sm"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Checked state
+      </Checkbox>
+      <Checkbox
+        {...args}
+        size="md"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Checked state
+      </Checkbox>
+      <Checkbox
+        {...args}
+        size="lg"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Checked state
+      </Checkbox>
+      <Checkbox
+        {...args}
+        isInvalid
+        size="lg"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Invalid state
+      </Checkbox>
+      <Checkbox
+        {...args}
+        defaultState="indeterminate"
+        size="lg"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Indeterminate state
+      </Checkbox>
+      <Checkbox
+        {...args}
+        isInvalid
+        defaultState="indeterminate"
+        size="lg"
+        description={
+          "Used when the checkbox is selected and will use its value for the form submission."
+        }
+      >
+        Indeterminate invalid
+      </Checkbox>
+      <Checkbox
+        size="lg"
+        icon={props =>
+          props.isIndeterminate ? (
+            <IndeterminateIcon />
+          ) : props.isChecked ? (
+            <EyeOpen />
+          ) : (
+            <EyeClose />
+          )
+        }
+        description="Used when the checkbox is selected and will use its value for the form submission."
+      >
+        Custom icon prop
+      </Checkbox>
+      <Checkbox size="lg">
+        <CheckboxLabel>
+          <CheckboxInput />
+          <CheckboxIcon>
+            {props =>
+              props.isIndeterminate ? (
+                <IndeterminateIcon />
+              ) : props.isChecked ? (
+                <CloseIcon />
+              ) : null
+            }
+          </CheckboxIcon>
+          <div>
+            <CheckboxText>Custom checkbox</CheckboxText>
+            <CheckboxDescription>
+              Used when the checkbox is selected and will use its value for the
+              form submission.
+            </CheckboxDescription>
+          </div>
+        </CheckboxLabel>
+      </Checkbox>
+    </div>
+  );
+})({});
+
+export const WithoutDescription = storyTemplate<CheckboxProps>(args => {
+  return (
+    <>
+      <Checkbox {...args}>Checked state</Checkbox>
+    </>
+  );
+})({ size: "md" });
+
+export const Invalid = storyTemplate<CheckboxProps>(args => {
+  return (
+    <>
+      <Checkbox {...args} isInvalid>
+        Checked state
+      </Checkbox>
+    </>
+  );
+})({ size: "md" });
 
 export const Controlled = storyTemplate<CheckboxProps>(args => {
   const [state, onStateChange] = React.useState<CheckboxStatus>(false);

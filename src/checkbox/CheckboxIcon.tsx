@@ -4,10 +4,21 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useCheckboxContext } from "./Checkbox";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { CheckIcon, IndeterminateIcon } from "../icons";
+import { runIfFn } from "../utils";
 
-export type CheckboxIconProps = BoxProps & {};
+export type CheckboxIconRenderPropValues = {
+  isInvalid: boolean;
+  isDisabled: boolean;
+  isChecked: boolean;
+  isIndeterminate: boolean;
+};
+
+export type CheckboxIconProps = BoxProps &
+  RenderProp<CheckboxIconRenderPropValues> & {
+    isInvalid?: boolean;
+  };
 
 export const CheckboxIcon = forwardRefWithAs<
   CheckboxIconProps,
@@ -18,22 +29,33 @@ export const CheckboxIcon = forwardRefWithAs<
   const { state, size = "md" } = useCheckboxContext();
 
   let stateProp = state?.state;
-
   if (Array.isArray(stateProp) && state?.value) {
     stateProp = stateProp.includes(state?.value);
   }
+
+  const invalid = !!(props.isInvalid || state?.isInvalid);
+  const isDisabled = !!state?.disabled;
+  const isIndeterminate = stateProp === "indeterminate";
+  const isChecked = stateProp === true;
+  const isUnchecked = stateProp === false || stateProp === undefined;
+
+  const compoundStyles = (key: string) => {
+    return cx(
+      theme.checkbox.icon.state[key],
+      invalid
+        ? theme.checkbox.icon.state[`${key}_invalid`]
+        : theme.checkbox.icon.state[`${key}_valid`],
+    );
+  };
 
   const theme = useTheme();
   const checkboxIconStyles = cx(
     theme.checkbox.icon.base,
     theme.checkbox.icon.size[size],
-    state?.disabled
-      ? theme.checkbox.icon.state.disabled
-      : stateProp === "indeterminate"
-      ? theme.checkbox.icon.state.indeterminate
-      : stateProp
-      ? theme.checkbox.icon.state.checked
-      : theme.checkbox.icon.state.unchecked,
+    isDisabled && theme.checkbox.icon.state.disabled,
+    isIndeterminate && compoundStyles("indeterminate"),
+    isChecked && compoundStyles("checked"),
+    isUnchecked && compoundStyles("unchecked"),
     className,
   );
 
@@ -46,7 +68,12 @@ export const CheckboxIcon = forwardRefWithAs<
       {...rest}
     >
       {children ? (
-        children
+        runIfFn(children, {
+          isChecked,
+          isIndeterminate,
+          isInvalid: invalid,
+          isDisabled,
+        })
       ) : stateProp === "indeterminate" ? (
         <IndeterminateIcon />
       ) : stateProp ? (

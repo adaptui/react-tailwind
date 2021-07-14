@@ -18,8 +18,8 @@ export const CheckboxText = forwardRefWithAs<
 
   const theme = useTheme();
   const checkboxLabelStyles = cx(
-    theme.checkbox.label.base,
-    theme.checkbox.label.size[size],
+    theme.checkbox.field.text.base,
+    theme.checkbox.field.text.size[size],
     className,
   );
 

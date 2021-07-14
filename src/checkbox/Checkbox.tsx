@@ -6,18 +6,20 @@ import * as React from "react";
 import { useControllableState } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
-import { CheckboxIcon } from "./CheckboxIcon";
+import { useTheme } from "../theme";
 import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { CheckboxInput } from "./CheckboxInput";
 import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { CommonFieldProps } from "../form-field";
+import { CheckboxDescription } from "./CheckboxDescription";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { CheckboxIcon, CheckboxIconRenderPropValues } from "./CheckboxIcon";
 
 export type CheckboxStatus = CheckboxStateReturn["state"];
 
 export type CheckboxContext = {
-  state: ReakitCheckboxOptions;
+  state: ReakitCheckboxOptions & { isInvalid?: boolean };
   size: CheckboxProps["size"];
 };
 
@@ -30,15 +32,20 @@ export { useCheckboxContext };
 
 type CheckboxRenderProps = RenderProp<ReakitCheckboxOptions>;
 
+type CheckboxExtraProps = {
+  name?: string;
+  description?: string;
+  inputRef?: React.Ref<HTMLInputElement>;
+  defaultState?: ReakitCheckboxOptions["state"];
+  size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+  onStateChange?: (value: CheckboxStatus) => void;
+  icon?: (props: CheckboxIconRenderPropValues) => React.ReactNode;
+};
+
 export type CheckboxProps = BoxProps &
   Omit<CommonFieldProps, "id" | "isReadOnly"> &
-  Omit<ReakitCheckboxOptions, "size" | "setState"> & {
-    defaultState?: ReakitCheckboxOptions["state"];
-    onStateChange?: (value: CheckboxStatus) => void;
-    size?: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
-    name?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
-  };
+  Omit<ReakitCheckboxOptions, "size" | "setState"> &
+  CheckboxExtraProps;
 
 export const Checkbox = forwardRefWithAs<
   CheckboxProps & CheckboxRenderProps,
@@ -60,13 +67,18 @@ export const Checkbox = forwardRefWithAs<
     name,
     children,
     inputRef,
+    description,
+    icon,
     ...rest
   } = props;
+
   const [checkboxState, setCheckboxStateChange] = useControllableState({
     value: initialState,
     defaultValue: defaultState,
     onChange: onStateChange,
   });
+
+  const isTrulyDisabled = isDisabled || disabled;
 
   const state = React.useMemo(
     () => ({
@@ -74,7 +86,8 @@ export const Checkbox = forwardRefWithAs<
       setState: setCheckboxStateChange,
       value,
       checked,
-      disabled: isDisabled || disabled,
+      isInvalid,
+      disabled: isTrulyDisabled,
       focusable,
     }),
     [
@@ -82,12 +95,15 @@ export const Checkbox = forwardRefWithAs<
       setCheckboxStateChange,
       value,
       checked,
-      isDisabled,
-      disabled,
+      isTrulyDisabled,
+      isInvalid,
       focusable,
     ],
   );
   const context = React.useMemo(() => ({ state, size }), [state, size]);
+
+  const theme = useTheme();
+  const checkboxTextWrapperStyles = theme.checkbox.field.base;
 
   if (!children) {
     return (
@@ -100,7 +116,7 @@ export const Checkbox = forwardRefWithAs<
             isRequired={isRequired}
             isInvalid={isInvalid}
           />
-          <CheckboxIcon />
+          <CheckboxIcon children={icon} />
         </CheckboxLabel>
       </CheckboxProvider>
     );
@@ -119,8 +135,15 @@ export const Checkbox = forwardRefWithAs<
             isRequired={isRequired}
             isInvalid={isInvalid}
           />
-          <CheckboxIcon />
-          {<CheckboxText>{children}</CheckboxText>}
+          <CheckboxIcon children={icon} />
+          {description ? (
+            <div className={checkboxTextWrapperStyles}>
+              <CheckboxText>{children}</CheckboxText>
+              <CheckboxDescription>{description}</CheckboxDescription>
+            </div>
+          ) : (
+            <CheckboxText>{children}</CheckboxText>
+          )}
         </CheckboxLabel>
       )}
     </CheckboxProvider>

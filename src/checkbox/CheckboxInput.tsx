@@ -19,7 +19,9 @@ export const CheckboxInput = forwardRefWithAs<
   "input"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { state } = useCheckboxContext();
+  const {
+    state: { isInvalid, ...state },
+  } = useCheckboxContext();
   // Interpts with the checked unchecked state
   if (state["value"] === undefined) delete state["value"];
   if (state["checked"] === undefined) delete state["checked"];
@@ -28,10 +30,11 @@ export const CheckboxInput = forwardRefWithAs<
   const checkboxInputStyles = cx(theme.checkbox.input, className);
 
   const formFieldProps = useFormControl({
-    isDisabled: state.disabled || props.isDisabled || props.disabled,
-    isInvalid: props.isInvalid || (props["aria-invalid"] as boolean),
-    isRequired: props.isRequired || props.required,
     ...rest,
+    isDisabled: state.disabled || props.isDisabled || props.disabled,
+    isInvalid:
+      isInvalid || props.isInvalid || (props["aria-invalid"] as boolean),
+    isRequired: props.isRequired || props.required,
   });
 
   return (
