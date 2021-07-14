@@ -7,13 +7,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
   >
     <input
       aria-checked="false"
-      class="lib:peer lib:sr-only"
+      class="peer lib:sr-only"
       type="checkbox"
       value="apple"
     />
     <div
       aria-hidden="true"
-      class="lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:rounded lib:select-none lib:transition-all lib:ring-0 lib:ring-gray-300 peer-focus:lib:ring-2 lib:w-4 lib:h-4 lib:text-xs lib:border-[1.5px] lib:border-solid lib:border-gray-400 group-hover:lib:border-gray-500"
+      class="lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:select-none lib:transition-all lib:ring-0 lib:ring-gray-300 peer-focus:ring-2 lib:w-4 lib:h-4 lib:text-xs lib:rounded lib:border-[1.5px] lib:border-solid lib:border-gray-400 group-hover:lib:border-gray-500"
       role="img"
     />
     <div
