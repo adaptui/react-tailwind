@@ -10,7 +10,7 @@ import {
   CloseButtonProps,
 } from "../index";
 import { Spinner } from "../../spinner";
-import { CaretRightIcon, ClockIcon } from "../../icons";
+import { CaretRightIcon, ClockIcon, SearchIcon } from "../../icons";
 import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {

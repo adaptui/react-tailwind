@@ -47,7 +47,12 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
     );
 
     return (
-      <Box ref={ref} className={spinnerStyles} {...rest}>
+      <Box
+        ref={ref}
+        className={spinnerStyles}
+        data-testid="testid-spinner"
+        {...rest}
+      >
         {label && <div className={theme.spinner.aria}>{label}</div>}
       </Box>
     );
