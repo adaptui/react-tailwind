@@ -35,6 +35,28 @@ describe("Testing Button", () => {
     expect(screen.queryByText(/Icon only/i)).toBeInTheDocument();
   });
 
+  test("when loading & iconOnly is set: prefix, suffix & children should be ignored and show spinner", () => {
+    render(
+      <Button
+        loading
+        prefix={<p>prefix</p>}
+        suffix={<p>suffix</p>}
+        iconOnly={<p>Icon only</p>}
+      >
+        hello world
+      </Button>,
+    );
+
+    expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("prefix")).not.toBeInTheDocument();
+    expect(screen.queryByText("suffix")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Icon only/i)).toHaveAttribute("aria-hidden");
+    expect(screen.queryByText(/Icon only/i)?.parentElement).toHaveClass(
+      "opacity-0",
+    );
+    expect(screen.getByTestId("testid-spinner")).toBeInTheDocument();
+  });
+
   it("should render with loading spinner when loading is true", () => {
     render(<Button loading>hello world</Button>);
 

@@ -17,32 +17,33 @@ export interface ButtonChildrenProps
 export const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
   const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
 
-  if (prefix || suffix) {
+  if ((!prefix && !suffix) || iconOnly) {
+    if (!loading) {
+      return <>{iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}</>;
+    }
+
     return (
-      <ChildrenWithPrefixSuffix
-        suffix={suffix}
-        prefix={prefix}
-        size={size}
-        loading={loading}
-        spinner={spinner}
-      >
-        {children}
-      </ChildrenWithPrefixSuffix>
+      <>
+        <ButtonSpinnerWrapper>
+          <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
+        </ButtonSpinnerWrapper>
+        <div className="opacity-0">
+          {iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}
+        </div>
+      </>
     );
   }
 
-  if (!loading)
-    return <>{iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}</>;
-
   return (
-    <>
-      <ButtonSpinnerWrapper>
-        <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
-      </ButtonSpinnerWrapper>
-      <div className="opacity-0">
-        {iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}
-      </div>
-    </>
+    <ChildrenWithPrefixSuffix
+      suffix={suffix}
+      prefix={prefix}
+      size={size}
+      loading={loading}
+      spinner={spinner}
+    >
+      {children}
+    </ChildrenWithPrefixSuffix>
   );
 };
 
