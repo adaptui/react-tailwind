@@ -65,7 +65,7 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       data-testid="testid-avatar-badge"
     >
       <svg
-        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5"
+        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5 lib:text-[5px]"
         data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 9 9"
