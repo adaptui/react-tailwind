@@ -38,7 +38,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
       ...rest
     } = props;
 
-    const badge = useTheme("badge") as Renderlesskit.GetThemeValue<"badge">;
+    const badge = useTheme("badge");
     const badgeStyles = cx(
       badge.base,
       badge.size[size],

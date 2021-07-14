@@ -13,7 +13,10 @@ const ThemeContext = React.createContext<ThemeContextType | undefined>(
   undefined,
 );
 
-export const useTheme = (component?: keyof DeepDictionary<DefaultTheme>) => {
+type ThemeKeys = keyof DeepDictionary<DefaultTheme>;
+export function useTheme(): DefaultTheme;
+export function useTheme<T extends ThemeKeys>(component?: T): DefaultTheme[T];
+export function useTheme<T extends ThemeKeys>(component?: T) {
   const context = React.useContext(ThemeContext);
 
   if (!context) {
@@ -26,7 +29,7 @@ export const useTheme = (component?: keyof DeepDictionary<DefaultTheme>) => {
   if (component && context[component]) return context[component];
 
   return context;
-};
+}
 
 export type PartialDefaultTheme = DeepPartial<DefaultTheme>;
 export type ExtendableDefaultTheme = PartialDefaultTheme & {
