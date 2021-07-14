@@ -17,7 +17,7 @@ export interface ButtonChildrenProps
 export const ButtonChildren: React.FC<ButtonChildrenProps> = props => {
   const { children, iconOnly, suffix, prefix, size, loading, spinner } = props;
 
-  if (!prefix && !suffix) {
+  if ((!prefix && !suffix) || iconOnly) {
     if (!loading)
       return <>{iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}</>;
 
