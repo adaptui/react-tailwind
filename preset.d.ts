@@ -5,7 +5,7 @@ type Config = {
    *
    * [Documentation](https://tailwindcss.com/docs/dark-mode)
    */
-  dark?: "media" | "class";
+  darkMode?: "media" | "class";
 
   /**
    * Configure what PurgeCSS removes when building for production.
