@@ -1,7 +1,6 @@
-import React from "react";
-import { Meta } from "@storybook/react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Badge, BadgeProps } from "../Badge";
+import { Badge } from "../Badge";
 import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {
@@ -13,10 +12,9 @@ export default {
   parameters: {
     layout: "centered",
   },
-} as Meta;
+} as ComponentMeta<typeof Badge>;
 
-export const Default = {
-  render: (args: BadgeProps) => <Badge {...args} />,
+export const Default: ComponentStory<typeof Badge> = {
   args: {
     children: "Beta",
     size: "md",
@@ -26,36 +24,39 @@ export const Default = {
   parameters: { options: { showPanel: true } },
 };
 
-export const Small = {
+export const Small: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, size: "sm" },
 };
-export const Medium = { ...Default };
-export const Large = { ...Default, args: { ...Default.args, size: "lg" } };
+export const Medium: ComponentStory<typeof Badge> = { ...Default };
+export const Large: ComponentStory<typeof Badge> = {
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+};
 
-export const Solid = { ...Default };
-export const Subtle = {
+export const Solid: ComponentStory<typeof Badge> = { ...Default };
+export const Subtle: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, variant: "subtle" },
 };
-export const Outline = {
+export const Outline: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, variant: "outline" },
 };
 
-export const Primary = {
+export const Primary: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, themeColor: "primary" },
 };
-export const Seconday = {
+export const Seconday: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, themeColor: "secondary" },
 };
-export const Success = {
+export const Success: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, themeColor: "success" },
 };
-export const Danger = {
+export const Danger: ComponentStory<typeof Badge> = {
   ...Default,
   args: { ...Default.args, themeColor: "danger" },
 };

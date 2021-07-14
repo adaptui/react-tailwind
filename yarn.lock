@@ -13609,10 +13609,10 @@ store2@^2.12.0:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
 
-storybook-addon-pseudo-states@^1.1.0-canary.8.ee5c388.0:
-  version "1.1.0-canary.8.ee5c388.0"
-  resolved "https://registry.yarnpkg.com/storybook-addon-pseudo-states/-/storybook-addon-pseudo-states-1.1.0-canary.8.ee5c388.0.tgz#63d44985781a6f1b8549e65f2781eaf67a717a2a"
-  integrity sha512-OsiTYqrDJvrr1Bnk4YS4jkToyolp05F0sPqeI69VPhTvLeuaEDrq1Ivcv2SyUMqyqlzF920bKnHYE9Udxpu3cA==
+storybook-addon-pseudo-states@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/storybook-addon-pseudo-states/-/storybook-addon-pseudo-states-1.0.0.tgz#21f4f954d734e531812e04207f9ac431b2c6bbc7"
+  integrity sha512-pRbPB/L2IB5jFX2snE3qS+/Fhsb9vej/s30opUgD+vrUTShvatUHJpajI5cDOxT6Gape6YWKg06/L75OW2vu/g==
 
 storybook-builder-vite@^0.0.12:
   version "0.0.12"

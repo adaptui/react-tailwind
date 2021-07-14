@@ -212,11 +212,13 @@ export const CloseButton: ComponentStory<typeof Button> = {
 
 export const ExtendedVariant: ComponentStory<typeof Button> = {
   ...Default,
+  // @ts-ignore
   args: { ...Default.args, children: "tertiary", variant: "tertiary" },
 };
 
 export const ExtendedSize: ComponentStory<typeof Button> = {
   ...Default,
+  // @ts-ignore
   args: { ...Default.args, children: "xxl", size: "xxl" },
 };
 
