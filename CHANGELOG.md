@@ -1,3 +1,10 @@
+### [0.0.1-alpha.12](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.11...v0.0.1-alpha.12) (2021-07-15)
+
+
+### Code Refactors
+
+* **lodash:** ♻️  try lodash for lodash-es ([838893d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/838893df43e839a011e5ccc43b7577d1ded4683f))
+
 ### [0.0.1-alpha.11](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.10...v0.0.1-alpha.11) (2021-07-15)
 
 
