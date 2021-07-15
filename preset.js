@@ -14,6 +14,12 @@ const renderlesskitConfig = {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
+      fontSize: {
+        xs: ["12px", "115%"],
+        cxs: ["13px", "100%"],
+        sm: ["14px", "115%"],
+        base: ["16px", "115%"],
+      },
       inset: {
         unset: "unset",
       },

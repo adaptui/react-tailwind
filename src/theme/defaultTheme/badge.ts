@@ -1,9 +1,9 @@
 export const badge = {
   base: "lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:whitespace-nowrap lib:align-middle lib:rounded-full lib:transition-all",
   size: {
-    sm: "lib:py-px lib:px-1.5 lib:text-xs lib:leading-[115%]",
-    md: "lib:py-[3px] lib:px-1.5 lib:text-xs lib:leading-[115%]",
-    lg: "lib:py-[4.5px] lib:px-2 lib:text-[length:13px] lib:leading-[100%]",
+    sm: "lib:py-px lib:px-1.5 lib:text-xs",
+    md: "lib:py-[3px] lib:px-1.5 lib:text-xs",
+    lg: "lib:py-[4.5px] lib:px-2 lib:text-cxs",
   },
   variant: {
     solid: {
