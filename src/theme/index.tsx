@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from "lodash";
 
 import defaultTheme from "./defaultTheme";
 import { mergeExtensions, mergeThemes } from "./mergeThemes";
