@@ -1,5 +1,5 @@
 import { cx } from "@renderlesskit/react";
-import { defaults, mergeWith, isString, isUndefined } from "lodash-es";
+import { defaults, mergeWith, isString, isUndefined } from "lodash";
 import { PartialDefaultTheme, DefaultTheme, ExtendableDefaultTheme } from ".";
 
 export function mergeThemes(themes: PartialDefaultTheme[]) {
