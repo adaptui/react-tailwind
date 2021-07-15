@@ -1,3 +1,10 @@
+### [0.0.1-alpha.10](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.9...v0.0.1-alpha.10) (2021-07-15)
+
+
+### Bug Fixes
+
+* **lodash:** 🐛  esm issue by lowering its version ([c3138d5](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c3138d587eba35a731976d05cba953ad3b684126))
+
 ### [0.0.1-alpha.9](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.8...v0.0.1-alpha.9) (2021-07-15)
 
 
