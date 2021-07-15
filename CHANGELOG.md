@@ -1,3 +1,77 @@
+### [0.0.1-alpha.9](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.8...v0.0.1-alpha.9) (2021-07-15)
+
+
+### Bug Fixes
+
+* **button:** :bug: line height being cascaded by font size ([35caf54](https://github.com/timelessco/renderlesskit-react-tailwind/commit/35caf544000381269ee2f7fb371bcb93553d0781))
+* button logic & added one more test case ([84590b5](https://github.com/timelessco/renderlesskit-react-tailwind/commit/84590b53a37f78e14fc0b13b4e162ad56b562542))
+* ignore prefix suffix children on button iconOnly ([3415127](https://github.com/timelessco/renderlesskit-react-tailwind/commit/34151271ce6772c527cbf11cc6956a66089f0b16))
+* **button:** 🐛  fix types & move fns to utils ([62b6bc5](https://github.com/timelessco/renderlesskit-react-tailwind/commit/62b6bc57eccd38907f3fcf69a51feffe21dd7774))
+* **button:** 🐛  loading button ui ([59d1321](https://github.com/timelessco/renderlesskit-react-tailwind/commit/59d1321069af7d2e6238265c83ef43a2025b040f))
+* **button:** 🐛  remove borders on outline variant ([12ce3a9](https://github.com/timelessco/renderlesskit-react-tailwind/commit/12ce3a9f7b05e2075e40a0d47ca9a3364f2a5f99))
+* **button:** 🐛  revert pointer events change ([ce30278](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ce302788f09c76874dc0f233abab0cf8028af357))
+* **storybook:** 🐛  pseudo state global decorator & also with vite ([78a07e7](https://github.com/timelessco/renderlesskit-react-tailwind/commit/78a07e716112483ba174dbcfd9e7e7f7b647bb6a))
+* :fire: fix bugs & arrange imports ([16d72bc](https://github.com/timelessco/renderlesskit-react-tailwind/commit/16d72bc0b9202013b9bc55fb93cdf48b2ca1dc19))
+
+
+### Build Updates
+
+* **babel:** 🔧  update babel config ([9138671](https://github.com/timelessco/renderlesskit-react-tailwind/commit/91386717d64b236b792590dc38a68d0da7a6bce7))
+
+
+### Documentation Changes
+
+* added docs site link ([47e0c05](https://github.com/timelessco/renderlesskit-react-tailwind/commit/47e0c05fabfa5b87ff94fc41678f5b85b93f2cd2))
+
+
+### Maintanance Updates
+
+* :wrench: update deps & chores ([cc09546](https://github.com/timelessco/renderlesskit-react-tailwind/commit/cc0954672d8746fabef4c58c59b1ede4278c46e7))
+* **deps:** ➖  remove unused storybook addon links ([7c035a9](https://github.com/timelessco/renderlesskit-react-tailwind/commit/7c035a9c53388ebf86433f2a229a6470ccea750e))
+* **deps:** ⬆️  update & patch deps with releaseit ([#118](https://github.com/timelessco/renderlesskit-react-tailwind/issues/118)) ([e03db10](https://github.com/timelessco/renderlesskit-react-tailwind/commit/e03db10d9d723c9743512c17ad2c1898d082080e))
+* **release:** 0.0.1-alpha.8 ([1aa1e36](https://github.com/timelessco/renderlesskit-react-tailwind/commit/1aa1e36ee671d340a2a595fc2513f002c367b018))
+* **storybook:** ♻️  add a story example to test a11y ([9e01fa1](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9e01fa12b1503fa0bd43e54ec555d242c049beb8))
+
+
+### Feature Updates
+
+* **badge:** ✨ update to the new design ([#124](https://github.com/timelessco/renderlesskit-react-tailwind/issues/124)) ([1d9734c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/1d9734c390284db472237cc43f1e87addb114074))
+* **button:** ✨  add disabled a11y to button ([48cbbf6](https://github.com/timelessco/renderlesskit-react-tailwind/commit/48cbbf6842a1b108b679e14f89304df44141c7a7))
+* **button:** ✨  add live region for loading status ([b3dd6fa](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b3dd6fa53adfb5e448d138c6cf9b89d6f100ce02))
+* :fire: add icononly & simulate pseudo state in stories ([687bcf1](https://github.com/timelessco/renderlesskit-react-tailwind/commit/687bcf1ae528a2e5553db8fe918576dc571111cc))
+* :fire: add play for hover ([2bdfb7b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/2bdfb7b509b937d8075d252f74810bd19371b948))
+* :fire: add prefix suffix with loading states ([79e031f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/79e031f6098bded9df8063ad9a4315fbe7b9ca08))
+* :fire: csf v3 & add antialiased globally ([bd7a773](https://github.com/timelessco/renderlesskit-react-tailwind/commit/bd7a773c846fd3e9e012552cafa928b841c27f9d))
+* :sparkles: add active button transform ([fdde66e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/fdde66ef20b33e2b905747992557351b645648da))
+* :sparkles: add iconOnly spinner & absolute spinner ([c70b425](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c70b425286290a33bdf7c79d8366eec70173e329))
+* :sparkles: add new button improvement ([465fbba](https://github.com/timelessco/renderlesskit-react-tailwind/commit/465fbba2adda871d463c8ff8582e51e30bb1ea72))
+* added extendTheme utility for better DX ([#115](https://github.com/timelessco/renderlesskit-react-tailwind/issues/115)) ([beaec2b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/beaec2b3c8bda83a4e2ff6f786adc4c74962ffd8))
+* improved Renderlesskit.GetThemeValue type ([#117](https://github.com/timelessco/renderlesskit-react-tailwind/issues/117)) ([70793da](https://github.com/timelessco/renderlesskit-react-tailwind/commit/70793dae41cf39b708546c3c2fc9758f148686df))
+* rexport extendTheme ([#119](https://github.com/timelessco/renderlesskit-react-tailwind/issues/119)) ([0c289e6](https://github.com/timelessco/renderlesskit-react-tailwind/commit/0c289e6d605567bd414e0f67f0e1f537228731f5))
+* update theme structure for components ([#116](https://github.com/timelessco/renderlesskit-react-tailwind/issues/116)) ([88f8fb9](https://github.com/timelessco/renderlesskit-react-tailwind/commit/88f8fb9346cb5173a2a728ad033adee233fcc609))
+
+
+### Code Refactors
+
+* **button:** :recycle: change the buttonChildren conditions ([93daabb](https://github.com/timelessco/renderlesskit-react-tailwind/commit/93daabbc245aad3e28e09342cec4ff4a04fb4a24))
+* **button:** ♻️  fix disabled button with css ([8b3014b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/8b3014b820448c84fa46e5b0c6914206d0a1614f))
+* **button:** ♻️  split button components & add announcer ([d5a449e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/d5a449e37e3884545eaba8029c7d9f4b8c6c9e6c))
+* **lodash:** ♻️  use lodash-es for tree shaking ([38d1d75](https://github.com/timelessco/renderlesskit-react-tailwind/commit/38d1d7568d57d5293d4cbe4aecd235a24e7777d6))
+* **tailwind:** ♻️  fix tailwind transform bug ([e5846f7](https://github.com/timelessco/renderlesskit-react-tailwind/commit/e5846f704b6b00f58e6d7c602f0bc420db2b9090))
+* :recycle: migrate from newButton to button ([f9220e1](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f9220e18ed2662c29abc1f508a205c83cbb3e31b))
+* improve checkbox, switch's form integration & better prop naming ([#111](https://github.com/timelessco/renderlesskit-react-tailwind/issues/111)) ([b54b11c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b54b11c79aa00098473206b4d2e3cdb07231b024))
+
+
+### Test Updates
+
+* **badge:** :camera_flash: update snapshot ([59e6033](https://github.com/timelessco/renderlesskit-react-tailwind/commit/59e60338fb0ee162a37416afb25fec384b2fc751))
+* added test for input ([#113](https://github.com/timelessco/renderlesskit-react-tailwind/issues/113)) ([db591f1](https://github.com/timelessco/renderlesskit-react-tailwind/commit/db591f15e529b4b9ad1c91517da3caf44669d38d))
+* added tests for new button ([2ab5561](https://github.com/timelessco/renderlesskit-react-tailwind/commit/2ab55615f47032fcf978dde070f5102c0542d777))
+* form field test improvements ([#112](https://github.com/timelessco/renderlesskit-react-tailwind/issues/112)) ([4574e1c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/4574e1cd24dd336ff632ef2e770272f2540e1486))
+* update snapshots ([f64fb21](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f64fb2103d5022ff7fd69659c86539d3220aa635))
+* **button:** :white_check_mark: add button tests back ([f7ea32d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f7ea32d72e6b68126c025807d62d23ec16608c85))
+* **esm:** ✅  fix esm config for lodash ([e04ee54](https://github.com/timelessco/renderlesskit-react-tailwind/commit/e04ee5440fbe8b0dd6221fd38113887e244a93a6))
+
 ### [0.0.1-alpha.8](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.7...v0.0.1-alpha.8) (2021-03-31)
 
 ### Reverts
