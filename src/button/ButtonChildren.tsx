@@ -56,9 +56,9 @@ export interface ChildrenWithPrefixSuffixProps
 const ChildrenWithPrefixSuffix: React.FC<ChildrenWithPrefixSuffixProps> =
   props => {
     const { suffix, prefix, children, size, loading, spinner } = props;
-    const theme = useTheme();
-    const suffixStyles = cx(theme.button.suffix.size[size]);
-    const prefixStyles = cx(theme.button.prefix.size[size]);
+    const button = useTheme("button");
+    const suffixStyles = cx(button.suffix.size[size]);
+    const prefixStyles = cx(button.prefix.size[size]);
 
     return (
       <>
