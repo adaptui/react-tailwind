@@ -75,21 +75,20 @@ export const Button = forwardRefWithAs<
   } = props;
   const _disabled = disabled || loading;
 
-  const button = useTheme("button") as Renderlesskit.GetThemeValue<"button">;
+  const button = useTheme("button");
   const baseStyles = cx(
     button.base,
     !iconOnly ? button.size[size] : button.iconOnly.size[size],
     button.variant[variant],
-    _disabled ? "pointer-events-none" : "pointer-events-auto",
     className,
   );
 
   const prevLoading = usePrevious(loading);
 
   React.useEffect(() => {
-    if (loading) announce("Started loading...");
+    if (loading) announce("Started loading");
 
-    if (!loading && prevLoading) announce("Stopped loading...");
+    if (!loading && prevLoading) announce("Stopped loading");
   }, [loading, prevLoading]);
 
   return (
