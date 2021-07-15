@@ -10,14 +10,12 @@ export interface ButtonSpinnerProps
 
 export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const { spinner, iconOnly, size } = props;
-  const theme = useTheme();
+  const button = useTheme("button");
 
   if (spinner) return <>{spinner}</>;
 
   const spinnerStyles = cx(
-    !iconOnly
-      ? theme.button.spinner.size[size]
-      : theme.button.spinner.iconOnly.size[size],
+    !iconOnly ? button.spinner.size[size] : button.spinner.iconOnly.size[size],
   );
 
   return <Spinner className={spinnerStyles} size="em" />;
