@@ -1,3 +1,15 @@
+### [0.0.1-alpha.13](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.8...v0.0.1-alpha.13) (2021-07-16)
+
+
+### Bug Fixes
+
+* **button:** 🐛  fix button transform & use lesser lodash fn ([db79d5a](https://github.com/timelessco/renderlesskit-react-tailwind/commit/db79d5a9776a5041f850daecbafb28a52358c590))
+* **checkbox:** 🏷️  type issue with ts ignore temporarily ([8d19b66](https://github.com/timelessco/renderlesskit-react-tailwind/commit/8d19b66a4ca7cb31db1da0fd380183f0c85498b0))
+
+### Build Updates
+
+* **prettier:** 🔧  ignore changelog from formating ([a314c0e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/a314c0e6f8224cac48aeb613fb676b70646fe64d))
+
 ### [0.0.1-alpha.12](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.11...v0.0.1-alpha.12) (2021-07-15)
 
 
