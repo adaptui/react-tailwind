@@ -22,6 +22,7 @@ module.exports = function (api) {
 
   const plugins = [
     ["@babel/plugin-proposal-class-properties"],
+    ["lodash"],
     isBuild
       ? [
           "babel-plugin-jsx-remove-data-test-id",

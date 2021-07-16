@@ -146,3 +146,7 @@ export const withIconA11y = (icon: React.ReactElement, props?: Dict) => {
       })
     : icon;
 };
+
+export function isUndefined(value: any): value is undefined {
+  return typeof value === "undefined" || value === undefined;
+}

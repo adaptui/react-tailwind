@@ -20,6 +20,15 @@ const utilities = plugin(function ({ addUtilities }) {
     ".touch-action-none": {
       "touch-action": "none",
     },
+    ".button-transform": {
+      transform: "translateY(0px)",
+    },
+    ".button-transform:hover": {
+      transform: "translateY(-1px)",
+    },
+    ".button-transform:active": {
+      transform: "translateY(0px)",
+    },
   };
 
   addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
