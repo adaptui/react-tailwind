@@ -1,3 +1,10 @@
+### [0.0.1-alpha.14](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.13...v0.0.1-alpha.14) (2021-07-19)
+
+
+### Code Refactors
+
+* **button:** ♻️  update button rendering issue ([07d3c72](https://github.com/timelessco/renderlesskit-react-tailwind/commit/07d3c72d8d25a3cbdda3de3e0451fc35c2e1b59f))
+
 ### [0.0.1-alpha.13](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.8...v0.0.1-alpha.13) (2021-07-16)
 
 
