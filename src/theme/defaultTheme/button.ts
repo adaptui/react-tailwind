@@ -1,11 +1,5 @@
 export const button = {
-  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:w-auto lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed  lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:will-change-transform lib:transition-all",
-  size: {
-    sm: "lib:h-[26px] lib:min-w-[26px] lib:px-2 lib:rounded-lg lib:text-cxs pb-px",
-    md: "lib:h-[30px] lib:min-w-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm",
-    lg: "lib:h-9 lib:min-w-9 lib:px-3 lib:rounded-[10px] lib:text-sm",
-    xl: "lib:h-11 lib:min-w-11 lib:px-4 lib:rounded-xl lib:text-base",
-  },
+  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:w-auto lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:will-change-transform lib:transition-all",
   variant: {
     solid:
       "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 disabled:lib:bg-gray-100 active:lib:bg-gray-800 focus-visible:lib:ring-gray-300",
@@ -16,12 +10,18 @@ export const button = {
     ghost:
       "lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-gray-200",
   },
-  iconOnly: {
-    size: {
-      sm: "lib:text-base lib:h-[26px] lib:w-[26px] lib:rounded-lg",
-      md: "lib:text-base lib:h-[30px] lib:w-[30px] lib:rounded-lg",
-      lg: "lib:text-base lib:h-9 lib:w-9 lib:rounded-[10px]",
-      xl: "lib:text-xl lib:h-11 lib:w-11 lib:rounded-xl",
+  size: {
+    default: {
+      sm: "lib:h-[26px] lib:px-2 lib:rounded-lg lib:text-cxs lib:min-w-[26px] pb-px",
+      md: "lib:h-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm lib:min-w-[30px]",
+      lg: "lib:h-9 lib:px-3 lib:rounded-[10px] lib:text-sm lib:min-w-9",
+      xl: "lib:h-11 lib:px-4 lib:rounded-xl lib:text-base lib:min-w-11",
+    },
+    iconOnly: {
+      sm: "lib:h-[26px] lib:rounded-lg lib:text-base lib:w-[26px]",
+      md: "lib:h-[30px] lib:rounded-lg lib:text-base lib:w-[30px]",
+      lg: "lib:h-9 lib:rounded-[10px] lib:text-base lib:w-9",
+      xl: "lib:h-11 lib:rounded-xl lib:text-xl lib:w-11",
     },
   },
   suffix: {

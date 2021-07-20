@@ -17,7 +17,7 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
    *
    * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"button", "size">;
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size", "default">;
 
   /**
    * How the button should look?
@@ -78,7 +78,7 @@ export const Button = forwardRefWithAs<
   const button = useTheme("button");
   const baseStyles = cx(
     button.base,
-    !iconOnly ? button.size[size] : button.iconOnly.size[size],
+    !iconOnly ? button.size.default[size] : button.size.iconOnly[size],
     button.variant[variant],
     className,
   );
