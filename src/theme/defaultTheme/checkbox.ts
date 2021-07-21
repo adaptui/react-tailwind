@@ -19,7 +19,7 @@ const field = {
 };
 
 export const checkbox = {
-  base: "lib:group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer",
+  base: "group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer",
   disabled: "lib:cursor-not-allowed",
   input: "peer lib:sr-only",
   icon: {
@@ -31,18 +31,27 @@ export const checkbox = {
     },
     state: {
       disabled: "lib:text-gray-400 lib:bg-gray-200 lib:cursor-not-allowed",
-      checked: "lib:text-white",
-      unchecked: "lib:border-[1.5px] lib:border-solid",
-      indeterminate: "lib:text-white",
-      checked_valid: "lib:bg-gray-800 group-hover:lib:bg-gray-700",
-      unchecked_valid: "lib:border-gray-400 group-hover:lib:border-gray-500",
-      indeterminate_valid: "lib:bg-gray-800",
-      checked_invalid:
-        "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500 lib:ring-red-300",
-      unchecked_invalid:
-        "lib:border-red-600 group-hover:lib:border-red-500 lib:ring-red-300",
-      indeterminate_invalid:
-        "lib:bg-red-600 lib:text-white group-hover:lib:bg-red-500 lib:ring-red-300",
+      default: {
+        checked: "lib:text-white lib:bg-gray-800",
+        unchecked: "lib:border-[1.5px] lib:border-solid lib:border-gray-400",
+        indeterminate: "lib:text-white lib:bg-gray-800",
+      },
+      invalid: {
+        checked: "lib:bg-red-600 lib:text-white lib:ring-red-300",
+        unchecked:
+          "lib:border-[1.5px] lib:border-solid lib:border-red-600 lib:ring-red-300",
+        indeterminate: "lib:bg-red-600 lib:text-white lib:ring-red-300",
+      },
+      hover: {
+        checked: "group-hover:lib:bg-gray-700",
+        unchecked: "group-hover:lib:border-gray-500",
+        indeterminate: "group-hover:lib:bg-gray-700",
+      },
+      hover_invalid: {
+        checked: "group-hover:lib:bg-red-500",
+        unchecked: "group-hover:lib:border-red-500",
+        indeterminate: "group-hover:lib:bg-red-500",
+      },
     },
   },
   field,
