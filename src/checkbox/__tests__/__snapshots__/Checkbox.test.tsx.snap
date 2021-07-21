@@ -3,7 +3,7 @@
 exports[`<Checkbox /> should render correctly 1`] = `
 <DocumentFragment>
   <label
-    class="lib:group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer"
+    class="group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer"
   >
     <input
       aria-checked="false"
