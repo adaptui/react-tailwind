@@ -11,8 +11,9 @@ import { SwitchText, SwitchIcon, SwitchLabel, SwitchInput } from "./";
 type Size = keyof Renderlesskit.GetThemeValue<
   "switch",
   "icon",
-  "wrapper"
->["size"];
+  "wrapper",
+  "size"
+>;
 
 export type SwitchContext = {
   state: CommonSwitchProps & {

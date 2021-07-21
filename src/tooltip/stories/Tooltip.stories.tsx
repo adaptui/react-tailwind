@@ -63,7 +63,7 @@ export const WithIcon = base({
 
 export const WithArrow = base({
   children: (
-    <Button variant="secondary" className="bg-red">
+    <Button variant="outline" className="bg-red">
       Tooltip
     </Button>
   ),
