@@ -8,7 +8,7 @@ export const button = {
     outline:
       "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200 hover:lib:ring-gray-300 hover:shadow-sm active:lib:bg-gray-100 active:lib:ring-gray-300 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 disabled:lib:ring-gray-200",
     ghost:
-      "lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 ",
+      "lib:bg-white lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 ",
   },
   size: {
     default: {
