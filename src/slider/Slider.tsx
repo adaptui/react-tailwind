@@ -23,29 +23,36 @@ const [SliderStateProvider, useSliderContext] = createContext<
   strict: false,
 });
 
-const [SliderPropsContext, useSliderPropsContext] = createContext<
-  Pick<SliderProps, "orientation" | "size" | "origin" | "showMinMax"> & {
-    thumbSize: React.MutableRefObject<{
-      width: number;
-      height: number;
-    }>;
-  } & { padding: number }
->({
-  name: "SliderProps",
-  strict: false,
-});
+type SliderContextType = Pick<
+  SliderProps,
+  "orientation" | "size" | "origin" | "showMinMax"
+> & {
+  thumbSize: React.MutableRefObject<{
+    width: number;
+    height: number;
+  }>;
+  padding: number;
+};
+
+const [SliderPropsContext, useSliderPropsContext] =
+  createContext<SliderContextType>({
+    name: "SliderProps",
+    strict: false,
+  });
 
 export { useSliderContext, useSliderPropsContext };
 
-export type SliderProps = Omit<BoxProps, "onChange"> & {
-  isReadOnly?: boolean;
-} & SliderInitialState & {
+export type SliderProps = SliderInitialState &
+  Omit<BoxProps, "onChange"> & {
+    isReadOnly?: boolean;
     origin?: number;
     thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
     size?: keyof Renderlesskit.GetThemeValue<
       "slider",
-      "common"
-    >["thumb"]["size"];
+      "common",
+      "thumb",
+      "size"
+    >;
     showMinMax?: boolean;
   };
 
