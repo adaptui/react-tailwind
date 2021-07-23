@@ -58,6 +58,27 @@ const base = storyTemplate<RadioGroupProps>(CompleteRadio, { size: "md" });
 export const Base = base({});
 export const DefaultState = base({ defaultState: "orange" });
 
+export const WithDescription = () => {
+  return (
+    <RadioGroup
+      aria-label="numbers"
+      className="flex flex-col space-y-4"
+      loop
+      size="md"
+    >
+      <Radio value="one" description="Description for radio">
+        One
+      </Radio>
+      <Radio isInvalid value="two" description="Description for radio">
+        Two
+      </Radio>
+      <Radio disabled value="three" description="Description for radio">
+        Three
+      </Radio>
+    </RadioGroup>
+  );
+};
+
 export const Controlled = () => {
   const [state, setState] = React.useState("watermelon");
   return (

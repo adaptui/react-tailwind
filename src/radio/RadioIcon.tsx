@@ -10,13 +10,14 @@ import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
 import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
+import { CommonFieldProps } from "../form-field";
 
 export type RadioIconProps = BoxProps &
   Pick<RadioProps, "value" | "disabled"> & {
     checkedIcon?: React.ReactNode;
     uncheckedIcon?: React.ReactNode;
     disabledIcon?: React.ReactNode;
-  };
+  } & Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 export const RadioIcon = forwardRefWithAs<
   Partial<RadioIconProps>,
@@ -35,15 +36,32 @@ export const RadioIcon = forwardRefWithAs<
   const { state } = useRadioStateContext();
   const stateProp = state === value;
 
+  const invalid = !!(props.isInvalid || state?.isInvalid);
+  const isDisabled = props.isDisabled || !!state?.disabled;
+  const isChecked = stateProp === true;
+  const isUnchecked = stateProp === false || stateProp === undefined;
+
+  const compoundStyles = (key: keyof typeof theme.radio.icon.state.default) => {
+    return cx(
+      invalid
+        ? cx(
+            theme.radio.icon.state.invalid[key],
+            theme.radio.icon.state.hover_invalid[key],
+          )
+        : cx(
+            theme.radio.icon.state.default[key],
+            theme.radio.icon.state.hover[key],
+          ),
+    );
+  };
+
   const theme = useTheme();
   const radioIconStyles = cx(
     theme.radio.icon.base,
     theme.radio.icon.size[size],
-    disabled
-      ? theme.radio.icon.state.disabled
-      : stateProp
-      ? theme.radio.icon.state.checked
-      : theme.radio.icon.state.unchecked,
+    isDisabled && theme.radio.icon.state.disabled,
+    isChecked && compoundStyles("checked"),
+    isUnchecked && compoundStyles("unchecked"),
     className,
   );
 

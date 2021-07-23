@@ -13,7 +13,7 @@ export type RadioState = CompositeState & {
   /**
    * The `value` attribute of the current checked radio.
    */
-  state: StateType;
+  state: StateType & { disabled?: boolean; isInvalid?: boolean };
 };
 
 export type RadioActions = CompositeActions & {

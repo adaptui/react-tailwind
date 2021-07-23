@@ -14,7 +14,7 @@ export const CheckboxDescription = forwardRefWithAs<
   "span"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { size = "md" } = useCheckboxContext();
+  const { size = "md" } = {};
 
   const theme = useTheme();
   const checkboxDescriptionStyles = cx(

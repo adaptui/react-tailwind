@@ -8,8 +8,12 @@ import { RadioInitialState } from "./RadioState";
 import { createContext, runIfFn } from "../utils";
 import { RadioGroupProps, useRadioGroup } from "./RadioGroup";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { CheckboxDescription } from "../checkbox";
+import { useTheme } from "../theme";
+import { CommonFieldProps } from "../form-field";
 
-export type RadioStateContext = RadioInitialState;
+export type RadioStateContext = RadioInitialState &
+  Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 const [RadioStateProvider, useRadioStateContext] =
   createContext<RadioStateContext>({
@@ -42,14 +46,30 @@ export type RadioInitialProps = {
   checkedIcon?: React.ReactNode;
   uncheckedIcon?: React.ReactNode;
   disabledIcon?: React.ReactNode;
+  description?: string;
 };
 
-export type RadioProps = BoxProps & RadioInitialProps & RadioRenderProps;
+export type RadioProps = BoxProps &
+  RadioInitialProps &
+  RadioRenderProps &
+  Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
   (props, ref) => {
-    const { className, style, children, ...rest } = props;
+    const {
+      className,
+      style,
+      description,
+      children,
+      isDisabled,
+      isInvalid,
+      isRequired,
+      ...rest
+    } = props;
     const { size, ...state } = useRadioGroup();
+
+    const radio = useTheme("radio");
+    const radioTextWrapperStyles = radio.field.base;
 
     return (
       <RadioStateProvider value={state}>
@@ -58,9 +78,24 @@ export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
             runIfFn(children, { size, ...rest, ...state })
           ) : (
             <RadioLabel ref={ref} className={className} style={style}>
-              <RadioInput />
-              <RadioIcon />
-              {children}
+              <RadioInput
+                isDisabled={isDisabled}
+                isRequired={isRequired}
+                isInvalid={isInvalid}
+              />
+              <RadioIcon
+                isDisabled={isDisabled}
+                isRequired={isRequired}
+                isInvalid={isInvalid}
+              />
+              {description ? (
+                <div className={radioTextWrapperStyles}>
+                  <span>{children}</span>
+                  <CheckboxDescription>{description}</CheckboxDescription>
+                </div>
+              ) : (
+                <span>{children}</span>
+              )}
             </RadioLabel>
           )}
         </RadioPropsProvider>

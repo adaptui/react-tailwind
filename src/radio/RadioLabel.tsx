@@ -20,8 +20,8 @@ export const RadioLabel = forwardRefWithAs<
   const theme = useTheme();
   const radioStyles = cx(
     theme.radio.base,
-    theme.radio.label.base,
-    theme.radio.label.size[size],
+    theme.radio.field.label.base,
+    theme.radio.field.label.size[size],
     disabled ? theme.radio.disabled : "",
     className,
   );
