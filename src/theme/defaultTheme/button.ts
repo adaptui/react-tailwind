@@ -24,14 +24,6 @@ export const button = {
       xl: "lib:h-11 lib:rounded-xl lib:text-xl lib:w-11",
     },
   },
-  suffix: {
-    size: {
-      sm: "lib:text-xs",
-      md: "lib:text-xs",
-      lg: "lib:text-xs",
-      xl: "lib:text-base",
-    },
-  },
   prefix: {
     size: {
       sm: "lib:text-xs",
@@ -40,12 +32,22 @@ export const button = {
       xl: "lib:text-base",
     },
   },
-  spinner: {
+  suffix: {
     size: {
       sm: "lib:text-xs",
       md: "lib:text-xs",
       lg: "lib:text-xs",
       xl: "lib:text-base",
+    },
+  },
+  spinner: {
+    default: {
+      size: {
+        sm: "lib:text-xs",
+        md: "lib:text-xs",
+        lg: "lib:text-xs",
+        xl: "lib:text-base",
+      },
     },
     iconOnly: {
       size: {

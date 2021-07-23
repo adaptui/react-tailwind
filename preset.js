@@ -19,6 +19,7 @@ const renderlesskitConfig = {
         cxs: ["13px", "100%"],
         sm: ["14px", "115%"],
         base: ["16px", "115%"],
+        "2base": ["32px", "115%"],
       },
       inset: {
         unset: "unset",
