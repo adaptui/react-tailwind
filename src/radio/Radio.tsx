@@ -8,10 +8,10 @@ import { RadioInitialState } from "./RadioState";
 import { createContext, runIfFn } from "../utils";
 import { RadioGroupProps, useRadioGroup } from "./RadioGroup";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
-import { CheckboxDescription } from "../checkbox";
 import { useTheme } from "../theme";
 import { CommonFieldProps } from "../form-field";
 import { RadioText } from "./RadioText";
+import { RadioDescription } from "./RadioDescription";
 
 type RadioStateContext = RadioInitialState &
   Omit<CommonFieldProps, "id" | "isReadOnly">;
@@ -92,7 +92,7 @@ export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
               {description ? (
                 <div className={radioTextWrapperStyles}>
                   <RadioText>{children}</RadioText>
-                  <CheckboxDescription>{description}</CheckboxDescription>
+                  <RadioDescription>{description}</RadioDescription>
                 </div>
               ) : (
                 <RadioText>{children}</RadioText>
