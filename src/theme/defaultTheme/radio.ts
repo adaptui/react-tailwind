@@ -8,8 +8,8 @@ const field = {
       lg: "lib:text-sm",
     },
   },
-  label: {
-    base: "lib:text-gray-600 lib:select-none",
+  text: {
+    base: "lib:text-gray-700 lib:select-none lib:font-medium",
     size: {
       sm: "lib:text-xs",
       md: "lib:text-sm lib:leading-4",

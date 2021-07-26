@@ -13,11 +13,12 @@ import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
 import { CommonFieldProps } from "../form-field";
 
 export type RadioIconProps = BoxProps &
-  Pick<RadioProps, "value" | "disabled"> & {
+  Pick<RadioProps, "value" | "disabled"> &
+  Omit<CommonFieldProps, "id" | "isReadOnly"> & {
     checkedIcon?: React.ReactNode;
     uncheckedIcon?: React.ReactNode;
     disabledIcon?: React.ReactNode;
-  } & Omit<CommonFieldProps, "id" | "isReadOnly">;
+  };
 
 export const RadioIcon = forwardRefWithAs<
   Partial<RadioIconProps>,
@@ -33,17 +34,17 @@ export const RadioIcon = forwardRefWithAs<
     ...rest
   } = props;
   const { value, disabled, size = "md" } = useRadioProps();
-  const { state } = useRadioStateContext();
+  const { state, isInvalid, isDisabled } = useRadioStateContext();
   const stateProp = state === value;
 
-  const invalid = !!(props.isInvalid || state?.isInvalid);
-  const isDisabled = props.isDisabled || !!state?.disabled;
+  const _invalid = !!(props.isInvalid || isInvalid);
+  const _disabled = disabled || props.isDisabled || isDisabled;
   const isChecked = stateProp === true;
   const isUnchecked = stateProp === false || stateProp === undefined;
 
   const compoundStyles = (key: keyof typeof theme.radio.icon.state.default) => {
     return cx(
-      invalid
+      _invalid
         ? cx(
             theme.radio.icon.state.invalid[key],
             theme.radio.icon.state.hover_invalid[key],
@@ -59,7 +60,7 @@ export const RadioIcon = forwardRefWithAs<
   const radioIconStyles = cx(
     theme.radio.icon.base,
     theme.radio.icon.size[size],
-    isDisabled && theme.radio.icon.state.disabled,
+    _disabled && theme.radio.icon.state.disabled,
     isChecked && compoundStyles("checked"),
     isUnchecked && compoundStyles("unchecked"),
     className,
@@ -81,7 +82,7 @@ export const RadioIcon = forwardRefWithAs<
     >
       {children
         ? children
-        : disabled
+        : _disabled
         ? iconMap.disabled
         : stateProp
         ? iconMap.checked

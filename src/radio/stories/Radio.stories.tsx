@@ -17,6 +17,8 @@ import {
   createUnionControl,
 } from "../../../.storybook/storybookUtils";
 import { CheckCircleIcon } from "../../icons";
+import { RadioDescription } from "../RadioDescription";
+import { RadioText } from "../RadioText";
 
 export default {
   title: "Forms/Radio",
@@ -60,22 +62,70 @@ export const DefaultState = base({ defaultState: "orange" });
 
 export const WithDescription = () => {
   return (
-    <RadioGroup
-      aria-label="numbers"
-      className="flex flex-col space-y-4"
-      loop
-      size="md"
-    >
-      <Radio value="one" description="Description for radio">
-        One
-      </Radio>
-      <Radio isInvalid value="two" description="Description for radio">
-        Two
-      </Radio>
-      <Radio disabled value="three" description="Description for radio">
-        Three
-      </Radio>
-    </RadioGroup>
+    <div>
+      <RadioGroup className="flex flex-col space-y-6">
+        <Radio
+          size="sm"
+          value="1"
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Radio state
+        </Radio>
+        <Radio
+          size="md"
+          value="1.1"
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Radio state
+        </Radio>
+        <Radio
+          size="lg"
+          value="1.2"
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Radio state
+        </Radio>
+        <Radio
+          size="lg"
+          value="2"
+          isInvalid
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Invalid state
+        </Radio>
+        <Radio
+          size="lg"
+          value="3"
+          isDisabled
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Disabled state
+        </Radio>
+        <Radio value="4" size="lg">
+          <RadioLabel>
+            <RadioInput />
+            <RadioIcon />
+            <div>
+              <RadioText>Custom checkbox</RadioText>
+              <RadioDescription>
+                Used when the checkbox is selected and will use its value for
+                the form submission.
+              </RadioDescription>
+            </div>
+          </RadioLabel>
+        </Radio>
+      </RadioGroup>
+    </div>
   );
 };
 
