@@ -9,16 +9,13 @@ import {
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 
-export type RadioGroupContext = RadioStateReturn &
-  Pick<RadioGroupProps, "size">;
+type RadioGroupContext = RadioStateReturn & Pick<RadioGroupProps, "size">;
 
 const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
   errorMessage: "Radio must be used within RadioProvider",
   name: "RadioGroup",
   strict: false,
 });
-
-export { useRadioGroup };
 
 export type RadioGroupProps = RadioInitialState & {
   size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
@@ -50,3 +47,5 @@ export const RadioGroup = forwardRefWithAs<
 });
 
 RadioGroup.displayName = "RadioGroup";
+
+export { useRadioGroup };

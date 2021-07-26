@@ -13,7 +13,7 @@ import { useTheme } from "../theme";
 import { CommonFieldProps } from "../form-field";
 import { RadioText } from "./RadioText";
 
-export type RadioStateContext = RadioInitialState &
+type RadioStateContext = RadioInitialState &
   Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 const [RadioStateProvider, useRadioStateContext] =
@@ -23,18 +23,13 @@ const [RadioStateProvider, useRadioStateContext] =
     strict: false,
   });
 
-export { useRadioStateContext };
-
-export type RadioPropsContext = RadioInitialProps &
-  Pick<RadioGroupProps, "size">;
+type RadioPropsContext = RadioInitialProps & Pick<RadioGroupProps, "size">;
 
 const [RadioPropsProvider, useRadioProps] = createContext<RadioPropsContext>({
   errorMessage: "RadioProps must be used within RadioPropsProvider",
   name: "RadioProps",
   strict: false,
 });
-
-export { useRadioProps };
 
 type RadioRenderProps = RenderProp<RadioStateContext & RadioPropsContext>;
 
@@ -111,3 +106,5 @@ export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
 );
 
 Radio.displayName = "Radio";
+
+export { useRadioStateContext, useRadioProps };
