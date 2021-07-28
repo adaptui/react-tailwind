@@ -9,8 +9,8 @@ import {
 import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
 import { CommonFieldProps } from "../form-field";
+import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
 
 export type RadioIconProps = BoxProps &
   Pick<RadioProps, "value" | "disabled"> &

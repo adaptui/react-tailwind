@@ -20,12 +20,16 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
   const theme = useTheme();
   const radioStyles = cx(theme.radio.input, className);
 
+  const isTrulyDisabled = isDisabled || props.isDisabled || props.disabled;
+  const isTrulyRequired = isRequired || props.isRequired || props.required;
+  // prettier-ignore
+  const isTrulyInvalid = isInvalid || props.isInvalid || !!props["aria-invalid"];
+
   const { id, ...fieldInputProps } = useFormControl({
     ...rest,
-    isDisabled: isDisabled || props.isDisabled || props.disabled,
-    isInvalid:
-      isInvalid || props.isInvalid || (!!props["aria-invalid"] as boolean),
-    isRequired: isRequired || props.isRequired || props.required,
+    isDisabled: isTrulyDisabled,
+    isInvalid: isTrulyInvalid,
+    isRequired: isTrulyRequired,
   });
 
   return (

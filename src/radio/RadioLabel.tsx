@@ -15,17 +15,11 @@ export const RadioLabel = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { size = "md", disabled } = useRadioProps();
+  const { disabled } = useRadioProps();
   const { isDisabled } = useRadioStateContext();
 
   const theme = useTheme();
-  // const radioStyles = cx(
-  //   theme.radio.base,
-  //   theme.radio.field.text.base,
-  //   theme.radio.field.text.size[size],
-  //   disabled ? theme.radio.disabled : "",
-  //   className,
-  // );
+
   const radioLabelStyles = cx(
     theme.radio.base,
     disabled || isDisabled ? theme.radio.disabled : "",
