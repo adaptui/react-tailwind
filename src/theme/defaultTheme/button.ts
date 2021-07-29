@@ -2,21 +2,22 @@ export const button = {
   base: "lib:inline-flex lib:items-center lib:justify-center lib:relative lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:transition-all lib:will-change-transform disabled:cursor-not-allowed lib:outline-none lib:appearance-none lib:select-none lib:whitespace-nowrap lib:align-middle",
   variant: {
     default: {
-      solid: "lib:bg-gray-800 lib:text-white",
-      subtle: "lib:bg-gray-100 lib:text-gray-600",
-      outline: "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200",
-      ghost: "lib:bg-white lib:text-gray-600",
+      solid: "lib:bg-gray-800 lib:text-white lib:border lib:border-transparent",
+      subtle:
+        "lib:bg-gray-100 lib:text-gray-600 lib:border lib:border-transparent",
+      outline: "lib:bg-white lib:text-gray-600 lib:border lib:border-gray-200",
+      ghost: "lib:bg-white lib:text-gray-600 lib:border lib:border-transparent",
     },
     hover: {
       solid: "hover:lib:bg-gray-700",
       subtle: "hover:lib:bg-gray-200",
-      outline: "hover:lib:ring-gray-300 hover:shadow-sm",
+      outline: "hover:lib:border-gray-300 hover:shadow-sm",
       ghost: "hover:lib:bg-gray-100",
     },
     active: {
       solid: "active:lib:bg-gray-800",
       subtle: "active:lib:bg-gray-100",
-      outline: "active:lib:bg-gray-100 active:lib:ring-gray-300",
+      outline: "active:lib:bg-gray-100 active:lib:border-gray-300",
       ghost: "active:lib:bg-gray-200",
     },
     focus: {
@@ -28,7 +29,7 @@ export const button = {
     disabled: {
       solid: "disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
       subtle: "disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
-      outline: "disabled:lib:text-gray-400 disabled:lib:ring-gray-200",
+      outline: "disabled:lib:text-gray-400 disabled:lib:border-gray-200",
       ghost: "disabled:lib:text-gray-400",
     },
   },
