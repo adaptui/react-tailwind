@@ -24,7 +24,7 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
    *
    * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant">;
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
 
   /**
    * If added, the button will only show an icon ignoring other childrens.
@@ -79,7 +79,11 @@ export const Button = forwardRefWithAs<
   const baseStyles = cx(
     button.base,
     !iconOnly ? button.size.default[size] : button.size.iconOnly[size],
-    button.variant[variant],
+    button.variant.default[variant],
+    button.variant.hover[variant],
+    button.variant.active[variant],
+    button.variant.focus[variant],
+    button.variant.disabled[variant],
     className,
   );
 

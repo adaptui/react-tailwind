@@ -1,14 +1,40 @@
 export const button = {
-  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:transition-all lib:will-change-transform disabled:cursor-not-allowed lib:outline-none lib:appearance-none lib:select-none lib:whitespace-nowrap lib:align-middle",
+  base: "lib:inline-flex lib:items-center lib:justify-center lib:relative lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:transition-all lib:will-change-transform disabled:cursor-not-allowed lib:outline-none lib:appearance-none lib:select-none lib:whitespace-nowrap lib:align-middle",
   variant: {
-    solid:
-      "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 active:lib:bg-gray-800 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300 disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
-    subtle:
-      "lib:bg-gray-100 lib:text-gray-600 hover:lib:bg-gray-200 active:lib:bg-gray-100 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300 disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
-    outline:
-      "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200 hover:lib:ring-gray-300 hover:shadow-sm active:lib:bg-gray-100 active:lib:ring-gray-300 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 disabled:lib:ring-gray-200",
-    ghost:
-      "lib:bg-white lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 ",
+    default: {
+      solid: "lib:bg-gray-800 lib:text-white",
+      subtle: "lib:bg-gray-100 lib:text-gray-600",
+      outline: "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200",
+      ghost: "lib:bg-white lib:text-gray-600",
+    },
+    hover: {
+      solid: "hover:lib:bg-gray-700",
+      subtle: "hover:lib:bg-gray-200",
+      outline: "hover:lib:ring-gray-300 hover:shadow-sm",
+      ghost: "hover:lib:bg-gray-100",
+    },
+    active: {
+      solid:
+        "active:lib:bg-gray-800 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300 disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
+      subtle:
+        "active:lib:bg-gray-100 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300 disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
+      outline:
+        "active:lib:bg-gray-100 active:lib:ring-gray-300 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 disabled:lib:ring-gray-200",
+      ghost:
+        "active:lib:bg-gray-200 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400",
+    },
+    focus: {
+      solid: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300",
+      subtle: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300",
+      outline: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200",
+      ghost: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200",
+    },
+    disabled: {
+      solid: "disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
+      subtle: "disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
+      outline: "disabled:lib:text-gray-400 disabled:lib:ring-gray-200",
+      ghost: "disabled:lib:text-gray-400",
+    },
   },
   size: {
     default: {
