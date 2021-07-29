@@ -14,14 +14,10 @@ export const button = {
       ghost: "hover:lib:bg-gray-100",
     },
     active: {
-      solid:
-        "active:lib:bg-gray-800 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300 disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
-      subtle:
-        "active:lib:bg-gray-100 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300 disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
-      outline:
-        "active:lib:bg-gray-100 active:lib:ring-gray-300 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400 disabled:lib:ring-gray-200",
-      ghost:
-        "active:lib:bg-gray-200 focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200 disabled:lib:text-gray-400",
+      solid: "active:lib:bg-gray-800",
+      subtle: "active:lib:bg-gray-100",
+      outline: "active:lib:bg-gray-100 active:lib:ring-gray-300",
+      ghost: "active:lib:bg-gray-200",
     },
     focus: {
       solid: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300",
