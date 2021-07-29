@@ -18,13 +18,15 @@ type Render = (
 
 export const render: Render = (children, options = {}) => {
   const result = RtlRender(
-    <RenderlesskitProvider theme={theme}>{children}</RenderlesskitProvider>,
+    <RenderlesskitProvider extend={theme}>{children}</RenderlesskitProvider>,
     options,
   );
 
   const _rerender = (rerenderUi: any) => {
     result.rerender(
-      <RenderlesskitProvider theme={theme}>{rerenderUi}</RenderlesskitProvider>,
+      <RenderlesskitProvider extend={theme}>
+        {rerenderUi}
+      </RenderlesskitProvider>,
     );
   };
 

@@ -20,7 +20,7 @@ export const decorators = [
     document.body.classList.add("antialiased");
 
     return (
-      <RenderlesskitProvider theme={theme}>
+      <RenderlesskitProvider extend={theme}>
         <Story />
       </RenderlesskitProvider>
     );
