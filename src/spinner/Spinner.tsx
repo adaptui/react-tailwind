@@ -53,7 +53,7 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
         data-testid="testid-spinner"
         {...rest}
       >
-        {label && <div className={theme.spinner.aria}>{label}</div>}
+        {label && <div className={theme.spinner.label}>{label}</div>}
       </Box>
     );
   },
