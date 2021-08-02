@@ -5,6 +5,7 @@ import { button } from "./button";
 import { buttonGroup } from "./buttonGroup";
 import { calendar } from "./calendar";
 import { checkbox } from "./checkbox";
+import { checkboxNew } from "./checkboxNew";
 import { circularProgress } from "./circularProgress";
 import { datepicker } from "./datepicker";
 import { formField } from "./form-field";
@@ -31,6 +32,7 @@ const theme = {
   buttonGroup,
   calendar,
   checkbox,
+  checkboxNew,
   circularProgress,
   datepicker,
   formField,

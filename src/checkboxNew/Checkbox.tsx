@@ -23,18 +23,35 @@ export const Checkbox = forwardRefWithAs<
     defaultState,
     state: stateProp,
     onStateChange: onStateChangeProp,
+    // We should definitely discard `defaultChecked` because it is not a controlled prop
+    // Causes the below error:
+    // Input elements must be either controlled or uncontrolled.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    defaultChecked,
+    ...inputProps
   } = props;
 
-  // Decide on whether to discard `checked`, `defaultChecked`,
+  // Decide on what to do with `checked` `onChange`
+  // Because they work standalone withount the below `uncontrolled` state logic.
+  // <ReakitCheckbox checked={check} onChange={e => console.log(setCheck(e.target.checked))} />
   // Because we are handling them using `state` and `onStateChange`
   const [state, onStateChange] = useControllableState({
     defaultValue: defaultState,
     value: stateProp,
     onChange: onStateChangeProp,
   });
-  console.log("%c state", "color: #364cd9", state);
 
-  return <ReakitCheckbox ref={ref} state={state} setState={onStateChange} />;
+  return (
+    <label>
+      <ReakitCheckbox
+        ref={ref}
+        state={state}
+        setState={onStateChange}
+        className="lib:sr-only"
+        {...inputProps}
+      />
+    </label>
+  );
 });
 
 Checkbox.displayName = "Checkbox";
