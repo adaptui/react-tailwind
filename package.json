@@ -31,7 +31,7 @@
     "preset.js"
   ],
   "scripts": {
-    "postinstall": "concurrently \"husky install\" \"patch-package\"",
+    "postinstall": "concurrently \"husky install\" ",
     "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
     "test": "jest --config ./jest.config.ts --no-cache",
     "check-types": "yarn build:types && yarn tsd",
@@ -79,6 +79,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "tailwindcss": "patch:tailwindcss@^2.2.7#./patches/tailwindcss+2.2.7.patch"
   },
   "dependencies": {
     "@react-aria/live-announcer": "^3.0.0",
@@ -143,7 +146,6 @@
     "jest": "^27.0.6",
     "jest-axe": "^5.0.1",
     "lint-staged": "^11.1.1",
-    "patch-package": "^6.4.7",
     "pinst": "^2.1.6",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
@@ -159,7 +161,7 @@
     "sort-package-json": "^1.50.0",
     "storybook-addon-pseudo-states": "^1.0.0",
     "storybook-builder-vite": "^0.0.12",
-    "tailwindcss": "2.2.7",
+    "tailwindcss": "^2.2.7",
     "ts-node": "^10.1.0",
     "tsd": "^0.17.0",
     "typescript": "^4.3.5",
