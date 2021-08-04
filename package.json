@@ -31,15 +31,16 @@
     "preset.js"
   ],
   "scripts": {
-    "postinstall": "concurrently \"husky install\" ",
+    "postinstall": "concurrently \"husky install\" \"patch-package\"",
     "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
     "test": "jest --config ./jest.config.ts --no-cache",
-    "check-types": "yarn build:types && yarn tsd",
+    "check-types": "npm run build:types && tsd",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js",
     "lint:fix": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "format:package": "sort-package-json",
-    "build": "rimraf dist && concurrently \"yarn:build:*\"",
+    "prebuild": "rimraf dist",
+    "build": "concurrently \"npm:build:*\"",
     "build-storybook": "build-storybook",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx -d dist/esm --source-maps",
@@ -47,7 +48,9 @@
     "commit": "gacp",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
-    "release": "pinst --disable && release-it && pinst --enable"
+    "release": "release-it",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "commitlint": {
     "extends": [
@@ -56,13 +59,13 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,tx,tsx}": [
-      "yarn lint:fix"
+      "npm run lint:fix"
     ],
     "**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}": [
-      "yarn format"
+      "npm run format"
     ],
     "package.json": [
-      "yarn format:package"
+      "npm run format:package"
     ]
   },
   "browserslist": {
@@ -77,35 +80,27 @@
       "last 1 safari version"
     ]
   },
-  "resolutions": {
-    "tailwindcss": "patch:tailwindcss@^2.2.7#./patches/tailwindcss+2.2.7.patch"
-  },
   "dependencies": {
     "@react-aria/live-announcer": "^3.0.0",
     "@renderlesskit/react": "^0.3.3",
-    "lodash": "4.17.21",
+    "lodash": "^4.17.21",
     "reakit": "^1.3.8"
   },
   "devDependencies": {
-    "@babel/cli": "7.14.8",
-    "@babel/core": "^7.14.8",
-    "@babel/plugin-proposal-class-properties": "7.14.5",
-    "@babel/preset-env": "7.14.9",
-    "@babel/preset-react": "7.14.5",
-    "@babel/preset-typescript": "7.14.5",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "7.14.8",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/preset-env": "^7.14.9",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@release-it/conventional-changelog": "^3.0.1",
-    "@storybook/addon-a11y": "6.4.0-alpha.23",
-    "@storybook/addon-actions": "6.4.0-alpha.23",
-    "@storybook/addon-essentials": "6.4.0-alpha.23",
+    "@storybook/addon-a11y": "^6.4.0-alpha.23",
+    "@storybook/addon-actions": "^6.4.0-alpha.23",
+    "@storybook/addon-essentials": "^6.4.0-alpha.23",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addons": "^6.3.6",
-    "@storybook/api": "^6.3.6",
-    "@storybook/components": "^6.3.6",
-    "@storybook/core-events": "^6.3.6",
-    "@storybook/react": "6.4.0-alpha.23",
-    "@storybook/theming": "^6.3.6",
+    "@storybook/react": "^6.4.0-alpha.23",
     "@testing-library/dom": "^8.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
@@ -113,7 +108,6 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^26.0.24",
     "@types/jest-axe": "^3.5.2",
-    "@types/lodash": "^4.14.172",
     "@types/node": "^16.4.10",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
@@ -151,6 +145,7 @@
     "jest-axe": "^5.0.1",
     "jest-matcher-utils": "^27.0.6",
     "lint-staged": "^11.1.1",
+    "patch-package": "^6.4.7",
     "pinst": "^2.1.6",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
@@ -171,8 +166,7 @@
     "ts-node": "^10.1.0",
     "tsd": "^0.17.0",
     "typescript": "^4.3.5",
-    "vite": "^2.4.4",
-    "webpack": "^5.48.0"
+    "vite": "^2.4.4"
   },
   "peerDependencies": {
     "deepmerge": "4.x",

@@ -1,6 +1,0 @@
-# https://yarnpkg.com/getting-started/qa#:~:text=You%20can%20also,as%20binary%20content.
-/.yarn/releases/** binary
-/.yarn/plugins/** binary
-
-# https://gist.github.com/tobiasbueschel/9ffa7754ddeb2a046d22f9b4054965da
-yarn.lock -diff
