@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useMemo } from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -39,7 +39,7 @@ export const AvatarGroup = forwardRefWithAs<
     ...rest
   } = props;
   const theme = useTheme();
-  const context = React.useMemo(
+  const context = useMemo(
     () => ({ size, showBorder, borderColor }),
     [size, showBorder, borderColor],
   );

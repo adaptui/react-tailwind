@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useMemo, useEffect } from "react";
 import { cx } from "@renderlesskit/react";
 import { Meta } from "@storybook/react";
 
@@ -162,7 +162,7 @@ export const Invalid = storyTemplate<CheckboxProps>(args => {
 })({ size: "md" });
 
 export const Controlled = storyTemplate<CheckboxProps>(args => {
-  const [state, onStateChange] = React.useState<CheckboxStatus>(false);
+  const [state, onStateChange] = useState<CheckboxStatus>(false);
 
   return (
     <>
@@ -175,7 +175,7 @@ export const Controlled = storyTemplate<CheckboxProps>(args => {
 })({ size: "md" });
 
 export const Group = storyTemplate<CheckboxProps>(args => {
-  const [state, onStateChange] = React.useState<CheckboxStatus>([]);
+  const [state, onStateChange] = useState<CheckboxStatus>([]);
 
   return (
     <>
@@ -211,7 +211,7 @@ export const Group = storyTemplate<CheckboxProps>(args => {
 })({ size: "md" });
 
 export const GroupIndeterminateSimple = storyTemplate<CheckboxProps>(args => {
-  const [checkedItems, setCheckedItems] = React.useState<CheckboxStatus[]>([
+  const [checkedItems, setCheckedItems] = useState<CheckboxStatus[]>([
     false,
     false,
   ]);
@@ -248,12 +248,12 @@ export const GroupIndeterminateSimple = storyTemplate<CheckboxProps>(args => {
 })({ size: "md" });
 
 export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
-  const values = React.useMemo(() => ["Apple", "Orange", "Watermelon"], []);
-  const [itemState, setItemState] = React.useState<CheckboxStatus>([]);
-  const [groupState, setGroupState] = React.useState<CheckboxStatus>(false);
+  const values = useMemo(() => ["Apple", "Orange", "Watermelon"], []);
+  const [itemState, setItemState] = useState<CheckboxStatus>([]);
+  const [groupState, setGroupState] = useState<CheckboxStatus>(false);
 
   // updates items when group is toggled
-  React.useEffect(() => {
+  useEffect(() => {
     if (groupState === true) {
       setItemState(values);
     } else if (groupState === false) {
@@ -262,7 +262,7 @@ export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
   }, [groupState, values]);
 
   // updates group when items is toggled
-  React.useEffect(() => {
+  useEffect(() => {
     if (!Array.isArray(itemState)) return;
 
     if (itemState.length === values.length) {
@@ -299,7 +299,7 @@ export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
 })({ size: "md" });
 
 const CheckboxCustom = (props: CheckboxProps) => {
-  const [state, onStateChange] = React.useState<CheckboxStatus>(true);
+  const [state, onStateChange] = useState<CheckboxStatus>(true);
 
   return (
     <Checkbox state={state} onStateChange={onStateChange} {...props}>
@@ -353,7 +353,7 @@ const CheckboxCustomComplete = (props: CheckboxProps) => {
 };
 
 export const CompleteCustomCheckbox = storyTemplate<CheckboxProps>(args => {
-  const [state, onStateChange] = React.useState<CheckboxStatus>([]);
+  const [state, onStateChange] = useState<CheckboxStatus>([]);
 
   return (
     <>

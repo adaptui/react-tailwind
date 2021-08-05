@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Role, RoleProps } from "reakit";
 
 import { forwardRefWithAs } from "../utils/types";

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { press } from "reakit-test-utils";
 import { screen } from "@testing-library/react";
 

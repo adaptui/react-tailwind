@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -16,7 +16,7 @@ const InputElement = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const htmlRef = React.useRef<HTMLDivElement>();
+  const htmlRef = useRef<HTMLDivElement>();
   const { as, className, children, type, allowPointerEvents, ...rest } = props;
 
   const theme = useTheme();
@@ -44,7 +44,7 @@ const InputAddon = forwardRefWithAs<
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const htmlRef = React.useRef<HTMLDivElement>();
+  const htmlRef = useRef<HTMLDivElement>();
   const { as, className, children, type, ...rest } = props;
 
   const theme = useTheme();

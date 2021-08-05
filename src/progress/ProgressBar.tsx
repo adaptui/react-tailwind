@@ -3,7 +3,6 @@ import {
   ProgressProps,
   Progress as RenderlesskitProgress,
 } from "@renderlesskit/react";
-import * as React from "react";
 
 import { useTheme } from "../theme";
 import { useProgressContext } from "./Progress";

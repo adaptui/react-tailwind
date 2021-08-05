@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { Switch } from "../Switch";
 import { SwitchLabel, SwitchInput } from "..";
 import { cleanup, fireEvent, render, screen } from "../../utils/testUtils";
@@ -30,7 +30,7 @@ describe("<Switch />", () => {
 
   it("should support controlled state", () => {
     const Controlled = () => {
-      const [state, setState] = React.useState(false);
+      const [state, setState] = useState(false);
 
       return <Switch checked={state} onChange={() => setState(!state)} />;
     };
@@ -43,7 +43,7 @@ describe("<Switch />", () => {
 
   it("should support controlled state with checked prop", () => {
     const Controlled = () => {
-      const [state, setState] = React.useState(false);
+      const [state, setState] = useState(false);
 
       return <Switch checked={state} onChange={() => setState(!state)} />;
     };

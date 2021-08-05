@@ -3,7 +3,7 @@ import {
   ProgressInitialState,
   ProgressStateReturn,
 } from "@renderlesskit/react";
-import * as React from "react";
+import { useMemo } from "react";
 
 import { BoxProps } from "../box";
 import { createContext, runIfFn } from "../utils";
@@ -42,7 +42,7 @@ export const CircularProgress = forwardRefWithAs<
 >((props, ref) => {
   const { value, min, max, size = "md", children, ...rest } = props;
   const state = useProgressState({ value, min, max });
-  const context = React.useMemo(() => ({ state, size }), [state, size]);
+  const context = useMemo(() => ({ state, size }), [state, size]);
 
   return (
     <CircularProgressProvider value={context}>

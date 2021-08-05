@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 
 import { isBrowser } from "../utils";
 import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
@@ -12,7 +12,7 @@ export function useMediaQuery(query: string | string[]): boolean[] {
   const queries = Array.isArray(query) ? query : [query];
   const isSupported = isBrowser && "matchMedia" in window;
 
-  const [matches, setMatches] = React.useState(
+  const [matches, setMatches] = useState(
     queries.map(query =>
       isSupported ? !!window.matchMedia(query).matches : false,
     ),

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { isNull } from "@renderlesskit/react";
 import { Meta } from "@storybook/react";
 

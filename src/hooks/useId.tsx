@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
 
 /**
@@ -16,13 +16,13 @@ const genId = () => ++id;
  */
 export function useId(idProp?: string, prefix?: string) {
   const initialId = idProp || (handoffComplete ? genId() : null);
-  const [uid, setUid] = React.useState(initialId);
+  const [uid, setUid] = useState(initialId);
 
   useSafeLayoutEffect(() => {
     if (uid === null) setUid(genId());
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (handoffComplete === false) {
       handoffComplete = true;
     }
