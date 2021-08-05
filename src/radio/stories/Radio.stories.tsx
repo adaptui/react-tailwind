@@ -29,12 +29,7 @@ export default {
 } as Meta;
 
 const BaseRadio: React.FC<RadioProps> = props => {
-  return (
-    <Radio
-      className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600"
-      {...props}
-    />
-  );
+  return <Radio {...props} />;
 };
 
 const CompleteRadio: React.FC<RadioGroupProps> = props => {
