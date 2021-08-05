@@ -38,16 +38,19 @@ export const CheckboxIcon = forwardRefWithAs<
   const isChecked = stateProp === true;
   const isUnchecked = stateProp === false || stateProp === undefined;
 
-  const compoundStyles = (key: string) => {
+  const compoundStyles = (
+    key: keyof typeof theme.checkbox.icon.state.default,
+  ) => {
     return cx(
-      // TODO: Fix the ts error later
-      // @ts-ignore
-      theme.checkbox.icon.state[key],
       invalid
-        ? // @ts-ignore
-          theme.checkbox.icon.state[`${key}_invalid`]
-        : // @ts-ignore
-          theme.checkbox.icon.state[`${key}_valid`],
+        ? cx(
+            theme.checkbox.icon.state.invalid[key],
+            theme.checkbox.icon.state.hover_invalid[key],
+          )
+        : cx(
+            theme.checkbox.icon.state.default[key],
+            theme.checkbox.icon.state.hover[key],
+          ),
     );
   };
 
