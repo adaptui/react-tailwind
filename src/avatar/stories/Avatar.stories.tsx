@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Meta } from "@storybook/react";
 
 import {
@@ -72,7 +72,7 @@ export const TypingBadge = base({
 
 export const BadgeExample = storyTemplate<AvatarProps>(
   args => {
-    const [isTyping, setTyping] = React.useState(false);
+    const [isTyping, setTyping] = useState(false);
 
     return (
       <>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Portal } from "reakit";
 import { Meta } from "@storybook/react";
 

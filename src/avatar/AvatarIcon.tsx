@@ -1,4 +1,4 @@
-import * as React from "react";
+import { isValidElement, cloneElement } from "react";
 import { Box, BoxProps } from "reakit";
 import { cx } from "@renderlesskit/react";
 
@@ -16,8 +16,8 @@ export const AvatarIcon = forwardRefWithAs<
   const { className, children, ...rest } = props;
   const theme = useTheme();
   const { size = "md" } = useAvatarContext();
-  const _children = React.isValidElement(children)
-    ? React.cloneElement(children, {
+  const _children = isValidElement(children)
+    ? cloneElement(children, {
         role: "img",
         focusable: false,
         "aria-hidden": true,

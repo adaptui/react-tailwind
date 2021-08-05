@@ -1,4 +1,3 @@
-import * as React from "react";
 import { cx } from "@renderlesskit/react";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 

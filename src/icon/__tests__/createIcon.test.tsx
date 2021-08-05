@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { createIcon } from "../createIcon";
 import { render, testA11y } from "../../utils/testUtils";
 

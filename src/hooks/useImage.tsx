@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  ImgHTMLAttributes,
-} from "react";
+import * as React from "react";
 
 import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
 
@@ -37,7 +31,7 @@ export interface UseImageProps {
    * The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.
    * This tells the browser to request cross-origin access when trying to download the image data.
    */
-  crossOrigin?: ImgHTMLAttributes<any>["crossOrigin"];
+  crossOrigin?: React.ImgHTMLAttributes<any>["crossOrigin"];
 }
 
 type Status = "loading" | "failed" | "pending" | "loaded";
@@ -64,15 +58,15 @@ export function useImage(props: UseImageProps) {
   const { src, srcSet, onLoad, onError, crossOrigin, sizes, ignoreFallback } =
     props;
 
-  const [status, setStatus] = useState<Status>("pending");
+  const [status, setStatus] = React.useState<Status>("pending");
 
-  useEffect(() => {
+  React.useEffect(() => {
     setStatus(src ? "loading" : "pending");
   }, [src]);
 
-  const imageRef = useRef<HTMLImageElement | null>();
+  const imageRef = React.useRef<HTMLImageElement | null>();
 
-  const load = useCallback(() => {
+  const load = React.useCallback(() => {
     if (!src) return;
 
     flush();

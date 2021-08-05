@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useCallback } from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -102,7 +102,7 @@ export const StackableToast = (props: StackableToastProps) => {
     visible,
   } = toast;
 
-  const ref = React.useCallback(
+  const ref = useCallback(
     (el: HTMLElement | null) => {
       if (el) {
         const boundingRect = el.getBoundingClientRect();

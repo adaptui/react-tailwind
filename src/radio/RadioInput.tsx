@@ -1,4 +1,3 @@
-import React from "react";
 import { cx } from "@renderlesskit/react";
 import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
 

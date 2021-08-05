@@ -1,10 +1,10 @@
 import {
-  render as RtlRender,
-  RenderOptions,
   RenderResult,
+  RenderOptions,
+  render as RtlRender,
 } from "@testing-library/react";
-import * as React from "react";
 import { RunOptions } from "axe-core";
+import { isValidElement } from "react";
 import { configureAxe } from "jest-axe";
 
 import theme from "../../renderlesskit.config";
@@ -49,9 +49,7 @@ export const testA11y = async (
 ) => {
   jest.useRealTimers();
 
-  const container = React.isValidElement(ui)
-    ? render(ui, options).container
-    : ui;
+  const container = isValidElement(ui) ? render(ui, options).container : ui;
 
   // @ts-ignore
   const results = await axe(container, axeOptions);
