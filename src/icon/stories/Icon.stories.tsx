@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCog } from "react-icons/fa";
 import { Meta } from "@storybook/react";
 

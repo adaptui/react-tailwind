@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Meta } from "@storybook/react";
 
@@ -88,7 +88,7 @@ export const WthSlider = base({
 });
 
 export const WithSliderValueLabel = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   return (
     <FormField id="slider" className="w-60" isInvalid={value > 80}>
       {({ isInvalid }) => (

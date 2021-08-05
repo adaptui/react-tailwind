@@ -1,4 +1,3 @@
-import React from "react";
 import { cx, SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";

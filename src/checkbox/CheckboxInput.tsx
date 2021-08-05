@@ -2,7 +2,6 @@ import {
   Checkbox as ReakitCheckbox,
   CheckboxProps as ReakitCheckboxProps,
 } from "reakit";
-import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";

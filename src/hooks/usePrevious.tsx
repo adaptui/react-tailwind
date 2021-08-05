@@ -1,5 +1,5 @@
-import * as React from "react";
 import type { MutableRefObject } from "react";
+import { useRef, useEffect } from "react";
 
 /**
  * a type-safe version of the `usePrevious` hook described here:
@@ -8,9 +8,9 @@ import type { MutableRefObject } from "react";
 export function usePrevious<T>(
   value: T,
 ): MutableRefObject<T | undefined>["current"] {
-  const ref = React.useRef<T>();
+  const ref = useRef<T>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     ref.current = value;
   }, [value]);
 

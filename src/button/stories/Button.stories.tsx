@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 // @ts-ignore
 import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
@@ -250,9 +250,9 @@ export const CustomSpinner: ComponentStory<typeof Button> = {
 };
 
 export const LoadingAlly = () => {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let timeout: number;
     if (state) {
       timeout = window.setTimeout(() => setState(prev => !prev), 3000);

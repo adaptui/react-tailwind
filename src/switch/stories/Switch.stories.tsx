@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { Meta } from "@storybook/react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -59,7 +59,7 @@ export const Custom = storyTemplate<SwitchProps>(
 )({});
 
 export const Controlled = storyTemplate<SwitchProps>(args => {
-  const [state, setState] = React.useState(false);
+  const [state, setState] = useState(false);
 
   return <Switch checked={state} onChange={() => setState(!state)} {...args} />;
 })({});

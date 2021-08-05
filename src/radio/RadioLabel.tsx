@@ -1,4 +1,3 @@
-import React from "react";
 import { BoxProps } from "reakit";
 import { cx } from "@renderlesskit/react";
 

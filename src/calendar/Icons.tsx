@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export const CalendarIcon = () => (
   <svg
     style={{ width: 16 }}
