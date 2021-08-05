@@ -2,6 +2,8 @@ diff --git a/node_modules/tailwindcss/lib/jit/lib/generateRules.js b/node_module
 index 9b59423..c2f8660 100644
 --- a/node_modules/tailwindcss/lib/jit/lib/generateRules.js
 +++ b/node_modules/tailwindcss/lib/jit/lib/generateRules.js
+@@ -117,12 +117,15 @@ function applyImportant(matches) {
+ // worth the complexity for that case.
 
 
 -function applyVariant(variant, matches, context) {
