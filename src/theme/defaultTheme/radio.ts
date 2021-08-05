@@ -3,7 +3,7 @@ const field = {
   description: {
     base: "lib:text-gray-500 lib:mt-1 lib:text-sm",
     size: {
-      sm: "lib:text-xs",
+      sm: "ib:text-paragraph-cxs",
       md: "lib:text-sm",
       lg: "lib:text-sm",
     },
@@ -11,7 +11,7 @@ const field = {
   text: {
     base: "lib:text-gray-700 lib:select-none lib:font-medium",
     size: {
-      sm: "lib:text-xs",
+      sm: "lib:text-paragraph-cxs",
       md: "lib:text-sm lib:leading-4",
       lg: "lib:text-sm lib:leading-5",
     },

@@ -19,6 +19,7 @@ const renderlesskitConfig = {
         cxs: ["13px", "100%"],
         sm: ["14px", "115%"],
         base: ["16px", "115%"],
+        "paragraph-cxs": ["13px", "150%"],
       },
       inset: {
         unset: "unset",
