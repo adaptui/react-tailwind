@@ -19,15 +19,15 @@ const field = {
 };
 
 export const radio = {
-  base: "group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer",
+  base: "group lib:relative lib:inline-flex lib:space-x-1.5 lib:items-center lib:align-top lib:cursor-pointer",
   disabled: "lib:cursor-not-allowed",
   input: "peer lib:sr-only",
   icon: {
-    base: "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:select-none lib:transition-all lib:rounded-full lib:ring-0 lib:ring-gray-300 peer-focus:ring-2",
+    base: "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:select-none lib:transition-all lib:rounded-full lib:ring-0 lib:ring-gray-300 peer-focus-visible:ring-2",
     size: {
-      sm: "lib:w-3.5 lib:h-3.5 lib:text-[0.625rem]",
-      md: "lib:w-4 lib:h-4 lib:text-xs",
-      lg: "lib:w-5 lib:h-5 lib:text-base",
+      sm: "lib:text-sm",
+      md: "lib:text-base",
+      lg: "lib:text-xl",
     },
     state: {
       disabled: "lib:text-gray-400 lib:cursor-not-allowed",
