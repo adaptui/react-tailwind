@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createIcon } from "../icon";
 
 export const CaretDownIcon = createIcon({

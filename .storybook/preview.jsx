@@ -1,5 +1,4 @@
 import "focus-visible";
-import * as React from "react";
 
 import "./tailwind.css";
 import theme from "../renderlesskit.config.ts";

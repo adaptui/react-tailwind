@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { FaCopy } from "react-icons/fa";
 import { Meta } from "@storybook/react";
 
@@ -88,7 +88,7 @@ export const GroupNoArrowNavigation = group({ allowArrowNavigation: false });
 
 export const TagGroupsListExample = storyTemplate<TagGroupProps>(
   args => {
-    const [tags, setTags] = React.useState(["One", "Two", "Three"]);
+    const [tags, setTags] = useState(["One", "Two", "Three"]);
 
     return (
       <TagGroup className="flex items-center gap-1" {...args}>

@@ -1,7 +1,7 @@
 /**
  * A Custom Toast Which User Might Write
  */
-import React from "react";
+import { useCallback } from "react";
 import { cx, ConfigurableToastOptions } from "@renderlesskit/react";
 
 import { InfoCircleIcon } from "../../icons";
@@ -39,7 +39,7 @@ const CustomToast: React.FC<CustomToastProps> = ({
 export const useCustomToast = () => {
   const { showToast } = useToastHandlers();
 
-  return React.useCallback(
+  return useCallback(
     (
       alertDetails: CustomToastProps,
       options?: ConfigurableToastOptions<Toast>,

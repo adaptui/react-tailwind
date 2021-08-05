@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useCallback, useEffect } from "react";
 import { useToastTimer } from "@renderlesskit/react";
 
 import {
@@ -19,7 +19,7 @@ export const useToasts = () => {
   const [isMobile] = useMediaQuery("(max-width: 640px)");
   const sortedToasts = getPlacementSortedToasts(toasts);
 
-  const updateFrontHeight = React.useCallback(
+  const updateFrontHeight = useCallback(
     (placement: ToastPlacement, frontHeight: number) => {
       updateFieldToast("placement", placement, { frontHeight });
     },
@@ -27,7 +27,7 @@ export const useToasts = () => {
     [updateFieldToast],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (previousToasts == null) return;
 
     const previousToastsLength = previousToasts.length;
@@ -43,7 +43,7 @@ export const useToasts = () => {
     updateFrontHeight(frontToast.placement, frontToast.height);
   }, [visibleToasts, previousToasts, updateFrontHeight]);
 
-  const updateHeight = React.useCallback(
+  const updateHeight = useCallback(
     (toastId: string, height: number, placement: ToastPlacement) => {
       updateToast(toastId, { height });
       updateFrontHeight(placement, height);
@@ -51,7 +51,7 @@ export const useToasts = () => {
     [updateToast, updateFrontHeight],
   );
 
-  const calculateOffset = React.useCallback(
+  const calculateOffset = useCallback(
     (toastId: string, placement: ToastPlacement) => {
       const toasts = sortedToasts[placement];
       const index = toasts.findIndex(toast => toast.id === toastId);

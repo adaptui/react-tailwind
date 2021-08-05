@@ -23,7 +23,7 @@ export function assignRef<T = any>(ref: ReactRef<T> | undefined, value: T) {
 /**
  * React hook that merges react refs into a single memoized function
  * @example
- * import React from "react";
+ * import * as React from "react";
  * import { useMergeRefs } from `@chakra-ui/hooks`;
  *
  * const Component = React.forwardRef((props, ref) => {
