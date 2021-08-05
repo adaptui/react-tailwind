@@ -1,35 +1,50 @@
 export const button = {
-  base: "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:font-medium lib:w-auto lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:outline-none focus-visible:lib:ring-2 disabled:lib:text-gray-400 disabled:cursor-not-allowed  lib:space-x-1.5 lib:appearance-none lib:whitespace-nowrap lib:align-middle lib:select-none lib:will-change-transform lib:transition-all",
-  size: {
-    sm: "lib:h-[26px] lib:min-w-[26px] lib:px-2 lib:rounded-lg lib:text-cxs pb-px",
-    md: "lib:h-[30px] lib:min-w-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm",
-    lg: "lib:h-9 lib:min-w-9 lib:px-3 lib:rounded-[10px] lib:text-sm",
-    xl: "lib:h-11 lib:min-w-11 lib:px-4 lib:rounded-xl lib:text-base",
-  },
+  base: "lib:inline-flex lib:items-center lib:justify-center lib:relative lib:translate-y-0 hover:lib:-translate-y-px active:lib:translate-y-0 lib:transition-all lib:will-change-transform disabled:cursor-not-allowed lib:outline-none lib:appearance-none lib:select-none lib:whitespace-nowrap lib:align-middle",
   variant: {
-    solid:
-      "lib:bg-gray-800 lib:text-white hover:lib:bg-gray-700 disabled:lib:bg-gray-100 active:lib:bg-gray-800 focus-visible:lib:ring-gray-300",
-    subtle:
-      "lib:bg-gray-100 lib:text-gray-600 hover:lib:bg-gray-200 active:lib:bg-gray-100 disabled:lib:bg-gray-100 focus-visible:lib:ring-gray-300",
-    outline:
-      "lib:bg-white lib:text-gray-600 lib:ring-1 lib:ring-gray-200 hover:lib:ring-gray-300 hover:shadow-sm active:lib:bg-gray-100 focus-visible:lib:ring-gray-200",
-    ghost:
-      "lib:text-gray-600 hover:lib:bg-gray-100 active:lib:bg-gray-200 focus-visible:lib:ring-gray-200",
-  },
-  iconOnly: {
-    size: {
-      sm: "lib:text-base lib:h-[26px] lib:w-[26px] lib:rounded-lg",
-      md: "lib:text-base lib:h-[30px] lib:w-[30px] lib:rounded-lg",
-      lg: "lib:text-base lib:h-9 lib:w-9 lib:rounded-[10px]",
-      xl: "lib:text-xl lib:h-11 lib:w-11 lib:rounded-xl",
+    default: {
+      solid: "lib:bg-gray-800 lib:text-white lib:border lib:border-transparent",
+      subtle:
+        "lib:bg-gray-100 lib:text-gray-600 lib:border lib:border-transparent",
+      outline: "lib:bg-white lib:text-gray-600 lib:border lib:border-gray-200",
+      ghost: "lib:bg-white lib:text-gray-600 lib:border lib:border-transparent",
+    },
+    hover: {
+      solid: "hover:lib:bg-gray-700",
+      subtle: "hover:lib:bg-gray-200",
+      outline: "hover:lib:border-gray-300 hover:shadow-sm",
+      ghost: "hover:lib:bg-gray-100",
+    },
+    active: {
+      solid: "active:lib:bg-gray-800",
+      subtle: "active:lib:bg-gray-100",
+      outline: "active:lib:bg-gray-100 active:lib:border-gray-300",
+      ghost: "active:lib:bg-gray-200",
+    },
+    focus: {
+      solid: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300",
+      subtle: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-300",
+      outline: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200",
+      ghost: "focus-visible:lib:ring-2 focus-visible:lib:ring-gray-200",
+    },
+    disabled: {
+      solid: "disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
+      subtle: "disabled:lib:bg-gray-100 disabled:lib:text-gray-400",
+      outline: "disabled:lib:text-gray-400 disabled:lib:border-gray-200",
+      ghost: "disabled:lib:text-gray-400",
     },
   },
-  suffix: {
-    size: {
-      sm: "lib:text-xs",
-      md: "lib:text-xs",
-      lg: "lib:text-xs",
-      xl: "lib:text-base",
+  size: {
+    default: {
+      sm: "lib:h-[26px] lib:px-2 lib:space-x-1.5 lib:rounded-lg lib:text-cxs lib:font-medium lib:w-auto lib:min-w-[26px] pb-px",
+      md: "lib:h-[30px] lib:px-2.5 lib:space-x-1.5 lib:rounded-lg lib:text-sm lib:font-medium lib:w-auto lib:min-w-[30px]",
+      lg: "lib:h-9 lib:px-3 lib:space-x-1.5 lib:rounded-[10px] lib:text-sm lib:font-medium lib:w-auto lib:min-w-9",
+      xl: "lib:h-11 lib:px-4 lib:space-x-1.5 lib:rounded-xl lib:text-base lib:font-medium lib:w-auto lib:min-w-11",
+    },
+    iconOnly: {
+      sm: "lib:h-[26px] lib:rounded-lg lib:text-base lib:w-[26px]",
+      md: "lib:h-[30px] lib:rounded-lg lib:text-base lib:w-[30px]",
+      lg: "lib:h-9 lib:rounded-[10px] lib:text-base lib:w-9",
+      xl: "lib:h-11 lib:rounded-xl lib:text-xl lib:w-11",
     },
   },
   prefix: {
@@ -40,12 +55,22 @@ export const button = {
       xl: "lib:text-base",
     },
   },
-  spinner: {
+  suffix: {
     size: {
       sm: "lib:text-xs",
       md: "lib:text-xs",
       lg: "lib:text-xs",
       xl: "lib:text-base",
+    },
+  },
+  spinner: {
+    default: {
+      size: {
+        sm: "lib:text-xs",
+        md: "lib:text-xs",
+        lg: "lib:text-xs",
+        xl: "lib:text-base",
+      },
     },
     iconOnly: {
       size: {
