@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { press } from "reakit-test-utils";
 
 import {
@@ -15,7 +15,7 @@ import { cleanup, fireEvent, render, screen } from "../../utils/testUtils";
 afterEach(cleanup);
 
 const CheckboxCustom = (props: CheckboxProps) => {
-  const [state, onStateChange] = React.useState<CheckboxStatus>(true);
+  const [state, onStateChange] = useState<CheckboxStatus>(true);
 
   return (
     <Checkbox state={state} onStateChange={onStateChange} {...props}>
@@ -137,7 +137,7 @@ describe("<Checkbox />", () => {
 
   it("should support controlled state", () => {
     const Controlled = () => {
-      const [state, setState] = React.useState(false);
+      const [state, setState] = useState(false);
 
       return (
         <Checkbox state={state} onStateChange={() => setState(!state)}>
@@ -154,7 +154,7 @@ describe("<Checkbox />", () => {
 
   it("should support custom checkbox", () => {
     const Custom = () => {
-      const [state, setState] = React.useState(false);
+      const [state, setState] = useState(false);
 
       return (
         <CheckboxCustom state={state} onStateChange={() => setState(!state)}>
@@ -171,7 +171,7 @@ describe("<Checkbox />", () => {
 
   it("should support group checkboxes", () => {
     const Group = () => {
-      const [state, onStateChange] = React.useState<CheckboxStatus>([]);
+      const [state, onStateChange] = useState<CheckboxStatus>([]);
 
       return (
         <>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useMemo } from "react";
 import { Composite, CompositeStateReturn, useCompositeState } from "reakit";
 
 import { TagProps } from "./Tag";
@@ -34,7 +34,7 @@ export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
       ...rest
     } = props;
     const composite = useCompositeState({ baseId });
-    const context = React.useMemo(
+    const context = useMemo(
       () => ({ size, variant, composite }),
       [size, variant, composite],
     );

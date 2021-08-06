@@ -5,7 +5,7 @@ import {
   TooltipInitialState,
   Tooltip as ReakitTooltip,
 } from "reakit/Tooltip";
-import React from "react";
+import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";

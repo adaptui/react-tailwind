@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useMemo } from "react";
 import { useControllableState } from "@renderlesskit/react";
 import { CheckboxOptions as ReakitCheckboxOptions } from "reakit";
 
@@ -71,7 +71,7 @@ export const Switch = forwardRefWithAs<
     onChange: onChange,
   });
 
-  const state = React.useMemo(
+  const state = useMemo(
     () => ({
       setState: setSwitchStateChange,
       value: switchState,
@@ -80,7 +80,7 @@ export const Switch = forwardRefWithAs<
     }),
     [setSwitchStateChange, switchState, focusable],
   );
-  const context = React.useMemo(() => ({ state, size }), [state, size]);
+  const context = useMemo(() => ({ state, size }), [state, size]);
 
   if (!children) {
     return (

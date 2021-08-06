@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useMemo, useState, cloneElement } from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -26,12 +26,12 @@ export const InputGroup = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, children, ...rest } = props;
-  const context = React.useMemo(() => ({}), []);
+  const context = useMemo(() => ({}), []);
 
   const theme = useTheme();
   const inputGroupStyles = cx(theme.input.group.base, className);
   const validChildren = getValidChildren(children);
-  const [clones, setClones] = React.useState<ReactFiberNode[]>([]);
+  const [clones, setClones] = useState<ReactFiberNode[]>([]);
 
   const inputInlineStyles: Record<string, any> = {};
 
@@ -51,7 +51,7 @@ export const InputGroup = forwardRefWithAs<
     setClones(
       validChildren.map((child: any) => {
         return child.type.id === "Input"
-          ? React.cloneElement(child, {
+          ? cloneElement(child, {
               style: inputInlineStyles,
             })
           : child;

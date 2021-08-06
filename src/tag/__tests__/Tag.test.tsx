@@ -1,4 +1,3 @@
-import * as React from "react";
 import { fireEvent, screen } from "@testing-library/react";
 
 import { Tag } from "../Tag";

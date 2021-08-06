@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Meta } from "@storybook/react";
 
 import {
@@ -76,7 +76,7 @@ export const Customization = () => {
 export const LableDesign = storyTemplate<
   SliderProps & { currentColor: string }
 >(({ currentColor, ...args }) => {
-  const [value, setValue] = React.useState(50);
+  const [value, setValue] = useState(50);
 
   return (
     <div role="group" aria-labelledby="price" style={{ width: 400 }}>

@@ -38,16 +38,18 @@ export type ExtendableDefaultTheme = PartialDefaultTheme & {
 
 export type RenderlesskitProviderProps = {
   children?: React.ReactNode;
-  theme?: ExtendableDefaultTheme;
+  theme?: DefaultTheme;
+  extend?: ExtendableDefaultTheme;
 };
 
 export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
-  const { children, theme = defaultTheme } = props;
+  const { children, theme = defaultTheme, extend } = props;
 
-  const finalTheme: DefaultTheme = React.useMemo(
-    () => mergeExtensions(mergeThemes([theme, cloneDeep(defaultTheme)])),
-    [theme],
-  );
+  let finalTheme = theme;
+
+  if (extend) {
+    finalTheme = mergeExtensions(mergeThemes([extend, cloneDeep(theme)]));
+  }
 
   return (
     <ThemeContext.Provider value={finalTheme}>{children}</ThemeContext.Provider>
