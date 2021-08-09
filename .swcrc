@@ -1,0 +1,25 @@
+{
+  "env": {
+    "coreJs": 3
+  },
+  "jsc": {
+    "loose": true,
+
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "decorators": false,
+      "dynamicImport": false
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic",
+        "pragma": "React.createElement",
+        "pragmaFrag": "React.Fragment",
+        "throwIfNamespace": true,
+        "development": false,
+        "useBuiltins": false
+      }
+    }
+  }
+}
