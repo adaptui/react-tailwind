@@ -8,8 +8,13 @@ import { RadioInitialState } from "./RadioState";
 import { createContext, runIfFn } from "../utils";
 import { RadioGroupProps, useRadioGroup } from "./RadioGroup";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { useTheme } from "../theme";
+import { CommonFieldProps } from "../form-field";
+import { RadioText } from "./RadioText";
+import { RadioDescription } from "./RadioDescription";
 
-export type RadioStateContext = RadioInitialState;
+type RadioStateContext = RadioInitialState &
+  Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 const [RadioStateProvider, useRadioStateContext] =
   createContext<RadioStateContext>({
@@ -18,18 +23,13 @@ const [RadioStateProvider, useRadioStateContext] =
     strict: false,
   });
 
-export { useRadioStateContext };
-
-export type RadioPropsContext = RadioInitialProps &
-  Pick<RadioGroupProps, "size">;
+type RadioPropsContext = RadioInitialProps & Pick<RadioGroupProps, "size">;
 
 const [RadioPropsProvider, useRadioProps] = createContext<RadioPropsContext>({
   errorMessage: "RadioProps must be used within RadioPropsProvider",
   name: "RadioProps",
   strict: false,
 });
-
-export { useRadioProps };
 
 type RadioRenderProps = RenderProp<RadioStateContext & RadioPropsContext>;
 
@@ -42,25 +42,61 @@ export type RadioInitialProps = {
   checkedIcon?: React.ReactNode;
   uncheckedIcon?: React.ReactNode;
   disabledIcon?: React.ReactNode;
+  description?: string;
 };
 
-export type RadioProps = BoxProps & RadioInitialProps & RadioRenderProps;
+export type RadioProps = BoxProps &
+  RadioInitialProps &
+  RadioRenderProps &
+  Pick<RadioGroupProps, "size"> &
+  Omit<CommonFieldProps, "id" | "isReadOnly">;
 
 export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
   (props, ref) => {
-    const { className, style, children, ...rest } = props;
-    const { size, ...state } = useRadioGroup();
+    const {
+      className,
+      style,
+      description,
+      children,
+      isDisabled,
+      isInvalid,
+      isRequired,
+      disabled,
+      size = "md",
+      ...rest
+    } = props;
+    const { size: _size = size, ...state } = useRadioGroup();
+
+    const radio = useTheme("radio");
+    const radioTextWrapperStyles = radio.field.base;
+
+    const isTrulyDisabled = isDisabled || disabled;
+    const isTrulyInvalid = isInvalid || !!rest["aria-invalid"];
 
     return (
-      <RadioStateProvider value={state}>
-        <RadioPropsProvider value={{ size, ...rest }}>
+      <RadioStateProvider
+        value={{
+          ...state,
+          isDisabled: isTrulyDisabled,
+          isInvalid: isTrulyInvalid,
+          isRequired,
+        }}
+      >
+        <RadioPropsProvider value={{ size: _size, ...rest }}>
           {typeof children !== "string" ? (
-            runIfFn(children, { size, ...rest, ...state })
+            runIfFn(children, { size: _size, ...rest, ...state })
           ) : (
             <RadioLabel ref={ref} className={className} style={style}>
               <RadioInput />
               <RadioIcon />
-              {children}
+              {description ? (
+                <div className={radioTextWrapperStyles}>
+                  <RadioText>{children}</RadioText>
+                  <RadioDescription>{description}</RadioDescription>
+                </div>
+              ) : (
+                <RadioText>{children}</RadioText>
+              )}
             </RadioLabel>
           )}
         </RadioPropsProvider>
@@ -70,3 +106,5 @@ export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
 );
 
 Radio.displayName = "Radio";
+
+export { useRadioStateContext, useRadioProps };

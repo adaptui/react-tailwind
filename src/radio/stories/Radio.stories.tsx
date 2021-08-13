@@ -17,6 +17,8 @@ import {
   createUnionControl,
 } from "../../../.storybook/storybookUtils";
 import { CheckCircleIcon } from "../../icons";
+import { RadioDescription } from "../RadioDescription";
+import { RadioText } from "../RadioText";
 
 export default {
   title: "Forms/Radio",
@@ -27,12 +29,7 @@ export default {
 } as Meta;
 
 const BaseRadio: React.FC<RadioProps> = props => {
-  return (
-    <Radio
-      className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600"
-      {...props}
-    />
-  );
+  return <Radio {...props} />;
 };
 
 const CompleteRadio: React.FC<RadioGroupProps> = props => {
@@ -57,6 +54,75 @@ const base = storyTemplate<RadioGroupProps>(CompleteRadio, { size: "md" });
 
 export const Base = base({});
 export const DefaultState = base({ defaultState: "orange" });
+
+export const WithDescription = () => {
+  return (
+    <div>
+      <RadioGroup className="flex flex-col space-y-6">
+        <Radio
+          size="sm"
+          value="1"
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Radio state
+        </Radio>
+        <Radio
+          size="md"
+          value="1.1"
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Radio state
+        </Radio>
+        <Radio
+          size="lg"
+          value="1.2"
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Radio state
+        </Radio>
+        <Radio
+          size="lg"
+          value="2"
+          isInvalid
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Invalid state
+        </Radio>
+        <Radio
+          size="lg"
+          value="3"
+          isDisabled
+          description={
+            "Used when the radio is selected and will use its value for the form submission."
+          }
+        >
+          Disabled state
+        </Radio>
+        <Radio value="4" size="lg">
+          <RadioLabel>
+            <RadioInput />
+            <RadioIcon />
+            <div>
+              <RadioText>Custom checkbox</RadioText>
+              <RadioDescription>
+                Used when the checkbox is selected and will use its value for
+                the form submission.
+              </RadioDescription>
+            </div>
+          </RadioLabel>
+        </Radio>
+      </RadioGroup>
+    </div>
+  );
+};
 
 export const Controlled = () => {
   const [state, setState] = React.useState("watermelon");
