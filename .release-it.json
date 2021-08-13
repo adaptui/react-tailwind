@@ -5,7 +5,7 @@
   },
   "git": {
     "commitMessage": "🚀 Release v${version}",
-    "commitArgs": ["--no-verify"]
+    "commitArgs": ["--no-verify", "-S"]
   },
   "github": {
     "release": true,
