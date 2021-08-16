@@ -9,10 +9,12 @@ import {
 import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
+import { CommonFieldProps } from "../form-field";
 import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
 
 export type RadioIconProps = BoxProps &
-  Pick<RadioProps, "value" | "disabled"> & {
+  Pick<RadioProps, "value" | "disabled"> &
+  Omit<CommonFieldProps, "id" | "isReadOnly"> & {
     checkedIcon?: React.ReactNode;
     uncheckedIcon?: React.ReactNode;
     disabledIcon?: React.ReactNode;
@@ -32,18 +34,35 @@ export const RadioIcon = forwardRefWithAs<
     ...rest
   } = props;
   const { value, disabled, size = "md" } = useRadioProps();
-  const { state } = useRadioStateContext();
+  const { state, isInvalid, isDisabled } = useRadioStateContext();
   const stateProp = state === value;
+
+  const _invalid = !!(props.isInvalid || isInvalid);
+  const _disabled = disabled || props.isDisabled || isDisabled;
+  const isChecked = stateProp === true;
+  const isUnchecked = stateProp === false || stateProp === undefined;
+
+  const compoundStyles = (key: keyof typeof theme.radio.icon.state.default) => {
+    return cx(
+      _invalid
+        ? cx(
+            theme.radio.icon.state.invalid[key],
+            theme.radio.icon.state.hover_invalid[key],
+          )
+        : cx(
+            theme.radio.icon.state.default[key],
+            theme.radio.icon.state.hover[key],
+          ),
+    );
+  };
 
   const theme = useTheme();
   const radioIconStyles = cx(
     theme.radio.icon.base,
     theme.radio.icon.size[size],
-    disabled
-      ? theme.radio.icon.state.disabled
-      : stateProp
-      ? theme.radio.icon.state.checked
-      : theme.radio.icon.state.unchecked,
+    _disabled && theme.radio.icon.state.disabled,
+    isChecked && compoundStyles("checked"),
+    isUnchecked && compoundStyles("unchecked"),
     className,
   );
 
@@ -63,7 +82,7 @@ export const RadioIcon = forwardRefWithAs<
     >
       {children
         ? children
-        : disabled
+        : _disabled
         ? iconMap.disabled
         : stateProp
         ? iconMap.checked

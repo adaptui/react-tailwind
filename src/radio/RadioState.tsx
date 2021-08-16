@@ -36,8 +36,8 @@ export function useRadioState(
 ): RadioStateReturn {
   const {
     state: initialValue,
-    defaultState,
     loop = true,
+    defaultState,
     onStateChange,
     ...props
   } = initialState;

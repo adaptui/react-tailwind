@@ -1,6 +1,5 @@
 import * as React from "react";
-import { format } from "date-fns";
-import { CalendarStateReturn } from "@renderlesskit/react";
+import { CalendarStateReturn, format } from "@renderlesskit/react";
 
 import {
   DatePicker,
