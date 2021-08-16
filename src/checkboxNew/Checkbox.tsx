@@ -71,7 +71,7 @@ export const Checkbox = forwardRefWithAs<
   const baseStyles = cx(checkbox.base);
 
   return (
-    <label ref={labelRef} className={baseStyles}>
+    <label ref={labelRef} className={baseStyles} {...labelProps}>
       <CheckboxInput
         ref={ref}
         state={state}

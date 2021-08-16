@@ -2,6 +2,9 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Checkbox } from "../Checkbox";
 import { createControls } from "../../../.storybook/storybookUtils";
+import { useState } from "react";
+import { Button } from "../..";
+import { CheckboxProps } from "reakit/ts";
 
 export default {
   title: "Forms/CheckboxNew",
@@ -81,3 +84,27 @@ export const CheckboxStack: ComponentStory<typeof Checkbox> = {
   },
   parameters: { options: { showPanel: true } },
 };
+
+export const Controlled = () => {
+  const [state, setState] =
+    useState<NonNullable<CheckboxProps["state"]>>(false);
+
+  return (
+    <div className="flex flex-col space-y-4">
+      <Checkbox state={state} onStateChange={setState} />
+      <div className="flex flex-col space-y-2">
+        <Button onClick={() => setState(true)}>{`${
+          state === true ? "Now" : "Change to"
+        } Checked`}</Button>
+        <Button onClick={() => setState(false)}>{`${
+          state === false ? "Now" : "Change to"
+        } UnChecked`}</Button>
+        <Button onClick={() => setState("indeterminate")}>{`${
+          state === "indeterminate" ? "Now" : "Change to"
+        } Interderminate`}</Button>
+      </div>
+    </div>
+  );
+};
+
+Controlled.parameters = { options: { showPanel: false } };
