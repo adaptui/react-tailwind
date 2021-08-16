@@ -5,12 +5,10 @@ export const CheckIcon = createIcon({
   viewBox: "0 0 12 12",
   path: (
     <path
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-      d="M2.25 6.214l2.41 2.679L9.75 3"
+      fill="currentColor"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M10.49 2.24c.31.27.35.74.08 1.05L5.14 9.58A.75.75 0 014 9.59L1.44 6.73a.75.75 0 011.12-1l2 2.23L9.43 2.3a.75.75 0 011.06-.07z"
     />
   ),
 });

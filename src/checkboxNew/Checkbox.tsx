@@ -1,17 +1,47 @@
-import * as React from "react";
-import {
-  Checkbox as ReakitCheckbox,
-  CheckboxProps as ReakitCheckboxProps,
-  CheckboxStateReturn as ReakitCheckboxStateReturn,
-} from "reakit";
-import { useControllableState } from "@renderlesskit/react";
+import { cx, useControllableState } from "@renderlesskit/react";
+import { CheckboxStateReturn as ReakitCheckboxStateReturn } from "reakit";
 
 import { forwardRefWithAs } from "../utils/types";
+import { CheckboxInputProps } from "./CheckboxInput";
+import { CheckboxInput } from "./CheckboxInput";
+import { CheckboxIcon, CheckboxIconProps } from "./CheckboxIcon";
+import { useTheme } from "../theme";
 
-export type CheckboxProps = ReakitCheckboxProps & {
+export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
+  /**
+   * Default State of the Checkbox for uncontrolled Checkbox.
+   *
+   * @default false
+   */
+
   defaultState?: ReakitCheckboxStateReturn["state"];
+
+  /**
+   * State of the Checkbox for controlled Checkbox.
+   */
   state?: ReakitCheckboxStateReturn["state"];
+
+  /**
+   * OnChange callback for controlled Checkbox.
+   */
   onStateChange?: ReakitCheckboxStateReturn["setState"];
+
+  /**
+   * How large should the button be?
+   *
+   * @default md
+   */
+  size?: CheckboxIconProps["size"];
+
+  /**
+   * Ref to target the input.
+   */
+  labelRef?: React.Ref<HTMLLabelElement>;
+
+  /**
+   * Props to pass to the Label.
+   */
+  labelProps?: React.HTMLAttributes<HTMLLabelElement>;
 };
 
 export const Checkbox = forwardRefWithAs<
@@ -20,36 +50,35 @@ export const Checkbox = forwardRefWithAs<
   "input"
 >((props, ref) => {
   const {
-    defaultState,
+    // Default State should be false otherwise input state will be undefined
+    defaultState = false,
     state: stateProp,
-    onStateChange: onStateChangeProp,
-    // We should definitely discard `defaultChecked` because it is not a controlled prop
-    // Causes the below error:
-    // Input elements must be either controlled or uncontrolled.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    defaultChecked,
+    onStateChange,
+    size = "md",
+    labelRef,
+    labelProps,
     ...inputProps
   } = props;
 
-  // Decide on what to do with `checked` `onChange`
-  // Because they work standalone withount the below `uncontrolled` state logic.
-  // <ReakitCheckbox checked={check} onChange={e => console.log(setCheck(e.target.checked))} />
-  // Because we are handling them using `state` and `onStateChange`
-  const [state, onStateChange] = useControllableState({
+  const [state, setState] = useControllableState({
     defaultValue: defaultState,
     value: stateProp,
-    onChange: onStateChangeProp,
+    onChange: onStateChange,
   });
+  console.log("%c state", "color: #73998c", state);
+
+  const checkbox = useTheme("checkboxNew");
+  const baseStyles = cx(checkbox.base);
 
   return (
-    <label>
-      <ReakitCheckbox
+    <label ref={labelRef} className={baseStyles}>
+      <CheckboxInput
         ref={ref}
         state={state}
-        setState={onStateChange}
-        className="lib:sr-only"
+        setState={setState}
         {...inputProps}
       />
+      <CheckboxIcon state={state} size={size} />
     </label>
   );
 });
