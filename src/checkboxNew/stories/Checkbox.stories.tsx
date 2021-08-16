@@ -20,6 +20,7 @@ export default {
       "setState",
       "checked",
       "value",
+      "defaultState",
       "state",
       "onStateChange",
       "labelProps",
@@ -39,14 +40,27 @@ export const Default: ComponentStory<typeof Checkbox> = {
 export const Small: ComponentStory<typeof Checkbox> = {
   ...Default,
   args: { ...Default.args, size: "sm" },
+  argTypes: {
+    size: { table: { disable: true } },
+  },
 };
-export const Medium: ComponentStory<typeof Checkbox> = { ...Default };
+export const Medium: ComponentStory<typeof Checkbox> = {
+  ...Default,
+  argTypes: {
+    size: { table: { disable: true } },
+  },
+};
 export const Large: ComponentStory<typeof Checkbox> = {
   ...Default,
   args: { ...Default.args, size: "lg" },
+  argTypes: {
+    size: { table: { disable: true } },
+  },
 };
 
-export const UnChecked: ComponentStory<typeof Checkbox> = { ...Default };
+export const UnChecked: ComponentStory<typeof Checkbox> = {
+  ...Default,
+};
 export const Checked: ComponentStory<typeof Checkbox> = {
   ...Default,
   args: { ...Default.args, defaultState: true },
@@ -92,16 +106,19 @@ export const Controlled = () => {
   return (
     <div className="flex flex-col space-y-4">
       <Checkbox state={state} onStateChange={setState} />
+
       <div className="flex flex-col space-y-2">
-        <Button onClick={() => setState(true)}>{`${
-          state === true ? "Now" : "Change to"
-        } Checked`}</Button>
-        <Button onClick={() => setState(false)}>{`${
-          state === false ? "Now" : "Change to"
-        } UnChecked`}</Button>
-        <Button onClick={() => setState("indeterminate")}>{`${
-          state === "indeterminate" ? "Now" : "Change to"
-        } Interderminate`}</Button>
+        <Button onClick={() => setState(true)}>
+          {`${state === true ? "Now" : "Change to"} Checked`}
+        </Button>
+
+        <Button onClick={() => setState(false)}>
+          {`${state === false ? "Now" : "Change to"} UnChecked`}
+        </Button>
+
+        <Button onClick={() => setState("indeterminate")}>
+          {`${state === "indeterminate" ? "Now" : "Change to"} Interderminate`}
+        </Button>
       </div>
     </div>
   );

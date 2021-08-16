@@ -60,6 +60,9 @@ export const Checkbox = forwardRefWithAs<
     ...inputProps
   } = props;
 
+  console.log("%c state", "color: #8c0038", stateProp);
+  console.log("%c defaultState", "color: #514080", defaultState);
+  console.log("%c onStateChange", "color: #99614d", onStateChange);
   const [state, setState] = useControllableState({
     defaultValue: defaultState,
     value: stateProp,
