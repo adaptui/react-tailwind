@@ -1,11 +1,11 @@
 import { cx } from "@renderlesskit/react";
 
-import { Box, BoxProps } from "../box";
-import { CheckIcon, IndeterminateIcon } from "../icons";
 import { useTheme } from "../theme";
+import { Box, BoxProps } from "../box";
 import { withIconA11y } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
 import { CheckboxProps } from "./Checkbox";
+import { forwardRefWithAs } from "../utils/types";
+import { CheckIcon, IndeterminateIcon } from "../icons";
 
 export type CheckboxIconProps = BoxProps &
   Required<Pick<CheckboxProps, "state">> & {
@@ -17,7 +17,7 @@ export const CheckboxIcon = forwardRefWithAs<
   HTMLSpanElement,
   "span"
 >((props, ref) => {
-  const { state, size } = props;
+  const { state, size, className, children, ...rest } = props;
   const isChecked = state === true;
   const isUnchecked = state === false;
   const isIndeterminate = state === "indeterminate";
@@ -26,13 +26,14 @@ export const CheckboxIcon = forwardRefWithAs<
   const baseStyles = cx(
     checkbox.icon.base,
     checkbox.icon.size[size],
-    isUnchecked ? checkbox.icon.state.unChecked : "",
-    isChecked ? checkbox.icon.state.checked : "",
-    isIndeterminate ? checkbox.icon.state.checked : "",
+    isUnchecked ? checkbox.icon.unChecked.default : "",
+    isChecked ? checkbox.icon.checked.default : "",
+    isIndeterminate ? checkbox.icon.checked.default : "",
+    className,
   );
 
   return (
-    <Box ref={ref} as="span" className={baseStyles}>
+    <Box ref={ref} as="span" className={baseStyles} {...rest}>
       {isChecked ? withIconA11y(<CheckIcon />) : null}
       {isIndeterminate ? withIconA11y(<IndeterminateIcon />) : null}
     </Box>

@@ -26,11 +26,12 @@ export const CheckboxInput = forwardRefWithAs<
     // Because they work standalone withount the below `uncontrolled` state logic.
     // <ReakitCheckbox checked={check} onChange={e => console.log(setCheck(e.target.checked))} />
     // Because we are handling them using `state` and `onStateChange`
+    className,
     ...rest
   } = props;
 
   const checkbox = useTheme("checkboxNew");
-  const baseStyles = cx(checkbox.input);
+  const baseStyles = cx(checkbox.input, className);
 
   return (
     <ReakitCheckbox

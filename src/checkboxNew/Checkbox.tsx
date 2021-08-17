@@ -1,11 +1,10 @@
-import { cx, useControllableState } from "@renderlesskit/react";
+import { useControllableState } from "@renderlesskit/react";
 import { CheckboxStateReturn as ReakitCheckboxStateReturn } from "reakit";
 
 import { forwardRefWithAs } from "../utils/types";
-import { CheckboxInputProps } from "./CheckboxInput";
-import { CheckboxInput } from "./CheckboxInput";
+import { CheckboxLabel } from "./CheckboxLabel";
 import { CheckboxIcon, CheckboxIconProps } from "./CheckboxIcon";
-import { useTheme } from "../theme";
+import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
 
 export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
   /**
@@ -34,11 +33,6 @@ export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
   size?: CheckboxIconProps["size"];
 
   /**
-   * Ref to target the input.
-   */
-  labelRef?: React.Ref<HTMLLabelElement>;
-
-  /**
    * Props to pass to the Label.
    */
   labelProps?: React.HTMLAttributes<HTMLLabelElement>;
@@ -55,14 +49,10 @@ export const Checkbox = forwardRefWithAs<
     state: stateProp,
     onStateChange,
     size = "md",
-    labelRef,
     labelProps,
     ...inputProps
   } = props;
 
-  console.log("%c state", "color: #8c0038", stateProp);
-  console.log("%c defaultState", "color: #514080", defaultState);
-  console.log("%c onStateChange", "color: #99614d", onStateChange);
   const [state, setState] = useControllableState({
     defaultValue: defaultState,
     value: stateProp,
@@ -70,11 +60,8 @@ export const Checkbox = forwardRefWithAs<
   });
   console.log("%c state", "color: #73998c", state);
 
-  const checkbox = useTheme("checkboxNew");
-  const baseStyles = cx(checkbox.base);
-
   return (
-    <label ref={labelRef} className={baseStyles} {...labelProps}>
+    <CheckboxLabel {...labelProps}>
       <CheckboxInput
         ref={ref}
         state={state}
@@ -82,7 +69,7 @@ export const Checkbox = forwardRefWithAs<
         {...inputProps}
       />
       <CheckboxIcon state={state} size={size} />
-    </label>
+    </CheckboxLabel>
   );
 });
 
