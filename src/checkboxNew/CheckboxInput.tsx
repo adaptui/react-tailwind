@@ -7,7 +7,14 @@ import { cx } from "@renderlesskit/react";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 
-export type CheckboxInputProps = ReakitCheckboxProps;
+export type CheckboxInputProps = ReakitCheckboxProps & {
+  /**
+   * If `true`, the checkbox will be invalid.
+   *
+   * @default false
+   */
+  invalid?: boolean;
+};
 
 export const CheckboxInput = forwardRefWithAs<
   CheckboxInputProps,
@@ -26,12 +33,15 @@ export const CheckboxInput = forwardRefWithAs<
     // Because they work standalone withount the below `uncontrolled` state logic.
     // <ReakitCheckbox checked={check} onChange={e => console.log(setCheck(e.target.checked))} />
     // Because we are handling them using `state` and `onStateChange`
+    invalid,
+    // We are removing className & style, so users don't change the input styles
     className,
+    style,
     ...rest
   } = props;
 
   const checkbox = useTheme("checkboxNew");
-  const baseStyles = cx(checkbox.input, className);
+  const baseStyles = cx(checkbox.input);
 
   return (
     <ReakitCheckbox
@@ -39,6 +49,7 @@ export const CheckboxInput = forwardRefWithAs<
       state={state}
       setState={setState}
       className={baseStyles}
+      aria-invalid={invalid}
       {...rest}
     />
   );

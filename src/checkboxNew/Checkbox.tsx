@@ -1,9 +1,16 @@
 import { useControllableState } from "@renderlesskit/react";
 import { CheckboxStateReturn as ReakitCheckboxStateReturn } from "reakit";
 
-import { forwardRefWithAs } from "../utils/types";
+import {
+  CheckboxDefaultIcon,
+  CheckboxIcon,
+  CheckboxIconProps,
+  CheckboxIconRenderProps,
+} from "./CheckboxIcon";
+import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
-import { CheckboxIcon, CheckboxIconProps } from "./CheckboxIcon";
+import { forwardRefWithAs } from "../utils/types";
+import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
 
 export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
@@ -33,9 +40,19 @@ export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
   size?: CheckboxIconProps["size"];
 
   /**
-   * Props to pass to the Label.
+   * Provide custom icons as a replacement for the default ones.
    */
-  labelProps?: React.HTMLAttributes<HTMLLabelElement>;
+  icon?: (props: CheckboxIconRenderProps) => React.ReactNode;
+
+  /**
+   * Label for the Checkbox.
+   */
+  label?: string;
+
+  /**
+   * Description for the Checkbox.
+   */
+  description?: string;
 };
 
 export const Checkbox = forwardRefWithAs<
@@ -49,7 +66,14 @@ export const Checkbox = forwardRefWithAs<
     state: stateProp,
     onStateChange,
     size = "md",
-    labelProps,
+    invalid = false,
+    icon = CheckboxDefaultIcon,
+    label,
+    description,
+    // Top level styles(label) for the checkbox
+    className,
+    style,
+    children,
     ...inputProps
   } = props;
 
@@ -60,17 +84,36 @@ export const Checkbox = forwardRefWithAs<
   });
   console.log("%c state", "color: #73998c", state);
 
-  return (
-    <CheckboxLabel {...labelProps}>
-      <CheckboxInput
-        ref={ref}
-        state={state}
-        setState={setState}
-        {...inputProps}
-      />
-      <CheckboxIcon state={state} size={size} />
-    </CheckboxLabel>
-  );
+  if (description && !label) {
+    console.warn("Checkbox: `description` should be used along with `label`");
+  }
+
+  if (!children) {
+    return (
+      <CheckboxLabel className={className} style={style}>
+        <CheckboxInput
+          ref={ref}
+          state={state}
+          setState={setState}
+          {...inputProps}
+        />
+        <CheckboxIcon state={state} size={size} invalid={invalid}>
+          {icon}
+        </CheckboxIcon>
+        {label && !description ? (
+          <CheckboxText size={size}>{label}</CheckboxText>
+        ) : null}
+        {label && description ? (
+          <div className="flex flex-col">
+            <CheckboxText size={size}>{label}</CheckboxText>
+            <CheckboxDescription size={size}>{description}</CheckboxDescription>
+          </div>
+        ) : null}
+      </CheckboxLabel>
+    );
+  }
+
+  return null;
 });
 
 Checkbox.displayName = "Checkbox";

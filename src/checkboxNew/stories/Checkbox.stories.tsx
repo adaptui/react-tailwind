@@ -1,4 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+// @ts-ignore
+import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
 
 import { Checkbox } from "../Checkbox";
 import { createControls } from "../../../.storybook/storybookUtils";
@@ -23,8 +25,7 @@ export default {
       "defaultState",
       "state",
       "onStateChange",
-      "labelProps",
-      "labelRef",
+      "icon",
     ],
   }),
   parameters: {
@@ -96,6 +97,30 @@ export const CheckboxStack: ComponentStory<typeof Checkbox> = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
+  decorators: [withPseudoState],
+  parameters: { options: { showPanel: true } },
+};
+
+export const HoverStack: ComponentStory<typeof Checkbox> = {
+  ...CheckboxStack,
+  parameters: { options: { showPanel: false }, pseudo: { hover: true } },
+};
+export const ActiveStack: ComponentStory<typeof Checkbox> = {
+  ...CheckboxStack,
+  parameters: { options: { showPanel: false }, pseudo: { active: true } },
+};
+export const FocusStack: ComponentStory<typeof Checkbox> = {
+  ...CheckboxStack,
+  parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
+};
+export const DisabledStack: ComponentStory<typeof Checkbox> = {
+  ...CheckboxStack,
+  args: { disabled: true },
+  parameters: { options: { showPanel: false } },
+};
+export const InvalidStack: ComponentStory<typeof Checkbox> = {
+  ...CheckboxStack,
+  args: { invalid: true },
   parameters: { options: { showPanel: true } },
 };
 
@@ -125,3 +150,133 @@ export const Controlled = () => {
 };
 
 Controlled.parameters = { options: { showPanel: false } };
+
+export const WithLabelStack: ComponentStory<typeof Checkbox> = {
+  render: args => {
+    return (
+      <div className="flex flex-col space-y-4">
+        <div className="space-x-4">
+          <Checkbox {...args} label="Checkbox" size="sm" />
+          <Checkbox {...args} label="Checkbox" size="md" />
+          <Checkbox {...args} label="Checkbox" size="lg" />
+        </div>
+        <div className="space-x-4">
+          <Checkbox {...args} label="Checkbox" size="sm" defaultState={true} />
+          <Checkbox {...args} label="Checkbox" size="md" defaultState={true} />
+          <Checkbox {...args} label="Checkbox" size="lg" defaultState={true} />
+        </div>
+        <div className="space-x-4">
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            size="sm"
+            defaultState="indeterminate"
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            size="md"
+            defaultState="indeterminate"
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            size="lg"
+            defaultState="indeterminate"
+          />
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
+    label: { table: { disable: true } },
+    description: { table: { disable: true } },
+  },
+  decorators: [withPseudoState],
+  parameters: { options: { showPanel: true } },
+};
+
+export const WithDescriptionStack: ComponentStory<typeof Checkbox> = {
+  render: args => {
+    return (
+      <div className="flex flex-col space-y-8">
+        <div className="max-w-xs space-y-4">
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="sm"
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="md"
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="lg"
+          />
+        </div>
+        <div className="max-w-xs space-y-4">
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="sm"
+            defaultState={true}
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="md"
+            defaultState={true}
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="lg"
+            defaultState={true}
+          />
+        </div>
+        <div className="max-w-xs space-y-4">
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="sm"
+            defaultState="indeterminate"
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="md"
+            defaultState="indeterminate"
+          />
+          <Checkbox
+            {...args}
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="lg"
+            defaultState="indeterminate"
+          />
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
+    label: { table: { disable: true } },
+    description: { table: { disable: true } },
+  },
+  decorators: [withPseudoState],
+  parameters: { options: { showPanel: true } },
+};

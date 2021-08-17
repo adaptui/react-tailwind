@@ -141,24 +141,24 @@ export const ButtonStack: ComponentStory<typeof Button> = {
   parameters: { options: { showPanel: true } },
 };
 
-export const Hover: ComponentStory<typeof Button> = {
+export const HoverStack: ComponentStory<typeof Button> = {
   ...ButtonStack,
   parameters: { options: { showPanel: false }, pseudo: { hover: true } },
 };
-export const Active: ComponentStory<typeof Button> = {
+export const ActiveStack: ComponentStory<typeof Button> = {
   ...ButtonStack,
   parameters: { options: { showPanel: false }, pseudo: { active: true } },
 };
-export const Focus: ComponentStory<typeof Button> = {
+export const FocusStack: ComponentStory<typeof Button> = {
   ...ButtonStack,
   parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
 };
-export const Disabled: ComponentStory<typeof Button> = {
+export const DisabledStack: ComponentStory<typeof Button> = {
   ...ButtonStack,
   args: { disabled: true },
   parameters: { options: { showPanel: false } },
 };
-export const Loading: ComponentStory<typeof Button> = {
+export const LoadingStack: ComponentStory<typeof Button> = {
   ...ButtonStack,
   args: { loading: true },
   parameters: { options: { showPanel: false } },
