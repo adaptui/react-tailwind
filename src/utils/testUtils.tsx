@@ -41,13 +41,13 @@ export const axe = configureAxe({
 });
 
 type UI = Parameters<typeof render>[0] | Element;
-type TestA11YOptions = RenderOptions & {
+type TestA11YOption = RenderOptions & {
   axeOptions?: RunOptions;
 };
 
 export const testA11y = async (
   ui: UI,
-  { axeOptions, ...options }: TestA11YOptions = {},
+  { axeOptions, ...options }: TestA11YOption = {},
 ) => {
   jest.useRealTimers();
 
