@@ -7,22 +7,33 @@ import { runIfFn, withIconA11y } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 import { CheckIcon, IndeterminateIcon } from "../icons";
 
-export type CheckboxIconRenderProps = Pick<CheckboxProps, "state" | "invalid">;
+export type CheckboxIconRenderProps = Pick<
+  CheckboxProps,
+  "state" | "value" | "invalid"
+>;
 
 export type CheckboxIconProps = BoxProps &
-  Required<Pick<CheckboxProps, "state" | "invalid">> & {
-    size: keyof Renderlesskit.GetThemeValue<"checkboxNew", "icon", "size">;
-  };
+  Required<Pick<CheckboxProps, "state">> &
+  Pick<CheckboxProps, "value" | "size" | "invalid">;
 
 export const CheckboxIcon = forwardRefWithAs<
   CheckboxIconProps,
   HTMLSpanElement,
   "span"
 >((props, ref) => {
-  const { state, size, invalid, className, children, ...rest } = props;
-  const isChecked = state === true;
-  const isUnchecked = state === false;
+  const {
+    state,
+    value,
+    size = "md",
+    invalid = false,
+    className,
+    children,
+    ...rest
+  } = props;
+  const isChecked =
+    Array.isArray(state) && value ? state.includes(value) : state === true;
   const isIndeterminate = state === "indeterminate";
+  const isUnchecked = !isChecked && !isIndeterminate;
 
   const checkbox = useTheme("checkboxNew");
   const baseStyles = cx(
@@ -66,7 +77,7 @@ export const CheckboxIcon = forwardRefWithAs<
 
   return (
     <Box ref={ref} as="span" className={baseStyles} {...rest}>
-      {children ? runIfFn(children, { state, invalid }) : null}
+      {children ? runIfFn(children, { state, value, invalid }) : null}
     </Box>
   );
 });
@@ -74,8 +85,9 @@ export const CheckboxIcon = forwardRefWithAs<
 CheckboxIcon.displayName = "CheckboxIcon";
 
 export const CheckboxDefaultIcon = (props: CheckboxIconRenderProps) => {
-  const { state } = props;
-  const isChecked = state === true;
+  const { state, value } = props;
+  const isChecked =
+    Array.isArray(state) && value ? state.includes(value) : state === true;
   const isIndeterminate = state === "indeterminate";
 
   return (

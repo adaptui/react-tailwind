@@ -2,16 +2,16 @@ import { useControllableState } from "@renderlesskit/react";
 import { CheckboxStateReturn as ReakitCheckboxStateReturn } from "reakit";
 
 import {
-  CheckboxDefaultIcon,
   CheckboxIcon,
-  CheckboxIconProps,
+  CheckboxDefaultIcon,
   CheckboxIconRenderProps,
 } from "./CheckboxIcon";
 import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
+import { runIfFn } from "../utils";
 
 export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
   /**
@@ -37,7 +37,7 @@ export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
    *
    * @default md
    */
-  size?: CheckboxIconProps["size"];
+  size?: keyof Renderlesskit.GetThemeValue<"checkboxNew", "icon", "size">;
 
   /**
    * Provide custom icons as a replacement for the default ones.
@@ -53,6 +53,11 @@ export type CheckboxProps = Omit<CheckboxInputProps, "size"> & {
    * Description for the Checkbox.
    */
   description?: string;
+
+  /**
+   * Children of the Checkbox.
+   */
+  children?: RenderProp<CheckboxProps>;
 };
 
 export const Checkbox = forwardRefWithAs<
@@ -65,6 +70,7 @@ export const Checkbox = forwardRefWithAs<
     defaultState = false,
     state: stateProp,
     onStateChange,
+    value,
     size = "md",
     invalid = false,
     icon = CheckboxDefaultIcon,
@@ -95,9 +101,10 @@ export const Checkbox = forwardRefWithAs<
           ref={ref}
           state={state}
           setState={setState}
+          value={value}
           {...inputProps}
         />
-        <CheckboxIcon state={state} size={size} invalid={invalid}>
+        <CheckboxIcon state={state} value={value} size={size} invalid={invalid}>
           {icon}
         </CheckboxIcon>
         {label && !description ? (
@@ -113,7 +120,7 @@ export const Checkbox = forwardRefWithAs<
     );
   }
 
-  return null;
+  return <>{runIfFn(children, { state, setState })};</>;
 });
 
 Checkbox.displayName = "Checkbox";
