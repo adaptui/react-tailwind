@@ -8,6 +8,28 @@ import { CheckboxStateReturn } from "./CheckboxState";
 import { CHECKBOX_KEYS } from "./__keys";
 import { fireChange, getChecked, useIndeterminateState } from "./helpers";
 
+export type CheckboxOptions = ClickableOptions &
+  Pick<Partial<CheckboxStateReturn>, "state" | "setState"> & {
+    /**
+     * Checkbox's value is going to be used when multiple checkboxes share the
+     * same state. Checking a checkbox with value will add it to the state
+     * array.
+     */
+    value?: string | number;
+
+    /**
+     * Checkbox's checked state. If present, it's used instead of `state`.
+     */
+    checked?: boolean;
+  };
+
+export type CheckboxHTMLProps = ClickableHTMLProps &
+  React.InputHTMLAttributes<any> & {
+    value?: string | number;
+  };
+
+export type CheckboxProps = CheckboxOptions & CheckboxHTMLProps;
+
 export const useCheckbox = createHook<CheckboxOptions, CheckboxHTMLProps>({
   name: "Checkbox",
   compose: useClickable,
@@ -73,6 +95,7 @@ export const useCheckbox = createHook<CheckboxOptions, CheckboxHTMLProps>({
           if (!isNativeCheckbox) {
             element.checked = !element.checked;
           }
+
           onChangeRef.current(event);
         }
 
@@ -134,25 +157,3 @@ export const Checkbox = createComponent({
   memo: true,
   useHook: useCheckbox,
 });
-
-export type CheckboxOptions = ClickableOptions &
-  Pick<Partial<CheckboxStateReturn>, "state" | "setState"> & {
-    /**
-     * Checkbox's value is going to be used when multiple checkboxes share the
-     * same state. Checking a checkbox with value will add it to the state
-     * array.
-     */
-    value?: string | number;
-
-    /**
-     * Checkbox's checked state. If present, it's used instead of `state`.
-     */
-    checked?: boolean;
-  };
-
-export type CheckboxHTMLProps = ClickableHTMLProps &
-  React.InputHTMLAttributes<any> & {
-    value?: string | number;
-  };
-
-export type CheckboxProps = CheckboxOptions & CheckboxHTMLProps;

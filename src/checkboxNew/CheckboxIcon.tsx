@@ -1,94 +1,81 @@
 import { cx } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { CheckboxProps } from "./Checkbox";
-import { runIfFn, withIconA11y } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
-import { CheckIcon, IndeterminateIcon } from "../icons";
+import { withIconA11y } from "../utils";
+import { CHECKBOX_LABEL_KEYS } from "./__keys";
+import { CheckboxStateReturn } from "./CheckboxState";
+import { IndeterminateIcon, CheckIcon } from "../icons";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-export type CheckboxIconRenderProps = Pick<
-  CheckboxProps,
-  "state" | "value" | "invalid"
->;
+export type CheckboxIconOptions = BoxOptions &
+  Pick<
+    CheckboxStateReturn,
+    "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
+  >;
 
-export type CheckboxIconProps = BoxProps &
-  Required<Pick<CheckboxProps, "state">> &
-  Pick<CheckboxProps, "value" | "size" | "invalid">;
+export type CheckboxIconHTMLProps = BoxHTMLProps;
 
-export const CheckboxIcon = forwardRefWithAs<
-  CheckboxIconProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const {
-    state,
-    value,
-    size = "md",
-    invalid = false,
-    className,
-    children,
-    ...rest
-  } = props;
-  const isChecked =
-    Array.isArray(state) && value ? state.includes(value) : state === true;
-  const isIndeterminate = state === "indeterminate";
-  const isUnchecked = !isChecked && !isIndeterminate;
+export type CheckboxIconProps = CheckboxIconOptions & CheckboxIconHTMLProps;
 
-  const checkbox = useTheme("checkboxNew");
-  const baseStyles = cx(
-    checkbox.icon.base,
-    checkbox.icon.size[size],
-    isUnchecked
-      ? invalid
-        ? checkbox.icon.unChecked.invalid
-        : cx(
+export const useCheckboxIcon = createHook<
+  CheckboxIconOptions,
+  CheckboxIconHTMLProps
+>({
+  name: "CheckboxIcon",
+  compose: useBox,
+  keys: CHECKBOX_LABEL_KEYS,
+
+  useProps(options, htmlProps) {
+    const { isChecked, isIndeterminate, isUnchecked, size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const checkbox = useTheme("checkboxNew");
+    const className = cx(
+      checkbox.icon.base,
+      checkbox.icon.size[size],
+      isUnchecked
+        ? cx(
             checkbox.icon.unChecked.default,
             checkbox.icon.unChecked.hover,
             checkbox.icon.unChecked.active,
             checkbox.icon.unChecked.focus,
             checkbox.icon.unChecked.disabled,
           )
-      : "",
-    isChecked
-      ? invalid
-        ? checkbox.icon.checked.invalid
-        : cx(
+        : "",
+      isChecked
+        ? cx(
             checkbox.icon.checked.default,
             checkbox.icon.checked.hover,
             checkbox.icon.checked.active,
             checkbox.icon.checked.focus,
             checkbox.icon.checked.disabled,
           )
-      : "",
-    isIndeterminate
-      ? invalid
-        ? checkbox.icon.indeterminate.invalid
-        : cx(
+        : "",
+      isIndeterminate
+        ? cx(
             checkbox.icon.checked.default,
             checkbox.icon.indeterminate.hover,
             checkbox.icon.indeterminate.active,
             checkbox.icon.indeterminate.focus,
             checkbox.icon.indeterminate.disabled,
           )
-      : "",
-    className,
-  );
+        : "",
+      htmlClassName,
+    );
 
-  return (
-    <Box ref={ref} as="span" className={baseStyles} {...rest}>
-      {children ? runIfFn(children, { state, value, invalid }) : null}
-    </Box>
-  );
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxIcon.displayName = "CheckboxIcon";
+export const CheckboxIcon = createComponent({
+  as: "span",
+  memo: true,
+  useHook: useCheckboxIcon,
+});
 
-export const CheckboxDefaultIcon = (props: CheckboxIconRenderProps) => {
-  const { state, value } = props;
-  const isChecked =
-    Array.isArray(state) && value ? state.includes(value) : state === true;
-  const isIndeterminate = state === "indeterminate";
+export const CheckboxDefaultIcon = (props: CheckboxStateReturn) => {
+  const { isChecked, isIndeterminate } = props;
 
   return (
     <>

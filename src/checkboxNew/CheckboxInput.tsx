@@ -1,58 +1,43 @@
 import {
-  Checkbox as ReakitCheckbox,
-  CheckboxProps as ReakitCheckboxProps,
-} from "reakit";
+  useCheckbox,
+  CheckboxOptions,
+  CheckboxHTMLProps,
+} from "../checkboxReakit";
 import { cx } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
+import { CHECKBOX_INPUT_KEYS } from "./__keys";
+import { CheckboxStateReturn } from "./CheckboxState";
 
-export type CheckboxInputProps = ReakitCheckboxProps & {
-  /**
-   * If `true`, the checkbox will be invalid.
-   *
-   * @default false
-   */
-  invalid?: boolean;
+export type CheckboxInputOptions = CheckboxOptions & {
+  size: CheckboxStateReturn["size"];
 };
 
-export const CheckboxInput = forwardRefWithAs<
-  CheckboxInputProps,
-  HTMLInputElement,
-  "input"
->((props, ref) => {
-  const {
-    state,
-    setState,
-    // We should definitely discard `defaultChecked` because it is not a controlled prop
-    // Causes the below error:
-    // Input elements must be either controlled or uncontrolled.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    defaultChecked,
-    // Decide on what to do with `checked` `onChange`
-    // Because they work standalone withount the below `uncontrolled` state logic.
-    // <ReakitCheckbox checked={check} onChange={e => console.log(setCheck(e.target.checked))} />
-    // Because we are handling them using `state` and `onStateChange`
-    invalid,
-    // We are removing className & style, so users don't change the input styles
-    className,
-    style,
-    ...rest
-  } = props;
+export type CheckboxInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
 
-  const checkbox = useTheme("checkboxNew");
-  const baseStyles = cx(checkbox.input);
+export type CheckboxInputProps = CheckboxInputOptions & CheckboxInputHTMLProps;
 
-  return (
-    <ReakitCheckbox
-      ref={ref}
-      state={state}
-      setState={setState}
-      className={baseStyles}
-      aria-invalid={invalid}
-      {...rest}
-    />
-  );
+export const useCheckboxInput = createHook<
+  CheckboxInputOptions,
+  CheckboxInputHTMLProps
+>({
+  name: "CheckboxInput",
+  compose: useCheckbox,
+  keys: CHECKBOX_INPUT_KEYS,
+
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("checkboxNew");
+    const className = cx(theme.input, htmlClassName);
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxInput.displayName = "CheckboxInput";
+export const CheckboxInput = createComponent({
+  as: "input",
+  memo: true,
+  useHook: useCheckboxInput,
+});

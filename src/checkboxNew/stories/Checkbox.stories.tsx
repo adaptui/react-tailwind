@@ -1,12 +1,11 @@
+import { useEffect, useMemo, useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 // @ts-ignore
 import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
 
-import { Checkbox } from "../Checkbox";
+import { Button } from "../../button";
+import { Checkbox, CheckboxProps } from "../Checkbox";
 import { createControls } from "../../../.storybook/storybookUtils";
-import { useEffect, useMemo, useState } from "react";
-import { Button, CheckboxStatus } from "../..";
-import { CheckboxProps } from "reakit/ts";
 
 export default {
   title: "Forms/CheckboxNew",
@@ -117,11 +116,6 @@ export const DisabledStack: ComponentStory<typeof Checkbox> = {
   ...CheckboxStack,
   args: { disabled: true },
   parameters: { options: { showPanel: false } },
-};
-export const InvalidStack: ComponentStory<typeof Checkbox> = {
-  ...CheckboxStack,
-  args: { invalid: true },
-  parameters: { options: { showPanel: true } },
 };
 
 export const WithLabelStack: ComponentStory<typeof Checkbox> = {
@@ -373,8 +367,11 @@ GroupBooleanState.parameters = { options: { showPanel: false } };
 
 export const GroupStringState = () => {
   const values = useMemo(() => ["Apple", "Orange", "Watermelon"], []);
-  const [itemState, setItemState] = useState<CheckboxStatus>([]);
-  const [groupState, setGroupState] = useState<CheckboxStatus>(false);
+  const [itemState, setItemState] = useState<
+    NonNullable<CheckboxProps["state"]>
+  >([]);
+  const [groupState, setGroupState] =
+    useState<NonNullable<CheckboxProps["state"]>>(false);
 
   const isAllChecked = groupState === true;
   const isIndeterminate = groupState === "indeterminate";

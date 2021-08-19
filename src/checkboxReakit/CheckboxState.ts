@@ -1,24 +1,5 @@
 import { useControllableState } from "@renderlesskit/react";
 
-export function useCheckboxState(
-  props: CheckboxInitialState = {},
-): CheckboxStateReturn {
-  const {
-    // Default State should be false otherwise input state will be undefined
-    defaultState = false,
-    state: stateProp,
-    onStateChange,
-  } = props;
-
-  const [state, setState] = useControllableState({
-    defaultValue: defaultState,
-    value: stateProp,
-    onChange: onStateChange,
-  });
-
-  return { state, setState };
-}
-
 export type CheckboxState = {
   /**
    * Stores the state of the checkbox.
@@ -55,3 +36,22 @@ export type CheckboxInitialState = {
 };
 
 export type CheckboxStateReturn = CheckboxState & CheckboxActions;
+
+export function useCheckboxState(
+  props: CheckboxInitialState = {},
+): CheckboxStateReturn {
+  const {
+    // Default State should be false otherwise input state will be undefined
+    defaultState = false,
+    state: stateProp,
+    onStateChange,
+  } = props;
+
+  const [state, setState] = useControllableState({
+    defaultValue: defaultState,
+    value: stateProp,
+    onChange: onStateChange,
+  });
+
+  return { state, setState };
+}

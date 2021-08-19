@@ -1,5 +1,19 @@
 // Automatically generated
-const RADIO_STATE_KEYS = [
+export const USE_RADIO_STATE_KEYS = [
+  "baseId",
+  "unstable_virtual",
+  "rtl",
+  "orientation",
+  "currentId",
+  "loop",
+  "wrap",
+  "shift",
+  "unstable_includesBaseElement",
+  "state",
+  "defaultState",
+  "onStateChange",
+] as const;
+export const RADIO_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
   "unstable_virtual",
