@@ -21,7 +21,7 @@ export const checkboxNew = {
         "lib:bg-red-600 lib:border-red-600 lib:text-white peer-hover:lib:bg-red-500 peer-hover:lib:border-red-500 peer-active:lib:bg-red-600 peer-active:lib:border-red-600 peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-red-300 peer-disabled:lib:bg-red-200 peer-disabled:lib:border-red-200 peer-disabled:lib:text-red-400",
     },
     unChecked: {
-      default: "lib:bg-white lib:border-gray-400 lib:text-transparent",
+      default: "lib:bg-white lib:border-gray-400 lib:text-current",
       hover: "peer-hover:lib:border-gray-500",
       active: "peer-active:lib:border-gray-400",
       focus:
@@ -29,7 +29,7 @@ export const checkboxNew = {
       disabled:
         "peer-disabled:lib:bg-gray-200 peer-disabled:lib:border-gray-300",
       invalid:
-        "lib:bg-white lib:border-red-600 lib:text-transparent peer-hover:lib:border-red-700 peer-active:lib:border-red-600 peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-red-300 peer-disabled:lib:bg-red-200 peer-disabled:lib:border-red-300",
+        "lib:bg-white lib:border-red-600 lib:text-current peer-hover:lib:border-red-700 peer-active:lib:border-red-600 peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-red-300 peer-disabled:lib:bg-red-200 peer-disabled:lib:border-red-300",
     },
     indeterminate: {
       default: "lib:bg-gray-800 lib:border-gray-800 lib:text-white",

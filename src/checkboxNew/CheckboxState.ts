@@ -39,10 +39,8 @@ export type CheckboxActions = RenderlesskitCheckboxActions & {};
 
 export type CheckboxStateReturn = CheckboxState & CheckboxActions;
 
-export type CheckboxInitialState = RenderlesskitCheckboxInitialState & {
-  size?: CheckboxState["size"];
-  value?: CheckboxInputOptions["value"];
-};
+export type CheckboxInitialState = RenderlesskitCheckboxInitialState &
+  Partial<Pick<CheckboxState, "size" | "value">>;
 
 export function useCheckboxState(
   props: CheckboxInitialState = {},

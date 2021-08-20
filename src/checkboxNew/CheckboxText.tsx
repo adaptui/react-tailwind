@@ -26,7 +26,7 @@ export const useCheckboxText = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkboxNew");
-    const className = cx(theme.text.base, theme.text.size[size], restHtmlProps);
+    const className = cx(theme.text.base, theme.text.size[size], htmlClassName);
 
     return { className, ...restHtmlProps };
   },
