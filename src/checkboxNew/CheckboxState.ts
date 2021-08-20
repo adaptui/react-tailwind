@@ -28,6 +28,11 @@ export type CheckboxState = RenderlesskitCheckboxState & {
    * If true, Checkbox is unchecked.
    */
   isUnchecked: boolean;
+
+  /**
+   * Input's value.
+   */
+  value: CheckboxInputOptions["value"];
 };
 
 export type CheckboxActions = RenderlesskitCheckboxActions & {};
@@ -54,6 +59,7 @@ export function useCheckboxState(
     state,
     setState,
     size,
+    value,
     isChecked,
     isIndeterminate,
     isUnchecked,
