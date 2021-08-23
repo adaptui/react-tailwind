@@ -1,8 +1,8 @@
 import {
   CheckboxState as RenderlesskitCheckboxState,
   CheckboxActions as RenderlesskitCheckboxActions,
-  CheckboxInitialState as RenderlesskitCheckboxInitialState,
   useCheckboxState as useRenderlesskitCheckboxState,
+  CheckboxInitialState as RenderlesskitCheckboxInitialState,
 } from "../checkboxReakit";
 import { CheckboxInputOptions } from "./CheckboxInput";
 

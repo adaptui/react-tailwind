@@ -1,5 +1,4 @@
 import { cx } from "@renderlesskit/react";
-import { splitProps } from "reakit-utils";
 import { useEffect, useMemo, useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 // @ts-ignore
@@ -17,11 +16,10 @@ import {
 } from "../index";
 import { Button } from "../../button";
 import { withIconA11y } from "../../utils";
-import { USE_CHECKBOX_STATE_KEYS } from "../__keys";
-import { Checkbox, CheckboxProps } from "../Checkbox";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
 import { CloseIcon, EyeClose, EyeOpen } from "../../icons";
 import { createControls } from "../../../.storybook/storybookUtils";
+import { Checkbox, CheckboxProps, useCheckboxProps } from "../Checkbox";
 
 export default {
   title: "Forms/CheckboxNew",
@@ -543,11 +541,7 @@ CustomSimple.parameters = { options: { showPanel: false } };
 type CustomCheckboxProps = CheckboxInputHTMLProps & CheckboxInitialState;
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
-  const [stateProps, checkboxProps] = splitProps(
-    props,
-    USE_CHECKBOX_STATE_KEYS,
-  ) as [CheckboxInitialState, CheckboxInputHTMLProps];
-  const state = useCheckboxState(stateProps);
+  const [state, checkboxProps] = useCheckboxProps(props);
   const { className, children, ...inputProps } = checkboxProps;
 
   return (
