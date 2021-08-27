@@ -5,9 +5,16 @@ export const checkboxNew = {
   icon: {
     base: "lib:inline-flex lib:items-center lib:justify-center lib:self-start lib:flex-shrink-0 lib:align-top lib:select-none lib:transition-all",
     size: {
-      sm: "lib:w-3.5 lib:h-3.5 lib:text-[10px] lib:border-[1.5px] lib:rounded lib:mr-1.5",
-      md: "lib:w-4 lib:h-4 lib:text-xs lib:border-[1.5px] lib:rounded lib:mr-2",
-      lg: "lib:w-5 lib:h-5 lib:text-base lib:border-[1.5px] lib:rounded lib:mr-2",
+      base: {
+        sm: "lib:w-3.5 lib:h-3.5 lib:text-[10px] lib:border-[1.5px] lib:rounded",
+        md: "lib:w-4 lib:h-4 lib:text-xs lib:border-[1.5px] lib:rounded",
+        lg: "lib:w-5 lib:h-5 lib:text-base lib:border-[1.5px] lib:rounded",
+      },
+      space: {
+        sm: "lib:mr-1.5",
+        md: "lib:mr-2",
+        lg: "lib:mr-2",
+      },
     },
     checked: {
       default: "lib:bg-gray-800 lib:border-gray-800 lib:text-white",
