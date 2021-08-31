@@ -12,7 +12,12 @@ export type CheckboxState = RenderlesskitCheckboxState & {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"checkboxNew", "icon", "size">;
+  size: keyof Renderlesskit.GetThemeValue<
+    "checkboxNew",
+    "icon",
+    "size",
+    "base"
+  >;
 
   /**
    * If true, Checkbox is checked.

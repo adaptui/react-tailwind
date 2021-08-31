@@ -3,7 +3,8 @@ import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";
 import { withIconA11y } from "../utils";
-import { CHECKBOX_LABEL_KEYS } from "./__keys";
+import { CheckboxProps } from "./Checkbox";
+import { CHECKBOX_ICON_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
 import { IndeterminateIcon, CheckIcon } from "../icons";
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
@@ -12,7 +13,7 @@ export type CheckboxIconOptions = BoxOptions &
   Pick<
     CheckboxStateReturn,
     "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
-  >;
+  > & { label: CheckboxProps["label"] };
 
 export type CheckboxIconHTMLProps = BoxHTMLProps;
 
@@ -24,16 +25,17 @@ export const useCheckboxIcon = createHook<
 >({
   name: "CheckboxIcon",
   compose: useBox,
-  keys: CHECKBOX_LABEL_KEYS,
+  keys: CHECKBOX_ICON_KEYS,
 
   useProps(options, htmlProps) {
-    const { isChecked, isIndeterminate, isUnchecked, size } = options;
+    const { isChecked, isIndeterminate, isUnchecked, size, label } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const checkbox = useTheme("checkboxNew");
     const className = cx(
       checkbox.icon.base,
-      checkbox.icon.size[size],
+      checkbox.icon.size.base[size],
+      label ? checkbox.icon.size.space[size] : "",
       isUnchecked
         ? cx(
             checkbox.icon.unChecked.default,
