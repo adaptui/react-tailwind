@@ -8,7 +8,6 @@ import {
   CheckboxIcon,
   CheckboxLabel,
   CheckboxInput,
-  useCheckboxState,
   CheckboxState,
   CheckboxInitialState,
   CheckboxText,
@@ -17,7 +16,7 @@ import {
 import { Button } from "../../button";
 import { withIconA11y } from "../../utils";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
-import { CloseIcon, EyeClose, EyeOpen } from "../../icons";
+import { EyeClose, EyeOpen } from "../../icons";
 import { createControls } from "../../../.storybook/storybookUtils";
 import { Checkbox, CheckboxProps, useCheckboxProps } from "../Checkbox";
 
@@ -490,38 +489,49 @@ export const CustomIcon = () => {
 CustomIcon.parameters = { options: { showPanel: false } };
 
 export const CustomSimple = () => {
-  const state = useCheckboxState();
-
   return (
-    <CheckboxLabel {...state}>
-      <CheckboxInput {...state} />
-      <CheckboxIcon
-        {...state}
-        className={cx(
-          state.isChecked
-            ? "bg-red-500 peer-hover:bg-red-400 peer-active:bg-red-600 "
-            : "",
-          "peer-focus-visible:ring-orange-400",
-        )}
-      >
-        {state.isChecked ? withIconA11y(<CloseIcon />) : null}
-      </CheckboxIcon>
-      <div className="flex">
-        <CheckboxText {...state} className="text-pink-600">
-          Custom Checkbox
-        </CheckboxText>
-        <CheckboxDescription
-          as="span"
-          {...state}
-          className="self-center mt-0 ml-2 text-xs text-emarald-600"
-        >
-          Custom Description
-        </CheckboxDescription>
-      </div>
-    </CheckboxLabel>
+    <Checkbox label="Checkbox" description="Fruits in the basket">
+      <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+      <CheckboxIcon className="bg-red-500" />
+      <CheckboxText className="text-green-500" />
+      <CheckboxDescription className="text-orange-500" />
+    </Checkbox>
   );
 };
 CustomSimple.parameters = { options: { showPanel: false } };
+
+export const CustomSimpleV2 = () => {
+  return (
+    <Checkbox label="Checkbox" description="Fruits in the basket">
+      {state => {
+        return (
+          <>
+            <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+            <CheckboxIcon
+              className={
+                state.isChecked
+                  ? "bg-red-500 peer-hover:bg-red-400"
+                  : "bg-green-500 peer-hover:bg-green-400"
+              }
+            >
+              <>
+                {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
+                {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+              </>
+            </CheckboxIcon>
+            <CheckboxText className="text-green-500">
+              Overidden Label
+            </CheckboxText>
+            <CheckboxDescription className="text-orange-500">
+              Overridden Description
+            </CheckboxDescription>
+          </>
+        );
+      }}
+    </Checkbox>
+  );
+};
+CustomSimpleV2.parameters = { options: { showPanel: false } };
 
 type CustomCheckboxProps = CheckboxInputHTMLProps & CheckboxInitialState;
 
@@ -556,17 +566,6 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
       ) : null}
       <span className="select-none">{children}</span>
     </CheckboxLabel>
-  );
-};
-
-export const CustomSimpleV2 = () => {
-  return (
-    <Checkbox label="Checkbox" description="Fruits in the basket">
-      <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
-      <CheckboxIcon className="bg-red-500" />
-      <CheckboxText className="text-green-500" />
-      <CheckboxDescription className="text-orange-500" />
-    </Checkbox>
   );
 };
 

@@ -6,14 +6,15 @@ import {
   CheckboxStateReturn,
   CheckboxInitialState,
 } from "./CheckboxState";
+import { RenderProp } from "../utils/types";
 import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { USE_CHECKBOX_STATE_KEYS } from "./__keys";
-import { getValidChildren, runIfFn } from "../utils";
+import { runIfFn, runIfFnChildren } from "../utils";
+import { getCheckboxComponentProps } from "./helpers";
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon, CheckboxDefaultIcon } from "./CheckboxIcon";
 import { CheckboxInput, CheckboxInputHTMLProps } from "./CheckboxInput";
-import { Dict } from "../utils/types";
 
 export type CheckboxOwnProps = CheckboxInputHTMLProps & {
   /**
@@ -32,7 +33,9 @@ export type CheckboxOwnProps = CheckboxInputHTMLProps & {
   description?: React.ReactNode | ((args: CheckboxStateReturn) => JSX.Element);
 };
 
-export type CheckboxProps = CheckboxInitialState & CheckboxOwnProps;
+export type CheckboxProps = CheckboxInitialState &
+  CheckboxOwnProps &
+  RenderProp<CheckboxStateReturn>;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
@@ -46,8 +49,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       children,
       ...inputProps
     } = checkboxProps;
-
-    const componentProps = getCheckboxComponentProps(children);
+    const componentProps = getCheckboxComponentProps(
+      runIfFnChildren(children, state),
+    );
 
     return (
       <CheckboxLabel
@@ -62,25 +66,31 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           {...inputProps}
           {...componentProps?.inputProps}
         />
-        <CheckboxIcon {...state} label={label} {...componentProps?.iconProps}>
-          {runIfFn(icon, state)}
-        </CheckboxIcon>
+        <CheckboxIcon
+          {...state}
+          label={label}
+          children={runIfFn(icon, state)}
+          {...componentProps?.iconProps}
+        ></CheckboxIcon>
         {label && !description ? (
-          <CheckboxText {...state} {...componentProps?.textProps}>
-            {runIfFn(label, state)}
-          </CheckboxText>
+          <CheckboxText
+            {...state}
+            children={runIfFn(label, state)}
+            {...componentProps?.textProps}
+          />
         ) : null}
         {label && description ? (
           <div className="flex flex-col">
-            <CheckboxText {...state} {...componentProps?.textProps}>
-              {runIfFn(label, state)}
-            </CheckboxText>
+            <CheckboxText
+              {...state}
+              children={runIfFn(label, state)}
+              {...componentProps?.textProps}
+            />
             <CheckboxDescription
               {...state}
+              children={runIfFn(description, state)}
               {...componentProps?.descriptionProps}
-            >
-              {runIfFn(description, state)}
-            </CheckboxDescription>
+            />
           </div>
         ) : null}
       </CheckboxLabel>
@@ -102,26 +112,4 @@ export const useCheckboxProps = (props: CheckboxProps) => {
     CheckboxOwnProps,
     CheckboxInitialState,
   ];
-};
-
-const ComponentPropsMap = {
-  CheckboxLabel: "labelProps",
-  CheckboxInput: "inputProps",
-  CheckboxIcon: "iconProps",
-  CheckboxText: "textProps",
-  CheckboxDescription: "descriptionProps",
-};
-
-export const getCheckboxComponentProps = (children: React.ReactNode) => {
-  const validChildren = getValidChildren(children);
-  const props: Dict = {};
-
-  validChildren.forEach(child => {
-    props[
-      // @ts-ignore
-      ComponentPropsMap[child.type.displayName]
-    ] = child.props;
-  });
-
-  return props;
 };

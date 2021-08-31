@@ -13,7 +13,7 @@ export type CheckboxIconOptions = BoxOptions &
   Pick<
     CheckboxStateReturn,
     "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
-  > & { label: CheckboxProps["label"] };
+  > & { label?: CheckboxProps["label"] };
 
 export type CheckboxIconHTMLProps = BoxHTMLProps;
 
