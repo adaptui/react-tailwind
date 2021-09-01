@@ -4,7 +4,7 @@ import { Meta } from "@storybook/react";
 import { Box } from "../../box";
 import { Radio, RadioGroup } from "../../radio";
 import { Textarea, TextareaProps } from "../index";
-import { storyTemplate } from "../../../.storybook/storybookUtils";
+import { storyTemplate } from "../../../.storybook/utils";
 
 export default {
   title: "Forms/Textarea",

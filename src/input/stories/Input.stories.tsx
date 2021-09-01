@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { storyTemplate } from "../../../.storybook/storybookUtils";
+import { storyTemplate } from "../../../.storybook/utils";
 
 import {
   Input,

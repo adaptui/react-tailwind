@@ -1,9 +1,6 @@
 import { Meta } from "@storybook/react";
 
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
+import { storyTemplate, createUnionControl } from "../../../.storybook/utils";
 import { Button } from "../../button";
 import { Tooltip, TooltipProps } from "../Tooltip";
 import { ExclamationTriangleIcon } from "../../icons";

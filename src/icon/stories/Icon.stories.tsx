@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 
 import { Icon } from "../index";
 import { ClockIcon, CloseIcon, CaretRightIcon } from "../../icons";
-import { createControls } from "../../../.storybook/storybookUtils";
+import { createControls } from "../../../.storybook/utils";
 
 export default {
   title: "Primitives/Icon",

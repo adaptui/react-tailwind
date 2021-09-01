@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Badge } from "../Badge";
-import { createControls } from "../../../.storybook/storybookUtils";
+import { createControls } from "../../../.storybook/utils";
 
 export default {
   title: "Primitives/Badge",

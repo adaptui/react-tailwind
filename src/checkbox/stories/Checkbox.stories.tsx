@@ -19,7 +19,10 @@ import { useCheckboxProps } from "../helpers";
 import { EyeClose, EyeOpen } from "../../icons";
 import { Checkbox, CheckboxProps } from "../Checkbox";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
-import { createControls } from "../../../.storybook/storybookUtils";
+import { createControls } from "../../../.storybook/utils";
+
+type Meta = ComponentMeta<typeof Checkbox>;
+type Story = ComponentStory<typeof Checkbox>;
 
 export default {
   title: "Forms/checkbox",
@@ -44,9 +47,9 @@ export default {
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof Checkbox>;
+} as Meta;
 
-export const Default: ComponentStory<typeof Checkbox> = {
+export const Default: Story = {
   args: { size: "md", defaultState: false },
   parameters: { options: { showPanel: true } },
   argTypes: {
@@ -54,7 +57,7 @@ export const Default: ComponentStory<typeof Checkbox> = {
   },
 };
 
-export const Small: ComponentStory<typeof Checkbox> = {
+export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
   argTypes: {
@@ -62,14 +65,14 @@ export const Small: ComponentStory<typeof Checkbox> = {
     size: { table: { disable: true } },
   },
 };
-export const Medium: ComponentStory<typeof Checkbox> = {
+export const Medium: Story = {
   ...Default,
   argTypes: {
     ...Default.argTypes,
     size: { table: { disable: true } },
   },
 };
-export const Large: ComponentStory<typeof Checkbox> = {
+export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
   argTypes: {
@@ -78,19 +81,17 @@ export const Large: ComponentStory<typeof Checkbox> = {
   },
 };
 
-export const UnChecked: ComponentStory<typeof Checkbox> = {
-  ...Default,
-};
-export const Checked: ComponentStory<typeof Checkbox> = {
+export const UnChecked: Story = { ...Default };
+export const Checked: Story = {
   ...Default,
   args: { ...Default.args, defaultState: true },
 };
-export const Indeterminate: ComponentStory<typeof Checkbox> = {
+export const Indeterminate: Story = {
   ...Default,
   args: { ...Default.args, defaultState: "indeterminate" },
 };
 
-export const CheckboxStack: ComponentStory<typeof Checkbox> = {
+export const CheckboxStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-2">
@@ -121,25 +122,25 @@ export const CheckboxStack: ComponentStory<typeof Checkbox> = {
   parameters: { options: { showPanel: true } },
 };
 
-export const HoverStack: ComponentStory<typeof Checkbox> = {
+export const HoverStack: Story = {
   ...CheckboxStack,
   parameters: { options: { showPanel: false }, pseudo: { hover: true } },
 };
-export const ActiveStack: ComponentStory<typeof Checkbox> = {
+export const ActiveStack: Story = {
   ...CheckboxStack,
   parameters: { options: { showPanel: false }, pseudo: { active: true } },
 };
-export const FocusStack: ComponentStory<typeof Checkbox> = {
+export const FocusStack: Story = {
   ...CheckboxStack,
   parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
 };
-export const DisabledStack: ComponentStory<typeof Checkbox> = {
+export const DisabledStack: Story = {
   ...CheckboxStack,
   args: { disabled: true },
   parameters: { options: { showPanel: false } },
 };
 
-export const WithLabelStack: ComponentStory<typeof Checkbox> = {
+export const WithLabelStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-4">
@@ -185,7 +186,7 @@ export const WithLabelStack: ComponentStory<typeof Checkbox> = {
   parameters: { options: { showPanel: true } },
 };
 
-export const WithDescriptionStack: ComponentStory<typeof Checkbox> = {
+export const WithDescriptionStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-8">

@@ -1,9 +1,6 @@
 import { Meta } from "@storybook/react";
 
-import {
-  createUnionControl,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
+import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { InfoCircleIcon } from "../../icons";
 import {
   List,

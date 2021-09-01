@@ -1,9 +1,6 @@
 import { Meta } from "@storybook/react";
 
-import {
-  createControls,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
+import { createControls, storyTemplate } from "../../../.storybook/utils";
 import { Spinner, SpinnerProps } from "../index";
 
 export default {

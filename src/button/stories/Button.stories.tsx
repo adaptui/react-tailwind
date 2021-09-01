@@ -10,7 +10,10 @@ import {
 } from "../index";
 import { Spinner } from "../../spinner";
 import { CaretRightIcon, ClockIcon } from "../../icons";
-import { createControls } from "../../../.storybook/storybookUtils";
+import { createControls } from "../../../.storybook/utils";
+
+type Meta = ComponentMeta<typeof Button>;
+type Story = ComponentStory<typeof Button>;
 
 export default {
   title: "Primitives/Button",
@@ -32,43 +35,43 @@ export default {
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof Button>;
+} as Meta;
 
-export const Default: ComponentStory<typeof Button> = {
+export const Default: Story = {
   args: { children: "Continue", size: "md", variant: "solid" },
   decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
-export const Small: ComponentStory<typeof Button> = {
+export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
 };
-export const Medium: ComponentStory<typeof Button> = { ...Default };
-export const Large: ComponentStory<typeof Button> = {
+export const Medium: Story = { ...Default };
+export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
 };
-export const ExtraLarge: ComponentStory<typeof Button> = {
+export const ExtraLarge: Story = {
   ...Default,
   args: { ...Default.args, size: "xl" },
 };
 
-export const Solid: ComponentStory<typeof Button> = { ...Default };
-export const Subtle: ComponentStory<typeof Button> = {
+export const Solid: Story = { ...Default };
+export const Subtle: Story = {
   ...Default,
   args: { ...Default.args, variant: "subtle" },
 };
-export const Outline: ComponentStory<typeof Button> = {
+export const Outline: Story = {
   ...Default,
   args: { ...Default.args, variant: "outline" },
 };
-export const Ghost: ComponentStory<typeof Button> = {
+export const Ghost: Story = {
   ...Default,
   args: { ...Default.args, variant: "ghost" },
 };
 
-export const ButtonStack: ComponentStory<typeof Button> = {
+export const ButtonStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-2">
@@ -141,82 +144,82 @@ export const ButtonStack: ComponentStory<typeof Button> = {
   parameters: { options: { showPanel: true } },
 };
 
-export const HoverStack: ComponentStory<typeof Button> = {
+export const HoverStack: Story = {
   ...ButtonStack,
   parameters: { options: { showPanel: false }, pseudo: { hover: true } },
 };
-export const ActiveStack: ComponentStory<typeof Button> = {
+export const ActiveStack: Story = {
   ...ButtonStack,
   parameters: { options: { showPanel: false }, pseudo: { active: true } },
 };
-export const FocusStack: ComponentStory<typeof Button> = {
+export const FocusStack: Story = {
   ...ButtonStack,
   parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
 };
-export const DisabledStack: ComponentStory<typeof Button> = {
+export const DisabledStack: Story = {
   ...ButtonStack,
   args: { disabled: true },
   parameters: { options: { showPanel: false } },
 };
-export const LoadingStack: ComponentStory<typeof Button> = {
+export const LoadingStack: Story = {
   ...ButtonStack,
   args: { loading: true },
   parameters: { options: { showPanel: false } },
 };
 
-export const IconOnly: ComponentStory<typeof Button> = {
+export const IconOnly: Story = {
   ...Default,
   args: { ...Default.args, iconOnly: <ClockIcon /> },
 };
 
-export const IconOnlyStack: ComponentStory<typeof Button> = {
+export const IconOnlyStack: Story = {
   ...ButtonStack,
   args: { iconOnly: <ClockIcon /> },
 };
 
-export const Suffix: ComponentStory<typeof Button> = {
+export const Suffix: Story = {
   ...Default,
   args: { ...Default.args, suffix: <CaretRightIcon /> },
 };
 
-export const SuffixStack: ComponentStory<typeof Button> = {
+export const SuffixStack: Story = {
   ...ButtonStack,
   args: { suffix: <CaretRightIcon /> },
 };
 
-export const Prefix: ComponentStory<typeof Button> = {
+export const Prefix: Story = {
   ...Default,
   args: { ...Default.args, prefix: <ClockIcon /> },
 };
 
-export const PrefixStack: ComponentStory<typeof Button> = {
+export const PrefixStack: Story = {
   ...ButtonStack,
   args: { prefix: <ClockIcon /> },
 };
 
-export const PrefixSuffix: ComponentStory<typeof Button> = {
+export const PrefixSuffix: Story = {
   ...Default,
   args: { ...Default.args, prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
 };
 
-export const PrefixSuffixStack: ComponentStory<typeof Button> = {
+export const PrefixSuffixStack: Story = {
   ...ButtonStack,
   args: { prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
 };
 
-export const CloseButton: ComponentStory<typeof Button> = {
+export const CloseButton: Story = {
   ...Default,
   render: (args: CloseButtonProps) => <CloseButtonComponent {...args} />,
   args: { size: "md", variant: "solid" },
 };
 
-export const ExtendedVariant: ComponentStory<typeof Button> = {
+export const ExtendedVariant: Story = {
   ...Default,
   // @ts-ignore
   args: { ...Default.args, children: "tertiary", variant: "tertiary" },
 };
 
-export const ExtendedSize: ComponentStory<typeof Button> = {
+export const ExtendedSize: Story = {
   ...Default,
   // @ts-ignore
   args: { ...Default.args, children: "xxl", size: "xxl" },
@@ -226,7 +229,7 @@ const ExtendedSpinnerComponent = () => {
   return <Spinner size="em" className="text-base text-red-500" />;
 };
 
-export const ExtendedSpinner: ComponentStory<typeof Button> = {
+export const ExtendedSpinner: Story = {
   ...Default,
   args: {
     ...Default.args,
@@ -241,7 +244,7 @@ const CustomSpinnerComponent = () => {
   );
 };
 
-export const CustomSpinner: ComponentStory<typeof Button> = {
+export const CustomSpinner: Story = {
   ...ExtendedSpinner,
   args: {
     ...ExtendedSpinner.args,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import theme from "../src/theme/defaultTheme";
 
@@ -65,3 +65,10 @@ export const createControls = (
     console.log(e);
   }
 };
+
+export type CSFType<M extends Meta> = M extends {
+  component: React.ComponentType<infer P>;
+  args: infer D;
+}
+  ? { args: Omit<P, keyof D> } & Story<P>
+  : never;
