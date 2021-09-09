@@ -12,10 +12,7 @@ import {
 } from "../index";
 import { Box } from "../../box";
 import { Button } from "../../button";
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
+import { storyTemplate, createUnionControl } from "../../../.storybook/utils";
 import { CheckCircleIcon } from "../../icons";
 import { RadioDescription } from "../RadioDescription";
 import { RadioText } from "../RadioText";

@@ -18,7 +18,7 @@ import { Textarea } from "../../textarea";
 import { InfoCircleIcon } from "../../icons";
 import { Radio, RadioGroup } from "../../radio";
 import { FormLabelValue } from "../FormLabelValue";
-import { storyTemplate } from "../../../.storybook/storybookUtils";
+import { storyTemplate } from "../../../.storybook/utils";
 
 export default {
   title: "Forms/FormField",

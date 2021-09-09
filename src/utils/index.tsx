@@ -70,6 +70,14 @@ export function runIfFn<T, U>(
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
 
+export function runIfFnChildren<T, U>(
+  valueOrFn: T | ((...fnArgs: U[]) => T),
+  ...args: U[]
+): T {
+  // @ts-ignore
+  return isFunction(valueOrFn) ? valueOrFn(...args).props.children : valueOrFn;
+}
+
 /**
  * Gets only the valid children of a component,
  * and ignores any nullish or falsy child.

@@ -4,10 +4,7 @@ import { Meta } from "@storybook/react";
 
 import { Avatar } from "../../avatar";
 import { ClockIcon } from "../../icons";
-import {
-  createControls,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
+import { createControls, storyTemplate } from "../../../.storybook/utils";
 import { Tag, TagProps, TagGroupProps, TagGroup } from "..";
 
 export default {

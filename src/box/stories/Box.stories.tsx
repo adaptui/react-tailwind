@@ -1,33 +1,25 @@
-import { Story, Meta } from "@storybook/react";
+import { Meta } from "@storybook/react";
 
-import { Box, BoxProps } from "../index";
+import { Box } from "../index";
 import { cx } from "@renderlesskit/react";
-import { createControls } from "../../../.storybook/storybookUtils";
 
 export default {
   title: "Primitives/Box",
   component: Box,
-  argTypes: createControls("box", {
-    ignore: ["unstable_system", "wrapElement", "as"],
-  }),
   parameters: {
-    options: {
-      showPanel: false,
-    },
+    options: { showPanel: false },
     layout: "centered",
   },
 } as Meta;
 
-const Base: Story<BoxProps> = args => <Box {...args}>This is the div</Box>;
+export const Default = () => {
+  return <Box>This is a div box</Box>;
+};
 
-export const Default = Base.bind({});
-Default.args = {};
-
-export const Styled: Story<BoxProps> = args => (
+export const Styled = () => (
   <Box
     as="figure"
     className="p-8 overflow-hidden bg-gray-100 md:flex rounded-xl md:p-0"
-    {...args}
   >
     <Box
       as="img"
@@ -53,26 +45,22 @@ export const Styled: Story<BoxProps> = args => (
   </Box>
 );
 
-export const AsButton: Story<BoxProps> = args => {
-  const { className, ...rest } = args;
-
+export const AsButton = () => {
   return (
     <Box
       as="button"
       type="button"
       className={cx(
         "h-8 px-4 text-base font-bold text-white lib:bg-red-500 lib:rounded-md",
-        className,
       )}
-      {...rest}
     >
       Button
     </Box>
   );
 };
 
-export const AsPrevButtonComp: Story<BoxProps> = args => (
-  <Box as={AsButton} className="bg-green-500" {...args}>
+export const AsPrevButtonComp = () => (
+  <Box as={AsButton} className="bg-green-500">
     Button
   </Box>
 );

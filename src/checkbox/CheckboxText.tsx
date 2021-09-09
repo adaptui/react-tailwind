@@ -1,28 +1,39 @@
 import { cx } from "@renderlesskit/react";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { useCheckboxContext } from "./Checkbox";
-import { forwardRefWithAs } from "../utils/types";
+import { CHECKBOX_TEXT_KEYS } from "./__keys";
+import { CheckboxStateReturn } from "./CheckboxState";
 
-export type CheckboxTextProps = BoxProps & {};
+export type CheckboxTextOptions = BoxOptions &
+  Pick<CheckboxStateReturn, "size">;
 
-export const CheckboxText = forwardRefWithAs<
-  CheckboxTextProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const { size = "md" } = useCheckboxContext();
+export type CheckboxTextHTMLProps = BoxHTMLProps;
 
-  const theme = useTheme();
-  const checkboxLabelStyles = cx(
-    theme.checkbox.field.text.base,
-    theme.checkbox.field.text.size[size],
-    className,
-  );
+export type CheckboxTextProps = CheckboxTextOptions & CheckboxTextHTMLProps;
 
-  return <Box className={checkboxLabelStyles} ref={ref} {...rest} />;
+export const useCheckboxText = createHook<
+  CheckboxTextOptions,
+  CheckboxTextHTMLProps
+>({
+  name: "CheckboxText",
+  compose: useBox,
+  keys: CHECKBOX_TEXT_KEYS,
+
+  useProps(options, htmlProps) {
+    const { size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("checkbox");
+    const className = cx(theme.text.base, theme.text.size[size], htmlClassName);
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxText.displayName = "CheckboxText";
+export const CheckboxText = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useCheckboxText,
+});

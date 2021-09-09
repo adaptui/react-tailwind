@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { Meta } from "@storybook/react";
 
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
+import { storyTemplate, createUnionControl } from "../../../.storybook/utils";
 import { SliderTrack } from "../SliderTrack";
 import { SliderThumb } from "../SliderThumb";
 import { Slider, SliderProps } from "../Slider";

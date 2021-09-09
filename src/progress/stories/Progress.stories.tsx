@@ -3,10 +3,7 @@ import { isNull } from "@renderlesskit/react";
 import { Meta } from "@storybook/react";
 
 import { Button } from "../../button";
-import {
-  createUnionControl,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
+import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { Progress, ProgressProps, ProgressTrack, ProgressBar } from "../index";
 
 export default {

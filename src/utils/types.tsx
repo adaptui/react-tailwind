@@ -1,7 +1,9 @@
 import * as React from "react";
 
+export type RenderPropType<T> = React.ReactNode | ((args: T) => JSX.Element);
+
 export type RenderProp<T> = {
-  children?: React.ReactNode | ((args: T) => JSX.Element);
+  children?: RenderPropType<T>;
 };
 
 export type As<Props = any> = React.ElementType<Props>;

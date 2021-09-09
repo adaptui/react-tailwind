@@ -1,256 +1,423 @@
-import { useState, useMemo, useEffect } from "react";
 import { cx } from "@renderlesskit/react";
-import { Meta } from "@storybook/react";
+import { useEffect, useMemo, useState } from "react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+// @ts-ignore
+import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
 
 import {
-  Checkbox,
-  CheckboxInput,
-  CheckboxLabel,
-  CheckboxProps,
-  CheckboxStatus,
   CheckboxIcon,
+  CheckboxLabel,
+  CheckboxInput,
+  CheckboxState,
+  CheckboxInitialState,
   CheckboxText,
+  CheckboxDescription,
 } from "../index";
-import {
-  createUnionControl,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
-import { Controller, useForm } from "react-hook-form";
 import { Button } from "../../button";
-import { FormField } from "../../form-field";
-import { CheckboxDescription } from "../CheckboxDescription";
-import { CloseIcon, EyeClose, EyeOpen, IndeterminateIcon } from "../../icons";
+import { withIconA11y } from "../../utils";
+import { EyeClose, EyeOpen } from "../../icons";
+import { useCheckboxStateSplit } from "../helpers";
+import { CheckboxInputHTMLProps } from "../CheckboxInput";
+import { createControls } from "../../../.storybook/utils";
+import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
+
+type Meta = ComponentMeta<typeof Checkbox>;
+type Story = ComponentStory<typeof Checkbox>;
 
 export default {
-  title: "Forms/Checkbox",
+  title: "Forms/checkbox",
   component: Checkbox,
   argTypes: {
-    size: createUnionControl({
-      sm: "sm",
-      md: "md",
-      lg: "lg",
+    label: { control: { type: "text" } },
+    description: { control: { type: "text" } },
+    ...createControls("checkbox", {
+      ignore: [
+        "unstable_system",
+        "unstable_clickOnEnter",
+        "unstable_clickOnSpace",
+        "wrapElement",
+        "focusable",
+        "as",
+        "setState",
+        "checked",
+        "value",
+        "defaultState",
+        "state",
+        "onStateChange",
+        "icon",
+      ],
     }),
-    defaultState: createUnionControl([true, false, "indeterminate"]),
-    disabled: { control: { type: "boolean" } },
+  },
+  parameters: {
+    layout: "centered",
   },
 } as Meta;
 
-const base = storyTemplate<CheckboxProps>(Checkbox, {
-  size: "md",
-  defaultState: true,
-});
+export const Default: Story = {
+  args: { size: "md", defaultState: false },
+  parameters: { options: { showPanel: true } },
+};
 
-export const Disabled = base({ disabled: true });
+export const Small: Story = {
+  ...Default,
+  args: { ...Default.args, size: "sm" },
+  argTypes: {
+    ...Default.argTypes,
+    size: { table: { disable: true } },
+  },
+};
+export const Medium: Story = {
+  ...Default,
+  argTypes: {
+    ...Default.argTypes,
+    size: { table: { disable: true } },
+  },
+};
+export const Large: Story = {
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+  argTypes: {
+    ...Default.argTypes,
+    size: { table: { disable: true } },
+  },
+};
 
-export const WithDescription = storyTemplate<CheckboxProps>(args => {
+export const UnChecked: Story = { ...Default };
+export const Checked: Story = {
+  ...Default,
+  args: { ...Default.args, defaultState: true },
+};
+export const Indeterminate: Story = {
+  ...Default,
+  args: { ...Default.args, defaultState: "indeterminate" },
+};
+
+export const CheckboxStack: Story = {
+  render: args => {
+    return (
+      <div className="flex flex-col space-y-2">
+        <div className="space-x-2">
+          <Checkbox size="sm" {...args} />
+          <Checkbox size="md" {...args} />
+          <Checkbox size="lg" {...args} />
+        </div>
+        <div className="space-x-2">
+          <Checkbox size="sm" defaultState={true} {...args} />
+          <Checkbox size="md" defaultState={true} {...args} />
+          <Checkbox size="lg" defaultState={true} {...args} />
+        </div>
+        <div className="space-x-2">
+          <Checkbox size="sm" defaultState="indeterminate" {...args} />
+          <Checkbox size="md" defaultState="indeterminate" {...args} />
+          <Checkbox size="lg" defaultState="indeterminate" {...args} />
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    ...Default.argTypes,
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
+  },
+  decorators: [withPseudoState],
+  parameters: { options: { showPanel: true } },
+};
+
+export const HoverStack: Story = {
+  ...CheckboxStack,
+  parameters: { options: { showPanel: false }, pseudo: { hover: true } },
+};
+export const ActiveStack: Story = {
+  ...CheckboxStack,
+  parameters: { options: { showPanel: false }, pseudo: { active: true } },
+};
+export const FocusStack: Story = {
+  ...CheckboxStack,
+  parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
+};
+export const DisabledStack: Story = {
+  ...CheckboxStack,
+  args: { disabled: true },
+  parameters: { options: { showPanel: false } },
+};
+
+export const WithLabelStack: Story = {
+  render: args => {
+    return (
+      <div className="flex flex-col space-y-4">
+        <div className="space-x-4">
+          <Checkbox label="Checkbox" size="sm" {...args} />
+          <Checkbox label="Checkbox" size="md" {...args} />
+          <Checkbox label="Checkbox" size="lg" {...args} />
+        </div>
+        <div className="space-x-4">
+          <Checkbox label="Checkbox" size="sm" defaultState={true} {...args} />
+          <Checkbox label="Checkbox" size="md" defaultState={true} {...args} />
+          <Checkbox label="Checkbox" size="lg" defaultState={true} {...args} />
+        </div>
+        <div className="space-x-4">
+          <Checkbox
+            label="Checkbox"
+            size="sm"
+            defaultState="indeterminate"
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            size="md"
+            defaultState="indeterminate"
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            size="lg"
+            defaultState="indeterminate"
+            {...args}
+          />
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
+  },
+  decorators: [withPseudoState],
+  parameters: { options: { showPanel: true } },
+};
+
+export const WithDescriptionStack: Story = {
+  render: args => {
+    return (
+      <div className="flex flex-col space-y-8">
+        <div className="max-w-xs space-y-4">
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="sm"
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="md"
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="lg"
+            {...args}
+          />
+        </div>
+        <div className="max-w-xs space-y-4">
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="sm"
+            defaultState={true}
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="md"
+            defaultState={true}
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="lg"
+            defaultState={true}
+            {...args}
+          />
+        </div>
+        <div className="max-w-xs space-y-4">
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="sm"
+            defaultState="indeterminate"
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="md"
+            defaultState="indeterminate"
+            {...args}
+          />
+          <Checkbox
+            label="Checkbox"
+            description="Used when the checkbox is selected and will use its value for the form submission."
+            size="lg"
+            defaultState="indeterminate"
+            {...args}
+          />
+        </div>
+      </div>
+    );
+  },
+  argTypes: {
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
+  },
+  decorators: [withPseudoState],
+  parameters: { options: { showPanel: true } },
+};
+
+export const Controlled = () => {
+  const [state, setState] =
+    useState<NonNullable<CheckboxProps["state"]>>(false);
+
   return (
-    <div className="flex flex-col space-y-6">
-      <Checkbox
-        {...args}
-        size="sm"
-        description={
-          "Used when the checkbox is selected and will use its value for the form submission."
-        }
-      >
-        Checked state
-      </Checkbox>
-      <Checkbox
-        {...args}
-        size="md"
-        description={
-          "Used when the checkbox is selected and will use its value for the form submission."
-        }
-      >
-        Checked state
-      </Checkbox>
-      <Checkbox
-        {...args}
-        size="lg"
-        description={
-          "Used when the checkbox is selected and will use its value for the form submission."
-        }
-      >
-        Checked state
-      </Checkbox>
-      <Checkbox
-        {...args}
-        isInvalid
-        size="lg"
-        description={
-          "Used when the checkbox is selected and will use its value for the form submission."
-        }
-      >
-        Invalid state
-      </Checkbox>
-      <Checkbox
-        {...args}
-        defaultState="indeterminate"
-        size="lg"
-        description={
-          "Used when the checkbox is selected and will use its value for the form submission."
-        }
-      >
-        Indeterminate state
-      </Checkbox>
-      <Checkbox
-        {...args}
-        isInvalid
-        defaultState="indeterminate"
-        size="lg"
-        description={
-          "Used when the checkbox is selected and will use its value for the form submission."
-        }
-      >
-        Indeterminate invalid
-      </Checkbox>
-      <Checkbox
-        size="lg"
-        icon={props =>
-          props.isIndeterminate ? (
-            <IndeterminateIcon />
-          ) : props.isChecked ? (
-            <EyeOpen />
-          ) : (
-            <EyeClose />
-          )
-        }
-        description="Used when the checkbox is selected and will use its value for the form submission."
-      >
-        Custom icon prop
-      </Checkbox>
-      <Checkbox size="lg">
-        <CheckboxLabel>
-          <CheckboxInput />
-          <CheckboxIcon>
-            {props =>
-              props.isIndeterminate ? (
-                <IndeterminateIcon />
-              ) : props.isChecked ? (
-                <CloseIcon />
-              ) : null
-            }
-          </CheckboxIcon>
-          <div>
-            <CheckboxText>Custom checkbox</CheckboxText>
-            <CheckboxDescription>
-              Used when the checkbox is selected and will use its value for the
-              form submission.
-            </CheckboxDescription>
-          </div>
-        </CheckboxLabel>
-      </Checkbox>
+    <div className="flex flex-col space-y-4">
+      <Checkbox state={state} onStateChange={setState} />
+
+      <div className="flex flex-col space-y-2">
+        <Button onClick={() => setState(true)}>
+          {`${state === true ? "Now" : "Change to"} Checked`}
+        </Button>
+
+        <Button onClick={() => setState(false)}>
+          {`${state === false ? "Now" : "Change to"} UnChecked`}
+        </Button>
+
+        <Button onClick={() => setState("indeterminate")}>
+          {`${state === "indeterminate" ? "Now" : "Change to"} Interderminate`}
+        </Button>
+      </div>
     </div>
   );
-})({});
+};
+Controlled.parameters = { options: { showPanel: false } };
 
-export const WithoutDescription = storyTemplate<CheckboxProps>(args => {
-  return (
-    <>
-      <Checkbox {...args}>Checked state</Checkbox>
-    </>
-  );
-})({ size: "md" });
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-export const Invalid = storyTemplate<CheckboxProps>(args => {
-  return (
-    <>
-      <Checkbox {...args} isInvalid>
-        Checked state
-      </Checkbox>
-    </>
-  );
-})({ size: "md" });
+export const Group = () => {
+  const [state, setState] = useState<NonNullable<CheckboxProps["state"]>>([]);
 
-export const Controlled = storyTemplate<CheckboxProps>(args => {
-  const [state, onStateChange] = useState<CheckboxStatus>(false);
+  if (!Array.isArray(state)) return;
 
   return (
-    <>
-      <Checkbox state={state} onStateChange={onStateChange} {...args}>
-        Checkbox
-      </Checkbox>
-      <div className="mt-2">{`Checked: ${state}`}</div>
-    </>
+    <div className="flex flex-col space-y-4 min-h-96">
+      <div className="text-xl font-bold">Pick fruits to eat</div>
+      <div className="space-x-2">
+        <Checkbox
+          state={state}
+          onStateChange={setState}
+          value="apple"
+          label="Apple"
+        />
+        <Checkbox
+          state={state}
+          onStateChange={setState}
+          className="ml-2"
+          value="orange"
+          label="Orange"
+        />
+        <Checkbox
+          state={state}
+          onStateChange={setState}
+          className="ml-2"
+          value="watermelon"
+          label="Watermelon"
+        />
+      </div>
+      {state.length > 0 ? (
+        <div>
+          <div className="font-semibold">Picked fruits:</div>
+          <ul>
+            {state.map((fruit, index) => (
+              <li key={fruit}>{`- ${capitalizeFirstLetter(
+                fruit as string,
+              )}`}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </div>
   );
-})({ size: "md" });
+};
+Group.parameters = { options: { showPanel: false } };
 
-export const Group = storyTemplate<CheckboxProps>(args => {
-  const [state, onStateChange] = useState<CheckboxStatus>([]);
-
-  return (
-    <>
-      <div className="mb-2">Choices: {(state as string[]).join(", ")}</div>
-      <Checkbox
-        state={state}
-        onStateChange={onStateChange}
-        value="apple"
-        {...args}
-      >
-        Apple
-      </Checkbox>
-      <Checkbox
-        state={state}
-        onStateChange={onStateChange}
-        className="ml-2"
-        value="orange"
-        {...args}
-      >
-        Orange
-      </Checkbox>
-      <Checkbox
-        state={state}
-        onStateChange={onStateChange}
-        className="ml-2"
-        value="watermelon"
-        {...args}
-      >
-        Watermelon
-      </Checkbox>
-    </>
-  );
-})({ size: "md" });
-
-export const GroupIndeterminateSimple = storyTemplate<CheckboxProps>(args => {
-  const [checkedItems, setCheckedItems] = useState<CheckboxStatus[]>([
+export const GroupBooleanState = () => {
+  const [checkedItems, setCheckedItems] = useState<boolean[]>([
+    false,
     false,
     false,
   ]);
+
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
   return (
-    <>
+    <div className="flex flex-col space-y-4">
       <Checkbox
         state={isIndeterminate ? "indeterminate" : allChecked}
-        onStateChange={value => setCheckedItems([value, value])}
-        {...args}
-      >
-        Parent Checkbox
-      </Checkbox>
-      <div className="flex flex-col pl-6 mt-1">
+        onStateChange={value =>
+          setCheckedItems([
+            value as boolean,
+            value as boolean,
+            value as boolean,
+          ])
+        }
+        label="Check all items"
+        className="self-start"
+      />
+      <div className="space-x-2">
         <Checkbox
           state={checkedItems[0]}
-          onStateChange={value => setCheckedItems([value, checkedItems[1]])}
-          {...args}
-        >
-          Child Checkbox 1
-        </Checkbox>
+          onStateChange={value =>
+            setCheckedItems([
+              value as boolean,
+              checkedItems[1],
+              checkedItems[2],
+            ])
+          }
+          label="Item 1"
+        />
         <Checkbox
           state={checkedItems[1]}
-          onStateChange={value => setCheckedItems([checkedItems[0], value])}
-          {...args}
-        >
-          Child Checkbox 2
-        </Checkbox>
+          onStateChange={value =>
+            setCheckedItems([
+              checkedItems[0],
+              value as boolean,
+              checkedItems[2],
+            ])
+          }
+          label="Item 2"
+        />
+        <Checkbox
+          state={checkedItems[2]}
+          onStateChange={value =>
+            setCheckedItems([
+              checkedItems[0],
+              checkedItems[1],
+              value as boolean,
+            ])
+          }
+          label="Item 3"
+        />
       </div>
-    </>
+    </div>
   );
-})({ size: "md" });
+};
+GroupBooleanState.parameters = { options: { showPanel: false } };
 
-export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
+export const GroupStringState = () => {
   const values = useMemo(() => ["Apple", "Orange", "Watermelon"], []);
-  const [itemState, setItemState] = useState<CheckboxStatus>([]);
-  const [groupState, setGroupState] = useState<CheckboxStatus>(false);
+  const [itemState, setItemState] = useState<
+    NonNullable<CheckboxProps["state"]>
+  >([]);
+  const [groupState, setGroupState] =
+    useState<NonNullable<CheckboxProps["state"]>>(false);
+
+  const isAllChecked = groupState === true;
+  const isIndeterminate = groupState === "indeterminate";
 
   // updates items when group is toggled
   useEffect(() => {
@@ -275,11 +442,20 @@ export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
   }, [itemState, values]);
 
   return (
-    <>
-      <Checkbox state={groupState} onStateChange={setGroupState} {...args}>
-        Fruits
-      </Checkbox>
-      <div className="flex flex-col pl-6 mt-1">
+    <div className="flex flex-col space-y-4">
+      <Checkbox
+        state={groupState}
+        onStateChange={setGroupState}
+        label={
+          isIndeterminate
+            ? "Fruit in the basket"
+            : isAllChecked
+            ? "Basket full"
+            : "Basket empty"
+        }
+        className="self-start"
+      />
+      <div className="space-x-2">
         {values.map((value, i) => {
           return (
             <Checkbox
@@ -287,134 +463,141 @@ export const GroupIndeterminateComplex = storyTemplate<CheckboxProps>(args => {
               state={itemState}
               onStateChange={setItemState}
               value={value}
-              {...args}
-            >
-              {value}
-            </Checkbox>
+              label={capitalizeFirstLetter(value)}
+            />
           );
         })}
       </div>
-    </>
+    </div>
   );
-})({ size: "md" });
+};
+GroupStringState.parameters = { options: { showPanel: false } };
 
-const CheckboxCustom = (props: CheckboxProps) => {
-  const [state, onStateChange] = useState<CheckboxStatus>(true);
+const CustomIconElement: CheckboxOwnProps["icon"] = state => (
+  <>
+    {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
+    {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+  </>
+);
 
+export const CustomIcon = () => {
+  return <Checkbox size="lg" icon={CustomIconElement} label="Custom Icons" />;
+};
+CustomIcon.parameters = { options: { showPanel: false } };
+
+export const CustomSimple = () => {
   return (
-    <Checkbox state={state} onStateChange={onStateChange} {...props}>
-      <CheckboxLabel>
-        <CheckboxInput />
-        <CheckboxIcon className="w-8 h-8 text-2xl text-white bg-blue-500" />
-        <CheckboxText className="text-orange-500">Custom Checkbox</CheckboxText>
-      </CheckboxLabel>
+    // These values will be overridden if the children are passed in respectively
+    <Checkbox
+      icon={CustomIconElement}
+      label="Checkbox"
+      description="Fruits in the basket"
+    >
+      <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+      <CheckboxIcon className="bg-red-500">{CustomIconElement}</CheckboxIcon>
+      <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
+      <CheckboxDescription className="text-orange-500">
+        New Description
+      </CheckboxDescription>
     </Checkbox>
   );
 };
+CustomSimple.parameters = { options: { showPanel: false } };
 
-export const CustomCheckbox = storyTemplate<CheckboxProps>(CheckboxCustom)({});
-
-// Inspired from https://codepen.io/geertsdev/pen/yLaGLJq
-const CheckboxCustomComplete = (props: CheckboxProps) => {
-  const { className, children, ...rest } = props;
-
+export const CustomSimpleV2 = () => {
   return (
-    <Checkbox {...props}>
-      <CheckboxLabel
-        className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
-        {...rest}
-      >
-        <CheckboxInput />
-        {(props?.state as string[]).includes(props?.value as string) ? (
-          <span
-            aris-hidden="true"
-            role="img"
-            className="text-blue-500 absolute inset-y-0 left-0 flex items-center pl-1.5"
-          >
-            <svg
-              className="w-5 h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
+    <Checkbox label="Checkbox" description="Fruits in the basket">
+      {state => {
+        return (
+          <>
+            <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+            <CheckboxIcon
+              className={
+                state.isChecked
+                  ? "bg-red-500 peer-hover:bg-red-400"
+                  : "bg-green-500 peer-hover:bg-green-400"
+              }
             >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </span>
-        ) : null}
-        <span className="select-none">{children}</span>
-      </CheckboxLabel>
+              <>
+                {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
+                {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+              </>
+            </CheckboxIcon>
+            <CheckboxText className="text-green-500">
+              Overidden Label
+            </CheckboxText>
+            <CheckboxDescription className="text-orange-500">
+              Overridden Description
+            </CheckboxDescription>
+          </>
+        );
+      }}
     </Checkbox>
   );
 };
+CustomSimpleV2.parameters = { options: { showPanel: false } };
 
-export const CompleteCustomCheckbox = storyTemplate<CheckboxProps>(args => {
-  const [state, onStateChange] = useState<CheckboxStatus>([]);
+type CustomCheckboxProps = CheckboxInputHTMLProps & CheckboxInitialState;
+
+const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
+  const [state, checkboxProps] = useCheckboxStateSplit(props);
+  const { className, children, ...inputProps } = checkboxProps;
+
+  return (
+    <CheckboxLabel
+      {...state}
+      className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
+    >
+      <CheckboxInput {...state} {...inputProps} />
+      {state.isChecked ? (
+        <CheckboxIcon className="text-blue-500 absolute inset-y-0 left-0 flex items-center pl-1.5">
+          <svg
+            className="w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            role="img"
+            focusable={false}
+          >
+            <path
+              fillRule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </CheckboxIcon>
+      ) : null}
+      <span className="select-none">{children}</span>
+    </CheckboxLabel>
+  );
+};
+
+export const CustomAdvanced = () => {
+  const [state, onStateChange] = useState<CheckboxState["state"]>([]);
 
   return (
     <>
-      <CheckboxCustomComplete
-        value="one"
-        state={state}
-        onStateChange={onStateChange}
-        {...args}
-      >
+      <CustomCheckbox value="one" state={state} onStateChange={onStateChange}>
         Button one 😁
-      </CheckboxCustomComplete>
-      <CheckboxCustomComplete
+      </CustomCheckbox>
+      <CustomCheckbox
         className="ml-2"
         value="two"
         state={state}
         onStateChange={onStateChange}
-        {...args}
       >
         Button two 🤓
-      </CheckboxCustomComplete>
-      <CheckboxCustomComplete
+      </CustomCheckbox>
+      <CustomCheckbox
         className="ml-2"
         value="three"
         state={state}
         onStateChange={onStateChange}
-        {...args}
       >
         Button three 👻
-      </CheckboxCustomComplete>
+      </CustomCheckbox>
     </>
   );
-})({});
-
-type FormData = {
-  darkmode: boolean;
 };
-export const ReactHookForm = () => {
-  const { control, handleSubmit } = useForm<FormData>({
-    defaultValues: { darkmode: false },
-  });
-  const onSubmit = handleSubmit(data => console.log(data));
-
-  return (
-    <form onSubmit={onSubmit}>
-      <FormField>
-        <Controller
-          name="darkmode"
-          control={control}
-          render={({ field: { value, onChange, name, ref } }) => (
-            <Checkbox
-              isRequired
-              state={value}
-              onStateChange={onChange}
-              name={name}
-              inputRef={ref}
-            />
-          )}
-        />
-      </FormField>
-      <br />
-      <Button type="submit">Submit</Button>
-    </form>
-  );
-};
+CustomAdvanced.parameters = { options: { showPanel: false } };

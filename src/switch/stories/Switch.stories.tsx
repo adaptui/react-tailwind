@@ -2,10 +2,7 @@ import { useState } from "react";
 import { Meta } from "@storybook/react";
 import { Controller, useForm } from "react-hook-form";
 
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
+import { storyTemplate, createUnionControl } from "../../../.storybook/utils";
 import { Button } from "../../button";
 import { FormErrorText, FormField } from "../../form-field";
 import {
