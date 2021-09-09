@@ -2,12 +2,11 @@ import * as React from "react";
 
 import { CheckboxText } from "./CheckboxText";
 import { CheckboxLabel } from "./CheckboxLabel";
-import { runIfFn, runIfFnChildren } from "../utils";
 import { RenderProp, RenderPropType } from "../utils/types";
 import { CheckboxDescription } from "./CheckboxDescription";
-import { CheckboxIcon, CheckboxDefaultIcon } from "./CheckboxIcon";
+import { CheckboxIcon } from "./CheckboxIcon";
 import { CheckboxInput, CheckboxInputHTMLProps } from "./CheckboxInput";
-import { getCheckboxComponentProps, useCheckboxProps } from "./helpers";
+import { useCheckboxProps } from "./helpers";
 import { CheckboxStateReturn, CheckboxInitialState } from "./CheckboxState";
 
 export type CheckboxOwnProps = CheckboxInputHTMLProps & {
@@ -33,57 +32,25 @@ export type CheckboxProps = CheckboxInitialState &
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const [state, checkboxProps] = useCheckboxProps(props);
     const {
-      icon = CheckboxDefaultIcon,
       label,
       description,
-      className,
-      style,
-      children,
-      ...inputProps
-    } = checkboxProps;
-    const componentProps = getCheckboxComponentProps(
-      runIfFnChildren(children, state),
-    );
+      labelProps,
+      inputProps,
+      iconProps,
+      textProps,
+      descriptionProps,
+    } = useCheckboxProps(props);
 
     return (
-      <CheckboxLabel
-        {...state}
-        className={className}
-        style={style}
-        {...componentProps?.labelProps}
-      >
-        <CheckboxInput
-          ref={ref}
-          {...state}
-          {...inputProps}
-          {...componentProps?.inputProps}
-        />
-        <CheckboxIcon
-          {...state}
-          children={runIfFn(icon, state)}
-          {...componentProps?.iconProps}
-        />
-        {label && !description ? (
-          <CheckboxText
-            {...state}
-            children={runIfFn(label, state)}
-            {...componentProps?.textProps}
-          />
-        ) : null}
+      <CheckboxLabel {...labelProps}>
+        <CheckboxInput ref={ref} {...inputProps} />
+        <CheckboxIcon {...iconProps} />
+        {label && !description ? <CheckboxText {...textProps} /> : null}
         {label && description ? (
           <div>
-            <CheckboxText
-              {...state}
-              children={runIfFn(label, state)}
-              {...componentProps?.textProps}
-            />
-            <CheckboxDescription
-              {...state}
-              children={runIfFn(description, state)}
-              {...componentProps?.descriptionProps}
-            />
+            <CheckboxText {...textProps} />
+            <CheckboxDescription {...descriptionProps} />
           </div>
         ) : null}
       </CheckboxLabel>

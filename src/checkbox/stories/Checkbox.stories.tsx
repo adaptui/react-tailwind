@@ -15,11 +15,11 @@ import {
 } from "../index";
 import { Button } from "../../button";
 import { withIconA11y } from "../../utils";
-import { useCheckboxProps } from "../helpers";
 import { EyeClose, EyeOpen } from "../../icons";
-import { Checkbox, CheckboxProps } from "../Checkbox";
+import { useCheckboxStateSplit } from "../helpers";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
 import { createControls } from "../../../.storybook/utils";
+import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
 
 type Meta = ComponentMeta<typeof Checkbox>;
 type Story = ComponentStory<typeof Checkbox>;
@@ -27,23 +27,27 @@ type Story = ComponentStory<typeof Checkbox>;
 export default {
   title: "Forms/checkbox",
   component: Checkbox,
-  argTypes: createControls("checkbox", {
-    ignore: [
-      "unstable_system",
-      "unstable_clickOnEnter",
-      "unstable_clickOnSpace",
-      "wrapElement",
-      "focusable",
-      "as",
-      "setState",
-      "checked",
-      "value",
-      "defaultState",
-      "state",
-      "onStateChange",
-      "icon",
-    ],
-  }),
+  argTypes: {
+    label: { control: { type: "text" } },
+    description: { control: { type: "text" } },
+    ...createControls("checkbox", {
+      ignore: [
+        "unstable_system",
+        "unstable_clickOnEnter",
+        "unstable_clickOnSpace",
+        "wrapElement",
+        "focusable",
+        "as",
+        "setState",
+        "checked",
+        "value",
+        "defaultState",
+        "state",
+        "onStateChange",
+        "icon",
+      ],
+    }),
+  },
   parameters: {
     layout: "centered",
   },
@@ -52,9 +56,6 @@ export default {
 export const Default: Story = {
   args: { size: "md", defaultState: false },
   parameters: { options: { showPanel: true } },
-  argTypes: {
-    description: { table: { disable: true } },
-  },
 };
 
 export const Small: Story = {
@@ -180,7 +181,6 @@ export const WithLabelStack: Story = {
   argTypes: {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
-    description: { table: { disable: true } },
   },
   decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
@@ -262,7 +262,6 @@ export const WithDescriptionStack: Story = {
   argTypes: {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
-    description: { table: { disable: true } },
   },
   decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
@@ -474,29 +473,32 @@ export const GroupStringState = () => {
 };
 GroupStringState.parameters = { options: { showPanel: false } };
 
+const CustomIconElement: CheckboxOwnProps["icon"] = state => (
+  <>
+    {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
+    {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+  </>
+);
+
 export const CustomIcon = () => {
-  return (
-    <Checkbox
-      size="lg"
-      icon={state => (
-        <>
-          {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-          {state.isChecked ? withIconA11y(<EyeOpen />) : null}
-        </>
-      )}
-      label="Custom Icons"
-    />
-  );
+  return <Checkbox size="lg" icon={CustomIconElement} label="Custom Icons" />;
 };
 CustomIcon.parameters = { options: { showPanel: false } };
 
 export const CustomSimple = () => {
   return (
-    <Checkbox label="Checkbox" description="Fruits in the basket">
+    // These values will be overridden if the children are passed in respectively
+    <Checkbox
+      icon={CustomIconElement}
+      label="Checkbox"
+      description="Fruits in the basket"
+    >
       <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
-      <CheckboxIcon className="bg-red-500" />
-      <CheckboxText className="text-green-500" />
-      <CheckboxDescription className="text-orange-500" />
+      <CheckboxIcon className="bg-red-500">{CustomIconElement}</CheckboxIcon>
+      <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
+      <CheckboxDescription className="text-orange-500">
+        New Description
+      </CheckboxDescription>
     </Checkbox>
   );
 };
@@ -538,7 +540,7 @@ CustomSimpleV2.parameters = { options: { showPanel: false } };
 type CustomCheckboxProps = CheckboxInputHTMLProps & CheckboxInitialState;
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
-  const [state, checkboxProps] = useCheckboxProps(props);
+  const [state, checkboxProps] = useCheckboxStateSplit(props);
   const { className, children, ...inputProps } = checkboxProps;
 
   return (

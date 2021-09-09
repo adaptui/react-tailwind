@@ -1,5 +1,5 @@
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
 export type BoxOptions = RoleOptions;
 

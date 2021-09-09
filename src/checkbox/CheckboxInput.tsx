@@ -1,9 +1,9 @@
 import {
+  cx,
   useCheckbox,
   CheckboxOptions,
   CheckboxHTMLProps,
-} from "../checkboxReakit";
-import { cx } from "@renderlesskit/react";
+} from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";

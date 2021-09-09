@@ -3,7 +3,8 @@ import {
   CheckboxActions as RenderlesskitCheckboxActions,
   useCheckboxState as useRenderlesskitCheckboxState,
   CheckboxInitialState as RenderlesskitCheckboxInitialState,
-} from "../checkboxReakit";
+} from "@renderlesskit/react";
+
 import { CheckboxInputOptions } from "./CheckboxInput";
 
 export type CheckboxState = RenderlesskitCheckboxState & {
