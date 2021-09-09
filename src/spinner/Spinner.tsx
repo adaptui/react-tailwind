@@ -50,7 +50,12 @@ export const useSpinner = createHook<SpinnerOptions, SpinnerHTMLProps>({
     const defaultChildren = <div className={spinner.label}>Loading...</div>;
     const children = htmlChildren || defaultChildren;
 
-    return { className, children, ...restHtmlProps };
+    return {
+      className,
+      children,
+      "data-testid": "testid-spinner",
+      ...restHtmlProps,
+    };
   },
 });
 
