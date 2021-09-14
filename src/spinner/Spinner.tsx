@@ -1,11 +1,19 @@
+import * as React from "react";
 import { cx } from "@renderlesskit/react";
-import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";
-import { SPINNER_KEYS } from "./__keys";
-import { BoxOptions, BoxHTMLProps, useBox } from "../box";
+import { Box, BoxProps } from "../box";
+import { forwardRefWithAs } from "../utils/types";
 
-export type SpinnerOptions = BoxOptions & {
+export type SpinnerProps = BoxProps & {
+  /**
+   * For accessibility, it is important to add a fallback loading text.
+   * This text will be visible to screen readers.
+   *
+   * @default "Loading..."
+   */
+  label?: string;
+
   /**
    * How large should the spinner be?
    *
@@ -21,46 +29,36 @@ export type SpinnerOptions = BoxOptions & {
   stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
 };
 
-export type SpinnerHTMLProps = BoxHTMLProps;
-
-export type SpinnerProps = SpinnerOptions & SpinnerHTMLProps;
-
-export const useSpinner = createHook<SpinnerOptions, SpinnerHTMLProps>({
-  name: "Spinner",
-  compose: useBox,
-  keys: SPINNER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size = "md", stroke = "transparent" } = options;
+export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
+  (props, ref) => {
     const {
-      className: htmlClassName,
-      children: htmlChildren,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const spinner = useTheme("spinner");
-    const className = cx(
-      spinner.base,
-      spinner.size[size],
-      spinner.stroke[stroke],
-      htmlClassName,
-    );
-    // For accessibility, it is important to add a fallback loading text.
-    // This text will be visible to screen readers.
-    const defaultChildren = <div className={spinner.label}>Loading...</div>;
-    const children = htmlChildren || defaultChildren;
-
-    return {
+      label = "Loading...",
+      size = "md",
+      stroke = "transparent",
       className,
+      // Extracting it so that it doesn't appear in the DOM by mistake
       children,
-      "data-testid": "testid-spinner",
-      ...restHtmlProps,
-    };
-  },
-});
+      ...rest
+    } = props;
+    const theme = useTheme();
+    const spinnerStyles = cx(
+      theme.spinner.base,
+      theme.spinner.size[size],
+      theme.spinner.stroke[stroke],
+      className,
+    );
 
-export const Spinner = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSpinner,
-});
+    return (
+      <Box
+        ref={ref}
+        className={spinnerStyles}
+        data-testid="testid-spinner"
+        {...rest}
+      >
+        {label && <div className={theme.spinner.label}>{label}</div>}
+      </Box>
+    );
+  },
+);
+
+Spinner.displayName = "Spinner";

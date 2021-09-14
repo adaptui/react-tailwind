@@ -4,12 +4,13 @@ import {
 } from "reakit";
 import * as React from "react";
 import { cx } from "@renderlesskit/react";
+import { announce } from "@react-aria/live-announcer";
 
 import { useTheme } from "../theme";
 import { usePrevious } from "../hooks";
-import { ButtonChildren } from "./ButtonChildren";
+import { runIfFn, withIconA11y } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
-import { announce } from "@react-aria/live-announcer";
+import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
@@ -86,6 +87,8 @@ export const Button = forwardRefWithAs<
     button.variant.disabled[variant],
     className,
   );
+  const suffixStyles = cx(button.suffix.size[size]);
+  const prefixStyles = cx(button.prefix.size[size]);
 
   const prevLoading = usePrevious(loading);
 
@@ -102,16 +105,37 @@ export const Button = forwardRefWithAs<
       disabled={_disabled}
       {...rest}
     >
-      <ButtonChildren
-        iconOnly={iconOnly}
-        suffix={suffix}
-        prefix={prefix}
-        size={size}
-        loading={loading}
-        spinner={spinner}
-      >
-        {children}
-      </ButtonChildren>
+      {(!prefix && !suffix) || iconOnly ? (
+        loading ? (
+          <ButtonFullWidthSpinner
+            spinner={spinner}
+            iconOnly={iconOnly}
+            size={size}
+          >
+            {iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}
+          </ButtonFullWidthSpinner>
+        ) : (
+          <>{iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}</>
+        )
+      ) : (
+        <>
+          {prefix ? (
+            loading && !suffix ? (
+              <ButtonSpinner spinner={spinner} prefix={prefix} size={size} />
+            ) : (
+              runIfFn(withIconA11y(prefix, { className: prefixStyles }))
+            )
+          ) : null}
+          <span>{children}</span>
+          {suffix ? (
+            loading ? (
+              <ButtonSpinner spinner={spinner} suffix={suffix} size={size} />
+            ) : (
+              runIfFn(withIconA11y(suffix, { className: suffixStyles }))
+            )
+          ) : null}
+        </>
+      )}
     </ReakitButton>
   );
 });
