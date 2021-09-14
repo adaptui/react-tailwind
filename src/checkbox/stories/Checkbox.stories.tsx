@@ -25,7 +25,7 @@ type Meta = ComponentMeta<typeof Checkbox>;
 type Story = ComponentStory<typeof Checkbox>;
 
 export default {
-  title: "Forms/checkbox",
+  title: "Forms/Checkbox",
   component: Checkbox,
   argTypes: {
     label: { control: { type: "text" } },

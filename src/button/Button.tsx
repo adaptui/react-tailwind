@@ -8,8 +8,8 @@ import { announce } from "@react-aria/live-announcer";
 
 import { useTheme } from "../theme";
 import { usePrevious } from "../hooks";
-import { runIfFn, withIconA11y } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { withIconA11y } from "../utils";
+import { forwardRefWithAs, RenderPropType } from "../utils/types";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
@@ -30,17 +30,17 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
    * If added, the button will only show an icon ignoring other childrens.
    */
-  iconOnly?: React.ReactElement;
+  iconOnly?: RenderPropType;
 
   /**
    * If added, the button will show an icon before the button's text.
    */
-  suffix?: React.ReactElement;
+  suffix?: RenderPropType;
 
   /**
    * If added, the button will show an icon before the button's text.
    */
-  prefix?: React.ReactElement;
+  prefix?: RenderPropType;
 
   /**
    * If `true`, the button will show a spinner.
@@ -52,7 +52,7 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   /**
    * If added, the button will show this spinner components
    */
-  spinner?: React.ReactElement;
+  spinner?: RenderPropType;
 };
 
 export const Button = forwardRefWithAs<
@@ -112,10 +112,10 @@ export const Button = forwardRefWithAs<
             iconOnly={iconOnly}
             size={size}
           >
-            {iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}
+            {iconOnly ? withIconA11y(iconOnly) : children}
           </ButtonFullWidthSpinner>
         ) : (
-          <>{iconOnly ? runIfFn(withIconA11y(iconOnly)) : children}</>
+          <>{iconOnly ? withIconA11y(iconOnly) : children}</>
         )
       ) : (
         <>
@@ -123,7 +123,7 @@ export const Button = forwardRefWithAs<
             loading && !suffix ? (
               <ButtonSpinner spinner={spinner} prefix={prefix} size={size} />
             ) : (
-              runIfFn(withIconA11y(prefix, { className: prefixStyles }))
+              withIconA11y(prefix, { className: prefixStyles })
             )
           ) : null}
           <span>{children}</span>
@@ -131,7 +131,9 @@ export const Button = forwardRefWithAs<
             loading ? (
               <ButtonSpinner spinner={spinner} suffix={suffix} size={size} />
             ) : (
-              runIfFn(withIconA11y(suffix, { className: suffixStyles }))
+              withIconA11y(suffix, {
+                className: suffixStyles,
+              })
             )
           ) : null}
         </>
