@@ -35,10 +35,10 @@ export const button = {
   },
   size: {
     default: {
-      sm: "lib:h-[26px] lib:px-2 lib:space-x-1.5 lib:rounded-lg lib:text-cxs lib:font-medium lib:w-auto lib:min-w-[26px] pb-px",
-      md: "lib:h-[30px] lib:px-2.5 lib:space-x-1.5 lib:rounded-lg lib:text-sm lib:font-medium lib:w-auto lib:min-w-[30px]",
-      lg: "lib:h-9 lib:px-3 lib:space-x-1.5 lib:rounded-[10px] lib:text-sm lib:font-medium lib:w-auto lib:min-w-9",
-      xl: "lib:h-11 lib:px-4 lib:space-x-1.5 lib:rounded-xl lib:text-base lib:font-medium lib:w-auto lib:min-w-11",
+      sm: "lib:h-[26px] lib:px-2 lib:rounded-lg lib:text-cxs lib:font-medium lib:w-auto lib:min-w-[26px] pb-px",
+      md: "lib:h-[30px] lib:px-2.5 lib:rounded-lg lib:text-sm lib:font-medium lib:w-auto lib:min-w-[30px]",
+      lg: "lib:h-9 lib:px-3 lib:rounded-[10px] lib:text-sm lib:font-medium lib:w-auto lib:min-w-9",
+      xl: "lib:h-11 lib:px-4 lib:rounded-xl lib:text-base lib:font-medium lib:w-auto lib:min-w-11",
     },
     iconOnly: {
       sm: "lib:h-[26px] lib:rounded-lg lib:text-base lib:w-[26px]",
@@ -49,18 +49,18 @@ export const button = {
   },
   prefix: {
     size: {
-      sm: "lib:text-xs",
-      md: "lib:text-xs",
-      lg: "lib:text-xs",
-      xl: "lib:text-base",
+      sm: "lib:text-xs lib:mr-1.5",
+      md: "lib:text-xs lib:mr-1.5",
+      lg: "lib:text-xs lib:mr-1.5",
+      xl: "lib:text-base lib:mr-1.5",
     },
   },
   suffix: {
     size: {
-      sm: "lib:text-xs",
-      md: "lib:text-xs",
-      lg: "lib:text-xs",
-      xl: "lib:text-base",
+      sm: "lib:text-xs lib:ml-1.5",
+      md: "lib:text-xs lib:ml-1.5",
+      lg: "lib:text-xs lib:ml-1.5",
+      xl: "lib:text-base lib:ml-1.5",
     },
   },
   spinner: {
@@ -78,6 +78,22 @@ export const button = {
         md: "lib:text-base",
         lg: "lib:text-base",
         xl: "lib:text-xl",
+      },
+    },
+    prefix: {
+      size: {
+        sm: " lib:mr-1.5",
+        md: " lib:mr-1.5",
+        lg: " lib:mr-1.5",
+        xl: " lib:mr-1.5",
+      },
+    },
+    suffix: {
+      size: {
+        sm: " lib:ml-1.5",
+        md: " lib:ml-1.5",
+        lg: " lib:ml-1.5",
+        xl: " lib:ml-1.5",
       },
     },
   },

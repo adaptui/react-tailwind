@@ -1,3 +1,4 @@
+import * as React from "react";
 import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -12,12 +13,14 @@ export type SpinnerProps = BoxProps & {
    * @default "Loading..."
    */
   label?: string;
+
   /**
    * How large should the spinner be?
    *
    * @default "md"
    */
   size?: keyof Renderlesskit.GetThemeValue<"spinner", "size">;
+
   /**
    * How the spinner should be displayed?
    *

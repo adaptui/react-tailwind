@@ -1,6 +1,8 @@
 import * as React from "react";
 
-export type RenderPropType<T> = React.ReactNode | ((args: T) => JSX.Element);
+export type RenderPropType<T = any> =
+  | React.ReactNode
+  | ((args: T) => JSX.Element);
 
 export type RenderProp<T> = {
   children?: RenderPropType<T>;
