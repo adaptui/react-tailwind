@@ -48,18 +48,18 @@ export const button = {
   },
   prefix: {
     size: {
-      sm: "text-xs",
-      md: "text-xs",
-      lg: "text-xs",
-      xl: "text-base",
+      sm: "text-xs mr-1.5",
+      md: "text-xs mr-1.5",
+      lg: "text-xs mr-1.5",
+      xl: "text-base mr-1.5",
     },
   },
   suffix: {
     size: {
-      sm: "text-xs",
-      md: "text-xs",
-      lg: "text-xs",
-      xl: "text-base",
+      sm: "text-xs ml-1.5",
+      md: "text-xs ml-1.5",
+      lg: "text-xs ml-1.5",
+      xl: "text-base ml-1.5",
     },
   },
   spinner: {
@@ -77,6 +77,22 @@ export const button = {
         md: "text-base",
         lg: "text-base",
         xl: "text-xl",
+      },
+    },
+    prefix: {
+      size: {
+        sm: " mr-1.5",
+        md: " mr-1.5",
+        lg: " mr-1.5",
+        xl: " mr-1.5",
+      },
+    },
+    suffix: {
+      size: {
+        sm: " ml-1.5",
+        md: " ml-1.5",
+        lg: " ml-1.5",
+        xl: " ml-1.5",
       },
     },
   },

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Dict } from "./types";
+import { Dict, RenderPropType } from "./types";
 
 export interface CreateContextOptions {
   /**
@@ -143,9 +143,17 @@ export function isString(value: any): value is string {
 }
 
 // Add a11y to the icon passed
-export const withIconA11y = (icon: React.ReactElement, props?: Dict) => {
-  return React.isValidElement(icon)
-    ? React.cloneElement(icon, {
+export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
+  const iconElement = runIfFn(icon, {
+    // @ts-ignore
+    role: "img",
+    focusable: false,
+    "aria-hidden": true,
+    ...props,
+  });
+
+  return React.isValidElement(iconElement)
+    ? React.cloneElement(iconElement, {
         // @ts-ignore
         role: "img",
         focusable: false,
