@@ -1,51 +1,51 @@
 const field = {
-  base: "lib:flex lib:flex-col",
+  base: "flex flex-col",
   description: {
-    base: "lib:text-gray-500 lib:mt-1 lib:text-sm",
+    base: "text-gray-500 mt-1 text-sm",
     size: {
       sm: "ib:text-paragraph-cxs",
-      md: "lib:text-sm",
-      lg: "lib:text-sm",
+      md: "text-sm",
+      lg: "text-sm",
     },
   },
   text: {
-    base: "lib:text-gray-700 lib:select-none lib:font-medium",
+    base: "text-gray-700 select-none font-medium",
     size: {
-      sm: "lib:text-paragraph-cxs",
-      md: "lib:text-sm lib:leading-4",
-      lg: "lib:text-sm lib:leading-5",
+      sm: "text-paragraph-cxs",
+      md: "text-sm leading-4",
+      lg: "text-sm leading-5",
     },
   },
 };
 
 export const radio = {
-  base: "group lib:relative lib:inline-flex lib:space-x-1.5 lib:items-center lib:align-top lib:cursor-pointer",
-  disabled: "lib:cursor-not-allowed",
-  input: "peer lib:sr-only",
+  base: "group relative inline-flex space-x-1.5 items-center align-top cursor-pointer",
+  disabled: "cursor-not-allowed",
+  input: "peer sr-only",
   icon: {
-    base: "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:select-none lib:transition-all lib:rounded-full lib:ring-0 lib:ring-gray-300 peer-focus-visible:ring-2",
+    base: "inline-flex items-center justify-center flex-shrink-0 align-top self-start select-none transition-all rounded-full ring-0 ring-gray-300 peer-focus-visible:ring-2",
     size: {
-      sm: "lib:text-sm",
-      md: "lib:text-base",
-      lg: "lib:text-xl",
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-xl",
     },
     state: {
-      disabled: "lib:text-gray-400 lib:cursor-not-allowed",
+      disabled: "text-gray-400 cursor-not-allowed",
       default: {
-        checked: "lib:text-gray-800",
-        unchecked: "lib:text-gray-400",
+        checked: "text-gray-800",
+        unchecked: "text-gray-400",
       },
       invalid: {
-        checked: "lib:text-red-600 lib:ring lib:ring-red-300",
-        unchecked: "lib:text-red-600 lib:ring-red-300",
+        checked: "text-red-600 ring ring-red-300",
+        unchecked: "text-red-600 ring-red-300",
       },
       hover: {
-        checked: "group-hover:lib:text-gray-700",
-        unchecked: "group-hover:lib:text-gray-500",
+        checked: "group-hover:text-gray-700",
+        unchecked: "group-hover:text-gray-500",
       },
       hover_invalid: {
-        checked: "group-hover:lib:text-red-500",
-        unchecked: "group-hover:lib:text-red-500",
+        checked: "group-hover:text-red-500",
+        unchecked: "group-hover:text-red-500",
       },
     },
   },

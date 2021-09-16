@@ -1,4 +1,5 @@
-import { cx, SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
+import { SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { BoxProps } from "../box";
 import { useTheme } from "../index";

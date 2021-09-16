@@ -1,8 +1,8 @@
 import {
-  cx,
   SliderInput,
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "..";
 import { forwardRefWithAs } from "../utils/types";

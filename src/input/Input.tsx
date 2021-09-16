@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { useTheme } from "../theme";

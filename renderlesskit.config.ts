@@ -5,20 +5,16 @@ export const theme = extendTheme({
   extend: {
     button: {
       variant: {
-        tertiary: "bg-purple-600 lib:text-white",
+        default: {
+          tertiary: "bg-purple-600 text-white",
+        },
       },
       size: {
-        xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",
+        default: {
+          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",
+        },
       },
     },
-    // alert: {
-    //   status: {
-    //     info: {
-    //       base: "bg-red-500",
-    //       icon: "text-white",
-    //     },
-    //   },
-    // },
   },
 });
 

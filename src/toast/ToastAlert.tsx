@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cx, ActionType, AddToast, ToastOptions } from "@renderlesskit/react";
+import { ActionType, AddToast, ToastOptions } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { useMediaQuery } from "../hooks";

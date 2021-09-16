@@ -1,19 +1,19 @@
 export const toast = {
   // Base Alert Styles
-  base: "lib:flex lib:shadow-lg lib:py-2 lib:px-3 lib:rounded-md lib:w-full",
+  base: "flex shadow-lg py-2 px-3 rounded-md w-full",
   content: {
-    base: "lib:flex w-full lib:transition-opacity",
-    show: "lib:opacity-100",
-    hide: "lib:opacity-0",
+    base: "flex w-full transition-opacity",
+    show: "opacity-100",
+    hide: "opacity-0",
   },
-  icon: "lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5",
+  icon: "inline-flex box-content flex-shrink-0 mr-2 w-4 h-4 py-0.5",
   body: {
-    base: "lib:flex lib:flex-col lib:text-sm lib:flex-wrap lib:mr-2",
-    title: "lib:font-medium",
-    description: "lib:mt-0.5",
+    base: "flex flex-col text-sm flex-wrap mr-2",
+    title: "font-medium",
+    description: "mt-0.5",
   },
   actions: {
-    base: "space-x-2 lib:ml-auto lib:flex lib:items-center",
+    base: "space-x-2 ml-auto flex items-center",
     button: {
       ghost: "",
       primary: "",
@@ -68,61 +68,60 @@ export const toast = {
   },
 
   // Default string content styles
-  default:
-    "lib:flex lib:shadow-lg lib:bg-gray-800 lib:py-2 lib:px-3 lib:text-white lib:rounded-md lib:w-full",
+  default: "flex shadow-lg bg-gray-800 py-2 px-3 text-white rounded-md w-full",
 
   // Container Vercel Toast animation styles
   container: {
-    base: "lib:fixed lib:z-50 sm:lib:max-w-xs lib:max-w-[90vw] lib:transition-all lib:duration-300",
+    base: "fixed z-50 sm:max-w-xs max-w-[90vw] transition-all duration-300",
     notHovered: "",
     hovered: "",
   },
   animationWrapper: {
-    base: "lib:absolute sm:lib:w-80 lib:w-[90vw] lib:transition-all lib:duration-300 lib:transform-gpu",
+    base: "absolute sm:w-80 w-[90vw] transition-all duration-300 transform-gpu",
     notVisible: "",
     visible: "",
   },
-  hoverWrapper: "lib:flex lib:transition-all lib:duration-300",
-  fill: "lib:absolute lib:left-0 lib:right-0 lib:w-full lib:h-full lib:bg-transparent",
+  hoverWrapper: "flex transition-all duration-300",
+  fill: "absolute left-0 right-0 w-full h-full bg-transparent",
 
   // Placements
   bottom: {
     container: {
       base: "",
-      notHovered: "lib:bottom-2.5",
-      hovered: "lib:bottom-5",
+      notHovered: "bottom-2.5",
+      hovered: "bottom-5",
     },
     animationWrapper: {
-      base: "lib:bottom-0",
-      notVisible: "lib:translate-y-20 lib:opacity-0",
-      visible: "lib:translate-y-0 lib:opacity-100",
+      base: "bottom-0",
+      notVisible: "translate-y-20 opacity-0",
+      visible: "translate-y-0 opacity-100",
     },
-    fill: "lib:top-full",
+    fill: "top-full",
 
     left: {
       container: {
-        base: "lib:left-5",
+        base: "left-5",
       },
       animationWrapper: {
-        base: "lib:left-0",
+        base: "left-0",
       },
     },
 
     center: {
       container: {
-        base: "lib:right-0 lib:left-[50%] lib:transform lib:translate-x-[-50%]",
+        base: "right-0 left-[50%] transform translate-x-[-50%]",
       },
       animationWrapper: {
-        base: "lib:left-[50%] lib:transform lib:translate-x-[-50%]",
+        base: "left-[50%] transform translate-x-[-50%]",
       },
     },
 
     right: {
       container: {
-        base: "lib:right-5",
+        base: "right-5",
       },
       animationWrapper: {
-        base: "lib:right-0",
+        base: "right-0",
       },
     },
   },
@@ -130,40 +129,40 @@ export const toast = {
   top: {
     container: {
       base: "",
-      notHovered: "lib:top-2.5",
-      hovered: "lib:top-5",
+      notHovered: "top-2.5",
+      hovered: "top-5",
     },
     animationWrapper: {
-      base: "lib:top-0",
-      notVisible: "lib:-translate-y-20 lib:opacity-0",
-      visible: "lib:translate-y-0 lib:opacity-100",
+      base: "top-0",
+      notVisible: "-translate-y-20 opacity-0",
+      visible: "translate-y-0 opacity-100",
     },
-    fill: "lib:bottom-full",
+    fill: "bottom-full",
 
     left: {
       container: {
-        base: "lib:left-5",
+        base: "left-5",
       },
       animationWrapper: {
-        base: "lib:left-0",
+        base: "left-0",
       },
     },
 
     center: {
       container: {
-        base: "lib:right-0 lib:left-[50%] lib:transform lib:translate-x-[-50%]",
+        base: "right-0 left-[50%] transform translate-x-[-50%]",
       },
       animationWrapper: {
-        base: "lib:left-[50%] lib:transform lib:translate-x-[-50%]",
+        base: "left-[50%] transform translate-x-[-50%]",
       },
     },
 
     right: {
       container: {
-        base: "lib:right-5",
+        base: "right-5",
       },
       animationWrapper: {
-        base: "lib:right-0",
+        base: "right-0",
       },
     },
   },

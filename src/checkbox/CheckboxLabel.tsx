@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { createComponent, createHook } from "reakit-system";
 
 import { useTheme } from "../theme";

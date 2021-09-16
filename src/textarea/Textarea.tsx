@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { Box } from "../box";

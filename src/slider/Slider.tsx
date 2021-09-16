@@ -1,10 +1,10 @@
 import * as React from "react";
 import {
-  cx,
   useSliderState,
   SliderStateReturn,
   SliderInitialState,
 } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";

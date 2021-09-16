@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";

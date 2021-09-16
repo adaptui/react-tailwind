@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CalendarStateReturn, format } from "@renderlesskit/react";
+import { CalendarStateReturn, toUTCString } from "@renderlesskit/react";
 
 import {
   DatePicker,
@@ -79,7 +79,7 @@ const CustomInput: React.FC = () => {
           e.preventDefault();
           state.toggle();
         }}
-        value={format(new Date(state.dateValue), "yyyy-MM-dd")}
+        value={toUTCString(new Date(state.dateValue))}
         onChange={e => {
           state.selectDate(e.target.value);
         }}

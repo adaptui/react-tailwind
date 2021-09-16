@@ -2,7 +2,7 @@ import {
   Checkbox as ReakitSwitch,
   CheckboxProps as ReakitSwitchProps,
 } from "reakit";
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { useSwitchContext } from "./Switch";

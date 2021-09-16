@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 
 import { Box } from "../index";
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 export default {
   title: "Primitives/Box",
@@ -51,7 +51,7 @@ export const AsButton = () => {
       as="button"
       type="button"
       className={cx(
-        "h-8 px-4 text-base font-bold text-white lib:bg-red-500 lib:rounded-md",
+        "h-8 px-4 text-base font-bold text-white bg-red-500 rounded-md",
       )}
     >
       Button

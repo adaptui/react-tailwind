@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { useEffect, useMemo, useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 // @ts-ignore
@@ -25,7 +25,7 @@ type Meta = ComponentMeta<typeof Checkbox>;
 type Story = ComponentStory<typeof Checkbox>;
 
 export default {
-  title: "Forms/checkbox",
+  title: "Forms/Checkbox",
   component: Checkbox,
   argTypes: {
     label: { control: { type: "text" } },

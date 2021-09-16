@@ -1,62 +1,58 @@
 export const checkbox = {
   label:
-    "lib:relative lib:inline-flex lib:items-center lib:justify-center lib:cursor-pointer lib:align-top",
-  input: "peer lib:sr-only",
+    "relative inline-flex items-center justify-center cursor-pointer align-top",
+  input: "peer sr-only",
   icon: {
-    base: "lib:inline-flex lib:items-center lib:justify-center lib:self-start lib:flex-shrink-0 lib:align-top lib:select-none lib:transition-all",
+    base: "inline-flex items-center justify-center self-start flex-shrink-0 align-top select-none transition-all",
     size: {
-      sm: "lib:w-3.5 lib:h-3.5 lib:text-[10px] lib:border-[1.5px] lib:rounded",
-      md: "lib:w-4 lib:h-4 lib:text-xs lib:border-[1.5px] lib:rounded",
-      lg: "lib:w-5 lib:h-5 lib:text-base lib:border-[1.5px] lib:rounded",
+      sm: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
+      md: "w-4 h-4 text-xs border-[1.5px] rounded",
+      lg: "w-5 h-5 text-base border-[1.5px] rounded",
     },
     checked: {
-      default: "lib:bg-gray-800 lib:border-gray-800 lib:text-white",
-      hover: "peer-hover:lib:bg-gray-700 peer-hover:lib:border-gray-700",
-      active: "peer-active:lib:bg-gray-800 peer-active:lib:border-gray-800",
-      focus:
-        "peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-gray-300",
+      default: "bg-gray-800 border-gray-800 text-white",
+      hover: "peer-hover:bg-gray-700 peer-hover:border-gray-700",
+      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
       disabled:
-        "peer-disabled:lib:bg-gray-200 peer-disabled:lib:border-gray-200 peer-disabled:lib:text-gray-400",
+        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
       invalid:
-        "lib:bg-red-600 lib:border-red-600 lib:text-white peer-hover:lib:bg-red-500 peer-hover:lib:border-red-500 peer-active:lib:bg-red-600 peer-active:lib:border-red-600 peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-red-300 peer-disabled:lib:bg-red-200 peer-disabled:lib:border-red-200 peer-disabled:lib:text-red-400",
+        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
     },
     unChecked: {
-      default: "lib:bg-white lib:border-gray-400 lib:text-current",
-      hover: "peer-hover:lib:border-gray-500",
-      active: "peer-active:lib:border-gray-400",
-      focus:
-        "peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-gray-300",
-      disabled:
-        "peer-disabled:lib:bg-gray-200 peer-disabled:lib:border-gray-300",
+      default: "bg-white border-gray-400 text-current",
+      hover: "peer-hover:border-gray-500",
+      active: "peer-active:border-gray-400",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled: "peer-disabled:bg-gray-200 peer-disabled:border-gray-300",
       invalid:
-        "lib:bg-white lib:border-red-600 lib:text-current peer-hover:lib:border-red-700 peer-active:lib:border-red-600 peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-red-300 peer-disabled:lib:bg-red-200 peer-disabled:lib:border-red-300",
+        "bg-white border-red-600 text-current peer-hover:border-red-700 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-300",
     },
     indeterminate: {
-      default: "lib:bg-gray-800 lib:border-gray-800 lib:text-white",
-      hover: "peer-hover:lib:bg-gray-700 peer-hover:lib:border-gray-700",
-      active: "peer-active:lib:bg-gray-800 peer-active:lib:border-gray-800",
-      focus:
-        "peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-gray-300",
+      default: "bg-gray-800 border-gray-800 text-white",
+      hover: "peer-hover:bg-gray-700 peer-hover:border-gray-700",
+      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
       disabled:
-        "peer-disabled:lib:bg-gray-200 peer-disabled:lib:border-gray-200 peer-disabled:lib:text-gray-400",
+        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
       invalid:
-        "lib:bg-red-600 lib:border-red-600 lib:text-white peer-hover:lib:bg-red-500 peer-hover:lib:border-red-500 peer-active:lib:bg-red-600 peer-active:lib:border-red-600 peer-focus-visible:lib:ring-2 peer-focus-visible:lib:ring-red-300 peer-disabled:lib:bg-red-200 peer-disabled:lib:border-red-200 peer-disabled:lib:text-red-400",
+        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
     },
   },
   text: {
-    base: "lib:text-gray-700 lib:font-medium lib:select-none",
+    base: "text-gray-700 font-medium select-none",
     size: {
-      sm: "lib:text-cxs lib:ml-1.5",
-      md: "lib:text-sm lib:ml-2",
-      lg: "lib:text-base lib:ml-2",
+      sm: "text-cxs ml-1.5",
+      md: "text-sm ml-2",
+      lg: "text-base ml-2",
     },
   },
   description: {
-    base: "lib:text-gray-500 lib:select-none",
+    base: "text-gray-500 select-none",
     size: {
-      sm: "lib:text-paragraph-cxs lib:mt-1 lib:ml-1.5",
-      md: "lib:text-paragraph-sm lib:mt-1.5 lib:ml-2",
-      lg: "lib:text-paragraph-sm lib:mt-2 lib:ml-2",
+      sm: "text-paragraph-cxs mt-1 ml-1.5",
+      md: "text-paragraph-sm mt-1.5 ml-2",
+      lg: "text-paragraph-sm mt-2 ml-2",
     },
   },
 };

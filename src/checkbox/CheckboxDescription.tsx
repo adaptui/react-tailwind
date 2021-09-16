@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 

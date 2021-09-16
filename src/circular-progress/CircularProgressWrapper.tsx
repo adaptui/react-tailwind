@@ -1,8 +1,8 @@
 import {
-  cx,
   ProgressProps,
   Progress as RenderlesskitProgress,
 } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { Clickable, CompositeItem } from "reakit";
 
 import { useTheme } from "../theme";

@@ -4,20 +4,20 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
 <DocumentFragment>
   <div
     aria-label="Avatar group"
-    class="lib:inline-flex lib:items-center lib:-space-x-1.5"
+    class="inline-flex items-center -space-x-1.5"
     role="group"
   >
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-8 lib:w-8 lib:ring-2 lib:ring-white"
+      class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-8 w-8 ring-2 ring-white"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+        class="inline-flex text-gray-500 text-xs"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -35,16 +35,16 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       </span>
     </div>
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-4 lib:w-4 lib:ring-1 lib:ring-white"
+      class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-4 w-4 ring-1 ring-white"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-[0.625rem]"
+        class="inline-flex text-gray-500 text-[0.625rem]"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -69,20 +69,20 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
 <DocumentFragment>
   <div
     aria-label="Avatar group"
-    class="lib:inline-flex lib:items-center lib:-space-x-1.5"
+    class="inline-flex items-center -space-x-1.5"
     role="group"
   >
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-8 lib:w-8 lib:ring-2 lib:ring-white"
+      class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-8 w-8 ring-2 ring-white"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+        class="inline-flex text-gray-500 text-xs"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -100,16 +100,16 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       </span>
     </div>
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-8 lib:w-8 lib:ring-2 lib:ring-white"
+      class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-8 w-8 ring-2 ring-white"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+        class="inline-flex text-gray-500 text-xs"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -134,20 +134,20 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
 <DocumentFragment>
   <div
     aria-label="Avatar group"
-    class="lib:inline-flex lib:items-center lib:-space-x-1.5"
+    class="inline-flex items-center -space-x-1.5"
     role="group"
   >
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:ring-2 lib:ring-white"
+      class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-6 w-6 ring-2 ring-white"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+        class="inline-flex text-gray-500 text-xs"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"
@@ -165,16 +165,16 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       </span>
     </div>
     <div
-      class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:ring-2 lib:ring-white"
+      class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-6 w-6 ring-2 ring-white"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="Avatar Icon"
-        class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+        class="inline-flex text-gray-500 text-xs"
       >
         <svg
           aria-hidden="true"
-          class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
           data-testid="testid-icon"
           focusable="false"
           role="img"

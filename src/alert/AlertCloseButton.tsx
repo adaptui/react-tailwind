@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../index";
 import { useAlertContext } from "./Alert";

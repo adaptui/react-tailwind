@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
 
 import { useTheme } from "../theme";

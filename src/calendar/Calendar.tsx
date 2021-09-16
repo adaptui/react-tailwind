@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  cx,
   CalendarCell,
   CalendarGrid,
   CalendarHeader as RenderlessCalendarHeader,
@@ -15,6 +14,7 @@ import {
   RangeCalendarInitialState,
   RangeCalendarStateReturn,
 } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { CalendarProvider, useCalendarContext } from "./helpers";

@@ -1,6 +1,6 @@
 import { isValidElement, cloneElement } from "react";
 import { Box, BoxProps } from "reakit";
-import { cx } from "@renderlesskit/react";
+import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";

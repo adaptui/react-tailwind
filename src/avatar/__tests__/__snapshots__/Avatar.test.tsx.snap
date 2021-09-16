@@ -3,16 +3,16 @@
 exports[`<Avatar /> should render Avatar 1`] = `
 <DocumentFragment>
   <div
-    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:ring-white"
+    class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-6 w-6 ring-white"
     data-testid="testid-avatar_children"
   >
     <span
       aria-label="Avatar Icon"
-      class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+      class="inline-flex text-gray-500 text-xs"
     >
       <svg
         aria-hidden="true"
-        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+        class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
         data-testid="testid-icon"
         focusable="false"
         role="img"
@@ -35,16 +35,16 @@ exports[`<Avatar /> should render Avatar 1`] = `
 exports[`<Avatar /> should render with AvatarBadge 1`] = `
 <DocumentFragment>
   <div
-    class="lib:relative lib:inline-flex lib:items-center lib:justify-center lib:rounded-full lib:flex-shrink-0 lib:bg-gray-100 lib:h-6 lib:w-6 lib:ring-white"
+    class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-6 w-6 ring-white"
     data-testid="testid-avatar_children"
   >
     <span
       aria-label="Avatar Icon"
-      class="lib:inline-flex lib:text-gray-500 lib:text-xs"
+      class="inline-flex text-gray-500 text-xs"
     >
       <svg
         aria-hidden="true"
-        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle"
+        class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
         data-testid="testid-icon"
         focusable="false"
         role="img"
@@ -61,11 +61,11 @@ exports[`<Avatar /> should render with AvatarBadge 1`] = `
       </svg>
     </span>
     <div
-      class="lib:absolute lib:flex lib:items-center lib:justify-center lib:ring-white lib:rounded-full lib:text-[0.25rem] lib:ring-2 lib:bottom-0 lib:right-0"
+      class="absolute flex items-center justify-center ring-white rounded-full text-[0.25rem] ring-2 bottom-0 right-0"
       data-testid="testid-avatar-badge"
     >
       <svg
-        class="lib:w-[1em] lib:h-[1em] lib:inline-block lib:leading-[1em] lib:flex-shrink-0 lib:text-current lib:align-middle lib:text-green-500 lib:ring-white lib:ring-opacity-100 lib:ring-1.5 lib:text-[5px]"
+        class="w-[1em] h-[1em] inline-block flex-shrink-0 align-middle text-green-500 ring-white ring-opacity-100 ring-1.5 text-[5px]"
         data-testid="testid-icon"
         focusable="false"
         viewBox="0 0 9 9"
