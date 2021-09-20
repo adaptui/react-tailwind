@@ -1,19 +1,28 @@
-import { Role, RoleProps } from "reakit";
+import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
 import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
 
-export type BoxProps = RoleProps & {};
+export type BoxOptions = RoleOptions;
 
-export const Box = forwardRefWithAs<BoxProps, HTMLDivElement, "div">(
-  (props, ref) => {
-    const { className, ...rest } = props;
-    const classNameProp = tcm(className);
+export type BoxHTMLProps = RoleHTMLProps;
 
-    return <Role ref={ref} className={classNameProp} {...rest} />;
+export type BoxProps = BoxOptions & BoxHTMLProps;
+
+export const useBox = createHook<BoxOptions, BoxHTMLProps>({
+  name: "Box",
+  compose: useRole,
+
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    const className = tcm(htmlClassName);
+
+    return { className, ...restHtmlProps };
   },
-);
+});
 
-Box.displayName = "Box";
-
-export default Box;
+export const Box = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useBox,
+});

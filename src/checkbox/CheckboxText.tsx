@@ -1,15 +1,15 @@
-import { tcm } from "../utils";
+import { cx } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
 import { useTheme } from "../theme";
 import { CHECKBOX_TEXT_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-export type CheckboxTextOptions = RoleOptions &
+export type CheckboxTextOptions = BoxOptions &
   Pick<CheckboxStateReturn, "size">;
 
-export type CheckboxTextHTMLProps = RoleHTMLProps;
+export type CheckboxTextHTMLProps = BoxHTMLProps;
 
 export type CheckboxTextProps = CheckboxTextOptions & CheckboxTextHTMLProps;
 
@@ -18,7 +18,7 @@ export const useCheckboxText = createHook<
   CheckboxTextHTMLProps
 >({
   name: "CheckboxText",
-  compose: useRole,
+  compose: useBox,
   keys: CHECKBOX_TEXT_KEYS,
 
   useProps(options, htmlProps) {
@@ -26,11 +26,7 @@ export const useCheckboxText = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkbox");
-    const className = tcm(
-      theme.text.base,
-      theme.text.size[size],
-      htmlClassName,
-    );
+    const className = cx(theme.text.base, theme.text.size[size], htmlClassName);
 
     return { className, ...restHtmlProps };
   },

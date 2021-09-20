@@ -1,12 +1,12 @@
 import * as React from "react";
 
+import { useCheckboxProps } from "./helpers";
 import { CheckboxText } from "./CheckboxText";
+import { CheckboxIcon } from "./CheckboxIcon";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { RenderProp, RenderPropType } from "../utils/types";
 import { CheckboxDescription } from "./CheckboxDescription";
-import { CheckboxIcon } from "./CheckboxIcon";
 import { CheckboxInput, CheckboxInputHTMLProps } from "./CheckboxInput";
-import { useCheckboxProps } from "./helpers";
 import { CheckboxStateReturn, CheckboxInitialState } from "./CheckboxState";
 
 export type CheckboxOwnProps = CheckboxInputHTMLProps & {
