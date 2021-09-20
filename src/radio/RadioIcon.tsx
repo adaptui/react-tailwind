@@ -1,94 +1,67 @@
-import * as React from "react";
+import { cx } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
 
-import {
-  RadioCheckedIcon,
-  RadioDisabledIcon,
-  RadioUncheckedIcon,
-} from "../icons/RadioIcons";
 import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
-import { CommonFieldProps } from "../form-field";
-import { RadioProps, useRadioProps, useRadioStateContext } from "./Radio";
+import { RADIO_ICON_KEYS } from "./__keys";
+import { RadioStateReturn } from "./RadioState";
+import { BoxOptions, BoxHTMLProps, useBox } from "../box";
 
-export type RadioIconProps = BoxProps &
-  Pick<RadioProps, "value" | "disabled"> &
-  Omit<CommonFieldProps, "id" | "isReadOnly"> & {
-    checkedIcon?: React.ReactNode;
-    uncheckedIcon?: React.ReactNode;
-    disabledIcon?: React.ReactNode;
-  };
+export type RadioIconOptions = BoxOptions & Pick<RadioStateReturn, "size">;
 
-export const RadioIcon = forwardRefWithAs<
-  Partial<RadioIconProps>,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const {
-    checkedIcon,
-    uncheckedIcon,
-    disabledIcon,
-    className,
-    children,
-    ...rest
-  } = props;
-  const { value, disabled, size = "md" } = useRadioProps();
-  const { state, isInvalid, isDisabled } = useRadioStateContext();
-  const stateProp = state === value;
+export type RadioIconHTMLProps = BoxHTMLProps;
 
-  const _invalid = !!(props.isInvalid || isInvalid);
-  const _disabled = disabled || props.isDisabled || isDisabled;
-  const isChecked = stateProp === true;
-  const isUnchecked = stateProp === false || stateProp === undefined;
+export type RadioIconProps = RadioIconOptions & RadioIconHTMLProps;
 
-  const compoundStyles = (key: keyof typeof theme.radio.icon.state.default) => {
-    return tcm(
-      _invalid
-        ? tcm(
-            theme.radio.icon.state.invalid[key],
-            theme.radio.icon.state.hover_invalid[key],
-          )
-        : tcm(
-            theme.radio.icon.state.default[key],
-            theme.radio.icon.state.hover[key],
-          ),
+export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
+  name: "RadioIcon",
+  compose: useBox,
+  keys: RADIO_ICON_KEYS,
+
+  useProps(options, htmlProps) {
+    const { size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const checkbox = useTheme("checkbox");
+    const className = cx(
+      checkbox.icon.base,
+      checkbox.icon.size[size],
+      // isUnchecked
+      //   ? tcm(
+      //       checkbox.icon.unChecked.default,
+      //       checkbox.icon.unChecked.hover,
+      //       checkbox.icon.unChecked.active,
+      //       checkbox.icon.unChecked.focus,
+      //       checkbox.icon.unChecked.disabled,
+      //     )
+      //   : "",
+      // isChecked
+      //   ? tcm(
+      //       checkbox.icon.checked.default,
+      //       checkbox.icon.checked.hover,
+      //       checkbox.icon.checked.active,
+      //       checkbox.icon.checked.focus,
+      //       checkbox.icon.checked.disabled,
+      //     )
+      //   : "",
+      // isIndeterminate
+      //   ? tcm(
+      //       checkbox.icon.checked.default,
+      //       checkbox.icon.indeterminate.hover,
+      //       checkbox.icon.indeterminate.active,
+      //       checkbox.icon.indeterminate.focus,
+      //       checkbox.icon.indeterminate.disabled,
+      //     )
+      //   : "",
+      htmlClassName,
     );
-  };
 
-  const theme = useTheme();
-  const radioIconStyles = tcm(
-    theme.radio.icon.base,
-    theme.radio.icon.size[size],
-    _disabled && theme.radio.icon.state.disabled,
-    isChecked && compoundStyles("checked"),
-    isUnchecked && compoundStyles("unchecked"),
-    className,
-  );
-
-  const iconMap = {
-    checked: checkedIcon || <RadioCheckedIcon />,
-    unchecked: uncheckedIcon || <RadioUncheckedIcon />,
-    disabled: disabledIcon || <RadioDisabledIcon />,
-  };
-
-  return (
-    <Box
-      ref={ref}
-      role="img"
-      aria-hidden="true"
-      className={radioIconStyles}
-      {...rest}
-    >
-      {children
-        ? children
-        : _disabled
-        ? iconMap.disabled
-        : stateProp
-        ? iconMap.checked
-        : iconMap.unchecked}
-    </Box>
-  );
+    return { className, ...restHtmlProps };
+  },
 });
 
-RadioIcon.displayName = "RadioIcon";
+export const RadioIcon = createComponent({
+  as: "span",
+  memo: true,
+  useHook: useRadioIcon,
+});

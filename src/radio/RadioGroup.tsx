@@ -1,50 +1,36 @@
-import { Composite } from "reakit";
-
 import {
-  useRadioState,
-  RadioInitialState,
-  RadioStateReturn,
-} from "./RadioState";
-import { createContext } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+  RadioGroupHTMLProps as RenderlesskitRadioGroupHTMLProps,
+  RadioGroupOptions as RenderlesskitRadioGroupOptions,
+  useRadioGroup as useRenderlesskitRadioGroup,
+} from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
 
-type RadioGroupContext = RadioStateReturn & Pick<RadioGroupProps, "size">;
+import { RADIO_GROUP_KEYS } from "./__keys";
 
-const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
-  errorMessage: "Radio must be used within RadioProvider",
-  name: "RadioGroup",
-  strict: false,
+export type RadioGroupOptions = RenderlesskitRadioGroupOptions;
+
+export type RadioGroupHTMLProps = RenderlesskitRadioGroupHTMLProps;
+
+export type RadioGroupProps = RadioGroupOptions & RadioGroupHTMLProps;
+
+export const useRadioGroup = createHook<RadioGroupOptions, RadioGroupHTMLProps>(
+  {
+    name: "RadioGroup",
+    compose: useRenderlesskitRadioGroup,
+    keys: RADIO_GROUP_KEYS,
+
+    useOptions(options, htmlProps) {
+      return options;
+    },
+
+    useProps(options, htmlProps) {
+      return htmlProps;
+    },
+  },
+);
+
+export const RadioGroup = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useRadioGroup,
 });
-
-export type RadioGroupProps = RadioInitialState & {
-  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
-  ariaLabel?: string;
-};
-
-export const RadioGroup = forwardRefWithAs<
-  RadioGroupProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { size, className, style, ariaLabel = "Radio Group", children } = props;
-  const { state, setState, ...composite } = useRadioState(props);
-
-  return (
-    <RadioProvider value={{ state, setState, ...composite, size }}>
-      <Composite
-        ref={ref}
-        role="radiogroup"
-        aria-label={ariaLabel}
-        className={className}
-        style={style}
-        {...composite}
-      >
-        {children}
-      </Composite>
-    </RadioProvider>
-  );
-});
-
-RadioGroup.displayName = "RadioGroup";
-
-export { useRadioGroup };

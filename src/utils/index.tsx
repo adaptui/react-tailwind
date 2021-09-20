@@ -1,5 +1,6 @@
 import { cx } from "@chakra-ui/utils";
 import * as React from "react";
+import { createTailwindMerge } from "tailwind-merge";
 
 import { Dict, RenderPropType } from "./types";
 
@@ -168,4 +169,20 @@ export function isUndefined(value: any): value is undefined {
   return typeof value === "undefined" || value === undefined;
 }
 
-export { twMerge as tcm } from "tailwind-merge";
+export const tcm = createTailwindMerge(getDefaultConfig => {
+  const defaultConfig = getDefaultConfig();
+
+  return {
+    ...defaultConfig,
+    classGroups: {
+      ...defaultConfig.classGroups,
+      "font-size": [
+        ...defaultConfig.classGroups["font-size"],
+        // Defined custom text presets
+        {
+          text: ["cxs", "paragraph-cxs", "paragraph-sm", "2base"],
+        },
+      ],
+    },
+  };
+});

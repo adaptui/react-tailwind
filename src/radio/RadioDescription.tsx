@@ -1,29 +1,44 @@
-import { tcm } from "../utils";
+import { cx } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
+
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { useRadioProps } from "./Radio";
-import { forwardRefWithAs } from "../utils/types";
+import { RadioStateReturn } from "./RadioState";
+import { RADIO_DESCRIPTION_KEYS } from "./__keys";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-export type RadioDescriptionProps = BoxProps & {};
+export type RadioDescriptionOptions = BoxOptions &
+  Pick<RadioStateReturn, "size">;
 
-export const RadioDescription = forwardRefWithAs<
-  RadioDescriptionProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const { size = "md" } = useRadioProps();
+export type RadioDescriptionHTMLProps = BoxHTMLProps;
 
-  const theme = useTheme();
-  const radioDescriptionStyles = tcm(
-    theme.radio.field.description.base,
-    theme.radio.field.description.size[size],
-    className,
-  );
+export type RadioDescriptionProps = RadioDescriptionOptions &
+  RadioDescriptionHTMLProps;
 
-  return (
-    <Box as="span" ref={ref} className={radioDescriptionStyles} {...rest} />
-  );
+export const useRadioDescription = createHook<
+  RadioDescriptionOptions,
+  RadioDescriptionHTMLProps
+>({
+  name: "RadioDescription",
+  compose: useBox,
+  keys: RADIO_DESCRIPTION_KEYS,
+
+  useProps(options, htmlProps) {
+    const { size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("radio");
+    const className = cx(
+      theme.description.base,
+      theme.description.size[size],
+      htmlClassName,
+    );
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-RadioDescription.displayName = "RadioDescription";
+export const RadioDescription = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useRadioDescription,
+});

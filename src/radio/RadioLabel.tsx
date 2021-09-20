@@ -1,29 +1,35 @@
-import { tcm } from "../utils";
-import { Box, BoxProps } from "../box";
+import { cx } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
+
 import { useTheme } from "../theme";
-import { useRadioProps, useRadioStateContext } from "./Radio";
-import { forwardRefWithAs } from "../utils/types";
+import { RADIO_LABEL_KEYS } from "./__keys";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-export type RadioLabelProps = BoxProps & {};
+export type RadioLabelOptions = BoxOptions;
 
-export const RadioLabel = forwardRefWithAs<
-  RadioLabelProps,
-  HTMLLabelElement,
-  "label"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const { disabled } = useRadioProps();
-  const { isDisabled } = useRadioStateContext();
+export type RadioLabelHTMLProps = BoxHTMLProps;
 
-  const theme = useTheme();
+export type RadioLabelProps = RadioLabelOptions & RadioLabelHTMLProps;
 
-  const radioLabelStyles = tcm(
-    theme.radio.base,
-    disabled || isDisabled ? theme.radio.disabled : "",
-    className,
-  );
+export const useRadioLabel = createHook<RadioLabelOptions, RadioLabelHTMLProps>(
+  {
+    name: "RadioLabel",
+    compose: useBox,
+    keys: RADIO_LABEL_KEYS,
 
-  return <Box as="label" ref={ref} className={radioLabelStyles} {...rest} />;
+    useProps(options, htmlProps) {
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+      const theme = useTheme("radio");
+      const className = cx(theme.label, htmlClassName);
+
+      return { className, ...restHtmlProps };
+    },
+  },
+);
+
+export const RadioLabel = createComponent({
+  as: "label",
+  memo: true,
+  useHook: useRadioLabel,
 });
-
-RadioLabel.displayName = "RadioLabel";

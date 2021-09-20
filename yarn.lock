@@ -2107,10 +2107,10 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
-"@renderlesskit/react@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.6.1.tgz#b007c52a5ce466c6d10c223483574faf6aadb100"
-  integrity sha512-MQxE3l7R/fCSDXP+xXl9nwvA4vf+KCmK/ka349XlEj6Fw5b+cEw6DhkXvEALQY9zS5241CSPWwakdkNeZ/ztsA==
+"@renderlesskit/react@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.6.2.tgz#0aab8cfbb223cead67b250ef0851f017e086fcaf"
+  integrity sha512-wISKo5lyGVz+oaVnHOD1QeGa12aNXXevL7HAZfKMC9u/SkYRAF0eA62+lIQPrCQzF1hdWuq15/1Acr/6lqPuyw==
   dependencies:
     "@chakra-ui/counter" "^1.1.9"
     "@chakra-ui/hooks" "^1.6.0"
@@ -2120,7 +2120,7 @@
     "@react-aria/interactions" "^3.6.0"
     "@react-aria/spinbutton" "^3.0.1"
     "@react-aria/utils" "^3.9.0"
-    date-fns "^2.23.0"
+    date-fns "^2.24.0"
     reakit-system "^0.15.2"
     reakit-utils "^0.15.2"
     reakit-warning "^0.6.2"
@@ -5967,7 +5967,7 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-date-fns@^2.16.1, date-fns@^2.23.0:
+date-fns@^2.16.1, date-fns@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.24.0.tgz#7d86dc0d93c87b76b63d213b4413337cfd1c105d"
   integrity sha512-6ujwvwgPID6zbI0o7UbURi2vlLDR9uP26+tW6Lg+Ji3w7dd0i3DOcjcClLjLPranT60SSEFBwdSyYwn/ZkPIuw==

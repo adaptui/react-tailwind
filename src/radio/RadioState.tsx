@@ -1,62 +1,33 @@
 import {
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-  useCompositeState,
-} from "reakit";
-import * as React from "react";
-import { useControllableState } from "@renderlesskit/react";
+  RadioState as RenderlesskitRadioState,
+  RadioActions as RenderlesskitRadioActions,
+  useRadioState as useRenderlesskitRadioState,
+  RadioInitialState as RenderlesskitRadioInitialState,
+} from "@renderlesskit/react";
 
-type StateType = string | number | undefined;
-
-export type RadioState = CompositeState & {
+export type RadioState = RenderlesskitRadioState & {
   /**
-   * The `value` attribute of the current checked radio.
+   * How large should the button be?
+   *
+   * @default md
    */
-  state: StateType;
+  size: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
 };
 
-export type RadioActions = CompositeActions & {
-  /**
-   * Sets `state`.
-   */
-  setState: React.Dispatch<React.SetStateAction<StateType>>;
-};
-
-export type RadioInitialState = CompositeInitialState &
-  Partial<Pick<RadioState, "state">> & {
-    defaultState?: StateType;
-    onStateChange?: (v: StateType) => void;
-  };
+export type RadioActions = RenderlesskitRadioActions & {};
 
 export type RadioStateReturn = RadioState & RadioActions;
 
-export function useRadioState(
-  initialState: RadioInitialState = {},
-): RadioStateReturn {
-  const {
-    state: initialValue,
-    loop = true,
-    defaultState,
-    onStateChange,
-    ...props
-  } = initialState;
+export type RadioInitialState = RenderlesskitRadioInitialState &
+  Partial<Pick<RadioState, "size">>;
 
-  const [state, setState] = useControllableState<string | number | undefined>({
-    value: initialValue,
-    defaultValue: defaultState,
-    onChange: onStateChange,
-  });
+export function useRadioState(props: RadioInitialState = {}): RadioStateReturn {
+  const state = useRenderlesskitRadioState(props);
+  console.log("%cstate", "color: #0088cc", state);
+  const { size = "md" } = props;
 
-  React.useEffect(() => {
-    onStateChange?.(state);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
-
-  const composite = useCompositeState({ ...props, loop });
   return {
-    ...composite,
-    state,
-    setState,
+    ...state,
+    size,
   };
 }

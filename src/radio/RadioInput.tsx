@@ -1,46 +1,38 @@
-import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
+import { useRadio, RadioOptions, RadioHTMLProps } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
 
 import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
-import { useRadioProps, useRadioStateContext } from "./Radio";
-import { CommonFieldProps, useFormControl } from "../form-field";
+import { RADIO_INPUT_KEYS } from "./__keys";
+import { RadioStateReturn } from "./RadioState";
 
-export type RadioInputProps = Partial<ReakitRadioProps> &
-  Omit<CommonFieldProps, "isReadOnly" | "id">;
+export type RadioInputOptions = RadioOptions & {
+  size: RadioStateReturn["size"];
+};
 
-export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
-  const { className, ...rest } = props;
-  const { isDisabled, isRequired, isInvalid, ...state } =
-    useRadioStateContext();
-  const { size, checkedIcon, disabledIcon, uncheckedIcon, ...iconProps } =
-    useRadioProps();
+export type RadioInputHTMLProps = Omit<RadioHTMLProps, "size">;
 
-  const theme = useTheme();
-  const radioStyles = tcm(theme.radio.input, className);
+export type RadioInputProps = RadioInputOptions & RadioInputHTMLProps;
 
-  const isTrulyDisabled = isDisabled || props.isDisabled || props.disabled;
-  const isTrulyRequired = isRequired || props.isRequired || props.required;
-  // prettier-ignore
-  const isTrulyInvalid = isInvalid || props.isInvalid || !!props["aria-invalid"];
+export const useRadioInput = createHook<RadioInputOptions, RadioInputHTMLProps>(
+  {
+    name: "RadioInput",
+    compose: useRadio,
+    keys: RADIO_INPUT_KEYS,
 
-  const { id, ...fieldInputProps } = useFormControl({
-    ...rest,
-    isDisabled: isTrulyDisabled,
-    isInvalid: isTrulyInvalid,
-    isRequired: isTrulyRequired,
-  });
+    useProps(options, htmlProps) {
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-  return (
-    <ReakitRadio
-      ref={ref}
-      className={radioStyles}
-      {...iconProps}
-      {...state}
-      {...fieldInputProps}
-      {...rest}
-    />
-  );
+      const theme = useTheme("checkbox");
+      const className = tcm(theme.input, htmlClassName);
+
+      return { className, ...restHtmlProps };
+    },
+  },
+);
+
+export const RadioInput = createComponent({
+  as: "input",
+  memo: true,
+  useHook: useRadioInput,
 });
-
-RadioInput.displayName = "RadioInput";
