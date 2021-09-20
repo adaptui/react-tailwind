@@ -1,9 +1,6 @@
 const plugin = require("tailwindcss/plugin");
 const selectorParser = require("postcss-selector-parser");
-const {
-  transformAllSelectors,
-  updateLastClasses,
-} = require("tailwindcss/lib/util/pluginUtils");
+const { transformAllSelectors } = require("tailwindcss/lib/util/pluginUtils");
 
 const variantPlugin = plugin(function ({ addVariant, config }) {
   function generateDataClassVariant(dataName, dataBool) {
@@ -42,15 +39,6 @@ const variantPlugin = plugin(function ({ addVariant, config }) {
   generateDataClassVariant("is-range-selection", true);
   generateDataClassVariant("is-selection-start", true);
   generateDataClassVariant("is-selection-end", true);
-
-  addVariant(
-    "lib",
-    transformAllSelectors(selector => {
-      return updateLastClasses(selector, className => {
-        return `lib${config("separator")}${className}`;
-      });
-    }),
-  );
 });
 
 module.exports = variantPlugin;

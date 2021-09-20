@@ -3,12 +3,11 @@ import {
   ButtonProps as ReakitButtonProps,
 } from "reakit";
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 import { announce } from "@react-aria/live-announcer";
 
 import { useTheme } from "../theme";
 import { usePrevious } from "../hooks";
-import { withIconA11y } from "../utils";
+import { withIconA11y, tcm } from "../utils";
 import { forwardRefWithAs, RenderPropType } from "../utils/types";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
@@ -77,9 +76,9 @@ export const Button = forwardRefWithAs<
   const _disabled = disabled || loading;
 
   const button = useTheme("button");
-  const baseStyles = cx(
+  const baseStyles = tcm(
     button.base,
-    !iconOnly ? button.size.default[size] : button.size.iconOnly[size],
+    !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
     button.variant.default[variant],
     button.variant.hover[variant],
     button.variant.active[variant],
@@ -87,8 +86,8 @@ export const Button = forwardRefWithAs<
     button.variant.disabled[variant],
     className,
   );
-  const suffixStyles = cx(button.suffix.size[size]);
-  const prefixStyles = cx(button.prefix.size[size]);
+  const suffixStyles = tcm(button.size.suffix[size]);
+  const prefixStyles = tcm(button.size.prefix[size]);
 
   const prevLoading = usePrevious(loading);
 
@@ -107,11 +106,7 @@ export const Button = forwardRefWithAs<
     >
       {(!prefix && !suffix) || iconOnly ? (
         loading ? (
-          <ButtonFullWidthSpinner
-            spinner={spinner}
-            iconOnly={iconOnly}
-            size={size}
-          >
+          <ButtonFullWidthSpinner spinner={spinner} size={size}>
             {iconOnly ? withIconA11y(iconOnly) : children}
           </ButtonFullWidthSpinner>
         ) : (
@@ -131,9 +126,7 @@ export const Button = forwardRefWithAs<
             loading ? (
               <ButtonSpinner spinner={spinner} suffix={suffix} size={size} />
             ) : (
-              withIconA11y(suffix, {
-                className: suffixStyles,
-              })
+              withIconA11y(suffix, { className: suffixStyles })
             )
           ) : null}
         </>

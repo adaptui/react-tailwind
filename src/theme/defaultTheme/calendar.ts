@@ -1,17 +1,17 @@
 export const calendar = {
-  base: "lib:font-sans lib:p-3 lib:rounded-md lib:bg-white lib:shadow-lg lib:w-max",
+  base: "font-sans p-3 rounded-md bg-white shadow-lg w-max",
   header: {
-    base: "lib:flex lib:justify-between",
-    title: "lib:text-sm lib:font-bold lib:text-gray-700",
-    button: "lib:text-gray-600 lib:w-16px",
+    base: "flex justify-between",
+    title: "text-sm font-bold text-gray-700",
+    button: "text-gray-600 w-16px",
   },
   table: {
-    base: "lib:p-4 lib:mt-2",
+    base: "p-4 mt-2",
     head: {
       base: "",
-      row: "lib:text-center",
+      row: "text-center",
       header: {
-        base: "lib:text-center lib:rounded-lg lib:text-sm lib:h-8 lib:w-8 lib:min-h-8 lib:min-w-8 lib:text-gray-500 lib:font-light",
+        base: "text-center rounded-lg text-sm h-8 w-8 min-h-8 min-w-8 text-gray-500 font-light",
         abbr: "",
       },
     },
@@ -19,8 +19,8 @@ export const calendar = {
       base: "",
       row: "",
       data: {
-        base: "lib:text-center lib:rounded-lg lib:text-sm lib:h-8 lib:w-8 lib:min-h-8 lib:min-w-8 focus-within:lib:bg-gray-100 focus-within:lib:text-black aria-selected:lib:text-white aria-selected:lib:bg-blue-400 is-range-selection:lib:bg-blue-100 is-range-selection:lib:rounded-none is-range-selection:lib:text-gray-800 is-selection-start:lib:text-white is-selection-start:lib:bg-blue-500 is-selection-end:lib:text-white is-selection-end:lib:bg-blue-500 is-selection-start:lib:rounded-l-lg is-selection-end:lib:rounded-r-lg",
-        button: "lib:p-2 lib:outline-none aria-disabled:lib:text-gray-400",
+        base: "text-center rounded-lg text-sm h-8 w-8 min-h-8 min-w-8 focus-within:bg-gray-100 focus-within:text-black aria-selected:text-white aria-selected:bg-blue-400 is-range-selection:bg-blue-100 is-range-selection:rounded-none is-range-selection:text-gray-800 is-selection-start:text-white is-selection-start:bg-blue-500 is-selection-end:text-white is-selection-end:bg-blue-500 is-selection-start:rounded-l-lg is-selection-end:rounded-r-lg",
+        button: "p-2 outline-none aria-disabled:text-gray-400",
       },
     },
   },

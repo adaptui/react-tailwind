@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  cx,
   CalendarCell,
   CalendarGrid,
   CalendarHeader as RenderlessCalendarHeader,
@@ -16,6 +15,7 @@ import {
   RangeCalendarStateReturn,
 } from "@renderlesskit/react";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { CalendarProvider, useCalendarContext } from "./helpers";
 
@@ -239,7 +239,7 @@ export const CalendarTableBodyData: React.FC<any> = props => {
     <CalendarCell
       as="td"
       date={day}
-      className={cx(theme.calendar.table.body.data.base, className)}
+      className={tcm(theme.calendar.table.body.data.base, className)}
       {...state}
       {...rest}
     />

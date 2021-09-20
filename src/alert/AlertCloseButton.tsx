@@ -1,6 +1,5 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { useAlertContext } from "./Alert";
 import { forwardRefWithAs } from "../utils/types";
 import { CloseButton, CloseButtonProps } from "../button";
@@ -16,7 +15,7 @@ export const AlertCloseButton = forwardRefWithAs<
   const { className, ...rest } = props;
 
   const theme = useTheme();
-  const alertCloseButtonStyles = cx(
+  const alertCloseButtonStyles = tcm(
     theme.alert.closeButton,
     theme.alert.status[status].actionButton,
     className,

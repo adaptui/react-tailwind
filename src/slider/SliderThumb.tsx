@@ -1,9 +1,9 @@
 import {
-  cx,
   SliderInput,
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
+import { tcm } from "../utils";
 import { useTheme } from "..";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
@@ -33,7 +33,7 @@ export const SliderThumb = forwardRefWithAs<
     origin: origin,
   });
 
-  const thumbHandleStyles = cx(
+  const thumbHandleStyles = tcm(
     theme.slider.common.thumb.base,
     theme.slider.common.thumb.size[size],
     theme.slider[orientation].thumb.base,

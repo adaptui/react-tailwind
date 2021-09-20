@@ -1,5 +1,4 @@
-import { cx } from "@renderlesskit/react";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useListContext } from "./List";
@@ -16,7 +15,7 @@ export const ListIcon = forwardRefWithAs<
   const { size = "md" } = useListContext();
 
   const theme = useTheme();
-  const listIconStyles = cx(
+  const listIconStyles = tcm(
     theme.list.icon.base,
     theme.list.icon.size[size],
     className,

@@ -1,20 +1,20 @@
 export const input = {
-  wrapper: "lib:relative lib:inline-flex",
-  base: "lib:appearance-none lib:w-full lib:outline-none lib:px-2 lib:py-1 lib:text-xs lib:shadow-sm lib:font-medium lib:placeholder-text-gray-500 lib:border lib:h-6 lib:border-gray-300 hover:lib:border-gray-400 lib:rounded-md lib:text-gray-800 focus-visible:lib:border-blue-500 focus-visible:lib:shadow-input disabled:lib:bg-gray-100 disabled:lib:shadow-none disabled:lib:cursor-not-allowed disabled:lib:border-gray-300",
-  invalid: "lib:border-red-300 hover:lib:border-red-400",
+  wrapper: "relative inline-flex",
+  base: "appearance-none w-full outline-none px-2 py-1 text-xs shadow-sm font-medium placeholder-text-gray-500 border h-6 border-gray-300 hover:border-gray-400 rounded-md text-gray-800 focus-visible:border-blue-500 focus-visible:shadow-input disabled:bg-gray-100 disabled:shadow-none disabled:cursor-not-allowed disabled:border-gray-300",
+  invalid: "border-red-300 hover:border-red-400",
   children: {
-    pointerEventsNone: "lib:pointer-events-none",
-    base: "lib:flex lib:items-center lib:justify-center lib:text-xs lib:absolute lib:inset-y-0 lib:h-6 lib:text-gray-800 lib:bg-transparent lib:border lib:border-transparent lib:rounded-md focus-within:lib:outline-none focus-within:lib:border-blue-500 focus-within:lib:shadow-input ",
-    prefix: "lib:left-0",
-    suffix: "lib:right-0",
+    pointerEventsNone: "pointer-events-none",
+    base: "flex items-center justify-center text-xs absolute inset-y-0 h-6 text-gray-800 bg-transparent border border-transparent rounded-md focus-within:outline-none focus-within:border-blue-500 focus-within:shadow-input ",
+    prefix: "left-0",
+    suffix: "right-0",
   },
 
   group: {
-    base: "lib:inline-flex lib:items-center lib:justify-center lib:rounded-md",
+    base: "inline-flex items-center justify-center rounded-md",
     children: {
-      base: "lib:inline-flex lib:items-center lib:h-6 lib:text-xs lib:font-medium lib:text-gray-800 lib:border lib:border-gray-300 lib:shadow-sm focus-within:lib:outline-none focus-within:lib:border-blue-500 focus-within:lib:shadow-input focus-within:lib:z-10",
-      prefix: "lib:-mr-px lib:rounded-l-md",
-      suffix: "lib:-ml-px lib:rounded-r-md",
+      base: "inline-flex items-center h-6 text-xs font-medium text-gray-800 border border-gray-300 shadow-sm focus-within:outline-none focus-within:border-blue-500 focus-within:shadow-input focus-within:z-10",
+      prefix: "-mr-px rounded-l-md",
+      suffix: "-ml-px rounded-r-md",
     },
   },
 };

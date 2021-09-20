@@ -1,6 +1,5 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useSliderPropsContext } from "./Slider";
 import { forwardRefWithAs } from "../utils/types";
@@ -21,7 +20,7 @@ export const SliderMinMax = forwardRefWithAs<
   });
 
   const theme = useTheme();
-  const sliderMinMaxStyles = cx(
+  const sliderMinMaxStyles = tcm(
     theme.slider.common.minmax.base,
     isReversed ? theme.slider.common.minmax.reversed : "",
     className,

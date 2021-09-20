@@ -1,10 +1,10 @@
-import { isValidElement, cloneElement } from "react";
 import { Box, BoxProps } from "reakit";
-import { cx } from "@renderlesskit/react";
+import { isValidElement, cloneElement } from "react";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
 import { useAvatarContext } from "./Avatar";
+import { forwardRefWithAs } from "../utils/types";
 
 export type AvatarIconProps = BoxProps & {};
 
@@ -24,7 +24,7 @@ export const AvatarIcon = forwardRefWithAs<
       })
     : children;
 
-  const iconStyles = cx(
+  const iconStyles = tcm(
     theme.avatar.icon.base,
     theme.avatar.icon.size[size],
     className,

@@ -2,8 +2,8 @@ import {
   Checkbox as ReakitSwitch,
   CheckboxProps as ReakitSwitchProps,
 } from "reakit";
-import { cx } from "@renderlesskit/react";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { useSwitchContext } from "./Switch";
 import { forwardRefWithAs } from "../utils/types";
@@ -23,7 +23,7 @@ export const SwitchInput = forwardRefWithAs<
   if (state["checked"] === undefined) delete state["checked"];
 
   const theme = useTheme();
-  const switchInputStyles = cx(theme.switch.input, className);
+  const switchInputStyles = tcm(theme.switch.input, className);
 
   const formFieldProps = useFormControl(rest);
 

@@ -1,10 +1,8 @@
-import * as React from "react";
-import { cx } from "@renderlesskit/react";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
 import { useRadioProps } from "./Radio";
+import { forwardRefWithAs } from "../utils/types";
 
 export type RadioDescriptionProps = BoxProps & {};
 
@@ -17,7 +15,7 @@ export const RadioDescription = forwardRefWithAs<
   const { size = "md" } = useRadioProps();
 
   const theme = useTheme();
-  const radioDescriptionStyles = cx(
+  const radioDescriptionStyles = tcm(
     theme.radio.field.description.base,
     theme.radio.field.description.size[size],
     className,

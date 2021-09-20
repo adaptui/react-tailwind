@@ -1,6 +1,7 @@
 import * as React from "react";
-import { cx, ActionType, AddToast, ToastOptions } from "@renderlesskit/react";
+import { ActionType, AddToast, ToastOptions } from "@renderlesskit/react";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { useMediaQuery } from "../hooks";
 import { InfoCircleIcon } from "../icons";
@@ -74,9 +75,9 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
   const theme = useTheme();
 
   return (
-    <div role="alert" className={cx(theme.toast.base, theme.toast[type].base)}>
+    <div role="alert" className={tcm(theme.toast.base, theme.toast[type].base)}>
       <div
-        className={cx(
+        className={tcm(
           theme.toast.content.base,
           showAlertContent
             ? theme.toast.content.show
@@ -90,7 +91,7 @@ export const ToastAlert: React.FC<ToastAlertProps> = ({
           <div className={theme.toast.body.title}>{title}</div>
           {description ? (
             <div
-              className={cx(
+              className={tcm(
                 theme.toast.body.description,
                 theme.toast[type].body.description,
               )}
@@ -147,7 +148,7 @@ const ToastActionButton: React.FC<ToastActionButtonProps> = ({
   return (
     <Button
       size="sm"
-      className={cx(
+      className={tcm(
         theme.toast.actions.button[variant],
         theme.toast[type].actions.button[variant],
       )}

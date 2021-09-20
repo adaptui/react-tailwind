@@ -1,4 +1,4 @@
-import { cx } from "@renderlesskit/react";
+import { tcm } from "../utils";
 import { defaults, mergeWith } from "lodash";
 
 import {
@@ -44,7 +44,7 @@ export function mergeExtensions({
   return mergeWith(theme, extend, (themeValue, extendValue) => {
     return mergeWith(themeValue, ...extendValue, (merged: any, value: any) => {
       if (isString(merged) && isString(value)) {
-        return cx(merged, value);
+        return tcm(merged, value);
       }
 
       return undefined;

@@ -1,7 +1,7 @@
-import { cx } from "@renderlesskit/react";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { Box } from "../box";
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { useAutoSize } from "./useAutoSize";
 import { useFormControl } from "../form-field";
@@ -57,12 +57,12 @@ export const Textarea = forwardRefWithAs<
   });
 
   const theme = useTheme();
-  const textaresStyles = cx(
+  const textaresStyles = tcm(
     theme.textarea.base,
     theme.textarea.resize[resize],
     className,
   );
-  const shadowTextareaStyles = cx(textaresStyles, theme.textarea.shadow);
+  const shadowTextareaStyles = tcm(textaresStyles, theme.textarea.shadow);
   const textareaInlineStyles = {
     height: inlineStyles.outerHeightStyle,
     // Need a large enough difference to allow scrolling.

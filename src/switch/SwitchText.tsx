@@ -1,5 +1,4 @@
-import { cx } from "@renderlesskit/react";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useSwitchContext } from "./Switch";
@@ -16,7 +15,7 @@ export const SwitchText = forwardRefWithAs<
   const { size = "md" } = useSwitchContext();
 
   const theme = useTheme();
-  const switchLabelStyles = cx(
+  const switchLabelStyles = tcm(
     theme.switch.labelText.base,
     theme.switch.labelText.size[size],
     className,

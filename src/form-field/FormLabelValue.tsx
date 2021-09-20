@@ -1,5 +1,4 @@
-import { cx } from "@renderlesskit/react";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -14,7 +13,7 @@ export const FormLabelValue = forwardRefWithAs<
   const { children, className, ...rest } = props;
 
   const theme = useTheme();
-  const labelValueStyles = cx(theme.formField.labelValueText, className);
+  const labelValueStyles = tcm(theme.formField.labelValueText, className);
 
   return (
     <Box ref={ref} className={labelValueStyles} {...rest}>

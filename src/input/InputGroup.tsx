@@ -1,13 +1,12 @@
 import { useMemo, useState, cloneElement } from "react";
-import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { AddonTypes } from "./InputAddons";
+import { useSafeLayoutEffect } from "../hooks";
 import { forwardRefWithAs } from "../utils/types";
 import { InputProps, ReactFiberNode } from "./Input";
-import { createContext, getValidChildren } from "../utils";
-import { useSafeLayoutEffect } from "../hooks";
+import { createContext, getValidChildren, tcm } from "../utils";
 
 export type InputGroupContext = InputGroupProps;
 
@@ -29,7 +28,7 @@ export const InputGroup = forwardRefWithAs<
   const context = useMemo(() => ({}), []);
 
   const theme = useTheme();
-  const inputGroupStyles = cx(theme.input.group.base, className);
+  const inputGroupStyles = tcm(theme.input.group.base, className);
   const validChildren = getValidChildren(children);
   const [clones, setClones] = useState<ReactFiberNode[]>([]);
 

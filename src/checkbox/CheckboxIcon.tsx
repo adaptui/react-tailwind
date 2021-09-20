@@ -1,10 +1,11 @@
 import { cx } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { CHECKBOX_ICON_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, BoxHTMLProps, useBox } from "../box";
 
 export type CheckboxIconOptions = BoxOptions &
   Pick<
@@ -33,7 +34,7 @@ export const useCheckboxIcon = createHook<
       checkbox.icon.base,
       checkbox.icon.size[size],
       isUnchecked
-        ? cx(
+        ? tcm(
             checkbox.icon.unChecked.default,
             checkbox.icon.unChecked.hover,
             checkbox.icon.unChecked.active,
@@ -42,7 +43,7 @@ export const useCheckboxIcon = createHook<
           )
         : "",
       isChecked
-        ? cx(
+        ? tcm(
             checkbox.icon.checked.default,
             checkbox.icon.checked.hover,
             checkbox.icon.checked.active,
@@ -51,7 +52,7 @@ export const useCheckboxIcon = createHook<
           )
         : "",
       isIndeterminate
-        ? cx(
+        ? tcm(
             checkbox.icon.checked.default,
             checkbox.icon.indeterminate.hover,
             checkbox.icon.indeterminate.active,

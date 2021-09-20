@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
 import {
   AlertIcon,
@@ -12,7 +11,7 @@ import { Box, BoxProps } from "../box";
 import { AlertBody } from "./AlertBody";
 import { useMediaQuery } from "../hooks";
 import { AlertActions } from "./AlertActions";
-import { createContext, runIfFn } from "../utils";
+import { createContext, runIfFn, tcm } from "../utils";
 import { AlertCloseButton } from "./AlertCloseButton";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 
@@ -92,7 +91,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
     const context = { status, isTablet };
 
     const theme = useTheme();
-    const alertStyles = cx(
+    const alertStyles = tcm(
       theme.alert.base,
       theme.alert.status[status].base,
       className,

@@ -1,3 +1,4 @@
+import { cx } from "@chakra-ui/utils";
 import * as React from "react";
 
 import { Dict, RenderPropType } from "./types";
@@ -142,27 +143,29 @@ export function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === "[object String]";
 }
 
+// Merge library & user prop
+export const passProps = (icon: RenderPropType, props?: Dict) => {
+  return React.isValidElement(icon)
+    ? React.cloneElement(icon, {
+        ...props,
+        ...icon.props,
+        className: cx(props?.className, icon.props.className),
+      })
+    : runIfFn(icon, { ...props });
+};
+
 // Add a11y to the icon passed
 export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
-  const iconElement = runIfFn(icon, {
-    // @ts-ignore
+  return passProps(icon, {
     role: "img",
     focusable: false,
     "aria-hidden": true,
     ...props,
   });
-
-  return React.isValidElement(iconElement)
-    ? React.cloneElement(iconElement, {
-        // @ts-ignore
-        role: "img",
-        focusable: false,
-        "aria-hidden": true,
-        ...props,
-      })
-    : icon;
 };
 
 export function isUndefined(value: any): value is undefined {
   return typeof value === "undefined" || value === undefined;
 }
+
+export { twMerge as tcm } from "tailwind-merge";

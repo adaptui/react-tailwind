@@ -2,8 +2,9 @@
  * A Custom Toast Which User Might Write
  */
 import { useCallback } from "react";
-import { cx, ConfigurableToastOptions } from "@renderlesskit/react";
+import { ConfigurableToastOptions } from "@renderlesskit/react";
 
+import { tcm } from "../../utils";
 import { InfoCircleIcon } from "../../icons";
 import { Toast, useToastHandlers } from "../index";
 
@@ -18,17 +19,17 @@ const CustomToast: React.FC<CustomToastProps> = ({
   showAlertContent,
 }) => {
   return (
-    <div className="lib:flex lib:shadow-lg lib:bg-gray-800 lib:py-2 lib:px-3 lib:text-white lib:rounded-md lib:w-full">
+    <div className="flex w-full px-3 py-2 text-white bg-gray-800 rounded-md shadow-lg">
       <div
-        className={cx(
-          "lib:flex w-full lib:justify-between lib:transition-opacity",
-          showAlertContent ? "lib:opacity-100" : "lib:opacity-0",
+        className={tcm(
+          "flex w-full justify-between transition-opacity",
+          showAlertContent ? "opacity-100" : "opacity-0",
         )}
       >
-        <div className="lib:flex lib:flex-col lib:text-sm lib:flex-wrap">
-          <div className="lib:font-medium">{title}</div>
+        <div className="flex flex-col flex-wrap text-sm">
+          <div className="font-medium">{title}</div>
         </div>
-        <div className="lib:inline-flex lib:box-content lib:flex-shrink-0 lib:mr-2 lib:w-4 lib:h-4 lib:py-0.5">
+        <div className="inline-flex box-content flex-shrink-0 mr-2 w-4 h-4 py-0.5">
           <InfoCircleIcon />
         </div>
       </div>

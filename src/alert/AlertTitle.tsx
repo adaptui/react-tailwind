@@ -1,6 +1,5 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
 
@@ -14,7 +13,7 @@ export const AlertTitle = forwardRefWithAs<
   const { className, ...rest } = props;
 
   const theme = useTheme();
-  const alertTitleStyles = cx(theme.alert.title, className);
+  const alertTitleStyles = tcm(theme.alert.title, className);
 
   return <Box className={alertTitleStyles} ref={ref} {...rest} />;
 });

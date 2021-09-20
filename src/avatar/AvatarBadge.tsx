@@ -1,6 +1,6 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { MoonIcon, DotIcon } from "../icons";
@@ -24,7 +24,7 @@ export const AvatarBadge = forwardRefWithAs<
 
   const _status = status || contextStatus || "online";
 
-  const badgeStyles = cx(
+  const badgeStyles = tcm(
     theme.avatar.badge.base,
     theme.avatar.badge.size[size],
     theme.avatar.badge.position[position],
@@ -35,7 +35,7 @@ export const AvatarBadge = forwardRefWithAs<
     if (_status === "online")
       return (
         <DotIcon
-          className={cx(
+          className={tcm(
             theme.avatar.status.online.base,
             theme.avatar.status.online.size[size],
           )}
@@ -44,7 +44,7 @@ export const AvatarBadge = forwardRefWithAs<
     if (_status === "offline")
       return (
         <MoonIcon
-          className={cx(
+          className={tcm(
             theme.avatar.status.offline.base,
             theme.avatar.status.offline.size[size],
           )}
@@ -53,7 +53,7 @@ export const AvatarBadge = forwardRefWithAs<
     if (_status === "typing")
       return (
         <TypingAnimation
-          className={cx(
+          className={tcm(
             theme.avatar.status.typing.base,
             theme.avatar.status.typing.size[size],
           )}
@@ -96,12 +96,12 @@ export const TypingAnimation = forwardRefWithAs<
   const theme = useTheme();
   const { size = "md" } = useAvatarContext();
 
-  const baseStyles = cx(
+  const baseStyles = tcm(
     theme.avatar.status.typing.base,
     theme.avatar.status.typing.size[size],
     className,
   );
-  const typingStyles = cx(theme.avatar.status.typing.circle, circleStyle);
+  const typingStyles = tcm(theme.avatar.status.typing.circle, circleStyle);
 
   return (
     <Box ref={ref} className={baseStyles} {...rest}>

@@ -1,8 +1,7 @@
-import { cx } from "@renderlesskit/react";
 import { useEffect, useMemo, useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-// @ts-ignore
-import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
+
+import { tcm } from "../../utils";
 
 import {
   CheckboxIcon,
@@ -119,22 +118,9 @@ export const CheckboxStack: Story = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
-export const HoverStack: Story = {
-  ...CheckboxStack,
-  parameters: { options: { showPanel: false }, pseudo: { hover: true } },
-};
-export const ActiveStack: Story = {
-  ...CheckboxStack,
-  parameters: { options: { showPanel: false }, pseudo: { active: true } },
-};
-export const FocusStack: Story = {
-  ...CheckboxStack,
-  parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
-};
 export const DisabledStack: Story = {
   ...CheckboxStack,
   args: { disabled: true },
@@ -182,7 +168,6 @@ export const WithLabelStack: Story = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
@@ -263,7 +248,6 @@ export const WithDescriptionStack: Story = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
@@ -546,7 +530,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
   return (
     <CheckboxLabel
       {...state}
-      className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
+      className={tcm("px-8 py-2 border-2 border-blue-500 rounded", className)}
     >
       <CheckboxInput {...state} {...inputProps} />
       {state.isChecked ? (
