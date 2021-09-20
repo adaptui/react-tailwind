@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-// @ts-ignore
-import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
 
 import {
   Button,
@@ -39,7 +37,6 @@ export default {
 
 export const Default: Story = {
   args: { children: "Continue", size: "md", variant: "solid" },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
@@ -128,7 +125,7 @@ export const ButtonStack: Story = {
             Continue
           </Button>
           <Button {...args} size="xl" variant="ghost">
-            Continue
+            Continues
           </Button>
         </div>
       </div>
@@ -140,22 +137,9 @@ export const ButtonStack: Story = {
     size: { table: { disable: true } },
     variant: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
-export const HoverStack: Story = {
-  ...ButtonStack,
-  parameters: { options: { showPanel: false }, pseudo: { hover: true } },
-};
-export const ActiveStack: Story = {
-  ...ButtonStack,
-  parameters: { options: { showPanel: false }, pseudo: { active: true } },
-};
-export const FocusStack: Story = {
-  ...ButtonStack,
-  parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
-};
 export const DisabledStack: Story = {
   ...ButtonStack,
   args: { disabled: true },

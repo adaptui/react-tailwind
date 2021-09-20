@@ -1,8 +1,6 @@
 import { twMerge as cx } from "tailwind-merge";
 import { useEffect, useMemo, useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-// @ts-ignore
-import { withPseudoState } from "storybook-addon-pseudo-states/dist/withPseudoState";
 
 import {
   CheckboxIcon,
@@ -27,27 +25,27 @@ type Story = ComponentStory<typeof Checkbox>;
 export default {
   title: "Forms/Checkbox",
   component: Checkbox,
-  argTypes: {
-    label: { control: { type: "text" } },
-    description: { control: { type: "text" } },
-    ...createControls("checkbox", {
-      ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
-        "wrapElement",
-        "focusable",
-        "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
-        "state",
-        "onStateChange",
-        "icon",
-      ],
-    }),
-  },
+  // argTypes: {
+  //   label: { control: { type: "text" } },
+  //   description: { control: { type: "text" } },
+  //   ...createControls("checkbox", {
+  //     ignore: [
+  //       "unstable_system",
+  //       "unstable_clickOnEnter",
+  //       "unstable_clickOnSpace",
+  //       "wrapElement",
+  //       "focusable",
+  //       "as",
+  //       "setState",
+  //       "checked",
+  //       "value",
+  //       "defaultState",
+  //       "state",
+  //       "onStateChange",
+  //       "icon",
+  //     ],
+  //   }),
+  // },
   parameters: {
     layout: "centered",
   },
@@ -119,22 +117,9 @@ export const CheckboxStack: Story = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
-export const HoverStack: Story = {
-  ...CheckboxStack,
-  parameters: { options: { showPanel: false }, pseudo: { hover: true } },
-};
-export const ActiveStack: Story = {
-  ...CheckboxStack,
-  parameters: { options: { showPanel: false }, pseudo: { active: true } },
-};
-export const FocusStack: Story = {
-  ...CheckboxStack,
-  parameters: { options: { showPanel: false }, pseudo: { focusVisible: true } },
-};
 export const DisabledStack: Story = {
   ...CheckboxStack,
   args: { disabled: true },
@@ -182,7 +167,6 @@ export const WithLabelStack: Story = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
@@ -263,7 +247,6 @@ export const WithDescriptionStack: Story = {
     disabled: { table: { disable: false } },
     size: { table: { disable: true } },
   },
-  decorators: [withPseudoState],
   parameters: { options: { showPanel: true } },
 };
 
