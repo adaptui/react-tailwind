@@ -34,45 +34,19 @@ export const button = {
   },
   size: {
     default: {
-      sm: "h-[26px] px-2 space-x-1.5 rounded-lg text-cxs font-medium w-auto min-w-[26px] pb-px",
-      md: "h-[30px] px-2.5 space-x-1.5 rounded-lg text-sm font-medium w-auto min-w-[30px]",
-      lg: "h-9 px-3 space-x-1.5 rounded-[10px] text-sm font-medium w-auto min-w-9",
-      xl: "h-11 px-4 space-x-1.5 rounded-xl text-base font-medium w-auto min-w-11",
+      sm: "h-[26px] px-2 rounded-lg text-cxs font-medium w-auto min-w-[26px] pb-px",
+      md: "h-[30px] px-2.5 rounded-lg text-sm font-medium w-auto min-w-[30px]",
+      lg: "h-9 px-3 rounded-[10px] text-sm font-medium w-auto min-w-9",
+      xl: "h-11 px-4 rounded-xl text-base font-medium w-auto min-w-11",
     },
     iconOnly: {
-      sm: "h-[26px] rounded-lg text-base w-[26px]",
-      md: "h-[30px] rounded-lg text-base w-[30px]",
-      lg: "h-9 rounded-[10px] text-base w-9",
-      xl: "h-11 rounded-xl text-xl w-11",
-    },
-  },
-  prefix: {
-    size: {
-      sm: "text-xs mr-1.5",
-      md: "text-xs mr-1.5",
-      lg: "text-xs mr-1.5",
-      xl: "text-base mr-1.5",
-    },
-  },
-  suffix: {
-    size: {
-      sm: "text-xs ml-1.5",
-      md: "text-xs ml-1.5",
-      lg: "text-xs ml-1.5",
-      xl: "text-base ml-1.5",
-    },
-  },
-  spinner: {
-    default: {
-      size: {
-        sm: "text-xs",
-        md: "text-xs",
-        lg: "text-xs",
-        xl: "text-base",
+      base: {
+        sm: "h-[26px] rounded-lg w-[26px]",
+        md: "h-[30px] rounded-lg w-[30px]",
+        lg: "h-9 rounded-[10px] w-9",
+        xl: "h-11 rounded-xl w-11",
       },
-    },
-    iconOnly: {
-      size: {
+      text: {
         sm: "text-base",
         md: "text-base",
         lg: "text-base",
@@ -80,20 +54,16 @@ export const button = {
       },
     },
     prefix: {
-      size: {
-        sm: " mr-1.5",
-        md: " mr-1.5",
-        lg: " mr-1.5",
-        xl: " mr-1.5",
-      },
+      sm: "text-xs mr-1.5",
+      md: "text-xs mr-1.5",
+      lg: "text-xs mr-1.5",
+      xl: "text-base mr-1.5",
     },
     suffix: {
-      size: {
-        sm: " ml-1.5",
-        md: " ml-1.5",
-        lg: " ml-1.5",
-        xl: " ml-1.5",
-      },
+      sm: "text-xs ml-1.5",
+      md: "text-xs ml-1.5",
+      lg: "text-xs ml-1.5",
+      xl: "text-base ml-1.5",
     },
   },
 };

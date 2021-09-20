@@ -78,7 +78,7 @@ export const Button = forwardRefWithAs<
   const button = useTheme("button");
   const baseStyles = tcm(
     button.base,
-    !iconOnly ? button.size.default[size] : button.size.iconOnly[size],
+    !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
     button.variant.default[variant],
     button.variant.hover[variant],
     button.variant.active[variant],
@@ -86,8 +86,8 @@ export const Button = forwardRefWithAs<
     button.variant.disabled[variant],
     className,
   );
-  const suffixStyles = tcm(button.suffix.size[size]);
-  const prefixStyles = tcm(button.prefix.size[size]);
+  const suffixStyles = tcm(button.size.suffix[size]);
+  const prefixStyles = tcm(button.size.prefix[size]);
 
   const prevLoading = usePrevious(loading);
 
@@ -106,11 +106,7 @@ export const Button = forwardRefWithAs<
     >
       {(!prefix && !suffix) || iconOnly ? (
         loading ? (
-          <ButtonFullWidthSpinner
-            spinner={spinner}
-            iconOnly={iconOnly}
-            size={size}
-          >
+          <ButtonFullWidthSpinner spinner={spinner} size={size}>
             {iconOnly ? withIconA11y(iconOnly) : children}
           </ButtonFullWidthSpinner>
         ) : (

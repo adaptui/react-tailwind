@@ -1,3 +1,4 @@
+import { cx } from "@renderlesskit/react";
 import { useState, useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
@@ -6,7 +7,7 @@ import {
   CloseButton as CloseButtonComponent,
   CloseButtonProps,
 } from "../index";
-import { Spinner } from "../../spinner";
+import { Spinner, SpinnerProps } from "../../spinner";
 import { CaretRightIcon, ClockIcon } from "../../icons";
 import { createControls } from "../../../.storybook/utils";
 
@@ -183,7 +184,11 @@ export const PrefixStack: Story = {
 
 export const PrefixSuffix: Story = {
   ...Default,
-  args: { ...Default.args, prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
+  args: {
+    ...Default.args,
+    prefix: <ClockIcon />,
+    suffix: <CaretRightIcon />,
+  },
 };
 
 export const PrefixSuffixStack: Story = {
@@ -209,8 +214,24 @@ export const ExtendedSize: Story = {
   args: { ...Default.args, children: "xxl", size: "xxl" },
 };
 
-const ExtendedSpinnerComponent = () => {
-  return <Spinner size="em" className="text-base text-red-500" />;
+export const ExtendedPrefixSuffix: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    className: "p-5 text-lg",
+    prefix: <ClockIcon className="mx-4 text-lg text-orange-500" />,
+    suffix: <CaretRightIcon className="mx-4 text-lg text-emarald-500" />,
+  },
+};
+
+const ExtendedSpinnerComponent: React.FC<SpinnerProps> = props => {
+  return (
+    <Spinner
+      size="em"
+      {...props}
+      className={cx(props.className, "text-red-500")}
+    />
+  );
 };
 
 export const ExtendedSpinner: Story = {

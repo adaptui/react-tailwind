@@ -1,4 +1,5 @@
-import { tcm } from "../utils";
+import { cx } from "@renderlesskit/react";
+
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -39,7 +40,7 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
       ...rest
     } = props;
     const theme = useTheme();
-    const spinnerStyles = tcm(
+    const spinnerStyles = cx(
       theme.spinner.base,
       theme.spinner.size[size],
       theme.spinner.stroke[stroke],

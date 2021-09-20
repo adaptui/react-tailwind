@@ -1,27 +1,28 @@
 import * as React from "react";
 
+import { passProps } from "../utils";
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { ButtonProps } from "./Button";
-import { tcm, runIfFn } from "../utils";
+import { cx } from "@renderlesskit/react";
 
 export type ButtonSpinnerProps = Partial<
   Pick<ButtonProps, "spinner" | "size" | "iconOnly" | "prefix" | "suffix">
 > & {};
 
 export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const { spinner, iconOnly, prefix, suffix, size = "md" } = props;
-  const button = useTheme("button");
+  const { spinner, prefix, suffix, size = "md" } = props;
 
-  const spinnerStyles = tcm(
-    !iconOnly
-      ? button.spinner.default.size[size]
-      : button.spinner.iconOnly.size[size],
-    prefix ? button.spinner.prefix.size[size] : "",
-    suffix ? button.spinner.suffix.size[size] : "",
+  const button = useTheme("button");
+  const spinnerStyles = cx(
+    prefix
+      ? button.size.prefix[size]
+      : suffix
+      ? button.size.suffix[size]
+      : button.size.iconOnly.text[size],
   );
 
-  if (spinner) return <>{runIfFn(spinner, { className: spinnerStyles })}</>;
+  if (spinner) return <>{passProps(spinner, { className: spinnerStyles })}</>;
 
   return <Spinner className={spinnerStyles} size="em" />;
 };

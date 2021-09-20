@@ -1,4 +1,4 @@
-import { tcm } from "../utils";
+import { cx } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
@@ -38,7 +38,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
     } = props;
 
     const badge = useTheme("badge");
-    const badgeStyles = tcm(
+    const badgeStyles = cx(
       badge.base,
       badge.size[size],
       badge.variant[variant][themeColor],

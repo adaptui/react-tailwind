@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { CloseIcon } from "../icons";
 import { Button, ButtonProps } from "./Button";
 import { forwardRefWithAs } from "../utils/types";
@@ -17,7 +15,7 @@ export const CloseButton = forwardRefWithAs<
     <Button
       ref={ref}
       aria-label="Close"
-      iconOnly={(children as React.ReactElement) || <CloseIcon />}
+      iconOnly={children || <CloseIcon />}
       {...rest}
     />
   );

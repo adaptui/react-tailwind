@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/react";
 
 import { Box } from "../index";
-import { tcm } from "../../utils";
 
 export default {
   title: "Primitives/Box",
@@ -50,17 +49,9 @@ export const AsButton = () => {
     <Box
       as="button"
       type="button"
-      className={tcm(
-        "h-8 px-4 text-base font-bold text-white bg-red-500 rounded-md",
-      )}
+      className="h-8 px-4 text-base font-bold text-white bg-red-500 rounded-md"
     >
       Button
     </Box>
   );
 };
-
-export const AsPrevButtonComp = () => (
-  <Box as={AsButton} className="bg-green-500">
-    Button
-  </Box>
-);

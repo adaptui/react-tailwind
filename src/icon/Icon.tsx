@@ -1,7 +1,7 @@
 // Credits to https://github.com/chakra-ui/chakra-ui/tree/main/packages/icon
 import * as React from "react";
+import { cx } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -44,7 +44,7 @@ export const Icon = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
     const shared: any = {
       ref,
       focusable,
-      className: tcm(iconStyles, className),
+      className: cx(iconStyles, className),
     };
 
     const _viewBox = viewBox ?? fallbackIcon.viewBox;
