@@ -3,12 +3,11 @@ import {
   ButtonProps as ReakitButtonProps,
 } from "reakit";
 import * as React from "react";
-import { twMerge as cx } from "tailwind-merge";
 import { announce } from "@react-aria/live-announcer";
 
 import { useTheme } from "../theme";
 import { usePrevious } from "../hooks";
-import { withIconA11y } from "../utils";
+import { withIconA11y, tcm } from "../utils";
 import { forwardRefWithAs, RenderPropType } from "../utils/types";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
@@ -77,7 +76,7 @@ export const Button = forwardRefWithAs<
   const _disabled = disabled || loading;
 
   const button = useTheme("button");
-  const baseStyles = cx(
+  const baseStyles = tcm(
     button.base,
     !iconOnly ? button.size.default[size] : button.size.iconOnly[size],
     button.variant.default[variant],
@@ -87,8 +86,8 @@ export const Button = forwardRefWithAs<
     button.variant.disabled[variant],
     className,
   );
-  const suffixStyles = cx(button.suffix.size[size]);
-  const prefixStyles = cx(button.prefix.size[size]);
+  const suffixStyles = tcm(button.suffix.size[size]);
+  const prefixStyles = tcm(button.prefix.size[size]);
 
   const prevLoading = usePrevious(loading);
 
@@ -131,9 +130,7 @@ export const Button = forwardRefWithAs<
             loading ? (
               <ButtonSpinner spinner={spinner} suffix={suffix} size={size} />
             ) : (
-              withIconA11y(suffix, {
-                className: suffixStyles,
-              })
+              withIconA11y(suffix, { className: suffixStyles })
             )
           ) : null}
         </>

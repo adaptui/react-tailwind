@@ -14,8 +14,8 @@ import {
   RangeCalendarInitialState,
   RangeCalendarStateReturn,
 } from "@renderlesskit/react";
-import { twMerge as cx } from "tailwind-merge";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { CalendarProvider, useCalendarContext } from "./helpers";
 
@@ -239,7 +239,7 @@ export const CalendarTableBodyData: React.FC<any> = props => {
     <CalendarCell
       as="td"
       date={day}
-      className={cx(theme.calendar.table.body.data.base, className)}
+      className={tcm(theme.calendar.table.body.data.base, className)}
       {...state}
       {...rest}
     />

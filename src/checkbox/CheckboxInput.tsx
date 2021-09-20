@@ -3,9 +3,9 @@ import {
   CheckboxOptions,
   CheckboxHTMLProps,
 } from "@renderlesskit/react";
-import { twMerge as cx } from "tailwind-merge";
 import { createComponent, createHook } from "reakit-system";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { CHECKBOX_INPUT_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
@@ -30,7 +30,7 @@ export const useCheckboxInput = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkbox");
-    const className = cx(theme.input, htmlClassName);
+    const className = tcm(theme.input, htmlClassName);
 
     return { className, ...restHtmlProps };
   },

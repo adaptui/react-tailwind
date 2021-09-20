@@ -1,10 +1,9 @@
 import * as React from "react";
-import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { Spinner } from "../spinner";
 import { ButtonProps } from "./Button";
-import { runIfFn } from "..";
+import { tcm, runIfFn } from "../utils";
 
 export type ButtonSpinnerProps = Partial<
   Pick<ButtonProps, "spinner" | "size" | "iconOnly" | "prefix" | "suffix">
@@ -14,7 +13,7 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const { spinner, iconOnly, prefix, suffix, size = "md" } = props;
   const button = useTheme("button");
 
-  const spinnerStyles = cx(
+  const spinnerStyles = tcm(
     !iconOnly
       ? button.spinner.default.size[size]
       : button.spinner.iconOnly.size[size],

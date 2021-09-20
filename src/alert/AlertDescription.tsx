@@ -1,6 +1,5 @@
-import { twMerge as cx } from "tailwind-merge";
-
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useAlertContext } from "./Alert";
 import { forwardRefWithAs } from "../utils/types";
@@ -16,7 +15,7 @@ export const AlertDescription = forwardRefWithAs<
   const { isTablet } = useAlertContext();
 
   const theme = useTheme();
-  const alertDescriptionStyles = cx(
+  const alertDescriptionStyles = tcm(
     theme.alert.description.base,
     isTablet ? theme.alert.description.mobile : theme.alert.description.desktop,
     className,

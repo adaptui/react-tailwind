@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useSwitchContext } from "./Switch";
@@ -16,14 +15,14 @@ export const SwitchIcon = forwardRefWithAs<
   const { state, size = "md" } = useSwitchContext();
 
   const theme = useTheme();
-  const switchIconWrapperStyles = cx(
+  const switchIconWrapperStyles = tcm(
     theme.switch.icon.wrapper.base,
     theme.switch.icon.wrapper.size[size],
     // @ts-ignore
     theme.switch.icon.wrapper.state[`${state.checked}`],
     className,
   );
-  const switchIconContentStyles = cx(
+  const switchIconContentStyles = tcm(
     theme.switch.icon.content.base,
     theme.switch.icon.content.size[size],
     state?.checked

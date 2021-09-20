@@ -1,12 +1,11 @@
 import * as React from "react";
-import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { useId } from "../hooks/useId";
 import { Box, BoxProps } from "../box";
 import { useBoolean } from "../hooks/useBoolean";
 import { useFormControl } from "./useFormControl";
-import { createContext, runIfFn } from "../utils";
+import { createContext, runIfFn, tcm } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type CommonFieldProps = {
@@ -77,7 +76,7 @@ export const FormField = forwardRefWithAs<
   const theme = useTheme();
   const { htmlProps, ...context } = useFormContextValues(rest);
 
-  const formFieldStyles = cx(theme.formField.wrapper.base, className);
+  const formFieldStyles = tcm(theme.formField.wrapper.base, className);
 
   return (
     <FormFieldContextProvider value={context}>

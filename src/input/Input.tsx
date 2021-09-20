@@ -1,12 +1,11 @@
 import * as React from "react";
-import { twMerge as cx } from "tailwind-merge";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
 import { useTheme } from "../theme";
 import { AddonTypes } from "./InputAddons";
-import { getValidChildren } from "../utils";
 import { useSafeLayoutEffect } from "../hooks";
 import { useFormControl } from "../form-field";
+import { getValidChildren, tcm } from "../utils";
 
 export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   /**
@@ -49,8 +48,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     });
 
     const theme = useTheme();
-    const inputWrapperStyles = cx(theme.input.wrapper);
-    const inputStyles = cx(
+    const inputWrapperStyles = tcm(theme.input.wrapper);
+    const inputStyles = tcm(
       theme.input.base,
       isInvalid ? theme.input.invalid : "",
       className,

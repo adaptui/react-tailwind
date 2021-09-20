@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -22,7 +21,7 @@ export const CircularProgressBar = forwardRefWithAs<
   const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
   const strokeDasharray =
     determinant == null ? undefined : `${determinant} ${264 - determinant}`;
-  const circularProgressBarStyles = cx(
+  const circularProgressBarStyles = tcm(
     theme.circularProgress.bar.size[size],
     isIndeterminate ? theme.circularProgress.bar.indeterminate : "",
     className,
@@ -43,7 +42,7 @@ export const CircularProgressBar = forwardRefWithAs<
         fill="transparent"
         stroke="currentColor"
         strokeWidth="10px"
-        className={cx(theme.circularProgress.bar.track, trackStyle)}
+        className={tcm(theme.circularProgress.bar.track, trackStyle)}
       />
       <circle
         cx={50}
@@ -54,7 +53,7 @@ export const CircularProgressBar = forwardRefWithAs<
         strokeWidth="10px"
         strokeDashoffset="66"
         strokeDasharray={strokeDasharray}
-        className={cx(
+        className={tcm(
           theme.circularProgress.bar.innerTrack.base,
           isIndeterminate
             ? theme.circularProgress.bar.innerTrack.indeterminate

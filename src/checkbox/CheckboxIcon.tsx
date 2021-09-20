@@ -1,18 +1,18 @@
-import { twMerge as cx } from "tailwind-merge";
 import { createComponent, createHook } from "reakit-system";
+import { RoleOptions, RoleHTMLProps, useRole } from "reakit";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { CHECKBOX_ICON_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-export type CheckboxIconOptions = BoxOptions &
+export type CheckboxIconOptions = RoleOptions &
   Pick<
     CheckboxStateReturn,
     "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
   >;
 
-export type CheckboxIconHTMLProps = BoxHTMLProps;
+export type CheckboxIconHTMLProps = RoleHTMLProps;
 
 export type CheckboxIconProps = CheckboxIconOptions & CheckboxIconHTMLProps;
 
@@ -21,7 +21,7 @@ export const useCheckboxIcon = createHook<
   CheckboxIconHTMLProps
 >({
   name: "CheckboxIcon",
-  compose: useBox,
+  compose: useRole,
   keys: CHECKBOX_ICON_KEYS,
 
   useProps(options, htmlProps) {
@@ -29,11 +29,11 @@ export const useCheckboxIcon = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const checkbox = useTheme("checkbox");
-    const className = cx(
+    const className = tcm(
       checkbox.icon.base,
       checkbox.icon.size[size],
       isUnchecked
-        ? cx(
+        ? tcm(
             checkbox.icon.unChecked.default,
             checkbox.icon.unChecked.hover,
             checkbox.icon.unChecked.active,
@@ -42,7 +42,7 @@ export const useCheckboxIcon = createHook<
           )
         : "",
       isChecked
-        ? cx(
+        ? tcm(
             checkbox.icon.checked.default,
             checkbox.icon.checked.hover,
             checkbox.icon.checked.active,
@@ -51,7 +51,7 @@ export const useCheckboxIcon = createHook<
           )
         : "",
       isIndeterminate
-        ? cx(
+        ? tcm(
             checkbox.icon.checked.default,
             checkbox.icon.indeterminate.hover,
             checkbox.icon.indeterminate.active,

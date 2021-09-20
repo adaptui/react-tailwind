@@ -1,8 +1,6 @@
-import { BoxProps } from "reakit";
-import { twMerge as cx } from "tailwind-merge";
-
-import { Box } from "../box";
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { Box, BoxProps } from "../box";
+import { useTheme } from "../theme";
 import { useRadioProps, useRadioStateContext } from "./Radio";
 import { forwardRefWithAs } from "../utils/types";
 
@@ -19,7 +17,7 @@ export const RadioLabel = forwardRefWithAs<
 
   const theme = useTheme();
 
-  const radioLabelStyles = cx(
+  const radioLabelStyles = tcm(
     theme.radio.base,
     disabled || isDisabled ? theme.radio.disabled : "",
     className,

@@ -1,11 +1,10 @@
 import { useMemo } from "react";
-import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
-import { createContext, getValidChildren } from "../utils";
 import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
+import { createContext, getValidChildren, tcm } from "../utils";
 
 export type AvatarGroupContext = Pick<
   AvatarProps,
@@ -64,7 +63,7 @@ export const AvatarGroup = forwardRefWithAs<
         ref={ref}
         role="group"
         aria-label="Avatar group"
-        className={cx(theme.avatar.group.base, className)}
+        className={tcm(theme.avatar.group.base, className)}
         {...rest}
       >
         {childrenWithinMax}
@@ -91,7 +90,7 @@ const AvatarExcess = ({
 }) => {
   const theme = useTheme();
 
-  const excessStyles = cx(
+  const excessStyles = tcm(
     theme.avatar.group.excess.text.base,
     theme.avatar.group.excess.text.size[size],
   );

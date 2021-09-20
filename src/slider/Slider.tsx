@@ -1,18 +1,17 @@
-import * as React from "react";
 import {
   useSliderState,
   SliderStateReturn,
   SliderInitialState,
 } from "@renderlesskit/react";
-import { twMerge as cx } from "tailwind-merge";
+import * as React from "react";
 
-import { useTheme } from "../index";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { SliderTrack } from "./SliderTrack";
 import { SliderThumb } from "./SliderThumb";
+import { SliderTrack } from "./SliderTrack";
 import { SliderMinMax } from "./SliderMinMax";
 import { useFormControl } from "../form-field";
-import { createContext, runIfFn } from "../utils";
+import { createContext, runIfFn, tcm } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
 
@@ -103,7 +102,7 @@ export const Slider = forwardRefWithAs<
   });
   const { thumbSize, padding, thumbRef, trackRef } = useSliderDimensions();
 
-  const sliderWrapperStyles = cx(
+  const sliderWrapperStyles = tcm(
     theme.slider.common.wrapper.base,
     theme.slider[orientation].wrapper.base,
     className,

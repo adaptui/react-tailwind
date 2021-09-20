@@ -1,11 +1,10 @@
-import { twMerge as cx } from "tailwind-merge";
-
 import {
   InfoCircleIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from "../icons";
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useAlertContext } from "./Alert";
 import { forwardRefWithAs } from "../utils/types";
@@ -30,7 +29,7 @@ export const AlertIcon = forwardRefWithAs<
   const Icon = STATUS_ICONS[status];
 
   const theme = useTheme();
-  const alertIconBaseStyles = cx(
+  const alertIconBaseStyles = tcm(
     theme.alert.icon,
     theme.alert.status[status].icon,
     className,

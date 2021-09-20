@@ -1,8 +1,8 @@
 import { SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
-import { twMerge as cx } from "tailwind-merge";
 
+import { tcm } from "../utils";
 import { BoxProps } from "../box";
-import { useTheme } from "../index";
+import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { useSliderValues } from "./hooks/useSliderValues";
 import { SliderProps, useSliderPropsContext } from "./Slider";
@@ -35,19 +35,19 @@ export const SliderTrack = forwardRefWithAs<
     state,
   } = useSliderValues({ orientation: orientation, origin: origin });
 
-  const trackContainerStyles = cx(
+  const trackContainerStyles = tcm(
     theme.slider.common.track.base,
     theme.slider[orientation].track.base,
     className,
   );
 
-  const trackMainStyles = cx(
+  const trackMainStyles = tcm(
     theme.slider.common.track.main,
     theme.slider[orientation].track.main,
     theme.slider[orientation].track.size[size],
   );
 
-  const trackFilledStyles = cx(
+  const trackFilledStyles = tcm(
     theme.slider.common.track.filled,
     theme.slider[orientation].track.filled,
     theme.slider[orientation].track.size[size],

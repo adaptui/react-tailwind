@@ -1,15 +1,15 @@
-import { twMerge as cx } from "tailwind-merge";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { CHECKBOX_DESCRIPTION_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
 
-export type CheckboxDescriptionOptions = BoxOptions &
+export type CheckboxDescriptionOptions = RoleOptions &
   Pick<CheckboxStateReturn, "size">;
 
-export type CheckboxDescriptionHTMLProps = BoxHTMLProps;
+export type CheckboxDescriptionHTMLProps = RoleHTMLProps;
 
 export type CheckboxDescriptionProps = CheckboxDescriptionOptions &
   CheckboxDescriptionHTMLProps;
@@ -19,7 +19,7 @@ export const useCheckboxDescription = createHook<
   CheckboxDescriptionHTMLProps
 >({
   name: "CheckboxDescription",
-  compose: useBox,
+  compose: useRole,
   keys: CHECKBOX_DESCRIPTION_KEYS,
 
   useProps(options, htmlProps) {
@@ -27,7 +27,7 @@ export const useCheckboxDescription = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkbox");
-    const className = cx(
+    const className = tcm(
       theme.description.base,
       theme.description.size[size],
       htmlClassName,

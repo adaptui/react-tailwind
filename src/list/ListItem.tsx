@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -11,7 +10,7 @@ export const ListItem = forwardRefWithAs<ListItemProps, HTMLLIElement, "li">(
     const { className, ...rest } = props;
 
     const theme = useTheme();
-    const listItemStyles = cx(theme.list.item, className);
+    const listItemStyles = tcm(theme.list.item, className);
 
     return <Box as="li" ref={ref} className={listItemStyles} {...rest} />;
   },

@@ -1,6 +1,5 @@
-import { twMerge as cx } from "tailwind-merge";
-
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { TooltipProps } from "./Tooltip";
 import { forwardRefWithAs } from "../utils/types";
@@ -16,7 +15,7 @@ export const TooltipBody = forwardRefWithAs<
   const { prefix, visible, className, children, ...rest } = props;
 
   const theme = useTheme();
-  const tooltipStyles = cx(
+  const tooltipStyles = tcm(
     theme.tooltip.body.base,
     visible ? theme.tooltip.body.visible : theme.tooltip.body.invisible,
     className,

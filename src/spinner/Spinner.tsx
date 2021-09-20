@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -40,7 +39,7 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
       ...rest
     } = props;
     const theme = useTheme();
-    const spinnerStyles = cx(
+    const spinnerStyles = tcm(
       theme.spinner.base,
       theme.spinner.size[size],
       theme.spinner.stroke[stroke],

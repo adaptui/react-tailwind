@@ -1,6 +1,6 @@
-import { twMerge as cx } from "tailwind-merge";
 import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { useRadioProps, useRadioStateContext } from "./Radio";
@@ -17,7 +17,7 @@ export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
     useRadioProps();
 
   const theme = useTheme();
-  const radioStyles = cx(theme.radio.input, className);
+  const radioStyles = tcm(theme.radio.input, className);
 
   const isTrulyDisabled = isDisabled || props.isDisabled || props.disabled;
   const isTrulyRequired = isRequired || props.isRequired || props.required;

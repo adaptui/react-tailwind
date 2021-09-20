@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -13,7 +12,7 @@ export const SwitchLabel = forwardRefWithAs<
 >((props, ref) => {
   const { className, ...rest } = props;
   const theme = useTheme();
-  const switchStyles = cx(theme.switch.label, className);
+  const switchStyles = tcm(theme.switch.label, className);
 
   return <Box as="label" ref={ref} className={switchStyles} {...rest} />;
 });

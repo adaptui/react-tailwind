@@ -2,9 +2,9 @@
  * A Custom Toast Which User Might Write
  */
 import { useCallback } from "react";
-import { twMerge as cx } from "tailwind-merge";
 import { ConfigurableToastOptions } from "@renderlesskit/react";
 
+import { tcm } from "../../utils";
 import { InfoCircleIcon } from "../../icons";
 import { Toast, useToastHandlers } from "../index";
 
@@ -21,7 +21,7 @@ const CustomToast: React.FC<CustomToastProps> = ({
   return (
     <div className="flex w-full px-3 py-2 text-white bg-gray-800 rounded-md shadow-lg">
       <div
-        className={cx(
+        className={tcm(
           "flex w-full justify-between transition-opacity",
           showAlertContent ? "opacity-100" : "opacity-0",
         )}

@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { forwardRefWithAs } from "../utils/types";
@@ -19,7 +18,7 @@ export const ProgressTrack = forwardRefWithAs<
   return (
     <Box
       ref={ref}
-      className={cx(
+      className={tcm(
         theme.progress.track.base,
         theme.progress.track.size[size],
         className,

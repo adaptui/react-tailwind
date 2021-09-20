@@ -1,10 +1,9 @@
 import { useCallback } from "react";
-import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { Split } from "../utils/types";
-import { isFunction, objectKeys } from "../utils";
 import { useHover, useMediaQuery } from "../hooks";
+import { isFunction, objectKeys, tcm } from "../utils";
 import { Toast, ToastPlacement, useToasts, useToastsReturnType } from "./index";
 
 export const Toasts = () => {
@@ -42,11 +41,11 @@ export const ToastsContainer = (props: ToastsContainerProps) => {
   const theme = useTheme();
   const hoveredStyle = isHovered ? "hovered" : "notHovered";
   const mobileStyle = isMobile ? "center" : position;
-  const toastsContainerStyles = cx(
+  const toastsContainerStyles = tcm(
     theme.toast.container.base,
     theme.toast[side].container.base,
     theme.toast[side][mobileStyle].container.base,
-    cx(
+    tcm(
       theme.toast.container[hoveredStyle],
       theme.toast[side].container[hoveredStyle],
     ),
@@ -128,11 +127,11 @@ export const StackableToast = (props: StackableToastProps) => {
   const theme = useTheme();
   const visibleStyle = isToastVisible ? "visible" : "notVisible";
   const mobileStyle = isMobile ? "center" : position;
-  const toastAnimationStyles = cx(
+  const toastAnimationStyles = tcm(
     theme.toast.animationWrapper.base,
     theme.toast[side].animationWrapper.base,
     theme.toast[side][mobileStyle].animationWrapper.base,
-    cx(
+    tcm(
       theme.toast.animationWrapper[visibleStyle],
       theme.toast[side].animationWrapper[visibleStyle],
     ),
@@ -150,7 +149,7 @@ export const StackableToast = (props: StackableToastProps) => {
           height: isHovered ? `${height}px` : `${frontHeight}px`,
         }}
       >
-        <div className={cx(theme.toast.fill, theme.toast[side].fill)} />
+        <div className={tcm(theme.toast.fill, theme.toast[side].fill)} />
         {isFunction(content) ? (
           content({ toast, showAlertContent })
         ) : (

@@ -1,5 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { createContext } from "../utils";
@@ -24,7 +23,7 @@ export const List = forwardRefWithAs<ListProps, HTMLUListElement, "ul">(
     const { size = "md", className, ...rest } = props;
 
     const theme = useTheme();
-    const listStyles = cx(theme.list.base, theme.list.size[size], className);
+    const listStyles = tcm(theme.list.base, theme.list.size[size], className);
 
     return (
       <ListProvider value={{ size }}>
@@ -46,7 +45,7 @@ export const UnorderedList = forwardRefWithAs<
   const { className, ...rest } = props;
 
   const theme = useTheme();
-  const unorderedListStyles = cx(theme.list.ul, className);
+  const unorderedListStyles = tcm(theme.list.ul, className);
 
   return <List ref={ref} className={unorderedListStyles} {...rest} />;
 });
@@ -58,7 +57,7 @@ export const OrderedList = forwardRefWithAs<ListProps, HTMLOListElement, "ol">(
     const { className, ...rest } = props;
 
     const theme = useTheme();
-    const orderedListStyles = cx(theme.list.ol, className);
+    const orderedListStyles = tcm(theme.list.ol, className);
 
     return <List as="ol" ref={ref} className={orderedListStyles} {...rest} />;
   },

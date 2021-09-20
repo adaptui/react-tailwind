@@ -1,4 +1,4 @@
-import { twMerge as cx } from "tailwind-merge";
+import { tcm } from "../utils";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
@@ -38,7 +38,7 @@ export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
     } = props;
 
     const badge = useTheme("badge");
-    const badgeStyles = cx(
+    const badgeStyles = tcm(
       badge.base,
       badge.size[size],
       badge.variant[variant][themeColor],

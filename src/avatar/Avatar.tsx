@@ -1,5 +1,4 @@
 import * as React from "react";
-import { twMerge as cx } from "tailwind-merge";
 
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
@@ -10,7 +9,7 @@ import { AvatarImage } from "./AvatarImage";
 import { AvatarBadge } from "./AvatarBadge";
 import { useImage } from "../hooks/useImage";
 import { useAvatarGroup } from "./AvatarGroup";
-import { createContext, runIfFn } from "../utils";
+import { createContext, runIfFn, tcm } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type AvatarInitialProps = {
@@ -104,7 +103,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     const _showBorder = showBorder || group?.showBorder || false;
     const _borderColor = borderColor || group?.borderColor || false;
     const theme = useTheme();
-    const avatarStyles = cx(
+    const avatarStyles = tcm(
       theme.avatar.base,
       theme.avatar.size[_size],
       _showBorder ? theme.avatar.border.width[_size] : "",

@@ -2,8 +2,8 @@ import {
   ProgressProps,
   Progress as RenderlesskitProgress,
 } from "@renderlesskit/react";
-import { twMerge as cx } from "tailwind-merge";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 import { useCircularProgressContext } from "./CircularProgress";
@@ -23,7 +23,7 @@ export const CircularProgressWrapper = forwardRefWithAs<
     <RenderlesskitProgress
       ref={ref}
       aria-label="progress"
-      className={cx(theme.circularProgress.wrapper, className)}
+      className={tcm(theme.circularProgress.wrapper, className)}
       {...state}
       {...rest}
     />

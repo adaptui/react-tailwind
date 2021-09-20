@@ -1,6 +1,4 @@
-import * as React from "react";
-import { twMerge as cx } from "tailwind-merge";
-
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useRadioProps } from "./Radio";
@@ -17,7 +15,7 @@ export const RadioText = forwardRefWithAs<
   const { size = "md" } = useRadioProps();
 
   const theme = useTheme();
-  const radioTextStyles = cx(
+  const radioTextStyles = tcm(
     theme.radio.field.text.base,
     theme.radio.field.text.size[size],
     className,

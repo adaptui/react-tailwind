@@ -1,6 +1,5 @@
-import { twMerge as cx } from "tailwind-merge";
-
-import { useTheme } from "../index";
+import { tcm } from "../utils";
+import { useTheme } from "../theme";
 import { useAlertContext } from "./Alert";
 import { Button, ButtonProps } from "../button";
 import { forwardRefWithAs } from "../utils/types";
@@ -16,7 +15,7 @@ export const AlertActionButton = forwardRefWithAs<
   const { className, ...rest } = props;
 
   const theme = useTheme();
-  const alertActionButtonStyles = cx(
+  const alertActionButtonStyles = tcm(
     theme.alert.actionButton.base,
     isTablet
       ? theme.alert.actionButton.mobile

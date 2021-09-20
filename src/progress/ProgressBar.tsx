@@ -2,8 +2,8 @@ import {
   ProgressProps,
   Progress as RenderlesskitProgress,
 } from "@renderlesskit/react";
-import { twMerge as cx } from "tailwind-merge";
 
+import { tcm } from "../utils";
 import { useTheme } from "../theme";
 import { useProgressContext } from "./Progress";
 import { forwardRefWithAs } from "../utils/types";
@@ -25,7 +25,7 @@ export const ProgressBar = forwardRefWithAs<
       ref={ref}
       aria-label="progress"
       style={{ width: `${percent}%` }}
-      className={cx(
+      className={tcm(
         theme.progress.bar.base,
         !isIndeterminate
           ? theme.progress.bar.normal

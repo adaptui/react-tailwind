@@ -1,6 +1,7 @@
-import { twMerge as cx } from "tailwind-merge";
 import { useEffect, useMemo, useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+
+import { tcm } from "../../utils";
 
 import {
   CheckboxIcon,
@@ -25,27 +26,27 @@ type Story = ComponentStory<typeof Checkbox>;
 export default {
   title: "Forms/Checkbox",
   component: Checkbox,
-  // argTypes: {
-  //   label: { control: { type: "text" } },
-  //   description: { control: { type: "text" } },
-  //   ...createControls("checkbox", {
-  //     ignore: [
-  //       "unstable_system",
-  //       "unstable_clickOnEnter",
-  //       "unstable_clickOnSpace",
-  //       "wrapElement",
-  //       "focusable",
-  //       "as",
-  //       "setState",
-  //       "checked",
-  //       "value",
-  //       "defaultState",
-  //       "state",
-  //       "onStateChange",
-  //       "icon",
-  //     ],
-  //   }),
-  // },
+  argTypes: {
+    label: { control: { type: "text" } },
+    description: { control: { type: "text" } },
+    ...createControls("checkbox", {
+      ignore: [
+        "unstable_system",
+        "unstable_clickOnEnter",
+        "unstable_clickOnSpace",
+        "wrapElement",
+        "focusable",
+        "as",
+        "setState",
+        "checked",
+        "value",
+        "defaultState",
+        "state",
+        "onStateChange",
+        "icon",
+      ],
+    }),
+  },
   parameters: {
     layout: "centered",
   },
@@ -529,7 +530,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
   return (
     <CheckboxLabel
       {...state}
-      className={cx("px-8 py-2 border-2 border-blue-500 rounded", className)}
+      className={tcm("px-8 py-2 border-2 border-blue-500 rounded", className)}
     >
       <CheckboxInput {...state} {...inputProps} />
       {state.isChecked ? (
