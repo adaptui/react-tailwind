@@ -22,7 +22,6 @@ export const useRadioText = createHook<RadioTextOptions, RadioTextHTMLProps>({
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("radio");
-    console.log("%ctheme", "color: #917399", theme);
     const className = cx(theme.text.base, theme.text.size[size], htmlClassName);
 
     return { className, ...restHtmlProps };

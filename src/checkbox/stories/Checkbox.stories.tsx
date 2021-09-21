@@ -62,14 +62,12 @@ export const Small: Story = {
   args: { ...Default.args, size: "sm" },
   argTypes: {
     ...Default.argTypes,
-    size: { table: { disable: true } },
   },
 };
 export const Medium: Story = {
   ...Default,
   argTypes: {
     ...Default.argTypes,
-    size: { table: { disable: true } },
   },
 };
 export const Large: Story = {
@@ -77,7 +75,6 @@ export const Large: Story = {
   args: { ...Default.args, size: "lg" },
   argTypes: {
     ...Default.argTypes,
-    size: { table: { disable: true } },
   },
 };
 

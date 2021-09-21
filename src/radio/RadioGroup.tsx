@@ -1,36 +1,37 @@
 import {
+  Radio,
+  RadioGroup as RenderlesskitRadioGroup,
   RadioGroupHTMLProps as RenderlesskitRadioGroupHTMLProps,
-  RadioGroupOptions as RenderlesskitRadioGroupOptions,
-  useRadioGroup as useRenderlesskitRadioGroup,
 } from "@renderlesskit/react";
-import { createComponent, createHook } from "reakit-system";
+import * as React from "react";
 
-import { RADIO_GROUP_KEYS } from "./__keys";
+import {
+  RadioGroupStateReturn,
+  RadioGroupInitialState,
+} from "./RadioGroupState";
+import { runIfFn } from "../utils";
+import { RenderProp } from "../utils/types";
+import { RadioStateContextProvider, useRadioStateSplit } from "./helpers";
 
-export type RadioGroupOptions = RenderlesskitRadioGroupOptions;
+export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {};
 
-export type RadioGroupHTMLProps = RenderlesskitRadioGroupHTMLProps;
+export type RadioGroupProps = RadioGroupInitialState &
+  RadioGroupOwnProps &
+  RenderProp<RadioGroupStateReturn>;
 
-export type RadioGroupProps = RadioGroupOptions & RadioGroupHTMLProps;
+export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
+  (props, ref) => {
+    const [state, radioGroupProps] = useRadioStateSplit(props);
+    const { children, ...rest } = radioGroupProps;
 
-export const useRadioGroup = createHook<RadioGroupOptions, RadioGroupHTMLProps>(
-  {
-    name: "RadioGroup",
-    compose: useRenderlesskitRadioGroup,
-    keys: RADIO_GROUP_KEYS,
-
-    useOptions(options, htmlProps) {
-      return options;
-    },
-
-    useProps(options, htmlProps) {
-      return htmlProps;
-    },
+    return (
+      <RenderlesskitRadioGroup ref={ref} {...state} {...rest}>
+        <RadioStateContextProvider value={state}>
+          {runIfFn(children, state)}
+        </RadioStateContextProvider>
+      </RenderlesskitRadioGroup>
+    );
   },
 );
 
-export const RadioGroup = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useRadioGroup,
-});
+Radio.displayName = "Radio";

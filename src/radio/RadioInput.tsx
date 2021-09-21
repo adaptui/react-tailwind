@@ -1,5 +1,5 @@
-import { useRadio, RadioOptions, RadioHTMLProps } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
+import { useRadio, RadioOptions, RadioHTMLProps } from "@renderlesskit/react";
 
 import { tcm } from "../utils";
 import { useTheme } from "../theme";
@@ -23,7 +23,7 @@ export const useRadioInput = createHook<RadioInputOptions, RadioInputHTMLProps>(
     useProps(options, htmlProps) {
       const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-      const theme = useTheme("checkbox");
+      const theme = useTheme("radio");
       const className = tcm(theme.input, htmlClassName);
 
       return { className, ...restHtmlProps };

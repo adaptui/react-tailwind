@@ -9,9 +9,19 @@ export const checkbox = {
       md: "w-4 h-4 text-xs border-[1.5px] rounded",
       lg: "w-5 h-5 text-base border-[1.5px] rounded",
     },
+    unChecked: {
+      default: "bg-white border-gray-400 text-current",
+      hover: "peer-hover:border-gray-500 peer-hover:shadow",
+      active: "peer-active:border-gray-400",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled: "peer-disabled:bg-gray-200 peer-disabled:border-gray-300",
+      invalid:
+        "bg-white border-red-600 text-current peer-hover:border-red-700 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-300",
+    },
     checked: {
       default: "bg-gray-800 border-gray-800 text-white",
-      hover: "peer-hover:bg-gray-700 peer-hover:border-gray-700",
+      hover:
+        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
       active: "peer-active:bg-gray-800 peer-active:border-gray-800",
       focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
       disabled:
@@ -19,18 +29,10 @@ export const checkbox = {
       invalid:
         "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
     },
-    unChecked: {
-      default: "bg-white border-gray-400 text-current",
-      hover: "peer-hover:border-gray-500",
-      active: "peer-active:border-gray-400",
-      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
-      disabled: "peer-disabled:bg-gray-200 peer-disabled:border-gray-300",
-      invalid:
-        "bg-white border-red-600 text-current peer-hover:border-red-700 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-300",
-    },
     indeterminate: {
       default: "bg-gray-800 border-gray-800 text-white",
-      hover: "peer-hover:bg-gray-700 peer-hover:border-gray-700",
+      hover:
+        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
       active: "peer-active:bg-gray-800 peer-active:border-gray-800",
       focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
       disabled:

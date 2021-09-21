@@ -7,7 +7,8 @@ import { RADIO_ICON_KEYS } from "./__keys";
 import { RadioStateReturn } from "./RadioState";
 import { BoxOptions, BoxHTMLProps, useBox } from "../box";
 
-export type RadioIconOptions = BoxOptions & Pick<RadioStateReturn, "size">;
+export type RadioIconOptions = BoxOptions &
+  Pick<RadioStateReturn, "size" | "isChecked">;
 
 export type RadioIconHTMLProps = BoxHTMLProps;
 
@@ -19,40 +20,28 @@ export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
   keys: RADIO_ICON_KEYS,
 
   useProps(options, htmlProps) {
-    const { size } = options;
+    const { size, isChecked } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const checkbox = useTheme("checkbox");
+    const theme = useTheme("radio");
     const className = cx(
-      checkbox.icon.base,
-      checkbox.icon.size[size],
-      // isUnchecked
-      //   ? tcm(
-      //       checkbox.icon.unChecked.default,
-      //       checkbox.icon.unChecked.hover,
-      //       checkbox.icon.unChecked.active,
-      //       checkbox.icon.unChecked.focus,
-      //       checkbox.icon.unChecked.disabled,
-      //     )
-      //   : "",
-      // isChecked
-      //   ? tcm(
-      //       checkbox.icon.checked.default,
-      //       checkbox.icon.checked.hover,
-      //       checkbox.icon.checked.active,
-      //       checkbox.icon.checked.focus,
-      //       checkbox.icon.checked.disabled,
-      //     )
-      //   : "",
-      // isIndeterminate
-      //   ? tcm(
-      //       checkbox.icon.checked.default,
-      //       checkbox.icon.indeterminate.hover,
-      //       checkbox.icon.indeterminate.active,
-      //       checkbox.icon.indeterminate.focus,
-      //       checkbox.icon.indeterminate.disabled,
-      //     )
-      //   : "",
+      theme.icon.base,
+      theme.icon.size[size],
+      isChecked
+        ? tcm(
+            theme.icon.checked.default,
+            theme.icon.checked.hover,
+            theme.icon.checked.active,
+            theme.icon.checked.focus,
+            theme.icon.checked.disabled,
+          )
+        : tcm(
+            theme.icon.unChecked.default,
+            theme.icon.unChecked.hover,
+            theme.icon.unChecked.active,
+            theme.icon.unChecked.focus,
+            theme.icon.unChecked.disabled,
+          ),
       htmlClassName,
     );
 

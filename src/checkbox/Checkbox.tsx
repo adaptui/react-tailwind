@@ -6,10 +6,10 @@ import { CheckboxIcon } from "./CheckboxIcon";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { RenderProp, RenderPropType } from "../utils/types";
 import { CheckboxDescription } from "./CheckboxDescription";
-import { CheckboxInput, CheckboxInputHTMLProps } from "./CheckboxInput";
+import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxStateReturn, CheckboxInitialState } from "./CheckboxState";
 
-export type CheckboxOwnProps = CheckboxInputHTMLProps & {
+export type CheckboxOwnProps = Partial<CheckboxInputProps> & {
   /**
    * Provide custom icons as a replacement for the default ones.
    */
