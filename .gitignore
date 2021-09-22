@@ -1,27 +1,23 @@
 # dotenv environment variable files
 .env*
 
-# library folder
-.lib
-dist
-
-# testing
+# Testing
 /coverage
 
-# next.js
+# Storybook Build
+storybook-static
+
+# Next JS
 /.next/
 /out/
 
-# Storybook build
-storybook-static
+# Vercel folder
+.vercel
 
 # Local Netlify
 .netlify
 .idea
 *.env
-
-# Vercel folder
-.vercel
 
 # Optional eslint cache
 .eslintcache
@@ -50,3 +46,6 @@ jspm_packages
 !.yarn/sdks
 !.yarn/versions
 .yarn-integrity # Yarn Integrity file
+
+## library folder
+dist

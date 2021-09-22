@@ -1,11 +1,56 @@
+# dotenv environment variable files
+.env*
+
+# Testing
+/coverage
+
+# Storybook Build
+storybook-static
+
+# Next JS
+/.next/
+/out/
+
+# Vercel folder
+.vercel
+
+# Local Netlify
+.netlify
+.idea
+*.env
+
+# Optional eslint cache
+.eslintcache
+
+# Logs
+*.log*
+
+# Dependency directories
 node_modules
-.next
-.cache
-build
-public
-dist
-coverage
-package.json
+jspm_packages
+
+# Mac files
+.DS_Store
+
+# Optional npm cache directory
+.npm
+
+# Yarn 2
+.pnp/
+.pnp.*
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn-integrity # Yarn Integrity file
+
+# Lock files
 package-lock.json
 yarn.lock
-storybook-static
+
+## library folder
+dist
+CHANGELOG.md
