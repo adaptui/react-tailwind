@@ -1,8 +1,9 @@
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useAvatarContext } from "./Avatar";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAvatarContext } from "./Avatar";
 
 export type AvatarImageProps = BoxProps & {};
 

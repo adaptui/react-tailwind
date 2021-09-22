@@ -1,14 +1,15 @@
+import { isValidElement } from "react";
 import {
-  RenderResult,
-  RenderOptions,
   render as RtlRender,
+  RenderOptions,
+  RenderResult,
 } from "@testing-library/react";
 import { RunOptions } from "axe-core";
-import { isValidElement } from "react";
 import { configureAxe } from "jest-axe";
 
 import theme from "../../renderlesskit.config";
 import { RenderlesskitProvider } from "../theme";
+
 export * from "@testing-library/react";
 
 type Render = (

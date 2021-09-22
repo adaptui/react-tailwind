@@ -1,4 +1,5 @@
 import { objectKeys } from "../utils";
+
 import { Toast, ToastPlacement } from "./ToastTypes";
 
 export type SortedToastList = Record<ToastPlacement, Toast[]>;

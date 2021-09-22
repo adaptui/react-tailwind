@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createUnionControl } from "../../../.storybook/utils";
 
@@ -10,7 +10,7 @@ import {
 } from "./RadioComponent";
 
 type Meta = ComponentMeta<typeof RadioComponent>;
-type Story = ComponentStory<typeof RadioComponent>;
+type Story = ComponentStoryObj<typeof RadioComponent>;
 
 export default {
   title: "Forms/Radio",

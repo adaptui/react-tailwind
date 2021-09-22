@@ -1,8 +1,9 @@
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useAlertContext } from "./Alert";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAlertContext } from "./Alert";
 
 export type AlertDescriptionProps = BoxProps & {};
 

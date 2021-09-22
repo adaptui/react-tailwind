@@ -1,5 +1,5 @@
-import { createIcon } from "../createIcon";
 import { render, testA11y } from "../../utils/testUtils";
+import { createIcon } from "../createIcon";
 
 const Test = createIcon({
   displayName: "CloseIcon",

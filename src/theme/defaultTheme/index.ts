@@ -12,14 +12,14 @@ import { icon } from "./icon";
 import { input } from "./input";
 import { list } from "./list";
 import { progress } from "./progress";
-import { spinner } from "./spinner";
-import { _switch } from "./switch";
 import { radio } from "./radio";
 import { slider } from "./slider";
+import { spinner } from "./spinner";
+import { _switch } from "./switch";
 import { tag } from "./tag";
 import { textarea } from "./textarea";
-import { tooltip } from "./tooltip";
 import { toast } from "./toast";
+import { tooltip } from "./tooltip";
 
 // font-sans
 // To build css for the storybook body

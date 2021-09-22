@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FaCopy } from "react-icons/fa";
 import { Meta } from "@storybook/react";
 
+import { createControls, storyTemplate } from "../../../.storybook/utils";
 import { Avatar } from "../../avatar";
 import { ClockIcon } from "../../icons";
-import { createControls, storyTemplate } from "../../../.storybook/utils";
-import { Tag, TagProps, TagGroupProps, TagGroup } from "..";
+import { Tag, TagGroup, TagGroupProps, TagProps } from "..";
 
 export default {
   title: "Primitives/Tag",

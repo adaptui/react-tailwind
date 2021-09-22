@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 
+import { mockImage, render, testA11y } from "../../utils/testUtils";
 import { Avatar } from "../index";
-import { render, testA11y, mockImage } from "../../utils/testUtils";
 
 jest.useFakeTimers("modern");
 afterEach(() => {

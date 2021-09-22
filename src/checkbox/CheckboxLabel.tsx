@@ -1,9 +1,10 @@
-import { cx } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
+import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
-import { CHECKBOX_LABEL_KEYS } from "./__keys";
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useTheme } from "../theme";
+
+import { CHECKBOX_LABEL_KEYS } from "./__keys";
 
 export type CheckboxLabelOptions = BoxOptions;
 

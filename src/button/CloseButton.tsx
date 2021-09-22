@@ -1,6 +1,7 @@
 import { CloseIcon } from "../icons";
-import { Button, ButtonProps } from "./Button";
 import { forwardRefWithAs } from "../utils/types";
+
+import { Button, ButtonProps } from "./Button";
 
 export type CloseButtonProps = ButtonProps & {};
 

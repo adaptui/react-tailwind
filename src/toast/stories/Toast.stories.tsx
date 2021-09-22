@@ -2,8 +2,9 @@ import { Portal } from "reakit";
 import { Meta } from "@storybook/react";
 
 import { Button } from "../../button";
+import { ToastProvider, Toasts, useToast, useToastHandlers } from "../index";
+
 import { useCustomToast } from "./CustomToast";
-import { Toasts, useToast, ToastProvider, useToastHandlers } from "../index";
 
 export default { title: "Popups/Toast" } as Meta;
 

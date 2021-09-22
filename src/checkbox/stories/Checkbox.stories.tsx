@@ -1,27 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { tcm } from "../../utils";
-
-import {
-  CheckboxIcon,
-  CheckboxLabel,
-  CheckboxInput,
-  CheckboxState,
-  CheckboxInitialState,
-  CheckboxText,
-  CheckboxDescription,
-} from "../index";
-import { Button } from "../../button";
-import { withIconA11y } from "../../utils";
-import { EyeClose, EyeOpen } from "../../icons";
-import { useCheckboxStateSplit } from "../helpers";
-import { CheckboxInputHTMLProps } from "../CheckboxInput";
 import { createControls } from "../../../.storybook/utils";
+import { Button } from "../../button";
+import { EyeClose, EyeOpen } from "../../icons";
+import { tcm, withIconA11y } from "../../utils";
 import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
+import { CheckboxInputHTMLProps } from "../CheckboxInput";
+import { useCheckboxStateSplit } from "../helpers";
+import {
+  CheckboxDescription,
+  CheckboxIcon,
+  CheckboxInitialState,
+  CheckboxInput,
+  CheckboxLabel,
+  CheckboxState,
+  CheckboxText,
+} from "../index";
 
 type Meta = ComponentMeta<typeof Checkbox>;
-type Story = ComponentStory<typeof Checkbox>;
+type Story = ComponentStoryObj<typeof Checkbox>;
 
 export default {
   title: "Forms/Checkbox",

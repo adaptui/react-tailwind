@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Clickable, CompositeItem } from "reakit";
 
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
-import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
+import { CloseIcon } from "../icons";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { useTagGroup } from "./TagGroup";
 
 export type TagProps = Omit<BoxProps, "prefix"> & {

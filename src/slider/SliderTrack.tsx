@@ -1,9 +1,10 @@
 import { SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
 import { BoxProps } from "../box";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { useSliderValues } from "./hooks/useSliderValues";
 import { SliderProps, useSliderPropsContext } from "./Slider";
 

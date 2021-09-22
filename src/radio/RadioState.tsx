@@ -1,18 +1,19 @@
+import { CircleIcon } from "../icons/Circle";
+import { getValidChildren, runIfFn, runIfFnChildren } from "../utils";
+import { Dict } from "../utils/types";
+
 import {
-  RadioOwnProps,
+  RadioDescriptionProps,
   RadioGroupStateReturn,
+  RadioIconProps,
+  RadioInputProps,
+  RadioLabelProps,
+  RadioOwnProps,
   RadioProps,
+  RadioTextProps,
   useRadioStateContext,
   useRadioStateReturnSplit,
-  RadioLabelProps,
-  RadioInputProps,
-  RadioIconProps,
-  RadioTextProps,
-  RadioDescriptionProps,
 } from "./index";
-import { Dict } from "../utils/types";
-import { CircleIcon } from "../icons/Circle";
-import { runIfFnChildren, runIfFn, getValidChildren } from "../utils";
 
 export type RadioStateReturn = RadioGroupStateReturn & {
   /**

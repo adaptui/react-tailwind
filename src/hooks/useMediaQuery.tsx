@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { isBrowser } from "../utils";
+
 import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
 
 /**

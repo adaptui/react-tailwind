@@ -1,18 +1,19 @@
 import { splitProps } from "reakit-utils";
 
+import { createContext, getValidChildren } from "../utils";
+import { Dict } from "../utils/types";
+
 import {
-  RadioGroupInitialState,
-  useRadioGroupState,
-  RadioGroupStateReturn,
-  USE_RADIO_GROUP_STATE_KEYS,
   RADIO_GROUP_STATE_KEYS,
-  RadioProps,
-  RadioOwnProps,
+  RadioGroupInitialState,
   RadioGroupOwnProps,
   RadioGroupProps,
+  RadioGroupStateReturn,
+  RadioOwnProps,
+  RadioProps,
+  USE_RADIO_GROUP_STATE_KEYS,
+  useRadioGroupState,
 } from "./index";
-import { Dict } from "../utils/types";
-import { createContext, getValidChildren } from "../utils";
 
 const [RadioStateContextProvider, useRadioStateContext] =
   createContext<RadioGroupStateReturn>({

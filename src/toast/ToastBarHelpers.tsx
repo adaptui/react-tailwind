@@ -1,15 +1,16 @@
 import { useCallback, useEffect } from "react";
 import { useToastTimer } from "@renderlesskit/react";
 
+import { useMediaQuery, usePrevious } from "../hooks";
+
 import {
+  getPlacementSortedToasts,
+  mobileSortedToasts,
   Toast,
   ToastPlacement,
   useToastHandlers,
   useToastStore,
-  getPlacementSortedToasts,
-  mobileSortedToasts,
 } from "./index";
-import { useMediaQuery, usePrevious } from "../hooks";
 
 export const useToasts = () => {
   const { toasts } = useToastStore();

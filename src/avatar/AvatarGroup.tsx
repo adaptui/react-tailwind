@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
-import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
+import { useTheme } from "../theme";
 import { createContext, getValidChildren, tcm } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+
+import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
 
 export type AvatarGroupContext = Pick<
   AvatarProps,

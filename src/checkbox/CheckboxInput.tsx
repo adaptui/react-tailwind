@@ -1,12 +1,13 @@
-import {
-  useCheckbox,
-  CheckboxOptions,
-  CheckboxHTMLProps,
-} from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
+import {
+  CheckboxHTMLProps,
+  CheckboxOptions,
+  useCheckbox,
+} from "@renderlesskit/react";
 
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
+
 import { CHECKBOX_INPUT_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
 

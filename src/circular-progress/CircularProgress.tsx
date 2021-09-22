@@ -1,13 +1,14 @@
+import { useMemo } from "react";
 import {
-  useProgressState,
   ProgressInitialState,
   ProgressStateReturn,
+  useProgressState,
 } from "@renderlesskit/react";
-import { useMemo } from "react";
 
 import { BoxProps } from "../box";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+
 import { CircularProgressBar } from "./CircularProgressBar";
 import { CircularProgressWrapper } from "./CircularProgressWrapper";
 

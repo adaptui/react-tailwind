@@ -1,12 +1,12 @@
-import { tcm } from "../utils";
 import { defaults, mergeWith } from "lodash";
 
+import { isString, isUndefined, tcm } from "../utils";
+
 import {
-  PartialDefaultTheme,
   DefaultTheme,
   ExtendableDefaultTheme,
+  PartialDefaultTheme,
 } from "./index";
-import { isString, isUndefined } from "../utils";
 
 export function mergeThemes(themes: PartialDefaultTheme[]) {
   return {

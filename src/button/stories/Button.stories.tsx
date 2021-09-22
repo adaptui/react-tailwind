@@ -1,18 +1,18 @@
+import { useEffect, useState } from "react";
 import { cx } from "@renderlesskit/react";
-import { useState, useEffect } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
+import { createControls } from "../../../.storybook/utils";
+import { CaretRightIcon, ClockIcon } from "../../icons";
+import { Spinner, SpinnerProps } from "../../spinner";
 import {
   Button,
   CloseButton as CloseButtonComponent,
   CloseButtonProps,
 } from "../index";
-import { Spinner, SpinnerProps } from "../../spinner";
-import { CaretRightIcon, ClockIcon } from "../../icons";
-import { createControls } from "../../../.storybook/utils";
 
 type Meta = ComponentMeta<typeof Button>;
-type Story = ComponentStory<typeof Button>;
+type Story = ComponentStoryObj<typeof Button>;
 
 export default {
   title: "Primitives/Button",

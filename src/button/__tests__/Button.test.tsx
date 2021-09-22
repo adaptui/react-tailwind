@@ -1,7 +1,7 @@
-import { Button } from "../Button";
-
 import { screen } from "@testing-library/react";
+
 import { render, testA11y } from "../../utils/testUtils";
+import { Button } from "../Button";
 
 describe("Testing Button", () => {
   it("should render properly", () => {

@@ -1,8 +1,9 @@
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { TooltipProps } from "./Tooltip";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { TooltipProps } from "./Tooltip";
 
 type TooltipBodyProps = Omit<BoxProps, "prefix"> &
   Pick<TooltipProps, "prefix" | "visible">;

@@ -1,15 +1,16 @@
 import * as React from "react";
 
+import { RenderProp, RenderPropType } from "../utils/types";
+
 import {
-  RadioLabel,
-  RadioIcon,
-  RadioText,
   RadioDescription,
+  RadioIcon,
   RadioInput,
   RadioInputProps,
+  RadioLabel,
+  RadioText,
 } from "./index";
 import { RadioGroupStateReturn } from "./RadioGroupState";
-import { RenderProp, RenderPropType } from "../utils/types";
 import { RadioStateReturn, useRadioProps } from "./RadioState";
 
 export type RadioOwnProps = Partial<RadioInputProps> & {

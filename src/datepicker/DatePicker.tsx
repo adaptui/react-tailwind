@@ -2,18 +2,6 @@ import * as React from "react";
 import { CalendarStateReturn, toUTCString } from "@renderlesskit/react";
 
 import {
-  DatePicker,
-  DatePickerField,
-  DatePickerTrigger,
-  DatePickerContent,
-  useDatePickerContext,
-  DatePickerSegmentInput,
-  CompoundDateRangePickerProps,
-  CompoundDateNormalPickerProps,
-  DatePickerEndSegmentInput,
-  DatePickerStartSegmentInput,
-} from "./CompundDatePicker";
-import {
   CalendarHeader,
   CalendarNextMonthButton,
   CalendarNextYearButton,
@@ -29,12 +17,25 @@ import {
   StatelessCalendar,
 } from "../calendar";
 import {
+  CalendarIcon,
   ChevronLeft,
   ChevronRight,
   DoubleChevronLeft,
   DoubleChevronRight,
-  CalendarIcon,
 } from "../calendar/Icons";
+
+import {
+  CompoundDateNormalPickerProps,
+  CompoundDateRangePickerProps,
+  DatePicker,
+  DatePickerContent,
+  DatePickerEndSegmentInput,
+  DatePickerField,
+  DatePickerSegmentInput,
+  DatePickerStartSegmentInput,
+  DatePickerTrigger,
+  useDatePickerContext,
+} from "./CompundDatePicker";
 
 const Calendar = (state: CalendarStateReturn) => {
   return (

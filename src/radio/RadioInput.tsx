@@ -1,8 +1,9 @@
 import { createComponent, createHook } from "reakit-system";
-import { useRadio, RadioOptions, RadioHTMLProps } from "@renderlesskit/react";
+import { RadioHTMLProps, RadioOptions, useRadio } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
+
 import { RADIO_INPUT_KEYS } from "./__keys";
 import { RadioStateReturn } from "./RadioState";
 

@@ -1,19 +1,20 @@
-import {
-  useSliderState,
-  SliderStateReturn,
-  SliderInitialState,
-} from "@renderlesskit/react";
 import * as React from "react";
+import {
+  SliderInitialState,
+  SliderStateReturn,
+  useSliderState,
+} from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { SliderThumb } from "./SliderThumb";
-import { SliderTrack } from "./SliderTrack";
-import { SliderMinMax } from "./SliderMinMax";
 import { useFormControl } from "../form-field";
+import { useTheme } from "../theme";
 import { createContext, runIfFn, tcm } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
+import { SliderMinMax } from "./SliderMinMax";
+import { SliderThumb } from "./SliderThumb";
+import { SliderTrack } from "./SliderTrack";
 
 const [SliderStateProvider, useSliderContext] = createContext<
   SliderStateReturn & { isReadOnly?: boolean }

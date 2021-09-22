@@ -1,10 +1,11 @@
-import { cx } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
+import { cx } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+
 import { RADIO_TEXT_KEYS } from "./__keys";
 import { RadioStateReturn } from "./RadioState";
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
 export type RadioTextOptions = BoxOptions & Pick<RadioStateReturn, "size">;
 

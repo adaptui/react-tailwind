@@ -1,10 +1,11 @@
-import { cx } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
+import { cx } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+
 import { CHECKBOX_DESCRIPTION_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
 export type CheckboxDescriptionOptions = BoxOptions &
   Pick<CheckboxStateReturn, "size">;

@@ -1,6 +1,5 @@
-import { Badge } from "../Badge";
-
 import { render } from "../../utils/testUtils";
+import { Badge } from "../Badge";
 
 describe("<Badge />", () => {
   it("should render properly", () => {
