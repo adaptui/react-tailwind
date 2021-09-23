@@ -1,4 +1,5 @@
 import * as React from "react";
+import { slice } from "lodash";
 
 import { RenderProp, RenderPropType } from "../utils/types";
 
@@ -43,6 +44,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       textProps,
       descriptionProps,
     } = useRadioProps(props);
+    console.log(slice);
 
     return (
       <RadioLabel {...labelProps}>
