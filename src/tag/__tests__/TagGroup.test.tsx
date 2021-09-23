@@ -1,8 +1,8 @@
 import { press } from "reakit-test-utils";
 import { screen } from "@testing-library/react";
 
-import { Tag, TagGroup } from "..";
 import { render, testA11y } from "../../utils/testUtils";
+import { Tag, TagGroup } from "..";
 
 describe("<TagGroup />", () => {
   it("should allowArrowNavigation", () => {

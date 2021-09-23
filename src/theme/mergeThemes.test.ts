@@ -32,7 +32,7 @@ describe("mergeThemes", () => {
       extend: {
         button: {
           variant: {
-            tertiary: "bg-purple-600 lib:text-white",
+            tertiary: "bg-purple-600 text-white",
           },
         },
       },
@@ -50,7 +50,7 @@ describe("mergeThemes", () => {
         button: [
           {
             variant: {
-              tertiary: "bg-purple-600 lib:text-white",
+              tertiary: "bg-purple-600 text-white",
             },
           },
         ],
@@ -62,7 +62,7 @@ describe("mergeThemes", () => {
         sizes: {},
         base: "bg-green-100",
         variant: {
-          tertiary: "bg-purple-600 lib:text-white",
+          tertiary: "bg-purple-600 text-white",
         },
       },
     });

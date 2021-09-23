@@ -1,17 +1,17 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useImage } from "../hooks/useImage";
 import { GenericAvatar } from "../icons";
-import { AvatarName } from "./AvatarName";
+import { useTheme } from "../theme";
+import { createContext, runIfFn, tcm } from "../utils";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
+
+import { AvatarBadge } from "./AvatarBadge";
+import { useAvatarGroup } from "./AvatarGroup";
 import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
-import { AvatarBadge } from "./AvatarBadge";
-import { useImage } from "../hooks/useImage";
-import { useAvatarGroup } from "./AvatarGroup";
-import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { AvatarName } from "./AvatarName";
 
 export type AvatarInitialProps = {
   /**
@@ -104,7 +104,7 @@ export const Avatar = forwardRefWithAs<AvatarProps, HTMLDivElement, "div">(
     const _showBorder = showBorder || group?.showBorder || false;
     const _borderColor = borderColor || group?.borderColor || false;
     const theme = useTheme();
-    const avatarStyles = cx(
+    const avatarStyles = tcm(
       theme.avatar.base,
       theme.avatar.size[_size],
       _showBorder ? theme.avatar.border.width[_size] : "",

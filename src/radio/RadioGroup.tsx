@@ -1,51 +1,38 @@
-import { Composite } from "reakit";
-
+import * as React from "react";
 import {
-  useRadioState,
-  RadioInitialState,
-  RadioStateReturn,
-} from "./RadioState";
-import { createContext } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+  Radio,
+  RadioGroup as RenderlesskitRadioGroup,
+  RadioGroupHTMLProps as RenderlesskitRadioGroupHTMLProps,
+} from "@renderlesskit/react";
 
-export type RadioGroupContext = RadioStateReturn &
-  Pick<RadioGroupProps, "size">;
+import { runIfFn } from "../utils";
+import { RenderProp } from "../utils/types";
 
-const [RadioProvider, useRadioGroup] = createContext<RadioGroupContext>({
-  errorMessage: "Radio must be used within RadioProvider",
-  name: "RadioGroup",
-  strict: false,
-});
+import { RadioStateContextProvider, useRadioStateSplit } from "./helpers";
+import {
+  RadioGroupInitialState,
+  RadioGroupStateReturn,
+} from "./RadioGroupState";
 
-export { useRadioGroup };
+export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {};
 
-export type RadioGroupProps = RadioInitialState & {
-  size?: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
-  ariaLabel?: string;
-};
+export type RadioGroupProps = RadioGroupInitialState &
+  RadioGroupOwnProps &
+  RenderProp<RadioGroupStateReturn>;
 
-export const RadioGroup = forwardRefWithAs<
-  RadioGroupProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { size, className, style, ariaLabel = "Radio Group", children } = props;
-  const { state, setState, ...composite } = useRadioState(props);
+export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
+  (props, ref) => {
+    const [state, radioGroupProps] = useRadioStateSplit(props);
+    const { children, ...rest } = radioGroupProps;
 
-  return (
-    <RadioProvider value={{ state, setState, ...composite, size }}>
-      <Composite
-        ref={ref}
-        role="radiogroup"
-        aria-label={ariaLabel}
-        className={className}
-        style={style}
-        {...composite}
-      >
-        {children}
-      </Composite>
-    </RadioProvider>
-  );
-});
+    return (
+      <RenderlesskitRadioGroup ref={ref} {...state} {...rest}>
+        <RadioStateContextProvider value={state}>
+          {runIfFn(children, state)}
+        </RadioStateContextProvider>
+      </RenderlesskitRadioGroup>
+    );
+  },
+);
 
-RadioGroup.displayName = "RadioGroup";
+Radio.displayName = "Radio";

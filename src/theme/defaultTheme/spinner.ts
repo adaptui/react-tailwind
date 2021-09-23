@@ -1,16 +1,16 @@
 export const spinner = {
-  base: "lib:inline-block lib:border-2 lib:border-solid lib:border-current lib:rounded-full lib:animate-spin lib:text-current",
+  base: "inline-block border-2 border-solid border-current rounded-full animate-spin text-current",
   stroke: {
-    transparent: "lib:border-b-transparent lib:border-l-transparent",
-    visible: "lib:border-b-gray-300 lib:border-l-gray-300",
+    transparent: "border-b-transparent border-l-transparent",
+    visible: "border-b-gray-300 border-l-gray-300",
   },
-  aria: "lib:sr-only",
+  label: "sr-only",
   size: {
-    xs: "lib:h-3 lib:w-3",
-    sm: "lib:h-4 lib:w-4",
-    md: "lib:h-6 lib:w-6",
-    lg: "lib:h-8 lib:w-8",
-    xl: "lib:h-12 lib:w-12",
-    em: "lib:h-[1em] lib:w-[1em]",
+    xs: "h-3 w-3",
+    sm: "h-4 w-4",
+    md: "h-6 w-6",
+    lg: "h-8 w-8",
+    xl: "h-12 w-12",
+    em: "h-[1em] w-[1em]",
   },
 };

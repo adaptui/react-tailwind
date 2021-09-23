@@ -1,62 +1,127 @@
+import { CircleIcon } from "../icons/Circle";
+import { getValidChildren, runIfFn, runIfFnChildren } from "../utils";
+import { Dict } from "../utils/types";
+
 import {
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-  useCompositeState,
-} from "reakit";
-import * as React from "react";
-import { useControllableState } from "@renderlesskit/react";
+  RadioDescriptionProps,
+  RadioGroupStateReturn,
+  RadioIconProps,
+  RadioInputProps,
+  RadioLabelProps,
+  RadioOwnProps,
+  RadioProps,
+  RadioTextProps,
+  useRadioStateContext,
+  useRadioStateReturnSplit,
+} from "./index";
 
-type StateType = string | number | undefined;
-
-export type RadioState = CompositeState & {
+export type RadioStateReturn = RadioGroupStateReturn & {
   /**
-   * The `value` attribute of the current checked radio.
+   * `true`, if the value of the radio matches the current state.
    */
-  state: StateType;
+  isChecked: boolean;
 };
 
-export type RadioActions = CompositeActions & {
-  /**
-   * Sets `state`.
-   */
-  setState: React.Dispatch<React.SetStateAction<StateType>>;
+export const RadioDefaultIcon: RadioOwnProps["icon"] = state => {
+  const { isChecked } = state;
+
+  return <>{isChecked ? <CircleIcon /> : null}</>;
 };
 
-export type RadioInitialState = CompositeInitialState &
-  Partial<Pick<RadioState, "state">> & {
-    defaultState?: StateType;
-    onStateChange?: (v: StateType) => void;
-  };
+const ComponentPropsMap = {
+  RadioLabel: "labelProps",
+  RadioInput: "inputProps",
+  RadioIcon: "iconProps",
+  RadioText: "textProps",
+  RadioDescription: "descriptionProps",
+};
 
-export type RadioStateReturn = RadioState & RadioActions;
+export const getRadioComponentProps = (children: React.ReactNode) => {
+  const validChildren = getValidChildren(children);
+  const props: Dict = {};
 
-export function useRadioState(
-  initialState: RadioInitialState = {},
-): RadioStateReturn {
-  const {
-    state: initialValue,
-    defaultState,
-    loop = true,
-    onStateChange,
-    ...props
-  } = initialState;
-
-  const [state, setState] = useControllableState<string | number | undefined>({
-    value: initialValue,
-    defaultValue: defaultState,
-    onChange: onStateChange,
+  validChildren.forEach(child => {
+    props[
+      // @ts-ignore
+      ComponentPropsMap[child.type.displayName]
+    ] = child.props;
   });
 
-  React.useEffect(() => {
-    onStateChange?.(state);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  return props;
+};
 
-  const composite = useCompositeState({ ...props, loop });
-  return {
-    ...composite,
-    state,
-    setState,
+export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
+  const contextState = useRadioStateContext();
+  const [propsState, radioProps] = useRadioStateReturnSplit(props);
+
+  let initialState = propsState;
+  if (contextState != null) {
+    initialState = contextState;
+  }
+
+  const isChecked = initialState.state === radioProps.value;
+  const state: RadioStateReturn = { ...initialState, isChecked };
+
+  const {
+    icon = RadioDefaultIcon,
+    label,
+    description,
+    className,
+    style,
+    children,
+    ...restProps
+  } = radioProps;
+
+  const componentProps = getRadioComponentProps(
+    runIfFnChildren(children, state),
+  );
+
+  const labelProps: RadioLabelProps = {
+    ...state,
+    className,
+    style,
+    ...componentProps.labelProps,
   };
-}
+
+  const inputProps: RadioInputProps = {
+    ...state,
+    ...restProps,
+    ...componentProps.inputProps,
+  };
+
+  const _icon: RadioOwnProps["icon"] =
+    componentProps?.iconProps?.children || icon;
+  const iconProps: RadioIconProps = {
+    ...state,
+    ...componentProps.iconProps,
+    children: runIfFn(_icon, state),
+  };
+
+  const _label: RadioOwnProps["label"] =
+    componentProps?.textProps?.children || label;
+  const textProps: RadioTextProps = {
+    ...state,
+    ...componentProps.textProps,
+    children: runIfFn(_label, state),
+  };
+
+  const _description: RadioOwnProps["description"] =
+    componentProps?.descriptionProps?.children || description;
+  const descriptionProps: RadioDescriptionProps = {
+    ...state,
+    ...componentProps.descriptionProps,
+    children: runIfFn(_description, state),
+  };
+
+  return {
+    state,
+    labelProps,
+    inputProps,
+    iconProps,
+    textProps,
+    descriptionProps,
+    icon: _icon,
+    label: _label,
+    description: _description,
+  };
+};

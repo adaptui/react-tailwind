@@ -1,9 +1,9 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
-import { TooltipProps } from "./Tooltip";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { TooltipProps } from "./Tooltip";
 
 type TooltipBodyProps = Omit<BoxProps, "prefix"> &
   Pick<TooltipProps, "prefix" | "visible">;
@@ -16,7 +16,7 @@ export const TooltipBody = forwardRefWithAs<
   const { prefix, visible, className, children, ...rest } = props;
 
   const theme = useTheme();
-  const tooltipStyles = cx(
+  const tooltipStyles = tcm(
     theme.tooltip.body.base,
     visible ? theme.tooltip.body.visible : theme.tooltip.body.invisible,
     className,

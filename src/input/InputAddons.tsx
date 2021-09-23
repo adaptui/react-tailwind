@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useMergeRefs } from "../hooks";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { ComponentWithAs, forwardRefWithAs } from "../utils/types";
 
 type InputAddonProps = {
@@ -20,7 +20,7 @@ const InputElement = forwardRefWithAs<
   const { as, className, children, type, allowPointerEvents, ...rest } = props;
 
   const theme = useTheme();
-  const prefixStyles = cx(
+  const prefixStyles = tcm(
     theme.input.children.base,
     theme.input.children[type],
     allowPointerEvents ? "" : theme.input.children.pointerEventsNone,
@@ -48,7 +48,7 @@ const InputAddon = forwardRefWithAs<
   const { as, className, children, type, ...rest } = props;
 
   const theme = useTheme();
-  const prefixStyles = cx(
+  const prefixStyles = tcm(
     theme.input.group.children.base,
     theme.input.group.children[type],
     className,

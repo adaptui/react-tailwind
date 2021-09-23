@@ -1,42 +1,39 @@
-import { cx } from "@renderlesskit/react";
-import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
+import { createComponent, createHook } from "reakit-system";
+import { RadioHTMLProps, RadioOptions, useRadio } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
-import { useRadioProps, useRadioStateContext } from "./Radio";
-import { useFormControl } from "../form-field";
+import { tcm } from "../utils";
 
-export type RadioInputProps = Partial<ReakitRadioProps> & {};
+import { RADIO_INPUT_KEYS } from "./__keys";
+import { RadioStateReturn } from "./RadioState";
 
-export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
-  const { className, ...rest } = props;
-  const state = useRadioStateContext();
-  const {
-    size,
-    checkedIcon,
-    disabledIcon,
-    uncheckedIcon,
-    disabled,
-    ...iconProps
-  } = useRadioProps();
+export type RadioInputOptions = RadioOptions & {
+  size: RadioStateReturn["size"];
+};
 
-  const theme = useTheme();
-  const radioStyles = cx(theme.radio.input, className);
-  const { id, ...fieldInputProps } = useFormControl({
-    isDisabled: disabled,
-    ...rest,
-  });
+export type RadioInputHTMLProps = Omit<RadioHTMLProps, "size">;
 
-  return (
-    <ReakitRadio
-      ref={ref}
-      className={radioStyles}
-      {...iconProps}
-      {...fieldInputProps}
-      {...state}
-      {...rest}
-    />
-  );
+export type RadioInputProps = RadioInputOptions & RadioInputHTMLProps;
+
+export const useRadioInput = createHook<RadioInputOptions, RadioInputHTMLProps>(
+  {
+    name: "RadioInput",
+    compose: useRadio,
+    keys: RADIO_INPUT_KEYS,
+
+    useProps(options, htmlProps) {
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+      const theme = useTheme("radio");
+      const className = tcm(theme.input, htmlClassName);
+
+      return { className, ...restHtmlProps };
+    },
+  },
+);
+
+export const RadioInput = createComponent({
+  as: "input",
+  memo: true,
+  useHook: useRadioInput,
 });
-
-RadioInput.displayName = "RadioInput";

@@ -1,6 +1,8 @@
 import * as React from "react";
+import { cx } from "@chakra-ui/utils";
+import { createTailwindMerge } from "tailwind-merge";
 
-import { Dict } from "./types";
+import { Dict, RenderPropType } from "./types";
 
 export interface CreateContextOptions {
   /**
@@ -70,6 +72,14 @@ export function runIfFn<T, U>(
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
 
+export function runIfFnChildren<T, U>(
+  valueOrFn: T | ((...fnArgs: U[]) => T),
+  ...args: U[]
+): T {
+  // @ts-ignore
+  return isFunction(valueOrFn) ? valueOrFn(...args).props.children : valueOrFn;
+}
+
 /**
  * Gets only the valid children of a component,
  * and ignores any nullish or falsy child.
@@ -134,19 +144,45 @@ export function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === "[object String]";
 }
 
-// Add a11y to the icon passed
-export const withIconA11y = (icon: React.ReactElement, props?: Dict) => {
+// Merge library & user prop
+export const passProps = (icon: RenderPropType, props?: Dict) => {
   return React.isValidElement(icon)
     ? React.cloneElement(icon, {
-        // @ts-ignore
-        role: "img",
-        focusable: false,
-        "aria-hidden": true,
         ...props,
+        ...icon.props,
+        className: cx(props?.className, icon.props.className),
       })
-    : icon;
+    : runIfFn(icon, { ...props });
+};
+
+// Add a11y to the icon passed
+export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
+  return passProps(icon, {
+    role: "img",
+    focusable: false,
+    "aria-hidden": true,
+    ...props,
+  });
 };
 
 export function isUndefined(value: any): value is undefined {
   return typeof value === "undefined" || value === undefined;
 }
+
+export const tcm = createTailwindMerge(getDefaultConfig => {
+  const defaultConfig = getDefaultConfig();
+
+  return {
+    ...defaultConfig,
+    classGroups: {
+      ...defaultConfig.classGroups,
+      "font-size": [
+        ...defaultConfig.classGroups["font-size"],
+        // Defined custom text presets
+        {
+          text: ["cxs", "paragraph-cxs", "paragraph-sm", "2base"],
+        },
+      ],
+    },
+  };
+});

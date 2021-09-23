@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { Meta } from "@storybook/react";
 
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
-import { SliderTrack } from "../SliderTrack";
-import { SliderThumb } from "../SliderThumb";
-import { Slider, SliderProps } from "../Slider";
+import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { SliderThumbHandle } from "../../icons/SliderThumbHandle";
+import { Slider, SliderProps } from "../Slider";
+import { SliderThumb } from "../SliderThumb";
+import { SliderTrack } from "../SliderTrack";
 
 export default {
   title: "Forms/Slider",

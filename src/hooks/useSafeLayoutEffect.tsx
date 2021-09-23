@@ -1,4 +1,4 @@
-import { useLayoutEffect, useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 import { isBrowser } from "../utils";
 

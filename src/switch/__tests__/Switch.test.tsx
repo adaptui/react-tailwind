@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Switch } from "../Switch";
-import { SwitchLabel, SwitchInput } from "..";
+
 import { cleanup, fireEvent, render, screen } from "../../utils/testUtils";
+import { Switch } from "../Switch";
+import { SwitchInput, SwitchLabel } from "..";
 
 afterEach(cleanup);
 

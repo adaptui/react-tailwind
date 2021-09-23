@@ -1,28 +1,37 @@
+import { createComponent, createHook } from "reakit-system";
 import { cx } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { useCheckboxContext } from "./Checkbox";
-import { forwardRefWithAs } from "../utils/types";
 
-export type CheckboxLabelProps = BoxProps & {};
+import { CHECKBOX_LABEL_KEYS } from "./__keys";
 
-export const CheckboxLabel = forwardRefWithAs<
-  CheckboxLabelProps,
-  HTMLLabelElement,
-  "label"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const { state } = useCheckboxContext();
+export type CheckboxLabelOptions = BoxOptions;
 
-  const theme = useTheme();
-  const checkboxLabelStyles = cx(
-    theme.checkbox.base,
-    state?.disabled ? theme.checkbox.disabled : "",
-    className,
-  );
+export type CheckboxLabelHTMLProps = BoxHTMLProps;
 
-  return <Box as="label" ref={ref} className={checkboxLabelStyles} {...rest} />;
+export type CheckboxLabelProps = CheckboxLabelOptions & CheckboxLabelHTMLProps;
+
+export const useCheckboxLabel = createHook<
+  CheckboxLabelOptions,
+  CheckboxLabelHTMLProps
+>({
+  name: "CheckboxLabel",
+  compose: useBox,
+  keys: CHECKBOX_LABEL_KEYS,
+
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("checkbox");
+    const className = cx(theme.label, htmlClassName);
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxLabel.displayName = "CheckboxLabel";
+export const CheckboxLabel = createComponent({
+  as: "label",
+  memo: true,
+  useHook: useCheckboxLabel,
+});

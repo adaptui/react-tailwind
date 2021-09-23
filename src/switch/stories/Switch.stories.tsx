@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { Meta } from "@storybook/react";
 import { Controller, useForm } from "react-hook-form";
+import { Meta } from "@storybook/react";
 
-import {
-  storyTemplate,
-  createUnionControl,
-} from "../../../.storybook/storybookUtils";
+import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { Button } from "../../button";
 import { FormErrorText, FormField } from "../../form-field";
 import {
   Switch,
-  SwitchText,
   SwitchIcon,
-  SwitchProps,
-  SwitchLabel,
   SwitchInput,
+  SwitchLabel,
+  SwitchProps,
+  SwitchText,
 } from "..";
 
 export default {

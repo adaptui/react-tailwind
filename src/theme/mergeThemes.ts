@@ -1,12 +1,12 @@
-import { cx } from "@renderlesskit/react";
 import { defaults, mergeWith } from "lodash";
 
+import { isString, isUndefined, tcm } from "../utils";
+
 import {
-  PartialDefaultTheme,
   DefaultTheme,
   ExtendableDefaultTheme,
+  PartialDefaultTheme,
 } from "./index";
-import { isString, isUndefined } from "../utils";
 
 export function mergeThemes(themes: PartialDefaultTheme[]) {
   return {
@@ -44,7 +44,7 @@ export function mergeExtensions({
   return mergeWith(theme, extend, (themeValue, extendValue) => {
     return mergeWith(themeValue, ...extendValue, (merged: any, value: any) => {
       if (isString(merged) && isString(value)) {
-        return cx(merged, value);
+        return tcm(merged, value);
       }
 
       return undefined;

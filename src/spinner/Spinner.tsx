@@ -1,7 +1,7 @@
 import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 
 export type SpinnerProps = BoxProps & {
@@ -12,12 +12,14 @@ export type SpinnerProps = BoxProps & {
    * @default "Loading..."
    */
   label?: string;
+
   /**
    * How large should the spinner be?
    *
    * @default "md"
    */
   size?: keyof Renderlesskit.GetThemeValue<"spinner", "size">;
+
   /**
    * How the spinner should be displayed?
    *
@@ -52,7 +54,7 @@ export const Spinner = forwardRefWithAs<SpinnerProps, HTMLDivElement, "div">(
         data-testid="testid-spinner"
         {...rest}
       >
-        {label && <div className={theme.spinner.aria}>{label}</div>}
+        {label && <div className={theme.spinner.label}>{label}</div>}
       </Box>
     );
   },

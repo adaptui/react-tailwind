@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 
 import theme from "../src/theme/defaultTheme";
 
@@ -32,11 +32,13 @@ type CreateControlsOptions = {
 };
 
 export const createControls = (
-  component: string,
+  component?: string,
   options?: CreateControlsOptions,
 ) => {
   try {
     const controls = (options?.unions || []).reduce((cur, key) => {
+      if (!component) return cur;
+
       const value = (theme as Record<string, any>)[component][key];
 
       if (!value) return cur;

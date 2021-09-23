@@ -1,3 +1,3 @@
 export * from "./Progress";
-export * from "./ProgressTrack";
 export * from "./ProgressBar";
+export * from "./ProgressTrack";

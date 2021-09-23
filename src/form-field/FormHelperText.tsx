@@ -1,9 +1,9 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
 import { useSafeLayoutEffect } from "../hooks";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { useFormFieldContext } from "./FormField";
 
 type FormHelperTextProps = BoxProps & {};
@@ -16,7 +16,7 @@ export const FormHelperText = forwardRefWithAs<
   const { id, children, className, ...rest } = props;
   const { helpTextId, setHasHelpText } = useFormFieldContext();
   const theme = useTheme();
-  const helperStyles = cx(theme.formField.helperText, className);
+  const helperStyles = tcm(theme.formField.helperText, className);
 
   useSafeLayoutEffect(() => {
     setHasHelpText.on();

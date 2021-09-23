@@ -1,9 +1,9 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
-import { useAlertContext } from "./Alert";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAlertContext } from "./Alert";
 
 export type AlertDescriptionProps = BoxProps & {};
 
@@ -16,7 +16,7 @@ export const AlertDescription = forwardRefWithAs<
   const { isTablet } = useAlertContext();
 
   const theme = useTheme();
-  const alertDescriptionStyles = cx(
+  const alertDescriptionStyles = tcm(
     theme.alert.description.base,
     isTablet ? theme.alert.description.mobile : theme.alert.description.desktop,
     className,

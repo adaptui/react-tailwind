@@ -1,70 +1,61 @@
 import * as React from "react";
 
-import { BoxProps } from "../box";
-import { RadioIcon } from "./RadioIcon";
-import { RadioInput } from "./RadioInput";
-import { RadioLabel } from "./RadioLabel";
-import { RadioInitialState } from "./RadioState";
-import { createContext, runIfFn } from "../utils";
-import { RadioGroupProps, useRadioGroup } from "./RadioGroup";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { RenderProp, RenderPropType } from "../utils/types";
 
-export type RadioStateContext = RadioInitialState;
+import {
+  RadioDescription,
+  RadioIcon,
+  RadioInput,
+  RadioInputProps,
+  RadioLabel,
+  RadioText,
+} from "./index";
+import { RadioGroupStateReturn } from "./RadioGroupState";
+import { RadioStateReturn, useRadioProps } from "./RadioState";
 
-const [RadioStateProvider, useRadioStateContext] =
-  createContext<RadioStateContext>({
-    errorMessage: "RadioState must be used within RadioStateProvider",
-    name: "RadioState",
-    strict: false,
-  });
-
-export { useRadioStateContext };
-
-export type RadioPropsContext = RadioInitialProps &
-  Pick<RadioGroupProps, "size">;
-
-const [RadioPropsProvider, useRadioProps] = createContext<RadioPropsContext>({
-  errorMessage: "RadioProps must be used within RadioPropsProvider",
-  name: "RadioProps",
-  strict: false,
-});
-
-export { useRadioProps };
-
-type RadioRenderProps = RenderProp<RadioStateContext & RadioPropsContext>;
-
-export type RadioInitialProps = {
-  id?: string;
-  value: string | number;
-  checked?: boolean;
-  disabled?: boolean;
-  focusable?: boolean;
-  checkedIcon?: React.ReactNode;
-  uncheckedIcon?: React.ReactNode;
-  disabledIcon?: React.ReactNode;
+export type RadioOwnProps = Partial<RadioInputProps> & {
+  /**
+   * Provide custom icons as a replacement for the default ones.
+   */
+  icon?: RenderPropType<RadioStateReturn>;
+  /**
+   * Description for the Radio.
+   */
+  label?: RenderPropType<RadioStateReturn>;
+  /**
+   * Description for the Radio.
+   */
+  description?: RenderPropType<RadioStateReturn>;
 };
 
-export type RadioProps = BoxProps & RadioInitialProps & RadioRenderProps;
+export type RadioProps = RadioOwnProps &
+  Partial<RadioGroupStateReturn> &
+  RenderProp<RadioStateReturn>;
 
-export const Radio = forwardRefWithAs<RadioProps, HTMLLabelElement, "label">(
+export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   (props, ref) => {
-    const { className, style, children, ...rest } = props;
-    const { size, ...state } = useRadioGroup();
+    const {
+      label,
+      description,
+      labelProps,
+      inputProps,
+      iconProps,
+      textProps,
+      descriptionProps,
+    } = useRadioProps(props);
 
     return (
-      <RadioStateProvider value={state}>
-        <RadioPropsProvider value={{ size, ...rest }}>
-          {typeof children !== "string" ? (
-            runIfFn(children, { size, ...rest, ...state })
-          ) : (
-            <RadioLabel ref={ref} className={className} style={style}>
-              <RadioInput />
-              <RadioIcon />
-              {children}
-            </RadioLabel>
-          )}
-        </RadioPropsProvider>
-      </RadioStateProvider>
+      <RadioLabel {...labelProps}>
+        <RadioInput ref={ref} {...inputProps} />
+        <RadioIcon {...iconProps} />
+        {label && !description ? <RadioText {...textProps} /> : null}
+        {label && description ? (
+          <div>
+            <RadioText {...textProps} />
+            <RadioDescription {...descriptionProps} />
+          </div>
+        ) : null}
+      </RadioLabel>
     );
   },
 );

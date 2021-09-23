@@ -1,12 +1,13 @@
 import {
-  cx,
-  ProgressProps,
   Progress as RenderlesskitProgress,
+  ProgressProps,
 } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { useProgressContext } from "./Progress";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useProgressContext } from "./Progress";
 
 export type ProgressBarProps = Partial<ProgressProps> & {};
 
@@ -25,7 +26,7 @@ export const ProgressBar = forwardRefWithAs<
       ref={ref}
       aria-label="progress"
       style={{ width: `${percent}%` }}
-      className={cx(
+      className={tcm(
         theme.progress.bar.base,
         !isIndeterminate
           ? theme.progress.bar.normal

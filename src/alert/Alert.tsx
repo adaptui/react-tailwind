@@ -1,20 +1,20 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
+import { Box, BoxProps } from "../box";
+import { useMediaQuery } from "../hooks";
+import { useTheme } from "../theme";
+import { createContext, runIfFn, tcm } from "../utils";
+import { forwardRefWithAs, RenderProp } from "../utils/types";
+
+import { AlertActions } from "./AlertActions";
+import { AlertBody } from "./AlertBody";
+import { AlertCloseButton } from "./AlertCloseButton";
 import {
+  AlertActionButton,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
-  AlertActionButton,
 } from "./index";
-import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { AlertBody } from "./AlertBody";
-import { useMediaQuery } from "../hooks";
-import { AlertActions } from "./AlertActions";
-import { createContext, runIfFn } from "../utils";
-import { AlertCloseButton } from "./AlertCloseButton";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
 
 export type AlertStatus = keyof Renderlesskit.GetThemeValue<"alert", "status">;
 
@@ -92,7 +92,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
     const context = { status, isTablet };
 
     const theme = useTheme();
-    const alertStyles = cx(
+    const alertStyles = tcm(
       theme.alert.base,
       theme.alert.status[status].base,
       className,

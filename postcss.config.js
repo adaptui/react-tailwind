@@ -1,8 +1,8 @@
 module.exports = {
-  plugins: {
-    tailwindcss: {},
-    "postcss-flexbugs-fixes": {},
-    "postcss-focus-visible": {},
-    autoprefixer: { flexbox: "no-2009" },
-  },
+  plugins: [
+    require("tailwindcss"),
+    require("postcss-flexbugs-fixes"),
+    require("postcss-focus-visible"),
+    require("autoprefixer"),
+  ],
 };

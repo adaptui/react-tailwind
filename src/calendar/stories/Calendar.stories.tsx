@@ -1,11 +1,5 @@
-import { Story, Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  DoubleChevronLeft,
-  DoubleChevronRight,
-} from "../Icons";
 import {
   Calendar,
   CalendarHeader,
@@ -22,6 +16,12 @@ import {
   CalendarTitle,
   RangeCalendar,
 } from "../Calendar";
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "../Icons";
 
 export default {
   title: "Primitives/Calendar",

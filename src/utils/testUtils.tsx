@@ -1,14 +1,15 @@
+import { isValidElement } from "react";
 import {
-  RenderResult,
-  RenderOptions,
   render as RtlRender,
+  RenderOptions,
+  RenderResult,
 } from "@testing-library/react";
 import { RunOptions } from "axe-core";
-import { isValidElement } from "react";
 import { configureAxe } from "jest-axe";
 
 import theme from "../../renderlesskit.config";
 import { RenderlesskitProvider } from "../theme";
+
 export * from "@testing-library/react";
 
 type Render = (
@@ -41,13 +42,13 @@ export const axe = configureAxe({
 });
 
 type UI = Parameters<typeof render>[0] | Element;
-type TestA11YOptions = RenderOptions & {
+type TestA11YOption = RenderOptions & {
   axeOptions?: RunOptions;
 };
 
 export const testA11y = async (
   ui: UI,
-  { axeOptions, ...options }: TestA11YOptions = {},
+  { axeOptions, ...options }: TestA11YOption = {},
 ) => {
   jest.useRealTimers();
 

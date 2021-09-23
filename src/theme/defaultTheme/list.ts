@@ -7,7 +7,7 @@ export const list = {
   item: "",
 
   icon: {
-    base: "lib:inline lib:flex-shrink-0 lib:mr-2 leading-[1em] align-text-bottom",
+    base: "inline flex-shrink-0 mr-2 leading-[1em] align-text-bottom",
     size: {
       sm: "text-sm",
       md: "text-base",

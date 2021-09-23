@@ -1,15 +1,16 @@
 import {
-  cx,
   SliderInput,
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
-import { useTheme } from "..";
-import { forwardRefWithAs } from "../utils/types";
-import { useSliderValues } from "./hooks/useSliderValues";
-import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";
 import { BoxProps } from "../box";
 import { useFormControl } from "../form-field";
+import { tcm } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+import { useTheme } from "..";
+
+import { useSliderValues } from "./hooks/useSliderValues";
+import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";
 
 type SliderThumbProps = BoxProps &
   Omit<SliderProps, "size" | "orientation" | "origin">;
@@ -33,7 +34,7 @@ export const SliderThumb = forwardRefWithAs<
     origin: origin,
   });
 
-  const thumbHandleStyles = cx(
+  const thumbHandleStyles = tcm(
     theme.slider.common.thumb.base,
     theme.slider.common.thumb.size[size],
     theme.slider[orientation].thumb.base,

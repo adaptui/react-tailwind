@@ -1,22 +1,23 @@
 import * as React from "react";
 import {
-  cx,
+  Calendar as RenderlessCalendar,
+  CalendarButton,
   CalendarCell,
+  CalendarCellButton,
   CalendarGrid,
   CalendarHeader as RenderlessCalendarHeader,
-  CalendarButton,
-  CalendarWeekTitle,
-  CalendarCellButton,
-  Calendar as RenderlessCalendar,
-  useCalendarState,
   CalendarInitialState,
   CalendarStateReturn,
-  useRangeCalendarState,
+  CalendarWeekTitle,
   RangeCalendarInitialState,
   RangeCalendarStateReturn,
+  useCalendarState,
+  useRangeCalendarState,
 } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
+
 import { CalendarProvider, useCalendarContext } from "./helpers";
 
 export interface CalendarProps extends CalendarInitialState {}
@@ -239,7 +240,7 @@ export const CalendarTableBodyData: React.FC<any> = props => {
     <CalendarCell
       as="td"
       date={day}
-      className={cx(theme.calendar.table.body.data.base, className)}
+      className={tcm(theme.calendar.table.body.data.base, className)}
       {...state}
       {...rest}
     />

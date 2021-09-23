@@ -1,11 +1,12 @@
 import {
-  cx,
-  ProgressProps,
   Progress as RenderlesskitProgress,
+  ProgressProps,
 } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { useCircularProgressContext } from "./CircularProgress";
 
 export type CircularProgressWrapperProps = Partial<ProgressProps> & {};
@@ -23,7 +24,7 @@ export const CircularProgressWrapper = forwardRefWithAs<
     <RenderlesskitProgress
       ref={ref}
       aria-label="progress"
-      className={cx(theme.circularProgress.wrapper, className)}
+      className={tcm(theme.circularProgress.wrapper, className)}
       {...state}
       {...rest}
     />

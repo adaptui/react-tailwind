@@ -1,20 +1,20 @@
 import * as React from "react";
 import {
-  cx,
-  useSliderState,
-  SliderStateReturn,
   SliderInitialState,
+  SliderStateReturn,
+  useSliderState,
 } from "@renderlesskit/react";
 
-import { useTheme } from "../index";
 import { Box, BoxProps } from "../box";
-import { SliderTrack } from "./SliderTrack";
-import { SliderThumb } from "./SliderThumb";
-import { SliderMinMax } from "./SliderMinMax";
 import { useFormControl } from "../form-field";
-import { createContext, runIfFn } from "../utils";
+import { useTheme } from "../theme";
+import { createContext, runIfFn, tcm } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
+import { SliderMinMax } from "./SliderMinMax";
+import { SliderThumb } from "./SliderThumb";
+import { SliderTrack } from "./SliderTrack";
 
 const [SliderStateProvider, useSliderContext] = createContext<
   SliderStateReturn & { isReadOnly?: boolean }
@@ -103,7 +103,7 @@ export const Slider = forwardRefWithAs<
   });
   const { thumbSize, padding, thumbRef, trackRef } = useSliderDimensions();
 
-  const sliderWrapperStyles = cx(
+  const sliderWrapperStyles = tcm(
     theme.slider.common.wrapper.base,
     theme.slider[orientation].wrapper.base,
     className,

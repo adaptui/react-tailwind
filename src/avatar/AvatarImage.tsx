@@ -1,9 +1,9 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useAvatarContext } from "./Avatar";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAvatarContext } from "./Avatar";
 
 export type AvatarImageProps = BoxProps & {};
 
@@ -24,7 +24,7 @@ export const AvatarImage = forwardRefWithAs<
       src={src}
       alt={name}
       loading={loading}
-      className={cx(theme.avatar.image, className)}
+      className={tcm(theme.avatar.image, className)}
       {...rest}
     />
   );

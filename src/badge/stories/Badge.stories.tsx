@@ -1,7 +1,10 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
+import { createControls } from "../../../.storybook/utils";
 import { Badge } from "../Badge";
-import { createControls } from "../../../.storybook/storybookUtils";
+
+type Meta = ComponentMeta<typeof Badge>;
+type Story = ComponentStoryObj<typeof Badge>;
 
 export default {
   title: "Primitives/Badge",
@@ -12,9 +15,9 @@ export default {
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof Badge>;
+} as Meta;
 
-export const Default: ComponentStory<typeof Badge> = {
+export const Default: Story = {
   args: {
     children: "Beta",
     size: "md",
@@ -24,39 +27,39 @@ export const Default: ComponentStory<typeof Badge> = {
   parameters: { options: { showPanel: true } },
 };
 
-export const Small: ComponentStory<typeof Badge> = {
+export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
 };
-export const Medium: ComponentStory<typeof Badge> = { ...Default };
-export const Large: ComponentStory<typeof Badge> = {
+export const Medium: Story = { ...Default };
+export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
 };
 
-export const Solid: ComponentStory<typeof Badge> = { ...Default };
-export const Subtle: ComponentStory<typeof Badge> = {
+export const Solid: Story = { ...Default };
+export const Subtle: Story = {
   ...Default,
   args: { ...Default.args, variant: "subtle" },
 };
-export const Outline: ComponentStory<typeof Badge> = {
+export const Outline: Story = {
   ...Default,
   args: { ...Default.args, variant: "outline" },
 };
 
-export const Primary: ComponentStory<typeof Badge> = {
+export const Primary: Story = {
   ...Default,
   args: { ...Default.args, themeColor: "primary" },
 };
-export const Seconday: ComponentStory<typeof Badge> = {
+export const Seconday: Story = {
   ...Default,
   args: { ...Default.args, themeColor: "secondary" },
 };
-export const Success: ComponentStory<typeof Badge> = {
+export const Success: Story = {
   ...Default,
   args: { ...Default.args, themeColor: "success" },
 };
-export const Danger: ComponentStory<typeof Badge> = {
+export const Danger: Story = {
   ...Default,
   args: { ...Default.args, themeColor: "danger" },
 };

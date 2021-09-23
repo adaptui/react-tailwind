@@ -1,92 +1,75 @@
+import { createComponent, createHook } from "reakit-system";
 import { cx } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { useCheckboxContext } from "./Checkbox";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
-import { CheckIcon, IndeterminateIcon } from "../icons";
-import { runIfFn } from "../utils";
+import { tcm } from "../utils";
 
-export type CheckboxIconRenderPropValues = {
-  isInvalid: boolean;
-  isDisabled: boolean;
-  isChecked: boolean;
-  isIndeterminate: boolean;
-};
+import { CHECKBOX_ICON_KEYS } from "./__keys";
+import { CheckboxStateReturn } from "./CheckboxState";
 
-export type CheckboxIconProps = BoxProps &
-  RenderProp<CheckboxIconRenderPropValues> & {
-    isInvalid?: boolean;
-  };
+export type CheckboxIconOptions = BoxOptions &
+  Pick<
+    CheckboxStateReturn,
+    "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
+  >;
 
-export const CheckboxIcon = forwardRefWithAs<
-  CheckboxIconProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, children, ...rest } = props;
-  const { state, size = "md" } = useCheckboxContext();
+export type CheckboxIconHTMLProps = BoxHTMLProps;
 
-  let stateProp = state?.state;
-  if (Array.isArray(stateProp) && state?.value) {
-    stateProp = stateProp.includes(state?.value);
-  }
+export type CheckboxIconProps = CheckboxIconOptions & CheckboxIconHTMLProps;
 
-  const invalid = !!(props.isInvalid || state?.isInvalid);
-  const isDisabled = !!state?.disabled;
-  const isIndeterminate = stateProp === "indeterminate";
-  const isChecked = stateProp === true;
-  const isUnchecked = stateProp === false || stateProp === undefined;
+export const useCheckboxIcon = createHook<
+  CheckboxIconOptions,
+  CheckboxIconHTMLProps
+>({
+  name: "CheckboxIcon",
+  compose: useBox,
+  keys: CHECKBOX_ICON_KEYS,
 
-  const compoundStyles = (
-    key: keyof typeof theme.checkbox.icon.state.default,
-  ) => {
-    return cx(
-      invalid
-        ? cx(
-            theme.checkbox.icon.state.invalid[key],
-            theme.checkbox.icon.state.hover_invalid[key],
+  useProps(options, htmlProps) {
+    const { isChecked, isIndeterminate, isUnchecked, size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const checkbox = useTheme("checkbox");
+    const className = cx(
+      checkbox.icon.base,
+      checkbox.icon.size[size],
+      isUnchecked
+        ? tcm(
+            checkbox.icon.unChecked.default,
+            checkbox.icon.unChecked.hover,
+            checkbox.icon.unChecked.active,
+            checkbox.icon.unChecked.focus,
+            checkbox.icon.unChecked.disabled,
           )
-        : cx(
-            theme.checkbox.icon.state.default[key],
-            theme.checkbox.icon.state.hover[key],
-          ),
+        : "",
+      isChecked
+        ? tcm(
+            checkbox.icon.checked.default,
+            checkbox.icon.checked.hover,
+            checkbox.icon.checked.active,
+            checkbox.icon.checked.focus,
+            checkbox.icon.checked.disabled,
+          )
+        : "",
+      isIndeterminate
+        ? tcm(
+            checkbox.icon.checked.default,
+            checkbox.icon.indeterminate.hover,
+            checkbox.icon.indeterminate.active,
+            checkbox.icon.indeterminate.focus,
+            checkbox.icon.indeterminate.disabled,
+          )
+        : "",
+      htmlClassName,
     );
-  };
 
-  const theme = useTheme();
-  const checkboxIconStyles = cx(
-    theme.checkbox.icon.base,
-    theme.checkbox.icon.size[size],
-    isDisabled && theme.checkbox.icon.state.disabled,
-    isIndeterminate && compoundStyles("indeterminate"),
-    isChecked && compoundStyles("checked"),
-    isUnchecked && compoundStyles("unchecked"),
-    className,
-  );
-
-  return (
-    <Box
-      className={checkboxIconStyles}
-      ref={ref}
-      aria-hidden="true"
-      role="img"
-      {...rest}
-    >
-      {children ? (
-        runIfFn(children, {
-          isChecked,
-          isIndeterminate,
-          isInvalid: invalid,
-          isDisabled,
-        })
-      ) : stateProp === "indeterminate" ? (
-        <IndeterminateIcon />
-      ) : stateProp ? (
-        <CheckIcon />
-      ) : null}
-    </Box>
-  );
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxIcon.displayName = "CheckboxIcon";
+export const CheckboxIcon = createComponent({
+  as: "span",
+  memo: true,
+  useHook: useCheckboxIcon,
+});

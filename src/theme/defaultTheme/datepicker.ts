@@ -1,24 +1,23 @@
 export const datepicker = {
-  base: "datepicker lib:bg-white lib:w-max lib:rounded-md lib:shadow-sm lib:relative lib:inline-block lib:border lib:border-gray-300",
-  container:
-    "lib:flex lib:gap-4 lib:justify-between lib:p-2 lib:pr-4 lib:pl-4 lib:rounded-md",
-  segment_field: "lib:flex lib:justify-between lib:gap-1",
+  base: "datepicker bg-white w-max rounded-md shadow-sm relative inline-block border border-gray-300",
+  container: "flex gap-4 justify-between p-2 pr-4 pl-4 rounded-md",
+  segment_field: "flex justify-between gap-1",
   segment:
-    "focus-visible:lib:text-blue-500 focus-visible:lib:outline-none lib:font-mono lib:font-normal",
+    "focus-visible:text-blue-500 focus-visible:outline-none font-mono font-normal",
   trigger:
-    "lib:text-gray-700 focus-visible:lib:outline-none focus:text-blue-500 lib:relative lib:inline-block",
+    "text-gray-700 focus-visible:outline-none focus:text-blue-500 relative inline-block",
   badge: {
-    base: "lib:font-sans lib:font-medium lib:text-xs lib:rounded-full lib:py-1",
+    base: "font-sans font-medium text-xs rounded-full py-1",
     variant: {
-      primary: "lib:text-white lib:bg-gray-800",
-      secondary: "lib:text-gray-700 lib:bg-gray-50",
-      outline: "lib:bg-white lib:text-gray-800 lib:border lib:border-gray-800",
+      primary: "text-white bg-gray-800",
+      secondary: "text-gray-700 bg-gray-50",
+      outline: "bg-white text-gray-800 border border-gray-800",
     },
     size: {
-      xs: "lib:text-xs lib:px-2",
-      sm: "lib:text-sm lib:px-3",
-      md: "lib:text-base lib:px-4",
-      lg: "lib:text-lg lib:px-5",
+      xs: "text-xs px-2",
+      sm: "text-sm px-3",
+      md: "text-base px-4",
+      lg: "text-lg px-5",
     },
   },
 };

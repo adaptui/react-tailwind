@@ -1,49 +1,44 @@
+import { createComponent, createHook } from "reakit-system";
 import {
-  Checkbox as ReakitCheckbox,
-  CheckboxProps as ReakitCheckboxProps,
-} from "reakit";
-import { cx } from "@renderlesskit/react";
+  CheckboxHTMLProps,
+  CheckboxOptions,
+  useCheckbox,
+} from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { useCheckboxContext } from "./Checkbox";
-import { forwardRefWithAs } from "../utils/types";
-import { useFormControl, CommonFieldProps } from "../form-field";
+import { tcm } from "../utils";
 
-export type CheckboxInputProps = ReakitCheckboxProps &
-  Omit<CommonFieldProps, "id" | "isReadOnly">;
+import { CHECKBOX_INPUT_KEYS } from "./__keys";
+import { CheckboxStateReturn } from "./CheckboxState";
 
-export const CheckboxInput = forwardRefWithAs<
-  CheckboxInputProps,
-  HTMLInputElement,
-  "input"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const {
-    state: { isInvalid, ...state },
-  } = useCheckboxContext();
-  // Interpts with the checked unchecked state
-  if (state["value"] === undefined) delete state["value"];
-  if (state["checked"] === undefined) delete state["checked"];
+export type CheckboxInputOptions = CheckboxOptions & {
+  size: CheckboxStateReturn["size"];
+};
 
-  const theme = useTheme();
-  const checkboxInputStyles = cx(theme.checkbox.input, className);
+export type CheckboxInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
 
-  const formFieldProps = useFormControl({
-    ...rest,
-    isDisabled: state.disabled || props.isDisabled || props.disabled,
-    isInvalid:
-      isInvalid || props.isInvalid || (props["aria-invalid"] as boolean),
-    isRequired: props.isRequired || props.required,
-  });
+export type CheckboxInputProps = CheckboxInputOptions & CheckboxInputHTMLProps;
 
-  return (
-    <ReakitCheckbox
-      ref={ref}
-      className={checkboxInputStyles}
-      {...state}
-      {...formFieldProps}
-    />
-  );
+export const useCheckboxInput = createHook<
+  CheckboxInputOptions,
+  CheckboxInputHTMLProps
+>({
+  name: "CheckboxInput",
+  compose: useCheckbox,
+  keys: CHECKBOX_INPUT_KEYS,
+
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("checkbox");
+    const className = tcm(theme.input, htmlClassName);
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxInput.displayName = "CheckboxInput";
+export const CheckboxInput = createComponent({
+  as: "input",
+  memo: true,
+  useHook: useCheckboxInput,
+});

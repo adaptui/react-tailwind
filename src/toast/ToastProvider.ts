@@ -1,6 +1,6 @@
 import { createToastStore, DefaultToastOptions } from "@renderlesskit/react";
 
-import { Toast, Content } from "./index";
+import { Content, Toast } from "./index";
 
 const defaultOptions: DefaultToastOptions<Toast> = {
   animationDuration: 0,
@@ -19,4 +19,4 @@ const defaultOptions: DefaultToastOptions<Toast> = {
 const [ToastProvider, useToastStore, useCreateToast, useToastHandlers] =
   createToastStore<Toast, Content>(defaultOptions);
 
-export { ToastProvider, useToastStore, useCreateToast, useToastHandlers };
+export { ToastProvider, useCreateToast, useToastHandlers, useToastStore };

@@ -2,14 +2,11 @@ import * as React from "react";
 import { isNull } from "@renderlesskit/react";
 import { Meta } from "@storybook/react";
 
+import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { Button } from "../../button";
-import {
-  createUnionControl,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
 import { CircularProgressBar } from "../CircularProgressBar";
-import { CircularProgress, CircularProgressProps } from "../index";
 import { CircularProgressWrapper } from "../CircularProgressWrapper";
+import { CircularProgress, CircularProgressProps } from "../index";
 
 export default {
   title: "Feedback/CircularProgress",

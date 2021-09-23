@@ -1,20 +1,20 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { storyTemplate } from "../../../.storybook/storybookUtils";
 
+import { storyTemplate } from "../../../.storybook/utils";
+import { EyeClose, EyeOpen } from "../..";
+import { Avatar } from "../../avatar";
+import { Button } from "../../button";
+import { GenericAvatar } from "../../icons";
 import {
   Input,
   InputGroup,
-  InputProps,
-  InputPrefix,
-  InputSuffix,
-  InputGroupSuffix,
   InputGroupPrefix,
+  InputGroupSuffix,
+  InputPrefix,
+  InputProps,
+  InputSuffix,
 } from "../index";
-import { Avatar } from "../../avatar";
-import { EyeClose, EyeOpen } from "../..";
-import { GenericAvatar } from "../../icons";
-import { Button } from "../../button";
 
 export default {
   title: "Forms/Input",

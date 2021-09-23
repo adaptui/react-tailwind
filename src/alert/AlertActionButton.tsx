@@ -1,9 +1,9 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../index";
-import { useAlertContext } from "./Alert";
 import { Button, ButtonProps } from "../button";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAlertContext } from "./Alert";
 
 export type AlertActionButtonProps = ButtonProps & {};
 
@@ -16,7 +16,7 @@ export const AlertActionButton = forwardRefWithAs<
   const { className, ...rest } = props;
 
   const theme = useTheme();
-  const alertActionButtonStyles = cx(
+  const alertActionButtonStyles = tcm(
     theme.alert.actionButton.base,
     isTablet
       ? theme.alert.actionButton.mobile

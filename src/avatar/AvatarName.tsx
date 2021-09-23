@@ -1,8 +1,8 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { initials, useAvatarContext } from "./Avatar";
 
 export type AvatarNameProps = BoxProps & {};
@@ -16,7 +16,7 @@ export const AvatarName = forwardRefWithAs<AvatarNameProps>((props, ref) => {
 
   if (!initial) return null;
 
-  const nameStyles = cx(
+  const nameStyles = tcm(
     theme.avatar.initials.base,
     theme.avatar.initials.size[size],
     className,

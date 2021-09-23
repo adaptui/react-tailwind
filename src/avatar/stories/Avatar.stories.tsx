@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Meta } from "@storybook/react";
 
-import {
-  createControls,
-  storyTemplate,
-} from "../../../.storybook/storybookUtils";
+import { createControls, storyTemplate } from "../../../.storybook/utils";
 import { InfoCircleIcon, PhotographIcon } from "../../icons";
-import { AvatarGroup, AvatarGroupProps } from "../AvatarGroup";
-import { Avatar, AvatarProps } from "../index";
 import { AvatarContents } from "../Avatar";
 import { AvatarBadge } from "../AvatarBadge";
+import { AvatarGroup, AvatarGroupProps } from "../AvatarGroup";
+import { Avatar, AvatarProps } from "../index";
 
 export default {
   title: "Primitives/Avatar",

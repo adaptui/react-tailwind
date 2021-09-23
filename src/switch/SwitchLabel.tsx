@@ -1,7 +1,6 @@
-import { cx } from "@renderlesskit/react";
-
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
 
 export type SwitchLabelProps = BoxProps & {};
@@ -13,7 +12,7 @@ export const SwitchLabel = forwardRefWithAs<
 >((props, ref) => {
   const { className, ...rest } = props;
   const theme = useTheme();
-  const switchStyles = cx(theme.switch.label, className);
+  const switchStyles = tcm(theme.switch.label, className);
 
   return <Box as="label" ref={ref} className={switchStyles} {...rest} />;
 });

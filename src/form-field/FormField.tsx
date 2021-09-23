@@ -1,13 +1,13 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
-import { useId } from "../hooks/useId";
 import { Box, BoxProps } from "../box";
 import { useBoolean } from "../hooks/useBoolean";
-import { useFormControl } from "./useFormControl";
-import { createContext, runIfFn } from "../utils";
+import { useId } from "../hooks/useId";
+import { useTheme } from "../theme";
+import { createContext, runIfFn, tcm } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+
+import { useFormControl } from "./useFormControl";
 
 export type CommonFieldProps = {
   id?: string;
@@ -77,7 +77,7 @@ export const FormField = forwardRefWithAs<
   const theme = useTheme();
   const { htmlProps, ...context } = useFormContextValues(rest);
 
-  const formFieldStyles = cx(theme.formField.wrapper.base, className);
+  const formFieldStyles = tcm(theme.formField.wrapper.base, className);
 
   return (
     <FormFieldContextProvider value={context}>

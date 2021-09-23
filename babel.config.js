@@ -11,22 +11,18 @@ module.exports = function (api) {
       "@babel/env",
       {
         modules: isCommonJS ? "commonjs" : false,
-        targets: {
-          esmodules: isESM ? true : undefined,
-        },
+        targets: { esmodules: isESM ? true : undefined },
       },
     ],
-    [
-      "@babel/preset-react",
-      {
-        runtime: "automatic",
-      },
-    ],
+    ["@babel/preset-react", { runtime: "automatic" }],
     "@babel/preset-typescript",
   ];
 
   const plugins = [
-    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
+    ["@babel/plugin-proposal-logical-assignment-operators", { loose: true }],
+    ["@babel/plugin-proposal-private-property-in-object", { loose: true }],
+    ["@babel/plugin-proposal-private-methods", { loose: true }],
     ["lodash"],
     isBuild
       ? [

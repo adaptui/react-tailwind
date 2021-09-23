@@ -1,17 +1,18 @@
-import {
-  TooltipArrow,
-  useTooltipState,
-  TooltipReference,
-  TooltipInitialState,
-  Tooltip as ReakitTooltip,
-} from "reakit/Tooltip";
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
+import {
+  Tooltip as ReakitTooltip,
+  TooltipArrow,
+  TooltipInitialState,
+  TooltipReference,
+  useTooltipState,
+} from "reakit/Tooltip";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { TooltipBody } from "./TooltipBody";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { TooltipBody } from "./TooltipBody";
 
 export type TooltipProps = TooltipInitialState & {
   /**
@@ -72,7 +73,7 @@ export const Tooltip = ({
   const [side] = tooltip.placement.split("-");
 
   const theme = useTheme();
-  const arrowStyles = cx(theme.tooltip.arrow.base, arrowClassname);
+  const arrowStyles = tcm(theme.tooltip.arrow.base, arrowClassname);
 
   const transformMap: Record<string, string> = {
     top: "rotateZ(180deg)",

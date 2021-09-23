@@ -25,7 +25,7 @@ const utilities = plugin(function ({ addUtilities }) {
     },
   };
 
-  addUtilities(utilities, ["lib", "DEFAULT", "responsive"]);
+  addUtilities(utilities);
 });
 
 module.exports = utilities;

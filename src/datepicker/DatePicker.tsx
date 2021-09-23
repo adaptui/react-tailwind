@@ -1,19 +1,6 @@
 import * as React from "react";
-import { format } from "date-fns";
-import { CalendarStateReturn } from "@renderlesskit/react";
+import { CalendarStateReturn, toUTCString } from "@renderlesskit/react";
 
-import {
-  DatePicker,
-  DatePickerField,
-  DatePickerTrigger,
-  DatePickerContent,
-  useDatePickerContext,
-  DatePickerSegmentInput,
-  CompoundDateRangePickerProps,
-  CompoundDateNormalPickerProps,
-  DatePickerEndSegmentInput,
-  DatePickerStartSegmentInput,
-} from "./CompundDatePicker";
 import {
   CalendarHeader,
   CalendarNextMonthButton,
@@ -30,12 +17,25 @@ import {
   StatelessCalendar,
 } from "../calendar";
 import {
+  CalendarIcon,
   ChevronLeft,
   ChevronRight,
   DoubleChevronLeft,
   DoubleChevronRight,
-  CalendarIcon,
 } from "../calendar/Icons";
+
+import {
+  CompoundDateNormalPickerProps,
+  CompoundDateRangePickerProps,
+  DatePicker,
+  DatePickerContent,
+  DatePickerEndSegmentInput,
+  DatePickerField,
+  DatePickerSegmentInput,
+  DatePickerStartSegmentInput,
+  DatePickerTrigger,
+  useDatePickerContext,
+} from "./CompundDatePicker";
 
 const Calendar = (state: CalendarStateReturn) => {
   return (
@@ -80,7 +80,7 @@ const CustomInput: React.FC = () => {
           e.preventDefault();
           state.toggle();
         }}
-        value={format(new Date(state.dateValue), "yyyy-MM-dd")}
+        value={toUTCString(new Date(state.dateValue))}
         onChange={e => {
           state.selectDate(e.target.value);
         }}

@@ -1,30 +1,45 @@
+import { createComponent, createHook } from "reakit-system";
 import { cx } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { forwardRefWithAs } from "../utils/types";
-import { useCheckboxContext } from "./Checkbox";
 
-export type CheckboxDescriptionProps = BoxProps & {};
+import { CHECKBOX_DESCRIPTION_KEYS } from "./__keys";
+import { CheckboxStateReturn } from "./CheckboxState";
 
-export const CheckboxDescription = forwardRefWithAs<
-  CheckboxDescriptionProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const { size = "md" } = useCheckboxContext();
+export type CheckboxDescriptionOptions = BoxOptions &
+  Pick<CheckboxStateReturn, "size">;
 
-  const theme = useTheme();
-  const checkboxDescriptionStyles = cx(
-    theme.checkbox.field.description.base,
-    theme.checkbox.field.description.size[size],
-    className,
-  );
+export type CheckboxDescriptionHTMLProps = BoxHTMLProps;
 
-  return (
-    <Box as="span" ref={ref} className={checkboxDescriptionStyles} {...rest} />
-  );
+export type CheckboxDescriptionProps = CheckboxDescriptionOptions &
+  CheckboxDescriptionHTMLProps;
+
+export const useCheckboxDescription = createHook<
+  CheckboxDescriptionOptions,
+  CheckboxDescriptionHTMLProps
+>({
+  name: "CheckboxDescription",
+  compose: useBox,
+  keys: CHECKBOX_DESCRIPTION_KEYS,
+
+  useProps(options, htmlProps) {
+    const { size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("checkbox");
+    const className = cx(
+      theme.description.base,
+      theme.description.size[size],
+      htmlClassName,
+    );
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-CheckboxDescription.displayName = "CheckboxDescription";
+export const CheckboxDescription = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useCheckboxDescription,
+});

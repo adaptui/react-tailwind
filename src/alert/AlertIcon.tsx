@@ -1,14 +1,14 @@
-import { cx } from "@renderlesskit/react";
-
+import { Box, BoxProps } from "../box";
 import {
-  InfoCircleIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
+  InfoCircleIcon,
 } from "../icons";
-import { useTheme } from "../index";
-import { Box, BoxProps } from "../box";
-import { useAlertContext } from "./Alert";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAlertContext } from "./Alert";
 
 const STATUS_ICONS = {
   neutral: InfoCircleIcon,
@@ -30,7 +30,7 @@ export const AlertIcon = forwardRefWithAs<
   const Icon = STATUS_ICONS[status];
 
   const theme = useTheme();
-  const alertIconBaseStyles = cx(
+  const alertIconBaseStyles = tcm(
     theme.alert.icon,
     theme.alert.status[status].icon,
     className,

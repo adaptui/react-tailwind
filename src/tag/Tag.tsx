@@ -1,11 +1,12 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 import { Clickable, CompositeItem } from "reakit";
 
-import { useTheme } from "../theme";
-import { CloseIcon } from "../icons";
 import { Box, BoxProps } from "../box";
+import { CloseIcon } from "../icons";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { useTagGroup } from "./TagGroup";
 
 export type TagProps = Omit<BoxProps, "prefix"> & {
@@ -66,7 +67,7 @@ export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
     const _variant = variant || group?.variant || "primary";
 
     const theme = useTheme();
-    const tagStyles = cx(
+    const tagStyles = tcm(
       theme.tag.base,
       theme.tag.size[_size],
       theme.tag.variant[_variant],
@@ -118,7 +119,7 @@ export const ClosableElement = forwardRefWithAs<
   const _size = size || group?.size || "sm";
 
   const theme = useTheme();
-  const closableElementStyles = cx(theme.tag.suffix[_size], className);
+  const closableElementStyles = tcm(theme.tag.suffix[_size], className);
 
   return (
     <CompositeItem

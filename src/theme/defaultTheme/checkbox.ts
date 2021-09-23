@@ -1,58 +1,60 @@
-const field = {
-  base: "lib:flex lib:flex-col",
-  description: {
-    base: "lib:text-gray-500 lib:mt-1 lib:text-sm",
+export const checkbox = {
+  label:
+    "relative inline-flex items-center justify-center cursor-pointer align-top",
+  input: "peer sr-only",
+  icon: {
+    base: "inline-flex items-center justify-center self-start flex-shrink-0 align-top select-none transition-all",
     size: {
-      sm: "lib:text-xs",
-      md: "lib:text-sm",
-      lg: "lib:text-sm",
+      sm: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
+      md: "w-4 h-4 text-xs border-[1.5px] rounded",
+      lg: "w-5 h-5 text-base border-[1.5px] rounded",
+    },
+    unChecked: {
+      default: "bg-white border-gray-400 text-current",
+      hover: "peer-hover:border-gray-500 peer-hover:shadow",
+      active: "peer-active:border-gray-400",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled: "peer-disabled:bg-gray-200 peer-disabled:border-gray-300",
+      invalid:
+        "bg-white border-red-600 text-current peer-hover:border-red-700 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-300",
+    },
+    checked: {
+      default: "bg-gray-800 border-gray-800 text-white",
+      hover:
+        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
+      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled:
+        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
+      invalid:
+        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
+    },
+    indeterminate: {
+      default: "bg-gray-800 border-gray-800 text-white",
+      hover:
+        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
+      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled:
+        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
+      invalid:
+        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
     },
   },
   text: {
-    base: "lib:text-gray-700 lib:select-none lib:font-medium",
+    base: "text-gray-700 font-medium select-none",
     size: {
-      sm: "lib:text-xs",
-      md: "lib:text-sm lib:leading-4",
-      lg: "lib:text-sm lib:leading-5",
+      sm: "text-cxs ml-1.5",
+      md: "text-sm ml-2",
+      lg: "text-base ml-2",
     },
   },
-};
-
-export const checkbox = {
-  base: "group lib:relative lib:inline-flex lib:space-x-2 lib:items-center lib:align-top lib:cursor-pointer",
-  disabled: "lib:cursor-not-allowed",
-  input: "peer lib:sr-only",
-  icon: {
-    base: "lib:inline-flex lib:items-center lib:justify-center lib:flex-shrink-0 lib:align-top lib:self-start lib:select-none lib:transition-all lib:ring-0 lib:ring-gray-300 peer-focus:ring-2",
+  description: {
+    base: "text-gray-500 select-none",
     size: {
-      sm: "lib:w-3.5 lib:h-3.5 lib:text-[0.625rem] lib:rounded",
-      md: "lib:w-4 lib:h-4 lib:text-xs lib:rounded",
-      lg: "lib:w-5 lib:h-5 lib:text-base lib:rounded-md",
-    },
-    state: {
-      disabled: "lib:text-gray-400 lib:bg-gray-200 lib:cursor-not-allowed",
-      default: {
-        checked: "lib:text-white lib:bg-gray-800",
-        unchecked: "lib:border-[1.5px] lib:border-solid lib:border-gray-400",
-        indeterminate: "lib:text-white lib:bg-gray-800",
-      },
-      invalid: {
-        checked: "lib:bg-red-600 lib:text-white lib:ring-red-300",
-        unchecked:
-          "lib:border-[1.5px] lib:border-solid lib:border-red-600 lib:ring-red-300",
-        indeterminate: "lib:bg-red-600 lib:text-white lib:ring-red-300",
-      },
-      hover: {
-        checked: "group-hover:lib:bg-gray-700",
-        unchecked: "group-hover:lib:border-gray-500",
-        indeterminate: "group-hover:lib:bg-gray-700",
-      },
-      hover_invalid: {
-        checked: "group-hover:lib:bg-red-500",
-        unchecked: "group-hover:lib:border-red-500",
-        indeterminate: "group-hover:lib:bg-red-500",
-      },
+      sm: "text-paragraph-cxs mt-1 ml-1.5",
+      md: "text-paragraph-sm mt-1.5 ml-2",
+      lg: "text-paragraph-sm mt-2 ml-2",
     },
   },
-  field,
 };
