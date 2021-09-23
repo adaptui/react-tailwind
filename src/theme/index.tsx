@@ -1,9 +1,10 @@
 import * as React from "react";
 import { cloneDeep } from "lodash";
 
+import { DeepDictionary, DeepPartial } from "../utils/types";
+
 import defaultTheme from "./defaultTheme";
 import { mergeExtensions, mergeThemes } from "./mergeThemes";
-import { DeepDictionary, DeepPartial } from "../utils/types";
 
 export type DefaultTheme = typeof defaultTheme;
 
@@ -37,23 +38,25 @@ export type ExtendableDefaultTheme = PartialDefaultTheme & {
 };
 
 export type RenderlesskitProviderProps = {
-  children?: React.ReactNode;
   theme?: DefaultTheme;
   extend?: ExtendableDefaultTheme;
 };
 
-export const RenderlesskitProvider = (props: RenderlesskitProviderProps) => {
-  const { children, theme = defaultTheme, extend } = props;
+export const RenderlesskitProvider: React.FC<RenderlesskitProviderProps> =
+  props => {
+    const { children, theme = defaultTheme, extend } = props;
 
-  let finalTheme = theme;
+    let finalTheme = theme;
 
-  if (extend) {
-    finalTheme = mergeExtensions(mergeThemes([extend, cloneDeep(theme)]));
-  }
+    if (extend) {
+      finalTheme = mergeExtensions(mergeThemes([extend, cloneDeep(theme)]));
+    }
 
-  return (
-    <ThemeContext.Provider value={finalTheme}>{children}</ThemeContext.Provider>
-  );
-};
+    return (
+      <ThemeContext.Provider value={finalTheme}>
+        {children}
+      </ThemeContext.Provider>
+    );
+  };
 
 export * from "./extendTheme";

@@ -1,53 +1,48 @@
-const field = {
-  base: "flex flex-col",
-  description: {
-    base: "text-gray-500 mt-1 text-sm",
+export const radio = {
+  label: "relative inline-flex items-center cursor-pointer align-top",
+  input: "peer sr-only",
+  icon: {
+    base: "inline-flex items-center justify-center self-start flex-shrink-0 align-top select-none transition-all",
     size: {
-      sm: "ib:text-paragraph-cxs",
-      md: "text-sm",
-      lg: "text-sm",
+      sm: "w-3.5 h-3.5 border-[1.5px] text-[6px] rounded-full",
+      md: "w-4 h-4 border-[1.5px] text-[6px] rounded-full",
+      lg: "w-5 h-5 border-[1.5px] text-[8px] rounded-full",
+    },
+    unChecked: {
+      default: "bg-white border-gray-400 text-white",
+      hover: "peer-hover:border-gray-500 peer-hover:shadow",
+      active: "peer-active:border-gray-400",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled: "peer-disabled:bg-gray-200 peer-disabled:border-gray-300",
+      invalid:
+        "bg-white border-red-600 text-white peer-hover:border-red-700 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-300",
+    },
+    checked: {
+      default: "bg-gray-800 border-gray-800 text-white",
+      hover:
+        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
+      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
+      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
+      disabled:
+        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
+      invalid:
+        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
     },
   },
   text: {
-    base: "text-gray-700 select-none font-medium",
+    base: "text-gray-700 font-medium select-none",
     size: {
-      sm: "text-paragraph-cxs",
-      md: "text-sm leading-4",
-      lg: "text-sm leading-5",
+      sm: "text-cxs ml-1.5",
+      md: "text-sm ml-2",
+      lg: "text-base ml-2",
     },
   },
-};
-
-export const radio = {
-  base: "group relative inline-flex space-x-1.5 items-center align-top cursor-pointer",
-  disabled: "cursor-not-allowed",
-  input: "peer sr-only",
-  icon: {
-    base: "inline-flex items-center justify-center flex-shrink-0 align-top self-start select-none transition-all rounded-full ring-0 ring-gray-300 peer-focus-visible:ring-2",
+  description: {
+    base: "text-gray-500 select-none",
     size: {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-xl",
-    },
-    state: {
-      disabled: "text-gray-400 cursor-not-allowed",
-      default: {
-        checked: "text-gray-800",
-        unchecked: "text-gray-400",
-      },
-      invalid: {
-        checked: "text-red-600 ring ring-red-300",
-        unchecked: "text-red-600 ring-red-300",
-      },
-      hover: {
-        checked: "group-hover:text-gray-700",
-        unchecked: "group-hover:text-gray-500",
-      },
-      hover_invalid: {
-        checked: "group-hover:text-red-500",
-        unchecked: "group-hover:text-red-500",
-      },
+      sm: "text-paragraph-cxs mt-1 ml-1.5",
+      md: "text-paragraph-sm mt-1.5 ml-2",
+      lg: "text-paragraph-sm mt-2 ml-2",
     },
   },
-  field,
 };

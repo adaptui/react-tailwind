@@ -3,13 +3,14 @@ import {
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
-import { useTheme } from "..";
-import { forwardRefWithAs } from "../utils/types";
-import { useSliderValues } from "./hooks/useSliderValues";
-import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";
 import { BoxProps } from "../box";
 import { useFormControl } from "../form-field";
+import { tcm } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+import { useTheme } from "..";
+
+import { useSliderValues } from "./hooks/useSliderValues";
+import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";
 
 type SliderThumbProps = BoxProps &
   Omit<SliderProps, "size" | "orientation" | "origin">;

@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { Composite, CompositeStateReturn, useCompositeState } from "reakit";
 
-import { TagProps } from "./Tag";
 import { Box, BoxProps } from "../box";
 import { createContext } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { TagProps } from "./Tag";
 
 export type TagGroupContext = Pick<TagGroupProps, "size" | "variant"> & {
   composite: CompositeStateReturn;

@@ -2,9 +2,9 @@ import * as React from "react";
 import { isNull } from "@renderlesskit/react";
 import { Meta } from "@storybook/react";
 
-import { Button } from "../../button";
 import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
-import { Progress, ProgressProps, ProgressTrack, ProgressBar } from "../index";
+import { Button } from "../../button";
+import { Progress, ProgressBar, ProgressProps, ProgressTrack } from "../index";
 
 export default {
   title: "Feedback/Progress",

@@ -1,15 +1,16 @@
+import { useMemo } from "react";
 import {
-  useProgressState,
   ProgressInitialState,
   ProgressStateReturn,
+  useProgressState,
 } from "@renderlesskit/react";
-import { useMemo } from "react";
 
 import { BoxProps } from "../box";
-import { ProgressBar } from "./ProgressBar";
-import { ProgressTrack } from "./ProgressTrack";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
+
+import { ProgressBar } from "./ProgressBar";
+import { ProgressTrack } from "./ProgressTrack";
 
 export type ProgressContext = {
   state: ProgressStateReturn;

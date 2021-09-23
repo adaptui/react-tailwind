@@ -1,12 +1,13 @@
 import {
-  ProgressProps,
   Progress as RenderlesskitProgress,
+  ProgressProps,
 } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { useProgressContext } from "./Progress";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useProgressContext } from "./Progress";
 
 export type ProgressBarProps = Partial<ProgressProps> & {};
 

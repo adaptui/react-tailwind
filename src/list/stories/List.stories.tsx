@@ -4,11 +4,11 @@ import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { InfoCircleIcon } from "../../icons";
 import {
   List,
-  ListItem,
   ListIcon,
-  UnorderedList,
-  OrderedList,
+  ListItem,
   ListProps,
+  OrderedList,
+  UnorderedList,
 } from "../index";
 
 export default {

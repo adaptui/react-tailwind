@@ -1,14 +1,14 @@
 import { screen } from "@testing-library/react";
 
 import {
-  InputGroup,
   Input,
-  InputPrefix,
-  InputSuffix,
+  InputGroup,
   InputGroupPrefix,
   InputGroupSuffix,
+  InputPrefix,
+  InputSuffix,
 } from "../../input";
-import { render, testA11y, cleanup } from "../../utils/testUtils";
+import { cleanup, render, testA11y } from "../../utils/testUtils";
 
 afterEach(cleanup);
 

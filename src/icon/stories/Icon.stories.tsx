@@ -1,12 +1,12 @@
 import { FaCog } from "react-icons/fa";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { Icon } from "../index";
-import { ClockIcon, CloseIcon, CaretRightIcon } from "../../icons";
 import { createControls } from "../../../.storybook/utils";
+import { CaretRightIcon, ClockIcon, CloseIcon } from "../../icons";
+import { Icon } from "../index";
 
 type Meta = ComponentMeta<typeof Icon>;
-type Story = ComponentStory<typeof Icon>;
+type Story = ComponentStoryObj<typeof Icon>;
 
 export default {
   title: "Primitives/Icon",

@@ -1,13 +1,14 @@
+import { Box, BoxProps } from "../box";
 import {
-  InfoCircleIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
+  InfoCircleIcon,
 } from "../icons";
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { Box, BoxProps } from "../box";
-import { useAlertContext } from "./Alert";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAlertContext } from "./Alert";
 
 const STATUS_ICONS = {
   neutral: InfoCircleIcon,

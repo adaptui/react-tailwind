@@ -1,10 +1,11 @@
 import * as React from "react";
-
-import { passProps } from "../utils";
-import { useTheme } from "../theme";
-import { Spinner } from "../spinner";
-import { ButtonProps } from "./Button";
 import { cx } from "@renderlesskit/react";
+
+import { Spinner } from "../spinner";
+import { useTheme } from "../theme";
+import { passProps } from "../utils";
+
+import { ButtonProps } from "./Button";
 
 export type ButtonSpinnerProps = Partial<
   Pick<ButtonProps, "spinner" | "size" | "iconOnly" | "prefix" | "suffix">

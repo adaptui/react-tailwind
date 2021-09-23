@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 
-import { storyTemplate, createUnionControl } from "../../../.storybook/utils";
+import { createUnionControl, storyTemplate } from "../../../.storybook/utils";
 import { Alert, AlertProps } from "../index";
 
 export default {

@@ -1,167 +1,94 @@
-import * as React from "react";
-import { Meta } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
+
+import { createControls, createUnionControl } from "../../../.storybook/utils";
 
 import {
-  Radio,
-  RadioIcon,
-  RadioInput,
-  RadioGroup,
-  RadioLabel,
-  RadioProps,
-  RadioGroupProps,
-} from "../index";
-import { Box } from "../../box";
-import { Button } from "../../button";
-import { storyTemplate, createUnionControl } from "../../../.storybook/utils";
-import { CheckCircleIcon } from "../../icons";
-import { RadioDescription } from "../RadioDescription";
-import { RadioText } from "../RadioText";
+  RadioComponent,
+  RadioControlledComponent,
+  RadioDescriptionComponent,
+  RadioDisabledComponent,
+} from "./RadioComponent";
+
+type Meta = ComponentMeta<typeof RadioComponent>;
+type Story = ComponentStoryObj<typeof RadioComponent>;
 
 export default {
   title: "Forms/Radio",
-  component: Radio,
+  component: RadioComponent,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),
+    ...createControls(undefined, {
+      ignore: [
+        "baseId",
+        "unstable_virtual",
+        "rtl",
+        "orientation",
+        "currentId",
+        "loop",
+        "wrap",
+        "shift",
+        "unstable_includesBaseElement",
+        "defaultState",
+        "state",
+        "onStateChange",
+        "wrapElement",
+        "disabled",
+      ],
+    }),
+  },
+  parameters: {
+    layout: "centered",
   },
 } as Meta;
 
-const BaseRadio: React.FC<RadioProps> = props => {
-  return <Radio {...props} />;
+export const Default: Story = {
+  args: { size: "md" },
+  parameters: { options: { showPanel: true } },
 };
 
-const CompleteRadio: React.FC<RadioGroupProps> = props => {
-  return (
-    <RadioGroup
-      aria-label="fruits"
-      className="flex flex-col space-y-2 w-36"
-      loop
-      {...props}
-    >
-      <BaseRadio value="apple">apple</BaseRadio>
-      <BaseRadio value="orange">Orange</BaseRadio>
-      <BaseRadio value="watermelon">Watermelon</BaseRadio>
-      <BaseRadio value="grapes" disabled>
-        Grapes
-      </BaseRadio>
-    </RadioGroup>
-  );
+export const Small: Story = {
+  ...Default,
+  args: { ...Default.args, size: "sm" },
+  argTypes: {
+    ...Default.argTypes,
+  },
+};
+export const Medium: Story = {
+  ...Default,
+  argTypes: {
+    ...Default.argTypes,
+  },
+};
+export const Large: Story = {
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+  argTypes: {
+    ...Default.argTypes,
+  },
 };
 
-const base = storyTemplate<RadioGroupProps>(CompleteRadio, { size: "md" });
-
-export const Base = base({});
-export const DefaultState = base({ defaultState: "orange" });
-
-export const WithDescription = () => {
-  return (
-    <div>
-      <RadioGroup className="flex flex-col space-y-6">
-        <Radio
-          size="sm"
-          value="1"
-          description={
-            "Used when the radio is selected and will use its value for the form submission."
-          }
-        >
-          Radio state
-        </Radio>
-        <Radio
-          size="md"
-          value="1.1"
-          description={
-            "Used when the radio is selected and will use its value for the form submission."
-          }
-        >
-          Radio state
-        </Radio>
-        <Radio
-          size="lg"
-          value="1.2"
-          description={
-            "Used when the radio is selected and will use its value for the form submission."
-          }
-        >
-          Radio state
-        </Radio>
-        <Radio
-          size="lg"
-          value="2"
-          isInvalid
-          description={
-            "Used when the radio is selected and will use its value for the form submission."
-          }
-        >
-          Invalid state
-        </Radio>
-        <Radio
-          size="lg"
-          value="3"
-          isDisabled
-          description={
-            "Used when the radio is selected and will use its value for the form submission."
-          }
-        >
-          Disabled state
-        </Radio>
-        <Radio value="4" size="lg">
-          <RadioLabel>
-            <RadioInput />
-            <RadioIcon />
-            <div>
-              <RadioText>Custom checkbox</RadioText>
-              <RadioDescription>
-                Used when the checkbox is selected and will use its value for
-                the form submission.
-              </RadioDescription>
-            </div>
-          </RadioLabel>
-        </Radio>
-      </RadioGroup>
-    </div>
-  );
+export const WithDefaultState: Story = {
+  ...Default,
+  args: { ...Default.args, defaultState: "orange" },
+  argTypes: {
+    ...Default.argTypes,
+  },
 };
 
-export const Controlled = () => {
-  const [state, setState] = React.useState("watermelon");
-  return (
-    <Box className="space-y-2">
-      <CompleteRadio state={state} onStateChange={e => setState(e as string)} />
-      <Button className="bg-orange-500" onClick={() => setState("orange")}>
-        Change to Orange
-      </Button>
-    </Box>
-  );
+export const withDescription: Story = {
+  render: args => <RadioDescriptionComponent {...args} />,
+  args: { size: "md" },
+  parameters: { options: { showPanel: true } },
 };
 
-const CustomRadio: React.FC<RadioProps> = props => {
-  return (
-    <Radio {...props}>
-      <RadioLabel className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600">
-        <RadioInput />
-        <RadioIcon checkedIcon={<CheckCircleIcon />} />
-        {props.children}
-      </RadioLabel>
-    </Radio>
-  );
+export const WithDisabled: Story = {
+  render: args => <RadioDisabledComponent {...args} />,
+  args: { size: "md", defaultState: "orange" },
+  parameters: { options: { showPanel: true } },
 };
 
-const CompleteCustomRadio: React.FC<RadioGroupProps> = props => {
-  return (
-    <RadioGroup
-      aria-label="fruits"
-      className="flex flex-col space-y-2 w-36"
-      {...props}
-    >
-      <CustomRadio value="apple">apple</CustomRadio>
-      <CustomRadio value="orange">Orange</CustomRadio>
-      <CustomRadio value="watermelon">Watermelon</CustomRadio>
-      <CustomRadio value="grapes" disabled>
-        Grapes
-      </CustomRadio>
-    </RadioGroup>
-  );
+export const Controlled: Story = {
+  render: args => <RadioControlledComponent {...args} />,
+  args: { size: "md" },
+  parameters: { options: { showPanel: true } },
 };
-
-export const Custom = storyTemplate<RadioGroupProps>(CompleteCustomRadio, {
-  size: "md",
-})({});

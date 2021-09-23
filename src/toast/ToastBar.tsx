@@ -1,9 +1,10 @@
 import { useCallback } from "react";
 
-import { useTheme } from "../theme";
-import { Split } from "../utils/types";
 import { useHover, useMediaQuery } from "../hooks";
+import { useTheme } from "../theme";
 import { isFunction, objectKeys, tcm } from "../utils";
+import { Split } from "../utils/types";
+
 import { Toast, ToastPlacement, useToasts, useToastsReturnType } from "./index";
 
 export const Toasts = () => {

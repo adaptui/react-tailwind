@@ -2,23 +2,23 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Meta } from "@storybook/react";
 
-import {
-  FormField,
-  FormLabel,
-  FormErrorText,
-  FormHelperText,
-  FormFieldProps,
-  FormRequiredText,
-} from "..";
-import { Input } from "../../input";
+import { storyTemplate } from "../../../.storybook/utils";
 import { Button } from "../../button";
+import { InfoCircleIcon } from "../../icons";
+import { Input } from "../../input";
+import { Radio, RadioGroup } from "../../radio";
 import { Slider } from "../../slider";
 import { Switch } from "../../switch";
 import { Textarea } from "../../textarea";
-import { InfoCircleIcon } from "../../icons";
-import { Radio, RadioGroup } from "../../radio";
 import { FormLabelValue } from "../FormLabelValue";
-import { storyTemplate } from "../../../.storybook/utils";
+import {
+  FormErrorText,
+  FormField,
+  FormFieldProps,
+  FormHelperText,
+  FormLabel,
+  FormRequiredText,
+} from "..";
 
 export default {
   title: "Forms/FormField",

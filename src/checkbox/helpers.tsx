@@ -1,26 +1,26 @@
 import { splitProps } from "reakit-utils";
 
-import {
-  CheckboxInitialState,
-  useCheckboxState,
-  CheckboxStateReturn,
-  CheckboxDescriptionProps,
-  CheckboxIconProps,
-  CheckboxInputProps,
-  CheckboxLabelProps,
-  CheckboxTextProps,
-  USE_CHECKBOX_STATE_KEYS,
-  CheckboxProps,
-  CheckboxOwnProps,
-} from "./index";
-import { Dict } from "../utils/types";
+import { CheckIcon, IndeterminateIcon } from "../icons";
 import {
   getValidChildren,
   runIfFn,
   runIfFnChildren,
   withIconA11y,
 } from "../utils";
-import { CheckIcon, IndeterminateIcon } from "..";
+import { Dict } from "../utils/types";
+
+import {
+  CheckboxDescriptionProps,
+  CheckboxIconProps,
+  CheckboxInitialState,
+  CheckboxInputProps,
+  CheckboxLabelProps,
+  CheckboxOwnProps,
+  CheckboxProps,
+  CheckboxTextProps,
+  USE_CHECKBOX_STATE_KEYS,
+  useCheckboxState,
+} from "./index";
 
 export const useCheckboxStateSplit = (props: CheckboxProps) => {
   const [stateProps, checkboxProps] = splitProps(
@@ -29,11 +29,7 @@ export const useCheckboxStateSplit = (props: CheckboxProps) => {
   ) as [CheckboxInitialState, CheckboxOwnProps];
   const state = useCheckboxState(stateProps);
 
-  return [state, checkboxProps, stateProps] as [
-    CheckboxStateReturn,
-    CheckboxOwnProps,
-    CheckboxInitialState,
-  ];
+  return [state, checkboxProps, stateProps] as const;
 };
 
 const ComponentPropsMap = {

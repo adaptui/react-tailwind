@@ -1,17 +1,18 @@
-import {
-  TooltipArrow,
-  useTooltipState,
-  TooltipReference,
-  TooltipInitialState,
-  Tooltip as ReakitTooltip,
-} from "reakit/Tooltip";
 import * as React from "react";
-import { tcm } from "../utils";
+import {
+  Tooltip as ReakitTooltip,
+  TooltipArrow,
+  TooltipInitialState,
+  TooltipReference,
+  useTooltipState,
+} from "reakit/Tooltip";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { TooltipBody } from "./TooltipBody";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { TooltipBody } from "./TooltipBody";
 
 export type TooltipProps = TooltipInitialState & {
   /**

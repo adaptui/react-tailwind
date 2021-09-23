@@ -1,10 +1,10 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { Spinner } from "../index";
 import { createControls } from "../../../.storybook/utils";
+import { Spinner } from "../index";
 
 type Meta = ComponentMeta<typeof Spinner>;
-type Story = ComponentStory<typeof Spinner>;
+type Story = ComponentStoryObj<typeof Spinner>;
 
 export default {
   title: "Feedback/Spinner",

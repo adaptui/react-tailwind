@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 
-import { useTheme } from "../theme";
-import { AddonTypes } from "./InputAddons";
-import { useSafeLayoutEffect } from "../hooks";
 import { useFormControl } from "../form-field";
+import { useSafeLayoutEffect } from "../hooks";
+import { useTheme } from "../theme";
 import { getValidChildren, tcm } from "../utils";
+
+import { AddonTypes } from "./InputAddons";
 
 export type InputProps = Omit<ReakitInputProps, "prefix"> & {
   /**

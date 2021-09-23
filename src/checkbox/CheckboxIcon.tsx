@@ -1,11 +1,12 @@
-import { cx } from "@renderlesskit/react";
 import { createComponent, createHook } from "reakit-system";
+import { cx } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
+
 import { CHECKBOX_ICON_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
-import { BoxOptions, BoxHTMLProps, useBox } from "../box";
 
 export type CheckboxIconOptions = BoxOptions &
   Pick<

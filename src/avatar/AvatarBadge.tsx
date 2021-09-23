@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { MoonIcon, DotIcon } from "../icons";
+import { DotIcon, MoonIcon } from "../icons";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { AvatarProps, useAvatarContext } from "./Avatar";
 
 export type AvatarBadgeProps = BoxProps & Pick<AvatarProps, "status"> & {};

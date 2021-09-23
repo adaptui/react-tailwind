@@ -1,14 +1,15 @@
+import * as React from "react";
 import {
   Button as ReakitButton,
   ButtonProps as ReakitButtonProps,
 } from "reakit";
-import * as React from "react";
 import { announce } from "@react-aria/live-announcer";
 
-import { useTheme } from "../theme";
 import { usePrevious } from "../hooks";
-import { withIconA11y, tcm } from "../utils";
+import { useTheme } from "../theme";
+import { tcm, withIconA11y } from "../utils";
 import { forwardRefWithAs, RenderPropType } from "../utils/types";
+
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
 export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {

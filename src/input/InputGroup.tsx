@@ -1,12 +1,13 @@
-import { useMemo, useState, cloneElement } from "react";
+import { cloneElement, useMemo, useState } from "react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { AddonTypes } from "./InputAddons";
 import { useSafeLayoutEffect } from "../hooks";
-import { forwardRefWithAs } from "../utils/types";
-import { InputProps, ReactFiberNode } from "./Input";
+import { useTheme } from "../theme";
 import { createContext, getValidChildren, tcm } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+
+import { InputProps, ReactFiberNode } from "./Input";
+import { AddonTypes } from "./InputAddons";
 
 export type InputGroupContext = InputGroupProps;
 

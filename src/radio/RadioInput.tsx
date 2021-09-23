@@ -1,46 +1,39 @@
-import { RadioProps as ReakitRadioProps, Radio as ReakitRadio } from "reakit";
+import { createComponent, createHook } from "reakit-system";
+import { RadioHTMLProps, RadioOptions, useRadio } from "@renderlesskit/react";
 
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
-import { useRadioProps, useRadioStateContext } from "./Radio";
-import { CommonFieldProps, useFormControl } from "../form-field";
+import { tcm } from "../utils";
 
-export type RadioInputProps = Partial<ReakitRadioProps> &
-  Omit<CommonFieldProps, "isReadOnly" | "id">;
+import { RADIO_INPUT_KEYS } from "./__keys";
+import { RadioStateReturn } from "./RadioState";
 
-export const RadioInput = forwardRefWithAs<RadioInputProps>((props, ref) => {
-  const { className, ...rest } = props;
-  const { isDisabled, isRequired, isInvalid, ...state } =
-    useRadioStateContext();
-  const { size, checkedIcon, disabledIcon, uncheckedIcon, ...iconProps } =
-    useRadioProps();
+export type RadioInputOptions = RadioOptions & {
+  size: RadioStateReturn["size"];
+};
 
-  const theme = useTheme();
-  const radioStyles = tcm(theme.radio.input, className);
+export type RadioInputHTMLProps = Omit<RadioHTMLProps, "size">;
 
-  const isTrulyDisabled = isDisabled || props.isDisabled || props.disabled;
-  const isTrulyRequired = isRequired || props.isRequired || props.required;
-  // prettier-ignore
-  const isTrulyInvalid = isInvalid || props.isInvalid || !!props["aria-invalid"];
+export type RadioInputProps = RadioInputOptions & RadioInputHTMLProps;
 
-  const { id, ...fieldInputProps } = useFormControl({
-    ...rest,
-    isDisabled: isTrulyDisabled,
-    isInvalid: isTrulyInvalid,
-    isRequired: isTrulyRequired,
-  });
+export const useRadioInput = createHook<RadioInputOptions, RadioInputHTMLProps>(
+  {
+    name: "RadioInput",
+    compose: useRadio,
+    keys: RADIO_INPUT_KEYS,
 
-  return (
-    <ReakitRadio
-      ref={ref}
-      className={radioStyles}
-      {...iconProps}
-      {...state}
-      {...fieldInputProps}
-      {...rest}
-    />
-  );
+    useProps(options, htmlProps) {
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+      const theme = useTheme("radio");
+      const className = tcm(theme.input, htmlClassName);
+
+      return { className, ...restHtmlProps };
+    },
+  },
+);
+
+export const RadioInput = createComponent({
+  as: "input",
+  memo: true,
+  useHook: useRadioInput,
 });
-
-RadioInput.displayName = "RadioInput";

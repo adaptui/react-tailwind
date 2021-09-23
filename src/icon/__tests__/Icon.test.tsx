@@ -1,8 +1,8 @@
+import { FaCross } from "react-icons/fa";
 import { screen } from "@testing-library/react";
 
-import { Icon } from "../Icon";
 import { render, testA11y } from "../../utils/testUtils";
-import { FaCross } from "react-icons/fa";
+import { Icon } from "../Icon";
 
 describe("<Icon />", () => {
   expect.assertions(1);

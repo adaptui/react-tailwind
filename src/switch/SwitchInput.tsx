@@ -3,11 +3,12 @@ import {
   CheckboxProps as ReakitSwitchProps,
 } from "reakit";
 
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
-import { useSwitchContext } from "./Switch";
-import { forwardRefWithAs } from "../utils/types";
 import { CommonFieldProps, useFormControl } from "../form-field";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+
+import { useSwitchContext } from "./Switch";
 
 export type SwitchInputProps = ReakitSwitchProps & Omit<CommonFieldProps, "id">;
 

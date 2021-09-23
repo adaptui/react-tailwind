@@ -1,12 +1,13 @@
 import { useMemo } from "react";
-import { useControllableState } from "@renderlesskit/react";
 import { CheckboxOptions as ReakitCheckboxOptions } from "reakit";
+import { useControllableState } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
 import { CommonFieldProps } from "../form-field";
 import { createContext, runIfFn } from "../utils";
 import { forwardRefWithAs, RenderProp } from "../utils/types";
-import { SwitchText, SwitchIcon, SwitchLabel, SwitchInput } from "./";
+
+import { SwitchIcon, SwitchInput, SwitchLabel, SwitchText } from "./";
 
 type Size = keyof Renderlesskit.GetThemeValue<
   "switch",

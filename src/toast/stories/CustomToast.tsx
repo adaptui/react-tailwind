@@ -4,8 +4,8 @@
 import { useCallback } from "react";
 import { ConfigurableToastOptions } from "@renderlesskit/react";
 
-import { tcm } from "../../utils";
 import { InfoCircleIcon } from "../../icons";
+import { tcm } from "../../utils";
 import { Toast, useToastHandlers } from "../index";
 
 type CustomToastProps = {

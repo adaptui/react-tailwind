@@ -1,10 +1,11 @@
+import { cloneElement, isValidElement } from "react";
 import { Box, BoxProps } from "reakit";
-import { isValidElement, cloneElement } from "react";
 
-import { tcm } from "../utils";
 import { useTheme } from "../theme";
-import { useAvatarContext } from "./Avatar";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useAvatarContext } from "./Avatar";
 
 export type AvatarIconProps = BoxProps & {};
 

@@ -1,7 +1,7 @@
 import { cx } from "@renderlesskit/react";
 
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
+import { useTheme } from "../theme";
 import { forwardRefWithAs } from "../utils/types";
 
 export type SpinnerProps = BoxProps & {

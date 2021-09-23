@@ -1,9 +1,10 @@
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useSliderPropsContext } from "./Slider";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
 import { useSliderValues } from "./hooks/useSliderValues";
+import { useSliderPropsContext } from "./Slider";
 
 export type SliderMinMaxProps = BoxProps & {};
 

@@ -1,16 +1,16 @@
 import * as React from "react";
 import { screen } from "@testing-library/react";
 
+import { Input } from "../../input";
+import { render, testA11y } from "../../utils/testUtils";
+import { FormFieldProps } from "../FormField";
 import {
-  FormField,
-  FormLabel,
   FormErrorText,
+  FormField,
   FormHelperText,
+  FormLabel,
   FormRequiredText,
 } from "../index";
-import { Input } from "../../input";
-import { FormFieldProps } from "../FormField";
-import { render, testA11y } from "../../utils/testUtils";
 
 const LABEL_TEXT = "Form label";
 const HINT_TEXT = "This is hint text";

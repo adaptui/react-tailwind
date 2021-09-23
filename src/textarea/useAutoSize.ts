@@ -1,8 +1,9 @@
 import * as React from "react";
 
-import { debounce } from "../utils";
-import { TextareaProps } from "./index";
 import { useMergeRefs, useSafeLayoutEffect } from "../hooks";
+import { debounce } from "../utils";
+
+import { TextareaProps } from "./index";
 
 type UseAutoSizeProps = Pick<
   TextareaProps,

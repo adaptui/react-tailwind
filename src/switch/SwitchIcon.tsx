@@ -1,8 +1,9 @@
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
 import { Box, BoxProps } from "../box";
-import { useSwitchContext } from "./Switch";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 import { forwardRefWithAs } from "../utils/types";
+
+import { useSwitchContext } from "./Switch";
 
 export type SwitchIconProps = BoxProps & {};
 

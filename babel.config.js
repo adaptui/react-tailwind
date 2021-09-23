@@ -11,17 +11,10 @@ module.exports = function (api) {
       "@babel/env",
       {
         modules: isCommonJS ? "commonjs" : false,
-        targets: {
-          esmodules: isESM ? true : undefined,
-        },
+        targets: { esmodules: isESM ? true : undefined },
       },
     ],
-    [
-      "@babel/preset-react",
-      {
-        runtime: "automatic",
-      },
-    ],
+    ["@babel/preset-react", { runtime: "automatic" }],
     "@babel/preset-typescript",
   ];
 

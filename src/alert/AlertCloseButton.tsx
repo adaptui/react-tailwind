@@ -1,8 +1,9 @@
-import { tcm } from "../utils";
-import { useTheme } from "../theme";
-import { useAlertContext } from "./Alert";
-import { forwardRefWithAs } from "../utils/types";
 import { CloseButton, CloseButtonProps } from "../button";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
+import { forwardRefWithAs } from "../utils/types";
+
+import { useAlertContext } from "./Alert";
 
 export type AlertCloseButtonProps = CloseButtonProps & {};
 
