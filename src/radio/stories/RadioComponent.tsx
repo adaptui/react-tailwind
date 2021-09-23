@@ -72,6 +72,7 @@ export const RadioDisabledComponent: React.FC<RadioGroupProps> = props => {
 export const RadioControlledComponent: React.FC<RadioGroupProps> = props => {
   const [state, onStateChange] =
     React.useState<RadioGroupState["state"]>("apple");
+  console.log("%cstate", "color: #ffcc00", state);
 
   return (
     <RadioGroup
