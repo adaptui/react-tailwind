@@ -150,7 +150,7 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-testing-library": "^4.12.3",
+    "eslint-plugin-testing-library": "^4.12.4",
     "focus-visible": "^5.2.0",
     "fs-extra": "^10.0.0",
     "gacp": "^2.10.2",
