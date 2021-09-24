@@ -1,12 +1,16 @@
+import * as React from "react";
+import { Separator } from "reakit";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createUnionControl } from "../../../.storybook/utils";
+import { RadioGroupState } from "../index";
 
 import {
   RadioComponent,
   RadioControlledComponent,
   RadioDescriptionComponent,
   RadioDisabledComponent,
+  RadioShowMoreComponent,
 } from "./RadioComponent";
 
 type Meta = ComponentMeta<typeof RadioComponent>;
@@ -36,13 +40,11 @@ export default {
       ],
     }),
   },
-  parameters: {
-    layout: "centered",
-  },
+  parameters: { layout: "centered" },
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md" },
+  args: { size: "md", stack: "vertical" },
   parameters: { options: { showPanel: true } },
 };
 
@@ -67,6 +69,23 @@ export const Large: Story = {
   },
 };
 
+export const Stack: Story = {
+  args: { size: "md", stack: "horizontal" },
+  parameters: { options: { showPanel: true } },
+};
+
+export const withDescription: Story = {
+  render: args => <RadioDescriptionComponent {...args} />,
+  args: { size: "md", stack: "vertical" },
+  parameters: { options: { showPanel: true } },
+};
+
+export const WithDisabled: Story = {
+  render: args => <RadioDisabledComponent {...args} />,
+  args: { size: "md", stack: "vertical", defaultState: "orange" },
+  parameters: { options: { showPanel: true } },
+};
+
 export const WithDefaultState: Story = {
   ...Default,
   args: { ...Default.args, defaultState: "orange" },
@@ -75,20 +94,26 @@ export const WithDefaultState: Story = {
   },
 };
 
-export const withDescription: Story = {
-  render: args => <RadioDescriptionComponent {...args} />,
-  args: { size: "md" },
-  parameters: { options: { showPanel: true } },
-};
+export const Controlled = () => {
+  const [state, onStateChange] =
+    React.useState<RadioGroupState["state"]>("apple");
 
-export const WithDisabled: Story = {
-  render: args => <RadioDisabledComponent {...args} />,
-  args: { size: "md", defaultState: "orange" },
-  parameters: { options: { showPanel: true } },
+  return (
+    <div className="flex flex-col m-auto">
+      <RadioComponent
+        stack="horizontal"
+        state={state}
+        onStateChange={onStateChange}
+      />
+      <Separator className="my-4" />
+      <RadioControlledComponent state={state} onStateChange={onStateChange} />
+    </div>
+  );
 };
+Controlled.parameters = { options: { showPanel: false } };
 
-export const Controlled: Story = {
-  render: args => <RadioControlledComponent {...args} />,
-  args: { size: "md" },
-  parameters: { options: { showPanel: true } },
+export const WithShowMore: Story = {
+  render: args => <RadioShowMoreComponent {...args} />,
+  args: { size: "md", stack: "vertical" },
+  parameters: { options: { showPanel: true }, layout: "padded" },
 };

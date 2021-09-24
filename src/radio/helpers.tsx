@@ -1,7 +1,6 @@
 import { splitProps } from "reakit-utils";
 
-import { createContext, getValidChildren } from "../utils";
-import { Dict } from "../utils/types";
+import { createContext } from "../utils";
 
 import {
   RADIO_GROUP_STATE_KEYS,
@@ -23,7 +22,7 @@ const [RadioStateContextProvider, useRadioStateContext] =
 
 export { RadioStateContextProvider, useRadioStateContext };
 
-export const useRadioStateSplit = (props: RadioGroupProps) => {
+export const useRadioGroupStateSplit = (props: RadioGroupProps) => {
   const [stateProps, radioGroupProps] = splitProps(
     props,
     USE_RADIO_GROUP_STATE_KEYS,

@@ -25,7 +25,7 @@ export function useRadioGroupState(
   props: RadioGroupInitialState = {},
 ): RadioGroupStateReturn {
   const state = useRenderlesskitRadioState(props);
-  const { size = "lg" } = props;
+  const { size = "md" } = props;
 
   return {
     ...state,

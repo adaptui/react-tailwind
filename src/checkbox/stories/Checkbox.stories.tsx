@@ -1,9 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Separator } from "reakit";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls } from "../../../.storybook/utils";
-import { Button } from "../../button";
 import { EyeClose, EyeOpen } from "../../icons";
+import {
+  Radio,
+  RadioGroup,
+  RadioGroupProps,
+  RadioGroupStateReturn,
+} from "../../radio";
 import { tcm, withIconA11y } from "../../utils";
 import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
@@ -15,6 +21,7 @@ import {
   CheckboxInput,
   CheckboxLabel,
   CheckboxState,
+  CheckboxStateReturn,
   CheckboxText,
 } from "../index";
 
@@ -246,27 +253,61 @@ export const WithDescriptionStack: Story = {
   parameters: { options: { showPanel: true } },
 };
 
+export const RadioComponent: React.FC<RadioGroupProps> = props => {
+  return (
+    <RadioGroup
+      aria-label="checkbox state"
+      className="flex flex-row space-x-4"
+      {...props}
+    >
+      <Radio value="checked" label="Checked" />
+      <Radio value="unchecked" label="Unchecked" />
+      <Radio value="indeterminate" label="Indeterminate" />
+    </RadioGroup>
+  );
+};
+
 export const Controlled = () => {
-  const [state, setState] =
-    useState<NonNullable<CheckboxProps["state"]>>(false);
+  const [checkboxState, setCheckboxState] =
+    useState<CheckboxStateReturn["state"]>(true);
+
+  const onRadioStateChange: RadioGroupStateReturn["setState"] = state => {
+    if (state === "indeterminate") {
+      setCheckboxState("indeterminate");
+      return;
+    }
+
+    if (state === "checked") {
+      setCheckboxState(true);
+      return;
+    }
+
+    setCheckboxState(false);
+  };
+
+  const getRadioState = (): RadioGroupStateReturn["state"] => {
+    if (checkboxState === "indeterminate") return "indeterminate";
+    if (checkboxState === true) return "checked";
+    return "unchecked";
+  };
+
+  const radioState = getRadioState();
 
   return (
-    <div className="flex flex-col space-y-4">
-      <Checkbox state={state} onStateChange={setState} />
+    <div className="flex flex-col items-center space-y-4 w-96">
+      <Checkbox
+        state={checkboxState}
+        onStateChange={setCheckboxState}
+        label={capitalizeFirstLetter(radioState as string)}
+      />
 
-      <div className="flex flex-col space-y-2">
-        <Button onClick={() => setState(true)}>
-          {`${state === true ? "Now" : "Change to"} Checked`}
-        </Button>
+      <Separator className="w-full my-4" />
 
-        <Button onClick={() => setState(false)}>
-          {`${state === false ? "Now" : "Change to"} UnChecked`}
-        </Button>
-
-        <Button onClick={() => setState("indeterminate")}>
-          {`${state === "indeterminate" ? "Now" : "Change to"} Interderminate`}
-        </Button>
-      </div>
+      <RadioComponent
+        state={radioState}
+        onStateChange={onRadioStateChange}
+        stack="horizontal"
+      />
     </div>
   );
 };

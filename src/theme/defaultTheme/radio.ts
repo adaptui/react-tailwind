@@ -1,4 +1,22 @@
 export const radio = {
+  group: {
+    vertical: {
+      base: "flex flex-col",
+      size: {
+        sm: "space-y-3.5",
+        md: "space-y-4",
+        lg: "space-y-[18px]",
+      },
+    },
+    horizontal: {
+      base: "flex flex-row",
+      size: {
+        sm: "space-x-4",
+        md: "space-x-4",
+        lg: "space-x-4",
+      },
+    },
+  },
   label: "relative inline-flex items-center cursor-pointer align-top",
   input: "peer sr-only",
   icon: {
