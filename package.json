@@ -168,7 +168,7 @@
     "prettier": "2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.15.4",
+    "react-hook-form": "^7.16.0",
     "react-icons": "^4.2.0",
     "reakit-test-utils": "^0.15.2",
     "release-it": "^14.11.6",
