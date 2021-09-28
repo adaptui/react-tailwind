@@ -1,8 +1,11 @@
+import { splitProps } from "reakit-utils";
+
 import { CircleIcon } from "../icons/Circle";
 import { getValidChildren, runIfFn, runIfFnChildren } from "../utils";
 import { Dict } from "../utils/types";
 
 import {
+  RADIO_GROUP_STATE_KEYS,
   RadioDescriptionProps,
   RadioGroupStateReturn,
   RadioIconProps,
@@ -12,7 +15,6 @@ import {
   RadioProps,
   RadioTextProps,
   useRadioStateContext,
-  useRadioStateReturnSplit,
 } from "./index";
 
 export type RadioStateReturn = RadioGroupStateReturn & {
@@ -48,6 +50,15 @@ export const getRadioComponentProps = (children: React.ReactNode) => {
   });
 
   return props;
+};
+
+export const useRadioStateReturnSplit = (props: RadioProps) => {
+  const [stateReturnProps, radioProps] = splitProps(
+    props,
+    RADIO_GROUP_STATE_KEYS,
+  ) as [RadioGroupStateReturn, RadioOwnProps];
+
+  return [stateReturnProps, radioProps] as const;
 };
 
 export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {

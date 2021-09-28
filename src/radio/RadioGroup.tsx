@@ -16,14 +16,7 @@ import {
   RadioGroupStateReturn,
 } from "./RadioGroupState";
 
-export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {
-  /**
-   * Controls how the group of radios are arranged
-   *
-   * @default vertical
-   */
-  stack?: "vertical" | "horizontal";
-};
+export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {};
 
 export type RadioGroupProps = RadioGroupInitialState &
   RadioGroupOwnProps &
@@ -32,17 +25,12 @@ export type RadioGroupProps = RadioGroupInitialState &
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (props, ref) => {
     const [state, radioGroupProps] = useRadioGroupStateSplit(props);
-    const {
-      stack = "vertical",
-      children,
-      className: htmlClassName,
-      ...rest
-    } = radioGroupProps;
+    const { children, className: htmlClassName, ...rest } = radioGroupProps;
 
     const theme = useTheme("radio");
     const className = cx(
-      theme.group[stack].base,
-      theme.group[stack].size[state.size],
+      theme.group[state.stack].base,
+      theme.group[state.stack].size[state.size],
       htmlClassName,
     );
 

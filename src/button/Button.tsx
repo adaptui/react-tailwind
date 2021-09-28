@@ -1,18 +1,21 @@
 import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
 import {
-  Button as ReakitButton,
-  ButtonProps as ReakitButtonProps,
+  ButtonHTMLProps as ReakitButtonHTMLProps,
+  ButtonOptions as ReakitButtonOptions,
+  useButton as useReakitButton,
 } from "reakit";
 import { announce } from "@react-aria/live-announcer";
 
 import { usePrevious } from "../hooks";
 import { useTheme } from "../theme";
-import { tcm, withIconA11y } from "../utils";
-import { forwardRefWithAs, RenderPropType } from "../utils/types";
+import { runIfFn, tcm, withIconA11y } from "../utils";
+import { RenderPropType } from "../utils/types";
 
+import { BUTTON_KEYS } from "./__keys";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
-export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
+export type ButtonOptions = ReakitButtonOptions & {
   /**
    * How large should the button be?
    *
@@ -55,85 +58,122 @@ export type ButtonProps = Omit<ReakitButtonProps, "prefix"> & {
   spinner?: RenderPropType;
 };
 
-export const Button = forwardRefWithAs<
-  ButtonProps,
-  HTMLButtonElement,
-  "button"
->((props, ref) => {
-  const {
-    children,
-    size = "md",
-    variant = "solid",
-    iconOnly,
-    suffix,
-    prefix,
-    loading = false,
-    spinner,
-    disabled,
-    className,
-    style,
-    ...rest
-  } = props;
-  const _disabled = disabled || loading;
+export type ButtonHTMLProps = Omit<ReakitButtonHTMLProps, "prefix">;
 
-  const button = useTheme("button");
-  const baseStyles = tcm(
-    button.base,
-    !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
-    button.variant.default[variant],
-    button.variant.hover[variant],
-    button.variant.active[variant],
-    button.variant.focus[variant],
-    button.variant.disabled[variant],
-    className,
-  );
-  const suffixStyles = tcm(button.size.suffix[size]);
-  const prefixStyles = tcm(button.size.prefix[size]);
+export type ButtonProps = ButtonOptions & ButtonHTMLProps;
 
-  const prevLoading = usePrevious(loading);
+export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
+  name: "Button",
+  compose: useReakitButton,
+  keys: BUTTON_KEYS,
 
-  React.useEffect(() => {
-    if (loading) announce("Started loading");
+  useOptions(options, htmlProps) {
+    const {
+      size = "md",
+      variant = "solid",
+      loading = false,
+      ...restOptions
+    } = options;
+    const { disabled: htmlDisabled } = htmlProps;
+    const disabled = htmlDisabled || loading;
 
-    if (!loading && prevLoading) announce("Stopped loading");
-  }, [loading, prevLoading]);
+    return { size, variant, loading, disabled, ...restOptions };
+  },
 
-  return (
-    <ReakitButton
-      ref={ref}
-      className={baseStyles}
-      disabled={_disabled}
-      {...rest}
-    >
-      {(!prefix && !suffix) || iconOnly ? (
-        loading ? (
-          <ButtonFullWidthSpinner spinner={spinner} size={size}>
-            {iconOnly ? withIconA11y(iconOnly) : children}
-          </ButtonFullWidthSpinner>
-        ) : (
-          <>{iconOnly ? withIconA11y(iconOnly) : children}</>
-        )
-      ) : (
-        <>
-          {prefix ? (
-            loading && !suffix ? (
-              <ButtonSpinner spinner={spinner} prefix={prefix} size={size} />
-            ) : (
-              withIconA11y(prefix, { className: prefixStyles })
-            )
-          ) : null}
-          <span>{children}</span>
-          {suffix ? (
+  useProps(options, htmlProps) {
+    const {
+      size = "md",
+      variant = "solid",
+      loading = "false",
+      iconOnly,
+      prefix,
+      suffix,
+      spinner,
+      disabled,
+    } = options;
+    const {
+      className: htmlClassName,
+      children: htmlChildren,
+      ...restHtmlProps
+    } = htmlProps;
+
+    const button = useTheme("button");
+    const className = tcm(
+      button.base,
+      !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
+      button.variant.default[variant],
+      button.variant.hover[variant],
+      button.variant.active[variant],
+      button.variant.focus[variant],
+      button.variant.disabled[variant],
+      htmlClassName,
+    );
+    const suffixStyles = tcm(button.size.suffix[size]);
+    const prefixStyles = tcm(button.size.prefix[size]);
+
+    const prevLoading = usePrevious(loading);
+
+    React.useEffect(() => {
+      if (loading) announce("Started loading");
+
+      if (!loading && prevLoading) announce("Stopped loading");
+    }, [loading, prevLoading]);
+
+    const children = (props: ButtonHTMLProps) => {
+      return (
+        <button {...props}>
+          {(!prefix && !suffix) || iconOnly ? (
             loading ? (
-              <ButtonSpinner spinner={spinner} suffix={suffix} size={size} />
+              <ButtonFullWidthSpinner spinner={spinner} size={size}>
+                {iconOnly
+                  ? withIconA11y(iconOnly)
+                  : runIfFn(htmlChildren, props)}
+              </ButtonFullWidthSpinner>
             ) : (
-              withIconA11y(suffix, { className: suffixStyles })
+              // <>{"noloading"}</>
+              <>
+                {iconOnly
+                  ? withIconA11y(iconOnly)
+                  : runIfFn(htmlChildren, props)}
+              </>
             )
-          ) : null}
-        </>
-      )}
-    </ReakitButton>
-  );
+          ) : (
+            <>
+              {prefix ? (
+                loading && !suffix ? (
+                  <ButtonSpinner
+                    spinner={spinner}
+                    prefix={prefix}
+                    size={size}
+                  />
+                ) : (
+                  <>{withIconA11y(prefix, { className: prefixStyles })}</>
+                )
+              ) : null}
+              <span>{runIfFn(htmlChildren, props)}</span>
+              {suffix ? (
+                loading ? (
+                  <ButtonSpinner
+                    spinner={spinner}
+                    suffix={suffix}
+                    size={size}
+                  />
+                ) : (
+                  <>{withIconA11y(suffix, { className: suffixStyles })}</>
+                )
+              ) : null}
+            </>
+          )}
+        </button>
+      );
+    };
+
+    return { className, children, disabled, ...restHtmlProps };
+  },
 });
 
-Button.displayName = "Button";
+export const Button = createComponent({
+  as: "button",
+  memo: true,
+  useHook: useButton,
+});

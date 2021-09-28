@@ -12,6 +12,12 @@ export type RadioGroupState = RenderlesskitRadioState & {
    * @default md
    */
   size: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
+  /**
+   * Controls how the group of radios are arranged
+   *
+   * @default vertical
+   */
+  stack: "vertical" | "horizontal";
 };
 
 export type RadioGroupActions = RenderlesskitRadioActions & {};
@@ -19,16 +25,17 @@ export type RadioGroupActions = RenderlesskitRadioActions & {};
 export type RadioGroupStateReturn = RadioGroupState & RadioGroupActions;
 
 export type RadioGroupInitialState = RenderlesskitRadioInitialState &
-  Partial<Pick<RadioGroupState, "size">>;
+  Partial<Pick<RadioGroupState, "size" | "stack">>;
 
 export function useRadioGroupState(
   props: RadioGroupInitialState = {},
 ): RadioGroupStateReturn {
   const state = useRenderlesskitRadioState(props);
-  const { size = "md" } = props;
+  const { size = "md", stack = "vertical" } = props;
 
   return {
     ...state,
     size,
+    stack,
   };
 }

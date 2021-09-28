@@ -18,7 +18,7 @@ const variantPlugin = plugin(function ({ addVariant, config }) {
             if (dataBool) {
               sel.parent.insertAfter(
                 sel,
-                selectorParser.attribute({ attribute: `data-${dataName}` }),
+                selectorParser.attribute({ attribute: `${dataName}` }),
               );
             } else {
               sel.parent.insertAfter(
@@ -36,9 +36,11 @@ const variantPlugin = plugin(function ({ addVariant, config }) {
 
   generateDataClassVariant("aria-selected", false);
   generateDataClassVariant("aria-disabled", false);
-  generateDataClassVariant("is-range-selection", true);
-  generateDataClassVariant("is-selection-start", true);
-  generateDataClassVariant("is-selection-end", true);
+  generateDataClassVariant("data-is-range-selection", true);
+  generateDataClassVariant("data-is-selection-start", true);
+  generateDataClassVariant("data-is-selection-end", true);
+  generateDataClassVariant("data-enter", true);
+  generateDataClassVariant("data-leave", true);
 });
 
 module.exports = variantPlugin;

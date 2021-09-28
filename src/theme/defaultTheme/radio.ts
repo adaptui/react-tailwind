@@ -1,7 +1,7 @@
 export const radio = {
   group: {
     vertical: {
-      base: "flex flex-col",
+      base: "flex flex-col items-start",
       size: {
         sm: "space-y-3.5",
         md: "space-y-4",

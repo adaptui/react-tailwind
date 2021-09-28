@@ -3,13 +3,10 @@ import { splitProps } from "reakit-utils";
 import { createContext } from "../utils";
 
 import {
-  RADIO_GROUP_STATE_KEYS,
   RadioGroupInitialState,
   RadioGroupOwnProps,
   RadioGroupProps,
   RadioGroupStateReturn,
-  RadioOwnProps,
-  RadioProps,
   USE_RADIO_GROUP_STATE_KEYS,
   useRadioGroupState,
 } from "./index";
@@ -30,13 +27,4 @@ export const useRadioGroupStateSplit = (props: RadioGroupProps) => {
   const state = useRadioGroupState(stateProps);
 
   return [state, radioGroupProps, stateProps] as const;
-};
-
-export const useRadioStateReturnSplit = (props: RadioProps) => {
-  const [stateReturnProps, radioProps] = splitProps(
-    props,
-    RADIO_GROUP_STATE_KEYS,
-  ) as [RadioGroupStateReturn, RadioOwnProps];
-
-  return [stateReturnProps, radioProps] as const;
 };
