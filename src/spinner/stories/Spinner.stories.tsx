@@ -41,3 +41,7 @@ export const StrokeVisible: Story = {
   ...Default,
   args: { ...Default.args, size: "lg", stroke: "visible" },
 };
+
+export const Play = () => {
+  return <Spinner as="span" />;
+};

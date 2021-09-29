@@ -1,10 +1,12 @@
+import { createComponent, createHook } from "reakit-system";
 import { cx } from "@renderlesskit/react";
 
-import { Box, BoxProps } from "../box";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
 
-export type BadgeProps = BoxProps & {
+import { BADGE_KEYS } from "./__keys";
+
+export type BadgeOptions = BoxOptions & {
   /**
    * How large should the badge be?
    *
@@ -27,26 +29,44 @@ export type BadgeProps = BoxProps & {
   themeColor?: keyof Renderlesskit.GetThemeValue<"badge", "variant", "solid">;
 };
 
-export const Badge = forwardRefWithAs<BadgeProps, HTMLSpanElement, "span">(
-  (props, ref) => {
+export type BadgeHTMLProps = BoxHTMLProps;
+
+export type BadgeProps = BadgeOptions & BadgeHTMLProps;
+
+export const useBadge = createHook<BadgeOptions, BadgeHTMLProps>({
+  name: "Badge",
+  compose: useBox,
+  keys: BADGE_KEYS,
+
+  useOptions(options, htmlProps) {
     const {
       size = "md",
       variant = "solid",
       themeColor = "default",
-      className,
-      ...rest
-    } = props;
+      ...restOptions
+    } = options;
+
+    return { size, variant, themeColor, ...restOptions };
+  },
+
+  useProps(options, htmlProps) {
+    const { size = "md", variant = "solid", themeColor = "default" } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const badge = useTheme("badge");
-    const badgeStyles = cx(
+    const className = cx(
       badge.base,
       badge.size[size],
       badge.variant[variant][themeColor],
-      className,
+      htmlClassName,
     );
 
-    return <Box ref={ref} as="span" className={badgeStyles} {...rest} />;
+    return { className, ...restHtmlProps };
   },
-);
+});
 
-Badge.displayName = "Badge";
+export const Badge = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useBadge,
+});

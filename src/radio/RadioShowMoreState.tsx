@@ -104,7 +104,6 @@ export const getRadioComponentProps = <T, P>(children: T, props: P) => {
   const finalChildren: React.ReactNode[] = [];
 
   validChildren.forEach(child => {
-    // console.log("%cchild", "color: #f279ca", child);
     // @ts-ignore
     if (ComponentPropsMap[child.type.displayName]) {
       componentProps[

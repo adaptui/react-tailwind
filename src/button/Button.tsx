@@ -5,66 +5,73 @@ import {
   ButtonOptions as ReakitButtonOptions,
   useButton as useReakitButton,
 } from "reakit";
+import { cx } from "@renderlesskit/react";
 import { announce } from "@react-aria/live-announcer";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { usePrevious } from "../hooks";
+import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { runIfFn, tcm, withIconA11y } from "../utils";
+import { withIconA11y } from "../utils";
 import { RenderPropType } from "../utils/types";
 
 import { BUTTON_KEYS } from "./__keys";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
-export type ButtonOptions = ReakitButtonOptions & {
-  /**
-   * How large should the button be?
-   *
-   * @default md
-   */
-  size?: keyof Renderlesskit.GetThemeValue<"button", "size", "default">;
+export type ButtonOptions = BoxOptions &
+  ReakitButtonOptions & {
+    /**
+     * How large should the button be?
+     *
+     * @default md
+     */
+    size?: keyof Renderlesskit.GetThemeValue<"button", "size", "default">;
 
-  /**
-   * How the button should look?
-   *
-   * @default solid
-   */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
+    /**
+     * How the button should look?
+     *
+     * @default solid
+     */
+    variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
 
-  /**
-   * If added, the button will only show an icon ignoring other childrens.
-   */
-  iconOnly?: RenderPropType;
+    /**
+     * If added, the button will only show an icon ignoring other childrens.
+     */
+    iconOnly?: RenderPropType;
 
-  /**
-   * If added, the button will show an icon before the button's text.
-   */
-  suffix?: RenderPropType;
+    /**
+     * If added, the button will show an icon before the button's text.
+     */
+    suffix?: RenderPropType;
 
-  /**
-   * If added, the button will show an icon before the button's text.
-   */
-  prefix?: RenderPropType;
+    /**
+     * If added, the button will show an icon before the button's text.
+     */
+    prefix?: RenderPropType;
 
-  /**
-   * If `true`, the button will show a spinner.
-   *
-   * @default false
-   */
-  loading?: boolean;
+    /**
+     * If `true`, the button will show a spinner.
+     *
+     * @default false
+     */
+    loading?: boolean;
 
-  /**
-   * If added, the button will show this spinner components
-   */
-  spinner?: RenderPropType;
-};
+    /**
+     * If added, the button will show this spinner components
+     *
+     * @default Spinner Component
+     */
+    spinner?: RenderPropType;
+  };
 
-export type ButtonHTMLProps = Omit<ReakitButtonHTMLProps, "prefix">;
+export type ButtonHTMLProps = Omit<BoxHTMLProps, "prefix"> &
+  Omit<ReakitButtonHTMLProps, "prefix"> & {};
 
 export type ButtonProps = ButtonOptions & ButtonHTMLProps;
 
 export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
   name: "Button",
-  compose: useReakitButton,
+  compose: [useBox, useReakitButton],
   keys: BUTTON_KEYS,
 
   useOptions(options, htmlProps) {
@@ -72,25 +79,26 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       size = "md",
       variant = "solid",
       loading = false,
+      spinner = <Spinner size="em" />,
       ...restOptions
     } = options;
     const { disabled: htmlDisabled } = htmlProps;
     const disabled = htmlDisabled || loading;
 
-    return { size, variant, loading, disabled, ...restOptions };
+    return { size, variant, loading, spinner, disabled, ...restOptions };
   },
 
   useProps(options, htmlProps) {
     const {
       size = "md",
       variant = "solid",
-      loading = "false",
+      loading = false,
+      spinner = <Spinner size="em" />,
       iconOnly,
       prefix,
       suffix,
-      spinner,
-      disabled,
     } = options;
+
     const {
       className: htmlClassName,
       children: htmlChildren,
@@ -98,7 +106,7 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
     } = htmlProps;
 
     const button = useTheme("button");
-    const className = tcm(
+    const className = cx(
       button.base,
       !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
       button.variant.default[variant],
@@ -108,8 +116,8 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       button.variant.disabled[variant],
       htmlClassName,
     );
-    const suffixStyles = tcm(button.size.suffix[size]);
-    const prefixStyles = tcm(button.size.prefix[size]);
+    const suffixStyles = cx(button.size.suffix[size]);
+    const prefixStyles = cx(button.size.prefix[size]);
 
     const prevLoading = usePrevious(loading);
 
@@ -119,56 +127,39 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       if (!loading && prevLoading) announce("Stopped loading");
     }, [loading, prevLoading]);
 
-    const children = (props: ButtonHTMLProps) => {
-      return (
-        <button {...props}>
-          {(!prefix && !suffix) || iconOnly ? (
-            loading ? (
-              <ButtonFullWidthSpinner spinner={spinner} size={size}>
-                {iconOnly
-                  ? withIconA11y(iconOnly)
-                  : runIfFn(htmlChildren, props)}
-              </ButtonFullWidthSpinner>
-            ) : (
-              // <>{"noloading"}</>
-              <>
-                {iconOnly
-                  ? withIconA11y(iconOnly)
-                  : runIfFn(htmlChildren, props)}
-              </>
-            )
+    const children = (
+      <>
+        {(!prefix && !suffix) || iconOnly ? (
+          loading ? (
+            <ButtonFullWidthSpinner size={size} spinner={spinner}>
+              {iconOnly ? withIconA11y(iconOnly) : htmlChildren}
+            </ButtonFullWidthSpinner>
           ) : (
-            <>
-              {prefix ? (
-                loading && !suffix ? (
-                  <ButtonSpinner
-                    spinner={spinner}
-                    prefix={prefix}
-                    size={size}
-                  />
-                ) : (
-                  <>{withIconA11y(prefix, { className: prefixStyles })}</>
-                )
-              ) : null}
-              <span>{runIfFn(htmlChildren, props)}</span>
-              {suffix ? (
-                loading ? (
-                  <ButtonSpinner
-                    spinner={spinner}
-                    suffix={suffix}
-                    size={size}
-                  />
-                ) : (
-                  <>{withIconA11y(suffix, { className: suffixStyles })}</>
-                )
-              ) : null}
-            </>
-          )}
-        </button>
-      );
-    };
+            <>{iconOnly ? withIconA11y(iconOnly) : htmlChildren}</>
+          )
+        ) : (
+          <>
+            {prefix ? (
+              loading && !suffix ? (
+                <ButtonSpinner spinner={spinner} prefix={prefix} size={size} />
+              ) : (
+                <>{withIconA11y(prefix, { className: prefixStyles })}</>
+              )
+            ) : null}
+            <span>{htmlChildren}</span>
+            {suffix ? (
+              loading ? (
+                <ButtonSpinner size={size} spinner={spinner} suffix={suffix} />
+              ) : (
+                <>{withIconA11y(suffix, { className: suffixStyles })}</>
+              )
+            ) : null}
+          </>
+        )}
+      </>
+    );
 
-    return { className, children, disabled, ...restHtmlProps };
+    return { className, children, ...restHtmlProps };
   },
 });
 

@@ -1,5 +1,7 @@
 import { Meta } from "@storybook/react";
 
+import { Badge, ClockIcon } from "../..";
+import { Button } from "../../button";
 import { Box } from "../index";
 
 export default {
@@ -44,13 +46,17 @@ export const Styled = () => (
   </Box>
 );
 
+export const AsBadge = () => {
+  return (
+    <Box as={Badge} className="bg-green-500">
+      Badge
+    </Box>
+  );
+};
+
 export const AsButton = () => {
   return (
-    <Box
-      as="button"
-      type="button"
-      className="h-8 px-4 text-base font-bold text-white bg-red-500 rounded-md"
-    >
+    <Box as={Button} suffix={<ClockIcon />} className="bg-red-500 rounded-lg ">
       Button
     </Box>
   );

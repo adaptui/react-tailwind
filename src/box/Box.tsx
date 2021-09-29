@@ -15,6 +15,7 @@ export const useBox = createHook<BoxOptions, BoxHTMLProps>({
 
   useProps(options, htmlProps) {
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
     const className = tcm(htmlClassName);
 
     return { className, ...restHtmlProps };

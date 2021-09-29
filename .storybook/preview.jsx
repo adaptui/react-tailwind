@@ -1,6 +1,7 @@
 import "focus-visible";
 
 import "./tailwind.css";
+import theme from "../renderlesskit.config.ts";
 import { RenderlesskitProvider } from "../src/theme";
 
 export const parameters = {
@@ -18,7 +19,7 @@ export const decorators = [
     document.body.classList.add("antialiased");
 
     return (
-      <RenderlesskitProvider>
+      <RenderlesskitProvider extend={theme}>
         <Story />
       </RenderlesskitProvider>
     );

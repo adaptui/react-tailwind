@@ -8,3 +8,4 @@ export const BUTTON_KEYS = [
   "loading",
   "spinner",
 ] as const;
+export const CLOSE_BUTTON_KEYS = [] as const;
