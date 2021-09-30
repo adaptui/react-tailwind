@@ -3,9 +3,6 @@ import { Separator } from "reakit";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createUnionControl } from "../../../.storybook/utils";
-import { ShowMoreButton } from "../../show-more/ShowMoreButton";
-import { ShowMoreContent } from "../../show-more/ShowMoreContent";
-import { useShowMoreState } from "../../show-more/ShowMoreState";
 import { RadioGroupState } from "../index";
 
 import {
@@ -119,19 +116,4 @@ export const WithShowMore: Story = {
   render: args => <RadioShowMoreComponent {...args} />,
   args: { size: "md", stack: "vertical" },
   parameters: { options: { showPanel: false }, layout: "padded" },
-};
-
-export const ShowMore = () => {
-  const state = useShowMoreState({});
-  return (
-    <div>
-      <ShowMoreButton {...state}>Show More</ShowMoreButton>
-      <ShowMoreContent as="ul" className="flex flex-col space-y-4" {...state}>
-        <li>Abhisek</li>
-        <li>Navin</li>
-        <li>Fayas</li>
-        <li>Dheena</li>
-      </ShowMoreContent>
-    </div>
-  );
 };

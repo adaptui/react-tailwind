@@ -13,7 +13,6 @@ import {
 import { tcm, withIconA11y } from "../../utils";
 import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
-import { useCheckboxStateSplit } from "../helpers";
 import {
   CheckboxDescription,
   CheckboxIcon,
@@ -23,6 +22,7 @@ import {
   CheckboxState,
   CheckboxStateReturn,
   CheckboxText,
+  useCheckboxStateSplit,
 } from "../index";
 
 type Meta = ComponentMeta<typeof Checkbox>;

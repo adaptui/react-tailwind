@@ -10,10 +10,11 @@ import { useTheme } from "../theme";
 import { runIfFn } from "../utils";
 import { RenderProp } from "../utils/types";
 
-import { RadioStateContextProvider, useRadioGroupStateSplit } from "./helpers";
 import {
   RadioGroupInitialState,
   RadioGroupStateReturn,
+  RadioStateContextProvider,
+  useRadioGroupStateSplit,
 } from "./RadioGroupState";
 
 export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {};

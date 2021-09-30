@@ -6,4 +6,3 @@ export * from "./CheckboxInput";
 export * from "./CheckboxLabel";
 export * from "./CheckboxState";
 export * from "./CheckboxText";
-export * from "./helpers";

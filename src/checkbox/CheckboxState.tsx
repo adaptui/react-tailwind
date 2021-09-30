@@ -1,26 +1,87 @@
 import { splitProps } from "reakit-utils";
-
-import { CheckIcon, IndeterminateIcon } from "../icons";
 import {
-  getValidChildren,
-  runIfFn,
-  runIfFnChildren,
-  withIconA11y,
-} from "../utils";
-import { Dict } from "../utils/types";
+  CheckboxActions as RenderlesskitCheckboxActions,
+  CheckboxInitialState as RenderlesskitCheckboxInitialState,
+  CheckboxState as RenderlesskitCheckboxState,
+  useCheckboxState as useRenderlesskitCheckboxState,
+} from "@renderlesskit/react";
 
+import {
+  CheckIcon,
+  getComponentProps,
+  IndeterminateIcon,
+  runIfFn,
+  withIconA11y,
+} from "../index";
+
+import { CheckboxProps } from "./Checkbox";
+import { CheckboxInputOptions, CheckboxInputProps } from "./CheckboxInput";
 import {
   CheckboxDescriptionProps,
   CheckboxIconProps,
-  CheckboxInitialState,
-  CheckboxInputProps,
   CheckboxLabelProps,
   CheckboxOwnProps,
-  CheckboxProps,
   CheckboxTextProps,
   USE_CHECKBOX_STATE_KEYS,
-  useCheckboxState,
 } from "./index";
+
+export type CheckboxState = RenderlesskitCheckboxState & {
+  /**
+   * How large should the button be?
+   *
+   * @default md
+   */
+  size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+
+  /**
+   * If true, Checkbox is checked.
+   */
+  isChecked: boolean;
+
+  /**
+   * If true, Checkbox is indeterminate.
+   */
+  isIndeterminate: boolean;
+
+  /**
+   * If true, Checkbox is unchecked.
+   */
+  isUnchecked: boolean;
+
+  /**
+   * Input's value.
+   */
+  value: CheckboxInputOptions["value"];
+};
+
+export type CheckboxActions = RenderlesskitCheckboxActions & {};
+
+export type CheckboxStateReturn = CheckboxState & CheckboxActions;
+
+export type CheckboxInitialState = RenderlesskitCheckboxInitialState &
+  Partial<Pick<CheckboxState, "size" | "value">>;
+
+export function useCheckboxState(
+  props: CheckboxInitialState = {},
+): CheckboxStateReturn {
+  const { state, setState } = useRenderlesskitCheckboxState(props);
+  const { size = "md", value } = props;
+
+  const isChecked =
+    Array.isArray(state) && value ? state.includes(value) : state === true;
+  const isIndeterminate = state === "indeterminate";
+  const isUnchecked = !isChecked && !isIndeterminate;
+
+  return {
+    state,
+    setState,
+    size,
+    value,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+  };
+}
 
 export const useCheckboxStateSplit = (props: CheckboxProps) => {
   const [stateProps, checkboxProps] = splitProps(
@@ -32,26 +93,12 @@ export const useCheckboxStateSplit = (props: CheckboxProps) => {
   return [state, checkboxProps, stateProps] as const;
 };
 
-const ComponentPropsMap = {
+const componentMap = {
   CheckboxLabel: "labelProps",
   CheckboxInput: "inputProps",
   CheckboxIcon: "iconProps",
   CheckboxText: "textProps",
   CheckboxDescription: "descriptionProps",
-};
-
-export const getCheckboxComponentProps = (children: React.ReactNode) => {
-  const validChildren = getValidChildren(children);
-  const props: Dict = {};
-
-  validChildren.forEach(child => {
-    props[
-      // @ts-ignore
-      ComponentPropsMap[child.type.displayName]
-    ] = child.props;
-  });
-
-  return props;
 };
 
 export const CheckboxDefaultIcon: CheckboxOwnProps["icon"] = state => {
@@ -80,9 +127,7 @@ export const useCheckboxProps = (
     ...restProps
   } = checkboxProps;
 
-  const componentProps = getCheckboxComponentProps(
-    runIfFnChildren(children, state),
-  );
+  const { componentProps } = getComponentProps(componentMap, children, state);
 
   const labelProps: CheckboxLabelProps = {
     ...state,

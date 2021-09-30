@@ -1,23 +1,25 @@
-import { createComponent, createHook } from "reakit-system";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+import { createComponent } from "reakit-system";
+
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
 import { SHOW_MORE_CONTENT_KEYS } from "./__keys";
+import { createComposableHook } from "./createComposableHook";
 import { ShowMoreStateReturn } from "./ShowMoreState";
 
-export type ShowMoreContentOptions = RoleOptions &
+export type ShowMoreContentOptions = BoxOptions &
   Pick<ShowMoreStateReturn, "getCollapseProps">;
 
-export type ShowMoreContentHTMLProps = RoleHTMLProps;
+export type ShowMoreContentHTMLProps = BoxHTMLProps;
 
 export type ShowMoreContentProps = ShowMoreContentOptions &
   ShowMoreContentHTMLProps;
 
-export const useShowMoreContent = createHook<
+export const showMoreComposableContent = createComposableHook<
   ShowMoreContentOptions,
   ShowMoreContentHTMLProps
 >({
   name: "ShowMoreContent",
-  compose: useRole,
+  compose: useBox,
   keys: SHOW_MORE_CONTENT_KEYS,
 
   useOptions(options, htmlProps) {
@@ -31,6 +33,8 @@ export const useShowMoreContent = createHook<
     return getCollapseProps(htmlProps);
   },
 });
+
+export const useShowMoreContent = showMoreComposableContent();
 
 export const ShowMoreContent = createComponent({
   as: "div",

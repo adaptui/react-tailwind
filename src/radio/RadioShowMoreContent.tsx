@@ -1,17 +1,17 @@
 import { createComponent, createHook } from "reakit-system";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { cx } from "@chakra-ui/utils";
 
+import {
+  ShowMoreContentHTMLProps,
+  ShowMoreContentOptions,
+  useShowMoreContent,
+} from "../show-more/ShowMore";
+
 import { RADIO_SHOW_MORE_CONTENT_KEYS } from "./__keys";
-import { RadioShowMoreStateReturn } from "./RadioShowMoreState";
 
-export type RadioShowMoreContentOptions = BoxOptions &
-  Pick<
-    RadioShowMoreStateReturn,
-    "setIsVisibleAnimateStart" | "getCollapseProps"
-  >;
+export type RadioShowMoreContentOptions = ShowMoreContentOptions;
 
-export type RadioShowMoreContentHTMLProps = BoxHTMLProps;
+export type RadioShowMoreContentHTMLProps = ShowMoreContentHTMLProps;
 
 export type RadioShowMoreContentProps = RadioShowMoreContentOptions &
   RadioShowMoreContentHTMLProps;
@@ -21,7 +21,7 @@ export const useRadioShowMoreContent = createHook<
   RadioShowMoreContentHTMLProps
 >({
   name: "RadioShowMoreContent",
-  compose: useBox,
+  compose: useShowMoreContent,
   keys: RADIO_SHOW_MORE_CONTENT_KEYS,
 
   useOptions(options, htmlProps) {
@@ -29,14 +29,12 @@ export const useRadioShowMoreContent = createHook<
   },
 
   useProps(options, htmlProps) {
-    const { getCollapseProps } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     // const theme = useTheme("radio");
     const className = cx("!flex flex-col space-y-4", htmlClassName);
 
-    // @ts-ignore
-    return getCollapseProps({ className, ...restHtmlProps });
+    return { className, ...restHtmlProps };
   },
 });
 

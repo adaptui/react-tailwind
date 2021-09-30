@@ -1,32 +1,35 @@
 import * as React from "react";
 
+import { useShowMoreProps } from "../show-more/ShowMore";
+import {
+  ShowMoreInitialState,
+  ShowMoreStateReturn,
+} from "../show-more/ShowMoreState";
 import { RenderProp, RenderPropType } from "../utils/types";
 
-import { RadioGroupInitialState } from "./RadioGroupState";
+import {
+  RadioGroupInitialState,
+  useRadioStateContext,
+} from "./RadioGroupState";
 import { RadioShowMoreButton } from "./RadioShowMoreButton";
 import { RadioShowMoreContent } from "./RadioShowMoreContent";
-import {
-  RadioShowMoreInitialState,
-  RadioShowMoreStateReturn,
-  useRadioShowMoreProps,
-} from "./RadioShowMoreState";
 
-export type RadioShowMoreOwnProps = RenderProp<RadioShowMoreStateReturn> &
+export type RadioShowMoreOwnProps = RenderProp<ShowMoreStateReturn> &
   Pick<RadioGroupInitialState, "size"> & {
     /**
      * User defined Button element.
      *
      * @default "Show more"
      */
-    button?: RenderPropType<RadioShowMoreStateReturn>;
+    button?: RenderPropType<ShowMoreStateReturn>;
   };
 
-export type RadioShowMoreProps = RadioShowMoreInitialState &
-  RadioShowMoreOwnProps;
+export type RadioShowMoreProps = ShowMoreInitialState & RadioShowMoreOwnProps;
 
 export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
-  const { buttonProps, contentProps, size } = useRadioShowMoreProps(props);
-  console.log("%cbuttonProps", "color: #eeff00", buttonProps);
+  const { buttonProps, contentProps } = useShowMoreProps(props);
+  const contextState = useRadioStateContext();
+  const size = contextState?.size || "md";
 
   return (
     <>

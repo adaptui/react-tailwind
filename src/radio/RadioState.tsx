@@ -1,8 +1,7 @@
 import { splitProps } from "reakit-utils";
 
-import { CircleIcon } from "../icons/Circle";
-import { getValidChildren, runIfFn, runIfFnChildren } from "../utils";
-import { Dict } from "../utils/types";
+import { CircleIcon } from "../icons";
+import { getComponentProps, runIfFn } from "../utils";
 
 import {
   RADIO_GROUP_STATE_KEYS,
@@ -30,7 +29,25 @@ export const RadioDefaultIcon: RadioOwnProps["icon"] = state => {
   return <>{isChecked ? <CircleIcon /> : null}</>;
 };
 
-const ComponentPropsMap = {
+export const useRadioState = (props: RadioProps) => {
+  const [stateReturnProps, radioProps] = splitProps(
+    props,
+    RADIO_GROUP_STATE_KEYS,
+  ) as [RadioGroupStateReturn, RadioOwnProps];
+  const contextState = useRadioStateContext();
+
+  let radioGroupState = stateReturnProps;
+  if (contextState != null) {
+    radioGroupState = contextState;
+  }
+
+  const isChecked = radioGroupState.state === radioProps.value;
+  const state: RadioStateReturn = { ...radioGroupState, isChecked };
+
+  return [state, radioProps, stateReturnProps] as const;
+};
+
+const componentMap = {
   RadioLabel: "labelProps",
   RadioInput: "inputProps",
   RadioIcon: "iconProps",
@@ -38,40 +55,8 @@ const ComponentPropsMap = {
   RadioDescription: "descriptionProps",
 };
 
-export const getRadioComponentProps = (children: React.ReactNode) => {
-  const validChildren = getValidChildren(children);
-  const props: Dict = {};
-
-  validChildren.forEach(child => {
-    props[
-      // @ts-ignore
-      ComponentPropsMap[child.type.displayName]
-    ] = child.props;
-  });
-
-  return props;
-};
-
-export const useRadioStateReturnSplit = (props: RadioProps) => {
-  const [stateReturnProps, radioProps] = splitProps(
-    props,
-    RADIO_GROUP_STATE_KEYS,
-  ) as [RadioGroupStateReturn, RadioOwnProps];
-
-  return [stateReturnProps, radioProps] as const;
-};
-
 export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
-  const contextState = useRadioStateContext();
-  const [propsState, radioProps] = useRadioStateReturnSplit(props);
-
-  let initialState = propsState;
-  if (contextState != null) {
-    initialState = contextState;
-  }
-
-  const isChecked = initialState.state === radioProps.value;
-  const state: RadioStateReturn = { ...initialState, isChecked };
+  const [state, radioProps] = useRadioState(props);
 
   const {
     icon = RadioDefaultIcon,
@@ -83,15 +68,13 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     ...restProps
   } = radioProps;
 
-  const componentProps = getRadioComponentProps(
-    runIfFnChildren(children, state),
-  );
+  const { componentProps } = getComponentProps(componentMap, children, state);
 
   const labelProps: RadioLabelProps = {
     ...state,
     className,
     style,
-    ...componentProps.labelProps,
+    ...componentProps?.labelProps,
   };
 
   const inputProps: RadioInputProps = {

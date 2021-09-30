@@ -1,9 +1,14 @@
 import React from "react";
-import { createComponent, createHook } from "reakit-system";
-import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
+import { createComponent } from "reakit-system";
+import {
+  ButtonHTMLProps,
+  ButtonOptions,
+  useButton as useReakitButton,
+} from "reakit";
 import { useLiveRef } from "reakit-utils";
 
 import { SHOW_MORE_BUTTON_KEYS } from "./__keys";
+import { createComposableHook } from "./createComposableHook";
 import { ShowMoreStateReturn } from "./ShowMoreState";
 
 export type ShowMoreButtonOptions = ButtonOptions &
@@ -14,12 +19,12 @@ export type ShowMoreButtonHTMLProps = ButtonHTMLProps;
 export type ShowMoreButtonProps = ShowMoreButtonOptions &
   ShowMoreButtonHTMLProps;
 
-export const useShowMoreButton = createHook<
+export const showMoreComposableButton = createComposableHook<
   ShowMoreButtonOptions,
   ShowMoreButtonHTMLProps
 >({
   name: "ShowMoreButton",
-  compose: useButton,
+  compose: useReakitButton,
   keys: SHOW_MORE_BUTTON_KEYS,
 
   useOptions(options, htmlProps) {
@@ -46,42 +51,7 @@ export const useShowMoreButton = createHook<
   },
 });
 
-// type Hook<O> = {
-//   (options?: O, props?: RoleHTMLProps): RoleHTMLProps;
-//   unstable_propsAreEqual?: (prev: O, next: O) => boolean;
-//   __keys?: ReadonlyArray<any>;
-// };
-
-// export const overrideHook = <T extends As, O>(useHook: Hook<O>) => {
-//   return createHook<ShowMoreButtonOptions, ShowMoreButtonHTMLProps>({
-//     name: "ShowMoreButton",
-//     compose: useHook,
-//     keys: SHOW_MORE_BUTTON_KEYS,
-
-//     useOptions(options, htmlProps) {
-//       return options;
-//     },
-
-//     useProps(options, htmlProps) {
-//       const { setExpanded, getToggleProps } = options;
-//       const { onClick: htmlOnClick, ...restHtmlProps } = htmlProps;
-
-//       const onClickRef = useLiveRef(htmlOnClick);
-
-//       const onClick = React.useCallback(
-//         (event: React.MouseEvent) => {
-//           onClickRef.current?.(event);
-//           if (event.defaultPrevented) return;
-
-//           setExpanded((previousIsExpanded: any) => !previousIsExpanded);
-//         },
-//         [onClickRef, setExpanded],
-//       );
-
-//       return getToggleProps({ onClick, ...restHtmlProps });
-//     },
-//   });
-// };
+export const useShowMoreButton = showMoreComposableButton();
 
 export const ShowMoreButton = createComponent({
   as: "button",
