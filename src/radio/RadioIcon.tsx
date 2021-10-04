@@ -6,10 +6,13 @@ import { useTheme } from "../theme";
 import { tcm } from "../utils";
 
 import { RADIO_ICON_KEYS } from "./__keys";
+import { RadioProps } from "./Radio";
 import { RadioStateReturn } from "./RadioState";
 
 export type RadioIconOptions = BoxOptions &
-  Pick<RadioStateReturn, "size" | "isChecked">;
+  Pick<RadioStateReturn, "size" | "isChecked"> & {
+    description?: RadioProps["description"];
+  };
 
 export type RadioIconHTMLProps = BoxHTMLProps;
 
@@ -21,12 +24,13 @@ export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
   keys: RADIO_ICON_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, isChecked } = options;
+    const { size, isChecked, description } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("radio");
     const className = cx(
       theme.icon.base,
+      description ? theme.icon.description : "",
       theme.icon.size[size],
       isChecked
         ? tcm(

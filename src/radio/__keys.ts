@@ -17,6 +17,7 @@ export const RADIO_GROUP_STATE_KEYS = [
   "state",
   "size",
   "stack",
+  "maxVisibleItems",
   "setBaseId",
   "registerItem",
   "unregisterItem",
@@ -57,15 +58,22 @@ export const USE_RADIO_GROUP_STATE_KEYS = [
   "onStateChange",
   "size",
   "stack",
+  "maxVisibleItems",
 ] as const;
 export const RADIO_STATE_KEYS = [
   ...RADIO_GROUP_STATE_KEYS,
   "isChecked",
 ] as const;
 export const RADIO_DESCRIPTION_KEYS = RADIO_STATE_KEYS;
-export const RADIO_ICON_KEYS = RADIO_DESCRIPTION_KEYS;
-export const RADIO_INPUT_KEYS = RADIO_ICON_KEYS;
-export const RADIO_LABEL_KEYS = RADIO_INPUT_KEYS;
-export const RADIO_SHOW_MORE_BUTTON_KEYS = RADIO_LABEL_KEYS;
-export const RADIO_SHOW_MORE_CONTENT_KEYS = RADIO_SHOW_MORE_BUTTON_KEYS;
-export const RADIO_TEXT_KEYS = RADIO_SHOW_MORE_CONTENT_KEYS;
+export const RADIO_ICON_KEYS = [
+  ...RADIO_DESCRIPTION_KEYS,
+  "description",
+] as const;
+export const RADIO_INPUT_KEYS = RADIO_DESCRIPTION_KEYS;
+export const RADIO_LABEL_KEYS = [
+  ...RADIO_ICON_KEYS,
+  ...RADIO_INPUT_KEYS,
+  "disabled",
+] as const;
+export const RADIO_TEXT_KEYS = RADIO_INPUT_KEYS;
+export const RENDERLESSKIT_RADIO_GROUP_KEYS = RADIO_TEXT_KEYS;

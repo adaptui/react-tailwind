@@ -40,13 +40,8 @@ export const ShowMore: React.FC<ShowMoreProps> = props => {
 
 ShowMore.displayName = "ShowMore";
 
-const componentMap = {
-  ShowMoreContent: "contentProps",
-  ShowMoreButton: "buttonProps",
-};
-
 export type ShowMoreButtonOptions = ButtonOptions &
-  Pick<ShowMoreStateReturn, "setExpanded" | "getToggleProps">;
+  Pick<ShowMoreStateReturn, "baseId" | "toggle">;
 
 export type ShowMoreButtonHTMLProps = ButtonHTMLProps;
 
@@ -63,9 +58,22 @@ export const ShowMoreButton = createComponent({
   memo: true,
   useHook: useShowMoreButton,
 });
+ShowMoreButton.displayName = "ShowMoreButton";
 
 export type ShowMoreContentOptions = BoxOptions &
-  Pick<ShowMoreStateReturn, "getCollapseProps">;
+  Pick<
+    ShowMoreStateReturn,
+    | "baseId"
+    | "visible"
+    | "contentSize"
+    | "duration"
+    | "direction"
+    | "easing"
+    | "onCollapseEnd"
+    | "onCollapseStart"
+    | "onExpandEnd"
+    | "onExpandStart"
+  >;
 
 export type ShowMoreContentHTMLProps = BoxHTMLProps;
 
@@ -82,6 +90,12 @@ export const ShowMoreContent = createComponent({
   memo: true,
   useHook: useShowMoreContent,
 });
+ShowMoreContent.displayName = "ShowMoreContent";
+
+const componentMap = {
+  ShowMoreContent: "contentProps",
+  ShowMoreButton: "buttonProps",
+};
 
 export const useShowMoreSplit = (props: ShowMoreProps) => {
   const [stateProps, showMorerops] = splitProps(

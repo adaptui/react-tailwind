@@ -12,7 +12,7 @@ import { createComposableHook } from "./createComposableHook";
 import { ShowMoreStateReturn } from "./ShowMoreState";
 
 export type ShowMoreButtonOptions = ButtonOptions &
-  Pick<ShowMoreStateReturn, "setExpanded" | "getToggleProps">;
+  Pick<ShowMoreStateReturn, "baseId" | "toggle">;
 
 export type ShowMoreButtonHTMLProps = ButtonHTMLProps;
 
@@ -32,8 +32,15 @@ export const showMoreComposableButton = createComposableHook<
   },
 
   useProps(options, htmlProps) {
-    const { setExpanded, getToggleProps } = options;
-    const { onClick: htmlOnClick, ...restHtmlProps } = htmlProps;
+    const { toggle } = options;
+    const {
+      onClick: htmlOnClick,
+      "aria-controls": ariaControls,
+      ...restHtmlProps
+    } = htmlProps;
+    const controls = ariaControls
+      ? `${ariaControls} ${options.baseId}`
+      : options.baseId;
 
     const onClickRef = useLiveRef(htmlOnClick);
 
@@ -42,12 +49,12 @@ export const showMoreComposableButton = createComposableHook<
         onClickRef.current?.(event);
         if (event.defaultPrevented) return;
 
-        setExpanded((previousIsExpanded: any) => !previousIsExpanded);
+        toggle?.();
       },
-      [onClickRef, setExpanded],
+      [onClickRef, toggle],
     );
 
-    return getToggleProps({ onClick, ...restHtmlProps });
+    return { "aria-controls": controls, onClick, ...restHtmlProps };
   },
 });
 

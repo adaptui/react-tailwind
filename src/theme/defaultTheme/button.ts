@@ -34,17 +34,17 @@ export const button = {
   },
   size: {
     default: {
-      sm: "h-[26px] px-2 rounded-lg text-cxs font-medium w-auto min-w-[26px] pb-px",
-      md: "h-[30px] px-2.5 rounded-lg text-sm font-medium w-auto min-w-[30px]",
-      lg: "h-9 px-3 rounded-[10px] text-sm font-medium w-auto min-w-9",
-      xl: "h-11 px-4 rounded-xl text-base font-medium w-auto min-w-11",
+      sm: "min-h-[26px] px-2 rounded-lg text-cxs font-medium w-auto min-w-[26px] pb-px",
+      md: "min-h-[30px] px-2.5 rounded-lg text-sm font-medium w-auto min-w-[30px]",
+      lg: "min-h-9 px-3 rounded-[10px] text-sm font-medium w-auto min-w-9",
+      xl: "min-h-11 px-4 rounded-xl text-base font-medium w-auto min-w-11",
     },
     iconOnly: {
       base: {
-        sm: "h-[26px] rounded-lg w-[26px]",
-        md: "h-[30px] rounded-lg w-[30px]",
-        lg: "h-9 rounded-[10px] w-9",
-        xl: "h-11 rounded-xl w-11",
+        sm: "min-h-[26px] rounded-lg w-[26px]",
+        md: "min-h-[30px] rounded-lg w-[30px]",
+        lg: "min-h-9 rounded-[10px] w-9",
+        xl: "min-h-11 rounded-xl w-11",
       },
       text: {
         sm: "text-base",

@@ -3,9 +3,9 @@ export const radio = {
     vertical: {
       base: "flex flex-col items-start",
       size: {
-        sm: "space-y-3.5",
-        md: "space-y-4",
-        lg: "space-y-[18px]",
+        sm: "space-y-1",
+        md: "space-y-2",
+        lg: "space-y-3",
       },
     },
     horizontal: {
@@ -17,10 +17,21 @@ export const radio = {
       },
     },
   },
-  label: "relative inline-flex items-center cursor-pointer align-top",
+  label: {
+    base: "relative inline-flex items-center cursor-pointer align-top",
+    only: "hover:bg-gray-100",
+    disabled: "cursor-not-allowed",
+    showMore: "flex w-full",
+    size: {
+      sm: "min-h-[26px] px-2 pb-px rounded-lg",
+      md: "min-h-[30px] px-2.5 rounded-lg",
+      lg: "min-h-11 px-4 rounded-xl",
+    },
+  },
   input: "peer sr-only",
   icon: {
-    base: "inline-flex items-center justify-center self-start flex-shrink-0 align-top select-none transition-all",
+    base: "inline-flex items-center justify-center flex-shrink-0 align-top select-none transition-all",
+    description: "self-start",
     size: {
       sm: "w-3.5 h-3.5 border-[1.5px] text-[6px] rounded-full",
       md: "w-4 h-4 border-[1.5px] text-[6px] rounded-full",

@@ -69,11 +69,15 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
   } = radioProps;
 
   const { componentProps } = getComponentProps(componentMap, children, state);
+  const _description: RadioOwnProps["description"] =
+    componentProps?.descriptionProps?.children || description;
 
   const labelProps: RadioLabelProps = {
     ...state,
     className,
     style,
+    description: _description,
+    disabled: restProps.disabled,
     ...componentProps?.labelProps,
   };
 
@@ -88,6 +92,7 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
   const iconProps: RadioIconProps = {
     ...state,
     ...componentProps.iconProps,
+    description: _description,
     children: runIfFn(_icon, state),
   };
 
@@ -99,8 +104,6 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     children: runIfFn(_label, state),
   };
 
-  const _description: RadioOwnProps["description"] =
-    componentProps?.descriptionProps?.children || description;
   const descriptionProps: RadioDescriptionProps = {
     ...state,
     ...componentProps.descriptionProps,

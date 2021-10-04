@@ -3,6 +3,9 @@ import { Separator } from "reakit";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createUnionControl } from "../../../.storybook/utils";
+import { ShowMoreButton } from "../../show-more/ShowMoreButton";
+import { ShowMoreContent } from "../../show-more/ShowMoreContent";
+import { useShowMoreState } from "../../show-more/ShowMoreState";
 import { RadioGroupState } from "../index";
 
 import {
@@ -11,6 +14,7 @@ import {
   RadioDescriptionComponent,
   RadioDisabledComponent,
   RadioShowMoreComponent,
+  RadioShowMoreHorizontalComponent,
 } from "./RadioComponent";
 
 type Meta = ComponentMeta<typeof RadioComponent>;
@@ -112,8 +116,31 @@ export const Controlled = () => {
 };
 Controlled.parameters = { options: { showPanel: false } };
 
-export const WithShowMore: Story = {
+export const WithShowMoreVertical: Story = {
   render: args => <RadioShowMoreComponent {...args} />,
   args: { size: "md", stack: "vertical" },
   parameters: { options: { showPanel: false }, layout: "padded" },
+};
+
+export const WithShowMoreHorizontal: Story = {
+  render: args => <RadioShowMoreHorizontalComponent {...args} />,
+  args: { size: "md", stack: "horizontal" },
+  parameters: { options: { showPanel: false }, layout: "centered" },
+};
+
+export const ShowMore = () => {
+  const state = useShowMoreState({ direction: "horizontal" });
+
+  return (
+    <div className="flex">
+      <ShowMoreContent as="ul" {...state} className="flex space-x-2">
+        <li>Navin</li>
+        <li>Fayas</li>
+        <li>Dheena</li>
+        <li>Abhisek</li>
+        <li>Mohan</li>
+      </ShowMoreContent>
+      <ShowMoreButton {...state}>ShowMore</ShowMoreButton>
+    </div>
+  );
 };
