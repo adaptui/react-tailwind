@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@react-aria/live-announcer": "^3.0.1",
-    "@renderlesskit/react": "^0.6.2",
+    "@renderlesskit/react": "^0.7.0",
     "lodash": "^4.17.21",
     "reakit": "^1.3.10",
     "reakit-system": "^0.15.2",
