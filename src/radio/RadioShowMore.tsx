@@ -6,8 +6,8 @@ import {
   ShowMore,
   ShowMoreButton,
   ShowMoreContent,
+  ShowMoreProps,
 } from "../show-more/ShowMore";
-import { ShowMoreInitialState } from "../show-more/ShowMoreState";
 import { useTheme } from "../theme";
 import { Dict } from "../utils/types";
 
@@ -15,10 +15,10 @@ import { useRadioStateContext } from "./RadioGroupState";
 
 export type RadioShowMoreOwnProps = { componentProps?: Dict<any> };
 
-export type RadioShowMoreProps = ShowMoreInitialState & RadioShowMoreOwnProps;
+export type RadioShowMoreProps = ShowMoreProps & RadioShowMoreOwnProps;
 
 export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
-  const { children, componentProps } = props;
+  const { children, componentProps, direction, ...restProps } = props;
   const contextState = useRadioStateContext();
   const size = contextState?.size || "md";
   const sizeMap = {
@@ -39,9 +39,10 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
 
   return (
     <ShowMore
-      direction={contextState.stack}
+      direction={contextState.stack || direction}
       onExpandStart={() => setHasExpandStarted(true)}
       onCollapseStart={() => setHasExpandStarted(false)}
+      {...restProps}
     >
       {children}
       <ShowMoreContent
