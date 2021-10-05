@@ -1,18 +1,19 @@
 import * as React from "react";
-import {
-  Radio,
-  RadioGroup as RenderlesskitRadioGroup,
-  RadioGroupHTMLProps as RenderlesskitRadioGroupHTMLProps,
-} from "@renderlesskit/react";
 
-import { runIfFn } from "../utils";
+import { getComponentProps } from "../utils";
 import { RenderProp } from "../utils/types";
 
-import { RadioStateContextProvider, useRadioStateSplit } from "./helpers";
 import {
   RadioGroupInitialState,
   RadioGroupStateReturn,
+  RadioStateContextProvider,
+  useRadioGroupStateSplit,
 } from "./RadioGroupState";
+import { RadioShowMore } from "./RadioShowMore";
+import {
+  RenderlesskitRadioGroup,
+  RenderlesskitRadioGroupHTMLProps,
+} from "./RenderlesskitRadioGroup";
 
 export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {};
 
@@ -20,19 +21,44 @@ export type RadioGroupProps = RadioGroupInitialState &
   RadioGroupOwnProps &
   RenderProp<RadioGroupStateReturn>;
 
+const componentMap = {
+  ShowMoreContent: "contentProps",
+  ShowMoreButton: "buttonProps",
+};
+
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (props, ref) => {
-    const [state, radioGroupProps] = useRadioStateSplit(props);
-    const { children, ...rest } = radioGroupProps;
+    const [state, radioGroupProps] = useRadioGroupStateSplit(props);
+    const { children, ...restProps } = radioGroupProps;
+    const { componentProps, finalChildren } = getComponentProps(
+      componentMap,
+      children,
+      state,
+    );
+    const visibleChildren =
+      state.maxVisibleItems == null
+        ? finalChildren
+        : finalChildren.slice(0, state.maxVisibleItems);
+    const moreChildren =
+      state.maxVisibleItems == null ||
+      finalChildren.length <= state.maxVisibleItems
+        ? null
+        : finalChildren.slice(state.maxVisibleItems);
 
     return (
-      <RenderlesskitRadioGroup ref={ref} {...state} {...rest}>
+      <RenderlesskitRadioGroup ref={ref} {...state} {...restProps}>
         <RadioStateContextProvider value={state}>
-          {runIfFn(children, state)}
+          {visibleChildren}
+          {moreChildren ? (
+            <RadioShowMore
+              children={moreChildren}
+              componentProps={componentProps}
+            />
+          ) : null}
         </RadioStateContextProvider>
       </RenderlesskitRadioGroup>
     );
   },
 );
 
-Radio.displayName = "Radio";
+RadioGroup.displayName = "RadioGroup";

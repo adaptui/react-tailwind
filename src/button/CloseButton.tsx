@@ -1,25 +1,37 @@
+import { createComponent, createHook } from "reakit-system";
+
 import { CloseIcon } from "../icons";
-import { forwardRefWithAs } from "../utils/types";
 
-import { Button, ButtonProps } from "./Button";
+import { CLOSE_BUTTON_KEYS } from "./__keys";
+import { ButtonHTMLProps, ButtonOptions, useButton } from "./Button";
 
-export type CloseButtonProps = ButtonProps & {};
+export type CloseButtonOptions = ButtonOptions;
 
-export const CloseButton = forwardRefWithAs<
-  CloseButtonProps,
-  HTMLButtonElement,
-  "button"
->((props, ref) => {
-  const { children, ...rest } = props;
+export type CloseButtonHTMLProps = ButtonHTMLProps;
 
-  return (
-    <Button
-      ref={ref}
-      aria-label="Close"
-      iconOnly={children || <CloseIcon />}
-      {...rest}
-    />
-  );
+export type CloseButtonProps = CloseButtonOptions & CloseButtonHTMLProps;
+
+export const useCloseButton = createHook<
+  CloseButtonOptions,
+  CloseButtonHTMLProps
+>({
+  name: "CloseButton",
+  compose: useButton,
+  keys: CLOSE_BUTTON_KEYS,
+
+  useOptions(options, htmlProps) {
+    const { children } = htmlProps;
+    const { iconOnly = children || <CloseIcon />, ...restOptions } = options;
+    return { iconOnly, ...restOptions };
+  },
+
+  useProps(options, htmlProps) {
+    return { "aria-label": "close", ...htmlProps };
+  },
 });
 
-CloseButton.displayName = "CloseButton";
+export const CloseButton = createComponent({
+  as: "button",
+  memo: true,
+  useHook: useCloseButton,
+});

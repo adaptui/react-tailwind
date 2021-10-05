@@ -1,14 +1,10 @@
 import * as React from "react";
 
-import { Radio, RadioGroup, RadioGroupProps, RadioGroupState } from "../index";
+import { Radio, RadioGroup, RadioGroupProps } from "../index";
 
 export const RadioComponent: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup
-      aria-label="fruits"
-      className="flex flex-col w-40 space-y-4"
-      {...props}
-    >
+    <RadioGroup aria-label="fruits" {...props}>
       <Radio value="apple" label="Apple" />
       <Radio value="orange" label="Orange" />
       <Radio value="watermelon" label="Watermelon" />
@@ -18,11 +14,7 @@ export const RadioComponent: React.FC<RadioGroupProps> = props => {
 
 export const RadioDescriptionComponent: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup
-      aria-label="fruits"
-      className="flex flex-col space-y-4 w-96"
-      {...props}
-    >
+    <RadioGroup aria-label="fruits" className="w-[70rem]" {...props}>
       <Radio
         value="apple"
         label="Apple"
@@ -44,11 +36,7 @@ export const RadioDescriptionComponent: React.FC<RadioGroupProps> = props => {
 
 export const RadioDisabledComponent: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup
-      aria-label="fruits"
-      className="flex flex-col space-y-4 w-96"
-      {...props}
-    >
+    <RadioGroup aria-label="fruits" className="w-[70rem]" {...props}>
       <Radio
         value="apple"
         label="Apple"
@@ -70,15 +58,11 @@ export const RadioDisabledComponent: React.FC<RadioGroupProps> = props => {
 };
 
 export const RadioControlledComponent: React.FC<RadioGroupProps> = props => {
-  const [state, onStateChange] =
-    React.useState<RadioGroupState["state"]>("apple");
-
   return (
     <RadioGroup
       aria-label="fruits"
-      className="flex flex-col space-y-4 w-96"
-      state={state}
-      onStateChange={stat => console.log(stat)}
+      className="w-96"
+      defaultState={"apple"}
       {...props}
     >
       <Radio
@@ -99,3 +83,55 @@ export const RadioControlledComponent: React.FC<RadioGroupProps> = props => {
     </RadioGroup>
   );
 };
+
+export const RadioShowMoreComponent: React.FC<RadioGroupProps> = props => {
+  return (
+    <div className="overflow-y-scroll h-80">
+      <RadioGroup aria-label="fruits" maxVisibleItems={7} {...props}>
+        <Radio value="apple" label="Apple" />
+        <Radio value="orange" label="Orange" />
+        <Radio value="watermelon" label="Watermelon" />
+        <Radio value="grapes" label="Grapes" />
+        <Radio value="banana" label="Banana" />
+        <Radio value="blueberry" label="Blueberry" />
+        <Radio value="sapota" label="Sapota" />
+        <Radio value="papaya" label="Papaya" />
+        <Radio value="avocado" label="Avocado" />
+        <Radio value="strawberry" label="Strawberry" />
+        <Radio value="cherry" label="Cherry" />
+        <Radio value="fig" label="Fig" />
+        <Radio value="guava" label="Guava" />
+        <Radio value="mango" label="Mango" />
+      </RadioGroup>
+    </div>
+  );
+};
+
+export const RadioShowMoreHorizontalComponent: React.FC<RadioGroupProps> =
+  props => {
+    return (
+      <div className="overflow-x-scroll w-96">
+        <RadioGroup
+          aria-label="fruits"
+          maxVisibleItems={2}
+          stack="horizontal"
+          {...props}
+        >
+          <Radio value="apple" label="Apple" />
+          <Radio value="orange" label="Orange" />
+          <Radio value="watermelon" label="Watermelon" />
+          <Radio value="grapes" label="Grapes" />
+          <Radio value="banana" label="Banana" />
+          <Radio value="blueberry" label="Blueberry" />
+          <Radio value="sapota" label="Sapota" />
+          <Radio value="papaya" label="Papaya" />
+          <Radio value="avocado" label="Avocado" />
+          <Radio value="strawberry" label="Strawberry" />
+          <Radio value="cherry" label="Cherry" />
+          <Radio value="fig" label="Fig" />
+          <Radio value="guava" label="Guava" />
+          <Radio value="mango" label="Mango" />
+        </RadioGroup>
+      </div>
+    );
+  };

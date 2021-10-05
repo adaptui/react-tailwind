@@ -1,8 +1,47 @@
 export const radio = {
-  label: "relative inline-flex items-center cursor-pointer align-top",
+  group: {
+    vertical: {
+      base: "flex flex-col items-start",
+      size: {
+        sm: "space-y-1",
+        md: "space-y-2",
+        lg: "space-y-3",
+      },
+    },
+    horizontal: {
+      base: "flex flex-row w-fit",
+      size: {
+        sm: "space-x-4",
+        md: "space-x-4",
+        lg: "space-x-4",
+      },
+    },
+    showMore: {
+      button: {
+        base: { vertical: "justify-start w-full", horizontal: "min-w-max" },
+        expanded: { vertical: "!mt-0", horizontal: "!ml-0" },
+      },
+      content: {
+        vertical: "flex flex-col space-y-2 w-full",
+        horizontal: "flex flex-row space-x-2",
+      },
+    },
+  },
+  label: {
+    base: "relative inline-flex items-center cursor-pointer align-top",
+    only: "hover:bg-gray-100",
+    disabled: "cursor-not-allowed",
+    size: {
+      sm: "min-h-[26px] px-2 pb-px rounded-lg",
+      md: "min-h-[30px] px-2.5 rounded-lg",
+      lg: "min-h-11 px-4 rounded-xl",
+    },
+    showMore: { vertical: "flex w-full", horizontal: "flex" },
+  },
   input: "peer sr-only",
   icon: {
-    base: "inline-flex items-center justify-center self-start flex-shrink-0 align-top select-none transition-all",
+    base: "inline-flex items-center justify-center flex-shrink-0 align-top select-none transition-all",
+    description: "self-start",
     size: {
       sm: "w-3.5 h-3.5 border-[1.5px] text-[6px] rounded-full",
       md: "w-4 h-4 border-[1.5px] text-[6px] rounded-full",
