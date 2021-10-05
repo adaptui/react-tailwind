@@ -25,7 +25,7 @@ export type ShowMoreOwnProps = RenderProp<DisclosureStateReturn> & {
 };
 
 export type ShowMoreProps = DisclosureInitialState &
-  ShowMoreContentProps &
+  Partial<ShowMoreContentProps> &
   ShowMoreOwnProps;
 
 export const ShowMore: React.FC<ShowMoreProps> = props => {
