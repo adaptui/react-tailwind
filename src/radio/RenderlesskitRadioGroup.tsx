@@ -2,15 +2,18 @@ import { createComponent, createHook } from "reakit-system";
 import { RadioGroupHTMLProps, RadioGroupOptions, useRadioGroup } from "reakit";
 import { cx } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 
 import { RENDERLESSKIT_RADIO_GROUP_KEYS } from "./__keys";
 import { RadioGroupState } from "./RadioGroupState";
 
-export type RenderlesskitRadioGroupOptions = RadioGroupOptions &
+export type RenderlesskitRadioGroupOptions = BoxOptions &
+  RadioGroupOptions &
   Pick<RadioGroupState, "stack" | "size">;
 
-export type RenderlesskitRadioGroupHTMLProps = RadioGroupHTMLProps;
+export type RenderlesskitRadioGroupHTMLProps = BoxHTMLProps &
+  RadioGroupHTMLProps;
 
 export type RenderlesskitRadioGroupProps = RenderlesskitRadioGroupOptions &
   RenderlesskitRadioGroupHTMLProps;
@@ -20,12 +23,8 @@ export const useRenderlesskitRadioGroup = createHook<
   RenderlesskitRadioGroupHTMLProps
 >({
   name: "RenderlesskitRadioGroup",
-  compose: useRadioGroup,
+  compose: [useBox, useRadioGroup],
   keys: RENDERLESSKIT_RADIO_GROUP_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
-  },
 
   useProps(options, htmlProps) {
     const { stack, size } = options;
@@ -37,6 +36,7 @@ export const useRenderlesskitRadioGroup = createHook<
       theme.group[stack].size[size],
       htmlClassName,
     );
+
     return { className, ...restHtmlProps };
   },
 });

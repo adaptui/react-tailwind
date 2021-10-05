@@ -86,39 +86,35 @@ export const RadioControlledComponent: React.FC<RadioGroupProps> = props => {
 
 export const RadioShowMoreComponent: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup
-      aria-label="fruits"
-      className="w-40"
-      maxVisibleItems={7}
-      {...props}
-    >
-      <Radio value="apple" label="Apple" />
-      <Radio value="orange" label="Orange" />
-      <Radio value="watermelon" label="Watermelon" />
-      <Radio value="grapes" label="Grapes" />
-      <Radio value="banana" label="Banana" />
-      <Radio value="blueberry" label="Blueberry" />
-      <Radio value="sapota" label="Sapota" />
-      <Radio value="papaya" label="Papaya" />
-      <Radio value="avocado" label="Avocado" />
-      <Radio value="strawberry" label="Strawberry" />
-      <Radio value="cherry" label="Cherry" />
-      <Radio value="fig" label="Fig" />
-      <Radio value="guava" label="Guava" />
-      <Radio value="mango" label="Mango" />
-    </RadioGroup>
+    <div className="overflow-y-scroll h-80">
+      <RadioGroup aria-label="fruits" maxVisibleItems={7} {...props}>
+        <Radio value="apple" label="Apple" />
+        <Radio value="orange" label="Orange" />
+        <Radio value="watermelon" label="Watermelon" />
+        <Radio value="grapes" label="Grapes" />
+        <Radio value="banana" label="Banana" />
+        <Radio value="blueberry" label="Blueberry" />
+        <Radio value="sapota" label="Sapota" />
+        <Radio value="papaya" label="Papaya" />
+        <Radio value="avocado" label="Avocado" />
+        <Radio value="strawberry" label="Strawberry" />
+        <Radio value="cherry" label="Cherry" />
+        <Radio value="fig" label="Fig" />
+        <Radio value="guava" label="Guava" />
+        <Radio value="mango" label="Mango" />
+      </RadioGroup>
+    </div>
   );
 };
 
 export const RadioShowMoreHorizontalComponent: React.FC<RadioGroupProps> =
   props => {
     return (
-      <div className="h-20 overflow-scroll w-96">
+      <div className="overflow-x-scroll w-96">
         <RadioGroup
           aria-label="fruits"
-          maxVisibleItems={7}
+          maxVisibleItems={2}
           stack="horizontal"
-          className=""
           {...props}
         >
           <Radio value="apple" label="Apple" />

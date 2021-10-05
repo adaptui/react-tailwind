@@ -8,6 +8,7 @@ import {
   ShowMoreContent,
 } from "../show-more/ShowMore";
 import { ShowMoreInitialState } from "../show-more/ShowMoreState";
+import { useTheme } from "../theme";
 import { Dict } from "../utils/types";
 
 import { useRadioStateContext } from "./RadioGroupState";
@@ -27,15 +28,14 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   } as const;
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
 
+  const theme = useTheme("radio");
   const buttonClassName = cx(
-    contextState.stack === "vertical" ? "justify-start w-full" : "min-w-max",
-    hasExpandStarted ? "" : "!mt-0",
+    theme.group.showMore.button.base[contextState.stack],
+    hasExpandStarted
+      ? ""
+      : theme.group.showMore.button.expanded[contextState.stack],
   );
-  const contentClassName = cx(
-    contextState.stack === "vertical"
-      ? "flex flex-col space-y-2 w-full"
-      : "flex flex-row space-x-2",
-  );
+  const contentClassName = cx(theme.group.showMore.content[contextState.stack]);
 
   return (
     <ShowMore

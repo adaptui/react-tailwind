@@ -119,7 +119,7 @@ Controlled.parameters = { options: { showPanel: false } };
 export const WithShowMoreVertical: Story = {
   render: args => <RadioShowMoreComponent {...args} />,
   args: { size: "md", stack: "vertical" },
-  parameters: { options: { showPanel: false }, layout: "padded" },
+  parameters: { options: { showPanel: false }, layout: "centered" },
 };
 
 export const WithShowMoreHorizontal: Story = {

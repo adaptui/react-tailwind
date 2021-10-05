@@ -3,7 +3,6 @@ import { cx } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
 
 import { RADIO_ICON_KEYS } from "./__keys";
 import { RadioProps } from "./Radio";
@@ -33,14 +32,14 @@ export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
       description ? theme.icon.description : "",
       theme.icon.size[size],
       isChecked
-        ? tcm(
+        ? cx(
             theme.icon.checked.default,
             theme.icon.checked.hover,
             theme.icon.checked.active,
             theme.icon.checked.focus,
             theme.icon.checked.disabled,
           )
-        : tcm(
+        : cx(
             theme.icon.unChecked.default,
             theme.icon.unChecked.hover,
             theme.icon.unChecked.active,

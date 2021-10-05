@@ -9,11 +9,21 @@ export const radio = {
       },
     },
     horizontal: {
-      base: "flex flex-row",
+      base: "flex flex-row w-fit",
       size: {
         sm: "space-x-4",
         md: "space-x-4",
         lg: "space-x-4",
+      },
+    },
+    showMore: {
+      button: {
+        base: { vertical: "justify-start w-full", horizontal: "min-w-max" },
+        expanded: { vertical: "!mt-0", horizontal: "!ml-0" },
+      },
+      content: {
+        vertical: "flex flex-col space-y-2 w-full",
+        horizontal: "flex flex-row space-x-2",
       },
     },
   },
@@ -21,12 +31,12 @@ export const radio = {
     base: "relative inline-flex items-center cursor-pointer align-top",
     only: "hover:bg-gray-100",
     disabled: "cursor-not-allowed",
-    showMore: "flex w-full",
     size: {
       sm: "min-h-[26px] px-2 pb-px rounded-lg",
       md: "min-h-[30px] px-2.5 rounded-lg",
       lg: "min-h-11 px-4 rounded-xl",
     },
+    showMore: { vertical: "flex w-full", horizontal: "flex" },
   },
   input: "peer sr-only",
   icon: {

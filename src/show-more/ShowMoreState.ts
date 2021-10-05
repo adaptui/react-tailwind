@@ -62,9 +62,24 @@ export type ShowMoreActions = unstable_IdActions & {
    */
   setVisible: React.Dispatch<React.SetStateAction<ShowMoreState["visible"]>>;
 
+  /**
+   * Callback called before the expand transition starts.
+   */
   onExpandStart?: () => void;
+
+  /**
+   * Callback called after the expand transition ends.
+   */
   onExpandEnd?: () => void;
+
+  /**
+   * Callback called before the collapse transition starts.
+   */
   onCollapseStart?: () => void;
+
+  /**
+   * Callback called after the collapse transition ends..
+   */
   onCollapseEnd?: () => void;
 };
 
