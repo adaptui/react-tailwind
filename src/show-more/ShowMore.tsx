@@ -1,11 +1,11 @@
 import { createComponent } from "reakit-system";
 import { splitProps } from "reakit-utils";
 import {
+  disclosureComposableButton,
+  disclosureComposableContent,
   DisclosureInitialState,
   DisclosureStateReturn,
   Hook,
-  showMoreComposableButton,
-  showMoreComposableContent,
   USE_DISCLOSURE_STATE_KEYS,
   useDisclosureState,
 } from "@renderlesskit/react";
@@ -96,7 +96,7 @@ export type ShowMoreButtonHTMLProps = ButtonHTMLProps;
 export type ShowMoreButtonProps = ShowMoreButtonOptions &
   ShowMoreButtonHTMLProps;
 
-export const useShowMoreButton = showMoreComposableButton(useButton) as Hook<
+export const useShowMoreButton = disclosureComposableButton(useButton) as Hook<
   ShowMoreButtonOptions,
   ShowMoreButtonHTMLProps
 >;
@@ -128,7 +128,7 @@ export type ShowMoreContentHTMLProps = BoxHTMLProps;
 export type ShowMoreContentProps = ShowMoreContentOptions &
   ShowMoreContentHTMLProps;
 
-export const useShowMoreContent = showMoreComposableContent(useBox) as Hook<
+export const useShowMoreContent = disclosureComposableContent(useBox) as Hook<
   ShowMoreContentOptions,
   ShowMoreContentHTMLProps
 >;

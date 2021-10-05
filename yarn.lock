@@ -2348,10 +2348,10 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
-"@renderlesskit/react@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.7.0.tgz#3f852e7917f19651bdf6e95fe6323197e0ad4831"
-  integrity sha512-F7YG45kcVSJyOSdoh9j07xEEkvVucuZ4W4Zj+xoqtD45T3qWIVotHfUsRk+7hE3qb3qNnpRhbG8BsD85hZCXvA==
+"@renderlesskit/react@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.7.1.tgz#d04183dd1e8c89ddc6d0bf1fb9bf63d1340f8473"
+  integrity sha512-X6rEyrngW4hag8pPBuNutLDNbvl0ePVsmWKVSusmXvKZTJ6WEeXbMmDfXsVEUXrzGMrnNZYBGlRUwRBLK7IFmw==
   dependencies:
     "@chakra-ui/counter" "^1.1.9"
     "@chakra-ui/hooks" "^1.6.0"
