@@ -25,3 +25,4 @@ export * from "./theme/types";
 export * from "./toast";
 export * from "./tooltip";
 export * from "./utils";
+export * from "./utils/types";

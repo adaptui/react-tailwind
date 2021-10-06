@@ -2,14 +2,15 @@ import { Meta } from "@storybook/react";
 
 import { Badge, ClockIcon } from "../..";
 import { Button } from "../../button";
-import { Box } from "../index";
+
+import { Box } from "./BoxBasic.component";
 
 export default {
-  title: "Primitives/Box",
+  title: "Primitives/Box/Basic",
   component: Box,
   parameters: {
-    options: { showPanel: false },
     layout: "centered",
+    options: { showPanel: false },
   },
 } as Meta;
 
