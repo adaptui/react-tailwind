@@ -15,7 +15,10 @@ import {
 } from "../index";
 
 import { CheckboxProps } from "./Checkbox";
-import { useCheckboxStateContext } from "./CheckboxGroupState";
+import {
+  CheckboxGroupState,
+  useCheckboxStateContext,
+} from "./CheckboxGroupState";
 import { CheckboxInputOptions, CheckboxInputProps } from "./CheckboxInput";
 import {
   CheckboxDescriptionProps,
@@ -26,34 +29,35 @@ import {
   USE_CHECKBOX_STATE_KEYS,
 } from "./index";
 
-export type CheckboxState = RenderlesskitCheckboxState & {
-  /**
-   * How large should the button be?
-   *
-   * @default md
-   */
-  size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+export type CheckboxState = RenderlesskitCheckboxState &
+  Pick<CheckboxGroupState, "maxVisibleItems" | "stack"> & {
+    /**
+     * How large should the button be?
+     *
+     * @default md
+     */
+    size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
 
-  /**
-   * If true, Checkbox is checked.
-   */
-  isChecked: boolean;
+    /**
+     * If true, Checkbox is checked.
+     */
+    isChecked: boolean;
 
-  /**
-   * If true, Checkbox is indeterminate.
-   */
-  isIndeterminate: boolean;
+    /**
+     * If true, Checkbox is indeterminate.
+     */
+    isIndeterminate: boolean;
 
-  /**
-   * If true, Checkbox is unchecked.
-   */
-  isUnchecked: boolean;
+    /**
+     * If true, Checkbox is unchecked.
+     */
+    isUnchecked: boolean;
 
-  /**
-   * Input's value.
-   */
-  value: CheckboxInputOptions["value"];
-};
+    /**
+     * Input's value.
+     */
+    value: CheckboxInputOptions["value"];
+  };
 
 export type CheckboxActions = RenderlesskitCheckboxActions & {};
 
@@ -68,7 +72,6 @@ export function useCheckboxState(
   const { state, setState } = useRenderlesskitCheckboxState(props);
   const { size: originalSize = "md", value } = props;
   const contextState = useCheckboxStateContext();
-  const size = contextState?.size ?? originalSize;
 
   const isChecked =
     Array.isArray(state) && value ? state.includes(value) : state === true;
@@ -78,11 +81,13 @@ export function useCheckboxState(
   return {
     state,
     setState,
-    size,
+    size: contextState?.size ?? originalSize,
     value,
     isChecked,
     isIndeterminate,
     isUnchecked,
+    maxVisibleItems: contextState?.maxVisibleItems ?? null,
+    stack: contextState?.stack ?? "horizontal",
   };
 }
 

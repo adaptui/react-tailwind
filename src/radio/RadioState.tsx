@@ -36,10 +36,8 @@ export const useRadioState = (props: RadioProps) => {
   ) as [RadioGroupStateReturn, RadioOwnProps];
   const contextState = useRadioStateContext();
 
-  let radioGroupState = stateReturnProps;
-  if (contextState != null) {
-    radioGroupState = contextState;
-  }
+  const radioGroupState =
+    contextState != null ? contextState : stateReturnProps;
 
   const isChecked = radioGroupState.state === radioProps.value;
   const state: RadioStateReturn = { ...radioGroupState, isChecked };

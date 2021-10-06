@@ -55,7 +55,11 @@ export const useShowMoreProps = (
   props: React.PropsWithChildren<ShowMoreProps>,
 ) => {
   const [state, showMoreProps] = useShowMoreSplit(props);
-  const { children, button = "Show more", ...restProps } = showMoreProps;
+  const {
+    children,
+    button = !state.expanded ? "Show more" : "Show less",
+    ...restProps
+  } = showMoreProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,

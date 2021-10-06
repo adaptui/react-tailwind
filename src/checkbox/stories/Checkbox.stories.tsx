@@ -12,7 +12,7 @@ import {
 } from "../../radio";
 import { tcm, withIconA11y } from "../../utils";
 import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
-import { CheckboxGroup } from "../CheckboxGroup";
+import { CheckboxGroup, CheckboxGroupProps } from "../CheckboxGroup";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
 import {
   CheckboxDescription,
@@ -329,15 +329,17 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const Group = () => {
+const Group: React.FC<CheckboxGroupProps> = props => {
   const [state, setState] = useState<NonNullable<CheckboxProps["state"]>>([]);
 
-  if (!Array.isArray(state)) return;
+  if (!Array.isArray(state)) return null;
 
   return (
     <div className="flex flex-col space-y-4 min-h-96">
-      <div className="text-xl font-bold">Pick fruits to eat</div>
-      <div className="space-x-2">
+      <div className="text-xl font-bold" id="label">
+        Pick fruits to eat
+      </div>
+      <CheckboxGroup aria-labelledby="label" {...props}>
         <Checkbox
           state={state}
           onStateChange={setState}
@@ -347,18 +349,28 @@ export const Group = () => {
         <Checkbox
           state={state}
           onStateChange={setState}
-          className="ml-2"
           value="orange"
           label="Orange"
         />
         <Checkbox
           state={state}
           onStateChange={setState}
-          className="ml-2"
           value="watermelon"
           label="Watermelon"
         />
-      </div>
+        <Checkbox
+          state={state}
+          onStateChange={setState}
+          value="sapota"
+          label="Sapota"
+        />
+        <Checkbox
+          state={state}
+          onStateChange={setState}
+          value="cherry"
+          label="Cherry"
+        />
+      </CheckboxGroup>
       {state.length > 0 ? (
         <div>
           <div className="font-semibold">Picked fruits:</div>
@@ -374,9 +386,33 @@ export const Group = () => {
     </div>
   );
 };
-Group.parameters = { options: { showPanel: false } };
 
-export const GroupBooleanState = () => {
+export const GroupDefault: ComponentStoryObj<typeof CheckboxGroup> = {
+  render: args => <Group {...args} />,
+  args: { size: "md", stack: "vertical" },
+  parameters: { options: { showPanel: true } },
+};
+
+export const GroupDefaultShowMore: ComponentStoryObj<typeof CheckboxGroup> = {
+  render: args => <Group {...args} />,
+  args: { size: "md", stack: "vertical", maxVisibleItems: 3 },
+  parameters: { options: { showPanel: true } },
+};
+
+export const GroupHorizontal: ComponentStoryObj<typeof CheckboxGroup> = {
+  render: args => <Group {...args} />,
+  args: { size: "md", stack: "horizontal" },
+  parameters: { options: { showPanel: true } },
+};
+
+export const GroupHorizontalShowMore: ComponentStoryObj<typeof CheckboxGroup> =
+  {
+    render: args => <Group {...args} />,
+    args: { size: "md", stack: "horizontal", maxVisibleItems: 3 },
+    parameters: { options: { showPanel: true } },
+  };
+
+export const GroupTriBooleanState = () => {
   const [checkedItems, setCheckedItems] = useState<boolean[]>([
     false,
     false,
@@ -387,7 +423,7 @@ export const GroupBooleanState = () => {
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
   return (
-    <div className="flex flex-col space-y-4">
+    <CheckboxGroup aria-label="Tristate checkbox using boolean values">
       <Checkbox
         state={isIndeterminate ? "indeterminate" : allChecked}
         onStateChange={value =>
@@ -398,9 +434,13 @@ export const GroupBooleanState = () => {
           ])
         }
         label="Check all items"
-        className="self-start"
+        aria-controls="check1 check2 check3"
       />
-      <div className="space-x-2">
+      <CheckboxGroup
+        role="presentation"
+        aria-label="For presentation"
+        stack="horizontal"
+      >
         <Checkbox
           state={checkedItems[0]}
           onStateChange={value =>
@@ -411,6 +451,7 @@ export const GroupBooleanState = () => {
             ])
           }
           label="Item 1"
+          id="check1"
         />
         <Checkbox
           state={checkedItems[1]}
@@ -422,6 +463,7 @@ export const GroupBooleanState = () => {
             ])
           }
           label="Item 2"
+          id="check2"
         />
         <Checkbox
           state={checkedItems[2]}
@@ -433,14 +475,15 @@ export const GroupBooleanState = () => {
             ])
           }
           label="Item 3"
+          id="check3"
         />
-      </div>
-    </div>
+      </CheckboxGroup>
+    </CheckboxGroup>
   );
 };
-GroupBooleanState.parameters = { options: { showPanel: false } };
+GroupTriBooleanState.parameters = { options: { showPanel: false } };
 
-export const GroupStringState = () => {
+export const GroupTriStringState = () => {
   const values = useMemo(() => ["Apple", "Orange", "Watermelon"], []);
   const [itemState, setItemState] = useState<
     NonNullable<CheckboxProps["state"]>
@@ -474,24 +517,29 @@ export const GroupStringState = () => {
   }, [itemState, values]);
 
   return (
-    <div className="flex flex-col space-y-4">
+    <CheckboxGroup aria-label="Tristate Checkbox using string values">
       <Checkbox
         state={groupState}
         onStateChange={setGroupState}
         label={
           isIndeterminate
-            ? "Fruit in the basket"
+            ? "Fruits in the basket"
             : isAllChecked
             ? "Basket full"
             : "Basket empty"
         }
-        className="self-start"
+        aria-controls="check1 check2 check3"
       />
-      <div className="space-x-2">
+      <CheckboxGroup
+        role="presentation"
+        aria-label="For presentation"
+        stack="horizontal"
+      >
         {values.map((value, i) => {
           return (
             <Checkbox
               key={i}
+              id={`check${i + 1}`}
               state={itemState}
               onStateChange={setItemState}
               value={value}
@@ -499,11 +547,11 @@ export const GroupStringState = () => {
             />
           );
         })}
-      </div>
-    </div>
+      </CheckboxGroup>
+    </CheckboxGroup>
   );
 };
-GroupStringState.parameters = { options: { showPanel: false } };
+GroupTriStringState.parameters = { options: { showPanel: false } };
 
 const CustomIconElement: CheckboxOwnProps["icon"] = state => (
   <>

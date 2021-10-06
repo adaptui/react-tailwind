@@ -28,7 +28,7 @@ export const checkbox = {
     },
   },
   label: {
-    base: "relative inline-flex items-center justify-center cursor-pointer align-top",
+    base: "relative inline-flex items-center cursor-pointer align-top",
     only: "hover:bg-gray-100",
     disabled: "cursor-not-allowed",
     size: {
