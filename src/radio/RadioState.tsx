@@ -57,7 +57,6 @@ const componentMap = {
 
 export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
   const [state, radioProps] = useRadioState(props);
-
   const {
     icon = RadioDefaultIcon,
     label,
@@ -67,8 +66,12 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     children,
     ...restProps
   } = radioProps;
-
   const { componentProps } = getComponentProps(componentMap, children, state);
+
+  const _icon: RadioOwnProps["icon"] =
+    componentProps?.iconProps?.children || icon;
+  const _label: RadioOwnProps["label"] =
+    componentProps?.textProps?.children || label;
   const _description: RadioOwnProps["description"] =
     componentProps?.descriptionProps?.children || description;
 
@@ -87,8 +90,6 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     ...componentProps.inputProps,
   };
 
-  const _icon: RadioOwnProps["icon"] =
-    componentProps?.iconProps?.children || icon;
   const iconProps: RadioIconProps = {
     ...state,
     ...componentProps.iconProps,
@@ -96,8 +97,6 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     children: runIfFn(_icon, state),
   };
 
-  const _label: RadioOwnProps["label"] =
-    componentProps?.textProps?.children || label;
   const textProps: RadioTextProps = {
     ...state,
     ...componentProps.textProps,

@@ -12,6 +12,7 @@ import {
 } from "../../radio";
 import { tcm, withIconA11y } from "../../utils";
 import { Checkbox, CheckboxOwnProps, CheckboxProps } from "../Checkbox";
+import { CheckboxGroup } from "../CheckboxGroup";
 import { CheckboxInputHTMLProps } from "../CheckboxInput";
 import {
   CheckboxDescription,
@@ -97,21 +98,27 @@ export const CheckboxStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-2">
-        <div className="space-x-2">
+        <CheckboxGroup
+          aria-label="checkbox unchecked example"
+          stack="horizontal"
+        >
           <Checkbox size="sm" {...args} />
           <Checkbox size="md" {...args} />
           <Checkbox size="lg" {...args} />
-        </div>
-        <div className="space-x-2">
+        </CheckboxGroup>
+        <CheckboxGroup aria-label="checkbox checked example" stack="horizontal">
           <Checkbox size="sm" defaultState={true} {...args} />
           <Checkbox size="md" defaultState={true} {...args} />
           <Checkbox size="lg" defaultState={true} {...args} />
-        </div>
-        <div className="space-x-2">
+        </CheckboxGroup>
+        <CheckboxGroup
+          aria-label="checkbox indeterminate example"
+          stack="horizontal"
+        >
           <Checkbox size="sm" defaultState="indeterminate" {...args} />
           <Checkbox size="md" defaultState="indeterminate" {...args} />
           <Checkbox size="lg" defaultState="indeterminate" {...args} />
-        </div>
+        </CheckboxGroup>
       </div>
     );
   },
@@ -133,17 +140,17 @@ export const WithLabelStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-4">
-        <div className="space-x-4">
+        <CheckboxGroup aria-label="checkbox unchecked example">
           <Checkbox label="Checkbox" size="sm" {...args} />
           <Checkbox label="Checkbox" size="md" {...args} />
           <Checkbox label="Checkbox" size="lg" {...args} />
-        </div>
-        <div className="space-x-4">
+        </CheckboxGroup>
+        <CheckboxGroup aria-label="checkbox checked example">
           <Checkbox label="Checkbox" size="sm" defaultState={true} {...args} />
           <Checkbox label="Checkbox" size="md" defaultState={true} {...args} />
           <Checkbox label="Checkbox" size="lg" defaultState={true} {...args} />
-        </div>
-        <div className="space-x-4">
+        </CheckboxGroup>
+        <CheckboxGroup aria-label="checkbox indeterminate example">
           <Checkbox
             label="Checkbox"
             size="sm"
@@ -162,7 +169,7 @@ export const WithLabelStack: Story = {
             defaultState="indeterminate"
             {...args}
           />
-        </div>
+        </CheckboxGroup>
       </div>
     );
   },
@@ -177,7 +184,10 @@ export const WithDescriptionStack: Story = {
   render: args => {
     return (
       <div className="flex flex-col space-y-8">
-        <div className="max-w-xs space-y-4">
+        <CheckboxGroup
+          aria-label="checkbox unchecked example"
+          className="max-w-xs"
+        >
           <Checkbox
             label="Checkbox"
             description="Used when the checkbox is selected and will use its value for the form submission."
@@ -196,8 +206,11 @@ export const WithDescriptionStack: Story = {
             size="lg"
             {...args}
           />
-        </div>
-        <div className="max-w-xs space-y-4">
+        </CheckboxGroup>
+        <CheckboxGroup
+          aria-label="checkbox checked example"
+          className="max-w-xs space-y-4"
+        >
           <Checkbox
             label="Checkbox"
             description="Used when the checkbox is selected and will use its value for the form submission."
@@ -219,8 +232,11 @@ export const WithDescriptionStack: Story = {
             defaultState={true}
             {...args}
           />
-        </div>
-        <div className="max-w-xs space-y-4">
+        </CheckboxGroup>
+        <CheckboxGroup
+          aria-label="checkbox indeterminate example"
+          className="max-w-xs space-y-4"
+        >
           <Checkbox
             label="Checkbox"
             description="Used when the checkbox is selected and will use its value for the form submission."
@@ -242,7 +258,7 @@ export const WithDescriptionStack: Story = {
             defaultState="indeterminate"
             {...args}
           />
-        </div>
+        </CheckboxGroup>
       </div>
     );
   },
@@ -253,13 +269,9 @@ export const WithDescriptionStack: Story = {
   parameters: { options: { showPanel: true } },
 };
 
-export const RadioComponent: React.FC<RadioGroupProps> = props => {
+const RadioComponent: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup
-      aria-label="checkbox state"
-      className="flex flex-row space-x-4"
-      {...props}
-    >
+    <RadioGroup aria-label="checkbox state" {...props}>
       <Radio value="checked" label="Checked" />
       <Radio value="unchecked" label="Unchecked" />
       <Radio value="indeterminate" label="Indeterminate" />

@@ -15,6 +15,7 @@ import {
 } from "../index";
 
 import { CheckboxProps } from "./Checkbox";
+import { useCheckboxStateContext } from "./CheckboxGroupState";
 import { CheckboxInputOptions, CheckboxInputProps } from "./CheckboxInput";
 import {
   CheckboxDescriptionProps,
@@ -65,7 +66,9 @@ export function useCheckboxState(
   props: CheckboxInitialState = {},
 ): CheckboxStateReturn {
   const { state, setState } = useRenderlesskitCheckboxState(props);
-  const { size = "md", value } = props;
+  const { size: originalSize = "md", value } = props;
+  const contextState = useCheckboxStateContext();
+  const size = contextState?.size ?? originalSize;
 
   const isChecked =
     Array.isArray(state) && value ? state.includes(value) : state === true;
@@ -116,7 +119,6 @@ export const useCheckboxProps = (
   props: React.PropsWithChildren<CheckboxProps>,
 ) => {
   const [state, checkboxProps] = useCheckboxStateSplit(props);
-
   const {
     icon = CheckboxDefaultIcon,
     label,
@@ -126,13 +128,21 @@ export const useCheckboxProps = (
     children,
     ...restProps
   } = checkboxProps;
-
   const { componentProps } = getComponentProps(componentMap, children, state);
+
+  const _icon: CheckboxOwnProps["icon"] =
+    componentProps?.iconProps?.children || icon;
+  const _label: CheckboxOwnProps["label"] =
+    componentProps?.textProps?.children || label;
+  const _description: CheckboxOwnProps["description"] =
+    componentProps?.descriptionProps?.children || description;
 
   const labelProps: CheckboxLabelProps = {
     ...state,
     className,
     style,
+    description: _description,
+    disabled: restProps.disabled,
     ...componentProps.labelProps,
   };
 
@@ -142,24 +152,19 @@ export const useCheckboxProps = (
     ...componentProps.inputProps,
   };
 
-  const _icon: CheckboxOwnProps["icon"] =
-    componentProps?.iconProps?.children || icon;
   const iconProps: CheckboxIconProps = {
     ...state,
+    description: _description,
     ...componentProps.iconProps,
     children: runIfFn(_icon, state),
   };
 
-  const _label: CheckboxOwnProps["label"] =
-    componentProps?.textProps?.children || label;
   const textProps: CheckboxTextProps = {
     ...state,
     ...componentProps.textProps,
     children: runIfFn(_label, state),
   };
 
-  const _description: CheckboxOwnProps["description"] =
-    componentProps?.descriptionProps?.children || description;
   const descriptionProps: CheckboxDescriptionProps = {
     ...state,
     ...componentProps.descriptionProps,

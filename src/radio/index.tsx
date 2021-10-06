@@ -9,3 +9,4 @@ export * from "./RadioLabel";
 export * from "./RadioShowMore";
 export * from "./RadioState";
 export * from "./RadioText";
+export * from "./RenderlesskitRadioGroup";
