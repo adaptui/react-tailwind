@@ -31,7 +31,7 @@ export const useRadioLabel = createHook<RadioLabelOptions, RadioLabelHTMLProps>(
       const theme = useTheme("radio");
       const className = cx(
         theme.label.base,
-        theme.label.size[size],
+        !description ? theme.label.size[size] : "",
         !description ? theme.label.only : "",
         disabled ? theme.label.disabled : "",
         maxVisibleItems != null ? theme.label.showMore[stack] : "",
