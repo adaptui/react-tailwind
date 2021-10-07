@@ -1,3 +1,10 @@
+### [0.0.1-alpha.18](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.17...v0.0.1-alpha.18) (2021-10-07)
+
+
+### Bug Fixes
+
+* **forwardref:** 🐛 bug with forwardRefWithAs types ([08ef0f0](https://github.com/timelessco/renderlesskit-react-tailwind/commit/08ef0f03e23735f03f7bb9fb52f0d38e6ff9fdc5))
+
 ### [0.0.1-alpha.17](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.16...v0.0.1-alpha.17) (2021-10-07)
 
 
