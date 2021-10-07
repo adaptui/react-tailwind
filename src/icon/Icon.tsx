@@ -4,7 +4,7 @@ import { cx } from "@renderlesskit/react";
 
 import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs } from "../utils";
 
 const fallbackIcon = {
   path: (

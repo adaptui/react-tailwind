@@ -1,6 +1,6 @@
 import { TimerToast } from "@renderlesskit/react";
 
-import { Dict } from "../utils/types";
+import { Dict } from "../utils";
 
 export interface Toast extends TimerToast {
   content?: Content;

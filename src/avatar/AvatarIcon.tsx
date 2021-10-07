@@ -2,8 +2,7 @@ import { cloneElement, isValidElement } from "react";
 import { Box, BoxProps } from "reakit";
 
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, tcm } from "../utils";
 
 import { useAvatarContext } from "./Avatar";
 

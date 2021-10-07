@@ -8,8 +8,13 @@ import {
 import { Box, BoxProps } from "../box";
 import { useFormControl } from "../form-field";
 import { useTheme } from "../theme";
-import { createContext, runIfFn, tcm } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import {
+  createContext,
+  forwardRefWithAs,
+  RenderProp,
+  runIfFn,
+  tcm,
+} from "../utils";
 
 import { useSliderDimensions } from "./hooks/useSliderDimensions";
 import { SliderMinMax } from "./SliderMinMax";

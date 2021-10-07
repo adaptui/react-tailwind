@@ -12,8 +12,12 @@ import {
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "../button";
-import { getComponentProps, runIfFn } from "../utils";
-import { RenderProp, RenderPropType } from "../utils/types";
+import {
+  getComponentProps,
+  RenderProp,
+  RenderPropType,
+  runIfFn,
+} from "../utils";
 
 export type ShowMoreOwnProps = RenderProp<DisclosureStateReturn> & {
   /**

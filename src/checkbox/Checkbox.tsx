@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { RenderProp, RenderPropType } from "../utils/types";
+import { RenderProp, RenderPropType } from "../utils";
 
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";

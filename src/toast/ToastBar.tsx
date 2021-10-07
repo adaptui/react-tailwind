@@ -2,8 +2,7 @@ import { useCallback } from "react";
 
 import { useHover, useMediaQuery } from "../hooks";
 import { useTheme } from "../theme";
-import { isFunction, objectKeys, tcm } from "../utils";
-import { Split } from "../utils/types";
+import { isFunction, objectKeys, Split, tcm } from "../utils";
 
 import { Toast, ToastPlacement, useToasts, useToastsReturnType } from "./index";
 

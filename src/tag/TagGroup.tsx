@@ -2,8 +2,7 @@ import { useMemo } from "react";
 import { Composite, CompositeStateReturn, useCompositeState } from "reakit";
 
 import { Box, BoxProps } from "../box";
-import { createContext } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { createContext, forwardRefWithAs } from "../utils";
 
 import { TagProps } from "./Tag";
 

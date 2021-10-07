@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { getComponentProps } from "../utils";
-import { RenderProp } from "../utils/types";
+import { getComponentProps, RenderProp } from "../utils";
 
 import {
   CheckboxGroupInitialState,

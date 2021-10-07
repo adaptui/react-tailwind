@@ -12,7 +12,7 @@ import {
   SwitchLabel,
   SwitchProps,
   SwitchText,
-} from "..";
+} from "../index";
 
 export default {
   title: "Forms/Switch",

@@ -18,7 +18,7 @@ import {
   FormHelperText,
   FormLabel,
   FormRequiredText,
-} from "..";
+} from "../index";
 
 export default {
   title: "Forms/FormField",

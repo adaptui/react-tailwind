@@ -4,8 +4,7 @@ import { useControllableState } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
 import { CommonFieldProps } from "../form-field";
-import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { createContext, forwardRefWithAs, RenderProp, runIfFn } from "../utils";
 
 import { SwitchIcon, SwitchInput, SwitchLabel, SwitchText } from "./";
 

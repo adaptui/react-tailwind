@@ -1,3 +1,23 @@
+### [0.0.1-alpha.18](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.17...v0.0.1-alpha.18) (2021-10-07)
+
+
+### Bug Fixes
+
+* **forwardref:** 🐛 bug with forwardRefWithAs types ([08ef0f0](https://github.com/timelessco/renderlesskit-react-tailwind/commit/08ef0f03e23735f03f7bb9fb52f0d38e6ff9fdc5))
+
+### [0.0.1-alpha.17](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.16...v0.0.1-alpha.17) (2021-10-07)
+
+
+### Feature Updates
+
+* **checkbox:** ✨ add showmore & stories ([#165](https://github.com/timelessco/renderlesskit-react-tailwind/issues/165)) ([6e793e2](https://github.com/timelessco/renderlesskit-react-tailwind/commit/6e793e28e2801fad229b5403d0bc906df8460590))
+* **tw-merge:** ✨ add tw-merge locally to test next build ([#167](https://github.com/timelessco/renderlesskit-react-tailwind/issues/167)) ([690a400](https://github.com/timelessco/renderlesskit-react-tailwind/commit/690a400cd1e7c568cab97bb47e6d0ae6178da3c4))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([#163](https://github.com/timelessco/renderlesskit-react-tailwind/issues/163)) ([104fa32](https://github.com/timelessco/renderlesskit-react-tailwind/commit/104fa32b1cc37d95d56ddbc876a2d8a551c41194))
+
 ### [0.0.1-alpha.16](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.15...v0.0.1-alpha.16) (2021-10-05)
 
 

@@ -5,9 +5,8 @@ import {
 
 import { BoxProps } from "../box";
 import { useFormControl } from "../form-field";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
-import { useTheme } from "..";
+import { useTheme } from "../theme";
+import { forwardRefWithAs, tcm } from "../utils";
 
 import { useSliderValues } from "./hooks/useSliderValues";
 import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";

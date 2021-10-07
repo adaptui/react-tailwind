@@ -4,8 +4,7 @@ import {
 } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, tcm } from "../utils";
 
 import { useCircularProgressContext } from "./CircularProgress";
 
