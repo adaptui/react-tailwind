@@ -6,8 +6,8 @@ export const USE_CHECKBOX_GROUP_STATE_KEYS = [
 ] as const;
 export const CHECKBOX_GROUP_STATE_KEYS = USE_CHECKBOX_GROUP_STATE_KEYS;
 export const CHECKBOX_STATE_KEYS = [
+  ...CHECKBOX_GROUP_STATE_KEYS,
   "state",
-  "size",
   "isChecked",
   "isIndeterminate",
   "isUnchecked",
@@ -21,10 +21,7 @@ export const USE_CHECKBOX_STATE_KEYS = [
   "size",
   "value",
 ] as const;
-export const CHECKBOX_DESCRIPTION_KEYS = [
-  ...CHECKBOX_GROUP_STATE_KEYS,
-  ...CHECKBOX_STATE_KEYS,
-] as const;
+export const CHECKBOX_DESCRIPTION_KEYS = CHECKBOX_STATE_KEYS;
 export const CHECKBOX_ICON_KEYS = [
   ...CHECKBOX_DESCRIPTION_KEYS,
   "description",
