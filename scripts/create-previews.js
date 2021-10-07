@@ -24,11 +24,7 @@ function capitalizeFirstLetter(string) {
 const createTemplateFile = (code, name, type, dir) => {
   const componentName = `${name}${capitalizeFirstLetter(type)}`;
   const finalCode = addPackageName(code);
-  const template = outdent`
-  export const ${componentName} = ${JSON.stringify(finalCode)}
-
-  export default ${componentName};
-  `;
+  const template = `${JSON.stringify(finalCode)}`;
   const templatePath = path.join(dir, `${componentName}.ts`);
 
   createFile(templatePath, template);

@@ -25,10 +25,10 @@
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "files": [
-    "dist",
     "tailwindPlugins",
     "preset.d.ts",
-    "preset.js"
+    "preset.js",
+    "dist"
   ],
   "scripts": {
     "boot": "yarn keys",
@@ -161,6 +161,7 @@
     "jest-axe": "5.0.1",
     "ladash": "1.2.0",
     "lint-staged": "11.2.0",
+    "node-fetch": "2.6.1",
     "outdent": "^0.8.0",
     "patch-package": "6.4.7",
     "pinst": "2.1.6",
