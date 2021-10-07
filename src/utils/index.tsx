@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cx } from "@chakra-ui/utils";
-import { createTailwindMerge } from "tailwind-merge";
 
+import { createTailwindMerge } from "./tailwind-merge";
 import { Dict, RenderPropType } from "./types";
 
 export interface CreateContextOptions {
