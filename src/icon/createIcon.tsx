@@ -1,7 +1,7 @@
 // Credits to https://github.com/chakra-ui/chakra-ui/tree/main/packages/icon
 import * as React from "react";
 
-import { forwardRefWithAs, PropsWithAs } from "../utils/types";
+import { forwardRefWithAs, PropsWithAs } from "../utils";
 
 import { Icon, IconProps } from "./Icon";
 

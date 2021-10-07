@@ -2,7 +2,13 @@ import * as React from "react";
 import { cx } from "@chakra-ui/utils";
 
 import { createTailwindMerge } from "./tailwind-merge";
-import { Dict, RenderPropType } from "./types";
+import {
+  As,
+  ComponentWithAs,
+  Dict,
+  PropsWithAs,
+  RenderPropType,
+} from "./types";
 
 export interface CreateContextOptions {
   /**
@@ -211,3 +217,27 @@ export const getComponentProps = <T, P>(
 
   return { componentProps, finalChildren };
 };
+
+/**
+ * @template Props Component Props
+ * @template RefProp HTML intrinsic type, eg: HTMLDivElement
+ * @template DefaultType string, eg: "div"
+ * @param component
+ */
+export function forwardRefWithAs<
+  Props,
+  RefProp = any,
+  DefaultType extends As = any,
+>(
+  component: React.ForwardRefRenderFunction<
+    RefProp,
+    PropsWithAs<Props, DefaultType>
+  >,
+) {
+  return React.forwardRef(component) as unknown as ComponentWithAs<
+    Props,
+    DefaultType
+  >;
+}
+
+export * from "./types";

@@ -1,7 +1,6 @@
 import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { createContext, tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { createContext, forwardRefWithAs, tcm } from "../utils";
 
 export type ListContext = {
   size?: keyof Renderlesskit.GetThemeValue<"list", "size">;

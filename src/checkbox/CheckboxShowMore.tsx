@@ -9,7 +9,7 @@ import {
   ShowMoreProps,
 } from "../show-more/ShowMore";
 import { useTheme } from "../theme";
-import { Dict } from "../utils/types";
+import { Dict } from "../utils";
 
 import { useCheckboxStateContext } from "./CheckboxGroupState";
 

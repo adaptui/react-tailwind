@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/react";
 
-import { Badge, ClockIcon } from "../..";
+import { Badge } from "../../badge";
 import { Button } from "../../button";
+import { ClockIcon } from "../../icons";
 import { Box } from "../index";
 
 export default {

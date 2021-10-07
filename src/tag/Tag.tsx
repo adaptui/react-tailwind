@@ -4,8 +4,7 @@ import { Clickable, CompositeItem } from "reakit";
 import { Box, BoxProps } from "../box";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, tcm } from "../utils";
 
 import { useTagGroup } from "./TagGroup";
 

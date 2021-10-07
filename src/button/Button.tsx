@@ -12,8 +12,7 @@ import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { withIconA11y } from "../utils";
-import { RenderPropType } from "../utils/types";
+import { RenderPropType, withIconA11y } from "../utils";
 
 import { BUTTON_KEYS } from "./__keys";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";

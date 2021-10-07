@@ -6,8 +6,7 @@ import {
 } from "@renderlesskit/react";
 
 import { BoxProps } from "../box";
-import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import { createContext, forwardRefWithAs, RenderProp, runIfFn } from "../utils";
 
 import { CircularProgressBar } from "./CircularProgressBar";
 import { CircularProgressWrapper } from "./CircularProgressWrapper";

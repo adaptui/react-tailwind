@@ -5,7 +5,7 @@ import { Meta } from "@storybook/react";
 import { createControls, storyTemplate } from "../../../.storybook/utils";
 import { Avatar } from "../../avatar";
 import { ClockIcon } from "../../icons";
-import { Tag, TagGroup, TagGroupProps, TagProps } from "..";
+import { Tag, TagGroup, TagGroupProps, TagProps } from "../index";
 
 export default {
   title: "Primitives/Tag",

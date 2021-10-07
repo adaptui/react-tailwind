@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cloneDeep } from "lodash";
 
-import { DeepDictionary, DeepPartial } from "../utils/types";
+import { DeepDictionary, DeepPartial } from "../utils";
 
 import defaultTheme from "./defaultTheme";
 import { mergeExtensions, mergeThemes } from "./mergeThemes";
