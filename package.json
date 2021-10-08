@@ -53,7 +53,7 @@
     "release": "release-it",
     "size": "yarn build && size-limit",
     "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
-    "storybook-build": "yarn previews && build-storybook",
+    "storybook-build": "yarn keys && yarn previews && build-storybook",
     "test": "jest --config ./jest.config.ts --no-cache"
   },
   "commitlint": {
