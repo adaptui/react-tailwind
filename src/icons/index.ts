@@ -1,4 +1,3 @@
-export * from "./Bolt";
 export * from "./CaretDown";
 export * from "./CaretRight";
 export * from "./Check";
@@ -16,5 +15,3 @@ export * from "./InfoCircle";
 export * from "./Moon";
 export * from "./Photograph";
 export * from "./Plus";
-export * from "./Search";
-export * from "./Wheel";

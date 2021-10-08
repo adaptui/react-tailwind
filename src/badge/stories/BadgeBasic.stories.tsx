@@ -1,30 +1,33 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createControls } from "../../../.storybook/utils";
-import { Badge } from "../Badge";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+
+import js from "./templates/BadgeBasicJsx";
+import ts from "./templates/BadgeBasicTsx";
+import { Badge } from "./BadgeBasic.component";
 
 type Meta = ComponentMeta<typeof Badge>;
 type Story = ComponentStoryObj<typeof Badge>;
 
 export default {
-  title: "Primitives/Badge",
+  title: "Primitives/Badge/Basic",
   component: Badge,
+  parameters: {
+    layout: "centered",
+    options: { showPanel: true },
+    preview: createPreviewTabs({ js, ts }),
+  },
   argTypes: createControls("badge", {
     ignore: ["unstable_system", "wrapElement", "as"],
   }),
-  parameters: {
-    layout: "centered",
-  },
 } as Meta;
 
 export const Default: Story = {
   args: {
-    children: "Beta",
     size: "md",
     variant: "solid",
     themeColor: "default",
   },
-  parameters: { options: { showPanel: true } },
 };
 
 export const Small: Story = {

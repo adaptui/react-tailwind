@@ -100,4 +100,4 @@ function preset(tailwindConfig) {
   });
 }
 
-module.exports = { preset };
+module.exports = preset;

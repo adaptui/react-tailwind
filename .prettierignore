@@ -54,3 +54,4 @@ yarn.lock
 # Library files
 dist
 CHANGELOG.md
+templates
