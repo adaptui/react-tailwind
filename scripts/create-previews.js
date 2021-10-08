@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const globFs = require("glob-fs")({ gitignore: false });
-const outdent = require("outdent");
+const { outdent } = require("outdent");
 
 const {
   createFile,
@@ -14,8 +14,8 @@ const transpileTs = require("./utils/transpile-ts");
 
 const addPackageName = string =>
   string
-    .replace("../../index", "@renderlesskit/react")
-    .replace("../../../index", "@renderlesskit/react");
+    .replace("../../index", "@renderlesskit/react-tailwind")
+    .replace("../../../index", "@renderlesskit/react-tailwind");
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -24,7 +24,11 @@ function capitalizeFirstLetter(string) {
 const createTemplateFile = (code, name, type, dir) => {
   const componentName = `${name}${capitalizeFirstLetter(type)}`;
   const finalCode = addPackageName(code);
-  const template = `${JSON.stringify(finalCode)}`;
+  const template = outdent`
+  export const ${componentName} = ${JSON.stringify(finalCode)}
+
+  export default ${componentName};
+  `;
   const templatePath = path.join(dir, `${componentName}.ts`);
 
   createFile(templatePath, template);

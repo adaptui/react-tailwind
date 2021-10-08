@@ -2,15 +2,15 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/BoxBasicJsx";
-import ts from "./templates/BoxBasicTsx";
-import { Box } from "./BoxBasic.component";
+import js from "./templates/BoxAsJsx";
+import ts from "./templates/BoxAsTsx";
+import { Box } from "./BoxAs.component";
 
 type Meta = ComponentMeta<typeof Box>;
 type Story = ComponentStoryObj<typeof Box>;
 
 export default {
-  title: "Primitives/Box/Basic",
+  title: "Primitives/Box/As",
   component: Box,
   parameters: {
     layout: "centered",

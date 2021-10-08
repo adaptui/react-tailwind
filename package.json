@@ -31,7 +31,7 @@
     "dist"
   ],
   "scripts": {
-    "boot": "yarn keys",
+    "boot": "concurrently \"yarn keys\" \"yarn previews\"",
     "prebuild": "rimraf dist",
     "build": "yarn keys && concurrently yarn:build:*",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
@@ -43,7 +43,7 @@
     "contributors:generate": "all-contributors generate",
     "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
     "format:package": "sort-package-json package.json",
-    "postinstall": "husky install",
+    "postinstall": "concurrently \"husky install\" \"patch-package\"",
     "keys": "node scripts/generateKeys",
     "lint": "eslint --color --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
@@ -53,7 +53,7 @@
     "release": "release-it",
     "size": "yarn build && size-limit",
     "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
-    "storybook-build": "build-storybook",
+    "storybook-build": "yarn previews && build-storybook",
     "test": "jest --config ./jest.config.ts --no-cache"
   },
   "commitlint": {
