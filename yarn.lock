@@ -9106,7 +9106,7 @@ glob-fs-gitignore@^0.1.5:
     micromatch "^2.3.11"
     parse-gitignore "^0.2.0"
 
-glob-fs@^0.1.7:
+glob-fs@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/glob-fs/-/glob-fs-0.1.7.tgz#9a7ebbfc694fae9cebec5d59dace93ecfb364f26"
   integrity sha512-f0U3u9xK8MEYtKDCnZXvZrZAy4uNp+KSA4xfaKI/NxbE6HXhqUBQ485Uwd6jQa/Q6z1yKi804WT9y53RrwuMxQ==
@@ -9128,7 +9128,7 @@ glob-fs@^0.1.7:
     is-windows "^0.1.0"
     kind-of "^2.0.0"
     lazy-cache "^0.1.0"
-    micromatch jonschlinkert/micromatch#2.2.0
+    micromatch "github:jonschlinkert/micromatch#2.2.0"
     mixin-object "^2.0.0"
     object-visit "^0.1.0"
     object.omit "^1.1.0"
@@ -12235,8 +12235,9 @@ micromatch@^4.0.2, micromatch@^4.0.4:
     braces "^3.0.1"
     picomatch "^2.2.3"
 
-micromatch@jonschlinkert/micromatch#2.2.0:
+"micromatch@github:jonschlinkert/micromatch#2.2.0":
   version "2.2.0"
+  uid "5017fd78202e04c684cc31d3c2fb1f469ea222ff"
   resolved "https://codeload.github.com/jonschlinkert/micromatch/tar.gz/5017fd78202e04c684cc31d3c2fb1f469ea222ff"
   dependencies:
     arr-diff "^1.0.1"
@@ -13081,7 +13082,7 @@ osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-outdent@^0.8.0:
+outdent@0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/outdent/-/outdent-0.8.0.tgz#2ebc3e77bf49912543f1008100ff8e7f44428eb0"
   integrity sha512-KiOAIsdpUTcAXuykya5fnVVT+/5uS0Q1mrkRHcF89tpieSmY33O/tmc54CqwA+bfhbtEfZUNLHaPUiB9X3jt1A==
@@ -16012,7 +16013,7 @@ store2@^2.12.0:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
 
-storybook-addon-preview@^2.1.2:
+storybook-addon-preview@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/storybook-addon-preview/-/storybook-addon-preview-2.1.2.tgz#396cfbbbb14e9aee7ad4f1b127ce20509ff1d17c"
   integrity sha512-PoQgTTVZlK/vzmcFGhBf5+R3tfcprU7HB+IzaBZ9AZ9i26YAK78Iqs/OP1vJxAgZuPOn4y4vxWhaytwW9VVkjw==
