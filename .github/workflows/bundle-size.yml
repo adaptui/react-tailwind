@@ -1,9 +1,8 @@
 name: Bundle Size
 
 on:
-  pull_request:
-    branches:
-      - main
+  repository_dispatch:
+    types: [bundle-size]
 
 jobs:
   bundlesize:
