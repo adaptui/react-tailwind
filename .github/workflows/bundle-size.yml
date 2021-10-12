@@ -14,9 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: andresz1/size-limit-action@v1
+      - name: Dump the client payload context
         env:
           PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
         run: echo "$PAYLOAD_CONTEXT"
+
+      - uses: andresz1/size-limit-action@v1
+        env:
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
