@@ -16,11 +16,11 @@ jobs:
 
       - name: Dump the client payload context
         env:
-          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload.github) }}
         run: echo "$PAYLOAD_CONTEXT"
 
       - uses: andresz1/size-limit-action@v1
         env:
-          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload.github) }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
