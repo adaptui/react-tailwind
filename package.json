@@ -51,7 +51,7 @@
     "previews": "node scripts/create-previews.js",
     "postpublish": "pinst --enable",
     "release": "release-it",
-    "size": "yarn build && size-limit",
+    "size": "yarn build && size-limit --save-bundle out --clean-dir",
     "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
     "storybook-build": "yarn keys && yarn previews && build-storybook",
     "test": "jest --config ./jest.config.ts --no-cache"
@@ -177,7 +177,7 @@
     "reakit-test-utils": "0.15.2",
     "release-it": "14.11.6",
     "rimraf": "3.0.2",
-    "size-limit": "5.0.5",
+    "size-limit": "6.0.1",
     "sort-package-json": "1.52.0",
     "storybook-addon-preview": "2.1.2",
     "tailwindcss": "2.2.16",
