@@ -2,7 +2,7 @@ name: Bundle Size
 
 on:
   repository_dispatch:
-    types: [bundle-size]
+    types: [bundle-size-command]
 
 jobs:
   bundlesize:
