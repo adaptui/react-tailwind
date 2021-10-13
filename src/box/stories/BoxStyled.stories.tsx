@@ -4,22 +4,22 @@ import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/BoxStyledJsx";
 import ts from "./templates/BoxStyledTsx";
-import { Box } from "./BoxStyled.component";
+import { BoxStyled } from "./BoxStyled.component";
 
-type Meta = ComponentMeta<typeof Box>;
-type Story = ComponentStoryObj<typeof Box>;
+type Meta = ComponentMeta<typeof BoxStyled>;
+type Story = ComponentStoryObj<typeof BoxStyled>;
 
 export default {
   title: "Primitives/Box/Styled",
-  component: Box,
+  component: BoxStyled,
   parameters: {
     layout: "centered",
     options: { showPanel: true },
     preview: createPreviewTabs({ js, ts }),
-    argTypes: createControls(undefined, {
-      ignore: ["unstable_system", "wrapElement"],
-    }),
   },
+  argTypes: createControls(undefined, {
+    ignore: ["unstable_system", "wrapElement"],
+  }),
 } as Meta;
 
 export const Default: Story = {};

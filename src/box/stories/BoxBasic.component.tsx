@@ -1,14 +1,11 @@
 import * as React from "react";
 
-import {
-  Box as RenderlesskitBox,
-  BoxProps as RenderlesskitBoxProps,
-} from "../../index";
+import { Box, BoxProps } from "../../index";
 
-export type BoxProps = RenderlesskitBoxProps & {};
+export type BoxBasicProps = BoxProps & {};
 
-export const Box: React.FC<BoxProps> = props => {
-  return <RenderlesskitBox {...props}>Box</RenderlesskitBox>;
+export const BoxBasic: React.FC<BoxBasicProps> = props => {
+  return <Box {...props}>Box</Box>;
 };
 
-export default Box;
+export default BoxBasic;

@@ -1,23 +1,29 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createControls } from "../../../.storybook/utils";
-import { Spinner } from "../index";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-type Meta = ComponentMeta<typeof Spinner>;
-type Story = ComponentStoryObj<typeof Spinner>;
+import js from "./templates/SpinnerBasicJsx";
+import ts from "./templates/SpinnerBasicTsx";
+import { SpinnerBasic } from "./SpinnerBasic.component";
+
+type Meta = ComponentMeta<typeof SpinnerBasic>;
+type Story = ComponentStoryObj<typeof SpinnerBasic>;
 
 export default {
-  title: "Feedback/Spinner",
-  component: Spinner,
+  title: "Feedback/Spinner/Basic",
+  component: SpinnerBasic,
   argTypes: createControls("spinner", {
     unions: ["size", "stroke"],
     ignore: ["unstable_system", "wrapElement", "as", "state"],
   }),
+  parameters: {
+    options: { showPanel: true },
+    preview: createPreviewTabs({ js, ts }),
+  },
 } as Meta;
 
 export const Default: Story = {
   args: { size: "md", stroke: "transparent" },
-  parameters: { options: { showPanel: true } },
 };
 
 export const ExtraSmall: Story = {
@@ -40,8 +46,4 @@ export const Large: Story = {
 export const StrokeVisible: Story = {
   ...Default,
   args: { ...Default.args, size: "lg", stroke: "visible" },
-};
-
-export const Play = () => {
-  return <Spinner as="span" />;
 };

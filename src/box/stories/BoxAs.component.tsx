@@ -1,28 +1,22 @@
 import * as React from "react";
 
-import {
-  Box as RenderlesskitBox,
-  BoxProps as RenderlesskitBoxProps,
-  Button,
-  ClockIcon,
-  tcm,
-} from "../../index";
+import { Box, BoxProps, Button, ClockIcon, tcm } from "../../index";
 
-export type BoxProps = RenderlesskitBoxProps & {};
+export type BoxAsProps = BoxProps & {};
 
-export const Box: React.FC<BoxProps> = props => {
+export const BoxAs: React.FC<BoxAsProps> = props => {
   const { className, ...rest } = props;
 
   return (
-    <RenderlesskitBox
+    <Box
       as={Button}
       suffix={<ClockIcon />}
       className={tcm("bg-red-500 rounded-lg", className)}
       {...rest}
     >
       Box
-    </RenderlesskitBox>
+    </Box>
   );
 };
 
-export default Box;
+export default BoxAs;

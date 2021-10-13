@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
@@ -8,14 +8,14 @@ import { CheckboxOwnProps } from "../index";
 
 import js from "./templates/CheckboxBasicJsx";
 import ts from "./templates/CheckboxBasicTsx";
-import { Checkbox } from "./CheckboxBasic.component";
+import { CheckboxBasic } from "./CheckboxBasic.component";
 
-type Meta = ComponentMeta<typeof Checkbox>;
-type Story = ComponentStoryObj<typeof Checkbox>;
+type Meta = ComponentMeta<typeof CheckboxBasic>;
+type Story = ComponentStoryObj<typeof CheckboxBasic>;
 
 export default {
   title: "Forms/Checkbox/Basic",
-  component: Checkbox,
+  component: CheckboxBasic,
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },

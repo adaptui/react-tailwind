@@ -1,14 +1,11 @@
 import * as React from "react";
 
-import {
-  Badge as RenderlesskitBadge,
-  BadgeProps as RenderlesskitBadgeProps,
-} from "../../index";
+import { Badge, BadgeProps } from "../../index";
 
-export type BadgeProps = RenderlesskitBadgeProps & {};
+export type BadgeBasicProps = BadgeProps & {};
 
-export const Badge: React.FC<BadgeProps> = props => {
-  return <RenderlesskitBadge {...props}>Beta</RenderlesskitBadge>;
+export const BadgeBasic: React.FC<BadgeBasicProps> = props => {
+  return <Badge {...props}>Beta</Badge>;
 };
 
-export default Badge;
+export default BadgeBasic;
