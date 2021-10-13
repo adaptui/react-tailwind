@@ -10,7 +10,7 @@ type Meta = ComponentMeta<typeof CheckboxGroup>;
 type Story = ComponentStoryObj<typeof CheckboxGroup>;
 
 export default {
-  title: "Forms/Checkbox/Stack",
+  title: "Forms/Checkbox/Group",
   component: CheckboxGroup,
   argTypes: {
     label: { control: { type: "text" } },
@@ -32,37 +32,26 @@ export default {
         "icon",
       ],
     }),
+    disabled: { table: { disable: false } },
+    size: { table: { disable: true } },
   },
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts }),
+    options: { showPanel: true },
   },
 } as Meta;
 
-export const Default: Story = {
-  argTypes: {
-    disabled: { table: { disable: false } },
-    size: { table: { disable: true } },
-  },
-  parameters: { options: { showPanel: true } },
+export const Default: Story = {};
+
+export const ShowMoreDefault: Story = {
+  args: { maxVisibleItems: 3 },
 };
 
-export const GroupDefault: Story = {
-  args: { size: "md", stack: "vertical" },
-  parameters: { options: { showPanel: true } },
+export const Horizontal: Story = {
+  args: { stack: "horizontal" },
 };
 
-export const GroupDefaultShowMore: Story = {
-  args: { size: "md", stack: "vertical", maxVisibleItems: 3 },
-  parameters: { options: { showPanel: true } },
-};
-
-export const GroupHorizontal: Story = {
-  args: { size: "md", stack: "horizontal" },
-  parameters: { options: { showPanel: true } },
-};
-
-export const GroupHorizontalShowMore: Story = {
-  args: { size: "md", stack: "horizontal", maxVisibleItems: 3 },
-  parameters: { options: { showPanel: true } },
+export const ShowMoreHorizontal: Story = {
+  args: { stack: "horizontal", maxVisibleItems: 3 },
 };
