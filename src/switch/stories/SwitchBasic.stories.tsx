@@ -2,16 +2,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/CheckboxStackJsx";
-import ts from "./templates/CheckboxStackTsx";
-import { CheckboxStack } from "./CheckboxStack.component";
+import js from "./templates/SwitchBasicJsx";
+import ts from "./templates/SwitchBasicTsx";
+import { SwitchBasic } from "./SwitchBasic.component";
 
-type Meta = ComponentMeta<typeof CheckboxStack>;
-type Story = ComponentStoryObj<typeof CheckboxStack>;
+type Meta = ComponentMeta<typeof SwitchBasic>;
+type Story = ComponentStoryObj<typeof SwitchBasic>;
 
 export default {
-  title: "Forms/Checkbox/Stack",
-  component: CheckboxStack,
+  title: "Forms/Switch/Basic",
+  component: SwitchBasic,
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
@@ -32,8 +32,6 @@ export default {
         "icon",
       ],
     }),
-    disabled: { table: { disable: false } },
-    size: { table: { disable: true } },
   },
   parameters: {
     layout: "centered",
@@ -42,15 +40,45 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: { size: "md", defaultState: false },
+  parameters: { options: { showPanel: true } },
+};
+
+export const Small: Story = {
+  ...Default,
+  args: { ...Default.args, size: "sm" },
+  argTypes: {
+    ...Default.argTypes,
+  },
+};
+export const Medium: Story = {
+  ...Default,
+  argTypes: {
+    ...Default.argTypes,
+  },
+};
+export const Large: Story = {
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+  argTypes: {
+    ...Default.argTypes,
+  },
+};
+
+export const UnChecked: Story = { ...Default };
+export const Checked: Story = {
+  ...Default,
+  args: { ...Default.args, defaultState: true },
+};
 
 export const Label: Story = {
-  args: { label: "Checkbox" },
+  args: { label: "Switch" },
 };
 
 export const Description: Story = {
   args: {
-    label: "Checkbox",
+    label: "Switch",
     description:
       "Used when the checkbox is selected and will use its value for the form submission.",
   },
@@ -61,13 +89,13 @@ export const Disabled: Story = {
 };
 
 export const DisabledLabel: Story = {
-  args: { label: "Checkbox", disabled: true },
+  args: { disabled: true, label: "Switch" },
 };
 
 export const DisabledDescription: Story = {
   args: {
-    label: "Checkbox",
     disabled: true,
+    label: "Switch",
     description:
       "Used when the checkbox is selected and will use its value for the form submission.",
   },

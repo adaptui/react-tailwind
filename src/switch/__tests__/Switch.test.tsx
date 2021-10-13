@@ -22,7 +22,7 @@ describe("<Switch />", () => {
   });
 
   it("can be disabled", () => {
-    render(<Switch isDisabled defaultChecked={true} />);
+    render(<Switch disabled defaultChecked={true} />);
 
     expect(screen.getByRole("switch")).toBeDisabled();
     // toBeChecked is failing for this case
@@ -60,12 +60,12 @@ describe("<Switch />", () => {
     const LIGHT_MODE = "Light Mode";
     render(
       <Switch defaultChecked={true}>
-        {({ checked }) => {
+        {({ isChecked }) => {
           return (
             <SwitchLabel>
               <SwitchInput />
               <span data-testid="testid-mode">
-                {checked ? DARK_MODE : LIGHT_MODE}
+                {isChecked ? DARK_MODE : LIGHT_MODE}
               </span>
             </SwitchLabel>
           );

@@ -46,7 +46,6 @@ export default {
 
 export const Default: Story = {
   args: { size: "md", defaultState: false },
-  parameters: { options: { showPanel: true } },
 };
 
 export const Small: Story = {
@@ -80,6 +79,42 @@ export const Indeterminate: Story = {
   args: { ...Default.args, defaultState: "indeterminate" },
 };
 
+export const Label: Story = {
+  ...Default,
+  args: { ...Default.args, label: "Checkbox" },
+};
+
+export const Description: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label: "Checkbox",
+    description:
+      "Used when the checkbox is selected and will use its value for the form submission.",
+  },
+};
+
+export const Disabled: Story = {
+  ...Default,
+  args: { ...Default.args, disabled: true },
+};
+
+export const DisabledLabel: Story = {
+  ...Default,
+  args: { ...Default.args, label: "Checkbox", disabled: true },
+};
+
+export const DisabledDescription: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label: "Checkbox",
+    disabled: true,
+    description:
+      "Used when the checkbox is selected and will use its value for the form submission.",
+  },
+};
+
 const CustomIconElement: CheckboxOwnProps["icon"] = state => (
   <>
     {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
@@ -91,7 +126,7 @@ export const CustomIcon: Story = {
   ...Default,
   args: {
     ...Default.args,
-    icon: { CustomIconElement },
+    icon: CustomIconElement,
     label: "Custom Icons",
   },
 };
