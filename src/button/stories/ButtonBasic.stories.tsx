@@ -11,14 +11,14 @@ import {
 
 import js from "./templates/ButtonBasicJsx";
 import ts from "./templates/ButtonBasicTsx";
-import { Button } from "./ButtonBasic.component";
+import { ButtonBasic } from "./ButtonBasic.component";
 
-type Meta = ComponentMeta<typeof Button>;
-type Story = ComponentStoryObj<typeof Button>;
+type Meta = ComponentMeta<typeof ButtonBasic>;
+type Story = ComponentStoryObj<typeof ButtonBasic>;
 
 export default {
   title: "Primitives/Button/Basic",
-  component: Button,
+  component: ButtonBasic,
   argTypes: createControls("button", {
     ignore: [
       "unstable_system",

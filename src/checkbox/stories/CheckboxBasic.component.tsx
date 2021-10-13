@@ -1,14 +1,11 @@
 import * as React from "react";
 
-import {
-  Checkbox as RenderlesskitCheckbox,
-  CheckboxProps as RenderlesskitCheckboxProps,
-} from "../../index";
+import { Checkbox, CheckboxProps } from "../../index";
 
-export type CheckboxProps = RenderlesskitCheckboxProps & {};
+export type CheckboxBasicProps = CheckboxProps & {};
 
-export const Checkbox: React.FC<CheckboxProps> = props => {
-  return <RenderlesskitCheckbox {...props} />;
+export const CheckboxBasic: React.FC<CheckboxBasicProps> = props => {
+  return <Checkbox {...props} />;
 };
 
-export default Checkbox;
+export default CheckboxBasic;

@@ -4,14 +4,14 @@ import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/BadgeBasicJsx";
 import ts from "./templates/BadgeBasicTsx";
-import { Badge } from "./BadgeBasic.component";
+import { BadgeBasic } from "./BadgeBasic.component";
 
-type Meta = ComponentMeta<typeof Badge>;
-type Story = ComponentStoryObj<typeof Badge>;
+type Meta = ComponentMeta<typeof BadgeBasic>;
+type Story = ComponentStoryObj<typeof BadgeBasic>;
 
 export default {
   title: "Primitives/Badge/Basic",
-  component: Badge,
+  component: BadgeBasic,
   parameters: {
     layout: "centered",
     options: { showPanel: true },

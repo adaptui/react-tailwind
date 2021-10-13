@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { ShowMore, ShowMoreProps } from "../ShowMore";
 
-export const ShowMoreComponent: React.FC<ShowMoreProps> = props => {
+export const ShowMoreVertical: React.FC<ShowMoreProps> = props => {
   return (
     <div className="overflow-y-scroll h-80">
       <div className="flex flex-col items-start space-y-2">
@@ -26,6 +26,8 @@ export const ShowMoreComponent: React.FC<ShowMoreProps> = props => {
     </div>
   );
 };
+
+export default ShowMoreVertical;
 
 export const ShowMoreHorizontalComponent: React.FC<ShowMoreProps> = props => {
   return (

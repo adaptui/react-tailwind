@@ -1,4 +1,4 @@
-import { createIcon } from "../icon";
+import { createIcon } from "../create-icon";
 
 export const MoonIcon = createIcon({
   displayName: "MoonIcon",

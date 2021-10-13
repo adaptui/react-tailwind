@@ -2,14 +2,14 @@ import * as React from "react";
 
 import {
   Checkbox,
-  CheckboxGroup as RenderlesskitCheckboxGroup,
-  CheckboxGroupProps as RenderlesskitCheckboxGroupProps,
+  CheckboxGroup,
+  CheckboxGroupProps,
   CheckboxProps,
 } from "../../index";
 
-export type CheckboxGroupProps = RenderlesskitCheckboxGroupProps & {};
+export type CheckboxGroupBasicProps = CheckboxGroupProps & {};
 
-export const CheckboxGroup: React.FC<CheckboxGroupProps> = props => {
+export const CheckboxGroupBasic: React.FC<CheckboxGroupBasicProps> = props => {
   const [state, setState] = React.useState<NonNullable<CheckboxProps["state"]>>(
     [],
   );
@@ -21,7 +21,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = props => {
       <div className="text-xl font-bold" id="label">
         Pick fruits to eat
       </div>
-      <RenderlesskitCheckboxGroup aria-labelledby="label" {...props}>
+      <CheckboxGroup aria-labelledby="label" {...props}>
         <Checkbox
           state={state}
           onStateChange={setState}
@@ -52,7 +52,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = props => {
           value="cherry"
           label="Cherry"
         />
-      </RenderlesskitCheckboxGroup>
+      </CheckboxGroup>
       {state.length > 0 ? (
         <div>
           <div className="font-semibold">Picked fruits:</div>
@@ -69,7 +69,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = props => {
   );
 };
 
-export default CheckboxGroup;
+export default CheckboxGroupBasic;
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
