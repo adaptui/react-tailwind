@@ -2,8 +2,8 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/CheckboxGroupJsx";
-import ts from "./templates/CheckboxGroupTsx";
+import js from "./templates/CheckboxGroupBasicJsx";
+import ts from "./templates/CheckboxGroupBasicTsx";
 import { CheckboxGroupBasic } from "./CheckboxGroupBasic.component";
 
 type Meta = ComponentMeta<typeof CheckboxGroupBasic>;
