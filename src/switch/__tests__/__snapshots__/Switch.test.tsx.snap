@@ -3,17 +3,17 @@
 exports[`<Switch /> should render correctly 1`] = `
 <DocumentFragment>
   <label
-    class="inline-block leading-normal align-top cursor-pointer"
+    class="relative inline-flex items-center cursor-pointer align-top"
   >
     <input
       aria-checked="false"
-      class="sr-only"
+      class="peer sr-only"
       role="switch"
       type="checkbox"
     />
     <span
       aria-hidden="true"
-      class="inline-flex justify-start flex-shrink-0 rounded-full p-0.5 transition-all h-4 w-[1.625rem]"
+      class="inline-flex items-center justify-start flex-shrink-0 align-top select-none transition-all h-4 w-[1.625rem] rounded-full p-0.5 bg-gray-300"
       role="img"
     >
       <span
