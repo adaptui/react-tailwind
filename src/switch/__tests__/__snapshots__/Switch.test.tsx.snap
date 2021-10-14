@@ -5,21 +5,16 @@ exports[`Switch should render correctly 1`] = `
   <label
     class="relative inline-flex items-center cursor-pointer align-top"
   >
-    <input
+    <button
       aria-checked="false"
       class="peer sr-only"
       role="switch"
-      type="checkbox"
     />
     <span
       aria-hidden="true"
-      class="inline-flex items-center justify-start flex-shrink-0 align-top select-none transition-all h-4 w-[1.625rem] rounded-full p-0.5 bg-gray-300"
+      class="relative inline-flex items-center justify-start flex-shrink-0 align-top select-none transition-all h-4 w-[26px] rounded-full bg-gray-200 peer-hover:bg-gray-300 peer-active:bg-gray-300 peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300 peer-disabled:bg-gray-300 after:absolute after:transform after:transition-all after:will-change-width after:bg-white after:w-[13px] after:h-[13px] after:rounded-full peer-active:after:w-[14px] after:top-[1.5px] after:left-[1.5px]"
       role="img"
-    >
-      <span
-        class="transition-transform transform bg-white rounded-full shadow h-3 w-3 translate-x-0"
-      />
-    </span>
+    />
   </label>
 </DocumentFragment>
 `;
