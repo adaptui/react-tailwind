@@ -23,6 +23,9 @@ const utilities = plugin(function ({ addUtilities }) {
     ".will-change-transform": {
       "will-change": "transform",
     },
+    ".will-change-width": {
+      "will-change": "width",
+    },
   };
 
   addUtilities(utilities);

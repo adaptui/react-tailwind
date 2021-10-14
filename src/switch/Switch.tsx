@@ -48,7 +48,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
 
     return (
       <SwitchLabel {...labelProps}>
-        <SwitchInput ref={ref} {...inputProps} />
+        <SwitchInput as="button" ref={ref} {...inputProps} />
         <SwitchIcon {...iconProps} />
         {label && !description ? <SwitchText {...textProps} /> : null}
         {label && description ? (

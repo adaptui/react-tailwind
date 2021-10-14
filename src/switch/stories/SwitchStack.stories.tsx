@@ -15,7 +15,7 @@ export default {
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
-    ...createControls("checkbox", {
+    ...createControls(undefined, {
       ignore: [
         "unstable_system",
         "unstable_clickOnEnter",

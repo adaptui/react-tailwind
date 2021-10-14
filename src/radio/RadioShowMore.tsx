@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
 import { PlusIcon } from "../icons";
 import {
@@ -9,7 +8,7 @@ import {
   ShowMoreProps,
 } from "../show-more/ShowMore";
 import { useTheme } from "../theme";
-import { Dict } from "../utils";
+import { cx, Dict } from "../utils";
 
 import { useRadioStateContext } from "./RadioGroupState";
 

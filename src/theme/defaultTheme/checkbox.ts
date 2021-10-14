@@ -30,7 +30,7 @@ export const checkbox = {
   label: {
     base: "relative inline-flex items-center cursor-pointer align-top",
     only: "hover:bg-gray-100",
-    disabled: "cursor-not-allowed",
+    disabled: "pointer-events-none",
     size: {
       sm: "min-h-[26px] px-2 pb-px rounded-lg",
       md: "min-h-[30px] px-2.5 rounded-lg",
@@ -90,9 +90,9 @@ export const checkbox = {
   description: {
     base: "text-gray-500 select-none",
     size: {
-      sm: "text-paragraph-cxs mt-1 ml-1.5",
-      md: "text-paragraph-sm mt-1.5 ml-2",
-      lg: "text-paragraph-sm mt-2 ml-2",
+      sm: "text-cxs mt-1 ml-1.5",
+      md: "text-sm mt-1.5 ml-2",
+      lg: "text-sm mt-2 ml-2",
     },
   },
 };

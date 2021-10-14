@@ -29,6 +29,13 @@ export const SwitchStack: React.FC<SwitchStackProps> = props => {
         <Switch size="lg" {...props} />
         <Switch size="lg" defaultState={true} {...props} />
       </Group>
+      <Group
+        className="flex flex-row space-x-4 w-fit"
+        aria-label="switch extra large example"
+      >
+        <Switch size="xl" {...props} />
+        <Switch size="xl" defaultState={true} {...props} />
+      </Group>
     </div>
   );
 };

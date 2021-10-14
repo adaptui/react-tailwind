@@ -5,14 +5,13 @@ import {
   ButtonOptions as ReakitButtonOptions,
   useButton as useReakitButton,
 } from "reakit";
-import { cx } from "@renderlesskit/react";
 import { announce } from "@react-aria/live-announcer";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { RenderPropType, withIconA11y } from "../utils";
+import { cx, RenderPropType, withIconA11y } from "../utils";
 
 import { BUTTON_KEYS } from "./__keys";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";

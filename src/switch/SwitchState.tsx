@@ -25,7 +25,7 @@ export type SwitchState = CheckboxState & {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+  size: keyof Renderlesskit.GetThemeValue<"switch", "icon", "size">;
 
   /**
    * Input's value.
@@ -86,11 +86,12 @@ export const SwitchDefaultIcon: SwitchOwnProps["icon"] = state => {
 
   const theme = useTheme("switch");
   const switchIconContentStyles = tcm(
-    theme.icon.content.base,
-    theme.icon.content.size[size],
+    theme.icon.children.base,
+    theme.icon.children.size.default[size],
+    theme.icon.children.size.active[size],
     isChecked
-      ? theme.icon.content.checked.size[size]
-      : theme.icon.content.unChecked,
+      ? theme.icon.children.checked.size[size]
+      : theme.icon.children.unChecked,
   );
 
   return <Box as="span" className={switchIconContentStyles} />;

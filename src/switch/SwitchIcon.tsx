@@ -1,8 +1,8 @@
 import { createComponent, createHook } from "reakit-system";
-import { cx } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { SWITCH_ICON_KEYS } from "./__keys";
 import { SwitchProps } from "./Switch";
@@ -25,14 +25,37 @@ export const useSwitchIcon = createHook<SwitchIconOptions, SwitchIconHTMLProps>(
 
     useProps(options, htmlProps) {
       const { isChecked, size, description } = options;
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+      const {
+        className: htmlClassName,
+        children,
+        ...restHtmlProps
+      } = htmlProps;
 
       const theme = useTheme("switch");
       const className = cx(
-        theme.icon.wrapper.base,
-        theme.icon.wrapper.size[size],
-        description ? theme.icon.wrapper.description : "",
-        isChecked ? theme.icon.wrapper.checked : theme.icon.wrapper.unChecked,
+        theme.icon.base,
+        theme.icon.size[size],
+        description ? theme.icon.description : "",
+        isChecked
+          ? cx(
+              theme.icon.checked.default,
+              theme.icon.checked.hover,
+              theme.icon.checked.active,
+              theme.icon.checked.focus,
+              theme.icon.checked.disabled,
+            )
+          : cx(
+              theme.icon.unChecked.default,
+              theme.icon.unChecked.hover,
+              theme.icon.unChecked.active,
+              theme.icon.unChecked.focus,
+              theme.icon.unChecked.disabled,
+            ),
+        theme.icon.afterChildren.base,
+        theme.icon.afterChildren.size.default[size],
+        isChecked
+          ? theme.icon.afterChildren.size.checked[size]
+          : theme.icon.afterChildren.size.unChecked[size],
         htmlClassName,
       );
 

@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cx } from "@chakra-ui/utils";
+
+import { cx } from "../utils";
 
 import { createTailwindMerge } from "./tailwind-merge";
 import {
@@ -82,6 +83,17 @@ export function runIfFnChildren<T, U>(
   valueOrFn: T | ((...fnArgs: U[]) => T),
   ...args: U[]
 ): T {
+  // Know bug but this is the only way to make it work
+  // {({ isChecked }) => {
+  //   return (
+  //     <>
+  //       <SwitchText data-testid="testid-mode">
+  //         {isChecked ? DARK_MODE : LIGHT_MODE}
+  //       </SwitchText>
+  //     </>
+  //   );
+  // }}
+  // Need a wrapper to get the children when the children is a function
   // @ts-ignore
   return isFunction(valueOrFn) ? valueOrFn(...args).props.children : valueOrFn;
 }

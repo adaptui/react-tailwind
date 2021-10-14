@@ -2,10 +2,10 @@ import * as React from "react";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
 import { GroupHTMLProps, GroupOptions, useGroup } from "reakit";
 import { useWarning } from "reakit-warning";
-import { cx } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { RENDERLESSKIT_CHECKBOX_GROUP_KEYS } from "./__keys";
 import { CheckboxGroupState } from "./CheckboxGroupState";

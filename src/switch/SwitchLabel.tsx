@@ -1,8 +1,8 @@
 import { createComponent, createHook } from "reakit-system";
-import { cx } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { SWITCH_LABEL_KEYS } from "./__keys";
 import { SwitchProps } from "./Switch";

@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { Switch, SwitchText } from "..";
 
 import js from "./templates/SwitchBasicJsx";
 import ts from "./templates/SwitchBasicTsx";
@@ -15,7 +16,7 @@ export default {
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
-    ...createControls("checkbox", {
+    ...createControls(undefined, {
       ignore: [
         "unstable_system",
         "unstable_clickOnEnter",
@@ -42,28 +43,20 @@ export default {
 
 export const Default: Story = {
   args: { size: "md", defaultState: false },
-  parameters: { options: { showPanel: true } },
 };
 
 export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
-export const Medium: Story = {
-  ...Default,
-  argTypes: {
-    ...Default.argTypes,
-  },
-};
+export const Medium: Story = {};
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
-  argTypes: {
-    ...Default.argTypes,
-  },
+};
+export const ExtraLarge: Story = {
+  ...Default,
+  args: { ...Default.args, size: "xl" },
 };
 
 export const UnChecked: Story = { ...Default };
@@ -99,4 +92,22 @@ export const DisabledDescription: Story = {
     description:
       "Used when the checkbox is selected and will use its value for the form submission.",
   },
+};
+
+export const Custom = () => {
+  const DARK_MODE = "Dark Mode";
+  const LIGHT_MODE = "Light Mode";
+  return (
+    <Switch defaultState={true}>
+      {({ isChecked }) => {
+        return (
+          <>
+            <SwitchText data-testid="testid-mode">
+              {isChecked ? DARK_MODE : LIGHT_MODE}
+            </SwitchText>
+          </>
+        );
+      }}
+    </Switch>
+  );
 };
