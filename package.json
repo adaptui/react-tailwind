@@ -112,6 +112,8 @@
     "@storybook/addon-actions": "6.4.0-beta.10",
     "@storybook/addon-essentials": "6.4.0-beta.10",
     "@storybook/addon-postcss": "2.0.0",
+    "@storybook/builder-webpack5": "^6.4.0-beta.11",
+    "@storybook/manager-webpack5": "^6.4.0-beta.11",
     "@storybook/react": "6.4.0-beta.10",
     "@testing-library/dom": "8.7.2",
     "@testing-library/jest-dom": "5.14.1",
@@ -184,7 +186,8 @@
     "ts-morph": "12.0.0",
     "ts-node": "10.3.0",
     "tsd": "0.18.0",
-    "typescript": "4.4.4"
+    "typescript": "4.4.4",
+    "webpack": "5"
   },
   "peerDependencies": {
     "deepmerge": "4.x",

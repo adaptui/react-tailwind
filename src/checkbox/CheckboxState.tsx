@@ -81,7 +81,7 @@ export function useCheckboxState(
   return {
     state,
     setState,
-    size: originalSize ?? contextState?.size,
+    size: originalSize ?? contextState?.size ?? "md",
     value,
     isChecked,
     isIndeterminate,
