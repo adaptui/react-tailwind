@@ -27,35 +27,6 @@ export const _switch = {
       focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
       disabled: "peer-disabled:bg-gray-500",
     },
-    afterChildren: {
-      base: "after:absolute after:transform after:transition-all after:will-change-width after:bg-white after:box-border",
-      size: {
-        default: {
-          sm: "after:w-2.5 after:h-2.5 after:rounded-full peer-active:after:w-3 after:shadow-switch-md",
-          md: "after:w-3 after:h-3 after:rounded-full peer-active:after:w-[13px] after:shadow-switch-md",
-          lg: "after:w-4 after:h-4 after:rounded-full peer-active:after:w-[18px] after:shadow-switch-md",
-          xl: "after:w-6 after:h-6 after:rounded-full peer-active:after:w-[26px] after:shadow-md",
-        },
-        disabled: {
-          sm: "after:shadow-switch-none",
-          md: "after:shadow-switch-none",
-          lg: "after:shadow-switch-none",
-          xl: "after:shadow-none",
-        },
-        checked: {
-          sm: "after:left-[calc(100%-2px)] after:-translate-x-full",
-          md: "after:left-[calc(100%-2px)] after:-translate-x-full",
-          lg: "after:left-[calc(100%-2px)] after:-translate-x-full",
-          xl: "after:left-[calc(100%-2px)] after:-translate-x-full",
-        },
-        unChecked: {
-          sm: "after:top-0.5 after:left-0.5",
-          md: "after:top-0.5 after:left-0.5",
-          lg: "after:top-0.5 after:left-0.5",
-          xl: "after:top-0.5 after:left-0.5",
-        },
-      },
-    },
     children: {
       base: "absolute transform transition-all will-change-width bg-white box-border",
       size: {
