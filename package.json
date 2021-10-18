@@ -20,8 +20,13 @@
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",
   "sideEffects": false,
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "default": "./dist/esm/index.js"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "source": "src/foo.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "files": [
@@ -75,8 +80,7 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "not dead"
     ],
     "development": [
       "last 1 chrome version",
