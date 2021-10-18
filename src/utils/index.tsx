@@ -1,8 +1,8 @@
 import * as React from "react";
-import { createTailwindMerge } from "tailwind-merge";
 
 import { cx } from "../utils";
 
+import { createTailwindMerge } from "./tailwind-merge";
 import {
   As,
   ComponentWithAs,
