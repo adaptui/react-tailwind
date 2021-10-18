@@ -1,3 +1,10 @@
+### [0.0.1-alpha.20](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.19...v0.0.1-alpha.20) (2021-10-18)
+
+
+### Build Updates
+
+* **package:** 👷 add proper exports & tailwind merge ([a58c92f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/a58c92f1b400229c81210d18db4075472aca2726))
+
 ### [0.0.1-alpha.19](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.18...v0.0.1-alpha.19) (2021-10-18)
 
 
