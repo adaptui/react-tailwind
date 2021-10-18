@@ -1,3 +1,10 @@
+### [0.0.1-alpha.21](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.20...v0.0.1-alpha.21) (2021-10-18)
+
+
+### Build Updates
+
+* **tw:** 💚 revert to local tailwind-merge version ([d6b25ef](https://github.com/timelessco/renderlesskit-react-tailwind/commit/d6b25efd655d54d49dc8d36cbb8bdd2a11b3c0c7))
+
 ### [0.0.1-alpha.20](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.19...v0.0.1-alpha.20) (2021-10-18)
 
 
