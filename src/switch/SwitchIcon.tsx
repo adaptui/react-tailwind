@@ -25,11 +25,7 @@ export const useSwitchIcon = createHook<SwitchIconOptions, SwitchIconHTMLProps>(
 
     useProps(options, htmlProps) {
       const { isChecked, size, description } = options;
-      const {
-        className: htmlClassName,
-        children,
-        ...restHtmlProps
-      } = htmlProps;
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
       const theme = useTheme("switch");
       const className = cx(
@@ -51,11 +47,6 @@ export const useSwitchIcon = createHook<SwitchIconOptions, SwitchIconHTMLProps>(
               theme.icon.unChecked.focus,
               theme.icon.unChecked.disabled,
             ),
-        theme.icon.afterChildren.base,
-        theme.icon.afterChildren.size.default[size],
-        isChecked
-          ? theme.icon.afterChildren.size.checked[size]
-          : theme.icon.afterChildren.size.unChecked[size],
         htmlClassName,
       );
 

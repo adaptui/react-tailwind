@@ -52,7 +52,7 @@
     "postpublish": "pinst --enable",
     "release": "release-it",
     "size": "yarn build && size-limit --save-bundle out --clean-dir",
-    "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "storybook-build": "yarn keys && yarn previews && build-storybook",
     "test": "jest --config ./jest.config.ts --no-cache"
   },

@@ -82,16 +82,16 @@ const componentMap = {
 };
 
 export const SwitchDefaultIcon: SwitchOwnProps["icon"] = state => {
-  const { size, isChecked } = state;
+  const { size, isChecked, disabled } = state;
 
   const theme = useTheme("switch");
   const switchIconContentStyles = tcm(
     theme.icon.children.base,
     theme.icon.children.size.default[size],
-    theme.icon.children.size.active[size],
     isChecked
-      ? theme.icon.children.checked.size[size]
-      : theme.icon.children.unChecked,
+      ? theme.icon.children.size.checked[size]
+      : theme.icon.children.size.unChecked[size],
+    disabled ? theme.icon.children.size.disabled[size] : "",
   );
 
   return <Box as="span" className={switchIconContentStyles} />;
@@ -136,7 +136,7 @@ export const useSwitchProps = (props: React.PropsWithChildren<SwitchProps>) => {
     ...state,
     description: _description,
     ...componentProps.iconProps,
-    children: runIfFn(_icon, state),
+    children: runIfFn(_icon, { ...state, disabled: restProps.disabled }),
   };
 
   const textProps: SwitchTextProps = {

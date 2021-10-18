@@ -17,7 +17,7 @@ export type SwitchOwnProps = Partial<SwitchInputProps> & {
   /**
    * Provide custom icons as a replacement for the default ones.
    */
-  icon?: RenderPropType<SwitchStateReturn>;
+  icon?: RenderPropType<SwitchStateReturn & Pick<SwitchInputProps, "disabled">>;
 
   /**
    * Description for the Switch.
