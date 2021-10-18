@@ -70,7 +70,7 @@ export function useCheckboxState(
   props: CheckboxInitialState = {},
 ): CheckboxStateReturn {
   const { state, setState } = useRenderlesskitCheckboxState(props);
-  const { size: originalSize = "md", value } = props;
+  const { size: originalSize, value } = props;
   const contextState = useCheckboxStateContext();
 
   const isChecked =
@@ -81,7 +81,7 @@ export function useCheckboxState(
   return {
     state,
     setState,
-    size: contextState?.size ?? originalSize,
+    size: originalSize ?? contextState?.size ?? "md",
     value,
     isChecked,
     isIndeterminate,

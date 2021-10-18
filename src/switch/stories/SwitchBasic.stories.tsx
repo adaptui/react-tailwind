@@ -1,25 +1,22 @@
-import * as React from "react";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { EyeClose, EyeOpen } from "../../icons";
-import { withIconA11y } from "../../utils";
-import { CheckboxOwnProps } from "../index";
+import { Switch, SwitchText } from "..";
 
-import js from "./templates/CheckboxBasicJsx";
-import ts from "./templates/CheckboxBasicTsx";
-import { CheckboxBasic } from "./CheckboxBasic.component";
+import js from "./templates/SwitchBasicJsx";
+import ts from "./templates/SwitchBasicTsx";
+import { SwitchBasic } from "./SwitchBasic.component";
 
-type Meta = ComponentMeta<typeof CheckboxBasic>;
-type Story = ComponentStoryObj<typeof CheckboxBasic>;
+type Meta = ComponentMeta<typeof SwitchBasic>;
+type Story = ComponentStoryObj<typeof SwitchBasic>;
 
 export default {
-  title: "Forms/Checkbox/Basic",
-  component: CheckboxBasic,
+  title: "Forms/Switch/Basic",
+  component: SwitchBasic,
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
-    ...createControls("checkbox", {
+    ...createControls(undefined, {
       ignore: [
         "unstable_system",
         "unstable_clickOnEnter",
@@ -51,22 +48,15 @@ export const Default: Story = {
 export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
-export const Medium: Story = {
-  ...Default,
-  argTypes: {
-    ...Default.argTypes,
-  },
-};
+export const Medium: Story = {};
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
-  argTypes: {
-    ...Default.argTypes,
-  },
+};
+export const ExtraLarge: Story = {
+  ...Default,
+  args: { ...Default.args, size: "xl" },
 };
 
 export const UnChecked: Story = { ...Default };
@@ -74,59 +64,50 @@ export const Checked: Story = {
   ...Default,
   args: { ...Default.args, defaultState: true },
 };
-export const Indeterminate: Story = {
-  ...Default,
-  args: { ...Default.args, defaultState: "indeterminate" },
-};
 
 export const Label: Story = {
-  ...Default,
-  args: { ...Default.args, label: "Checkbox" },
+  args: { label: "Switch" },
 };
 
 export const Description: Story = {
-  ...Default,
   args: {
-    ...Default.args,
-    label: "Checkbox",
+    label: "Switch",
     description:
       "Used when the checkbox is selected and will use its value for the form submission.",
   },
 };
 
 export const Disabled: Story = {
-  ...Default,
-  args: { ...Default.args, disabled: true },
+  args: { disabled: true },
 };
 
 export const DisabledLabel: Story = {
-  ...Default,
-  args: { ...Default.args, label: "Checkbox", disabled: true },
+  args: { disabled: true, label: "Switch" },
 };
 
 export const DisabledDescription: Story = {
-  ...Default,
   args: {
-    ...Default.args,
-    label: "Checkbox",
     disabled: true,
+    label: "Switch",
     description:
       "Used when the checkbox is selected and will use its value for the form submission.",
   },
 };
 
-const CustomIconElement: CheckboxOwnProps["icon"] = state => (
-  <>
-    {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-    {state.isChecked ? withIconA11y(<EyeOpen />) : null}
-  </>
-);
-
-export const CustomIcon: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    icon: CustomIconElement,
-    label: "Custom Icons",
-  },
+export const Custom = () => {
+  const DARK_MODE = "Dark Mode";
+  const LIGHT_MODE = "Light Mode";
+  return (
+    <Switch defaultState={true}>
+      {({ isChecked }) => {
+        return (
+          <>
+            <SwitchText data-testid="testid-mode">
+              {isChecked ? DARK_MODE : LIGHT_MODE}
+            </SwitchText>
+          </>
+        );
+      }}
+    </Switch>
+  );
 };

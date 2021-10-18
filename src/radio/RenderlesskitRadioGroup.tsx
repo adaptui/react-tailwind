@@ -1,9 +1,9 @@
 import { createComponent, createHook } from "reakit-system";
 import { RadioGroupHTMLProps, RadioGroupOptions, useRadioGroup } from "reakit";
-import { cx } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { RENDERLESSKIT_RADIO_GROUP_KEYS } from "./__keys";
 import { RadioGroupState } from "./RadioGroupState";

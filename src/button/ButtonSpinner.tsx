@@ -1,9 +1,8 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { passProps } from "../utils";
+import { cx, passProps } from "../utils";
 
 import { ButtonProps } from "./Button";
 

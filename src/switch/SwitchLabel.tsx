@@ -1,19 +1,48 @@
-import { Box, BoxProps } from "../box";
+import { createComponent, createHook } from "reakit-system";
+
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
 
-export type SwitchLabelProps = BoxProps & {};
+import { SWITCH_LABEL_KEYS } from "./__keys";
+import { SwitchProps } from "./Switch";
+import { SwitchStateReturn } from "./SwitchState";
 
-export const SwitchLabel = forwardRefWithAs<
-  SwitchLabelProps,
-  HTMLLabelElement,
-  "label"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const switchStyles = tcm(theme.switch.label, className);
+export type SwitchLabelOptions = BoxOptions &
+  Pick<SwitchStateReturn, "size"> & {
+    description?: SwitchProps["description"];
+    disabled?: SwitchProps["disabled"];
+  };
 
-  return <Box as="label" ref={ref} className={switchStyles} {...rest} />;
+export type SwitchLabelHTMLProps = BoxHTMLProps;
+
+export type SwitchLabelProps = SwitchLabelOptions & SwitchLabelHTMLProps;
+
+export const useSwitchLabel = createHook<
+  SwitchLabelOptions,
+  SwitchLabelHTMLProps
+>({
+  name: "SwitchLabel",
+  compose: useBox,
+  keys: SWITCH_LABEL_KEYS,
+
+  useProps(options, htmlProps) {
+    const { disabled } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("switch");
+    const className = cx(
+      theme.label.base,
+      disabled ? theme.label.disabled : "",
+      htmlClassName,
+    );
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-SwitchLabel.displayName = "SwitchLabel";
+export const SwitchLabel = createComponent({
+  as: "label",
+  memo: true,
+  useHook: useSwitchLabel,
+});

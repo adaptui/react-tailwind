@@ -1,27 +1,42 @@
-import { Box, BoxProps } from "../box";
+import { createComponent, createHook } from "reakit-system";
+
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
 
-import { useSwitchContext } from "./Switch";
+import { SWITCH_TEXT_KEYS } from "./__keys";
+import { SwitchStateReturn } from "./SwitchState";
 
-export type SwitchTextProps = BoxProps & {};
+export type SwitchTextOptions = BoxOptions & Pick<SwitchStateReturn, "size">;
 
-export const SwitchText = forwardRefWithAs<
-  SwitchTextProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const { className, as = "span", ...rest } = props;
-  const { size = "md" } = useSwitchContext();
+export type SwitchTextHTMLProps = BoxHTMLProps;
 
-  const theme = useTheme();
-  const switchLabelStyles = tcm(
-    theme.switch.labelText.base,
-    theme.switch.labelText.size[size],
-    className,
-  );
+export type SwitchTextProps = SwitchTextOptions & SwitchTextHTMLProps;
 
-  return <Box as={as} className={switchLabelStyles} ref={ref} {...rest} />;
+export const useSwitchText = createHook<SwitchTextOptions, SwitchTextHTMLProps>(
+  {
+    name: "SwitchText",
+    compose: useBox,
+    keys: SWITCH_TEXT_KEYS,
+
+    useProps(options, htmlProps) {
+      const { size } = options;
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+      const theme = useTheme("switch");
+      const className = cx(
+        theme.text.base,
+        theme.text.size[size],
+        htmlClassName,
+      );
+
+      return { className, ...restHtmlProps };
+    },
+  },
+);
+
+export const SwitchText = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useSwitchText,
 });
-
-SwitchText.displayName = "SwitchText";
