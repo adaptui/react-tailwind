@@ -1,3 +1,10 @@
+### [0.0.1-alpha.24](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.23...v0.0.1-alpha.24) (2021-10-19)
+
+
+### Performance Improvements
+
+* **lodash:** ⚡️ remove direct lodash dep ([bef072f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/bef072f141b8ef836bbada547055abc458394ae4))
+
 ### [0.0.1-alpha.23](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.22...v0.0.1-alpha.23) (2021-10-19)
 
 
