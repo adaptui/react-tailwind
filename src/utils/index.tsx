@@ -252,5 +252,39 @@ export function forwardRefWithAs<
   >;
 }
 
+export function defaults(target: any, ...sources: any[]) {
+  for (let source of sources) {
+    for (let k in source) {
+      if (!target?.hasOwnProperty?.(k)) {
+        target[k] = source[k];
+      }
+    }
+  }
+
+  return target;
+}
+
+export function mergeWith(target: any, ...sources: any[]) {
+  let customizer = sources.pop();
+
+  for (let source of sources) {
+    for (let k in source) {
+      let merged = customizer(target[k], source[k]);
+
+      if (merged === undefined) {
+        if (isObject(target[k]) && isObject(source[k])) {
+          target[k] = mergeWith(target[k], source[k], customizer);
+        } else {
+          target[k] = source[k];
+        }
+      } else {
+        target[k] = merged;
+      }
+    }
+  }
+
+  return target;
+}
+
 export * from "./types";
 export { cx } from "@renderlesskit/react";

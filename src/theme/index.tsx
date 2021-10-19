@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cloneDeep } from "lodash";
 
 import { DeepDictionary, DeepPartial } from "../utils";
 
@@ -49,7 +48,7 @@ export const RenderlesskitProvider: React.FC<RenderlesskitProviderProps> =
     let finalTheme = theme;
 
     if (extend) {
-      finalTheme = mergeExtensions(mergeThemes([extend, cloneDeep(theme)]));
+      finalTheme = mergeExtensions(mergeThemes([extend, theme]));
     }
 
     return (
