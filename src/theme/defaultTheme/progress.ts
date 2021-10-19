@@ -1,11 +1,11 @@
 export const progress = {
   track: {
-    base: "relative overflow-hidden bg-gray-300 rounded-2xl",
+    base: "relative overflow-hidden bg-gray-200 rounded-2xl",
     size: {
       sm: "h-0.5",
       md: "h-1",
       lg: "h-2",
-      xl: "h-4",
+      xl: "h-3",
     },
   },
   bar: {

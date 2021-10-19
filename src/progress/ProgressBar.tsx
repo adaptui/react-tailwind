@@ -1,40 +1,59 @@
+import { createComponent, createHook } from "reakit-system";
 import {
-  Progress as RenderlesskitProgress,
-  ProgressProps,
+  cx,
+  ProgressHTMLProps as ReakitProgressHTMLProps,
+  ProgressOptions as ReakitProgressOptions,
+  useProgress as useReakitProgress,
 } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
 
-import { useProgressContext } from "./Progress";
+import { PROGRESS_BAR_KEYS } from "./__keys";
+import { ProgressStateReturn } from "./ProgressState";
 
-export type ProgressBarProps = Partial<ProgressProps> & {};
+export type ProgressBarOptions = BoxOptions &
+  ReakitProgressOptions &
+  Partial<Pick<ProgressStateReturn, "value" | "percent" | "isIndeterminate">>;
 
-export const ProgressBar = forwardRefWithAs<
-  ProgressBarProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const { state } = useProgressContext();
-  const { percent, isIndeterminate } = state;
+export type ProgressBarHTMLProps = BoxHTMLProps & ReakitProgressHTMLProps;
 
-  return (
-    <RenderlesskitProgress
-      ref={ref}
-      aria-label="progress"
-      style={{ width: `${percent}%` }}
-      className={tcm(
-        theme.progress.bar.base,
-        !isIndeterminate
-          ? theme.progress.bar.normal
-          : theme.progress.bar.indeterminate,
-        className,
-      )}
-      {...rest}
-    />
-  );
+export type ProgressBarProps = ProgressBarOptions & ProgressBarHTMLProps;
+
+export const useProgressBar = createHook<
+  ProgressBarOptions,
+  ProgressBarHTMLProps
+>({
+  name: "ProgressBar",
+  compose: [useBox, useReakitProgress],
+  keys: PROGRESS_BAR_KEYS,
+
+  useOptions(options, htmlProps) {
+    return options;
+  },
+
+  useProps(options, htmlProps) {
+    const { percent, isIndeterminate } = options;
+    const {
+      style: htmlStyle,
+      className: htmlClassName,
+      ...restHtmlProps
+    } = htmlProps;
+
+    const progress = useTheme("progress");
+    const className = cx(
+      progress.bar.base,
+      !isIndeterminate ? progress.bar.normal : progress.bar.indeterminate,
+      htmlClassName,
+    );
+    const style = { width: `${percent}%`, ...htmlStyle };
+
+    return { "aria-label": "progress", className, style, ...restHtmlProps };
+  },
 });
 
-ProgressBar.displayName = "ProgressBar";
+export const ProgressBar = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useProgressBar,
+});
