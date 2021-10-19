@@ -23,7 +23,7 @@ import { tooltip } from "./tooltip";
 
 // font-sans
 // To build css for the storybook body
-const theme = {
+export const theme = {
   alert,
   avatar,
   badge,
