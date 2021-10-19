@@ -1,3 +1,10 @@
+### [0.0.1-alpha.23](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.22...v0.0.1-alpha.23) (2021-10-19)
+
+
+### Maintanance Updates
+
+* **twMerge:** 🔥 remove tailwind merge local ([edcf42d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/edcf42dda1c20433b023cf34f95af7e06d8c39ef))
+
 ### [0.0.1-alpha.22](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.21...v0.0.1-alpha.22) (2021-10-19)
 
 
