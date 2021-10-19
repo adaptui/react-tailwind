@@ -28,13 +28,13 @@ export const _switch = {
       disabled: "peer-disabled:bg-gray-500",
     },
     children: {
-      base: "absolute transform transition-all will-change-width bg-white box-border",
+      base: "absolute box-border bg-white transition-all duration-200",
       size: {
         default: {
-          sm: "w-2.5 h-2.5 rounded-full peer-children-active:w-3 shadow-switch-md",
-          md: "w-3 h-3 rounded-full peer-children-active:w-[13px] shadow-switch-md",
-          lg: "w-4 h-4 rounded-full peer-children-active:w-[18px] shadow-switch-md",
-          xl: "w-6 h-6 rounded-full peer-children-active:w-[26px] shadow-md",
+          sm: "w-2.5 h-2.5 top-0.5 rounded-full shadow-switch-md peer-children-active:w-3 ",
+          md: "w-3 h-3 top-0.5 rounded-full shadow-switch-md peer-children-active:w-[13px] ",
+          lg: "w-4 h-4 top-0.5 rounded-full shadow-switch-md peer-children-active:w-[18px] ",
+          xl: "w-6 h-6 top-0.5 rounded-full shadow-md peer-children-active:w-[26px] ",
         },
         disabled: {
           sm: "shadow-switch-none",
@@ -43,16 +43,16 @@ export const _switch = {
           xl: "shadow-none",
         },
         checked: {
-          sm: "left-[calc(100%-2px)] -translate-x-full",
-          md: "left-[calc(100%-2px)] -translate-x-full",
-          lg: "left-[calc(100%-2px)] -translate-x-full",
-          xl: "left-[calc(100%-2px)] -translate-x-full",
+          sm: "left-3 peer-children-active:-ml-0.5",
+          md: "left-3 peer-children-active:-ml-px",
+          lg: "left-3.5 peer-children-active:-ml-0.5",
+          xl: "left-5 peer-children-active:-ml-0.5",
         },
         unChecked: {
-          sm: "top-0.5 left-0.5",
-          md: "top-0.5 left-0.5",
-          lg: "top-0.5 left-0.5",
-          xl: "top-0.5 left-0.5",
+          sm: "left-0.5",
+          md: "left-0.5",
+          lg: "left-0.5",
+          xl: "left-0.5",
         },
       },
     },
