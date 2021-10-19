@@ -1,3 +1,25 @@
+### [0.0.1-alpha.22](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.21...v0.0.1-alpha.22) (2021-10-19)
+
+
+### Bug Fixes
+
+* **switch:** 🐛 bug in switch transition for mobile ([c46424e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c46424e30d0688d488dfb225b6861def7d24bdc9))
+
+
+### Feature Updates
+
+* **progress:** ✨ migrate to new RFC code ([#182](https://github.com/timelessco/renderlesskit-react-tailwind/issues/182)) ([ffd8442](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ffd8442c683fbe3c1b2887647545a920db72834e))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([#181](https://github.com/timelessco/renderlesskit-react-tailwind/issues/181)) ([8ec8d1b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/8ec8d1b591b8053a6153c07aca740de2b365f2b9))
+
+
+### Code Refactors
+
+* **tw:** ♻️ add tailwind-merge directly ([1d1703e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/1d1703e8fbf1531c3443e91a9fb386167033d9ee))
+
 ### [0.0.1-alpha.21](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.20...v0.0.1-alpha.21) (2021-10-18)
 
 
