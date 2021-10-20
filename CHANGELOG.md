@@ -1,3 +1,21 @@
+### [0.0.1-alpha.25](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2021-10-20)
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([#183](https://github.com/timelessco/renderlesskit-react-tailwind/issues/183)) ([fe2330c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/fe2330c64a52cd0657e0c0bb2fda386de28ba555))
+* **lodash:** ⚡️ remove babel plugin lodash ([4b73832](https://github.com/timelessco/renderlesskit-react-tailwind/commit/4b73832d6df337cecfb268111cc136b817b26a4c))
+
+
+### Code Refactors
+
+* **theme:** ♻️ update theme & utils code ([831a122](https://github.com/timelessco/renderlesskit-react-tailwind/commit/831a1224db38e3208f50ca72876fa3536cd87956))
+
+
+### Documentation Changes
+
+* **sb:** 📝 fix storybook previews with progress ([0fa62a0](https://github.com/timelessco/renderlesskit-react-tailwind/commit/0fa62a0348013560b5e94b4dcf255b3256d3dfeb))
+
 ### [0.0.1-alpha.24](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.23...v0.0.1-alpha.24) (2021-10-19)
 
 
