@@ -1,7 +1,12 @@
 {
   "extends": ["config:base"],
   "commitMessageAction": "⬆️ update",
-  "ignoreDeps": ["node-fetch", "eslint-plugin-import"],
+  "ignoreDeps": [
+    "node-fetch",
+    "eslint-plugin-import",
+    "size-limit",
+    "@size-limit/preset-big-lib"
+  ],
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],

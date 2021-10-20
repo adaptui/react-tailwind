@@ -23,7 +23,6 @@ module.exports = function (api) {
     ["@babel/plugin-proposal-logical-assignment-operators", { loose: true }],
     ["@babel/plugin-proposal-private-property-in-object", { loose: true }],
     ["@babel/plugin-proposal-private-methods", { loose: true }],
-    ["lodash"],
     isBuild
       ? [
           "babel-plugin-jsx-remove-data-test-id",
