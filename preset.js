@@ -54,8 +54,8 @@ const renderlesskitConfig = {
       },
       keyframes: {
         progress: {
-          "0%": { left: "-40%" },
-          "100%": { left: "100%" },
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(200%)" },
         },
         circularProgress: {
           "0%": {

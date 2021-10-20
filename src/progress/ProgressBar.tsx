@@ -1,22 +1,16 @@
 import { createComponent, createHook } from "reakit-system";
-import {
-  cx,
-  ProgressHTMLProps as ReakitProgressHTMLProps,
-  ProgressOptions as ReakitProgressOptions,
-  useProgress as useReakitProgress,
-} from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { PROGRESS_BAR_KEYS } from "./__keys";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressBarOptions = BoxOptions &
-  ReakitProgressOptions &
   Partial<Pick<ProgressStateReturn, "value" | "percent" | "isIndeterminate">>;
 
-export type ProgressBarHTMLProps = BoxHTMLProps & ReakitProgressHTMLProps;
+export type ProgressBarHTMLProps = BoxHTMLProps;
 
 export type ProgressBarProps = ProgressBarOptions & ProgressBarHTMLProps;
 
@@ -25,7 +19,7 @@ export const useProgressBar = createHook<
   ProgressBarHTMLProps
 >({
   name: "ProgressBar",
-  compose: [useBox, useReakitProgress],
+  compose: useBox,
   keys: PROGRESS_BAR_KEYS,
 
   useProps(options, htmlProps) {
@@ -39,12 +33,12 @@ export const useProgressBar = createHook<
     const progress = useTheme("progress");
     const className = cx(
       progress.bar.base,
-      !isIndeterminate ? progress.bar.normal : progress.bar.indeterminate,
+      isIndeterminate ? progress.bar.indeterminate : "",
       htmlClassName,
     );
     const style = { width: `${percent}%`, ...htmlStyle };
 
-    return { "aria-label": "progress", className, style, ...restHtmlProps };
+    return { className, style, ...restHtmlProps };
   },
 });
 
