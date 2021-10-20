@@ -1,6 +1,6 @@
 import { expectAssignable, expectType } from "tsd";
 
-import theme from "./defaultTheme";
+import theme from "../defaultTheme";
 
 // TODO: Test global renderlesskit namespace
 

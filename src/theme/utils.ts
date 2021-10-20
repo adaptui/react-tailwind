@@ -4,11 +4,16 @@ import {
   DefaultTheme,
   ExtendableDefaultTheme,
   PartialDefaultTheme,
-} from "./index";
+} from "./types";
 
+export const extendTheme = <T = ExtendableDefaultTheme>(theme: T): T => {
+  return theme;
+};
+
+// Based on https://github.com/tailwindlabs/tailwindcss/blob/6ce8864f47061035cd79b2d563eea72467dcb3b7/src/util/resolveConfig.js
 function collectExtends(items: ExtendableDefaultTheme[]) {
   return items.reduce((merged, { extend }) => {
-    return mergeWith(merged, extend, (mergedValue: any, extendValue: any) => {
+    return mergeWith(merged, extend, (mergedValue, extendValue) => {
       if (isUndefined(mergedValue)) {
         return [extendValue];
       }
@@ -22,6 +27,7 @@ function collectExtends(items: ExtendableDefaultTheme[]) {
   }, {});
 }
 
+// Based on https://github.com/tailwindlabs/tailwindcss/blob/6ce8864f47061035cd79b2d563eea72467dcb3b7/src/util/resolveConfig.js
 export function mergeThemes(themes: PartialDefaultTheme[]) {
   return {
     ...themes.reduce<DefaultTheme>(
@@ -35,17 +41,22 @@ export function mergeThemes(themes: PartialDefaultTheme[]) {
   };
 }
 
+// Based on https://github.com/tailwindlabs/tailwindcss/blob/6ce8864f47061035cd79b2d563eea72467dcb3b7/src/util/resolveConfig.js
 export function mergeExtensions({
   extend,
   ...theme
 }: DefaultTheme & { extend?: PartialDefaultTheme }) {
-  return mergeWith(theme, extend, (themeValue: any, extendValue: any) => {
-    return mergeWith(themeValue, ...extendValue, (merged: any, value: any) => {
-      if (isString(merged) && isString(value)) {
-        return tcm(merged, value);
-      }
+  return mergeWith(theme, extend, (themeValue, extendValue) => {
+    return mergeWith(
+      themeValue,
+      ...extendValue,
+      (merged: any, value: any[]) => {
+        if (isString(merged) && isString(value)) {
+          return tcm(merged, value);
+        }
 
-      return undefined;
-    });
+        return undefined;
+      },
+    );
   });
 }

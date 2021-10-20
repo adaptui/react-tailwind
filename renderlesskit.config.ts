@@ -1,4 +1,4 @@
-import { extendTheme } from "./src/theme/extendTheme";
+import { extendTheme } from "./src";
 
 export const theme = extendTheme({
   // This only affected the Storybook, doesn't go or merge when used this config as preset
