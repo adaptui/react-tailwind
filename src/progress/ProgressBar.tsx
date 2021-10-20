@@ -28,10 +28,6 @@ export const useProgressBar = createHook<
   compose: [useBox, useReakitProgress],
   keys: PROGRESS_BAR_KEYS,
 
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
   useProps(options, htmlProps) {
     const { percent, isIndeterminate } = options;
     const {

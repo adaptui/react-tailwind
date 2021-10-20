@@ -16,7 +16,7 @@ export type ProgressState = RenderlesskitProgressState & {
   /**
    * How large should the progress be?
    *
-   * @default "md"
+   * @default md
    */
   size: keyof Renderlesskit.GetThemeValue<"progress", "track", "size">;
 };

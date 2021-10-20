@@ -15,13 +15,13 @@ export const ProgressCustom: React.FC<ProgressCustomProps> = props => {
   const [value, setValue] = useProgressState();
 
   return (
-    <>
+    <div className="w-80">
       <Progress value={value} {...props}>
         <ProgressTrack className="bg-red-300" />
         <ProgressBar className="bg-red-800" />
       </Progress>
       <ActionButtons setValue={setValue} />
-    </>
+    </div>
   );
 };
 

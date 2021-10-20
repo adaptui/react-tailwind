@@ -9,10 +9,10 @@ export const ProgressBasic: React.FC<ProgressBasicProps> = props => {
   const [value, setValue] = useProgressState();
 
   return (
-    <>
+    <div className="w-80">
       <Progress value={value} {...props} />
       <ActionButtons setValue={setValue} />
-    </>
+    </div>
   );
 };
 

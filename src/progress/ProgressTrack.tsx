@@ -22,10 +22,6 @@ export const useProgressTrack = createHook<
   compose: useBox,
   keys: PROGRESS_TRACK_KEYS,
 
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
   useProps(options, htmlProps) {
     const { size } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;

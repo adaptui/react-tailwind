@@ -17,6 +17,9 @@ export default {
   component: ProgressCustom,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg", "xl"]),
+  },
+  parameters: {
+    layout: "centered",
     options: { showPanel: true },
     preview: createPreviewTabs({ js, ts }),
   },
