@@ -1,6 +1,26 @@
 export const progress = {
+  wrapper:
+    "inline-flex flex-row flex-wrap justify-between items-center align-top w-full",
+  label: {
+    base: "flex-1 text-left mb-3 text-gray-700 font-medium",
+    size: {
+      sm: "text-cxs",
+      md: "text-sm",
+      lg: "text-sm",
+      xl: "text-sm",
+    },
+  },
+  hint: {
+    base: "ml-3 mb-3 text-gray-500 ",
+    size: {
+      sm: "text-cxs",
+      md: "text-sm",
+      lg: "text-sm",
+      xl: "text-sm",
+    },
+  },
   track: {
-    base: "relative overflow-hidden bg-gray-200 rounded-2xl",
+    base: "w-full overflow-hidden bg-gray-200 rounded-2xl z-10",
     size: {
       sm: "h-0.5",
       md: "h-1",
@@ -9,9 +29,7 @@ export const progress = {
     },
   },
   bar: {
-    base: "h-full",
-    normal: "transition-all bg-gray-800 rounded-2xl",
-    indeterminate:
-      "absolute min-w-[50%] bg-gradient-to-r from-transparent via-gray-800 to-transparent animate-progress",
+    base: "h-full bg-gray-800 rounded-2xl transition-all",
+    indeterminate: "min-w-[50%] animate-progress",
   },
 };
