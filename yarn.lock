@@ -16043,10 +16043,10 @@ table@^6.0.9:
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
 
-tailwind-merge@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-0.7.1.tgz#aed4f2b7a6c70d5aa975615ed537d6b063ca445b"
-  integrity sha512-syMwChXiUACPIvv/pNsjHpbylJKuWwiYDsJNl1D9Pe5n7J0trQAf7vcqv9qGcpIe/zYDPl0kjbUr74zii3yM8w==
+tailwind-merge@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-0.8.0.tgz#54ec7ca5db09419278a5c65529d33ca55f07403e"
+  integrity sha512-ryCp1LuSru+5e0nTzZanPGqPetJonV2cIgS8Vk+kOmG2gxPRW6gbRi9H9HiPdLjswE0sCmQ6RYdgDmEQ7lBD3Q==
   dependencies:
     hashlru "^2.3.0"
 
