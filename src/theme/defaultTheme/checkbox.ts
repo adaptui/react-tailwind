@@ -32,9 +32,9 @@ export const checkbox = {
     only: "hover:bg-gray-100 focus-within:ring-2 focus-within:ring-gray-300",
     disabled: "pointer-events-none",
     size: {
-      sm: "min-h-[26px] px-2 py-[6.5px] rounded-lg",
-      md: "min-h-[30px] px-2.5 py-[6.5px] rounded-lg",
-      lg: "min-h-11 px-4 py-[6.5px] rounded-xl",
+      sm: "min-h-[26px] px-2 py-[6px] rounded-lg",
+      md: "min-h-[30px] px-2.5 py-[7px] rounded-lg",
+      lg: "min-h-9 px-3 py-2 rounded-[10px]",
     },
     showMore: { vertical: "flex w-full", horizontal: "flex" },
   },
