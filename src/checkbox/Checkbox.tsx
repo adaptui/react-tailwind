@@ -50,13 +50,12 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <CheckboxLabel {...labelProps}>
         <CheckboxInput ref={ref} {...inputProps} />
         <CheckboxIcon {...iconProps} />
-        {label && !description ? <CheckboxText {...textProps} /> : null}
-        {label && description ? (
-          <div>
-            <CheckboxText {...textProps} />
+        <div>
+          {label ? <CheckboxText {...textProps} /> : null}
+          {label && description ? (
             <CheckboxDescription {...descriptionProps} />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </CheckboxLabel>
     );
   },

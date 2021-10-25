@@ -10,6 +10,7 @@ import { CheckboxStateReturn } from "./CheckboxState";
 
 export type CheckboxLabelOptions = BoxOptions &
   Pick<CheckboxStateReturn, "size" | "maxVisibleItems" | "stack"> & {
+    label?: CheckboxProps["label"];
     description?: CheckboxProps["description"];
     disabled?: CheckboxProps["disabled"];
   };
@@ -27,14 +28,15 @@ export const useCheckboxLabel = createHook<
   keys: CHECKBOX_LABEL_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, disabled, description, maxVisibleItems, stack } = options;
+    const { size, disabled, label, description, maxVisibleItems, stack } =
+      options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkbox");
     const className = cx(
       theme.label.base,
-      !description ? theme.label.size[size] : "",
-      !description ? (disabled ? "" : theme.label.only) : "",
+      label && !description ? theme.label.size[size] : "",
+      label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
       maxVisibleItems != null ? theme.label.showMore[stack] : "",
       htmlClassName,

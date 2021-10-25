@@ -28,20 +28,19 @@ export const checkbox = {
     },
   },
   label: {
-    base: "relative inline-flex items-center cursor-pointer align-top",
-    only: "hover:bg-gray-100",
+    base: "relative inline-flex cursor-pointer align-top",
+    only: "hover:bg-gray-100 focus-within:ring-2 focus-within:ring-gray-300",
     disabled: "pointer-events-none",
     size: {
-      sm: "min-h-[26px] px-2 pb-px rounded-lg",
-      md: "min-h-[30px] px-2.5 rounded-lg",
-      lg: "min-h-11 px-4 rounded-xl",
+      sm: "min-h-[26px] px-2 py-[6.5px] rounded-lg",
+      md: "min-h-[30px] px-2.5 py-[6.5px] rounded-lg",
+      lg: "min-h-11 px-4 py-[6.5px] rounded-xl",
     },
     showMore: { vertical: "flex w-full", horizontal: "flex" },
   },
   input: "peer sr-only",
   icon: {
     base: "inline-flex items-center justify-center flex-shrink-0 align-top select-none transition-all",
-    description: "self-start",
     size: {
       sm: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
       md: "w-4 h-4 text-xs border-[1.5px] rounded",

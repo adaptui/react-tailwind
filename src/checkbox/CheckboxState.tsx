@@ -146,6 +146,7 @@ export const useCheckboxProps = (
     ...state,
     className,
     style,
+    label: _label,
     description: _description,
     disabled: restProps.disabled,
     ...componentProps.labelProps,
@@ -159,6 +160,7 @@ export const useCheckboxProps = (
 
   const iconProps: CheckboxIconProps = {
     ...state,
+    label: _label,
     description: _description,
     ...componentProps.iconProps,
     children: runIfFn(_icon, state),
