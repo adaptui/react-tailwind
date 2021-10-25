@@ -1,33 +1,44 @@
+import { createComponent, createHook } from "reakit-system";
 import {
-  Progress as RenderlesskitProgress,
-  ProgressProps,
+  ProgressHTMLProps as ReakitProgressHTMLProps,
+  ProgressOptions as ReakitProgressOptions,
+  useProgress as useReakitProgress,
 } from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
 
-import { useCircularProgressContext } from "./CircularProgress";
+import { CIRCULAR_PROGRESS_WRAPPER_KEYS } from "./__keys";
 
-export type CircularProgressWrapperProps = Partial<ProgressProps> & {};
+export type CircularProgressWrapperOptions = BoxOptions & ReakitProgressOptions;
 
-export const CircularProgressWrapper = forwardRefWithAs<
-  CircularProgressWrapperProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const state = useCircularProgressContext();
+export type CircularProgressWrapperHTMLProps = BoxHTMLProps &
+  ReakitProgressHTMLProps;
 
-  return (
-    <RenderlesskitProgress
-      ref={ref}
-      aria-label="progress"
-      className={tcm(theme.circularProgress.wrapper, className)}
-      {...state}
-      {...rest}
-    />
-  );
+export type CircularProgressWrapperProps = CircularProgressWrapperOptions &
+  CircularProgressWrapperHTMLProps;
+
+export const useCircularProgressWrapper = createHook<
+  CircularProgressWrapperOptions,
+  CircularProgressWrapperHTMLProps
+>({
+  name: "CircularProgressWrapper",
+  compose: [useBox, useReakitProgress],
+  keys: CIRCULAR_PROGRESS_WRAPPER_KEYS,
+
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("circularProgress");
+    const className = cx(theme.wrapper, htmlClassName);
+
+    return { "aria-label": "circular progress", className, ...restHtmlProps };
+  },
 });
 
-CircularProgressWrapper.displayName = "CircularProgressWrapper";
+export const CircularProgressWrapper = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useCircularProgressWrapper,
+});

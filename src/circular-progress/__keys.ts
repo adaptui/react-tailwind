@@ -1,0 +1,23 @@
+// Automatically generated
+export const USE_CIRCULAR_PROGRESS_STATE_KEYS = [
+  "value",
+  "min",
+  "max",
+  "size",
+] as const;
+export const CIRCULAR_PROGRESS_STATE_KEYS = [
+  ...USE_CIRCULAR_PROGRESS_STATE_KEYS,
+  "isIndeterminate",
+  "percent",
+] as const;
+export const CIRCULAR_PROGRESS_BAR_KEYS = [
+  ...CIRCULAR_PROGRESS_STATE_KEYS,
+  "hint",
+] as const;
+export const CIRCULAR_PROGRESS_BAR_WRAPPER_KEYS = CIRCULAR_PROGRESS_BAR_KEYS;
+export const CIRCULAR_PROGRESS_HINT_KEYS = CIRCULAR_PROGRESS_STATE_KEYS;
+export const CIRCULAR_PROGRESS_TRACK_KEYS = [
+  ...CIRCULAR_PROGRESS_BAR_WRAPPER_KEYS,
+  ...CIRCULAR_PROGRESS_HINT_KEYS,
+] as const;
+export const CIRCULAR_PROGRESS_WRAPPER_KEYS = CIRCULAR_PROGRESS_HINT_KEYS;
