@@ -8,6 +8,7 @@ export * from "./checkbox";
 export * from "./circular-progress";
 export * from "./create-icon";
 export * from "./datepicker";
+export * from "./divider";
 export * from "./form-field";
 export * from "./global-types";
 export * from "./hooks";
