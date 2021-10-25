@@ -24,6 +24,7 @@ export const USE_CHECKBOX_STATE_KEYS = [
 export const CHECKBOX_DESCRIPTION_KEYS = CHECKBOX_STATE_KEYS;
 export const CHECKBOX_ICON_KEYS = [
   ...CHECKBOX_DESCRIPTION_KEYS,
+  "label",
   "description",
 ] as const;
 export const CHECKBOX_INPUT_KEYS = CHECKBOX_DESCRIPTION_KEYS;

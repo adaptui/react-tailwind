@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { getComponentProps, RenderProp } from "../utils";
+import { getComponentProps, RenderProp, runIfFnChildren } from "../utils";
 
 import {
   CheckboxGroupInitialState,
@@ -45,6 +45,11 @@ export const CheckboxGroup = React.forwardRef<
     finalChildren.length <= state.maxVisibleItems
       ? null
       : finalChildren.slice(state.maxVisibleItems);
+  console.log(
+    "%cmoreChildren",
+    "color: #0088cc",
+    runIfFnChildren(moreChildren),
+  );
 
   return (
     <RenderlesskitCheckboxGroup ref={ref} {...state} {...restProps}>

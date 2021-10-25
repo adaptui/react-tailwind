@@ -13,6 +13,7 @@ export type CheckboxIconOptions = BoxOptions &
     CheckboxStateReturn,
     "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
   > & {
+    label?: CheckboxProps["label"];
     description?: CheckboxProps["description"];
   };
 
@@ -29,21 +30,27 @@ export const useCheckboxIcon = createHook<
   keys: CHECKBOX_ICON_KEYS,
 
   useProps(options, htmlProps) {
-    const { isChecked, isIndeterminate, isUnchecked, size, description } =
-      options;
+    const {
+      isChecked,
+      isIndeterminate,
+      isUnchecked,
+      size,
+      label,
+      description,
+    } = options;
+    console.log("%clabel", "color: #00bf00", label);
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkbox");
     const className = cx(
       theme.icon.base,
-      description ? theme.icon.description : "",
       theme.icon.size[size],
       isUnchecked
         ? cx(
             theme.icon.unChecked.default,
             theme.icon.unChecked.hover,
             theme.icon.unChecked.active,
-            theme.icon.unChecked.focus,
+            !label || (label && description) ? theme.icon.unChecked.focus : "",
             theme.icon.unChecked.disabled,
           )
         : "",
@@ -52,7 +59,7 @@ export const useCheckboxIcon = createHook<
             theme.icon.checked.default,
             theme.icon.checked.hover,
             theme.icon.checked.active,
-            theme.icon.checked.focus,
+            !label || (label && description) ? theme.icon.checked.focus : "",
             theme.icon.checked.disabled,
           )
         : "",
@@ -61,7 +68,9 @@ export const useCheckboxIcon = createHook<
             theme.icon.checked.default,
             theme.icon.indeterminate.hover,
             theme.icon.indeterminate.active,
-            theme.icon.indeterminate.focus,
+            !label || (label && description)
+              ? theme.icon.indeterminate.focus
+              : "",
             theme.icon.indeterminate.disabled,
           )
         : "",

@@ -72,14 +72,14 @@ export function getValidChildren(children: React.ReactNode) {
 }
 
 // Merge library & user prop
-export const passProps = (icon: RenderPropType, props?: Dict) => {
-  return React.isValidElement(icon)
-    ? React.cloneElement(icon, {
+export const passProps = (component: RenderPropType, props?: Dict) => {
+  return React.isValidElement(component)
+    ? React.cloneElement(component, {
         ...props,
-        ...icon.props,
-        className: cx(props?.className, icon.props.className),
+        ...component.props,
+        className: cx(props?.className, component.props.className),
       })
-    : runIfFn(icon, { ...props });
+    : runIfFn(component, { ...props });
 };
 
 // Add a11y to the icon passed

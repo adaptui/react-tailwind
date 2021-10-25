@@ -81,7 +81,17 @@ export const Indeterminate: Story = {
 
 export const Label: Story = {
   ...Default,
-  args: { ...Default.args, label: "Checkbox" },
+  args: { ...Default.args, label: "Checkboxs" },
+};
+
+export const MultilineLabel: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label:
+      "Used when the checkbox is selected and will use its value for the form submission.",
+    className: "w-72",
+  },
 };
 
 export const Description: Story = {
