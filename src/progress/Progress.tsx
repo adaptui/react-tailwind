@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { RenderPropType } from "../utils";
 
-import { ProgressBar, ProgressBarHTMLProps } from "./ProgressBar";
+import { ProgressBar } from "./ProgressBar";
 import { ProgressHint } from "./ProgressHint";
 import { ProgressLabel } from "./ProgressLabel";
 import {
@@ -11,16 +11,16 @@ import {
   useProgressProps,
 } from "./ProgressState";
 import { ProgressTrack } from "./ProgressTrack";
-import { ProgressWrapper } from "./ProgressWrapper";
+import { ProgressWrapper, ProgressWrapperHTMLProps } from "./ProgressWrapper";
 
-export type ProgressOwnProps = Partial<ProgressBarHTMLProps> & {
+export type ProgressOwnProps = Partial<ProgressWrapperHTMLProps> & {
   /**
-   * Description for the Progress.
+   * Label for the Progress.
    */
   label?: RenderPropType<ProgressStateReturn>;
 
   /**
-   * Description for the Progress.
+   * Hint for the Progress.
    */
   hint?: RenderPropType<ProgressStateReturn>;
 };
@@ -39,14 +39,11 @@ export const Progress = React.forwardRef<HTMLInputElement, ProgressProps>(
       trackProps,
     } = useProgressProps(props);
 
-    console.log("%cwrapperProps", "color: #9c66cc", wrapperProps);
     return (
-      <ProgressWrapper {...wrapperProps}>
-        {label ? <ProgressLabel className="mb-3" {...labelProps} /> : null}
-        {label && hint ? (
-          <ProgressHint className="mb-3" {...hintProps} />
-        ) : null}
-        <ProgressTrack ref={ref} {...trackProps}>
+      <ProgressWrapper ref={ref} {...wrapperProps}>
+        {label ? <ProgressLabel {...labelProps} /> : null}
+        {label && hint ? <ProgressHint {...hintProps} /> : null}
+        <ProgressTrack {...trackProps}>
           <ProgressBar {...barProps} />
         </ProgressTrack>
       </ProgressWrapper>
@@ -54,4 +51,4 @@ export const Progress = React.forwardRef<HTMLInputElement, ProgressProps>(
   },
 );
 
-Progress.displayName = "Checkbox";
+Progress.displayName = "Progress";

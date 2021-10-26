@@ -1,62 +1,57 @@
-import { useMemo } from "react";
-import {
-  ProgressInitialState,
-  ProgressStateReturn,
-  useProgressState,
-} from "@renderlesskit/react";
+import * as React from "react";
 
-import { BoxProps } from "../box";
-import { createContext, forwardRefWithAs, RenderProp, runIfFn } from "../utils";
+import { RenderPropType } from "../utils";
 
 import { CircularProgressBar } from "./CircularProgressBar";
-import { CircularProgressWrapper } from "./CircularProgressWrapper";
+import { CircularProgressBarWrapper } from "./CircularProgressBarWrapper";
+import { CircularProgressHint } from "./CircularProgressHint";
+import {
+  CircularProgressInitialState,
+  CircularProgressStateReturn,
+  useCircularProgressProps,
+} from "./CircularProgressState";
+import { CircularProgressTrack } from "./CircularProgressTrack";
+import {
+  CircularProgressWrapper,
+  CircularProgressWrapperHTMLProps,
+} from "./CircularProgressWrapper";
 
-export type CircularProgressContext = Pick<CircularProgressProps, "size"> & {
-  state: ProgressStateReturn;
-};
-
-const [CircularProgressProvider, useCircularProgressContext] =
-  createContext<CircularProgressContext>({
-    name: "CircularProgressContext",
-    strict: false,
-  });
-
-export { useCircularProgressContext };
-
-type CircularProgressRenderProps = RenderProp<ProgressStateReturn>;
-
-export type CircularProgressProps = BoxProps &
-  ProgressInitialState & {
+export type CircularProgressOwnProps =
+  Partial<CircularProgressWrapperHTMLProps> & {
     /**
-     * How large should the circular progress be?
-     *
-     * @default "sm"
+     * Hint for the CircularProgress.
      */
-    size?: keyof Renderlesskit.GetThemeValue<"circularProgress", "bar", "size">;
+    hint?: RenderPropType<CircularProgressStateReturn>;
   };
 
-export const CircularProgress = forwardRefWithAs<
-  CircularProgressProps & CircularProgressRenderProps,
-  HTMLDivElement,
-  "div"
+export type CircularProgressProps = CircularProgressInitialState &
+  CircularProgressOwnProps;
+
+export const CircularProgress = React.forwardRef<
+  HTMLInputElement,
+  CircularProgressProps
 >((props, ref) => {
-  const { value, min, max, size = "md", children, ...rest } = props;
-  const state = useProgressState({ value, min, max });
-  const context = useMemo(() => ({ state, size }), [state, size]);
+  const {
+    hint,
+    wrapperProps,
+    hintProps,
+    barWrapperProps,
+    trackProps,
+    barProps,
+    state,
+  } = useCircularProgressProps(props);
 
   return (
-    <CircularProgressProvider value={context}>
-      {children ? (
-        runIfFn(children, state)
-      ) : (
-        <CircularProgressWrapper ref={ref} {...rest}>
-          <CircularProgressBar />
-        </CircularProgressWrapper>
-      )}
-    </CircularProgressProvider>
+    <CircularProgressWrapper ref={ref} {...wrapperProps}>
+      {hint && !state.isIndeterminate ? (
+        <CircularProgressHint {...hintProps} />
+      ) : null}
+      <CircularProgressBarWrapper {...barWrapperProps}>
+        <CircularProgressTrack {...trackProps} />
+        <CircularProgressBar {...barProps} />
+      </CircularProgressBarWrapper>
+    </CircularProgressWrapper>
   );
 });
 
 CircularProgress.displayName = "CircularProgress";
-
-export default CircularProgress;

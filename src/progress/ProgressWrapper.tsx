@@ -7,21 +7,20 @@ import {
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { cx, RenderPropType } from "../utils";
 
 import { PROGRESS_BAR_KEYS } from "./__keys";
-import { ProgressProps } from "./Progress";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressWrapperOptions = BoxOptions &
   ReakitProgressOptions &
   Pick<ProgressStateReturn, "baseId"> & {
-    label?: ProgressProps["label"];
+    label?: RenderPropType<ProgressStateReturn>;
   };
 
 export type ProgressWrapperHTMLProps = BoxHTMLProps &
   ReakitProgressHTMLProps & {
-    label?: ProgressProps["label"];
+    label?: RenderPropType<ProgressStateReturn>;
   };
 
 export type ProgressWrapperProps = ProgressWrapperOptions &
@@ -36,20 +35,12 @@ export const useProgressWrapper = createHook<
   keys: PROGRESS_BAR_KEYS,
 
   useOptions(options, { label }) {
-    return {
-      label,
-      ...options,
-    };
+    return { label, ...options };
   },
 
   useProps(options, htmlProps) {
     const { baseId, label } = options;
-    const {
-      style: htmlStyle,
-      className: htmlClassName,
-      label: _,
-      ...restHtmlProps
-    } = htmlProps;
+    const { className: htmlClassName, label: _, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("progress");
     const className = cx(theme.wrapper, htmlClassName);

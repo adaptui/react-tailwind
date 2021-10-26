@@ -1,68 +1,65 @@
-import { Box, BoxProps } from "../box";
+import { createComponent, createHook } from "reakit-system";
+
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
 
-import { useCircularProgressContext } from "./CircularProgress";
+import { CIRCULAR_PROGRESS_BAR_KEYS } from "./__keys";
+import { CircularProgressProps } from "./CircularProgress";
+import { CircularProgressStateReturn } from "./CircularProgressState";
 
-export type CircularProgressBarProps = BoxProps & {
-  trackStyle?: string;
-  innerTrackStyle?: string;
-};
+export type CircularProgressBarOptions = BoxOptions &
+  Pick<CircularProgressStateReturn, "isIndeterminate" | "percent"> & {
+    hint: CircularProgressProps["hint"];
+  };
 
-export const CircularProgressBar = forwardRefWithAs<
-  CircularProgressBarProps,
-  HTMLOrSVGElement,
-  "svg"
->((props, ref) => {
-  const { className, trackStyle, innerTrackStyle, ...rest } = props;
-  const theme = useTheme();
-  const { state, size = "md" } = useCircularProgressContext();
-  const { isIndeterminate, percent } = state;
-  const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
-  const strokeDasharray =
-    determinant == null ? undefined : `${determinant} ${264 - determinant}`;
-  const circularProgressBarStyles = tcm(
-    theme.circularProgress.bar.size[size],
-    isIndeterminate ? theme.circularProgress.bar.indeterminate : "",
-    className,
-  );
+export type CircularProgressBarHTMLProps = BoxHTMLProps;
 
-  return (
-    <Box
-      as="svg"
-      ref={ref}
-      viewBox="0 0 100 100"
-      className={circularProgressBarStyles}
-      {...rest}
-    >
-      <circle
-        cx={50}
-        cy={50}
-        r={42}
-        fill="transparent"
-        stroke="currentColor"
-        strokeWidth="10px"
-        className={tcm(theme.circularProgress.bar.track, trackStyle)}
-      />
-      <circle
-        cx={50}
-        cy={50}
-        r={42}
-        fill="transparent"
-        stroke="currentColor"
-        strokeWidth="10px"
-        strokeDashoffset="66"
-        strokeDasharray={strokeDasharray}
-        className={tcm(
-          theme.circularProgress.bar.innerTrack.base,
-          isIndeterminate
-            ? theme.circularProgress.bar.innerTrack.indeterminate
-            : "",
-          innerTrackStyle,
-        )}
-      />
-    </Box>
-  );
+export type CircularProgressBarProps = CircularProgressBarOptions &
+  CircularProgressBarHTMLProps;
+
+export const useCircularProgressBar = createHook<
+  CircularProgressBarOptions,
+  CircularProgressBarHTMLProps
+>({
+  name: "CircularProgressBar",
+  compose: useBox,
+  keys: CIRCULAR_PROGRESS_BAR_KEYS,
+
+  useProps(options, htmlProps) {
+    const { isIndeterminate, percent, hint } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const determinant = isIndeterminate ? undefined : (percent ?? 0) * 2.64;
+    const strokeDasharray =
+      determinant == null ? undefined : `${determinant} ${264 - determinant}`;
+
+    const theme = useTheme("circularProgress");
+    const className = cx(
+      theme.bar.base,
+      isIndeterminate ? theme.bar.indeterminate : "",
+      htmlClassName,
+    );
+
+    return {
+      viewBox: "0 0 100 100",
+      cx: 50,
+      cy: 50,
+      r: 42,
+      fill: "transparent",
+      stroke: "currentColor",
+      strokeWidth: hint ? "5px" : "15px",
+      strokeDashoffset: "66",
+      strokeDasharray: strokeDasharray,
+      strokeLinecap: "round",
+      className,
+      ...restHtmlProps,
+    };
+  },
 });
 
-CircularProgressBar.displayName = "CircularProgressBar";
+export const CircularProgressBar = createComponent({
+  as: "circle",
+  memo: true,
+  useHook: useCircularProgressBar,
+});
