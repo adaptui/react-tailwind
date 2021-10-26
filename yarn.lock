@@ -2329,10 +2329,10 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
-"@renderlesskit/react@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.7.1.tgz#d04183dd1e8c89ddc6d0bf1fb9bf63d1340f8473"
-  integrity sha512-X6rEyrngW4hag8pPBuNutLDNbvl0ePVsmWKVSusmXvKZTJ6WEeXbMmDfXsVEUXrzGMrnNZYBGlRUwRBLK7IFmw==
+"@renderlesskit/react@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.7.2.tgz#5ad48944db7357b8ad11d7f354538fd61323f702"
+  integrity sha512-e/RxrFbT7t+6WFdjIB5C20l5LS2A7g8e1tft224Y5fMQxCElJgEq/GKTvE2qyeKsr9IYQLhojg3L+huJ82mOQA==
   dependencies:
     "@chakra-ui/counter" "^1.1.9"
     "@chakra-ui/hooks" "^1.6.0"

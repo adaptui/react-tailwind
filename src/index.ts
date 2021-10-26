@@ -15,6 +15,7 @@ export * from "./hooks";
 export * from "./icons";
 export * from "./input";
 export * from "./list";
+export * from "./meter";
 export * from "./progress";
 export * from "./radio";
 export * from "./slider";
