@@ -1,5 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "include": ["src"],
-  "exclude": ["**/*/stories", "**/*/__tests__", "**/*/utils"]
+  "exclude": ["**/*/stories", "**/*/__tests__", "**/*/utils"],
+  "declaration": true,
+  "declarationDir": "dist/types"
 }
