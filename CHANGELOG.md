@@ -1,3 +1,10 @@
+### [0.0.1-alpha.27](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.26...v0.0.1-alpha.27) (2021-10-26)
+
+
+### Build Updates
+
+* **swc:** 👷 export swc build files ([5811a54](https://github.com/timelessco/renderlesskit-react-tailwind/commit/5811a547250af9cffffa7a13be98486c29001ddd))
+
 ### [0.0.1-alpha.26](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.25...v0.0.1-alpha.26) (2021-10-26)
 
 
