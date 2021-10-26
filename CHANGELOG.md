@@ -1,3 +1,15 @@
+### [0.0.1-alpha.29](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.28...v0.0.1-alpha.29) (2021-10-26)
+
+
+### Bug Fixes
+
+* **types:** 🏷️ fix wrong build types ([f09d255](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f09d25509753fd8ab88705d67ec72b282638415a))
+
+
+### Maintanance Updates
+
+* **size:** 🔧 update size-limit to use swc build files ([6e2829b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/6e2829b3015f78522eca0a8243f226703bdfd1bd))
+
 ### [0.0.1-alpha.28](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.27...v0.0.1-alpha.28) (2021-10-26)
 
 
