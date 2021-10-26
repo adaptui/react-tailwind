@@ -1,0 +1,33 @@
+{
+  "env": { "coreJs": 3 },
+  "exclude": [
+    "fileMock.js$",
+    "styleMock.js$",
+    ".test.tsx$",
+    ".test-d.ts$",
+    ".component.tsx$",
+    ".stories.tsx$",
+    "Jsx.ts$",
+    "Tsx.ts$"
+  ],
+  "jsc": {
+    "loose": true,
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "decorators": false,
+      "dynamicImport": false
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic",
+        "pragma": "React.createElement",
+        "pragmaFrag": "React.Fragment",
+        "throwIfNamespace": true,
+        "development": false,
+        "useBuiltins": false
+      }
+    }
+  },
+  "sourceMaps": true
+}
