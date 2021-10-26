@@ -23,8 +23,8 @@
   "exports": {
     ".": {
       "require": "./out/cjs/index.js",
-      "default": "./out/esm/index.js",
-      "import": "./out/esm/index.js"
+      "import": "./out/esm/index.js",
+      "default": "./out/esm/index.js"
     },
     "./preset": "./preset.js"
   },
