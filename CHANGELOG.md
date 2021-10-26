@@ -1,3 +1,10 @@
+### [0.0.1-alpha.28](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.27...v0.0.1-alpha.28) (2021-10-26)
+
+
+### Build Updates
+
+* **exports:** 👷 move default to last in exports ([d1b8078](https://github.com/timelessco/renderlesskit-react-tailwind/commit/d1b80784429cbb02406456dcb10757e3ca790e9a))
+
 ### [0.0.1-alpha.27](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.26...v0.0.1-alpha.27) (2021-10-26)
 
 
