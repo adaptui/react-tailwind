@@ -1,3 +1,34 @@
+### [0.0.1-alpha.26](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.25...v0.0.1-alpha.26) (2021-10-26)
+
+
+### Bug Fixes
+
+* **deps:** ⬆️ update dependency tailwind-merge to ^0.8.0 ([#186](https://github.com/timelessco/renderlesskit-react-tailwind/issues/186)) ([3e033ec](https://github.com/timelessco/renderlesskit-react-tailwind/commit/3e033ecc97002cff1d592c46467fdda8067b4e6e))
+
+
+### Code Refactors
+
+* **checkbox:** ♻️ label with focus & hover ([#188](https://github.com/timelessco/renderlesskit-react-tailwind/issues/188)) ([bc4e4ad](https://github.com/timelessco/renderlesskit-react-tailwind/commit/bc4e4ad2319a0c2085c9ad10d0f221506ca6a23e))
+
+
+### Feature Updates
+
+* **circular-progress:** ✨ update component ([#189](https://github.com/timelessco/renderlesskit-react-tailwind/issues/189)) ([c2ed935](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c2ed935d1f1770cea092ce87c4af701ef98ab39a))
+* **progress:** ✨ finish progress with label hint group ([#185](https://github.com/timelessco/renderlesskit-react-tailwind/issues/185)) ([747efe7](https://github.com/timelessco/renderlesskit-react-tailwind/commit/747efe70036b01bcf7c078178a190dc094b7624d))
+
+
+### Build Updates
+
+* **swc:** 💚  add swc build ([#131](https://github.com/timelessco/renderlesskit-react-tailwind/issues/131)) ([6c7c899](https://github.com/timelessco/renderlesskit-react-tailwind/commit/6c7c8998a828d864ede7290476f3c82a536a2338))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([#184](https://github.com/timelessco/renderlesskit-react-tailwind/issues/184)) ([f2b09f7](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f2b09f7d0f8009106f6e8fbf89d6e3eb9658daa3))
+* **deps:** ⬆️ update dev dependencies (minor) ([#187](https://github.com/timelessco/renderlesskit-react-tailwind/issues/187)) ([b1ab48f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b1ab48f1d62a198a07291d6ee4528414c656b4d4))
+* **deps:** ⬆️ update dev dependencies (minor) to v6.4.0-beta.20 ([#190](https://github.com/timelessco/renderlesskit-react-tailwind/issues/190)) ([087901f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/087901fe42f40da891c986c42f231482c8b31420))
+* **deps:** pin dependency browserlist to 1.0.1 ([#191](https://github.com/timelessco/renderlesskit-react-tailwind/issues/191)) ([0c691ba](https://github.com/timelessco/renderlesskit-react-tailwind/commit/0c691bae8650a7cd2e5c49b06b816c5a90f06474))
+
 ### [0.0.1-alpha.25](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2021-10-20)
 
 
