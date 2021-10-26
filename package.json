@@ -22,22 +22,22 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "default": "./dist/esm/index.js",
-      "import": "./dist/esm/index.js"
+      "require": "./out/cjs/index.js",
+      "default": "./out/esm/index.js",
+      "import": "./out/esm/index.js"
     },
     "./preset": "./preset.js"
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "out/cjs/index.js",
+  "module": "out/esm/index.js",
   "source": "src/index.ts",
-  "types": "dist/types/index.d.ts",
-  "typings": "dist/types/index.d.ts",
+  "types": "out/types/index.d.ts",
+  "typings": "out/types/index.d.ts",
   "files": [
     "tailwindPlugins",
     "preset.d.ts",
     "preset.js",
-    "dist"
+    "out"
   ],
   "scripts": {
     "postinstall": "concurrently \"husky install\" \"patch-package\"",
