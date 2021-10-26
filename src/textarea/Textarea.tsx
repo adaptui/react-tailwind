@@ -3,8 +3,7 @@ import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
 import { Box } from "../box";
 import { useFormControl } from "../form-field";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, tcm } from "../utils";
 
 import { useAutoSize } from "./useAutoSize";
 

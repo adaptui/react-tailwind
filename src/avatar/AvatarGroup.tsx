@@ -2,8 +2,12 @@ import { useMemo } from "react";
 
 import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { createContext, getValidChildren, tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import {
+  createContext,
+  forwardRefWithAs,
+  getValidChildren,
+  tcm,
+} from "../utils";
 
 import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
 

@@ -4,8 +4,13 @@ import { Box, BoxProps } from "../box";
 import { useImage } from "../hooks/useImage";
 import { GenericAvatar } from "../icons";
 import { useTheme } from "../theme";
-import { createContext, runIfFn, tcm } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import {
+  createContext,
+  forwardRefWithAs,
+  RenderProp,
+  runIfFn,
+  tcm,
+} from "../utils";
 
 import { AvatarBadge } from "./AvatarBadge";
 import { useAvatarGroup } from "./AvatarGroup";

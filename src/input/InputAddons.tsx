@@ -3,8 +3,7 @@ import { useRef } from "react";
 import { Box, BoxProps } from "../box";
 import { useMergeRefs } from "../hooks";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { ComponentWithAs, forwardRefWithAs } from "../utils/types";
+import { ComponentWithAs, forwardRefWithAs, tcm } from "../utils";
 
 type InputAddonProps = {
   type: "prefix" | "suffix";

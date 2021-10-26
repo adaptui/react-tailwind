@@ -1,43 +1,44 @@
+import { createComponent, createHook } from "reakit-system";
 import {
-  Checkbox as ReakitSwitch,
-  CheckboxProps as ReakitSwitchProps,
-} from "reakit";
+  CheckboxHTMLProps,
+  CheckboxOptions,
+  useCheckbox,
+} from "@renderlesskit/react";
 
-import { CommonFieldProps, useFormControl } from "../form-field";
 import { useTheme } from "../theme";
 import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
 
-import { useSwitchContext } from "./Switch";
+import { SWITCH_INPUT_KEYS } from "./__keys";
+import { SwitchStateReturn } from "./SwitchState";
 
-export type SwitchInputProps = ReakitSwitchProps & Omit<CommonFieldProps, "id">;
+export type SwitchInputOptions = CheckboxOptions & {
+  size: SwitchStateReturn["size"];
+};
 
-export const SwitchInput = forwardRefWithAs<
-  SwitchInputProps,
-  HTMLInputElement,
-  "input"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const { state } = useSwitchContext();
-  // Interpts with the checked unchecked state
-  if (state["value"] === undefined) delete state["value"];
-  if (state["checked"] === undefined) delete state["checked"];
+export type SwitchInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
 
-  const theme = useTheme();
-  const switchInputStyles = tcm(theme.switch.input, className);
+export type SwitchInputProps = SwitchInputOptions & SwitchInputHTMLProps;
 
-  const formFieldProps = useFormControl(rest);
+export const useSwitchInput = createHook<
+  SwitchInputOptions,
+  SwitchInputHTMLProps
+>({
+  name: "SwitchInput",
+  compose: useCheckbox,
+  keys: SWITCH_INPUT_KEYS,
 
-  return (
-    <ReakitSwitch
-      ref={ref}
-      role="switch"
-      className={switchInputStyles}
-      state={state?.checked}
-      setState={state.setState as any}
-      {...formFieldProps}
-    />
-  );
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("switch");
+    const className = tcm(theme.input, htmlClassName);
+
+    return { role: "switch", className, ...restHtmlProps };
+  },
 });
 
-SwitchInput.displayName = "SwitchInput";
+export const SwitchInput = createComponent({
+  as: "input",
+  memo: true,
+  useHook: useSwitchInput,
+});

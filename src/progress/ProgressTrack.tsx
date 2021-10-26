@@ -1,32 +1,44 @@
-import { Box, BoxProps } from "../box";
+import { createComponent, createHook } from "reakit-system";
+
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { cx } from "../utils";
 
-import { ProgressProps, useProgressContext } from "./Progress";
+import { PROGRESS_TRACK_KEYS } from "./__keys";
+import { ProgressStateReturn } from "./ProgressState";
 
-export type ProgressTrackProps = BoxProps & Pick<ProgressProps, "size">;
+export type ProgressTrackOptions = BoxOptions &
+  Pick<ProgressStateReturn, "size">;
 
-export const ProgressTrack = forwardRefWithAs<
-  ProgressTrackProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const { size = "md" } = useProgressContext();
+export type ProgressTrackHTMLProps = BoxHTMLProps;
 
-  return (
-    <Box
-      ref={ref}
-      className={tcm(
-        theme.progress.track.base,
-        theme.progress.track.size[size],
-        className,
-      )}
-      {...rest}
-    />
-  );
+export type ProgressTrackProps = ProgressTrackOptions & ProgressTrackHTMLProps;
+
+export const useProgressTrack = createHook<
+  ProgressTrackOptions,
+  ProgressTrackHTMLProps
+>({
+  name: "ProgressTrack",
+  compose: useBox,
+  keys: PROGRESS_TRACK_KEYS,
+
+  useProps(options, htmlProps) {
+    const { size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("progress");
+    const className = cx(
+      theme.track.base,
+      theme.track.size[size],
+      htmlClassName,
+    );
+
+    return { className, ...restHtmlProps };
+  },
 });
 
-ProgressTrack.displayName = "ProgressTrack";
+export const ProgressTrack = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useProgressTrack,
+});

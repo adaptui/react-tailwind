@@ -5,8 +5,7 @@ import {
   InfoCircleIcon,
 } from "../icons";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import { forwardRefWithAs, tcm } from "../utils";
 
 import { useAlertContext } from "./Alert";
 

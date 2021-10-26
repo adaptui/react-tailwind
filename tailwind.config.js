@@ -1,7 +1,7 @@
 const path = require("path");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const { preset } = require("./preset");
+const preset = require("./preset");
 
 module.exports = preset({
   mode: "jit",

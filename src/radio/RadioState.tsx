@@ -1,8 +1,10 @@
-import { CircleIcon } from "../icons/Circle";
-import { getValidChildren, runIfFn, runIfFnChildren } from "../utils";
-import { Dict } from "../utils/types";
+import { splitProps } from "reakit-utils";
+
+import { CircleIcon } from "../icons";
+import { getComponentProps, runIfFn } from "../utils";
 
 import {
+  RADIO_GROUP_STATE_KEYS,
   RadioDescriptionProps,
   RadioGroupStateReturn,
   RadioIconProps,
@@ -12,7 +14,6 @@ import {
   RadioProps,
   RadioTextProps,
   useRadioStateContext,
-  useRadioStateReturnSplit,
 } from "./index";
 
 export type RadioStateReturn = RadioGroupStateReturn & {
@@ -28,7 +29,23 @@ export const RadioDefaultIcon: RadioOwnProps["icon"] = state => {
   return <>{isChecked ? <CircleIcon /> : null}</>;
 };
 
-const ComponentPropsMap = {
+export const useRadioState = (props: RadioProps) => {
+  const [stateReturnProps, radioProps] = splitProps(
+    props,
+    RADIO_GROUP_STATE_KEYS,
+  ) as [RadioGroupStateReturn, RadioOwnProps];
+  const contextState = useRadioStateContext();
+
+  const radioGroupState =
+    contextState != null ? contextState : stateReturnProps;
+
+  const isChecked = radioGroupState.state === radioProps.value;
+  const state: RadioStateReturn = { ...radioGroupState, isChecked };
+
+  return [state, radioProps, stateReturnProps] as const;
+};
+
+const componentMap = {
   RadioLabel: "labelProps",
   RadioInput: "inputProps",
   RadioIcon: "iconProps",
@@ -36,32 +53,8 @@ const ComponentPropsMap = {
   RadioDescription: "descriptionProps",
 };
 
-export const getRadioComponentProps = (children: React.ReactNode) => {
-  const validChildren = getValidChildren(children);
-  const props: Dict = {};
-
-  validChildren.forEach(child => {
-    props[
-      // @ts-ignore
-      ComponentPropsMap[child.type.displayName]
-    ] = child.props;
-  });
-
-  return props;
-};
-
 export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
-  const contextState = useRadioStateContext();
-  const [propsState, radioProps] = useRadioStateReturnSplit(props);
-
-  let initialState = propsState;
-  if (contextState != null) {
-    initialState = contextState;
-  }
-
-  const isChecked = initialState.state === radioProps.value;
-  const state: RadioStateReturn = { ...initialState, isChecked };
-
+  const [state, radioProps] = useRadioState(props);
   const {
     icon = RadioDefaultIcon,
     label,
@@ -71,16 +64,22 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     children,
     ...restProps
   } = radioProps;
+  const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const componentProps = getRadioComponentProps(
-    runIfFnChildren(children, state),
-  );
+  const _icon: RadioOwnProps["icon"] =
+    componentProps?.iconProps?.children || icon;
+  const _label: RadioOwnProps["label"] =
+    componentProps?.textProps?.children || label;
+  const _description: RadioOwnProps["description"] =
+    componentProps?.descriptionProps?.children || description;
 
   const labelProps: RadioLabelProps = {
     ...state,
     className,
     style,
-    ...componentProps.labelProps,
+    description: _description,
+    disabled: restProps.disabled,
+    ...componentProps?.labelProps,
   };
 
   const inputProps: RadioInputProps = {
@@ -89,24 +88,19 @@ export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
     ...componentProps.inputProps,
   };
 
-  const _icon: RadioOwnProps["icon"] =
-    componentProps?.iconProps?.children || icon;
   const iconProps: RadioIconProps = {
     ...state,
     ...componentProps.iconProps,
+    description: _description,
     children: runIfFn(_icon, state),
   };
 
-  const _label: RadioOwnProps["label"] =
-    componentProps?.textProps?.children || label;
   const textProps: RadioTextProps = {
     ...state,
     ...componentProps.textProps,
     children: runIfFn(_label, state),
   };
 
-  const _description: RadioOwnProps["description"] =
-    componentProps?.descriptionProps?.children || description;
   const descriptionProps: RadioDescriptionProps = {
     ...state,
     ...componentProps.descriptionProps,

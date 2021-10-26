@@ -3,8 +3,12 @@ import { cloneElement, useMemo, useState } from "react";
 import { Box, BoxProps } from "../box";
 import { useSafeLayoutEffect } from "../hooks";
 import { useTheme } from "../theme";
-import { createContext, getValidChildren, tcm } from "../utils";
-import { forwardRefWithAs } from "../utils/types";
+import {
+  createContext,
+  forwardRefWithAs,
+  getValidChildren,
+  tcm,
+} from "../utils";
 
 import { InputProps, ReactFiberNode } from "./Input";
 import { AddonTypes } from "./InputAddons";

@@ -1,4 +1,4 @@
-import { createIcon } from "../icon";
+import { createIcon } from "../create-icon";
 
 export const CircleIcon = createIcon({
   displayName: "CircleIcon",

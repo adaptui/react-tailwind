@@ -1,14 +1,17 @@
 import * as React from "react";
 
-import { RenderProp, RenderPropType } from "../utils/types";
+import { RenderProp, RenderPropType } from "../utils";
 
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";
 import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxLabel } from "./CheckboxLabel";
-import { CheckboxInitialState, CheckboxStateReturn } from "./CheckboxState";
+import {
+  CheckboxInitialState,
+  CheckboxStateReturn,
+  useCheckboxProps,
+} from "./CheckboxState";
 import { CheckboxText } from "./CheckboxText";
-import { useCheckboxProps } from "./helpers";
 
 export type CheckboxOwnProps = Partial<CheckboxInputProps> & {
   /**
@@ -47,13 +50,12 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <CheckboxLabel {...labelProps}>
         <CheckboxInput ref={ref} {...inputProps} />
         <CheckboxIcon {...iconProps} />
-        {label && !description ? <CheckboxText {...textProps} /> : null}
-        {label && description ? (
-          <div>
-            <CheckboxText {...textProps} />
+        <div>
+          {label ? <CheckboxText {...textProps} /> : null}
+          {label && description ? (
             <CheckboxDescription {...descriptionProps} />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </CheckboxLabel>
     );
   },

@@ -23,28 +23,6 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
   displayName?: string;
 };
 
-/**
- * @template Props Component Props
- * @template RefProp HTML intrinsic type, eg: HTMLDivElement
- * @template DefaultType string, eg: "div"
- * @param component
- */
-export function forwardRefWithAs<
-  Props,
-  RefProp = any,
-  DefaultType extends As = any,
->(
-  component: React.ForwardRefRenderFunction<
-    RefProp,
-    PropsWithAs<Props, DefaultType>
-  >,
-) {
-  return React.forwardRef(component) as unknown as ComponentWithAs<
-    Props,
-    DefaultType
-  >;
-}
-
 export type AnyString = string & { ignore?: any };
 
 export type Dict<T = any> = Record<string, T>;

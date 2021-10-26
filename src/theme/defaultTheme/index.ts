@@ -7,6 +7,7 @@ import { calendar } from "./calendar";
 import { checkbox } from "./checkbox";
 import { circularProgress } from "./circularProgress";
 import { datepicker } from "./datepicker";
+import { divider } from "./divider";
 import { formField } from "./form-field";
 import { icon } from "./icon";
 import { input } from "./input";
@@ -23,12 +24,13 @@ import { tooltip } from "./tooltip";
 
 // font-sans
 // To build css for the storybook body
-const theme = {
+export const theme = {
   alert,
   avatar,
   badge,
   button,
   buttonGroup,
+  divider,
   calendar,
   checkbox,
   circularProgress,

@@ -1,31 +1,37 @@
 import { createComponent, createHook } from "reakit-system";
-import { RadioHTMLProps, RadioOptions, useRadio } from "@renderlesskit/react";
+import {
+  cx,
+  RadioHTMLProps,
+  RadioOptions,
+  useRadio,
+} from "@renderlesskit/react";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
 
 import { RADIO_INPUT_KEYS } from "./__keys";
 import { RadioStateReturn } from "./RadioState";
 
-export type RadioInputOptions = RadioOptions & {
-  size: RadioStateReturn["size"];
-};
+export type RadioInputOptions = BoxOptions &
+  RadioOptions & {
+    size: RadioStateReturn["size"];
+  };
 
-export type RadioInputHTMLProps = Omit<RadioHTMLProps, "size">;
+export type RadioInputHTMLProps = BoxHTMLProps & Omit<RadioHTMLProps, "size">;
 
 export type RadioInputProps = RadioInputOptions & RadioInputHTMLProps;
 
 export const useRadioInput = createHook<RadioInputOptions, RadioInputHTMLProps>(
   {
     name: "RadioInput",
-    compose: useRadio,
+    compose: [useBox, useRadio],
     keys: RADIO_INPUT_KEYS,
 
     useProps(options, htmlProps) {
       const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
       const theme = useTheme("radio");
-      const className = tcm(theme.input, htmlClassName);
+      const className = cx(theme.input, htmlClassName);
 
       return { className, ...restHtmlProps };
     },

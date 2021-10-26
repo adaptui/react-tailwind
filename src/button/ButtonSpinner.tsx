@@ -1,9 +1,8 @@
 import * as React from "react";
-import { cx } from "@renderlesskit/react";
 
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { passProps } from "../utils";
+import { cx, passProps } from "../utils";
 
 import { ButtonProps } from "./Button";
 
@@ -12,7 +11,12 @@ export type ButtonSpinnerProps = Partial<
 > & {};
 
 export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const { spinner, prefix, suffix, size = "md" } = props;
+  const {
+    size = "md",
+    spinner = <Spinner size="em" />,
+    prefix,
+    suffix,
+  } = props;
 
   const button = useTheme("button");
   const spinnerStyles = cx(
@@ -23,14 +27,18 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
       : button.size.iconOnly.text[size],
   );
 
-  if (spinner) return <>{passProps(spinner, { className: spinnerStyles })}</>;
-
-  return <Spinner className={spinnerStyles} size="em" />;
+  return <>{passProps(spinner, { className: spinnerStyles })}</>;
 };
 
 export const ButtonFullWidthSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const { spinner, iconOnly, children, size = "md" } = props;
+  const {
+    size = "md",
+    spinner = <Spinner size="em" />,
+    iconOnly,
+    children,
+  } = props;
 
+  // This is only the grey area in button for now which user cannot customize
   return (
     <>
       <div className="absolute flex items-center justify-center">

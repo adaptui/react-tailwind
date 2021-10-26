@@ -43,6 +43,9 @@ const renderlesskitConfig = {
         thumb:
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
         input: "0px 0px 2px rgba(59, 130, 246, 0.6);",
+        "switch-md":
+          "0px 0px 0px 0.5px #FFFFFF, 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "switch-none": "0px 0px 0px 0.5px #FFFFFF",
       },
       animation: {
         progress: "progress 1s ease infinite normal none running",
@@ -51,8 +54,8 @@ const renderlesskitConfig = {
       },
       keyframes: {
         progress: {
-          "0%": { left: "-40%" },
-          "100%": { left: "100%" },
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(200%)" },
         },
         circularProgress: {
           "0%": {
@@ -100,4 +103,4 @@ function preset(tailwindConfig) {
   });
 }
 
-module.exports = { preset };
+module.exports = preset;

@@ -1,18 +1,21 @@
 import { createComponent, createHook } from "reakit-system";
-import { cx } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { cx } from "../utils";
 
 import { CHECKBOX_ICON_KEYS } from "./__keys";
+import { CheckboxProps } from "./Checkbox";
 import { CheckboxStateReturn } from "./CheckboxState";
 
 export type CheckboxIconOptions = BoxOptions &
   Pick<
     CheckboxStateReturn,
     "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
-  >;
+  > & {
+    label?: CheckboxProps["label"];
+    description?: CheckboxProps["description"];
+  };
 
 export type CheckboxIconHTMLProps = BoxHTMLProps;
 
@@ -27,38 +30,48 @@ export const useCheckboxIcon = createHook<
   keys: CHECKBOX_ICON_KEYS,
 
   useProps(options, htmlProps) {
-    const { isChecked, isIndeterminate, isUnchecked, size } = options;
+    const {
+      isChecked,
+      isIndeterminate,
+      isUnchecked,
+      size,
+      label,
+      description,
+    } = options;
+    console.log("%clabel", "color: #00bf00", label);
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const checkbox = useTheme("checkbox");
+    const theme = useTheme("checkbox");
     const className = cx(
-      checkbox.icon.base,
-      checkbox.icon.size[size],
+      theme.icon.base,
+      theme.icon.size[size],
       isUnchecked
-        ? tcm(
-            checkbox.icon.unChecked.default,
-            checkbox.icon.unChecked.hover,
-            checkbox.icon.unChecked.active,
-            checkbox.icon.unChecked.focus,
-            checkbox.icon.unChecked.disabled,
+        ? cx(
+            theme.icon.unChecked.default,
+            theme.icon.unChecked.hover,
+            theme.icon.unChecked.active,
+            !label || (label && description) ? theme.icon.unChecked.focus : "",
+            theme.icon.unChecked.disabled,
           )
         : "",
       isChecked
-        ? tcm(
-            checkbox.icon.checked.default,
-            checkbox.icon.checked.hover,
-            checkbox.icon.checked.active,
-            checkbox.icon.checked.focus,
-            checkbox.icon.checked.disabled,
+        ? cx(
+            theme.icon.checked.default,
+            theme.icon.checked.hover,
+            theme.icon.checked.active,
+            !label || (label && description) ? theme.icon.checked.focus : "",
+            theme.icon.checked.disabled,
           )
         : "",
       isIndeterminate
-        ? tcm(
-            checkbox.icon.checked.default,
-            checkbox.icon.indeterminate.hover,
-            checkbox.icon.indeterminate.active,
-            checkbox.icon.indeterminate.focus,
-            checkbox.icon.indeterminate.disabled,
+        ? cx(
+            theme.icon.checked.default,
+            theme.icon.indeterminate.hover,
+            theme.icon.indeterminate.active,
+            !label || (label && description)
+              ? theme.icon.indeterminate.focus
+              : "",
+            theme.icon.indeterminate.disabled,
           )
         : "",
       htmlClassName,

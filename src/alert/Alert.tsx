@@ -3,8 +3,13 @@ import * as React from "react";
 import { Box, BoxProps } from "../box";
 import { useMediaQuery } from "../hooks";
 import { useTheme } from "../theme";
-import { createContext, runIfFn, tcm } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
+import {
+  createContext,
+  forwardRefWithAs,
+  RenderProp,
+  runIfFn,
+  tcm,
+} from "../utils";
 
 import { AlertActions } from "./AlertActions";
 import { AlertBody } from "./AlertBody";

@@ -1,8 +1,8 @@
-export * from "./Bolt";
 export * from "./CaretDown";
 export * from "./CaretRight";
 export * from "./Check";
 export * from "./CheckCircle";
+export * from "./Circle";
 export * from "./Clock";
 export * from "./Close";
 export * from "./Dot";
@@ -14,5 +14,4 @@ export * from "./Indeterminate";
 export * from "./InfoCircle";
 export * from "./Moon";
 export * from "./Photograph";
-export * from "./Search";
-export * from "./Wheel";
+export * from "./Plus";

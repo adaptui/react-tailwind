@@ -1,63 +1,54 @@
-import { useMemo } from "react";
+import * as React from "react";
+
+import { RenderPropType } from "../utils";
+
+import { ProgressBar } from "./ProgressBar";
+import { ProgressHint } from "./ProgressHint";
+import { ProgressLabel } from "./ProgressLabel";
 import {
   ProgressInitialState,
   ProgressStateReturn,
-  useProgressState,
-} from "@renderlesskit/react";
-
-import { BoxProps } from "../box";
-import { createContext, runIfFn } from "../utils";
-import { forwardRefWithAs, RenderProp } from "../utils/types";
-
-import { ProgressBar } from "./ProgressBar";
+  useProgressProps,
+} from "./ProgressState";
 import { ProgressTrack } from "./ProgressTrack";
+import { ProgressWrapper, ProgressWrapperHTMLProps } from "./ProgressWrapper";
 
-export type ProgressContext = {
-  state: ProgressStateReturn;
-  size: ProgressProps["size"];
+export type ProgressOwnProps = Partial<ProgressWrapperHTMLProps> & {
+  /**
+   * Label for the Progress.
+   */
+  label?: RenderPropType<ProgressStateReturn>;
+
+  /**
+   * Hint for the Progress.
+   */
+  hint?: RenderPropType<ProgressStateReturn>;
 };
 
-const [ProgressProvider, useProgressContext] = createContext<ProgressContext>({
-  name: "ProgressContext",
-  strict: false,
-});
+export type ProgressProps = ProgressInitialState & ProgressOwnProps;
 
-export { useProgressContext };
+export const Progress = React.forwardRef<HTMLInputElement, ProgressProps>(
+  (props, ref) => {
+    const {
+      label,
+      hint,
+      wrapperProps,
+      labelProps,
+      hintProps,
+      barProps,
+      trackProps,
+    } = useProgressProps(props);
 
-type ProgressRenderProps = RenderProp<ProgressStateReturn>;
-
-export type ProgressProps = BoxProps &
-  ProgressInitialState & {
-    /**
-     * How large should the progress be?
-     *
-     * @default "md"
-     */
-    size?: keyof Renderlesskit.GetThemeValue<"progress", "track", "size">;
-  };
-
-export const Progress = forwardRefWithAs<
-  ProgressProps & ProgressRenderProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const { value, min, max, size = "md", children, ...rest } = props;
-  const state = useProgressState({ value, min, max });
-  const context = useMemo(() => ({ state, size }), [state, size]);
-
-  return (
-    <ProgressProvider value={context}>
-      {children ? (
-        runIfFn(children, state)
-      ) : (
-        <ProgressTrack ref={ref} {...rest}>
-          <ProgressBar />
+    return (
+      <ProgressWrapper ref={ref} {...wrapperProps}>
+        {label ? <ProgressLabel {...labelProps} /> : null}
+        {label && hint ? <ProgressHint {...hintProps} /> : null}
+        <ProgressTrack {...trackProps}>
+          <ProgressBar {...barProps} />
         </ProgressTrack>
-      )}
-    </ProgressProvider>
-  );
-});
+      </ProgressWrapper>
+    );
+  },
+);
 
 Progress.displayName = "Progress";
-
-export default Progress;
