@@ -76,8 +76,6 @@ export const useCircularProgressProps = (
   const [state, progressProps] = useCircularProgressStateSplit(props);
   const { hint, children, ...restProps } = progressProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
-  console.log("%cchildren", "color: #731d1d", children);
-  console.log("%ccomponentProps", "color: #f200e2", componentProps);
 
   const _hint: CircularProgressOwnProps["hint"] =
     componentProps?.textProps?.children || hint;

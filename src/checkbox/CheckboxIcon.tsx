@@ -38,7 +38,6 @@ export const useCheckboxIcon = createHook<
       label,
       description,
     } = options;
-    console.log("%clabel", "color: #00bf00", label);
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("checkbox");
