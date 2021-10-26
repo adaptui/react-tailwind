@@ -20,7 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "declaration": true,
-    "declarationDir": "dist/types",
     "sourceMap": true
   }
 }
