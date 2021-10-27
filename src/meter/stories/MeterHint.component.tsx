@@ -11,9 +11,11 @@ export const MeterHint: React.FC<MeterHintProps> = props => {
     <div className="w-80">
       <Meter
         value={value}
-        max={100}
+        max={75}
         label="Charging..."
-        hint={value === null ? undefined : `${value}%`}
+        hint={({ percent }: { percent: any }) =>
+          percent === null ? undefined : `${percent}%`
+        }
         {...props}
       />
       <ActionButtons setValue={setValue} />
@@ -29,11 +31,11 @@ const useMeterState = (initialValue: number = 0) => {
   React.useEffect(() => {
     const clearId = setInterval(() => {
       setValue(prevValue => {
-        return prevValue + 50;
+        return prevValue + 25;
       });
     }, 500);
 
-    if (value === 100) {
+    if (value === 75) {
       clearInterval(clearId);
     }
 
