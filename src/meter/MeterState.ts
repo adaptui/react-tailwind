@@ -29,6 +29,13 @@ export type MeterState = unstable_IdState &
      * @default md
      */
     size: keyof Renderlesskit.GetThemeValue<"meter", "track", "size">;
+
+    /**
+     * No of intervals for the meter.
+     *
+     * @default 1
+     */
+    intervals: number;
   };
 
 export type MeterActions = unstable_IdActions;
@@ -37,17 +44,18 @@ export type MeterStateReturn = MeterState & MeterActions;
 
 export type MeterInitialState = unstable_IdInitialState &
   RenderlesskitMeterInitialState &
-  Partial<Pick<MeterState, "size">>;
+  Partial<Pick<MeterState, "size" | "intervals">>;
 
 export function useMeterState(props: MeterInitialState = {}): MeterStateReturn {
   const state = useRenderlesskitMeterState(props);
   const id = unstable_useIdState();
-  const { size = "md" } = props;
+  const { size = "md", intervals = 1 } = props;
 
   return {
     ...state,
     ...id,
     size,
+    intervals,
   };
 }
 

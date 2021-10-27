@@ -8,6 +8,7 @@ export const USE_METER_STATE_KEYS = [
   "optimum",
   "high",
   "size",
+  "intervals",
 ] as const;
 export const METER_STATE_KEYS = [
   ...USE_METER_STATE_KEYS,

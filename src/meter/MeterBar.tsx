@@ -27,7 +27,7 @@ export const useMeterBar = createHook<MeterBarOptions, MeterBarHTMLProps>({
       ...restHtmlProps
     } = htmlProps;
 
-    const progress = useTheme("progress");
+    const progress = useTheme("meter");
     const className = cx(progress.bar.base, htmlClassName);
     const style = { width: `${percent}%`, ...htmlStyle };
 

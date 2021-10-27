@@ -29,6 +29,6 @@ export const meter = {
     },
   },
   bar: {
-    base: "h-full bg-gray-800 rounded-2xl transition-all",
+    base: "h-full bg-gray-800 transition-all",
   },
 };

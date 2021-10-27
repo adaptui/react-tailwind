@@ -1,4 +1,5 @@
 import * as React from "react";
+import { valueToPercent } from "@renderlesskit/react";
 
 import { RenderPropType } from "../utils";
 
@@ -30,6 +31,7 @@ export type MeterProps = MeterInitialState & MeterOwnProps;
 export const Meter = React.forwardRef<HTMLInputElement, MeterProps>(
   (props, ref) => {
     const {
+      state,
       label,
       hint,
       wrapperProps,
@@ -38,68 +40,37 @@ export const Meter = React.forwardRef<HTMLInputElement, MeterProps>(
       barProps,
       trackProps,
     } = useMeterProps(props);
-
-    const getGapArray = (intervals, gap, dividedPercentage) => {
-      const initialGap = 0;
-      const finalGap = 100;
-      return [
-        initialGap,
-        ...[...Array(intervals)]
-          .map((_, i) => {
-            return [
-              dividedPercentage * (i + 1) - gap,
-              dividedPercentage * (i + 1) - gap,
-              dividedPercentage * (i + 1) + gap,
-              dividedPercentage * (i + 1) + gap,
-            ];
-          })
-          .flat(),
-        finalGap,
-      ];
-    };
-
-    const getGradient = gapArray => {
-      const chunks = chunk(gapArray, 2);
-      return chunks
-        .map(([a, b], i) => {
-          if (isEven(i)) return `#000 ${a}% ${b}%`;
-          return `#fff ${a}% ${b}%`;
-        })
-        .join(", ");
-    };
-
-    const intervals = 3;
-    const percentage = 100;
-    const gap = 1;
-    const dividedPercentage = Math.round(percentage / (intervals + 1));
-    console.log("%cdividedPercentage", "color: #7f2200", dividedPercentage);
-    const gapArray = getGapArray(intervals, gap, dividedPercentage);
-    console.log("%cgapArray", "color: #994d75", gapArray);
-    const gradient = getGradient(gapArray);
-    console.log("%cgradient", "color: #e5de73", gradient);
-    const backgroundImage = `linear-gradient( to right, ${gradient})`;
+    const { intervals, value, max } = state;
+    const maxMultiplier = max / intervals;
+    const intervalValue = value / maxMultiplier;
 
     return (
       <MeterWrapper ref={ref} {...wrapperProps}>
         {label ? <MeterLabel {...labelProps} /> : null}
         {label && hint ? <MeterHint {...hintProps} /> : null}
-        <MeterTrack {...trackProps}>
-          <MeterBar {...barProps} />
-          <div className="absolute inset-0" style={{ backgroundImage }} />
-        </MeterTrack>
+        <div className="flex w-full space-x-1 meter-radius">
+          {intervals >= 1
+            ? Array(intervals)
+                .fill(0)
+                .map((_, i) => {
+                  const interval = i + 1;
+
+                  return (
+                    <MeterTrack key={`interval-${interval}`} {...trackProps}>
+                      {intervalValue >= i ? (
+                        <MeterBar
+                          {...barProps}
+                          percent={valueToPercent(intervalValue, i, interval)}
+                        />
+                      ) : null}
+                    </MeterTrack>
+                  );
+                })
+            : null}
+        </div>
       </MeterWrapper>
     );
   },
 );
 
 Meter.displayName = "Meter";
-
-function chunk<T>(arr: T[], size: number): T[][] {
-  return [...Array(Math.ceil(arr.length / size))].map((_, i) =>
-    arr.slice(size * i, size + size * i),
-  );
-}
-
-function isEven(n: number) {
-  return n % 2 === 0;
-}
