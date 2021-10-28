@@ -1,42 +1,58 @@
-import * as React from "react";
+import {
+  ImgHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
+
+export type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>;
 
 export interface UseImageProps {
   /**
    * The image `src` attribute
    */
   src?: string;
+
   /**
    * The image `srcset` attribute
    */
   srcSet?: string;
+
   /**
    * The image `sizes` attribute
    */
   sizes?: string;
+
   /**
    * A callback for when the image `src` has been loaded
    */
-  onLoad?(event: React.SyntheticEvent<HTMLImageElement, Event>): void;
+  onLoad?: NativeImageProps["onLoad"];
+
   /**
    * A callback for when there was an error loading the image `src`
    */
-  onError?(error: string | React.SyntheticEvent<HTMLImageElement, Event>): void;
+  onError?: NativeImageProps["onError"];
+
   /**
    * If `true`, opt out of the `fallbackSrc` logic and use as `img`
    */
   ignoreFallback?: boolean;
+
   /**
    * The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.
    * This tells the browser to request cross-origin access when trying to download the image data.
    */
-  crossOrigin?: React.ImgHTMLAttributes<any>["crossOrigin"];
+  crossOrigin?: NativeImageProps["crossOrigin"];
+
+  loading?: NativeImageProps["loading"];
 }
 
-type Status = "loading" | "failed" | "pending" | "loaded";
+export type UseImageStatus = "loading" | "failed" | "pending" | "loaded";
 
-type ImageEvent = React.SyntheticEvent<HTMLImageElement, Event>;
+export type UseImageImageEvent = React.SyntheticEvent<HTMLImageElement, Event>;
 
 /**
  * React hook that loads an image in the browser,
@@ -55,42 +71,41 @@ type ImageEvent = React.SyntheticEvent<HTMLImageElement, Event>;
  * ```
  */
 export function useImage(props: UseImageProps) {
-  const { src, srcSet, onLoad, onError, crossOrigin, sizes, ignoreFallback } =
-    props;
+  const {
+    loading,
+    src,
+    srcSet,
+    onLoad,
+    onError,
+    crossOrigin,
+    sizes,
+    ignoreFallback,
+  } = props;
 
-  const [status, setStatus] = React.useState<Status>("pending");
+  const [status, setStatus] = useState<UseImageStatus>("pending");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setStatus(src ? "loading" : "pending");
   }, [src]);
 
-  const imageRef = React.useRef<HTMLImageElement | null>();
+  const imageRef = useRef<HTMLImageElement | null>();
 
-  const load = React.useCallback(() => {
+  const load = useCallback(() => {
     if (!src) return;
 
     flush();
 
     const img = new Image();
-
     img.src = src;
-
-    if (crossOrigin) {
-      img.crossOrigin = crossOrigin;
-    }
-
-    if (srcSet) {
-      img.srcset = srcSet;
-    }
-
-    if (sizes) {
-      img.sizes = sizes;
-    }
+    if (crossOrigin) img.crossOrigin = crossOrigin;
+    if (srcSet) img.srcset = srcSet;
+    if (sizes) img.sizes = sizes;
+    if (loading) img.loading = loading;
 
     img.onload = event => {
       flush();
       setStatus("loaded");
-      onLoad?.(event as unknown as ImageEvent);
+      onLoad?.(event as unknown as UseImageImageEvent);
     };
     img.onerror = error => {
       flush();
@@ -99,7 +114,7 @@ export function useImage(props: UseImageProps) {
     };
 
     imageRef.current = img;
-  }, [src, crossOrigin, srcSet, sizes, onLoad, onError]);
+  }, [src, crossOrigin, srcSet, sizes, onLoad, onError, loading]);
 
   const flush = () => {
     if (imageRef.current) {

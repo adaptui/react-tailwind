@@ -4,7 +4,7 @@ import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { METER_HINT_KEYS } from "./__keys";
+import { METER_BAR_WRAPPER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterBarWrapperOptions = BoxOptions &
@@ -21,7 +21,7 @@ export const useMeterBarWrapper = createHook<
 >({
   name: "MeterBarWrapper",
   compose: useBox,
-  keys: METER_HINT_KEYS,
+  keys: METER_BAR_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
     const { flatBorders } = options;

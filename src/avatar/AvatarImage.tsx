@@ -1,32 +1,43 @@
-import { Box, BoxProps } from "../box";
+import { createComponent, createHook } from "reakit-system";
+
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
+import { UseImageProps } from "..";
 
-import { useAvatarContext } from "./Avatar";
+import { AVATAR_IMAGE_KEYS } from "./__keys";
+import { AvatarStateReturn } from "./AvatarState";
 
-export type AvatarImageProps = BoxProps & {};
+export type AvatarImageOptions = BoxOptions & Pick<AvatarStateReturn, "size">;
 
-export const AvatarImage = forwardRefWithAs<
-  AvatarImageProps,
-  HTMLImageElement,
-  "img"
->((props, ref) => {
-  const { className, ...rest } = props;
-  const theme = useTheme();
-  const { src, name, loading } = useAvatarContext();
+export type AvatarImageHTMLProps = BoxHTMLProps & UseImageProps;
 
-  return (
-    <Box
-      as="img"
-      ref={ref}
-      data-testid="testid-avatarimg"
-      src={src}
-      alt={name}
-      loading={loading}
-      className={tcm(theme.avatar.image, className)}
-      {...rest}
-    />
-  );
+export type AvatarImageProps = AvatarImageOptions & AvatarImageHTMLProps;
+
+export const useAvatarImage = createHook<
+  AvatarImageOptions,
+  AvatarImageHTMLProps
+>({
+  name: "AvatarImage",
+  compose: useBox,
+  keys: AVATAR_IMAGE_KEYS,
+
+  useProps(options, htmlProps) {
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+    const theme = useTheme("avatar");
+    const className = cx(theme.image, htmlClassName);
+
+    return {
+      className,
+      "data-testid": "testid-avatarimg",
+      ...restHtmlProps,
+    };
+  },
 });
 
-AvatarImage.displayName = "AvatarImage";
+export const AvatarImage = createComponent({
+  as: "img",
+  memo: true,
+  useHook: useAvatarImage,
+});

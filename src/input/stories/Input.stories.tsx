@@ -2,7 +2,7 @@ import * as React from "react";
 import { Meta } from "@storybook/react";
 
 import { storyTemplate } from "../../../.storybook/utils";
-import { Avatar } from "../../avatar";
+import { Avatar } from "../../avatar-new";
 import { Button } from "../../button";
 import { EyeClose, EyeOpen, GenericAvatar } from "../../icons";
 import {

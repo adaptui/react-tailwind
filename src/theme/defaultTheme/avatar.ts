@@ -1,11 +1,39 @@
 export const avatar = {
-  base: "relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100",
-  size: {
-    xs: "h-4 w-4",
-    sm: "h-5 w-5",
-    md: "h-6 w-6",
-    lg: "h-8 w-8",
-    xl: "h-10 w-10",
+  wrapper: {
+    base: "relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100",
+    size: {
+      xs: "h-4 w-4",
+      sm: "h-5 w-5",
+      md: "h-6 w-6",
+      lg: "h-7 w-7",
+      xl: "h-8 w-8",
+      "2xl": "h-10 w-10",
+      "3xl": "h-12 w-12",
+    },
+  },
+  icon: {
+    base: "inline-flex items-center justify-center text-gray-600",
+    size: {
+      xs: "text-[0.625rem]",
+      sm: "text-[0.625rem]",
+      md: "text-xs",
+      lg: "text-xs",
+      xl: "text-base",
+      "2xl": "text-base",
+      "3xl": "text-xl",
+    },
+  },
+  initials: {
+    base: "text-gray-600 font-medium text-center uppercase",
+    size: {
+      xs: "text-xs",
+      sm: "text-cxs",
+      md: "text-sm",
+      lg: "text-sm",
+      xl: "text-base",
+      "2xl": "text-lg",
+      "3xl": "text-xl",
+    },
   },
   image: "rounded-full w-full h-full object-cover",
   badge: {
@@ -55,26 +83,6 @@ export const avatar = {
         xl: "h-2 p-1",
       },
       circle: "bg-white w-0.5 h-0.5 rounded-full animate-pulse",
-    },
-  },
-  initials: {
-    base: "text-center uppercase text-gray-500",
-    size: {
-      xs: "text-xs",
-      sm: "text-xs",
-      md: "text-xs",
-      lg: "text-xs",
-      xl: "text-sm",
-    },
-  },
-  icon: {
-    base: "inline-flex text-gray-500",
-    size: {
-      xs: "text-[0.625rem]",
-      sm: "text-xs",
-      md: "text-xs",
-      lg: "text-xs",
-      xl: "text-xs",
     },
   },
   border: {
