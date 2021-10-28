@@ -12,6 +12,7 @@ import { formField } from "./form-field";
 import { icon } from "./icon";
 import { input } from "./input";
 import { list } from "./list";
+import { meter } from "./meter";
 import { progress } from "./progress";
 import { radio } from "./radio";
 import { slider } from "./slider";
@@ -39,6 +40,7 @@ export const theme = {
   icon,
   input,
   list,
+  meter,
   progress,
   radio,
   slider,

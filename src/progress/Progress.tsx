@@ -27,7 +27,7 @@ export type ProgressOwnProps = Partial<ProgressWrapperHTMLProps> & {
 
 export type ProgressProps = ProgressInitialState & ProgressOwnProps;
 
-export const Progress = React.forwardRef<HTMLInputElement, ProgressProps>(
+export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   (props, ref) => {
     const {
       label,

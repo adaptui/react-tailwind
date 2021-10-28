@@ -45,7 +45,7 @@ index 0000000..9799aa9
 +exports.NEXT_PRESET = {
 +    dependencies: {
 +        "@renderlesskit/react-tailwind": "0.0.1-alpha.29",
-+        next: "11.1.2",
++        next: "12.0.1",
 +        react: "17.0.2",
 +        "react-dom": "17.0.2"
 +    },
@@ -54,7 +54,7 @@ index 0000000..9799aa9
 +        autoprefixer: "10.3.7",
 +        deepmerge: "4.2.2",
 +        eslint: "7.32.0",
-+        "eslint-config-next": "11.1.2",
++        "eslint-config-next": "12.0.1",
 +        postcss: "8.3.11",
 +        tailwindcss: "2.2.17",
 +        typescript: "4.4.4"
@@ -86,7 +86,7 @@ index 0000000..9799aa9
 +
 +        "tailwind.config.js": "const path = require(\"path\");\n\nconst preset = require(\"@renderlesskit/react-tailwind/preset\");\n\nmodule.exports = preset({\n  mode: \"jit\",\n  purge: [\n    path.resolve(__dirname, \"./components/**/*\"),\n    path.resolve(__dirname, \"./pages/**/*\"),\n    path.resolve(__dirname, \"./renderlesskit.config.ts\"),\n    \"node_modules/@renderlesskit/react-tailwind/**/*\",\n  ],\n  theme: {\n    extend: {}\n  },\n  variants: {},\n  plugins: [],\n});",
 +
-+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"es5\",\n    \"lib\": [\"dom\", \"dom.iterable\", \"esnext\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"strict\": true,\n    \"forceConsistentCasingInFileNames\": true,\n    \"noEmit\": true,\n    \"esModuleInterop\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"node\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"jsx\": \"preserve\"\n    },\n  \"include\": [\"next-env.d.ts\", \"**/*.ts\", \"**/*.tsx\"],\n  \"exclude\": [\"node_modules\"]\n}"
++        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"es5\",\n    \"lib\": [\"dom\", \"dom.iterable\", \"esnext\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"strict\": true,\n    \"forceConsistentCasingInFileNames\": true,\n    \"noEmit\": true,\n    \"esModuleInterop\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"node\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"jsx\": \"preserve\"\n,\n    \"incremental\": true\n    },\n  \"include\": [\"next-env.d.ts\", \"**/*.ts\", \"**/*.tsx\"],\n  \"exclude\": [\"node_modules\"]\n}"
 +    }
 +};
 diff --git a/node_modules/storybook-addon-preview/dist/presets/NextJS.js b/node_modules/storybook-addon-preview/dist/presets/NextJS.js
@@ -104,7 +104,7 @@ index 0000000..8a7a6e5
 +exports.NEXTJS_PRESET = {
 +    dependencies: {
 +        "@renderlesskit/react-tailwind": "0.0.1-alpha.29",
-+        next: "11.1.2",
++        next: "12.0.1",
 +        react: "17.0.2",
 +        "react-dom": "17.0.2"
 +    },
@@ -114,7 +114,7 @@ index 0000000..8a7a6e5
 +        postcss: "8.3.11",
 +        deepmerge: "4.2.2",
 +        eslint: "7.32.0",
-+        "eslint-config-next": "11.1.2",
++        "eslint-config-next": "12.0.1",
 +    },
 +    scripts: {
 +        dev: "next dev",

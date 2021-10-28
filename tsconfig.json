@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "esnext",
     "lib": ["dom", "esnext", "dom.iterable"],
     "types": ["node", "jest", "@testing-library/jest-dom"],
@@ -20,6 +20,8 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "declaration": true,
+    "importHelpers": true,
+    "removeComments": true,
     "sourceMap": true
   }
 }

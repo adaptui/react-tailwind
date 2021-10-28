@@ -54,13 +54,13 @@ export function useProgressState(
 }
 
 export const useProgressStateSplit = (props: ProgressProps) => {
-  const [stateProps, switchProps] = splitProps(
+  const [stateProps, progressProps] = splitProps(
     props,
     USE_PROGRESS_STATE_KEYS,
   ) as [ProgressInitialState, ProgressOwnProps];
   const state = useProgressState(stateProps);
 
-  return [state, switchProps, stateProps] as const;
+  return [state, progressProps, stateProps] as const;
 };
 
 const componentMap = {
@@ -74,8 +74,8 @@ const componentMap = {
 export const useProgressProps = (
   props: React.PropsWithChildren<ProgressProps>,
 ) => {
-  const [state, switchProps] = useProgressStateSplit(props);
-  const { label, hint, children, ...restProps } = switchProps;
+  const [state, progressProps] = useProgressStateSplit(props);
+  const { label, hint, children, ...restProps } = progressProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
   const _label: ProgressOwnProps["label"] =
