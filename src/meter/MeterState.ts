@@ -16,6 +16,7 @@ import { getComponentProps, runIfFn } from "../utils";
 import { USE_METER_STATE_KEYS } from "./__keys";
 import { MeterOwnProps, MeterProps } from "./Meter";
 import { MeterBarProps } from "./MeterBar";
+import { MeterBarWrapperProps } from "./MeterBarWrapper";
 import { MeterHintProps } from "./MeterHint";
 import { MeterLabelProps } from "./MeterLabel";
 import { MeterTrackProps } from "./MeterTrack";
@@ -36,6 +37,11 @@ export type MeterState = unstable_IdState &
      * @default 1
      */
     intervals: number;
+
+    /**
+     * If true, meter bar intervals will have flat broders
+     */
+    flatBorders: boolean;
   };
 
 export type MeterActions = unstable_IdActions;
@@ -44,18 +50,19 @@ export type MeterStateReturn = MeterState & MeterActions;
 
 export type MeterInitialState = unstable_IdInitialState &
   RenderlesskitMeterInitialState &
-  Partial<Pick<MeterState, "size" | "intervals">>;
+  Partial<Pick<MeterState, "size" | "intervals" | "flatBorders">>;
 
 export function useMeterState(props: MeterInitialState = {}): MeterStateReturn {
   const state = useRenderlesskitMeterState(props);
   const id = unstable_useIdState();
-  const { size = "md", intervals = 1 } = props;
+  const { size = "md", intervals = 1, flatBorders = true } = props;
 
   return {
     ...state,
     ...id,
     size,
     intervals,
+    flatBorders: intervals === 1 ? false : flatBorders,
   };
 }
 
@@ -73,6 +80,7 @@ const componentMap = {
   MeterWrapper: "wrapperProps",
   MeterLabel: "labelProps",
   MeterHint: "hintProps",
+  MeterBarWrapper: "barWrapperProps",
   MeterBar: "barProps",
   MeterTrack: "trackProps",
 };
@@ -99,6 +107,11 @@ export const useMeterProps = (props: React.PropsWithChildren<MeterProps>) => {
     ...componentProps.barProps,
   };
 
+  const barWrapperProps: MeterBarWrapperProps = {
+    ...state,
+    ...componentProps.barWrapperProps,
+  };
+
   const trackProps: MeterTrackProps = {
     ...state,
     ...componentProps.trackProps,
@@ -123,6 +136,7 @@ export const useMeterProps = (props: React.PropsWithChildren<MeterProps>) => {
     wrapperProps,
     labelProps,
     hintProps,
+    barWrapperProps,
     barProps,
     trackProps,
   };

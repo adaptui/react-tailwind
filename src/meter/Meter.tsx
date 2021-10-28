@@ -4,6 +4,7 @@ import { valueToPercent } from "@renderlesskit/react";
 import { RenderPropType } from "../utils";
 
 import { MeterBar } from "./MeterBar";
+import { MeterBarWrapper } from "./MeterBarWrapper";
 import { MeterHint } from "./MeterHint";
 import { MeterLabel } from "./MeterLabel";
 import {
@@ -28,7 +29,7 @@ export type MeterOwnProps = Partial<MeterWrapperHTMLProps> & {
 
 export type MeterProps = MeterInitialState & MeterOwnProps;
 
-export const Meter = React.forwardRef<HTMLInputElement, MeterProps>(
+export const Meter = React.forwardRef<HTMLDivElement, MeterProps>(
   (props, ref) => {
     const {
       state,
@@ -37,6 +38,7 @@ export const Meter = React.forwardRef<HTMLInputElement, MeterProps>(
       wrapperProps,
       labelProps,
       hintProps,
+      barWrapperProps,
       barProps,
       trackProps,
     } = useMeterProps(props);
@@ -48,7 +50,7 @@ export const Meter = React.forwardRef<HTMLInputElement, MeterProps>(
       <MeterWrapper ref={ref} {...wrapperProps}>
         {label ? <MeterLabel {...labelProps} /> : null}
         {label && hint ? <MeterHint {...hintProps} /> : null}
-        <div className="flex w-full space-x-1 meter-radius">
+        <MeterBarWrapper {...barWrapperProps}>
           {intervals >= 1
             ? Array(intervals)
                 .fill(0)
@@ -67,7 +69,7 @@ export const Meter = React.forwardRef<HTMLInputElement, MeterProps>(
                   );
                 })
             : null}
-        </div>
+        </MeterBarWrapper>
       </MeterWrapper>
     );
   },

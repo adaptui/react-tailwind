@@ -19,6 +19,10 @@ export const meter = {
       xl: "text-sm",
     },
   },
+  barWrapper: {
+    base: "flex w-full space-x-1",
+    flatBorders: "meter-radius",
+  },
   track: {
     base: "w-full relative overflow-hidden bg-gray-200 rounded-2xl z-10",
     size: {
@@ -29,6 +33,7 @@ export const meter = {
     },
   },
   bar: {
-    base: "h-full bg-gray-800 transition-all",
+    base: "h-full bg-gray-800 rounded-2xl transition-all",
+    flatBroders: "rounded-none",
   },
 };

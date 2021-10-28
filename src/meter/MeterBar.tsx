@@ -8,7 +8,7 @@ import { METER_BAR_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterBarOptions = BoxOptions &
-  Partial<Pick<MeterStateReturn, "value" | "percent">>;
+  Partial<Pick<MeterStateReturn, "percent" | "flatBorders">>;
 
 export type MeterBarHTMLProps = BoxHTMLProps;
 
@@ -20,15 +20,19 @@ export const useMeterBar = createHook<MeterBarOptions, MeterBarHTMLProps>({
   keys: METER_BAR_KEYS,
 
   useProps(options, htmlProps) {
-    const { percent } = options;
+    const { percent, flatBorders } = options;
     const {
       style: htmlStyle,
       className: htmlClassName,
       ...restHtmlProps
     } = htmlProps;
 
-    const progress = useTheme("meter");
-    const className = cx(progress.bar.base, htmlClassName);
+    const meter = useTheme("meter");
+    const className = cx(
+      meter.bar.base,
+      flatBorders ? meter.bar.flatBroders : "",
+      htmlClassName,
+    );
     const style = { width: `${percent}%`, ...htmlStyle };
 
     return { className, style, ...restHtmlProps };
