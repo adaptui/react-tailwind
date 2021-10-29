@@ -18,7 +18,7 @@ export const MeterInterval: React.FC<MeterIntervalProps> = props => {
   return (
     <div className="space-y-4 w-80">
       <div className="flex justify-between space-x-4">
-        <Input state={intervalState} label="Max" />
+        <Input state={intervalState} label="Interval" />
         <Input state={stepState} label="Step" />
       </div>
       <Meter

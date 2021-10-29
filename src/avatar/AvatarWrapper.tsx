@@ -7,7 +7,8 @@ import { cx } from "../utils";
 import { AVATAR_WRAPPER_KEYS } from "./__keys";
 import { AvatarStateReturn } from "./AvatarState";
 
-export type AvatarWrapperOptions = BoxOptions & Pick<AvatarStateReturn, "size">;
+export type AvatarWrapperOptions = BoxOptions &
+  Pick<AvatarStateReturn, "size" | "circular">;
 
 export type AvatarWrapperHTMLProps = BoxHTMLProps;
 
@@ -22,12 +23,13 @@ export const useAvatarWrapper = createHook<
   keys: AVATAR_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
-    const { size } = options;
+    const { size, circular } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("avatar");
     const className = cx(
       theme.wrapper.base,
+      circular ? theme.wrapper.circular : "",
       theme.wrapper.size[size],
       htmlClassName,
     );

@@ -1,23 +1,15 @@
-import { splitProps } from "reakit-utils";
-import { isNull } from "@renderlesskit/react";
-
 import { useImage, UseImageProps, UseImageStatus } from "../hooks";
 import { UserIcon } from "../icons";
-import {
-  getComponentProps,
-  RenderPropType,
-  runIfFn,
-  withIconA11y,
-} from "../utils";
+import { RenderPropType } from "../utils";
 
-import { USE_AVATAR_STATE_KEYS } from "./__keys";
-import { AvatarProps } from "./Avatar";
-import { AvatarIconProps } from "./AvatarIcon";
-import { AvatarImageProps } from "./AvatarImage";
-import { AvatarInitialsProps } from "./AvatarInitials";
-import { AvatarWrapperProps } from "./AvatarWrapper";
+import { AvatarDefaultStatusIndicators } from "./AvatarDefaultStatusIndicators";
+import { getInitialsFromNameDefault } from "./AvatarProps";
 
 export type AvatarState = {
+  /**
+   * If `true`, Avatar looks like a round.
+   */
+  circular: boolean;
   /**
    * How large should avatar be?
    *
@@ -28,7 +20,7 @@ export type AvatarState = {
   /**
    * Provide custom icons as a replacement for the default ones.
    */
-  icon?: RenderPropType<AvatarStateReturn>;
+  icon: RenderPropType<AvatarStateReturn>;
 
   /**
    * Name prop used for `alt` & calculate placeholder initials.
@@ -43,12 +35,32 @@ export type AvatarState = {
   /**
    * URL for the avatar image
    */
-  imageLoadingStatus: UseImageStatus;
+  imageStatus: UseImageStatus;
 
   /**
    * Move to showing initials or icon if no src found.
    */
   showFallback: boolean;
+
+  /**
+   * Shows AvatarBadge with the given type
+   */
+  status: "none" | "active" | "typing" | "sleep" | "away";
+
+  /**
+   * Status Indicators to show based on the statu.
+   */
+  statusIndicators: RenderPropType<AvatarStateReturn>;
+
+  /**
+   * StatusIndicator Ring Color.
+   */
+  statusIndicatorRingColor: string;
+
+  /**
+   * StatusIndicator's Background Color.
+   */
+  statusIndicatorsBgColor: string;
 
   /**
    * If `true`, the `Avatar` will show a `border` around it.
@@ -60,10 +72,6 @@ export type AvatarState = {
    * Color of the `border` to match it's parent background.
    */
   // borderColor?: string;
-  /**
-   * Shows AvatarBadge with the given type
-   */
-  // status?: keyof Renderlesskit.GetThemeValue<"avatar", "status">;
   /**
    * Position for the AvatarBadge
    * @default "bottom-right"
@@ -83,135 +91,60 @@ export type AvatarActions = {
 
 export type AvatarStateReturn = AvatarState & AvatarActions;
 
-export type AvatarInitialState = Partial<
-  Pick<AvatarState, "size" | "icon" | "name">
+export type AvatarOwnInitialState = Partial<
+  Pick<
+    AvatarState,
+    "size" | "icon" | "name" | "circular" | "status" | "statusIndicators"
+  >
 > &
-  Partial<Pick<AvatarActions, "getInitialsFromName">> &
-  UseImageProps;
+  Partial<Pick<AvatarActions, "getInitialsFromName">> & {
+    /**
+     * Avatar containers background to match the StatusIndicator's background & ring color.
+     */
+    containerBackground?: string[];
+  };
+
+export type AvatarImageInitialState = UseImageProps;
+
+export type AvatarInitialState = AvatarOwnInitialState &
+  AvatarImageInitialState;
 
 export function useAvatarState(
   props: AvatarInitialState = {},
 ): AvatarStateReturn {
   const {
+    circular = true,
     size = "xl",
-    name = null,
-    getInitialsFromName = getInitialsFromNameDefault,
-    src,
     icon = <UserIcon />,
+    statusIndicators = AvatarDefaultStatusIndicators,
+    name = null,
+    status = "none",
+    containerBackground = ["bg-white", "ring-white"],
+    getInitialsFromName = getInitialsFromNameDefault,
   } = props;
 
   const initials = getInitialsFromName(name, size);
+
   /**
    * Use the image hook to only show the image when it has loaded
    */
-  const imageLoadingStatus = useImage(props);
+  const { status: imageStatus, showFallback } = useImage(props);
 
-  const hasLoaded = imageLoadingStatus === "loaded";
-  /**
-   * Fallback avatar applies under 2 conditions:
-   * - If `src` was passed and the image has not loaded or failed to load
-   * - If `src` wasn't passed
-   *
-   * In this case, we'll show either the name avatar or default avatar
-   */
-  const showFallback = !src || !hasLoaded;
+  const [statusIndicatorsBgColor, statusIndicatorRingColor] =
+    containerBackground;
 
   return {
+    circular,
     size,
     icon: icon,
     name,
-    getInitialsFromName,
     initials,
-    imageLoadingStatus,
+    status,
+    statusIndicatorsBgColor,
+    statusIndicatorRingColor,
+    getInitialsFromName,
+    imageStatus,
     showFallback,
+    statusIndicators,
   };
-}
-
-export const useAvatarStateSplit = (props: AvatarProps) => {
-  const [stateProps, avatarProps] = splitProps(
-    props,
-    USE_AVATAR_STATE_KEYS,
-  ) as [AvatarInitialState, AvatarProps];
-  const [imageProps] = splitProps(stateProps, [
-    "src",
-    "srcSet",
-    "sizes",
-    "onLoad",
-    "onError",
-    "ignoreFallback",
-    "crossOrigin",
-    "loading",
-  ]) as [UseImageProps, AvatarInitialState];
-
-  const state = useAvatarState(stateProps);
-
-  return [state, avatarProps, imageProps, stateProps] as const;
-};
-
-const componentMap = {
-  AvatarWrapper: "wrapperProps",
-  AvatarIcon: "iconProps",
-  AvartarInitials: "initialsProps",
-  AvartarImage: "imageProps",
-};
-
-export const useAvatarProps = (props: React.PropsWithChildren<AvatarProps>) => {
-  const [state, avatarProps, imageProps] = useAvatarStateSplit(props);
-  const { children, ...restProps } = avatarProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
-
-  const _icon: AvatarState["icon"] =
-    componentProps?.iconProps?.children || state.icon;
-
-  const wrapperProps: AvatarWrapperProps = {
-    ...state,
-    ...restProps,
-    ...componentProps.wrapperProps,
-  };
-
-  const iconProps: AvatarIconProps = {
-    ...state,
-    ...componentProps.iconProps,
-    children: runIfFn(withIconA11y(_icon), state),
-  };
-
-  const initialsProps: AvatarInitialsProps = {
-    ...state,
-    ...componentProps.initialsProps,
-    children: state.initials,
-  };
-
-  const _imageProps: AvatarImageProps = {
-    ...state,
-    ...imageProps,
-    ...componentProps.imageProps,
-  };
-
-  return {
-    state,
-    icon: _icon,
-    wrapperProps,
-    iconProps,
-    initialsProps,
-    imageProps: _imageProps,
-  };
-};
-
-export function getInitialsFromNameDefault(
-  name: AvatarState["name"],
-  size: AvatarState["size"],
-) {
-  if (isNull(name)) return null;
-
-  const [firstName, lastName] = name.split(" ");
-  const oneLetterInitialSizes = ["xs", "sm", "md"];
-
-  const initials =
-    firstName && lastName
-      ? `${firstName.charAt(0)}${lastName.charAt(0)}`
-      : `${firstName.charAt(0)}${firstName.charAt(1)}`;
-
-  return oneLetterInitialSizes.includes(size)
-    ? initials.toUpperCase().charAt(0)
-    : initials.toUpperCase();
 }

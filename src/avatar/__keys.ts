@@ -1,18 +1,29 @@
 // Automatically generated
 export const AVATAR_STATE_KEYS = [
+  "circular",
   "size",
   "icon",
   "name",
   "initials",
-  "imageLoadingStatus",
+  "imageStatus",
   "showFallback",
+  "status",
+  "statusIndicators",
+  "statusIndicatorRingColor",
+  "statusIndicatorsBgColor",
   "getInitialsFromName",
 ] as const;
-export const USE_AVATAR_STATE_KEYS = [
+export const USE_AVATAR_OWN_STATE_KEYS = [
   "size",
+  "status",
   "icon",
   "name",
+  "circular",
+  "statusIndicators",
   "getInitialsFromName",
+  "containerBackground",
+] as const;
+export const USE_AVATAR_IMAGE_STATE_KEYS = [
   "src",
   "srcSet",
   "sizes",
@@ -22,7 +33,12 @@ export const USE_AVATAR_STATE_KEYS = [
   "crossOrigin",
   "loading",
 ] as const;
+export const USE_AVATAR_STATE_KEYS = [
+  ...USE_AVATAR_OWN_STATE_KEYS,
+  ...USE_AVATAR_IMAGE_STATE_KEYS,
+] as const;
 export const AVATAR_ICON_KEYS = AVATAR_STATE_KEYS;
 export const AVATAR_IMAGE_KEYS = AVATAR_ICON_KEYS;
 export const AVATAR_INITIALS_KEYS = AVATAR_IMAGE_KEYS;
-export const AVATAR_WRAPPER_KEYS = AVATAR_INITIALS_KEYS;
+export const AVATAR_STATUS_INDICATOR_KEYS = AVATAR_INITIALS_KEYS;
+export const AVATAR_WRAPPER_KEYS = AVATAR_STATUS_INDICATOR_KEYS;

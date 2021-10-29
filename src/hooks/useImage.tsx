@@ -143,7 +143,20 @@ export function useImage(props: UseImageProps) {
    * If user opts out of the fallback/placeholder
    * logic, let's just return 'loaded'
    */
-  return ignoreFallback ? "loaded" : status;
+
+  const loadingStatus = ignoreFallback ? "loaded" : status;
+  const hasLoaded = loadingStatus === "loaded";
+
+  /**
+   * Fallback avatar applies under 2 conditions:
+   * - If `src` was passed and the image has not loaded or failed to load
+   * - If `src` wasn't passed
+   *
+   * In this case, we'll show either the name avatar or default avatar
+   */
+  const showFallback = !src || !hasLoaded;
+
+  return { status: loadingStatus, showFallback };
 }
 
 export type UseImageReturn = ReturnType<typeof useImage>;

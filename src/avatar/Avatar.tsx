@@ -4,7 +4,9 @@ import { isNull } from "@chakra-ui/utils";
 import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
 import { AvatarInitials } from "./AvatarInitials";
-import { AvatarInitialState, useAvatarProps } from "./AvatarState";
+import { useAvatarProps } from "./AvatarProps";
+import { AvatarInitialState } from "./AvatarState";
+import { AvatarStatusIndicator } from "./AvatarStatusIndicator";
 import { AvatarWrapper, AvatarWrapperHTMLProps } from "./AvatarWrapper";
 
 export type AvatarOwnProps = Partial<AvatarWrapperHTMLProps> & {};
@@ -13,9 +15,15 @@ export type AvatarProps = AvatarInitialState & AvatarOwnProps & {};
 
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   (props, ref) => {
-    const { state, wrapperProps, iconProps, initialsProps, imageProps } =
-      useAvatarProps(props);
-    const { showFallback, initials } = state;
+    const {
+      state,
+      wrapperProps,
+      iconProps,
+      initialsProps,
+      imageProps,
+      statusIndicatorProps,
+    } = useAvatarProps(props);
+    const { showFallback, initials, status } = state;
 
     return (
       <AvatarWrapper ref={ref} {...wrapperProps}>
@@ -28,6 +36,9 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         ) : (
           <AvatarImage {...imageProps} />
         )}
+        {status !== "none" ? (
+          <AvatarStatusIndicator {...statusIndicatorProps} />
+        ) : null}
       </AvatarWrapper>
     );
   },

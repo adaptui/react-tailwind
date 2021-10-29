@@ -24,6 +24,9 @@ const renderlesskitConfig = {
         "paragraph-sm": ["14px", "150%"],
         "2base": ["32px", "115%"],
       },
+      ringWidth: {
+        1.5: "1.5px",
+      },
       inset: {
         unset: "unset",
       },

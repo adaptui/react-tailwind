@@ -1,6 +1,7 @@
 export const avatar = {
   wrapper: {
-    base: "relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100",
+    base: "relative inline-flex items-center justify-center flex-shrink-0 rounded bg-gray-100",
+    circular: "rounded-full",
     size: {
       xs: "h-4 w-4",
       sm: "h-5 w-5",
@@ -36,20 +37,57 @@ export const avatar = {
     },
   },
   image: "rounded-full w-full h-full object-cover",
-  badge: {
-    base: "absolute flex items-center justify-center ring-white rounded-full",
-    position: {
-      "top-left": "top-0 left-0",
-      "top-right": "top-0 right-0",
-      "bottom-right": "bottom-0 right-0",
-      "bottom-left": "bottom-0 left-0",
+  statusIndicator: {
+    base: "absolute flex items-center justify-center bottom-0 right-0",
+  },
+  statusIndicators: {
+    active: {
+      base: "text-green-500 ring-1.5 rounded-full",
+      size: {
+        xs: "text-[4px]",
+        sm: "text-[5px]",
+        md: "text-[6px]",
+        lg: "text-[7px]",
+        xl: "text-[8px]",
+        "2xl": "text-[10px]",
+        "3xl": "text-[11px]",
+      },
     },
-    size: {
-      xs: "text-[0.25rem] ring-1",
-      sm: "text-[0.25rem] ring-1",
-      md: "text-[0.25rem] ring-2",
-      lg: "text-[0.375rem] ring-2",
-      xl: "text-[0.5rem] ring-2",
+    sleep: {
+      base: "text-gray-500 ring-1.5 rounded-full",
+      size: {
+        xs: "text-[4px]",
+        sm: "text-[5px]",
+        md: "text-[6px]",
+        lg: "text-[7px]",
+        xl: "text-[8px]",
+        "2xl": "text-[10px]",
+        "3xl": "text-[11px]",
+      },
+    },
+    away: {
+      base: "text-gray-500 ring-1.5 rounded-full",
+      size: {
+        xs: "text-[4px]",
+        sm: "text-[5px]",
+        md: "text-[6px]",
+        lg: "text-[7px]",
+        xl: "text-[8px]",
+        "2xl": "text-[10px]",
+        "3xl": "text-[11px]",
+      },
+    },
+    typing: {
+      base: "text-gray-500 ring-1.5 rounded-full",
+      size: {
+        xs: "w-2 h-[5px]",
+        sm: "w-[9px] h-[5.63px]",
+        md: "w-2.5 h-[6.25px]",
+        lg: "w-[11px] h-[6.88px]",
+        xl: "w-3.5 h-[8.17px]",
+        "2xl": "w-4 h-[9.33px]",
+        "3xl": "w-[17px] h-[9.92px]",
+      },
     },
   },
   status: {

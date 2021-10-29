@@ -24,23 +24,19 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: {
-    size: "xl",
-  },
+  args: { size: "xl" },
+};
+
+export const Squared: Story = {
+  args: { size: "xl", circular: false },
 };
 
 export const Name: Story = {
-  args: {
-    size: "xl",
-    name: "Satz Prince",
-  },
+  args: { size: "xl", name: "Satz Prince" },
 };
 
 export const Image: Story = {
-  args: {
-    size: "xl",
-    src: "https://i.pravatar.cc/300??img=61",
-  },
+  args: { size: "xl", src: "https://i.pravatar.cc/300??img=61" },
 };
 
 export const FallbackName: Story = {
@@ -57,5 +53,37 @@ export const FallbackIcon: Story = {
     src: "https://i.pravatar.c/300??img=61",
     icon: <CircledCheckIcon />,
     onError: () => console.log("Provide a valid src url"),
+  },
+};
+
+export const ActiveStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "active",
+  },
+};
+
+export const SleepStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "sleep",
+  },
+};
+
+export const AwayStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "away",
+  },
+};
+
+export const TypingStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "typing",
   },
 };
