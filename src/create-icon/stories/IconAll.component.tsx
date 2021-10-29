@@ -12,8 +12,6 @@ import {
   CloseIcon,
   DashIcon,
   SleepStatusIcon,
-  TypingLargeStatusIcon,
-  TypingSmallStatusIcon,
   UserIcon,
 } from "../../index";
 
@@ -35,8 +33,6 @@ export const Icon: React.FC<IconProps> = props => {
         <ActiveStatusIcon />
         <SleepStatusIcon />
         <AwayStatusIcon />
-        <TypingSmallStatusIcon />
-        <TypingLargeStatusIcon />
       </div>
     </div>
   );
