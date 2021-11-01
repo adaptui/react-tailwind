@@ -5,6 +5,8 @@ export function isUndefined(value: any): value is undefined {
   return typeof value === "undefined" || value === undefined;
 }
 
+export { isNull } from "@renderlesskit/react";
+
 // String assertions
 export function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === "[object String]";

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { isNull } from "@renderlesskit/react";
 
 import {
   Button,
+  isNull,
   Progress,
   ProgressBar,
   ProgressProps,
