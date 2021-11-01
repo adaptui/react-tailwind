@@ -1,5 +1,6 @@
 import * as React from "react";
-import { isNull } from "@chakra-ui/utils";
+
+import { isNull } from "../utils";
 
 import { AvatarIcon } from "./AvatarIcon";
 import { AvatarImage } from "./AvatarImage";
@@ -28,10 +29,10 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     return (
       <AvatarWrapper ref={ref} {...wrapperProps}>
         {showFallback ? (
-          !isNull(initials) ? (
-            <AvatarInitials {...initialsProps} />
-          ) : (
+          isNull(initials) ? (
             <AvatarIcon {...iconProps} />
+          ) : (
+            <AvatarInitials {...initialsProps} />
           )
         ) : (
           <AvatarImage {...imageProps} />

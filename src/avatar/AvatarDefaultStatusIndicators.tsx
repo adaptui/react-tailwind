@@ -15,13 +15,13 @@ import { AvatarStateReturn } from "./AvatarState";
 
 export const AvatarDefaultStatusIndicators: AvatarProps["statusIndicators"] =
   state => {
-    const { status, size, containerBackground } = state;
+    const { status, size, parentsBackground } = state;
 
     const theme = useTheme("avatar");
     const className = tcm(
       theme.statusIndicators[status].base,
       theme.statusIndicators[status].size[size],
-      ...containerBackground,
+      ...parentsBackground,
     );
 
     return passProps(runIfFn(<StatusIndicators state={state} />), {

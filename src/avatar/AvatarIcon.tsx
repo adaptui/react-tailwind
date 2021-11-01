@@ -32,7 +32,7 @@ export const useAvatarIcon = createHook<AvatarIconOptions, AvatarIconHTMLProps>(
 
       return {
         className,
-        "aria-label": "avatar-icon",
+        "aria-label": "avatar icon",
         ...restHtmlProps,
       };
     },

@@ -1,19 +1,22 @@
 import { useImage, UseImageProps, UseImageStatus } from "../hooks";
 import { UserIcon } from "../icons";
-import { RenderPropType } from "../utils";
+import { isNull, RenderPropType } from "../utils";
 
 import { AvatarDefaultStatusIndicators } from "./AvatarDefaultStatusIndicators";
+import { useAvatarGroup } from "./AvatarGroup";
 import { getInitialsFromNameDefault } from "./AvatarProps";
 
 export type AvatarState = {
   /**
    * If `true`, Avatar looks like a round.
+   *
+   * @default true
    */
   circular: boolean;
   /**
    * How large should avatar be?
    *
-   * @default md
+   * @default xl
    */
   size: keyof Renderlesskit.GetThemeValue<"avatar", "wrapper", "size">;
 
@@ -39,11 +42,14 @@ export type AvatarState = {
 
   /**
    * Move to showing initials or icon if no src found.
+   *
    */
   showFallback: boolean;
 
   /**
    * Shows AvatarBadge with the given type
+   *
+   * @default none
    */
   status: "none" | "active" | "typing" | "sleep" | "away";
 
@@ -54,24 +60,26 @@ export type AvatarState = {
 
   /**
    * StatusIndicator's Background Color & StatusIndicator Ring Color.
+   *
+   * @default ["bg-white", "ring-white"]"
    */
-  containerBackground: string[];
+  parentsBackground: string[];
 
   /**
    * If `true`, the `Avatar` will show a `border` around it.
    *
    * Best for a group of avatars
+   *
+   * @default false
    */
-  // showBorder?: boolean;
+  showRing: boolean;
+
   /**
    * Color of the `border` to match it's parent background.
+   *
+   * @default ring-white
    */
-  // borderColor?: string;
-  /**
-   * Position for the AvatarBadge
-   * @default "bottom-right"
-   */
-  // position?: keyof Renderlesskit.GetThemeValue<"avatar", "badge", "position">;
+  ringColor: string;
 };
 
 export type AvatarActions = {
@@ -89,14 +97,21 @@ export type AvatarStateReturn = AvatarState & AvatarActions;
 export type AvatarOwnInitialState = Partial<
   Pick<
     AvatarState,
-    "size" | "icon" | "name" | "circular" | "status" | "statusIndicators"
+    | "size"
+    | "icon"
+    | "name"
+    | "circular"
+    | "status"
+    | "statusIndicators"
+    | "showRing"
+    | "ringColor"
   >
 > &
   Partial<Pick<AvatarActions, "getInitialsFromName">> & {
     /**
      * Avatar containers background to match the StatusIndicator's background & ring color.
      */
-    containerBackground?: string[];
+    parentsBackground?: string[];
   };
 
 export type AvatarImageInitialState = UseImageProps;
@@ -114,11 +129,16 @@ export function useAvatarState(
     statusIndicators = AvatarDefaultStatusIndicators,
     name = null,
     status = "none",
-    containerBackground = ["bg-white", "ring-white"],
+    parentsBackground = ["bg-white", "ring-white"],
     getInitialsFromName = getInitialsFromNameDefault,
+    showRing = false,
+    ringColor = "ring-white",
   } = props;
 
   const initials = getInitialsFromName(name, size);
+
+  const context = useAvatarGroup();
+  const contextState = isNull(context) ? {} : context;
 
   /**
    * Use the image hook to only show the image when it has loaded
@@ -132,10 +152,13 @@ export function useAvatarState(
     name,
     initials,
     status,
-    containerBackground,
+    parentsBackground,
     getInitialsFromName,
     imageStatus,
     showFallback,
     statusIndicators,
+    showRing,
+    ringColor,
+    ...contextState,
   };
 }

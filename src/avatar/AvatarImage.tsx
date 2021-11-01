@@ -1,9 +1,9 @@
 import { createComponent, createHook } from "reakit-system";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { UseImageProps } from "../hooks";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
-import { UseImageProps } from "..";
 
 import { AVATAR_IMAGE_KEYS } from "./__keys";
 import { AvatarStateReturn } from "./AvatarState";

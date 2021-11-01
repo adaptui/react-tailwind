@@ -29,7 +29,7 @@ export const useAvatarStatusIndicator = createHook<
 
     return {
       className,
-      "aria-label": "avatar-status-indicator",
+      "aria-label": "avatar status indicator",
       ...restHtmlProps,
     };
   },

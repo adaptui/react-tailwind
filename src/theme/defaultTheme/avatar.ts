@@ -2,6 +2,17 @@ export const avatar = {
   wrapper: {
     base: "relative inline-flex items-center justify-center flex-shrink-0 rounded bg-gray-100",
     circular: "rounded-full",
+    border: {
+      size: {
+        xs: "ring-1.5",
+        sm: "ring-1.5",
+        md: "ring-1.5",
+        lg: "ring-2",
+        xl: "ring-2",
+        "2xl": "ring-2",
+        "3xl": "ring-2",
+      },
+    },
     size: {
       xs: "h-4 w-4",
       sm: "h-5 w-5",
@@ -98,19 +109,15 @@ export const avatar = {
     },
   },
   group: {
-    base: "inline-flex items-center -space-x-1.5",
-    excess: {
-      bg: "absolute inset-0 bg-black rounded-full opacity-50",
-      text: {
-        base: "absolute inset-0 flex items-center justify-center text-white rounded-full font-semibold",
-        size: {
-          xs: "text-xs",
-          sm: "text-xs",
-          md: "text-xs",
-          lg: "text-xs",
-          xl: "text-sm",
-        },
-      },
+    base: "inline-flex items-center",
+    size: {
+      xs: "-space-x-px",
+      sm: "-space-x-px",
+      md: "-space-x-1",
+      lg: "-space-x-1",
+      xl: "-space-x-1.5",
+      "2xl": "-space-x-1.5",
+      "3xl": "-space-x-2",
     },
   },
 };

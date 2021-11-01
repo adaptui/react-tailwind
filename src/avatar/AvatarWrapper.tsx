@@ -8,7 +8,7 @@ import { AVATAR_WRAPPER_KEYS } from "./__keys";
 import { AvatarStateReturn } from "./AvatarState";
 
 export type AvatarWrapperOptions = BoxOptions &
-  Pick<AvatarStateReturn, "size" | "circular">;
+  Pick<AvatarStateReturn, "size" | "circular" | "showRing" | "ringColor">;
 
 export type AvatarWrapperHTMLProps = BoxHTMLProps;
 
@@ -23,7 +23,7 @@ export const useAvatarWrapper = createHook<
   keys: AVATAR_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, circular } = options;
+    const { size, circular, showRing, ringColor } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("avatar");
@@ -31,6 +31,8 @@ export const useAvatarWrapper = createHook<
       theme.wrapper.base,
       circular ? theme.wrapper.circular : "",
       theme.wrapper.size[size],
+      showRing ? theme.wrapper.border.size[size] : "",
+      showRing && ringColor ? ringColor : "",
       htmlClassName,
     );
 
@@ -43,7 +45,7 @@ export const useAvatarWrapper = createHook<
 });
 
 export const AvatarWrapper = createComponent({
-  as: "div",
+  as: "span",
   memo: true,
   useHook: useAvatarWrapper,
 });
