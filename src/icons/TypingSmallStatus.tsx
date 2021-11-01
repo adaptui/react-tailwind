@@ -2,11 +2,11 @@ import React from "react";
 
 import { Box, BoxProps } from "../box";
 
-export type IconProps = React.SVGProps<SVGElement> & BoxProps & {};
+export type TypingSmallStatusProps = React.SVGProps<SVGElement> & BoxProps & {};
 
 export const TypingSmallStatusIcon = React.forwardRef<
   HTMLOrSVGElement,
-  IconProps
+  TypingSmallStatusProps
 >((props, ref) => {
   return (
     <Box
