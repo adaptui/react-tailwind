@@ -3,16 +3,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { CircledCheckIcon } from "../../icons";
 
-import js from "./templates/AvatarBasicJsx";
-import ts from "./templates/AvatarBasicTsx";
-import { AvatarBasic } from "./AvatarBasic.component";
+import js from "./templates/AvatarStackJsx";
+import ts from "./templates/AvatarStackTsx";
+import { AvatarStack } from "./AvatarStack.component";
 
-type Meta = ComponentMeta<typeof AvatarBasic>;
-type Story = ComponentStoryObj<typeof AvatarBasic>;
+type Meta = ComponentMeta<typeof AvatarStack>;
+type Story = ComponentStoryObj<typeof AvatarStack>;
 
 export default {
-  title: "Primitives/Avatar/Basic",
-  component: AvatarBasic,
+  title: "Primitives/Avatar/Stack",
+  component: AvatarStack,
   parameters: {
     layout: "centered",
     options: { showPanel: true },
@@ -23,25 +23,22 @@ export default {
   }),
 } as Meta;
 
-export const Default: Story = {
-  args: { size: "xl" },
-};
+export const Default: Story = {};
 
 export const Squared: Story = {
-  args: { size: "xl", circular: false },
+  args: { circular: false },
 };
 
 export const Name: Story = {
-  args: { size: "xl", name: "Satz Prince" },
+  args: { name: "Satz Prince" },
 };
 
 export const Image: Story = {
-  args: { size: "xl", src: "https://i.pravatar.cc/300??img=61" },
+  args: { src: "https://i.pravatar.cc/300??img=61" },
 };
 
 export const FallbackName: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.c/300??img=61",
     name: "Satz Prince",
   },
@@ -49,7 +46,6 @@ export const FallbackName: Story = {
 
 export const FallbackIcon: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.c/300??img=61",
     icon: <CircledCheckIcon />,
     onError: () => console.log("Provide a valid src url"),
@@ -58,7 +54,6 @@ export const FallbackIcon: Story = {
 
 export const ActiveStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "active",
   },
@@ -66,7 +61,6 @@ export const ActiveStatus: Story = {
 
 export const ActiveSquaredStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "active",
     circular: false,
@@ -75,7 +69,6 @@ export const ActiveSquaredStatus: Story = {
 
 export const SleepStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "sleep",
   },
@@ -83,7 +76,6 @@ export const SleepStatus: Story = {
 
 export const SleepSquaredStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "sleep",
     circular: false,
@@ -92,7 +84,6 @@ export const SleepSquaredStatus: Story = {
 
 export const AwayStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "away",
   },
@@ -100,7 +91,6 @@ export const AwayStatus: Story = {
 
 export const AwaySquaredStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "away",
     circular: false,
@@ -109,7 +99,6 @@ export const AwaySquaredStatus: Story = {
 
 export const TypingStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "typing",
   },
@@ -117,7 +106,6 @@ export const TypingStatus: Story = {
 
 export const TypingSquaredStatus: Story = {
   args: {
-    size: "xl",
     src: "https://i.pravatar.cc/300??img=61",
     status: "typing",
     circular: false,
@@ -126,26 +114,17 @@ export const TypingSquaredStatus: Story = {
 
 export const ParentBackgroundMatch: Story = {
   args: {
-    size: "xl",
-    status: "active",
-    parentsBackground: ["bg-blue-200", "ring-blue-200"],
+    status: "sleep",
+    parentsBackground: ["bg-green-200", "ring-green-200"],
   },
 
   decorators: [
     Story => {
       return (
-        <div className="flex items-center justify-center bg-blue-200 w-80 h-80">
+        <div className="flex items-center justify-center bg-green-200 w-80 h-80">
           <Story />
         </div>
       );
     },
   ],
 };
-
-export const ExtraSmall: Story = { args: { size: "xs" } };
-export const Small: Story = { args: { size: "sm" } };
-export const Medium: Story = { args: { size: "md" } };
-export const Large: Story = { args: { size: "lg" } };
-export const ExtraLarge: Story = { args: { size: "xl" } };
-export const ExtraExtraLarge: Story = { args: { size: "2xl" } };
-export const ExtraExtraExtraLarge: Story = { args: { size: "3xl" } };
