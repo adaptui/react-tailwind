@@ -87,3 +87,12 @@ export const TypingStatus: Story = {
     status: "typing",
   },
 };
+
+export const TypingSquaredStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "typing",
+    circular: false,
+  },
+};

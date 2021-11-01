@@ -1,6 +1,6 @@
 const plugin = require("tailwindcss/plugin");
 
-const utilities = plugin(function ({ addUtilities }) {
+const utilities = plugin(function ({ addUtilities, theme }) {
   const utilities = {
     ".collapse-border > :first-of-type:not(:last-of-type)": {
       "border-top-right-radius": "0px",

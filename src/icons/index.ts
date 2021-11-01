@@ -19,4 +19,6 @@ export * from "./Moon";
 export * from "./Photograph";
 export * from "./Plus";
 export * from "./SleepStatus";
+export * from "./TypingLargeStatus";
+export * from "./TypingSmallStatus";
 export * from "./User";

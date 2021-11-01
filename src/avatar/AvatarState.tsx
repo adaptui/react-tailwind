@@ -53,14 +53,9 @@ export type AvatarState = {
   statusIndicators: RenderPropType<AvatarStateReturn>;
 
   /**
-   * StatusIndicator Ring Color.
+   * StatusIndicator's Background Color & StatusIndicator Ring Color.
    */
-  statusIndicatorRingColor: string;
-
-  /**
-   * StatusIndicator's Background Color.
-   */
-  statusIndicatorsBgColor: string;
+  containerBackground: string[];
 
   /**
    * If `true`, the `Avatar` will show a `border` around it.
@@ -130,9 +125,6 @@ export function useAvatarState(
    */
   const { status: imageStatus, showFallback } = useImage(props);
 
-  const [statusIndicatorsBgColor, statusIndicatorRingColor] =
-    containerBackground;
-
   return {
     circular,
     size,
@@ -140,8 +132,7 @@ export function useAvatarState(
     name,
     initials,
     status,
-    statusIndicatorsBgColor,
-    statusIndicatorRingColor,
+    containerBackground,
     getInitialsFromName,
     imageStatus,
     showFallback,

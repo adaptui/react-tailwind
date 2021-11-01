@@ -8,7 +8,8 @@ import { UseImageProps } from "..";
 import { AVATAR_IMAGE_KEYS } from "./__keys";
 import { AvatarStateReturn } from "./AvatarState";
 
-export type AvatarImageOptions = BoxOptions & Pick<AvatarStateReturn, "size">;
+export type AvatarImageOptions = BoxOptions &
+  Pick<AvatarStateReturn, "size" | "circular">;
 
 export type AvatarImageHTMLProps = BoxHTMLProps & UseImageProps;
 
@@ -23,10 +24,15 @@ export const useAvatarImage = createHook<
   keys: AVATAR_IMAGE_KEYS,
 
   useProps(options, htmlProps) {
+    const { circular } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("avatar");
-    const className = cx(theme.image, htmlClassName);
+    const className = cx(
+      theme.image.base,
+      circular ? theme.image.circular : "",
+      htmlClassName,
+    );
 
     return {
       className,
