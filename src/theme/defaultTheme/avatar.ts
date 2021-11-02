@@ -1,106 +1,123 @@
 export const avatar = {
-  base: "relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100",
-  size: {
-    xs: "h-4 w-4",
-    sm: "h-5 w-5",
-    md: "h-6 w-6",
-    lg: "h-8 w-8",
-    xl: "h-10 w-10",
-  },
-  image: "rounded-full w-full h-full object-cover",
-  badge: {
-    base: "absolute flex items-center justify-center ring-white rounded-full",
-    position: {
-      "top-left": "top-0 left-0",
-      "top-right": "top-0 right-0",
-      "bottom-right": "bottom-0 right-0",
-      "bottom-left": "bottom-0 left-0",
+  wrapper: {
+    base: "relative inline-flex items-center justify-center flex-shrink-0 rounded bg-gray-100",
+    circular: "rounded-full",
+    border: {
+      size: {
+        xs: "ring-1.5",
+        sm: "ring-1.5",
+        md: "ring-1.5",
+        lg: "ring-2",
+        xl: "ring-2",
+        "2xl": "ring-2",
+        "3xl": "ring-2",
+      },
     },
     size: {
-      xs: "text-[0.25rem] ring-1",
-      sm: "text-[0.25rem] ring-1",
-      md: "text-[0.25rem] ring-2",
-      lg: "text-[0.375rem] ring-2",
-      xl: "text-[0.5rem] ring-2",
-    },
-  },
-  status: {
-    online: {
-      base: "text-green-500 ring-white ring-opacity-100 ring-1.5",
-      size: {
-        xl: "text-[9px]",
-        lg: "text-[7px]",
-        md: "text-[5px]",
-        sm: "text-[5px]",
-        xs: "text-[4px]",
-      },
-    },
-    offline: {
-      base: "text-yellow-500 bg-white ring-white ring-opacity-100 ring-1.5",
-      size: {
-        xl: "text-[9px]",
-        lg: "text-[7px]",
-        md: "text-[5px]",
-        sm: "text-[5px]",
-        xs: "text-[4px]",
-      },
-    },
-    typing: {
-      base: "flex items-center justify-center bg-gray-500 rounded-full space-x-px",
-      size: {
-        xs: "h-1 p-px",
-        sm: "h-1.5 p-0.5",
-        md: "h-1.5 p-0.5",
-        lg: "h-1.5 p-0.5",
-        xl: "h-2 p-1",
-      },
-      circle: "bg-white w-0.5 h-0.5 rounded-full animate-pulse",
-    },
-  },
-  initials: {
-    base: "text-center uppercase text-gray-500",
-    size: {
-      xs: "text-xs",
-      sm: "text-xs",
-      md: "text-xs",
-      lg: "text-xs",
-      xl: "text-sm",
+      xs: "h-4 w-4",
+      sm: "h-5 w-5",
+      md: "h-6 w-6",
+      lg: "h-7 w-7",
+      xl: "h-8 w-8",
+      "2xl": "h-10 w-10",
+      "3xl": "h-12 w-12",
     },
   },
   icon: {
-    base: "inline-flex text-gray-500",
+    base: "inline-flex items-center justify-center text-gray-600",
     size: {
       xs: "text-[0.625rem]",
-      sm: "text-xs",
+      sm: "text-[0.625rem]",
       md: "text-xs",
       lg: "text-xs",
-      xl: "text-xs",
+      xl: "text-base",
+      "2xl": "text-base",
+      "3xl": "text-xl",
     },
   },
-  border: {
-    width: {
-      xs: "ring-1",
-      sm: "ring-1",
-      md: "ring-2",
-      lg: "ring-2",
-      xl: "ring-2",
+  initials: {
+    base: "text-gray-600 font-medium text-center uppercase",
+    size: {
+      xs: "text-xs",
+      sm: "text-cxs",
+      md: "text-sm",
+      lg: "text-sm",
+      xl: "text-base",
+      "2xl": "text-lg",
+      "3xl": "text-xl",
     },
-    color: "ring-white",
+  },
+  image: {
+    base: "rounded w-full h-full object-cover",
+    circular: "rounded-full",
+  },
+  statusIndicator: {
+    base: "absolute flex items-center justify-center bottom-0 right-0",
+  },
+  statusIndicators: {
+    none: {
+      base: "",
+      size: { xs: "", sm: "", md: "", lg: "", xl: "", "2xl": "" },
+    },
+    active: {
+      base: "text-green-500 ring-1.5 rounded-full",
+      size: {
+        xs: "text-[4px]",
+        sm: "text-[5px]",
+        md: "text-[6px]",
+        lg: "text-[7px]",
+        xl: "text-[8px]",
+        "2xl": "text-[10px]",
+        "3xl": "text-[11px]",
+      },
+    },
+    sleep: {
+      base: "text-gray-500 ring-1.5 rounded-full",
+      size: {
+        xs: "text-[4px]",
+        sm: "text-[5px]",
+        md: "text-[6px]",
+        lg: "text-[7px]",
+        xl: "text-[8px]",
+        "2xl": "text-[10px]",
+        "3xl": "text-[11px]",
+      },
+    },
+    away: {
+      base: "text-gray-500 ring-1.5 rounded-full",
+      size: {
+        xs: "text-[4px]",
+        sm: "text-[5px]",
+        md: "text-[6px]",
+        lg: "text-[7px]",
+        xl: "text-[8px]",
+        "2xl": "text-[10px]",
+        "3xl": "text-[11px]",
+      },
+    },
+    typing: {
+      base: "text-gray-500 ring-1.5 rounded-full",
+      size: {
+        xs: "w-2",
+        sm: "w-[9px]",
+        md: "w-2.5",
+        lg: "w-[11px]",
+        xl: "w-3.5",
+        "2xl": "w-4",
+        "3xl": "w-[17px]",
+      },
+    },
   },
   group: {
-    base: "inline-flex items-center -space-x-1.5",
-    excess: {
-      bg: "absolute inset-0 bg-black rounded-full opacity-50",
-      text: {
-        base: "absolute inset-0 flex items-center justify-center text-white rounded-full font-semibold",
-        size: {
-          xs: "text-xs",
-          sm: "text-xs",
-          md: "text-xs",
-          lg: "text-xs",
-          xl: "text-sm",
-        },
-      },
+    base: "inline-flex items-center",
+    size: {
+      xs: "-space-x-px",
+      sm: "-space-x-px",
+      md: "-space-x-1",
+      lg: "-space-x-1",
+      xl: "-space-x-1.5",
+      "2xl": "-space-x-1.5",
+      "3xl": "-space-x-2",
     },
   },
 };

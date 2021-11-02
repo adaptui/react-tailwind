@@ -8,8 +8,8 @@ import {
 
 import {
   CheckIcon,
+  DashIcon,
   getComponentProps,
-  IndeterminateIcon,
   runIfFn,
   withIconA11y,
 } from "../index";
@@ -115,7 +115,7 @@ export const CheckboxDefaultIcon: CheckboxOwnProps["icon"] = state => {
   return (
     <>
       {isChecked ? withIconA11y(<CheckIcon />) : null}
-      {isIndeterminate ? withIconA11y(<IndeterminateIcon />) : null}
+      {isIndeterminate ? withIconA11y(<DashIcon />) : null}
     </>
   );
 };

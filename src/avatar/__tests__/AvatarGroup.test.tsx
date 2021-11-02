@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 
-import { render, testA11y } from "../../utils/testUtils";
+import { render } from "../../utils/testUtils";
 import { Avatar } from "../Avatar";
 import { AvatarGroup } from "../AvatarGroup";
 
@@ -40,9 +40,9 @@ describe("<AvatarGroup />", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("should not render truncated avatar counter if avatar count is less than limit", () => {
+  it("should not render truncated avatar counter if avatar count is less than max", () => {
     render(
-      <AvatarGroup limit={5}>
+      <AvatarGroup max={5}>
         <Avatar />
         <Avatar />
         <Avatar />
@@ -59,9 +59,9 @@ describe("<AvatarGroup />", () => {
     expect(group.childElementCount).toEqual(3);
   });
 
-  it("should render truncated avatar counter if avatar count is greater than limit", () => {
+  it("should render truncated avatar counter if avatar count is greater than max", () => {
     render(
-      <AvatarGroup limit={2}>
+      <AvatarGroup max={2}>
         <Avatar />
         <Avatar />
         <Avatar />
@@ -69,7 +69,7 @@ describe("<AvatarGroup />", () => {
     );
 
     const truncateCircle = screen.queryByTestId("testid-excess_label");
-    expect(truncateCircle).toHaveTextContent("+1");
+    expect(truncateCircle).toHaveTextContent("1");
 
     const group = screen.getByRole("group", {
       name: /avatar group/i,
@@ -78,9 +78,9 @@ describe("<AvatarGroup />", () => {
     expect(group.childElementCount).toEqual(3);
   });
 
-  it("should not render truncated avatars counter if limit is equal to avatars count", () => {
+  it("should not render truncated avatars counter if max is equal to avatars count", () => {
     render(
-      <AvatarGroup limit={2}>
+      <AvatarGroup max={2}>
         <Avatar />
         <Avatar />
       </AvatarGroup>,
@@ -94,14 +94,5 @@ describe("<AvatarGroup />", () => {
     });
 
     expect(group.childElementCount).toEqual(2);
-  });
-
-  it("should not have a11y violations", async () => {
-    await testA11y(
-      <AvatarGroup>
-        <Avatar name="Anurag Hazra" />
-        <Avatar name="Navin Moorthy" />
-      </AvatarGroup>,
-    );
   });
 });

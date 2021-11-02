@@ -1,46 +1,46 @@
-import { cloneElement, isValidElement } from "react";
-import { Box, BoxProps } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
 
-import { useAvatarContext } from "./Avatar";
+import { AVATAR_ICON_KEYS } from "./__keys";
+import { AvatarStateReturn } from "./AvatarState";
 
-export type AvatarIconProps = BoxProps & {};
+export type AvatarIconOptions = BoxOptions & Pick<AvatarStateReturn, "size">;
 
-export const AvatarIcon = forwardRefWithAs<
-  AvatarIconProps,
-  HTMLSpanElement,
-  "span"
->((props, ref) => {
-  const { className, children, ...rest } = props;
-  const theme = useTheme();
-  const { size = "md" } = useAvatarContext();
-  const _children = isValidElement(children)
-    ? cloneElement(children, {
-        role: "img",
-        focusable: false,
-        "aria-hidden": true,
-      })
-    : children;
+export type AvatarIconHTMLProps = BoxHTMLProps;
 
-  const iconStyles = tcm(
-    theme.avatar.icon.base,
-    theme.avatar.icon.size[size],
-    className,
-  );
+export type AvatarIconProps = AvatarIconOptions & AvatarIconHTMLProps;
 
-  return (
-    <Box
-      as="span"
-      ref={ref}
-      className={iconStyles}
-      aria-label="Avatar Icon"
-      {...rest}
-    >
-      {_children}
-    </Box>
-  );
+export const useAvatarIcon = createHook<AvatarIconOptions, AvatarIconHTMLProps>(
+  {
+    name: "AvatarIcon",
+    compose: useBox,
+    keys: AVATAR_ICON_KEYS,
+
+    useProps(options, htmlProps) {
+      const { size } = options;
+      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+
+      const theme = useTheme("avatar");
+      const className = cx(
+        theme.icon.base,
+        theme.icon.size[size],
+        htmlClassName,
+      );
+
+      return {
+        className,
+        "aria-label": "avatar icon",
+        ...restHtmlProps,
+      };
+    },
+  },
+);
+
+export const AvatarIcon = createComponent({
+  as: "span",
+  memo: true,
+  useHook: useAvatarIcon,
 });
-
-AvatarIcon.displayName = "AvatarIcon";

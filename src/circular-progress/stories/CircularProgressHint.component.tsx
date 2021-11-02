@@ -1,7 +1,11 @@
 import * as React from "react";
-import { isNull } from "@renderlesskit/react";
 
-import { Button, CircularProgress, CircularProgressProps } from "../../index";
+import {
+  Button,
+  CircularProgress,
+  CircularProgressProps,
+  isNull,
+} from "../../index";
 
 export type CircularProgressBasicProps = CircularProgressProps & {};
 

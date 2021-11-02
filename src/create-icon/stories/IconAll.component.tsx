@@ -1,13 +1,20 @@
 import * as React from "react";
 
 import {
+  ActiveStatusIcon,
+  AwayStatusIcon,
   CaretDownIcon,
+  CaretLeftIcon,
   CaretRightIcon,
-  CheckCircleIcon,
   CheckIcon,
+  CircledCheckIcon,
   ClockIcon,
   CloseIcon,
-  IndeterminateIcon,
+  DashIcon,
+  SleepStatusIcon,
+  TypingLargeStatusIcon,
+  TypingSmallStatusIcon,
+  UserIcon,
 } from "../../index";
 
 export type IconProps = {};
@@ -17,12 +24,19 @@ export const Icon: React.FC<IconProps> = props => {
     <div className="flex flex-col space-y-2">
       <div className="space-x-4 text-5xl">
         <CaretDownIcon />
+        <CaretLeftIcon />
         <CaretRightIcon />
         <CheckIcon />
-        <CheckCircleIcon />
+        <CircledCheckIcon />
         <ClockIcon />
         <CloseIcon />
-        <IndeterminateIcon />
+        <DashIcon />
+        <UserIcon />
+        <ActiveStatusIcon />
+        <SleepStatusIcon />
+        <AwayStatusIcon />
+        <TypingSmallStatusIcon className="inline-block w-12" />
+        <TypingLargeStatusIcon className="inline-block w-12" />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 
-import { mockImage, render, testA11y } from "../../utils/testUtils";
+import { mockImage, render } from "../../utils/testUtils";
 import { Avatar } from "../index";
 
 jest.useFakeTimers("modern");
@@ -17,20 +17,8 @@ describe("<Avatar />", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("should render Avatar renderProps", () => {
-    render(
-      <Avatar name="Anurag hazra">
-        {({ name, getInitials }) => <p>{getInitials!(name)}</p>}
-      </Avatar>,
-    );
-
-    expect(screen.getByTestId("testid-avatar_children")).toHaveTextContent(
-      "Ah",
-    );
-  });
-
-  it("should render with AvatarBadge", () => {
-    const { asFragment } = render(<Avatar status="online"></Avatar>);
+  it("should render with AvatarStatusIndicator", () => {
+    const { asFragment } = render(<Avatar status="active"></Avatar>);
 
     expect(asFragment()).toMatchSnapshot();
   });
@@ -46,7 +34,7 @@ describe("<Avatar />", () => {
   it("renders a custom fallback if src & name both are not provided", () => {
     const fallbackContent = "I'm a fallback";
     const { getByLabelText } = render(
-      <Avatar fallback={<div aria-label="fallback">{fallbackContent}</div>} />,
+      <Avatar icon={<div aria-label="fallback">{fallbackContent}</div>} />,
     );
 
     expect(getByLabelText("fallback")).toHaveTextContent(fallbackContent);
@@ -58,7 +46,7 @@ describe("<Avatar />", () => {
     const { queryByLabelText } = render(
       <Avatar
         name={name}
-        fallback={<div aria-label="fallback">{fallbackContent}</div>}
+        icon={<div aria-label="fallback">{fallbackContent}</div>}
       />,
     );
 
@@ -76,7 +64,7 @@ describe("<Avatar />", () => {
       <Avatar
         src={src}
         name={name}
-        fallback={<div aria-label="fallback">{fallbackContent}</div>}
+        icon={<div aria-label="fallback">{fallbackContent}</div>}
       />,
     );
 
@@ -103,9 +91,5 @@ describe("<Avatar />", () => {
     await mockImage.advanceTimer();
 
     expect(onErrorFn).toBeCalledTimes(1);
-  });
-
-  it("should not have a11y violations", async () => {
-    await testA11y(<Avatar>Ally</Avatar>);
   });
 });

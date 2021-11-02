@@ -1,7 +1,6 @@
 import * as React from "react";
-import { isNull } from "@renderlesskit/react";
 
-import { Button, Progress, ProgressProps } from "../../index";
+import { Button, isNull, Progress, ProgressProps } from "../../index";
 
 export type ProgressLabelProps = ProgressProps & {};
 

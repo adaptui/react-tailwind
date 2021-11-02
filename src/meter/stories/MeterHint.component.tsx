@@ -31,11 +31,11 @@ const useMeterState = (initialValue: number = 0) => {
   React.useEffect(() => {
     const clearId = setInterval(() => {
       setValue(prevValue => {
-        return prevValue + 25;
+        return prevValue + 1;
       });
     }, 500);
 
-    if (value === 75) {
+    if (value === 100) {
       clearInterval(clearId);
     }
 

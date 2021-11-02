@@ -1,32 +1,37 @@
 import { useMemo } from "react";
 
-import { Box, BoxProps } from "../box";
-import { useTheme } from "../theme";
+import { BoxProps } from "../box";
 import {
   createContext,
   forwardRefWithAs,
   getValidChildren,
-  tcm,
+  isUndefined,
 } from "../utils";
 
-import { Avatar, AvatarContents, AvatarProps } from "./Avatar";
+import { Avatar, AvatarProps } from "./Avatar";
+import { AvatarGroupWrapper } from "./AvatarGroupWrapper";
 
-export type AvatarGroupContext = Pick<
-  AvatarProps,
-  "size" | "showBorder" | "borderColor"
-> & {};
-
-const [AvatarGroupProvider, useAvatarGroup] = createContext<AvatarGroupContext>(
-  {
+const [AvatarGroupProvider, useAvatarGroup] =
+  createContext<AvatarGroupSharedProps>({
     strict: false,
     name: "AvatarGroupProvider",
-  },
-);
+  });
 
 export { useAvatarGroup };
 
+export type AvatarGroupSharedProps = Pick<
+  AvatarProps,
+  "size" | "circular" | "showRing" | "ringColor"
+>;
+
 export type AvatarGroupProps = BoxProps &
-  AvatarGroupContext & { limit?: number };
+  AvatarGroupSharedProps & {
+    /**
+     * Maximum number of avatars to be displayed within the group.
+     *
+     */
+    max?: number;
+  };
 
 export const AvatarGroup = forwardRefWithAs<
   AvatarGroupProps,
@@ -34,81 +39,47 @@ export const AvatarGroup = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const {
-    limit = 100,
-    size = "md",
-    showBorder = true,
-    borderColor,
-    className,
+    circular = true,
+    size = "xl",
+    showRing = true,
+    ringColor = "ring-white",
     children,
+    max,
     ...rest
   } = props;
-  const theme = useTheme();
+
   const context = useMemo(
-    () => ({ size, showBorder, borderColor }),
-    [size, showBorder, borderColor],
+    () => ({ size, showRing, ringColor, circular }),
+    [size, showRing, ringColor, circular],
   );
 
+  /**
+   * Check if all the children are valid React components.
+   */
   const validChildren = getValidChildren(children);
 
   /**
    * Get the avatars within the max
    */
-  const childrenWithinMax = limit
-    ? validChildren.slice(0, limit)
-    : validChildren;
+  const childrenWithinMax = isUndefined(max)
+    ? validChildren
+    : validChildren.slice(0, max);
 
   /**
    * Get the remaining avatar count
    */
-  const excess = limit != null && validChildren.length - limit;
+  const excess = isUndefined(max) ? 0 : validChildren.length - max;
 
   return (
     <AvatarGroupProvider value={context}>
-      <Box
-        ref={ref}
-        role="group"
-        aria-label="Avatar group"
-        className={tcm(theme.avatar.group.base, className)}
-        {...rest}
-      >
+      <AvatarGroupWrapper ref={ref} size={size} {...rest}>
         {childrenWithinMax}
         {excess > 0 ? (
-          <AvatarExcess
-            size={size}
-            excess={excess}
-            {...validChildren[limit].props}
-          />
+          <Avatar name={excess.toString()} data-testId="testid-excess_label" />
         ) : null}
-      </Box>
+      </AvatarGroupWrapper>
     </AvatarGroupProvider>
   );
 });
 
 AvatarGroup.displayName = "AvatarGroup";
-
-const AvatarExcess = ({
-  excess,
-  size = "md",
-  ...props
-}: AvatarProps & {
-  excess: number | false;
-}) => {
-  const theme = useTheme();
-
-  const excessStyles = tcm(
-    theme.avatar.group.excess.text.base,
-    theme.avatar.group.excess.text.size[size],
-  );
-
-  return (
-    <Avatar {...props}>
-      <>
-        <AvatarContents />
-        <Box className={theme.avatar.group.excess.bg} />
-        <Box data-testid="testid-excess_label" className={excessStyles}>
-          +{size === "xs" ? "" : excess}
-        </Box>
-      </>
-    </Avatar>
-  );
-};

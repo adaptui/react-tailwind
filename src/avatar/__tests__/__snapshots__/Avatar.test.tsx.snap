@@ -2,13 +2,13 @@
 
 exports[`<Avatar /> should render Avatar 1`] = `
 <DocumentFragment>
-  <div
-    class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-6 w-6 ring-white"
+  <span
+    class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-8 w-8"
     data-testid="testid-avatar_children"
   >
     <span
-      aria-label="Avatar Icon"
-      class="inline-flex text-gray-500 text-xs"
+      aria-label="avatar icon"
+      class="inline-flex items-center justify-center text-gray-600 text-base"
     >
       <svg
         aria-hidden="true"
@@ -19,65 +19,67 @@ exports[`<Avatar /> should render Avatar 1`] = `
         viewBox="0 0 12 12"
       >
         <path
-          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="transparent"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.3"
-        />
-      </svg>
-    </span>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`<Avatar /> should render with AvatarBadge 1`] = `
-<DocumentFragment>
-  <div
-    class="relative inline-flex items-center justify-center rounded-full flex-shrink-0 bg-gray-100 h-6 w-6 ring-white"
-    data-testid="testid-avatar_children"
-  >
-    <span
-      aria-label="Avatar Icon"
-      class="inline-flex text-gray-500 text-xs"
-    >
-      <svg
-        aria-hidden="true"
-        class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
-        data-testid="testid-icon"
-        focusable="false"
-        role="img"
-        viewBox="0 0 12 12"
-      >
-        <path
-          d="M6 5c1.1046 0 2-.8954 2-2s-.8954-2-2-2-2 .8954-2 2 .8954 2 2 2zM6 7c-.6566 0-1.3068.1035-1.9134.3045s-1.1578.4956-1.6221.867C1.5268 8.9218 1 9.9392 1 11h10c0-1.0609-.5268-2.0783-1.4645-2.8284C8.5978 7.4214 7.3261 7 6 7z"
-          fill="transparent"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.3"
+          clip-rule="evenodd"
+          d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+          fill="currentColor"
+          fill-rule="evenodd"
         />
       </svg>
     </span>
     <div
-      class="absolute flex items-center justify-center ring-white rounded-full text-[0.25rem] ring-2 bottom-0 right-0"
-      data-testid="testid-avatar-badge"
+      aria-label="avatar status indicator"
+      class="absolute flex items-center justify-center bottom-0 right-0"
+    />
+  </span>
+</DocumentFragment>
+`;
+
+exports[`<Avatar /> should render with AvatarStatusIndicator 1`] = `
+<DocumentFragment>
+  <span
+    class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-8 w-8"
+    data-testid="testid-avatar_children"
+  >
+    <span
+      aria-label="avatar icon"
+      class="inline-flex items-center justify-center text-gray-600 text-base"
     >
       <svg
-        class="w-[1em] h-[1em] inline-block flex-shrink-0 align-middle text-green-500 ring-white ring-opacity-100 ring-1.5 text-[5px]"
+        aria-hidden="true"
+        class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
         data-testid="testid-icon"
         focusable="false"
-        viewBox="0 0 9 9"
+        role="img"
+        viewBox="0 0 12 12"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+    <div
+      aria-label="avatar status indicator"
+      class="absolute flex items-center justify-center bottom-0 right-0"
+    >
+      <svg
+        aria-hidden="true"
+        class="w-[1em] h-[1em] inline-block flex-shrink-0 align-middle text-green-500 ring-1.5 rounded-full text-[8px] bg-white ring-white"
+        data-testid="testid-icon"
+        focusable="false"
+        role="img"
+        viewBox="0 0 4 4"
       >
         <circle
-          cx="4.5"
-          cy="4.5"
+          cx="2"
+          cy="2"
           fill="currentColor"
-          r="4.5"
+          r="2"
         />
       </svg>
     </div>
-  </div>
+  </span>
 </DocumentFragment>
 `;

@@ -5,6 +5,28 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 const renderlesskitConfig = {
   theme: {
+    animationDelay: {
+      75: "75ms",
+      100: "100ms",
+      150: "150ms",
+      200: "200ms",
+      300: "300ms",
+      333: "333ms",
+      500: "500ms",
+      667: "667ms",
+      700: "700ms",
+      1000: "1000ms",
+    },
+    animationDuration: {
+      75: "75ms",
+      100: "100ms",
+      150: "150ms",
+      200: "200ms",
+      300: "300ms",
+      500: "500ms",
+      700: "700ms",
+      1000: "1000ms",
+    },
     extend: {
       colors: {
         orange: colors.orange,
@@ -23,6 +45,9 @@ const renderlesskitConfig = {
         "paragraph-cxs": ["13px", "150%"],
         "paragraph-sm": ["14px", "150%"],
         "2base": ["32px", "115%"],
+      },
+      ringWidth: {
+        1.5: "1.5px",
       },
       inset: {
         unset: "unset",
@@ -77,6 +102,8 @@ const renderlesskitConfig = {
   plugins: [
     require("./tailwindPlugins/utilities"),
     require("./tailwindPlugins/variantPlugin"),
+    require("./tailwindPlugins/animationDelay"),
+    require("./tailwindPlugins/animationDuration"),
   ],
 };
 

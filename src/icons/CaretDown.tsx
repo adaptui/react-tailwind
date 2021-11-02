@@ -5,12 +5,10 @@ export const CaretDownIcon = createIcon({
   viewBox: "0 0 12 12",
   path: (
     <path
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-      d="M2.25 4.5L6 8.5l3.75-4"
+      fill="currentColor"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1.806 4.026a.65.65 0 0 0-.03.919l3.75 4a.65.65 0 0 0 .948 0l3.75-4a.65.65 0 1 0-.948-.89L6 7.55 2.724 4.055a.65.65 0 0 0-.918-.03Z"
     />
   ),
 });

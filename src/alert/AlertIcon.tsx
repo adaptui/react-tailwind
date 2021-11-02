@@ -1,6 +1,6 @@
 import { Box, BoxProps } from "../box";
 import {
-  CheckCircleIcon,
+  CircledCheckIcon,
   ExclamationTriangleIcon,
   InfoCircleIcon,
 } from "../icons";
@@ -12,7 +12,7 @@ import { useAlertContext } from "./Alert";
 const STATUS_ICONS = {
   neutral: InfoCircleIcon,
   info: InfoCircleIcon,
-  success: CheckCircleIcon,
+  success: CircledCheckIcon,
   warning: ExclamationTriangleIcon,
   error: InfoCircleIcon,
 };
