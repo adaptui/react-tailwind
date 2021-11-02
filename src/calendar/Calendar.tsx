@@ -29,7 +29,7 @@ export const Calendar: React.FC<CalendarProps> = props => {
   const theme = useTheme();
 
   return (
-    <CalendarProvider value={context}>
+    <CalendarProvider {...context}>
       <RenderlessCalendar {...ctx} className={theme.calendar.base}>
         {children}
       </RenderlessCalendar>
@@ -46,7 +46,7 @@ export const RangeCalendar: React.FC<RangeCalendarProps> = props => {
   const theme = useTheme();
 
   return (
-    <CalendarProvider value={context}>
+    <CalendarProvider {...context}>
       <RenderlessCalendar {...ctx} className={theme.calendar.base}>
         {children}
       </RenderlessCalendar>
@@ -62,7 +62,7 @@ export const StatelessCalendar: React.FC<
   const theme = useTheme();
 
   return (
-    <CalendarProvider value={context}>
+    <CalendarProvider {...context}>
       <RenderlessCalendar {...props.state} className={theme.calendar.base}>
         {children}
       </RenderlessCalendar>
@@ -78,7 +78,7 @@ export const StatelessRangeCalendar: React.FC<
   const theme = useTheme();
 
   return (
-    <CalendarProvider value={context}>
+    <CalendarProvider {...context}>
       <RenderlessCalendar {...props.state} className={theme.calendar.base}>
         {children}
       </RenderlessCalendar>
@@ -267,7 +267,7 @@ export const CalendarTableHeadColumns: React.FC = () => {
 
   return (
     <>
-      {state.weekDays.map((day, dayIndex) => {
+      {state?.weekDays.map((day, dayIndex) => {
         return (
           <CalendarTableHeadHeader key={dayIndex} dayIndex={dayIndex}>
             <CalendarTableHeadHeaderAbbr day={day} />
@@ -283,7 +283,7 @@ export const CalendarTableBodyContents: React.FC = () => {
 
   return (
     <>
-      {state.daysInMonth.map((week, weekIndex) => (
+      {state?.daysInMonth.map((week, weekIndex) => (
         <CalendarTableBodyRow key={weekIndex}>
           {week.map((day, dayIndex) => (
             <CalendarTableBodyData day={day} key={dayIndex} dayIndex={dayIndex}>

@@ -1,9 +1,4 @@
-import { splitProps } from "reakit-utils";
-
 import { createContext } from "../utils";
-
-import { USE_CHECKBOX_GROUP_STATE_KEYS } from "./__keys";
-import { CheckboxGroupOwnProps, CheckboxGroupProps } from "./CheckboxGroup";
 
 export type CheckboxGroupState = {
   /**
@@ -49,20 +44,10 @@ export function useCheckboxGroupState(
   };
 }
 
-const [CheckboxStateContextProvider, useCheckboxStateContext] =
+const [CheckboxGroupContextProvider, useCheckboxGroupContext] =
   createContext<CheckboxGroupStateReturn>({
+    name: "CheckboxGroupContextProvider",
     strict: false,
-    name: "CheckboxStateContext",
   });
 
-export { CheckboxStateContextProvider, useCheckboxStateContext };
-
-export const useCheckboxGroupStateSplit = (props: CheckboxGroupProps) => {
-  const [stateProps, checkboxGroupProps] = splitProps(
-    props,
-    USE_CHECKBOX_GROUP_STATE_KEYS,
-  ) as [CheckboxGroupInitialState, CheckboxGroupOwnProps];
-  const state = useCheckboxGroupState(stateProps);
-
-  return [state, checkboxGroupProps, stateProps] as const;
-};
+export { CheckboxGroupContextProvider, useCheckboxGroupContext };

@@ -1,52 +1,38 @@
 import * as React from "react";
 
-import { getComponentProps, RenderProp } from "../utils";
+import { RenderProp } from "../utils";
 
+import { useRadioGroupProps } from "./RadioGroupProps";
 import {
+  RadioGroupContextProvider,
   RadioGroupInitialState,
   RadioGroupStateReturn,
-  RadioStateContextProvider,
-  useRadioGroupStateSplit,
 } from "./RadioGroupState";
-import { RadioShowMore } from "./RadioShowMore";
 import {
-  RenderlesskitRadioGroup,
-  RenderlesskitRadioGroupHTMLProps,
-} from "./RenderlesskitRadioGroup";
+  RadioGroupWrapper,
+  RadioGroupWrapperHTMLProps,
+} from "./RadioGroupWrapper";
+import { RadioShowMore } from "./RadioShowMore";
 
-export type RadioGroupOwnProps = RenderlesskitRadioGroupHTMLProps & {};
+export type RadioGroupOwnProps = RadioGroupWrapperHTMLProps & {};
 
 export type RadioGroupProps = RadioGroupInitialState &
   RadioGroupOwnProps &
   RenderProp<RadioGroupStateReturn>;
 
-const componentMap = {
-  ShowMoreContent: "contentProps",
-  ShowMoreButton: "buttonProps",
-};
-
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (props, ref) => {
-    const [state, radioGroupProps] = useRadioGroupStateSplit(props);
-    const { children, ...restProps } = radioGroupProps;
-    const { componentProps, finalChildren } = getComponentProps(
-      componentMap,
-      children,
+    const {
       state,
-    );
-    const visibleChildren =
-      state.maxVisibleItems == null
-        ? finalChildren
-        : finalChildren.slice(0, state.maxVisibleItems);
-    const moreChildren =
-      state.maxVisibleItems == null ||
-      finalChildren.length <= state.maxVisibleItems
-        ? null
-        : finalChildren.slice(state.maxVisibleItems);
+      componentProps,
+      visibleChildren,
+      moreChildren,
+      ...restProps
+    } = useRadioGroupProps(props);
 
     return (
-      <RenderlesskitRadioGroup ref={ref} {...state} {...restProps}>
-        <RadioStateContextProvider value={state}>
+      <RadioGroupWrapper ref={ref} {...state} {...restProps}>
+        <RadioGroupContextProvider {...state}>
           {visibleChildren}
           {moreChildren ? (
             <RadioShowMore
@@ -54,8 +40,8 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
               componentProps={componentProps}
             />
           ) : null}
-        </RadioStateContextProvider>
-      </RenderlesskitRadioGroup>
+        </RadioGroupContextProvider>
+      </RadioGroupWrapper>
     );
   },
 );

@@ -6,18 +6,18 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { AVATAR_GROUP_WRAPPER_KEYS } from "./__keys";
-import { AvatarStateReturn } from "./AvatarState";
+import { AvatarGroupStateReturn } from "./AvatarGroupState";
 
 export type AvatarGroupWrapperOptions = BoxOptions &
   GroupOptions &
-  Pick<AvatarStateReturn, "size">;
+  Pick<AvatarGroupStateReturn, "size">;
 
 export type AvatarGroupWrapperHTMLProps = BoxHTMLProps & GroupHTMLProps;
 
 export type AvatarGroupWrapperProps = AvatarGroupWrapperOptions &
   AvatarGroupWrapperHTMLProps;
 
-export const useAvatarGroupWrapper = createHook<
+export const useAvatarGroupContextWrapper = createHook<
   AvatarGroupWrapperOptions,
   AvatarGroupWrapperHTMLProps
 >({
@@ -47,5 +47,5 @@ export const useAvatarGroupWrapper = createHook<
 export const AvatarGroupWrapper = createComponent({
   as: "div",
   memo: true,
-  useHook: useAvatarGroupWrapper,
+  useHook: useAvatarGroupContextWrapper,
 });

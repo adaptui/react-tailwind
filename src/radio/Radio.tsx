@@ -1,35 +1,19 @@
 import * as React from "react";
 
-import { RenderProp, RenderPropType } from "../utils";
+import { RenderProp } from "../utils";
 
-import {
-  RadioDescription,
-  RadioIcon,
-  RadioInput,
-  RadioInputProps,
-  RadioLabel,
-  RadioText,
-} from "./index";
-import { RadioGroupStateReturn } from "./RadioGroupState";
-import { RadioStateReturn, useRadioProps } from "./RadioState";
+import { RadioDescription } from "./RadioDescription";
+import { RadioIcon } from "./RadioIcon";
+import { RadioInput, RadioInputHTMLProps } from "./RadioInput";
+import { RadioLabel } from "./RadioLabel";
+import { useRadioProps } from "./RadioProps";
+import { RadioInitialState, RadioStateReturn } from "./RadioState";
+import { RadioText } from "./RadioText";
 
-export type RadioOwnProps = Partial<RadioInputProps> & {
-  /**
-   * Provide custom icons as a replacement for the default ones.
-   */
-  icon?: RenderPropType<RadioStateReturn>;
-  /**
-   * Description for the Radio.
-   */
-  label?: RenderPropType<RadioStateReturn>;
-  /**
-   * Description for the Radio.
-   */
-  description?: RenderPropType<RadioStateReturn>;
-};
+export type RadioOwnProps = RadioInputHTMLProps & {};
 
 export type RadioProps = RadioOwnProps &
-  Partial<RadioGroupStateReturn> &
+  RadioInitialState &
   RenderProp<RadioStateReturn>;
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(

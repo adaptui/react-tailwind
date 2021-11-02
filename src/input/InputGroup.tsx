@@ -80,7 +80,7 @@ export const InputGroup = forwardRefWithAs<
   }, [children]);
 
   return (
-    <InputGroupProvider value={context}>
+    <InputGroupProvider {...context}>
       <Box
         ref={ref}
         role="group"

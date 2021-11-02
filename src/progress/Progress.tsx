@@ -5,11 +5,8 @@ import { RenderPropType } from "../utils";
 import { ProgressBar } from "./ProgressBar";
 import { ProgressHint } from "./ProgressHint";
 import { ProgressLabel } from "./ProgressLabel";
-import {
-  ProgressInitialState,
-  ProgressStateReturn,
-  useProgressProps,
-} from "./ProgressState";
+import { useProgressProps } from "./ProgressProps";
+import { ProgressInitialState, ProgressStateReturn } from "./ProgressState";
 import { ProgressTrack } from "./ProgressTrack";
 import { ProgressWrapper, ProgressWrapperHTMLProps } from "./ProgressWrapper";
 

@@ -1,34 +1,16 @@
 import * as React from "react";
 
-import { RenderProp, RenderPropType } from "../utils";
+import { RenderProp } from "../utils";
 
 import { SwitchDescription } from "./SwitchDescription";
 import { SwitchIcon } from "./SwitchIcon";
-import { SwitchInput, SwitchInputProps } from "./SwitchInput";
+import { SwitchInput, SwitchInputHTMLProps } from "./SwitchInput";
 import { SwitchLabel } from "./SwitchLabel";
-import {
-  SwitchInitialState,
-  SwitchStateReturn,
-  useSwitchProps,
-} from "./SwitchState";
+import { useSwitchProps } from "./SwitchProps";
+import { SwitchInitialState, SwitchStateReturn } from "./SwitchState";
 import { SwitchText } from "./SwitchText";
 
-export type SwitchOwnProps = Partial<SwitchInputProps> & {
-  /**
-   * Provide custom icons as a replacement for the default ones.
-   */
-  icon?: RenderPropType<SwitchStateReturn & Pick<SwitchInputProps, "disabled">>;
-
-  /**
-   * Description for the Switch.
-   */
-  label?: RenderPropType<SwitchStateReturn>;
-
-  /**
-   * Description for the Switch.
-   */
-  description?: RenderPropType<SwitchStateReturn>;
-};
+export type SwitchOwnProps = SwitchInputHTMLProps & {};
 
 export type SwitchProps = SwitchInitialState &
   SwitchOwnProps &

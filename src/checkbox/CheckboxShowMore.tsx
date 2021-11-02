@@ -6,11 +6,11 @@ import {
   ShowMoreButton,
   ShowMoreContent,
   ShowMoreProps,
-} from "../show-more/ShowMore";
+} from "../show-more";
 import { useTheme } from "../theme";
 import { cx, Dict } from "../utils";
 
-import { useCheckboxStateContext } from "./CheckboxGroupState";
+import { useCheckboxGroupContext } from "./CheckboxGroupState";
 
 export type CheckboxShowMoreOwnProps = { componentProps?: Dict<any> };
 
@@ -18,8 +18,10 @@ export type CheckboxShowMoreProps = ShowMoreProps & CheckboxShowMoreOwnProps;
 
 export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
   const { children, componentProps, direction, ...restProps } = props;
-  const contextState = useCheckboxStateContext();
+  const contextState = useCheckboxGroupContext();
   const size = contextState?.size || "md";
+  const stack = contextState?.stack || direction || "vertical";
+
   const sizeMap = {
     sm: "sm",
     md: "md",
@@ -29,16 +31,14 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
 
   const theme = useTheme("radio");
   const buttonClassName = cx(
-    theme.group.showMore.button.base[contextState.stack],
-    hasExpandStarted
-      ? ""
-      : theme.group.showMore.button.expanded[contextState.stack],
+    theme.group.showMore.button.base[stack],
+    hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
   );
-  const contentClassName = cx(theme.group.showMore.content[contextState.stack]);
+  const contentClassName = cx(theme.group.showMore.content[stack]);
 
   return (
     <ShowMore
-      direction={contextState.stack || direction}
+      direction={stack}
       onExpandStart={() => setHasExpandStarted(true)}
       onCollapseStart={() => setHasExpandStarted(false)}
       {...restProps}

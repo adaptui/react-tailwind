@@ -4,5 +4,6 @@ export * from "./SwitchDescription";
 export * from "./SwitchIcon";
 export * from "./SwitchInput";
 export * from "./SwitchLabel";
+export * from "./SwitchProps";
 export * from "./SwitchState";
 export * from "./SwitchText";

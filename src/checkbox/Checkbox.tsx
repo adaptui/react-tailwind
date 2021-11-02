@@ -6,11 +6,8 @@ import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";
 import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxLabel } from "./CheckboxLabel";
-import {
-  CheckboxInitialState,
-  CheckboxStateReturn,
-  useCheckboxProps,
-} from "./CheckboxState";
+import { useCheckboxProps } from "./CheckboxProps";
+import { CheckboxInitialState, CheckboxStateReturn } from "./CheckboxState";
 import { CheckboxText } from "./CheckboxText";
 
 export type CheckboxOwnProps = Partial<CheckboxInputProps> & {

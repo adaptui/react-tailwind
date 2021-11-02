@@ -39,3 +39,7 @@ export function canUseDOM() {
 }
 
 export const isBrowser = canUseDOM();
+
+export function isEmptyObject(value: any) {
+  return isObject(value) && Object.keys(value).length === 0;
+}

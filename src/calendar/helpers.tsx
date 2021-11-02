@@ -5,7 +5,7 @@ import { createContext } from "../utils";
 const [CalendarProvider, useCalendarContext] =
   createContext<CalendarStateReturn>({
     strict: false,
-    name: "CalendarContext",
+    name: "CalendarProvider",
   });
 
 export { CalendarProvider, useCalendarContext };

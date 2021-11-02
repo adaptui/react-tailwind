@@ -120,8 +120,8 @@ export const Slider = forwardRefWithAs<
   );
 
   return (
-    <SliderPropsContext value={contextProps}>
-      <SliderStateProvider value={state}>
+    <SliderPropsContext {...contextProps}>
+      <SliderStateProvider {...state}>
         <Box ref={ref} className={sliderWrapperStyles} {...rest}>
           {children ? (
             runIfFn(children, { state, trackRef, thumbRef, showMinMax })

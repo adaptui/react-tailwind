@@ -5,10 +5,10 @@ import { RenderPropType } from "../utils";
 import { CircularProgressBar } from "./CircularProgressBar";
 import { CircularProgressBarWrapper } from "./CircularProgressBarWrapper";
 import { CircularProgressHint } from "./CircularProgressHint";
+import { useCircularProgressProps } from "./CircularProgressProps";
 import {
   CircularProgressInitialState,
   CircularProgressStateReturn,
-  useCircularProgressProps,
 } from "./CircularProgressState";
 import { CircularProgressTrack } from "./CircularProgressTrack";
 import {

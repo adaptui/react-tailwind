@@ -1,59 +1,35 @@
 import * as React from "react";
 
-import { getComponentProps, RenderProp, runIfFnChildren } from "../utils";
+import { RenderProp } from "../utils";
 
+import { useCheckboxGroupProps } from "./CheckboxGroupProps";
 import {
+  CheckboxGroupContextProvider,
   CheckboxGroupInitialState,
   CheckboxGroupStateReturn,
-  CheckboxStateContextProvider,
-  useCheckboxGroupStateSplit,
 } from "./CheckboxGroupState";
-import { CheckboxShowMore } from "./CheckboxShowMore";
 import {
-  RenderlesskitCheckboxGroup,
-  RenderlesskitCheckboxGroupHTMLProps,
-} from "./RenderlesskitCheckboxGroup";
+  CheckboxGroupWrapper,
+  CheckboxGroupWrapperHTMLProps,
+} from "./CheckboxGroupWrapper";
+import { CheckboxShowMore } from "./CheckboxShowMore";
 
-export type CheckboxGroupOwnProps = RenderlesskitCheckboxGroupHTMLProps & {};
+export type CheckboxGroupOwnProps = CheckboxGroupWrapperHTMLProps & {};
 
 export type CheckboxGroupProps = CheckboxGroupInitialState &
   CheckboxGroupOwnProps &
   RenderProp<CheckboxGroupStateReturn>;
 
-const componentMap = {
-  ShowMoreContent: "contentProps",
-  ShowMoreButton: "buttonProps",
-};
-
 export const CheckboxGroup = React.forwardRef<
   HTMLDivElement,
   CheckboxGroupProps
 >((props, ref) => {
-  const [state, radioGroupProps] = useCheckboxGroupStateSplit(props);
-  const { children, ...restProps } = radioGroupProps;
-  const { componentProps, finalChildren } = getComponentProps(
-    componentMap,
-    children,
-    state,
-  );
-  const visibleChildren =
-    state.maxVisibleItems == null
-      ? finalChildren
-      : finalChildren.slice(0, state.maxVisibleItems);
-  const moreChildren =
-    state.maxVisibleItems == null ||
-    finalChildren.length <= state.maxVisibleItems
-      ? null
-      : finalChildren.slice(state.maxVisibleItems);
-  console.log(
-    "%cmoreChildren",
-    "color: #0088cc",
-    runIfFnChildren(moreChildren),
-  );
+  const { state, componentProps, visibleChildren, moreChildren, ...restProps } =
+    useCheckboxGroupProps(props);
 
   return (
-    <RenderlesskitCheckboxGroup ref={ref} {...state} {...restProps}>
-      <CheckboxStateContextProvider value={state}>
+    <CheckboxGroupWrapper ref={ref} {...state} {...restProps}>
+      <CheckboxGroupContextProvider {...state}>
         {visibleChildren}
         {moreChildren ? (
           <CheckboxShowMore
@@ -61,8 +37,8 @@ export const CheckboxGroup = React.forwardRef<
             componentProps={componentProps}
           />
         ) : null}
-      </CheckboxStateContextProvider>
-    </RenderlesskitCheckboxGroup>
+      </CheckboxGroupContextProvider>
+    </CheckboxGroupWrapper>
   );
 });
 

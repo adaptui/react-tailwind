@@ -7,27 +7,27 @@ import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { RENDERLESSKIT_CHECKBOX_GROUP_KEYS } from "./__keys";
+import { CHECKBOX_GROUP_WRAPPER_KEYS } from "./__keys";
 import { CheckboxGroupState } from "./CheckboxGroupState";
 
-export type RenderlesskitCheckboxGroupOptions = BoxOptions &
+export type CheckboxGroupWrapperOptions = BoxOptions &
   GroupOptions &
   Pick<CheckboxGroupState, "stack" | "size">;
 
-export type RenderlesskitCheckboxGroupHTMLProps = BoxHTMLProps &
+export type CheckboxGroupWrapperHTMLProps = BoxHTMLProps &
   GroupHTMLProps &
   React.FieldsetHTMLAttributes<any>;
 
-export type RenderlesskitCheckboxGroupProps =
-  RenderlesskitCheckboxGroupOptions & RenderlesskitCheckboxGroupHTMLProps;
+export type CheckboxGroupWrapperProps = CheckboxGroupWrapperOptions &
+  CheckboxGroupWrapperHTMLProps;
 
-export const useRenderlesskitCheckboxGroup = createHook<
-  RenderlesskitCheckboxGroupOptions,
-  RenderlesskitCheckboxGroupHTMLProps
+export const useCheckboxGroupContextWrapper = createHook<
+  CheckboxGroupWrapperOptions,
+  CheckboxGroupWrapperHTMLProps
 >({
-  name: "RenderlesskitCheckboxGroup",
+  name: "CheckboxGroupWrapper",
   compose: [useBox, useGroup],
-  keys: RENDERLESSKIT_CHECKBOX_GROUP_KEYS,
+  keys: CHECKBOX_GROUP_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
     const { stack, size } = options;
@@ -44,9 +44,9 @@ export const useRenderlesskitCheckboxGroup = createHook<
   },
 });
 
-export const RenderlesskitCheckboxGroup = createComponent({
+export const CheckboxGroupWrapper = createComponent({
   as: "div",
-  useHook: useRenderlesskitCheckboxGroup,
+  useHook: useCheckboxGroupContextWrapper,
   useCreateElement: (type, props, children) => {
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],

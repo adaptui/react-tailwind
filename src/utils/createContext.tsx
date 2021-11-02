@@ -17,13 +17,12 @@ export interface CreateContextOptions<ContextType> {
    * In some cases, you might want to support nested context, so you can set it to `false`
    */
   strict?: boolean;
-}
 
-export type CreateContextReturn<T> = [
-  React.Provider<T>,
-  () => T,
-  React.Context<T>,
-];
+  /**
+   * Error message to throw if the context is `undefined`
+   */
+  errorMessage?: string;
+}
 
 /**
  * Creates a named context, provider, and hook.
@@ -33,7 +32,12 @@ export type CreateContextReturn<T> = [
 export function createContext<ContextType extends object | null>(
   options: CreateContextOptions<ContextType> = {},
 ) {
-  const { name = "Provider", defaultContext, strict = true } = options;
+  const {
+    name = "Provider",
+    defaultContext,
+    strict = true,
+    errorMessage = "Seems you forgot to wrap `useContext` within the Context Provider",
+  } = options;
 
   const Context = React.createContext<ContextType | undefined>(defaultContext);
 
@@ -53,7 +57,7 @@ export function createContext<ContextType extends object | null>(
 
   Provider.displayName = name;
 
-  function useContext(consumerName: string) {
+  function useContext() {
     const context = React.useContext(Context);
 
     if (context) return context;
@@ -61,15 +65,11 @@ export function createContext<ContextType extends object | null>(
     if (!isUndefined(defaultContext)) return defaultContext;
 
     if (strict) {
-      throw new Error(
-        `Seems you forgot to wrap \`${consumerName}\` within the \`${name}\``,
-      );
+      throw new Error(errorMessage);
     }
+
+    return undefined;
   }
 
-  return [
-    Context.Provider,
-    useContext,
-    Context,
-  ] as CreateContextReturn<ContextType>;
+  return [Provider, useContext] as const;
 }

@@ -7,11 +7,8 @@ import { MeterBar } from "./MeterBar";
 import { MeterBarWrapper } from "./MeterBarWrapper";
 import { MeterHint } from "./MeterHint";
 import { MeterLabel } from "./MeterLabel";
-import {
-  MeterInitialState,
-  MeterStateReturn,
-  useMeterProps,
-} from "./MeterState";
+import { useMeterProps } from "./MeterProps";
+import { MeterInitialState, MeterStateReturn } from "./MeterState";
 import { MeterTrack } from "./MeterTrack";
 import { MeterWrapper, MeterWrapperHTMLProps } from "./MeterWrapper";
 

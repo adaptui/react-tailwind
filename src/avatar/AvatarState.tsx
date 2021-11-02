@@ -3,7 +3,7 @@ import { UserIcon } from "../icons";
 import { isNull, RenderPropType } from "../utils";
 
 import { AvatarDefaultStatusIndicators } from "./AvatarDefaultStatusIndicators";
-import { useAvatarGroup } from "./AvatarGroup";
+import { useAvatarGroupContext } from "./AvatarGroupState";
 import { getInitialsFromNameDefault } from "./AvatarProps";
 
 export type AvatarState = {
@@ -13,6 +13,7 @@ export type AvatarState = {
    * @default true
    */
   circular: boolean;
+
   /**
    * How large should avatar be?
    *
@@ -137,7 +138,7 @@ export function useAvatarState(
 
   const initials = getInitialsFromName(name, size);
 
-  const context = useAvatarGroup();
+  const context = useAvatarGroupContext();
   const contextState = isNull(context) ? {} : context;
 
   /**

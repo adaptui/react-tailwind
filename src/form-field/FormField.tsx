@@ -85,7 +85,7 @@ export const FormField = forwardRefWithAs<
   const formFieldStyles = tcm(theme.formField.wrapper.base, className);
 
   return (
-    <FormFieldContextProvider value={context}>
+    <FormFieldContextProvider {...context}>
       <Box
         ref={ref}
         role="group"

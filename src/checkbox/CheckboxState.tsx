@@ -1,4 +1,3 @@
-import { splitProps } from "reakit-utils";
 import {
   CheckboxActions as RenderlesskitCheckboxActions,
   CheckboxInitialState as RenderlesskitCheckboxInitialState,
@@ -7,27 +6,10 @@ import {
 } from "@renderlesskit/react";
 
 import {
-  CheckIcon,
-  DashIcon,
-  getComponentProps,
-  runIfFn,
-  withIconA11y,
-} from "../index";
-
-import { CheckboxProps } from "./Checkbox";
-import {
   CheckboxGroupState,
-  useCheckboxStateContext,
+  useCheckboxGroupContext,
 } from "./CheckboxGroupState";
-import { CheckboxInputOptions, CheckboxInputProps } from "./CheckboxInput";
-import {
-  CheckboxDescriptionProps,
-  CheckboxIconProps,
-  CheckboxLabelProps,
-  CheckboxOwnProps,
-  CheckboxTextProps,
-  USE_CHECKBOX_STATE_KEYS,
-} from "./index";
+import { CheckboxInputOptions } from "./CheckboxInput";
 
 export type CheckboxState = RenderlesskitCheckboxState &
   Pick<CheckboxGroupState, "maxVisibleItems" | "stack"> & {
@@ -71,7 +53,7 @@ export function useCheckboxState(
 ): CheckboxStateReturn {
   const { state, setState } = useRenderlesskitCheckboxState(props);
   const { size: originalSize, value } = props;
-  const contextState = useCheckboxStateContext();
+  const contextState = useCheckboxGroupContext();
 
   const isChecked =
     Array.isArray(state) && value ? state.includes(value) : state === true;
@@ -90,103 +72,3 @@ export function useCheckboxState(
     stack: contextState?.stack ?? "horizontal",
   };
 }
-
-export const useCheckboxStateSplit = (props: CheckboxProps) => {
-  const [stateProps, checkboxProps] = splitProps(
-    props,
-    USE_CHECKBOX_STATE_KEYS,
-  ) as [CheckboxInitialState, CheckboxOwnProps];
-  const state = useCheckboxState(stateProps);
-
-  return [state, checkboxProps, stateProps] as const;
-};
-
-const componentMap = {
-  CheckboxLabel: "labelProps",
-  CheckboxInput: "inputProps",
-  CheckboxIcon: "iconProps",
-  CheckboxText: "textProps",
-  CheckboxDescription: "descriptionProps",
-};
-
-export const CheckboxDefaultIcon: CheckboxOwnProps["icon"] = state => {
-  const { isChecked, isIndeterminate } = state;
-
-  return (
-    <>
-      {isChecked ? withIconA11y(<CheckIcon />) : null}
-      {isIndeterminate ? withIconA11y(<DashIcon />) : null}
-    </>
-  );
-};
-
-export const useCheckboxProps = (
-  props: React.PropsWithChildren<CheckboxProps>,
-) => {
-  const [state, checkboxProps] = useCheckboxStateSplit(props);
-  const {
-    icon = CheckboxDefaultIcon,
-    label,
-    description,
-    className,
-    style,
-    children,
-    ...restProps
-  } = checkboxProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
-
-  const _icon: CheckboxOwnProps["icon"] =
-    componentProps?.iconProps?.children || icon;
-  const _label: CheckboxOwnProps["label"] =
-    componentProps?.textProps?.children || label;
-  const _description: CheckboxOwnProps["description"] =
-    componentProps?.descriptionProps?.children || description;
-
-  const labelProps: CheckboxLabelProps = {
-    ...state,
-    className,
-    style,
-    label: _label,
-    description: _description,
-    disabled: restProps.disabled,
-    ...componentProps.labelProps,
-  };
-
-  const inputProps: CheckboxInputProps = {
-    ...state,
-    ...restProps,
-    ...componentProps.inputProps,
-  };
-
-  const iconProps: CheckboxIconProps = {
-    ...state,
-    label: _label,
-    description: _description,
-    ...componentProps.iconProps,
-    children: runIfFn(_icon, state),
-  };
-
-  const textProps: CheckboxTextProps = {
-    ...state,
-    ...componentProps.textProps,
-    children: runIfFn(_label, state),
-  };
-
-  const descriptionProps: CheckboxDescriptionProps = {
-    ...state,
-    ...componentProps.descriptionProps,
-    children: runIfFn(_description, state),
-  };
-
-  return {
-    state,
-    labelProps,
-    inputProps,
-    iconProps,
-    textProps,
-    descriptionProps,
-    icon: _icon,
-    label: _label,
-    description: _description,
-  };
-};

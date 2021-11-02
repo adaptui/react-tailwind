@@ -5,26 +5,25 @@ import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { RENDERLESSKIT_RADIO_GROUP_KEYS } from "./__keys";
+import { RADIO_GROUP_WRAPPER_KEYS } from "./__keys";
 import { RadioGroupState } from "./RadioGroupState";
 
-export type RenderlesskitRadioGroupOptions = BoxOptions &
+export type RadioGroupWrapperOptions = BoxOptions &
   RadioGroupOptions &
   Pick<RadioGroupState, "stack" | "size">;
 
-export type RenderlesskitRadioGroupHTMLProps = BoxHTMLProps &
-  RadioGroupHTMLProps;
+export type RadioGroupWrapperHTMLProps = BoxHTMLProps & RadioGroupHTMLProps;
 
-export type RenderlesskitRadioGroupProps = RenderlesskitRadioGroupOptions &
-  RenderlesskitRadioGroupHTMLProps;
+export type RadioGroupWrapperProps = RadioGroupWrapperOptions &
+  RadioGroupWrapperHTMLProps;
 
-export const useRenderlesskitRadioGroup = createHook<
-  RenderlesskitRadioGroupOptions,
-  RenderlesskitRadioGroupHTMLProps
+export const useRadioGroupWrapper = createHook<
+  RadioGroupWrapperOptions,
+  RadioGroupWrapperHTMLProps
 >({
-  name: "RenderlesskitRadioGroup",
+  name: "RadioGroupWrapper",
   compose: [useBox, useRadioGroup],
-  keys: RENDERLESSKIT_RADIO_GROUP_KEYS,
+  keys: RADIO_GROUP_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
     const { stack, size } = options;
@@ -41,8 +40,8 @@ export const useRenderlesskitRadioGroup = createHook<
   },
 });
 
-export const RenderlesskitRadioGroup = createComponent({
+export const RadioGroupWrapper = createComponent({
   as: "div",
   memo: true,
-  useHook: useRenderlesskitRadioGroup,
+  useHook: useRadioGroupWrapper,
 });

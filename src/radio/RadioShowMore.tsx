@@ -6,11 +6,11 @@ import {
   ShowMoreButton,
   ShowMoreContent,
   ShowMoreProps,
-} from "../show-more/ShowMore";
+} from "../show-more";
 import { useTheme } from "../theme";
 import { cx, Dict } from "../utils";
 
-import { useRadioStateContext } from "./RadioGroupState";
+import { useRadioGroupContext } from "./RadioGroupState";
 
 export type RadioShowMoreOwnProps = { componentProps?: Dict<any> };
 
@@ -18,8 +18,9 @@ export type RadioShowMoreProps = ShowMoreProps & RadioShowMoreOwnProps;
 
 export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   const { children, componentProps, direction, ...restProps } = props;
-  const contextState = useRadioStateContext();
+  const contextState = useRadioGroupContext();
   const size = contextState?.size || "md";
+  const stack = contextState?.stack || direction || "vertical";
   const sizeMap = {
     sm: "sm",
     md: "md",
@@ -29,16 +30,14 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
 
   const theme = useTheme("radio");
   const buttonClassName = cx(
-    theme.group.showMore.button.base[contextState.stack],
-    hasExpandStarted
-      ? ""
-      : theme.group.showMore.button.expanded[contextState.stack],
+    theme.group.showMore.button.base[stack],
+    hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
   );
-  const contentClassName = cx(theme.group.showMore.content[contextState.stack]);
+  const contentClassName = cx(theme.group.showMore.content[stack]);
 
   return (
     <ShowMore
-      direction={contextState.stack || direction}
+      direction={stack}
       onExpandStart={() => setHasExpandStarted(true)}
       onCollapseStart={() => setHasExpandStarted(false)}
       {...restProps}
