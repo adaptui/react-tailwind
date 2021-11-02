@@ -75,7 +75,7 @@ export const AvatarGroup = forwardRefWithAs<
       <AvatarGroupWrapper ref={ref} size={size} {...rest}>
         {childrenWithinMax}
         {excess > 0 ? (
-          <Avatar name={excess.toString()} data-testId="testid-excess_label" />
+          <Avatar name={excess.toString()} data-testid="testid-excess_label" />
         ) : null}
       </AvatarGroupWrapper>
     </AvatarGroupProvider>
