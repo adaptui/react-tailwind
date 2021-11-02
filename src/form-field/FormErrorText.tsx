@@ -3,7 +3,7 @@ import { useSafeLayoutEffect } from "../hooks";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useFormFieldContext } from "./FormField";
+import { FormFieldContextProps, useFormFieldContext } from "./FormField";
 
 type FormErrorTextProps = BoxProps & {};
 
@@ -13,7 +13,8 @@ export const FormErrorText = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { id, children, className, ...rest } = props;
-  const { errorTextId, setHasErrorText, isInvalid } = useFormFieldContext();
+  const { errorTextId, setHasErrorText, isInvalid } =
+    useFormFieldContext() as FormFieldContextProps;
   const theme = useTheme();
   const errorStyles = tcm(theme.formField.errorText, className);
 

@@ -22,7 +22,7 @@ export type CommonFieldProps = {
   isRequired?: boolean;
 };
 
-type FormFieldContextProps = Omit<
+export type FormFieldContextProps = Omit<
   ReturnType<typeof useFormContextValues>,
   "htmlProps"
 >;

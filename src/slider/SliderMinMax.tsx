@@ -3,7 +3,7 @@ import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
 import { useSliderValues } from "./hooks/useSliderValues";
-import { useSliderPropsContext } from "./Slider";
+import { SliderContextType, useSliderPropsContext } from "./Slider";
 
 export type SliderMinMaxProps = BoxProps & {};
 
@@ -13,7 +13,8 @@ export const SliderMinMax = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, children, ...rest } = props;
-  const { orientation = "horizontal", origin = 0 } = useSliderPropsContext();
+  const { orientation = "horizontal", origin = 0 } =
+    useSliderPropsContext() as SliderContextType;
   const { isReversed } = useSliderValues({
     orientation: orientation,
     origin: origin,

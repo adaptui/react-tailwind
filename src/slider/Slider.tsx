@@ -28,7 +28,7 @@ const [SliderStateProvider, useSliderContext] = createContext<
   strict: false,
 });
 
-type SliderContextType = Pick<
+export type SliderContextType = Pick<
   SliderProps,
   "orientation" | "size" | "origin" | "showMinMax"
 > & {

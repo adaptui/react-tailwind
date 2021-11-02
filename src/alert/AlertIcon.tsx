@@ -7,7 +7,7 @@ import {
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useAlertContext } from "./Alert";
+import { AlertContext, useAlertContext } from "./Alert";
 
 const STATUS_ICONS = {
   neutral: InfoCircleIcon,
@@ -24,7 +24,7 @@ export const AlertIcon = forwardRefWithAs<
   HTMLSpanElement,
   "span"
 >((props, ref) => {
-  const { status } = useAlertContext();
+  const { status } = useAlertContext() as AlertContext;
   const { className, children, ...rest } = props;
   const Icon = STATUS_ICONS[status];
 
