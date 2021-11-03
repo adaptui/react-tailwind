@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 
+import { Avatar } from "../../avatar";
 import { render } from "../../utils/testUtils";
-import { Avatar } from "../Avatar";
 import { AvatarGroup } from "../AvatarGroup";
 
 describe("<AvatarGroup />", () => {
