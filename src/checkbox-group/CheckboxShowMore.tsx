@@ -8,7 +8,7 @@ import {
   ShowMoreProps,
 } from "../show-more";
 import { useTheme } from "../theme";
-import { cx, Dict } from "../utils";
+import { cx, Dict, passProps } from "../utils";
 
 import { useCheckboxGroupContext } from "./CheckboxGroupState";
 
@@ -36,6 +36,10 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
   );
   const contentClassName = cx(theme.group.showMore.content[stack]);
 
+  const finalChildren = React.Children.map(children, child => {
+    return passProps(child, { disabled: hasExpandStarted ? false : true });
+  });
+
   return (
     <ShowMore
       direction={stack}
@@ -43,7 +47,7 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
       onCollapseStart={() => setHasExpandStarted(false)}
       {...restProps}
     >
-      {children}
+      {finalChildren}
       <ShowMoreContent
         className={contentClassName}
         {...componentProps?.contentProps}
