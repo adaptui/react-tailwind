@@ -8,7 +8,7 @@ import {
   ShowMoreProps,
 } from "../show-more";
 import { useTheme } from "../theme";
-import { cx, Dict } from "../utils";
+import { cx, Dict, passProps } from "../utils";
 
 import { useRadioGroupContext } from "./RadioGroupState";
 
@@ -18,6 +18,7 @@ export type RadioShowMoreProps = ShowMoreProps & RadioShowMoreOwnProps;
 
 export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   const { children, componentProps, direction, ...restProps } = props;
+  console.log("%cchildren", "color: #9c66cc", children);
   const contextState = useRadioGroupContext();
   const size = contextState?.size || "md";
   const stack = contextState?.stack || direction || "vertical";
@@ -27,6 +28,7 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
     lg: "xl",
   } as const;
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
+  console.log("%chasExpandStarted", "color: #ace2e6", hasExpandStarted);
 
   const theme = useTheme("radio");
   const buttonClassName = cx(
@@ -35,6 +37,10 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   );
   const contentClassName = cx(theme.group.showMore.content[stack]);
 
+  const finalChildren = React.Children.map(children, child => {
+    return passProps(child, { disabled: hasExpandStarted ? false : true });
+  });
+
   return (
     <ShowMore
       direction={stack}
@@ -42,7 +48,7 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
       onCollapseStart={() => setHasExpandStarted(false)}
       {...restProps}
     >
-      {children}
+      {finalChildren}
       <ShowMoreContent
         className={contentClassName}
         {...componentProps?.contentProps}
