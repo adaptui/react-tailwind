@@ -3,7 +3,7 @@ import { useSafeLayoutEffect } from "../hooks";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useFormFieldContext } from "./FormField";
+import { FormFieldContextProps, useFormFieldContext } from "./FormField";
 
 type FormHelperTextProps = BoxProps & {};
 
@@ -13,7 +13,8 @@ export const FormHelperText = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { id, children, className, ...rest } = props;
-  const { helpTextId, setHasHelpText } = useFormFieldContext();
+  const { helpTextId, setHasHelpText } =
+    useFormFieldContext() as FormFieldContextProps;
   const theme = useTheme();
   const helperStyles = tcm(theme.formField.helperText, className);
 

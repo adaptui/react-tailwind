@@ -9,8 +9,10 @@ import { RadioProps } from "./Radio";
 import { RadioStateReturn } from "./RadioState";
 
 export type RadioLabelOptions = BoxOptions &
-  Pick<RadioStateReturn, "maxVisibleItems" | "size" | "stack"> & {
-    description?: RadioProps["description"];
+  Pick<
+    RadioStateReturn,
+    "maxVisibleItems" | "size" | "stack" | "description"
+  > & {
     disabled?: RadioProps["disabled"];
   };
 

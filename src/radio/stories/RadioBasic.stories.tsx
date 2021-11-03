@@ -45,12 +45,12 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", stack: "vertical" },
+  args: { size: "md" },
 };
 
 export const WithDefaultState: Story = {
   ...Default,
-  args: { ...Default.args, defaultState: "orange" },
+  args: { ...Default.args, state: "apple" },
 };
 
 export const Small: Story = {
@@ -63,19 +63,4 @@ export const Medium: Story = {
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
-};
-
-export const ShowMoreDefault: Story = {
-  ...Default,
-  args: { ...Default.args, maxVisibleItems: 3 },
-};
-
-export const Horizontal: Story = {
-  ...Default,
-  args: { ...Default.args, size: "md", stack: "horizontal" },
-};
-
-export const ShowMoreHorizontal: Story = {
-  ...Default,
-  args: { ...Default.args, stack: "horizontal", maxVisibleItems: 3 },
 };

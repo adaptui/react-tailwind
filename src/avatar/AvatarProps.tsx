@@ -1,6 +1,10 @@
-import { splitProps } from "reakit-utils";
-
-import { getComponentProps, isNull, runIfFn, withIconA11y } from "../utils";
+import {
+  getComponentProps,
+  isNull,
+  runIfFn,
+  splitProps,
+  withIconA11y,
+} from "../utils";
 
 import { USE_AVATAR_IMAGE_STATE_KEYS, USE_AVATAR_STATE_KEYS } from "./__keys";
 import { AvatarOwnProps, AvatarProps } from "./Avatar";

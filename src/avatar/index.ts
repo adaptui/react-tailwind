@@ -1,7 +1,5 @@
 export * from "./Avatar";
 export * from "./AvatarDefaultStatusIndicators";
-export * from "./AvatarGroup";
-export * from "./AvatarGroupWrapper";
 export * from "./AvatarIcon";
 export * from "./AvatarImage";
 export * from "./AvatarInitials";

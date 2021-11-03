@@ -1,17 +1,16 @@
 // Automatically generated
-export const USE_CHECKBOX_GROUP_STATE_KEYS = [
-  "size",
+export const CHECKBOX_STATE_KEYS = [
+  "state",
   "stack",
   "maxVisibleItems",
-] as const;
-export const CHECKBOX_GROUP_STATE_KEYS = USE_CHECKBOX_GROUP_STATE_KEYS;
-export const CHECKBOX_STATE_KEYS = [
-  ...CHECKBOX_GROUP_STATE_KEYS,
-  "state",
+  "size",
   "isChecked",
   "isIndeterminate",
   "isUnchecked",
   "value",
+  "icon",
+  "label",
+  "description",
   "setState",
 ] as const;
 export const USE_CHECKBOX_STATE_KEYS = [
@@ -20,18 +19,15 @@ export const USE_CHECKBOX_STATE_KEYS = [
   "onStateChange",
   "size",
   "value",
-] as const;
-export const CHECKBOX_DESCRIPTION_KEYS = CHECKBOX_STATE_KEYS;
-export const CHECKBOX_ICON_KEYS = [
-  ...CHECKBOX_DESCRIPTION_KEYS,
+  "icon",
   "label",
   "description",
 ] as const;
-export const CHECKBOX_INPUT_KEYS = CHECKBOX_DESCRIPTION_KEYS;
+export const CHECKBOX_DESCRIPTION_KEYS = CHECKBOX_STATE_KEYS;
+export const CHECKBOX_ICON_KEYS = CHECKBOX_DESCRIPTION_KEYS;
+export const CHECKBOX_INPUT_KEYS = CHECKBOX_ICON_KEYS;
 export const CHECKBOX_LABEL_KEYS = [
-  ...CHECKBOX_ICON_KEYS,
   ...CHECKBOX_INPUT_KEYS,
   "disabled",
 ] as const;
 export const CHECKBOX_TEXT_KEYS = CHECKBOX_INPUT_KEYS;
-export const RENDERLESSKIT_CHECKBOX_GROUP_KEYS = CHECKBOX_TEXT_KEYS;

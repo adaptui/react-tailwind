@@ -2,7 +2,7 @@ import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useAlertContext } from "./Alert";
+import { AlertContext, useAlertContext } from "./Alert";
 
 export type AlertBodyProps = BoxProps & {};
 
@@ -12,7 +12,7 @@ export const AlertBody = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { isTablet } = useAlertContext();
+  const { isTablet } = useAlertContext() as AlertContext;
 
   const theme = useTheme();
   const alertBodyStyles = tcm(

@@ -2,7 +2,7 @@ import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useFormFieldContext } from "./FormField";
+import { FormFieldContextProps, useFormFieldContext } from "./FormField";
 
 type FormRequiredTextProps = BoxProps & {};
 
@@ -12,7 +12,7 @@ export const FormRequiredText = forwardRefWithAs<
   "div"
 >((props, ref) => {
   const { children, className, ...rest } = props;
-  const { isRequired } = useFormFieldContext();
+  const { isRequired } = useFormFieldContext() as FormFieldContextProps;
 
   const theme = useTheme();
   const requiredStyles = tcm(theme.formField.requiredText, className);

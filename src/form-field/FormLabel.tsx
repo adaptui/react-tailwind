@@ -2,7 +2,7 @@ import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useFormFieldContext } from "./FormField";
+import { FormFieldContextProps, useFormFieldContext } from "./FormField";
 
 type FormLabelProps = BoxProps & {};
 
@@ -12,7 +12,7 @@ export const FormLabel = forwardRefWithAs<
   "label"
 >((props, ref) => {
   const { id, children, htmlFor, className, ...rest } = props;
-  const { labelId, inputId } = useFormFieldContext();
+  const { labelId, inputId } = useFormFieldContext() as FormFieldContextProps;
 
   const theme = useTheme();
   const labelStyles = tcm(theme.formField.labelText, className);

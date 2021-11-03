@@ -5,14 +5,15 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { CHECKBOX_LABEL_KEYS } from "./__keys";
-import { CheckboxProps } from "./Checkbox";
+import { CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxStateReturn } from "./CheckboxState";
 
 export type CheckboxLabelOptions = BoxOptions &
-  Pick<CheckboxStateReturn, "size" | "maxVisibleItems" | "stack"> & {
-    label?: CheckboxProps["label"];
-    description?: CheckboxProps["description"];
-    disabled?: CheckboxProps["disabled"];
+  Pick<
+    CheckboxStateReturn,
+    "size" | "maxVisibleItems" | "stack" | "label" | "description"
+  > & {
+    disabled?: CheckboxInputProps["disabled"];
   };
 
 export type CheckboxLabelHTMLProps = BoxHTMLProps;

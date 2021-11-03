@@ -13,9 +13,8 @@ import { RADIO_INPUT_KEYS } from "./__keys";
 import { RadioStateReturn } from "./RadioState";
 
 export type RadioInputOptions = BoxOptions &
-  RadioOptions & {
-    size: RadioStateReturn["size"];
-  };
+  RadioOptions &
+  Pick<RadioStateReturn, "size">;
 
 export type RadioInputHTMLProps = BoxHTMLProps & Omit<RadioHTMLProps, "size">;
 

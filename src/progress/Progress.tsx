@@ -1,29 +1,14 @@
 import * as React from "react";
 
-import { RenderPropType } from "../utils";
-
 import { ProgressBar } from "./ProgressBar";
 import { ProgressHint } from "./ProgressHint";
 import { ProgressLabel } from "./ProgressLabel";
-import {
-  ProgressInitialState,
-  ProgressStateReturn,
-  useProgressProps,
-} from "./ProgressState";
+import { useProgressProps } from "./ProgressProps";
+import { ProgressInitialState } from "./ProgressState";
 import { ProgressTrack } from "./ProgressTrack";
 import { ProgressWrapper, ProgressWrapperHTMLProps } from "./ProgressWrapper";
 
-export type ProgressOwnProps = Partial<ProgressWrapperHTMLProps> & {
-  /**
-   * Label for the Progress.
-   */
-  label?: RenderPropType<ProgressStateReturn>;
-
-  /**
-   * Hint for the Progress.
-   */
-  hint?: RenderPropType<ProgressStateReturn>;
-};
+export type ProgressOwnProps = ProgressWrapperHTMLProps & {};
 
 export type ProgressProps = ProgressInitialState & ProgressOwnProps;
 

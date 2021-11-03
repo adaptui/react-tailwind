@@ -1,5 +1,6 @@
 import {
   SliderInput,
+  SliderStateReturn,
   SliderThumb as RenderlessSliderThumb,
 } from "@renderlesskit/react";
 
@@ -9,7 +10,12 @@ import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
 import { useSliderValues } from "./hooks/useSliderValues";
-import { SliderProps, useSliderContext, useSliderPropsContext } from "./Slider";
+import {
+  SliderContextType,
+  SliderProps,
+  useSliderContext,
+  useSliderPropsContext,
+} from "./Slider";
 
 type SliderThumbProps = BoxProps &
   Omit<SliderProps, "size" | "orientation" | "origin">;
@@ -26,7 +32,7 @@ export const SliderThumb = forwardRefWithAs<
     orientation = "horizontal",
     size = "md",
     origin = 0,
-  } = useSliderPropsContext();
+  } = useSliderPropsContext() as SliderContextType;
 
   const { isVertical, isReversed, getThumbPercent, state } = useSliderValues({
     orientation: orientation,
@@ -40,7 +46,9 @@ export const SliderThumb = forwardRefWithAs<
     className,
   );
 
-  const { isDisabled, isReadOnly } = useSliderContext();
+  const { isDisabled, isReadOnly } = useSliderContext() as SliderStateReturn & {
+    isReadOnly?: boolean;
+  };
   const fieldInputProps = useFormControl({
     isDisabled,
     isReadOnly,
@@ -63,7 +71,7 @@ export const SliderThumb = forwardRefWithAs<
 
   return (
     <>
-      {[...new Array(state.values.length).keys()].map(index => {
+      {[...new Array(state?.values.length).keys()].map(index => {
         return (
           <RenderlessSliderThumb
             ref={ref}

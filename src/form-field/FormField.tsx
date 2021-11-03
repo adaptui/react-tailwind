@@ -22,7 +22,7 @@ export type CommonFieldProps = {
   isRequired?: boolean;
 };
 
-type FormFieldContextProps = Omit<
+export type FormFieldContextProps = Omit<
   ReturnType<typeof useFormContextValues>,
   "htmlProps"
 >;
@@ -85,7 +85,7 @@ export const FormField = forwardRefWithAs<
   const formFieldStyles = tcm(theme.formField.wrapper.base, className);
 
   return (
-    <FormFieldContextProvider value={context}>
+    <FormFieldContextProvider {...context}>
       <Box
         ref={ref}
         role="group"

@@ -2,7 +2,7 @@ import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useListContext } from "./List";
+import { ListContext, useListContext } from "./List";
 
 export type ListIconProps = BoxProps & {};
 
@@ -12,7 +12,7 @@ export const ListIcon = forwardRefWithAs<
   "span"
 >((props, ref) => {
   const { className, ...rest } = props;
-  const { size = "md" } = useListContext();
+  const { size = "md" } = useListContext() as ListContext;
 
   const theme = useTheme();
   const listIconStyles = tcm(

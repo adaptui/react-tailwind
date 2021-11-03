@@ -10,7 +10,7 @@ import { AvatarInitialState } from "./AvatarState";
 import { AvatarStatusIndicator } from "./AvatarStatusIndicator";
 import { AvatarWrapper, AvatarWrapperHTMLProps } from "./AvatarWrapper";
 
-export type AvatarOwnProps = Partial<AvatarWrapperHTMLProps> & {};
+export type AvatarOwnProps = AvatarWrapperHTMLProps & {};
 
 export type AvatarProps = AvatarInitialState & AvatarOwnProps & {};
 
