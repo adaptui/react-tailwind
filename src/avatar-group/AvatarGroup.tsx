@@ -1,6 +1,6 @@
+import { Avatar } from "../avatar";
 import { forwardRefWithAs } from "../utils";
 
-import { Avatar } from "./Avatar";
 import { useAvatarGroupProps } from "./AvatarGroupProps";
 import {
   AvatarGroupContextProvider,

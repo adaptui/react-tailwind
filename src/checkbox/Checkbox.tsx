@@ -1,31 +1,16 @@
 import * as React from "react";
 
-import { RenderProp, RenderPropType } from "../utils";
+import { RenderProp } from "../utils";
 
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";
-import { CheckboxInput, CheckboxInputProps } from "./CheckboxInput";
+import { CheckboxInput, CheckboxInputHTMLProps } from "./CheckboxInput";
 import { CheckboxLabel } from "./CheckboxLabel";
 import { useCheckboxProps } from "./CheckboxProps";
 import { CheckboxInitialState, CheckboxStateReturn } from "./CheckboxState";
 import { CheckboxText } from "./CheckboxText";
 
-export type CheckboxOwnProps = Partial<CheckboxInputProps> & {
-  /**
-   * Provide custom icons as a replacement for the default ones.
-   */
-  icon?: RenderPropType<CheckboxStateReturn>;
-
-  /**
-   * Description for the Checkbox.
-   */
-  label?: RenderPropType<CheckboxStateReturn>;
-
-  /**
-   * Description for the Checkbox.
-   */
-  description?: RenderPropType<CheckboxStateReturn>;
-};
+export type CheckboxOwnProps = CheckboxInputHTMLProps & {};
 
 export type CheckboxProps = CheckboxInitialState &
   CheckboxOwnProps &

@@ -1,5 +1,4 @@
-import { CheckIcon, DashIcon } from "../icons";
-import { getComponentProps, runIfFn, splitProps, withIconA11y } from "../utils";
+import { getComponentProps, runIfFn, splitProps } from "../utils";
 
 import { USE_CHECKBOX_STATE_KEYS } from "./__keys";
 import { CheckboxOwnProps, CheckboxProps } from "./Checkbox";
@@ -7,7 +6,11 @@ import { CheckboxDescriptionProps } from "./CheckboxDescription";
 import { CheckboxIconProps } from "./CheckboxIcon";
 import { CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxLabelProps } from "./CheckboxLabel";
-import { CheckboxInitialState, useCheckboxState } from "./CheckboxState";
+import {
+  CheckboxInitialState,
+  CheckboxState,
+  useCheckboxState,
+} from "./CheckboxState";
 import { CheckboxTextProps } from "./CheckboxText";
 
 export const useCheckboxStateSplit = (props: CheckboxProps) => {
@@ -28,37 +31,19 @@ const componentMap = {
   CheckboxDescription: "descriptionProps",
 };
 
-export const CheckboxDefaultIcon: CheckboxOwnProps["icon"] = state => {
-  const { isChecked, isIndeterminate } = state;
-
-  return (
-    <>
-      {isChecked ? withIconA11y(<CheckIcon />) : null}
-      {isIndeterminate ? withIconA11y(<DashIcon />) : null}
-    </>
-  );
-};
-
 export const useCheckboxProps = (
   props: React.PropsWithChildren<CheckboxProps>,
 ) => {
   const [state, checkboxProps] = useCheckboxStateSplit(props);
-  const {
-    icon = CheckboxDefaultIcon,
-    label,
-    description,
-    className,
-    style,
-    children,
-    ...restProps
-  } = checkboxProps;
+  const { icon, label, description } = state;
+  const { className, style, children, ...restProps } = checkboxProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const _icon: CheckboxOwnProps["icon"] =
+  const _icon: CheckboxState["icon"] =
     componentProps?.iconProps?.children || icon;
-  const _label: CheckboxOwnProps["label"] =
+  const _label: CheckboxState["label"] =
     componentProps?.textProps?.children || label;
-  const _description: CheckboxOwnProps["description"] =
+  const _description: CheckboxState["description"] =
     componentProps?.descriptionProps?.children || description;
 
   const labelProps: CheckboxLabelProps = {

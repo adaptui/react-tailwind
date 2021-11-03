@@ -5,7 +5,11 @@ import { ProgressOwnProps, ProgressProps } from "./Progress";
 import { ProgressBarProps } from "./ProgressBar";
 import { ProgressHintProps } from "./ProgressHint";
 import { ProgressLabelProps } from "./ProgressLabel";
-import { ProgressInitialState, useProgressState } from "./ProgressState";
+import {
+  ProgressInitialState,
+  ProgressState,
+  useProgressState,
+} from "./ProgressState";
 import { ProgressTrackProps } from "./ProgressTrack";
 import { ProgressWrapperProps } from "./ProgressWrapper";
 
@@ -31,12 +35,13 @@ export const useProgressProps = (
   props: React.PropsWithChildren<ProgressProps>,
 ) => {
   const [state, progressProps] = useProgressStateSplit(props);
-  const { label, hint, children, ...restProps } = progressProps;
+  const { label, hint } = state;
+  const { children, ...restProps } = progressProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const _label: ProgressOwnProps["label"] =
+  const _label: ProgressState["label"] =
     componentProps?.textProps?.children || label;
-  const _hint: ProgressOwnProps["hint"] =
+  const _hint: ProgressState["hint"] =
     componentProps?.hintProps?.children || hint;
 
   const wrapperProps: ProgressWrapperProps = {

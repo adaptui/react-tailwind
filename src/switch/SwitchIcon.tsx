@@ -5,13 +5,10 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SWITCH_ICON_KEYS } from "./__keys";
-import { SwitchProps } from "./Switch";
 import { SwitchStateReturn } from "./SwitchState";
 
 export type SwitchIconOptions = BoxOptions &
-  Pick<SwitchStateReturn, "isChecked" | "size"> & {
-    description?: SwitchProps["description"];
-  };
+  Pick<SwitchStateReturn, "isChecked" | "size" | "description"> & {};
 
 export type SwitchIconHTMLProps = BoxHTMLProps;
 

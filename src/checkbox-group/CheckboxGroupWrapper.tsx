@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
 import { GroupHTMLProps, GroupOptions, useGroup } from "reakit";
 import { useWarning } from "reakit-warning";
@@ -14,9 +13,7 @@ export type CheckboxGroupWrapperOptions = BoxOptions &
   GroupOptions &
   Pick<CheckboxGroupState, "stack" | "size">;
 
-export type CheckboxGroupWrapperHTMLProps = BoxHTMLProps &
-  GroupHTMLProps &
-  React.FieldsetHTMLAttributes<any>;
+export type CheckboxGroupWrapperHTMLProps = BoxHTMLProps & GroupHTMLProps;
 
 export type CheckboxGroupWrapperProps = CheckboxGroupWrapperOptions &
   CheckboxGroupWrapperHTMLProps;

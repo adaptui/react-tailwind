@@ -6,16 +6,16 @@ import {
   createUnionControl,
 } from "../../../.storybook/utils";
 
-import js from "./templates/RadioDescriptionJsx";
-import ts from "./templates/RadioDescriptionTsx";
-import { RadioDescription } from "./RadioDescription.component";
+import js from "./templates/RadioGroupBasicJsx";
+import ts from "./templates/RadioGroupBasicTsx";
+import { RadioGroupBasic } from "./RadioGroupBasic.component";
 
-type Meta = ComponentMeta<typeof RadioDescription>;
-type Story = ComponentStoryObj<typeof RadioDescription>;
+type Meta = ComponentMeta<typeof RadioGroupBasic>;
+type Story = ComponentStoryObj<typeof RadioGroupBasic>;
 
 export default {
-  title: "Forms/Radio/Description",
-  component: RadioDescription,
+  title: "Forms/RadioGroup/Basic",
+  component: RadioGroupBasic,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),
     ...createControls(undefined, {
@@ -48,36 +48,34 @@ export const Default: Story = {
   args: { size: "md", stack: "vertical" },
 };
 
+export const WithDefaultState: Story = {
+  ...Default,
+  args: { ...Default.args, defaultState: "orange" },
+};
+
 export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
 export const Medium: Story = {
   ...Default,
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
 
-export const Stack: Story = {
-  args: { size: "md", stack: "horizontal" },
-  parameters: { options: { showPanel: true } },
-};
-
-export const WithDefaultState: Story = {
+export const ShowMoreDefault: Story = {
   ...Default,
-  args: { ...Default.args, defaultState: "orange" },
-  argTypes: {
-    ...Default.argTypes,
-  },
+  args: { ...Default.args, maxVisibleItems: 3 },
+};
+
+export const Horizontal: Story = {
+  ...Default,
+  args: { ...Default.args, size: "md", stack: "horizontal" },
+};
+
+export const ShowMoreHorizontal: Story = {
+  ...Default,
+  args: { ...Default.args, stack: "horizontal", maxVisibleItems: 3 },
 };

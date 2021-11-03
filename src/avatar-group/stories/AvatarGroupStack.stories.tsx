@@ -10,7 +10,7 @@ type Meta = ComponentMeta<typeof AvatarGroupStack>;
 type Story = ComponentStoryObj<typeof AvatarGroupStack>;
 
 export default {
-  title: "Primitives/Avatar/GroupStack",
+  title: "Primitives/AvatarGroup/Stack",
   component: AvatarGroupStack,
   parameters: {
     layout: "centered",

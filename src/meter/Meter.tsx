@@ -1,28 +1,16 @@
 import * as React from "react";
 import { valueToPercent } from "@renderlesskit/react";
 
-import { RenderPropType } from "../utils";
-
 import { MeterBar } from "./MeterBar";
 import { MeterBarWrapper } from "./MeterBarWrapper";
 import { MeterHint } from "./MeterHint";
 import { MeterLabel } from "./MeterLabel";
 import { useMeterProps } from "./MeterProps";
-import { MeterInitialState, MeterStateReturn } from "./MeterState";
+import { MeterInitialState } from "./MeterState";
 import { MeterTrack } from "./MeterTrack";
 import { MeterWrapper, MeterWrapperHTMLProps } from "./MeterWrapper";
 
-export type MeterOwnProps = Partial<MeterWrapperHTMLProps> & {
-  /**
-   * Label for the Meter.
-   */
-  label?: RenderPropType<MeterStateReturn>;
-
-  /**
-   * Hint for the Meter.
-   */
-  hint?: RenderPropType<MeterStateReturn>;
-};
+export type MeterOwnProps = MeterWrapperHTMLProps & {};
 
 export type MeterProps = MeterInitialState & MeterOwnProps;
 

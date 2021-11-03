@@ -6,16 +6,16 @@ import {
   createUnionControl,
 } from "../../../.storybook/utils";
 
-import js from "./templates/RadioBasicJsx";
-import ts from "./templates/RadioBasicTsx";
-import { RadioBasic } from "./RadioBasic.component";
+import js from "./templates/RadioGroupDisabledJsx";
+import ts from "./templates/RadioGroupDisabledTsx";
+import { RadioGroupDisabled } from "./RadioGroupDisabled.component";
 
-type Meta = ComponentMeta<typeof RadioBasic>;
-type Story = ComponentStoryObj<typeof RadioBasic>;
+type Meta = ComponentMeta<typeof RadioGroupDisabled>;
+type Story = ComponentStoryObj<typeof RadioGroupDisabled>;
 
 export default {
-  title: "Forms/Radio/Basic",
-  component: RadioBasic,
+  title: "Forms/RadioGroup/Disabled",
+  component: RadioGroupDisabled,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),
     ...createControls(undefined, {
@@ -45,12 +45,12 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md" },
+  args: { size: "md", stack: "vertical" },
 };
 
 export const WithDefaultState: Story = {
   ...Default,
-  args: { ...Default.args, state: "apple" },
+  args: { ...Default.args, defaultState: "orange" },
 };
 
 export const Small: Story = {
@@ -63,4 +63,19 @@ export const Medium: Story = {
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
+};
+
+export const ShowMoreDefault: Story = {
+  ...Default,
+  args: { ...Default.args, maxVisibleItems: 3 },
+};
+
+export const Horizontal: Story = {
+  ...Default,
+  args: { ...Default.args, size: "md", stack: "horizontal" },
+};
+
+export const ShowMoreHorizontal: Story = {
+  ...Default,
+  args: { ...Default.args, stack: "horizontal", maxVisibleItems: 3 },
 };

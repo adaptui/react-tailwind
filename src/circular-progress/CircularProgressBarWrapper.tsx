@@ -5,13 +5,10 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { CIRCULAR_PROGRESS_BAR_WRAPPER_KEYS } from "./__keys";
-import { CircularProgressProps } from "./CircularProgress";
 import { CircularProgressStateReturn } from "./CircularProgressState";
 
 export type CircularProgressBarWrapperOptions = BoxOptions &
-  Pick<CircularProgressStateReturn, "isIndeterminate" | "size"> & {
-    hint: CircularProgressProps["hint"];
-  };
+  Pick<CircularProgressStateReturn, "isIndeterminate" | "size" | "hint"> & {};
 
 export type CircularProgressBarWrapperHTMLProps = BoxHTMLProps;
 

@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { Checkbox, CheckboxGroup, CheckboxProps } from "../../index";
 
-export type CheckboxStackProps = CheckboxProps & {};
+export type CheckboxGroupStackProps = CheckboxProps & {};
 
-export const CheckboxStack: React.FC<CheckboxStackProps> = props => {
+export const CheckboxGroupStack: React.FC<CheckboxGroupStackProps> = props => {
   return (
     <div className="flex flex-col space-y-4">
       <CheckboxGroup aria-label="checkbox small example" stack="horizontal">
@@ -26,4 +26,4 @@ export const CheckboxStack: React.FC<CheckboxStackProps> = props => {
   );
 };
 
-export default CheckboxStack;
+export default CheckboxGroupStack;

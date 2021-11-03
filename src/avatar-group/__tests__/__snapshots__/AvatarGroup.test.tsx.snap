@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="avatar group"
+    class="inline-flex items-center -space-x-1"
+    role="group"
+  >
+    <span
+      class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      data-testid="testid-avatar_children"
+    >
+      <span
+        aria-label="avatar icon"
+        class="inline-flex items-center justify-center text-gray-600 text-xs"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
+          data-testid="testid-icon"
+          focusable="false"
+          role="img"
+          viewBox="0 0 12 12"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div
+        aria-label="avatar status indicator"
+        class="absolute flex items-center justify-center bottom-0 right-0"
+      />
+    </span>
+    <span
+      class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      data-testid="testid-avatar_children"
+    >
+      <span
+        aria-label="avatar icon"
+        class="inline-flex items-center justify-center text-gray-600 text-xs"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
+          data-testid="testid-icon"
+          focusable="false"
+          role="img"
+          viewBox="0 0 12 12"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div
+        aria-label="avatar status indicator"
+        class="absolute flex items-center justify-center bottom-0 right-0"
+      />
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="avatar group"
+    class="inline-flex items-center -space-x-1"
+    role="group"
+  >
+    <span
+      class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      data-testid="testid-avatar_children"
+    >
+      <span
+        aria-label="avatar icon"
+        class="inline-flex items-center justify-center text-gray-600 text-xs"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
+          data-testid="testid-icon"
+          focusable="false"
+          role="img"
+          viewBox="0 0 12 12"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div
+        aria-label="avatar status indicator"
+        class="absolute flex items-center justify-center bottom-0 right-0"
+      />
+    </span>
+    <span
+      class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      data-testid="testid-avatar_children"
+    >
+      <span
+        aria-label="avatar icon"
+        class="inline-flex items-center justify-center text-gray-600 text-xs"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
+          data-testid="testid-icon"
+          focusable="false"
+          role="img"
+          viewBox="0 0 12 12"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div
+        aria-label="avatar status indicator"
+        class="absolute flex items-center justify-center bottom-0 right-0"
+      />
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<AvatarGroup /> should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="avatar group"
+    class="inline-flex items-center -space-x-1.5"
+    role="group"
+  >
+    <span
+      class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-8 w-8 ring-2 ring-white"
+      data-testid="testid-avatar_children"
+    >
+      <span
+        aria-label="avatar icon"
+        class="inline-flex items-center justify-center text-gray-600 text-base"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
+          data-testid="testid-icon"
+          focusable="false"
+          role="img"
+          viewBox="0 0 12 12"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div
+        aria-label="avatar status indicator"
+        class="absolute flex items-center justify-center bottom-0 right-0"
+      />
+    </span>
+    <span
+      class="relative inline-flex items-center justify-center flex-shrink-0 bg-gray-100 rounded-full h-8 w-8 ring-2 ring-white"
+      data-testid="testid-avatar_children"
+    >
+      <span
+        aria-label="avatar icon"
+        class="inline-flex items-center justify-center text-gray-600 text-base"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-[1em] h-[1em] inline-block leading-[1em] flex-shrink-0 text-current align-middle"
+          data-testid="testid-icon"
+          focusable="false"
+          role="img"
+          viewBox="0 0 12 12"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M4.75 3a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0ZM6 .25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Zm0 6a7.1 7.1 0 0 0-2.15.34 5.8 5.8 0 0 0-1.85 1 5 5 0 0 0-.95.99 1.9 1.9 0 0 0 .02 2.3c.44.6 1.18 1 1.97 1.08 1.97.2 3.95.2 5.92 0a2.81 2.81 0 0 0 1.97-1.08 1.9 1.9 0 0 0 .02-2.3 5 5 0 0 0-.95-1 6.44 6.44 0 0 0-4-1.33ZM4.32 8.02a5.23 5.23 0 0 1 4.75.73c.26.22.48.45.66.7.09.12.1.21.1.27a.5.5 0 0 1-.1.27c-.17.23-.5.43-.92.48-1.87.18-3.75.18-5.62 0a1.32 1.32 0 0 1-.91-.48.5.5 0 0 1-.1-.27c-.01-.06 0-.15.09-.27a3.93 3.93 0 0 1 2.06-1.43Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+      <div
+        aria-label="avatar status indicator"
+        class="absolute flex items-center justify-center bottom-0 right-0"
+      />
+    </span>
+  </div>
+</DocumentFragment>
+`;

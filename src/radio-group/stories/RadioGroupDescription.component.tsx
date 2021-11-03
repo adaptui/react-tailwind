@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Radio, RadioGroup, RadioGroupProps } from "../index";
+import { Radio, RadioGroup, RadioGroupProps } from "../../index";
 
-export const RadioDescription: React.FC<RadioGroupProps> = props => {
+export const RadioGroupDescription: React.FC<RadioGroupProps> = props => {
   return (
     <RadioGroup aria-label="fruits" className="w-[70rem]" {...props}>
       <Radio
@@ -24,4 +24,4 @@ export const RadioDescription: React.FC<RadioGroupProps> = props => {
   );
 };
 
-export default RadioDescription;
+export default RadioGroupDescription;

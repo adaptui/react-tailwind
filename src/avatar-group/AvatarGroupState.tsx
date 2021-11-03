@@ -1,6 +1,5 @@
+import { AvatarStateReturn } from "../avatar";
 import { createContext } from "../utils";
-
-import { AvatarStateReturn } from "./AvatarState";
 
 export type AvatarGroupSharedState = Pick<
   AvatarStateReturn,

@@ -9,8 +9,7 @@ import { SwitchProps } from "./Switch";
 import { SwitchStateReturn } from "./SwitchState";
 
 export type SwitchLabelOptions = BoxOptions &
-  Pick<SwitchStateReturn, "size"> & {
-    description?: SwitchProps["description"];
+  Pick<SwitchStateReturn, "size" | "description"> & {
     disabled?: SwitchProps["disabled"];
   };
 

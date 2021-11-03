@@ -10,6 +10,7 @@ import { CircularProgressBarWrapperProps } from "./CircularProgressBarWrapper";
 import { CircularProgressHintProps } from "./CircularProgressHint";
 import {
   CircularProgressInitialState,
+  CircularProgressState,
   useCircularProgressState,
 } from "./CircularProgressState";
 import { CircularProgressTrackProps } from "./CircularProgressTrack";
@@ -37,10 +38,11 @@ export const useCircularProgressProps = (
   props: React.PropsWithChildren<CircularProgressProps>,
 ) => {
   const [state, progressProps] = useCircularProgressStateSplit(props);
-  const { hint, children, ...restProps } = progressProps;
+  const { hint } = state;
+  const { children, ...restProps } = progressProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const _hint: CircularProgressOwnProps["hint"] =
+  const _hint: CircularProgressState["hint"] =
     componentProps?.textProps?.children || hint;
 
   const wrapperProps: CircularProgressWrapperProps = {

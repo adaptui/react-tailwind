@@ -10,7 +10,7 @@ type Meta = ComponentMeta<typeof CheckboxGroupBasic>;
 type Story = ComponentStoryObj<typeof CheckboxGroupBasic>;
 
 export default {
-  title: "Forms/Checkbox/Group",
+  title: "Forms/CheckboxGroup/Basic",
   component: CheckboxGroupBasic,
   argTypes: {
     label: { control: { type: "text" } },

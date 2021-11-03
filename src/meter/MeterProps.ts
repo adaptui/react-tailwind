@@ -6,7 +6,7 @@ import { MeterBarProps } from "./MeterBar";
 import { MeterBarWrapperProps } from "./MeterBarWrapper";
 import { MeterHintProps } from "./MeterHint";
 import { MeterLabelProps } from "./MeterLabel";
-import { MeterInitialState, useMeterState } from "./MeterState";
+import { MeterInitialState, MeterState, useMeterState } from "./MeterState";
 import { MeterTrackProps } from "./MeterTrack";
 import { MeterWrapperProps } from "./MeterWrapper";
 
@@ -31,13 +31,13 @@ const componentMap = {
 
 export const useMeterProps = (props: React.PropsWithChildren<MeterProps>) => {
   const [state, meterProps] = useMeterStateSplit(props);
-  const { label, hint, children, ...restProps } = meterProps;
+  const { label, hint } = state;
+  const { children, ...restProps } = meterProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const _label: MeterOwnProps["label"] =
+  const _label: MeterState["label"] =
     componentProps?.textProps?.children || label;
-  const _hint: MeterOwnProps["hint"] =
-    componentProps?.hintProps?.children || hint;
+  const _hint: MeterState["hint"] = componentProps?.hintProps?.children || hint;
 
   const wrapperProps: MeterWrapperProps = {
     ...state,

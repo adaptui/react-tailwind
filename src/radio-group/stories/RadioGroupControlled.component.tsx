@@ -10,9 +10,9 @@ import {
   RadioGroupStateReturn,
 } from "../../index";
 
-export type RadioControlledProps = {};
+export type RadioGroupControlledProps = {};
 
-export const RadioControlled: React.FC<RadioControlledProps> = () => {
+export const RadioGroupControlled: React.FC<RadioGroupControlledProps> = () => {
   const [checkboxState, setCheckboxState] =
     React.useState<CheckboxStateReturn["state"]>(true);
 
@@ -57,7 +57,7 @@ export const RadioControlled: React.FC<RadioControlledProps> = () => {
   );
 };
 
-export default RadioControlled;
+export default RadioGroupControlled;
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

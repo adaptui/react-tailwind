@@ -2,16 +2,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/CheckboxStackJsx";
-import ts from "./templates/CheckboxStackTsx";
-import { CheckboxStack } from "./CheckboxStack.component";
+import js from "./templates/CheckboxGroupStackJsx";
+import ts from "./templates/CheckboxGroupStackTsx";
+import { CheckboxGroupStack } from "./CheckboxGroupStack.component";
 
-type Meta = ComponentMeta<typeof CheckboxStack>;
-type Story = ComponentStoryObj<typeof CheckboxStack>;
+type Meta = ComponentMeta<typeof CheckboxGroupStack>;
+type Story = ComponentStoryObj<typeof CheckboxGroupStack>;
 
 export default {
-  title: "Forms/Checkbox/Stack",
-  component: CheckboxStack,
+  title: "Forms/CheckboxGroup/Stack",
+  component: CheckboxGroupStack,
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },

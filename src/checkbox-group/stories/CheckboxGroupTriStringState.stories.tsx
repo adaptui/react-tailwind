@@ -2,16 +2,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/CheckboxTriStringStateJsx";
-import ts from "./templates/CheckboxTriStringStateTsx";
-import { CheckboxTriStringState } from "./CheckboxTriStringState.component";
+import js from "./templates/CheckboxGroupTriStringStateJsx";
+import ts from "./templates/CheckboxGroupTriStringStateTsx";
+import { CheckboxGroupTriStringState } from "./CheckboxGroupTriStringState.component";
 
-type Meta = ComponentMeta<typeof CheckboxTriStringState>;
-type Story = ComponentStoryObj<typeof CheckboxTriStringState>;
+type Meta = ComponentMeta<typeof CheckboxGroupTriStringState>;
+type Story = ComponentStoryObj<typeof CheckboxGroupTriStringState>;
 
 export default {
-  title: "Forms/Checkbox/TriStringState",
-  component: CheckboxTriStringState,
+  title: "Forms/CheckboxGroup/TriStringState",
+  component: CheckboxGroupTriStringState,
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },

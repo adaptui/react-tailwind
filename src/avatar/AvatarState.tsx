@@ -1,9 +1,9 @@
+import { useAvatarGroupContext } from "../avatar-group";
 import { useImage, UseImageProps, UseImageStatus } from "../hooks";
 import { UserIcon } from "../icons";
 import { isNull, RenderPropType } from "../utils";
 
 import { AvatarDefaultStatusIndicators } from "./AvatarDefaultStatusIndicators";
-import { useAvatarGroupContext } from "./AvatarGroupState";
 import { getInitialsFromNameDefault } from "./AvatarProps";
 
 export type AvatarState = {

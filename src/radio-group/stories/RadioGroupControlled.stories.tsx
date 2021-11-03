@@ -6,16 +6,16 @@ import {
   createUnionControl,
 } from "../../../.storybook/utils";
 
-import js from "./templates/RadioControlledJsx";
-import ts from "./templates/RadioControlledTsx";
-import { RadioControlled } from "./RadioControlled.component";
+import js from "./templates/RadioGroupControlledJsx";
+import ts from "./templates/RadioGroupControlledTsx";
+import { RadioGroupControlled } from "./RadioGroupControlled.component";
 
-type Meta = ComponentMeta<typeof RadioControlled>;
-type Story = ComponentStoryObj<typeof RadioControlled>;
+type Meta = ComponentMeta<typeof RadioGroupControlled>;
+type Story = ComponentStoryObj<typeof RadioGroupControlled>;
 
 export default {
-  title: "Forms/Radio/Controlled",
-  component: RadioControlled,
+  title: "Forms/RadioGroup/Controlled",
+  component: RadioGroupControlled,
   argTypes: {
     size: createUnionControl(["sm", "md", "lg"]),
     ...createControls(undefined, {

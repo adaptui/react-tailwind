@@ -2,16 +2,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/AvatarGroupBasicJsx";
-import ts from "./templates/AvatarGroupBasicTsx";
-import { AvatarGroupBasic } from "./AvatarGroupBasic.component";
+import js from "./templates/AvatarGroupNameJsx";
+import ts from "./templates/AvatarGroupNameTsx";
+import { AvatarGroupName } from "./AvatarGroupName.component";
 
-type Meta = ComponentMeta<typeof AvatarGroupBasic>;
-type Story = ComponentStoryObj<typeof AvatarGroupBasic>;
+type Meta = ComponentMeta<typeof AvatarGroupName>;
+type Story = ComponentStoryObj<typeof AvatarGroupName>;
 
 export default {
-  title: "Primitives/Avatar/GroupBasic",
-  component: AvatarGroupBasic,
+  title: "Primitives/AvatarGroup/Name",
+  component: AvatarGroupName,
   parameters: {
     layout: "centered",
     options: { showPanel: true },
@@ -41,13 +41,13 @@ export const SquaredMaxCount: Story = {
 export const ParentBackgroundMatch: Story = {
   args: {
     size: "xl",
-    ringColor: "ring-orange-200",
+    ringColor: "ring-yellow-200",
   },
 
   decorators: [
     Story => {
       return (
-        <div className="flex items-center justify-center bg-orange-200 w-80 h-80">
+        <div className="flex items-center justify-center bg-yellow-200 w-80 h-80">
           <Story />
         </div>
       );

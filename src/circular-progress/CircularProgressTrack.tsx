@@ -7,9 +7,8 @@ import { cx } from "../utils";
 import { CIRCULAR_PROGRESS_TRACK_KEYS } from "./__keys";
 import { CircularProgressProps } from "./CircularProgress";
 
-export type CircularProgressTrackOptions = BoxOptions & {
-  hint: CircularProgressProps["hint"];
-};
+export type CircularProgressTrackOptions = BoxOptions &
+  Pick<CircularProgressProps, "hint"> & {};
 
 export type CircularProgressTrackHTMLProps = BoxHTMLProps;
 

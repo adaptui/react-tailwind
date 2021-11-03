@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { Checkbox, CheckboxGroup, CheckboxProps } from "../../index";
 
-export type CheckboxTriStringStateProps = {};
+export type CheckboxGroupTriStringStateProps = {};
 
-export const CheckboxTriStringState: React.FC<CheckboxTriStringStateProps> =
+export const CheckboxGroupTriStringState: React.FC<CheckboxGroupTriStringStateProps> =
   () => {
     const values = React.useMemo(() => ["Apple", "Orange", "Watermelon"], []);
     const [itemState, setItemState] = React.useState<
@@ -74,7 +74,7 @@ export const CheckboxTriStringState: React.FC<CheckboxTriStringStateProps> =
     );
   };
 
-export default CheckboxTriStringState;
+export default CheckboxGroupTriStringState;
 
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

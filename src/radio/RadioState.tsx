@@ -1,17 +1,20 @@
 import { CircleIcon } from "../icons";
-import { isNull, RenderPropType, splitProps } from "../utils";
-
-import { RADIO_GROUP_STATE_KEYS } from "./__keys";
-import { RadioProps } from "./Radio";
 import {
+  RADIO_GROUP_STATE_KEYS,
   RadioGroupActions,
   RadioGroupState,
   RadioGroupStateReturn,
   useRadioGroupContext,
-} from "./RadioGroupState";
+} from "../radio-group";
+import { isNull, RenderPropType, splitProps } from "../utils";
+
+import { RadioProps } from "./Radio";
 import { RadioInputProps } from "./RadioInput";
 
 export type RadioOwnStateProps = {
+  /**
+   * Input's value.
+   */
   value: RadioInputProps["value"];
 
   /**
@@ -53,12 +56,18 @@ export const useRadioState = (
     props,
     RADIO_GROUP_STATE_KEYS,
   ) as [RadioGroupStateReturn, RadioOwnStateProps];
-  const { icon = RadioDefaultIcon, label, description, value } = radioProps;
+
   const radioGroupContextState = useRadioGroupContext();
   const radioGroupState = (
     isNull(radioGroupContextState) ? stateReturnProps : radioGroupContextState
   ) as RadioGroupStateReturn;
+  const {
+    size = "md",
+    stack = "vertical",
+    ...restRadioState
+  } = radioGroupState;
 
+  const { icon = RadioDefaultIcon, label, description, value } = radioProps;
   const isChecked = radioGroupState.state === value;
 
   return {
@@ -67,7 +76,9 @@ export const useRadioState = (
     label,
     description,
     value,
-    ...radioGroupState,
+    size,
+    stack,
+    ...restRadioState,
   };
 };
 

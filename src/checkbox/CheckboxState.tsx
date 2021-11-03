@@ -5,10 +5,10 @@ import {
   useCheckboxState as useRenderlesskitCheckboxState,
 } from "@renderlesskit/react";
 
-import {
-  CheckboxGroupState,
-  useCheckboxGroupContext,
-} from "./CheckboxGroupState";
+import { CheckboxGroupState, useCheckboxGroupContext } from "../checkbox-group";
+import { CheckIcon, DashIcon } from "../icons";
+import { RenderPropType, withIconA11y } from "../utils";
+
 import { CheckboxInputOptions } from "./CheckboxInput";
 
 export type CheckboxState = RenderlesskitCheckboxState &
@@ -39,6 +39,21 @@ export type CheckboxState = RenderlesskitCheckboxState &
      * Input's value.
      */
     value: CheckboxInputOptions["value"];
+
+    /**
+     * Provide custom icons as a replacement for the default ones.
+     */
+    icon: RenderPropType<CheckboxStateReturn>;
+
+    /**
+     * Description for the Checkbox.
+     */
+    label: RenderPropType<CheckboxStateReturn>;
+
+    /**
+     * Description for the Checkbox.
+     */
+    description: RenderPropType<CheckboxStateReturn>;
   };
 
 export type CheckboxActions = RenderlesskitCheckboxActions & {};
@@ -46,13 +61,21 @@ export type CheckboxActions = RenderlesskitCheckboxActions & {};
 export type CheckboxStateReturn = CheckboxState & CheckboxActions;
 
 export type CheckboxInitialState = RenderlesskitCheckboxInitialState &
-  Partial<Pick<CheckboxState, "size" | "value">>;
+  Partial<
+    Pick<CheckboxState, "size" | "value" | "label" | "description" | "icon">
+  >;
 
 export function useCheckboxState(
   props: CheckboxInitialState = {},
 ): CheckboxStateReturn {
   const { state, setState } = useRenderlesskitCheckboxState(props);
-  const { size: originalSize, value } = props;
+  const {
+    size: originalSize,
+    value,
+    icon = CheckboxDefaultIcon,
+    label,
+    description,
+  } = props;
   const contextState = useCheckboxGroupContext();
 
   const isChecked =
@@ -70,5 +93,19 @@ export function useCheckboxState(
     isUnchecked,
     maxVisibleItems: contextState?.maxVisibleItems ?? null,
     stack: contextState?.stack ?? "horizontal",
+    icon,
+    label,
+    description,
   };
 }
+
+export const CheckboxDefaultIcon: CheckboxState["icon"] = state => {
+  const { isChecked, isIndeterminate } = state;
+
+  return (
+    <>
+      {isChecked ? withIconA11y(<CheckIcon />) : null}
+      {isIndeterminate ? withIconA11y(<DashIcon />) : null}
+    </>
+  );
+};
