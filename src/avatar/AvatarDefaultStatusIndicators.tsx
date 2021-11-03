@@ -1,12 +1,12 @@
 import { runIfFn } from "@chakra-ui/utils";
 
 import {
+  ActiveStatusIcon,
   AwayStatusIcon,
   SleepStatusIcon,
   TypingLargeStatusIcon,
   TypingSmallStatusIcon,
 } from "../icons";
-import { ActiveStatusIcon } from "../icons/ActiveStatus";
 import { useTheme } from "../theme";
 import { passProps, tcm } from "../utils";
 

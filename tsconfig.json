@@ -21,7 +21,6 @@
     "skipLibCheck": true,
     "declaration": true,
     "importHelpers": true,
-    "removeComments": true,
     "sourceMap": true
   }
 }

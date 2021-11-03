@@ -24,7 +24,7 @@ export const List = forwardRefWithAs<ListProps, HTMLUListElement, "ul">(
     const listStyles = tcm(theme.list.base, theme.list.size[size], className);
 
     return (
-      <ListProvider value={{ size }}>
+      <ListProvider size={size}>
         <Box as="ul" role="list" ref={ref} className={listStyles} {...rest} />
       </ListProvider>
     );

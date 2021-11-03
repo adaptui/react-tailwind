@@ -5,7 +5,11 @@ import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
 import { useSliderValues } from "./hooks/useSliderValues";
-import { SliderProps, useSliderPropsContext } from "./Slider";
+import {
+  SliderContextType,
+  SliderProps,
+  useSliderPropsContext,
+} from "./Slider";
 
 export type SliderTrackProps = BoxProps &
   Omit<SliderProps, "thumbContent" | "size" | "orientation" | "origin">;
@@ -21,7 +25,7 @@ export const SliderTrack = forwardRefWithAs<
     orientation = "horizontal",
     size = "md",
     origin = 0,
-  } = useSliderPropsContext();
+  } = useSliderPropsContext() as SliderContextType;
 
   const {
     isVertical,

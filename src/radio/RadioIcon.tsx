@@ -5,13 +5,10 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { RADIO_ICON_KEYS } from "./__keys";
-import { RadioProps } from "./Radio";
 import { RadioStateReturn } from "./RadioState";
 
 export type RadioIconOptions = BoxOptions &
-  Pick<RadioStateReturn, "size" | "isChecked"> & {
-    description?: RadioProps["description"];
-  };
+  Pick<RadioStateReturn, "size" | "isChecked" | "description"> & {};
 
 export type RadioIconHTMLProps = BoxHTMLProps;
 

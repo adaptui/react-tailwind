@@ -1,16 +1,20 @@
+import { SliderStateReturn } from "@renderlesskit/react";
+
 import { SliderProps, useSliderContext } from "../Slider";
 
 export const percent = (v: number) => `${v}%`;
 
 export const useSliderValues = (props: SliderProps) => {
-  const state = useSliderContext();
+  const state = useSliderContext() as SliderStateReturn & {
+    isReadOnly?: boolean;
+  };
   const origin = props.origin || 0;
   const { values, getValuePercent, getThumbPercent } = state;
 
   const isVertical = props.orientation === "vertical";
   const isRange = values.length === 2;
   const isMulti = values.length > 2;
-  const isReversed = state.reversed;
+  const isReversed = state?.reversed;
 
   const trackWidth = !isRange
     ? (getValuePercent(Math.max(values[0], origin)) -

@@ -2,7 +2,7 @@ import { Button, ButtonProps } from "../button";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
-import { useAlertContext } from "./Alert";
+import { AlertContext, useAlertContext } from "./Alert";
 
 export type AlertActionButtonProps = ButtonProps & {};
 
@@ -11,7 +11,7 @@ export const AlertActionButton = forwardRefWithAs<
   HTMLButtonElement,
   "button"
 >((props, ref) => {
-  const { status, isTablet } = useAlertContext();
+  const { status, isTablet } = useAlertContext() as AlertContext;
   const { className, ...rest } = props;
 
   const theme = useTheme();

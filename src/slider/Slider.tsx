@@ -28,7 +28,7 @@ const [SliderStateProvider, useSliderContext] = createContext<
   strict: false,
 });
 
-type SliderContextType = Pick<
+export type SliderContextType = Pick<
   SliderProps,
   "orientation" | "size" | "origin" | "showMinMax"
 > & {
@@ -120,8 +120,8 @@ export const Slider = forwardRefWithAs<
   );
 
   return (
-    <SliderPropsContext value={contextProps}>
-      <SliderStateProvider value={state}>
+    <SliderPropsContext {...contextProps}>
+      <SliderStateProvider {...state}>
         <Box ref={ref} className={sliderWrapperStyles} {...rest}>
           {children ? (
             runIfFn(children, { state, trackRef, thumbRef, showMinMax })

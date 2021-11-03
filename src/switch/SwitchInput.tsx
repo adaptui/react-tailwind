@@ -11,9 +11,8 @@ import { tcm } from "../utils";
 import { SWITCH_INPUT_KEYS } from "./__keys";
 import { SwitchStateReturn } from "./SwitchState";
 
-export type SwitchInputOptions = CheckboxOptions & {
-  size: SwitchStateReturn["size"];
-};
+export type SwitchInputOptions = CheckboxOptions &
+  Pick<SwitchStateReturn, "size">;
 
 export type SwitchInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
 

@@ -7,21 +7,16 @@ import {
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderPropType } from "../utils";
+import { cx } from "../utils";
 
 import { METER_BAR_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterWrapperOptions = BoxOptions &
   ReakitMeterOptions &
-  Pick<MeterStateReturn, "baseId"> & {
-    label?: RenderPropType<MeterStateReturn>;
-  };
+  Pick<MeterStateReturn, "baseId" | "label"> & {};
 
-export type MeterWrapperHTMLProps = BoxHTMLProps &
-  ReakitMeterHTMLProps & {
-    label?: RenderPropType<MeterStateReturn>;
-  };
+export type MeterWrapperHTMLProps = BoxHTMLProps & ReakitMeterHTMLProps & {};
 
 export type MeterWrapperProps = MeterWrapperOptions & MeterWrapperHTMLProps;
 
@@ -33,13 +28,9 @@ export const useMeterWrapper = createHook<
   compose: [useBox, useReakitMeter],
   keys: METER_BAR_KEYS,
 
-  useOptions(options, { label }) {
-    return { label, ...options };
-  },
-
   useProps(options, htmlProps) {
     const { baseId, label } = options;
-    const { className: htmlClassName, label: _, ...restHtmlProps } = htmlProps;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("meter");
     const className = cx(theme.wrapper, htmlClassName);

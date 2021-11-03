@@ -8,6 +8,8 @@ export const USE_METER_STATE_KEYS = [
   "optimum",
   "high",
   "size",
+  "label",
+  "hint",
   "intervals",
   "flatBorders",
 ] as const;
@@ -23,4 +25,4 @@ export const METER_BAR_WRAPPER_KEYS = METER_BAR_KEYS;
 export const METER_HINT_KEYS = METER_BAR_WRAPPER_KEYS;
 export const METER_LABEL_KEYS = METER_HINT_KEYS;
 export const METER_TRACK_KEYS = METER_LABEL_KEYS;
-export const METER_WRAPPER_KEYS = [...METER_TRACK_KEYS, "label"] as const;
+export const METER_WRAPPER_KEYS = METER_TRACK_KEYS;

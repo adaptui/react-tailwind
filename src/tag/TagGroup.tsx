@@ -40,7 +40,7 @@ export const TagGroup = forwardRefWithAs<TagGroupProps, HTMLDivElement, "div">(
     );
 
     return (
-      <TagGroupProvider value={context}>
+      <TagGroupProvider {...context}>
         {allowArrowNavigation ? (
           <Composite
             {...composite}

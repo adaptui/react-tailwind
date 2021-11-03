@@ -11,9 +11,8 @@ import { tcm } from "../utils";
 import { CHECKBOX_INPUT_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";
 
-export type CheckboxInputOptions = CheckboxOptions & {
-  size: CheckboxStateReturn["size"];
-};
+export type CheckboxInputOptions = CheckboxOptions &
+  Pick<CheckboxStateReturn, "size">;
 
 export type CheckboxInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
 

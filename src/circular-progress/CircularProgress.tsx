@@ -1,15 +1,10 @@
 import * as React from "react";
 
-import { RenderPropType } from "../utils";
-
 import { CircularProgressBar } from "./CircularProgressBar";
 import { CircularProgressBarWrapper } from "./CircularProgressBarWrapper";
 import { CircularProgressHint } from "./CircularProgressHint";
-import {
-  CircularProgressInitialState,
-  CircularProgressStateReturn,
-  useCircularProgressProps,
-} from "./CircularProgressState";
+import { useCircularProgressProps } from "./CircularProgressProps";
+import { CircularProgressInitialState } from "./CircularProgressState";
 import { CircularProgressTrack } from "./CircularProgressTrack";
 import {
   CircularProgressWrapper,
@@ -17,12 +12,7 @@ import {
 } from "./CircularProgressWrapper";
 
 export type CircularProgressOwnProps =
-  Partial<CircularProgressWrapperHTMLProps> & {
-    /**
-     * Hint for the CircularProgress.
-     */
-    hint?: RenderPropType<CircularProgressStateReturn>;
-  };
+  Partial<CircularProgressWrapperHTMLProps> & {};
 
 export type CircularProgressProps = CircularProgressInitialState &
   CircularProgressOwnProps;

@@ -5,7 +5,7 @@ import {
   CheckboxDescription,
   CheckboxIcon,
   CheckboxLabel,
-  CheckboxOwnProps,
+  CheckboxState,
   CheckboxText,
   EyeClose,
   EyeOpen,
@@ -34,7 +34,7 @@ export const CheckboxCustomSimple: React.FC<CheckboxCustomSimpleProps> = () => {
 
 export default CheckboxCustomSimple;
 
-const CustomIconElement: CheckboxOwnProps["icon"] = state => (
+const CustomIconElement: CheckboxState["icon"] = state => (
   <>
     {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
     {state.isChecked ? withIconA11y(<EyeOpen />) : null}

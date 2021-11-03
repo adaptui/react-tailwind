@@ -108,7 +108,7 @@ export const Alert = forwardRefWithAs<AlertProps, HTMLDivElement, "div">(
     );
 
     return (
-      <AlertProvider value={context}>
+      <AlertProvider {...context}>
         <Box role="alert" className={alertStyles} ref={ref} {...rest}>
           {children ? (
             runIfFn(children, { status, styles: theme.alert })

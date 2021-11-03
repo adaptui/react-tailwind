@@ -20,7 +20,7 @@ export function useTheme<T extends ThemeKeys>(component?: T) {
 
   if (!context) {
     throw new Error(
-      "useTheme: `ThemeContext` is undefined. Seems you forgot to wrap component within the RenderlesskitProvider",
+      "Seems you forgot to wrap `useTheme` within the `RenderlesskitProvider`",
     );
   }
 
@@ -31,7 +31,14 @@ export function useTheme<T extends ThemeKeys>(component?: T) {
 }
 
 export type RenderlesskitProviderProps = {
+  /**
+   * Actual theme used by all the components.
+   */
   theme?: DefaultTheme;
+
+  /**
+   * Extends to the above original theme.
+   */
   extend?: ExtendableDefaultTheme;
 };
 

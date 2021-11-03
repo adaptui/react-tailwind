@@ -5,17 +5,18 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { CHECKBOX_ICON_KEYS } from "./__keys";
-import { CheckboxProps } from "./Checkbox";
 import { CheckboxStateReturn } from "./CheckboxState";
 
 export type CheckboxIconOptions = BoxOptions &
   Pick<
     CheckboxStateReturn,
-    "isChecked" | "isIndeterminate" | "isUnchecked" | "size"
-  > & {
-    label?: CheckboxProps["label"];
-    description?: CheckboxProps["description"];
-  };
+    | "isChecked"
+    | "isIndeterminate"
+    | "isUnchecked"
+    | "size"
+    | "label"
+    | "description"
+  > & {};
 
 export type CheckboxIconHTMLProps = BoxHTMLProps;
 
