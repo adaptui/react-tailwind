@@ -1,14 +1,8 @@
 import react, * as React from "react";
 import type { Story } from "@storybook/react";
-import {
-  CodeSandboxTemplate,
-  CodeSandboxValue,
-  FilesParam,
-} from "storybook-addon-preview";
+import { CodeSandboxTemplate } from "storybook-addon-preview";
 
 import theme from "../src/theme/defaultTheme";
-import deepmerge from "deepmerge";
-import { start } from "repl";
 
 export const storyTemplate =
   <ComponentProps,>(
