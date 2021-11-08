@@ -119,7 +119,7 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@renderlesskit/react-tailwind": "0.0.1-alpha.29",
+      "@renderlesskit/react-tailwind": "0.0.1-alpha.30",
       next: "12.0.3",
       react: "17.0.2",
       "react-dom": "17.0.2",
@@ -169,7 +169,7 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@renderlesskit/react-tailwind": "0.0.1-alpha.29",
+      "@renderlesskit/react-tailwind": "0.0.1-alpha.30",
       next: "12.0.3",
       react: "17.0.2",
       "react-dom": "17.0.2",
