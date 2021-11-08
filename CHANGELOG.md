@@ -1,3 +1,32 @@
+### [0.0.1-alpha.30](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.29...v0.0.1-alpha.30) (2021-11-08)
+
+
+### Bug Fixes
+
+* **checkbox:** 🐛 do not allow tab movement to hidden children ([#199](https://github.com/timelessco/renderlesskit-react-tailwind/issues/199)) ([e6d7c84](https://github.com/timelessco/renderlesskit-react-tailwind/commit/e6d7c84f0ef23a8b1a5bf5e5847c1f25caa06207))
+* **progress:** 🔥 remove console.log lines ([c510328](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c5103282f2f915a2c49fb20684480d7f234a9e3c))
+
+
+### Feature Updates
+
+* **avatar:** ✨ add avatar with composable RFC ([#196](https://github.com/timelessco/renderlesskit-react-tailwind/issues/196)) ([4aab034](https://github.com/timelessco/renderlesskit-react-tailwind/commit/4aab034d9a60cc9a4285a815555e12ee002f5cbe))
+* **meter:** ✨ add meter with interval ([#193](https://github.com/timelessco/renderlesskit-react-tailwind/issues/193)) ([c614545](https://github.com/timelessco/renderlesskit-react-tailwind/commit/c614545ae98362c0ce249469b12515a5bb58dc08))
+
+
+### Code Refactors
+
+* **components:** ♻️ unify the code syntaxes throughout the comps ([#197](https://github.com/timelessco/renderlesskit-react-tailwind/issues/197)) ([9d70981](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9d709818c1532c92d49557e521d8312d9bc006cd))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency lint-staged to v11.2.5 ([#192](https://github.com/timelessco/renderlesskit-react-tailwind/issues/192)) ([53e43b2](https://github.com/timelessco/renderlesskit-react-tailwind/commit/53e43b2e7945fdd6ea6fd3c4f1b727a831a1f4e8))
+* **deps:** ⬆️ update dependency storybook-addon-preview to v2.2.0 ([#201](https://github.com/timelessco/renderlesskit-react-tailwind/issues/201)) ([6f2b38b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/6f2b38b225b842543279d684e0d640fb734d17ea))
+* **deps:** ⬆️ update dev dependencies (minor) ([#194](https://github.com/timelessco/renderlesskit-react-tailwind/issues/194)) ([662ba13](https://github.com/timelessco/renderlesskit-react-tailwind/commit/662ba13ad19b1cd5304418612f24fbd9e6f74a70))
+* **deps:** ⬆️ update dev dependencies (minor) ([#198](https://github.com/timelessco/renderlesskit-react-tailwind/issues/198)) ([ad0c06a](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ad0c06a958348f269a5ed902629078e44c53db06))
+* **deps:** ⬆️ update dev dependencies (minor) ([#200](https://github.com/timelessco/renderlesskit-react-tailwind/issues/200)) ([1e80f37](https://github.com/timelessco/renderlesskit-react-tailwind/commit/1e80f37a57e71edd02add9fea2b21533ab64a102))
+* **deps:** pin dependencies ([#195](https://github.com/timelessco/renderlesskit-react-tailwind/issues/195)) ([72c7f48](https://github.com/timelessco/renderlesskit-react-tailwind/commit/72c7f4898b8c99a5dd4ac98e24ad4b55e3d1a029))
+
 ### [0.0.1-alpha.29](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.28...v0.0.1-alpha.29) (2021-10-26)
 
 
