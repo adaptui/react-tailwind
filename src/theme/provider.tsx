@@ -1,4 +1,5 @@
 import * as React from "react";
+import { unstable_IdProvider as IdProvider } from "reakit";
 
 import defaultTheme from "./defaultTheme";
 import {
@@ -53,8 +54,10 @@ export const RenderlesskitProvider: React.FC<RenderlesskitProviderProps> =
     }
 
     return (
-      <ThemeContext.Provider value={finalTheme}>
-        {children}
-      </ThemeContext.Provider>
+      <IdProvider>
+        <ThemeContext.Provider value={finalTheme}>
+          {children}
+        </ThemeContext.Provider>
+      </IdProvider>
     );
   };

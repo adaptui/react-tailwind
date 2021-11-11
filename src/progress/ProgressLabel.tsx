@@ -1,4 +1,9 @@
 import { createComponent, createHook } from "reakit-system";
+import {
+  unstable_IdHTMLProps,
+  unstable_IdOptions,
+  unstable_useId,
+} from "reakit";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
@@ -8,9 +13,10 @@ import { PROGRESS_LABEL_KEYS } from "./__keys";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressLabelOptions = BoxOptions &
-  Pick<ProgressStateReturn, "size" | "baseId">;
+  unstable_IdOptions &
+  Pick<ProgressStateReturn, "size">;
 
-export type ProgressLabelHTMLProps = BoxHTMLProps;
+export type ProgressLabelHTMLProps = BoxHTMLProps & unstable_IdHTMLProps;
 
 export type ProgressLabelProps = ProgressLabelOptions & ProgressLabelHTMLProps;
 
@@ -19,7 +25,7 @@ export const useProgressLabel = createHook<
   ProgressLabelHTMLProps
 >({
   name: "ProgressLabel",
-  compose: useBox,
+  compose: [useBox, unstable_useId],
   keys: PROGRESS_LABEL_KEYS,
 
   useOptions(options, htmlProps) {
@@ -27,7 +33,7 @@ export const useProgressLabel = createHook<
   },
 
   useProps(options, htmlProps) {
-    const { size, baseId } = options;
+    const { size } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("progress");
@@ -37,7 +43,7 @@ export const useProgressLabel = createHook<
       htmlClassName,
     );
 
-    return { id: baseId, className, ...restHtmlProps };
+    return { className, ...restHtmlProps };
   },
 });
 

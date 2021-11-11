@@ -56,7 +56,7 @@ export type MeterInitialState = unstable_IdInitialState &
 
 export function useMeterState(props: MeterInitialState = {}): MeterStateReturn {
   const state = useRenderlesskitMeterState(props);
-  const id = unstable_useIdState();
+  const id = unstable_useIdState({ baseId: "meter" });
   const { size = "md", intervals = 1, flatBorders = true, label, hint } = props;
 
   return {
