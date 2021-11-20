@@ -28,7 +28,7 @@ export function useShowMoreState(
   props: ShowMoreInitialState = {},
 ): ShowMoreStateReturn {
   const state = useDisclosureState(props);
-  const { button = !state.expanded ? "Show more" : "Show less" } = props;
+  const { button = !state.visible ? "Show more" : "Show less" } = props;
 
   return {
     button,

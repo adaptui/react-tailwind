@@ -1,14 +1,16 @@
 import { createComponent } from "reakit-system";
-import { disclosureComposableButton, Hook } from "@renderlesskit/react";
+import {
+  disclosureComposableButton,
+  DisclosureHTMLProps,
+  DisclosureOptions,
+  Hook,
+} from "@renderlesskit/react";
 
 import { ButtonHTMLProps, ButtonOptions, useButton } from "../button";
 
-import { ShowMoreStateReturn } from "./ShowMoreState";
+export type ShowMoreButtonOptions = ButtonOptions & DisclosureOptions;
 
-export type ShowMoreButtonOptions = ButtonOptions &
-  Pick<ShowMoreStateReturn, "baseId" | "toggle" | "expanded">;
-
-export type ShowMoreButtonHTMLProps = ButtonHTMLProps;
+export type ShowMoreButtonHTMLProps = ButtonHTMLProps & DisclosureHTMLProps;
 
 export type ShowMoreButtonProps = ShowMoreButtonOptions &
   ShowMoreButtonHTMLProps;

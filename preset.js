@@ -76,11 +76,31 @@ const renderlesskitConfig = {
         progress: "progress 1s ease infinite normal none running",
         circularProgress:
           "circularProgress 2s ease infinite normal none running",
+        expandWidth: "expandWidth 500ms ease-in-out",
+        collapseWidth: "collapseWidth 500ms ease-in-out",
+        expandHeight: "expandHeight 500ms ease-in-out",
+        collapseHeight: "collapseHeight 500ms ease-in-out",
       },
       keyframes: {
         progress: {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(200%)" },
+        },
+        expandWidth: {
+          "0%": { width: 0 },
+          "100%": { width: "var(--content-width)" },
+        },
+        collapseWidth: {
+          "0%": { width: "var(--content-width)" },
+          "100%": { width: 0 },
+        },
+        expandHeight: {
+          "0%": { height: 0 },
+          "100%": { height: "var(--content-height)" },
+        },
+        collapseHeight: {
+          "0%": { height: "var(--content-height)" },
+          "100%": { height: 0 },
         },
         circularProgress: {
           "0%": {

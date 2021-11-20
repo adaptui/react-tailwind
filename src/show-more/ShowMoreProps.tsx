@@ -43,6 +43,7 @@ export const useShowMoreProps = (
     ...state,
     ...restProps,
     ...componentProps.contentProps,
+    animationPresent: true,
     children: runIfFn(_content, state),
   };
 

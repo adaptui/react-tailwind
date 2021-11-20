@@ -1,26 +1,16 @@
 import { createComponent } from "reakit-system";
-import { disclosureComposableContent, Hook } from "@renderlesskit/react";
+import {
+  disclosureComposableContent,
+  DisclosureContentOptions,
+  DisclosureHTMLProps,
+  Hook,
+} from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-import { ShowMoreStateReturn } from "./ShowMoreState";
+export type ShowMoreContentOptions = BoxOptions & DisclosureContentOptions;
 
-export type ShowMoreContentOptions = BoxOptions &
-  Pick<
-    ShowMoreStateReturn,
-    | "baseId"
-    | "expanded"
-    | "contentSize"
-    | "duration"
-    | "direction"
-    | "easing"
-    | "onCollapseEnd"
-    | "onCollapseStart"
-    | "onExpandEnd"
-    | "onExpandStart"
-  >;
-
-export type ShowMoreContentHTMLProps = BoxHTMLProps;
+export type ShowMoreContentHTMLProps = BoxHTMLProps & DisclosureHTMLProps;
 
 export type ShowMoreContentProps = ShowMoreContentOptions &
   ShowMoreContentHTMLProps;
