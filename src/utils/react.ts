@@ -102,17 +102,21 @@ export const getComponentProps = <T, P>(
   const componentProps: Dict = {};
   const finalChildren: React.ReactNode[] = [];
 
-  validChildren.forEach(child => {
-    // @ts-ignore
-    if (componentMaps[child.type.displayName]) {
-      componentProps[
-        // @ts-ignore
-        componentMaps[child.type.displayName]
-      ] = child.props;
-    } else {
-      finalChildren.push(child);
-    }
-  });
+  if (validChildren.length > 0) {
+    validChildren.forEach(child => {
+      // @ts-ignore
+      if (componentMaps[child.type.displayName]) {
+        componentProps[
+          // @ts-ignore
+          componentMaps[child.type.displayName]
+        ] = child.props;
+      } else {
+        finalChildren.push(child);
+      }
+    });
+  } else {
+    finalChildren.push(normalizedChildren);
+  }
 
   return { componentProps, finalChildren };
 };
