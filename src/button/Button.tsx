@@ -8,6 +8,7 @@ import {
 import { announce } from "@react-aria/live-announcer";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
@@ -88,8 +89,8 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
 
   useProps(options, htmlProps) {
     const {
-      size = "md",
-      variant = "solid",
+      size: _size = "md",
+      variant: _variant = "solid",
       loading = false,
       spinner = <Spinner size="em" />,
       iconOnly,
@@ -102,6 +103,10 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       children: htmlChildren,
       ...restHtmlProps
     } = htmlProps;
+
+    const groupcontext = useButtonGroupContext();
+    const size = groupcontext?.size || _size;
+    const variant = groupcontext?.variant || _variant;
 
     const button = useTheme("button");
     const className = cx(

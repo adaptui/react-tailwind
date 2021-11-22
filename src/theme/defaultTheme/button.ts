@@ -20,10 +20,14 @@ export const button = {
       ghost: "active:bg-gray-200",
     },
     focus: {
-      solid: "focus-visible:ring-2 focus-visible:ring-gray-300",
-      subtle: "focus-visible:ring-2 focus-visible:ring-gray-300",
-      outline: "focus-visible:ring-2 focus-visible:ring-gray-200",
-      ghost: "focus-visible:ring-2 focus-visible:ring-gray-200",
+      solid:
+        "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
+      subtle:
+        "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
+      outline:
+        "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
+      ghost:
+        "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
     },
     disabled: {
       solid: "disabled:bg-gray-100 disabled:text-gray-400",
