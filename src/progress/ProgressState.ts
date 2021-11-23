@@ -44,7 +44,7 @@ export function useProgressState(
   props: ProgressInitialState = {},
 ): ProgressStateReturn {
   const state = useRenderlesskitProgressState(props);
-  const id = unstable_useIdState();
+  const id = unstable_useIdState({ baseId: "progress" });
   const { size = "md", label, hint } = props;
 
   return {

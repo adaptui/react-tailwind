@@ -1,4 +1,5 @@
 export * from "./ActiveStatus";
+export * from "./Arrow";
 export * from "./AwayStatus";
 export * from "./CaretDown";
 export * from "./CaretLeft";

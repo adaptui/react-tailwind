@@ -1,4 +1,9 @@
 import { createComponent, createHook } from "reakit-system";
+import {
+  unstable_IdHTMLProps,
+  unstable_IdOptions,
+  unstable_useId,
+} from "reakit";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
@@ -8,16 +13,17 @@ import { METER_LABEL_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterLabelOptions = BoxOptions &
-  Pick<MeterStateReturn, "size" | "baseId">;
+  unstable_IdOptions &
+  Pick<MeterStateReturn, "size">;
 
-export type MeterLabelHTMLProps = BoxHTMLProps;
+export type MeterLabelHTMLProps = BoxHTMLProps & unstable_IdHTMLProps;
 
 export type MeterLabelProps = MeterLabelOptions & MeterLabelHTMLProps;
 
 export const useMeterLabel = createHook<MeterLabelOptions, MeterLabelHTMLProps>(
   {
     name: "MeterLabel",
-    compose: useBox,
+    compose: [useBox, unstable_useId],
     keys: METER_LABEL_KEYS,
 
     useOptions(options, htmlProps) {
@@ -25,7 +31,7 @@ export const useMeterLabel = createHook<MeterLabelOptions, MeterLabelHTMLProps>(
     },
 
     useProps(options, htmlProps) {
-      const { size, baseId } = options;
+      const { size } = options;
       const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
       const theme = useTheme("meter");
@@ -35,7 +41,7 @@ export const useMeterLabel = createHook<MeterLabelOptions, MeterLabelHTMLProps>(
         htmlClassName,
       );
 
-      return { id: baseId, className, ...restHtmlProps };
+      return { className, ...restHtmlProps };
     },
   },
 );

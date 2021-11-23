@@ -19,11 +19,12 @@ export const checkbox = {
     showMore: {
       button: {
         base: { vertical: "justify-start w-full", horizontal: "min-w-max" },
-        expanded: { vertical: "!mt-0", horizontal: "!ml-0" },
       },
       content: {
-        vertical: "flex flex-col space-y-2 w-full",
-        horizontal: "flex flex-row space-x-2",
+        vertical:
+          "flex flex-col space-y-2 w-full overflow-hidden data-enter:animate-expandHeight data-leave:animate-collapseHeight",
+        horizontal:
+          "flex flex-row space-x-2 overflow-hidden data-enter:animate-expandWidth data-leave:animate-collapseWidth",
       },
     },
   },

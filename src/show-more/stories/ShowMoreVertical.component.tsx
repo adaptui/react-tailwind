@@ -12,7 +12,10 @@ export const ShowMoreVertical: React.FC<ShowMoreProps> = props => {
         <div>Grapes</div>
         <div>Banana</div>
         <div>Blueberry</div>
-        <ShowMore className="flex flex-col space-y-2" {...props}>
+        <ShowMore
+          className="flex flex-col space-y-2 overflow-hidden data-enter:animate-expandHeight data-leave:animate-collapseHeight"
+          {...props}
+        >
           <div>Sapota</div>
           <div>Papaya</div>
           <div>Avocado</div>
