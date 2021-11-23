@@ -1,24 +1,25 @@
 import { createComponent } from "reakit-system";
 import {
-  disclosureComposableContent,
-  DisclosureContentOptions,
-  DisclosureHTMLProps,
+  disclosureCollapseComposableContent,
+  DisclosureCollapseContentHTMLProps,
+  DisclosureCollapseContentOptions,
   Hook,
 } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 
-export type ShowMoreContentOptions = BoxOptions & DisclosureContentOptions;
+export type ShowMoreContentOptions = BoxOptions &
+  DisclosureCollapseContentOptions;
 
-export type ShowMoreContentHTMLProps = BoxHTMLProps & DisclosureHTMLProps;
+export type ShowMoreContentHTMLProps = BoxHTMLProps &
+  DisclosureCollapseContentHTMLProps;
 
 export type ShowMoreContentProps = ShowMoreContentOptions &
   ShowMoreContentHTMLProps;
 
-export const useShowMoreContent = disclosureComposableContent(useBox) as Hook<
-  ShowMoreContentOptions,
-  ShowMoreContentHTMLProps
->;
+export const useShowMoreContent = disclosureCollapseComposableContent(
+  useBox,
+) as Hook<ShowMoreContentOptions, ShowMoreContentHTMLProps>;
 
 export const ShowMoreContent = createComponent({
   as: "div",

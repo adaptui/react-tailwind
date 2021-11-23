@@ -1,11 +1,16 @@
 import { RenderProp } from "../utils";
 
 import { ShowMoreButton } from "./ShowMoreButton";
-import { ShowMoreContent, ShowMoreContentHTMLProps } from "./ShowMoreContent";
+import {
+  ShowMoreContent,
+  ShowMoreContentHTMLProps,
+  ShowMoreContentOptions,
+} from "./ShowMoreContent";
 import { useShowMoreProps } from "./ShowMoreProps";
 import { ShowMoreInitialState, ShowMoreStateReturn } from "./ShowMoreState";
 
-export type ShowMoreOwnProps = ShowMoreContentHTMLProps & {};
+export type ShowMoreOwnProps = ShowMoreContentOptions &
+  ShowMoreContentHTMLProps & {};
 
 export type ShowMoreProps = ShowMoreInitialState &
   ShowMoreOwnProps &
