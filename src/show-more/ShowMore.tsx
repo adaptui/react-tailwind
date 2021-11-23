@@ -9,7 +9,7 @@ import {
 import { useShowMoreProps } from "./ShowMoreProps";
 import { ShowMoreInitialState, ShowMoreStateReturn } from "./ShowMoreState";
 
-export type ShowMoreOwnProps = ShowMoreContentOptions &
+export type ShowMoreOwnProps = Partial<ShowMoreContentOptions> &
   ShowMoreContentHTMLProps & {};
 
 export type ShowMoreProps = ShowMoreInitialState &
