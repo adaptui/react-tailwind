@@ -17699,10 +17699,10 @@ table@^6.0.9:
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
 
-tailwind-merge@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-0.8.2.tgz#e12c578dd761a28a524816c6122d6745b882e999"
-  integrity sha512-YzT5KMvBrI2WSVYpZHwB73dTVpWXCDECDBfyfPWol3CRrGZxvaiEpdLWNzeD5WFO6sA3spGWm/ICdF58HIt2Vw==
+tailwind-merge@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-0.9.0.tgz#3c7df4983515d291cc1136dd9269c7e8d8d37c7e"
+  integrity sha512-nHI0CoAAais8+0lwIiDposkhmdr4ejRVZxJH8bzZFbB7d6/jkciyl9lgHmkNpCJ0MMYi4Xg8JjHXZX7/67g3Tw==
   dependencies:
     hashlru "^2.3.0"
 
