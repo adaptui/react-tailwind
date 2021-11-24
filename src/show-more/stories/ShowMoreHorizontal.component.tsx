@@ -9,10 +9,7 @@ export const ShowMoreHorizontal: React.FC<ShowMoreProps> = props => {
         <div>Apple</div>
         <div>Orange</div>
         <div>Watermelon</div>
-        <ShowMore
-          className="flex flex-row space-x-2 overflow-hidden data-enter:animate-expandWidth data-leave:animate-collapseWidth"
-          {...props}
-        >
+        <ShowMore className="flex flex-row space-x-2" {...props}>
           <div>Sapota</div>
           <div>Papaya</div>
           <div>Avocado</div>

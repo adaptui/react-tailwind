@@ -17,10 +17,10 @@ export type CheckboxShowMoreOwnProps = { componentProps?: Dict<any> };
 export type CheckboxShowMoreProps = ShowMoreProps & CheckboxShowMoreOwnProps;
 
 export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
-  const { children, componentProps, ...restProps } = props;
+  const { children, componentProps, direction, ...restProps } = props;
   const contextState = useCheckboxGroupContext();
   const size = contextState?.size || "md";
-  const stack = contextState?.stack || "vertical";
+  const stack = contextState?.stack || direction || "vertical";
 
   const sizeMap = {
     sm: "sm",
@@ -28,36 +28,35 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
     lg: "xl",
   } as const;
 
-  const theme = useTheme("radio");
-  const buttonClassName = cx(theme.group.showMore.button.base[stack]);
+  const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
+
+  const theme = useTheme("checkbox");
+  const buttonClassName = cx(
+    theme.group.showMore.button.base[stack],
+    hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
+  );
   const contentClassName = cx(theme.group.showMore.content[stack]);
 
-  return (
-    <ShowMore {...restProps}>
-      {state => {
-        const finalChildren = React.Children.map(children, child => {
-          return passProps(child, {
-            disabled: state.visible ? false : true,
-          });
-        });
+  const finalChildren = React.Children.map(children, child => {
+    return passProps(child, { disabled: hasExpandStarted ? false : true });
+  });
 
-        return (
-          <>
-            {finalChildren}
-            <ShowMoreContent
-              className={contentClassName}
-              {...componentProps?.contentProps}
-            />
-            <ShowMoreButton
-              variant="ghost"
-              size={sizeMap[size]}
-              prefix={<PlusIcon />}
-              className={buttonClassName}
-              {...componentProps?.buttonProps}
-            />
-          </>
-        );
-      }}
+  return (
+    <ShowMore direction={stack} {...restProps}>
+      {finalChildren}
+      <ShowMoreContent
+        className={contentClassName}
+        onExpandStart={() => setHasExpandStarted(true)}
+        onCollapseStart={() => setHasExpandStarted(false)}
+        {...componentProps?.contentProps}
+      />
+      <ShowMoreButton
+        variant="ghost"
+        size={sizeMap[size]}
+        prefix={<PlusIcon />}
+        className={buttonClassName}
+        {...componentProps?.buttonProps}
+      />
     </ShowMore>
   );
 };
