@@ -1,99 +1,31 @@
+import * as React from "react";
+
+import { SliderThumbContainer } from "./SliderThumbContainer";
+import { SliderThumbInput } from "./SliderThumbInput";
+import { useSliderThumbProps } from "./SliderThumbProps";
+import { SliderThumbInitialState } from "./SliderThumbState";
 import {
-  SliderInput,
-  SliderStateReturn,
-  SliderThumb as RenderlessSliderThumb,
-} from "@renderlesskit/react";
+  SliderThumbWrapper,
+  SliderThumbWrapperHTMLProps,
+} from "./SliderThumbWrapper";
 
-import { BoxProps } from "../box";
-import { useFormControl } from "../form-field";
-import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+export type SliderThumbOwnProps = SliderThumbWrapperHTMLProps & {};
 
-import { useSliderValues } from "./hooks/useSliderValues";
-import {
-  SliderContextType,
-  SliderProps,
-  useSliderContext,
-  useSliderPropsContext,
-} from "./Slider";
+export type SliderThumbProps = SliderThumbInitialState & SliderThumbOwnProps;
 
-type SliderThumbProps = BoxProps &
-  Omit<SliderProps, "size" | "orientation" | "origin">;
+export const SliderThumb = React.forwardRef<HTMLDivElement, SliderThumbProps>(
+  (props, ref) => {
+    const { wrapperProps, containerProps, inputProps } =
+      useSliderThumbProps(props);
 
-export const SliderThumb = forwardRefWithAs<
-  SliderThumbProps,
-  HTMLDivElement,
-  "div"
->(({ children, className, ...props }, ref) => {
-  const theme = useTheme();
-
-  const {
-    thumbSize,
-    orientation = "horizontal",
-    size = "md",
-    origin = 0,
-  } = useSliderPropsContext() as SliderContextType;
-
-  const { isVertical, isReversed, getThumbPercent, state } = useSliderValues({
-    orientation: orientation,
-    origin: origin,
-  });
-
-  const thumbHandleStyles = tcm(
-    theme.slider.common.thumb.base,
-    theme.slider.common.thumb.size[size],
-    theme.slider[orientation].thumb.base,
-    className,
-  );
-
-  const { isDisabled, isReadOnly } = useSliderContext() as SliderStateReturn & {
-    isReadOnly?: boolean;
-  };
-  const fieldInputProps = useFormControl({
-    isDisabled,
-    isReadOnly,
-  });
-
-  const thumbDynamicStyles = (index: number) => {
-    const percent = getThumbPercent(index) * 100;
-    const offset =
-      percent -
-      (thumbSize.current.height / (isVertical ? 2 : 4)) *
-        getThumbPercent(index);
-    const offsetPercent = `${offset}%`;
-
-    return {
-      right: isReversed ? offsetPercent : "",
-      left: !isReversed && !isVertical ? offsetPercent : "",
-      bottom: isVertical ? offsetPercent : "",
-    };
-  };
-
-  return (
-    <>
-      {[...new Array(state?.values.length).keys()].map(index => {
-        return (
-          <RenderlessSliderThumb
-            ref={ref}
-            key={`thumb-${index}`}
-            style={thumbDynamicStyles(index)}
-            index={index}
-            {...state}
-            {...props}
-            className={thumbHandleStyles}
-          >
-            <SliderInput
-              className={theme.slider.common.input}
-              index={index}
-              {...fieldInputProps}
-              {...state}
-            />
-            {children}
-          </RenderlessSliderThumb>
-        );
-      })}
-    </>
-  );
-});
+    return (
+      <SliderThumbWrapper {...wrapperProps}>
+        <SliderThumbContainer {...containerProps}>
+          <SliderThumbInput ref={ref} {...inputProps} />
+        </SliderThumbContainer>
+      </SliderThumbWrapper>
+    );
+  },
+);
 
 SliderThumb.displayName = "SliderThumb";

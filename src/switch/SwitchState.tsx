@@ -5,8 +5,11 @@ import {
   useCheckboxState,
 } from "@renderlesskit/react";
 
-import { Box, RenderPropType, SwitchProps, tcm, useTheme } from "..";
+import { Box } from "../box";
+import { useTheme } from "../theme";
+import { RenderPropType, tcm } from "../utils";
 
+import { SwitchProps } from "./Switch";
 import { SwitchInputOptions, SwitchInputProps } from "./SwitchInput";
 
 export type SwitchState = CheckboxState & {

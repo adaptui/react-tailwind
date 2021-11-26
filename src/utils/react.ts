@@ -98,6 +98,7 @@ export const getComponentProps = <T, P>(
   props: P,
 ) => {
   const normalizedChildren = runIfFnChildren(children, props);
+  console.log("%cnormalizedChildren", "color: #99614d", normalizedChildren);
   const validChildren = getValidChildren(normalizedChildren);
   const componentProps: Dict = {};
   const finalChildren: React.ReactNode[] = [];
