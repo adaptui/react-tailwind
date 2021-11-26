@@ -74,19 +74,21 @@ const ActionButtons: React.FC<{
   );
 };
 
-const Input: React.FC<{ state: NumberInputStateReturn; label: string }> =
-  props => {
-    const { state, label } = props;
-    return (
-      <label>
-        <span className="inline-block mb-1 text-sm font-medium text-gray-700">
-          {label}
-        </span>
-        <NumberInput
-          id="interval"
-          className="block w-full border-gray-300 rounded-md shadow-sm form-input focus:ring-gray-300 focus:border-gray-500 sm:text-sm"
-          {...state}
-        />
-      </label>
-    );
-  };
+const Input: React.FC<{
+  state: NumberInputStateReturn;
+  label: string;
+}> = props => {
+  const { state, label } = props;
+  return (
+    <label>
+      <span className="inline-block mb-1 text-sm font-medium text-gray-700">
+        {label}
+      </span>
+      <NumberInput
+        id="interval"
+        className="block w-full border-gray-300 rounded-md shadow-sm form-input focus:ring-gray-300 focus:border-gray-500 sm:text-sm"
+        {...state}
+      />
+    </label>
+  );
+};

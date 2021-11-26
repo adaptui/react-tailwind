@@ -9,17 +9,18 @@ import {
 
 export type CircularProgressBasicProps = CircularProgressProps & {};
 
-export const CircularProgressBasic: React.FC<CircularProgressBasicProps> =
-  props => {
-    const [value, setValue] = useCircularProgressState();
+export const CircularProgressBasic: React.FC<
+  CircularProgressBasicProps
+> = props => {
+  const [value, setValue] = useCircularProgressState();
 
-    return (
-      <div className="flex flex-col items-center">
-        <CircularProgress value={value} hint={`${value}%`} {...props} />
-        <ActionButtons setValue={setValue} />
-      </div>
-    );
-  };
+  return (
+    <div className="flex flex-col items-center">
+      <CircularProgress value={value} hint={`${value}%`} {...props} />
+      <ActionButtons setValue={setValue} />
+    </div>
+  );
+};
 
 export default CircularProgressBasic;
 

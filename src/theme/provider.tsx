@@ -43,21 +43,22 @@ export type RenderlesskitProviderProps = {
   extend?: ExtendableDefaultTheme;
 };
 
-export const RenderlesskitProvider: React.FC<RenderlesskitProviderProps> =
-  props => {
-    const { children, theme = defaultTheme, extend } = props;
+export const RenderlesskitProvider: React.FC<
+  RenderlesskitProviderProps
+> = props => {
+  const { children, theme = defaultTheme, extend } = props;
 
-    let finalTheme = theme;
+  let finalTheme = theme;
 
-    if (extend) {
-      finalTheme = mergeExtensions(mergeThemes([extend, theme]));
-    }
+  if (extend) {
+    finalTheme = mergeExtensions(mergeThemes([extend, theme]));
+  }
 
-    return (
-      <IdProvider>
-        <ThemeContext.Provider value={finalTheme}>
-          {children}
-        </ThemeContext.Provider>
-      </IdProvider>
-    );
-  };
+  return (
+    <IdProvider>
+      <ThemeContext.Provider value={finalTheme}>
+        {children}
+      </ThemeContext.Provider>
+    </IdProvider>
+  );
+};

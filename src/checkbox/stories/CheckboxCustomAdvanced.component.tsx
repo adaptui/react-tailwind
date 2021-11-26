@@ -13,34 +13,35 @@ import {
 
 export type CheckboxCustomAdvancedProps = {};
 
-export const CheckboxCustomAdvanced: React.FC<CheckboxCustomAdvancedProps> =
-  () => {
-    const [state, onStateChange] = React.useState<CheckboxState["state"]>([]);
+export const CheckboxCustomAdvanced: React.FC<
+  CheckboxCustomAdvancedProps
+> = () => {
+  const [state, onStateChange] = React.useState<CheckboxState["state"]>([]);
 
-    return (
-      <>
-        <CustomCheckbox value="one" state={state} onStateChange={onStateChange}>
-          Button one 😁
-        </CustomCheckbox>
-        <CustomCheckbox
-          className="ml-2"
-          value="two"
-          state={state}
-          onStateChange={onStateChange}
-        >
-          Button two 🤓
-        </CustomCheckbox>
-        <CustomCheckbox
-          className="ml-2"
-          value="three"
-          state={state}
-          onStateChange={onStateChange}
-        >
-          Button three 👻
-        </CustomCheckbox>
-      </>
-    );
-  };
+  return (
+    <>
+      <CustomCheckbox value="one" state={state} onStateChange={onStateChange}>
+        Button one 😁
+      </CustomCheckbox>
+      <CustomCheckbox
+        className="ml-2"
+        value="two"
+        state={state}
+        onStateChange={onStateChange}
+      >
+        Button two 🤓
+      </CustomCheckbox>
+      <CustomCheckbox
+        className="ml-2"
+        value="three"
+        state={state}
+        onStateChange={onStateChange}
+      >
+        Button three 👻
+      </CustomCheckbox>
+    </>
+  );
+};
 
 export default CheckboxCustomAdvanced;
 
