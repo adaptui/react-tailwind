@@ -12,21 +12,22 @@ import { CircularProgressTrack } from "../CircularProgressTrack";
 
 export type CircularProgressCustomProps = CircularProgressProps & {};
 
-export const CircularProgressCustom: React.FC<CircularProgressCustomProps> =
-  props => {
-    const [value, setValue] = useCircularProgressState();
+export const CircularProgressCustom: React.FC<
+  CircularProgressCustomProps
+> = props => {
+  const [value, setValue] = useCircularProgressState();
 
-    return (
-      <div className="flex flex-col items-center">
-        <CircularProgress value={value} hint={`${value}%`} {...props}>
-          <CircularProgressTrack className="text-red-300" />
-          <CircularProgressBar className="text-red-700" />
-          <CircularProgressHint className="text-red-900" />
-        </CircularProgress>
-        <ActionButtons setValue={setValue} />
-      </div>
-    );
-  };
+  return (
+    <div className="flex flex-col items-center">
+      <CircularProgress value={value} hint={`${value}%`} {...props}>
+        <CircularProgressTrack className="text-red-300" />
+        <CircularProgressBar className="text-red-700" />
+        <CircularProgressHint className="text-red-900" />
+      </CircularProgress>
+      <ActionButtons setValue={setValue} />
+    </div>
+  );
+};
 
 export default CircularProgressCustom;
 
