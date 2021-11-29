@@ -8,7 +8,7 @@ import { SLIDER_THUMB_WRAPPER_KEYS } from "./__keys";
 import { SliderThumbStateReturn } from "./SliderThumbState";
 
 export type SliderThumbWrapperOptions = BoxOptions &
-  Pick<SliderThumbStateReturn, "sliderState" | "index">;
+  Pick<SliderThumbStateReturn, "sliderState" | "index" | "size">;
 
 export type SliderThumbWrapperHTMLProps = BoxHTMLProps;
 
@@ -24,7 +24,7 @@ export const useSliderThumbWrapper = createHook<
   keys: SLIDER_THUMB_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
-    const { sliderState, index } = options;
+    const { sliderState, index, size } = options;
     const { baseState } = sliderState;
     const { getThumbPercent } = baseState;
     const {
@@ -34,9 +34,11 @@ export const useSliderThumbWrapper = createHook<
     } = htmlProps;
 
     const theme = useTheme("slider");
-    const className = cx(theme.thumb.wrapper, htmlClassName);
+    const className = cx(theme.thumb.wrapper.normal, htmlClassName);
     const style = {
-      left: `calc(${getThumbPercent(index) * 100}% - 7px)`,
+      left: `calc(${getThumbPercent(index) * 100}% - ${
+        theme.thumb.wrapper.size[size]
+      })`,
       ...htmlStyle,
     };
 

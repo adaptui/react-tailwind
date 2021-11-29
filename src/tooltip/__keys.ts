@@ -18,11 +18,26 @@ export const TOOLTIP_STATE_KEYS = [
   "popper",
   "arrow",
   "unstable_timeout",
-  "trigger",
+  "content",
   "prefix",
   "suffix",
   "withArrow",
   "arrowIcon",
+  "setBaseId",
+  "show",
+  "hide",
+  "toggle",
+  "setVisible",
+  "setSide",
+  "setAlign",
+  "setSideOffset",
+  "setAlignOffset",
+  "setArrowOffset",
+  "setCollisionTolerance",
+  "setAnchor",
+  "setPopper",
+  "setArrow",
+  "unstable_setTimeout",
 ] as const;
 export const USE_TOOLTIP_STATE_KEYS = [
   "baseId",
@@ -37,14 +52,16 @@ export const USE_TOOLTIP_STATE_KEYS = [
   "onVisibleChange",
   "enableCollisionsDetection",
   "unstable_timeout",
-  "trigger",
+  "content",
   "arrowIcon",
   "withArrow",
   "prefix",
   "suffix",
 ] as const;
-export const TOOLTIP_ARROW_KEYS = TOOLTIP_STATE_KEYS;
+export const TOOLTIP_ANCHOR_KEYS = TOOLTIP_STATE_KEYS;
+export const TOOLTIP_ARROW_KEYS = TOOLTIP_ANCHOR_KEYS;
 export const TOOLTIP_ARROW_CONTENT_KEYS = TOOLTIP_ARROW_KEYS;
 export const TOOLTIP_CONTENT_KEYS = TOOLTIP_ARROW_CONTENT_KEYS;
 export const TOOLTIP_REFERENCE_KEYS = TOOLTIP_CONTENT_KEYS;
-export const TOOLTIP_WRAPPER_KEYS = TOOLTIP_REFERENCE_KEYS;
+export const TOOLTIP_TRIGGER_KEYS = TOOLTIP_REFERENCE_KEYS;
+export const TOOLTIP_WRAPPER_KEYS = TOOLTIP_TRIGGER_KEYS;

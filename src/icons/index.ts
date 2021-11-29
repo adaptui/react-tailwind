@@ -11,6 +11,7 @@ export * from "./Clock";
 export * from "./Close";
 export * from "./Dash";
 export * from "./Dot";
+export * from "./Equals";
 export * from "./ExclamationCircle";
 export * from "./ExclamationTriangle";
 export * from "./EyesIcon";

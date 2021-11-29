@@ -5,11 +5,19 @@ import {
   useTooltipReference as useRenderlesskitTooltipReference,
 } from "@renderlesskit/react";
 
+import { RenderPropType } from "../utils";
+
 import { TOOLTIP_REFERENCE_KEYS } from "./__keys";
+import { TooltipStateReturn } from "./TooltipState";
 
-export type TooltipReferenceOptions = RenderlesskitTooltipReferenceOptions;
+export type TooltipReferenceOptions = RenderlesskitTooltipReferenceOptions & {
+  prefix: RenderPropType<TooltipStateReturn>;
+};
 
-export type TooltipReferenceHTMLProps = RenderlesskitTooltipReferenceHTMLProps;
+export type TooltipReferenceHTMLProps = Omit<
+  RenderlesskitTooltipReferenceHTMLProps,
+  "prefix"
+>;
 
 export type TooltipReferenceProps = TooltipReferenceOptions &
   TooltipReferenceHTMLProps;

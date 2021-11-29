@@ -5,11 +5,19 @@ import {
   useTooltipArrow as useRenderlesskitTooltipArrow,
 } from "@renderlesskit/react";
 
+import { RenderPropType } from "..";
+
 import { TOOLTIP_ARROW_KEYS } from "./__keys";
+import { TooltipStateReturn } from "./TooltipState";
 
-export type TooltipArrowOptions = RenderlesskitTooltipArrowOptions;
+export type TooltipArrowOptions = RenderlesskitTooltipArrowOptions & {
+  prefix: RenderPropType<TooltipStateReturn>;
+};
 
-export type TooltipArrowHTMLProps = RenderlesskitTooltipArrowHTMLProps;
+export type TooltipArrowHTMLProps = Omit<
+  RenderlesskitTooltipArrowHTMLProps,
+  "prefix"
+>;
 
 export type TooltipArrowProps = TooltipArrowOptions & TooltipArrowHTMLProps;
 

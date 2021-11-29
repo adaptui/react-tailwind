@@ -5,8 +5,10 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_TRACK_KEYS } from "./__keys";
+import { SliderStateReturn } from "./SliderState";
 
-export type SliderTrackOptions = BoxOptions & {};
+export type SliderTrackOptions = BoxOptions &
+  Pick<SliderStateReturn, "size"> & {};
 
 export type SliderTrackHTMLProps = BoxHTMLProps;
 
@@ -21,10 +23,15 @@ export const useSliderTrack = createHook<
   keys: SLIDER_TRACK_KEYS,
 
   useProps(options, htmlProps) {
+    const { size } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("slider");
-    const className = cx(theme.track.base, htmlClassName);
+    const className = cx(
+      theme.track.base.normal,
+      theme.track.base.size[size],
+      htmlClassName,
+    );
 
     return { className, ...restHtmlProps };
   },

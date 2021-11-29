@@ -21,7 +21,7 @@ export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
   (props, ref) => {
     const {
       state,
-      finalChildren,
+      content,
       prefix,
       suffix,
       wrapperProps,
@@ -41,7 +41,7 @@ export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
         <TooltipWrapper ref={ref} {...wrapperProps}>
           <TooltipContent {...contentProps}>
             {prefix ? withIconA11y(prefix, { className: prefixStyles }) : null}
-            {finalChildren}
+            {content}
             {suffix ? withIconA11y(suffix, { className: suffixStyles }) : null}
             {state?.withArrow ? (
               <TooltipArrow {...arrowProps}>

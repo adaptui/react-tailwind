@@ -1,18 +1,18 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { SliderDefaultKnobIcon } from "../..";
+import { SliderDefaultKnobIcon } from "..";
 
-import js from "./templates/SliderBasicJsx";
-import ts from "./templates/SliderBasicTsx";
-import { SliderBasic } from "./SliderBasic.component";
+import js from "./templates/SliderRangeJsx";
+import ts from "./templates/SliderRangeTsx";
+import { SliderRange } from "./SliderRange.component";
 
-type Meta = ComponentMeta<typeof SliderBasic>;
-type Story = ComponentStoryObj<typeof SliderBasic>;
+type Meta = ComponentMeta<typeof SliderRange>;
+type Story = ComponentStoryObj<typeof SliderRange>;
 
 export default {
-  title: "Forms/Slider/Basic",
-  component: SliderBasic,
+  title: "Forms/Slider/Range",
+  component: SliderRange,
   parameters: {
     layout: "centered",
     options: { showPanel: true },
@@ -24,34 +24,25 @@ export default {
 } as Meta;
 
 export const Small: Story = {
-  args: { size: "sm", defaultValue: [50] },
+  args: { size: "sm", defaultValue: [25, 75] },
 };
 
 export const Medium: Story = {
-  args: { size: "md", defaultValue: [50] },
+  args: { size: "md", defaultValue: [25, 75] },
 };
 
 export const Large: Story = {
-  args: { size: "lg", defaultValue: [50] },
+  args: { size: "lg", defaultValue: [25, 75] },
 };
 
 export const KnobIcon: Story = {
-  args: { size: "md", defaultValue: [50], knobIcon: SliderDefaultKnobIcon },
-};
-
-export const WithoutTooltip: Story = {
-  args: {
-    size: "md",
-    defaultValue: [50],
-    knobIcon: SliderDefaultKnobIcon,
-    tooltip: false,
-  },
+  args: { size: "md", defaultValue: [25, 75], knobIcon: SliderDefaultKnobIcon },
 };
 
 export const MinMax = {
   args: {
     size: "md",
-    defaultValue: [50],
+    defaultValue: [25, 75],
     minValue: 20,
     maxValue: 80,
   },
@@ -60,7 +51,7 @@ export const MinMax = {
 export const Step = {
   args: {
     size: "md",
-    defaultValue: [50],
+    defaultValue: [25, 75],
     step: 10,
   },
 };
@@ -68,7 +59,7 @@ export const Step = {
 export const FormatOptions = {
   args: {
     size: "md",
-    defaultValue: [50],
+    defaultValue: [25, 75],
     formatOptions: {
       style: "unit",
       unit: "celsius",
@@ -78,5 +69,5 @@ export const FormatOptions = {
 };
 
 export const isDisabled: Story = {
-  args: { defaultValue: [50], isDisabled: true },
+  args: { size: "md", defaultValue: [25, 75], isDisabled: true },
 };

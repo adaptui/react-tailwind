@@ -12,6 +12,7 @@ import {
   ClockIcon,
   CloseIcon,
   DashIcon,
+  EqualsIcon,
   SleepStatusIcon,
   TypingLargeStatusIcon,
   TypingSmallStatusIcon,
@@ -38,7 +39,8 @@ export const Icon: React.FC<IconProps> = props => {
         <AwayStatusIcon />
         <TypingSmallStatusIcon className="inline-block w-12" />
         <TypingLargeStatusIcon className="inline-block w-12" />
-        <ArrowIcon />
+        <ArrowIcon className="inline-block w-12 h-12" />
+        <EqualsIcon />
       </div>
     </div>
   );

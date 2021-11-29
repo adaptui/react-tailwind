@@ -49,5 +49,5 @@ export const useSliderThumbProps = (
     ...componentProps.inputProps,
   };
 
-  return { wrapperProps, containerProps, inputProps };
+  return { wrapperProps, containerProps, inputProps, state };
 };

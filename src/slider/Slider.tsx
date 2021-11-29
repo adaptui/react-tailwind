@@ -8,7 +8,7 @@ import { SliderTrack } from "./SliderTrack";
 import { SliderTrackWrapper } from "./SliderTrackWrapper";
 import { SliderWrapper, SliderWrapperHTMLProps } from "./SliderWrapper";
 
-export type SliderOwnProps = SliderWrapperHTMLProps & {};
+export type SliderOwnProps = Omit<SliderWrapperHTMLProps, "defaultValue"> & {};
 
 export type SliderProps = SliderInitialState & SliderOwnProps;
 
@@ -19,6 +19,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       trackWrapperProps,
       trackProps,
       filledTrackProps,
+      thumbProps,
       state,
     } = useSliderProps(props);
 
@@ -28,7 +29,14 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           <SliderTrack {...trackProps} />
           <SliderFilledTrack {...filledTrackProps} />
         </SliderTrackWrapper>
-        <SliderThumb index={0} sliderState={state} aria-label="Thumb" />
+        {!state.range ? (
+          <SliderThumb {...thumbProps} aria-label="Thumb" index={0} />
+        ) : (
+          <>
+            <SliderThumb {...thumbProps} aria-label="Thumb 0" index={0} />
+            <SliderThumb {...thumbProps} aria-label="Thumb 1" index={1} />
+          </>
+        )}
       </SliderWrapper>
     );
   },

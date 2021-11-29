@@ -4,6 +4,7 @@ import { USE_SLIDER_STATE_KEYS } from "./__keys";
 import { SliderOwnProps, SliderProps } from "./Slider";
 import { SliderFilledTrackProps } from "./SliderFilledTrack";
 import { SliderInitialState, useSliderState } from "./SliderState";
+import { SliderThumbProps } from "./SliderThumb";
 import { SliderTrackProps } from "./SliderTrack";
 import { SliderTrackWrapperProps } from "./SliderTrackWrapper";
 import { SliderWrapperProps } from "./SliderWrapper";
@@ -27,6 +28,7 @@ const componentMap = {
 
 export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
   const [state, sliderProps] = useSliderStateSplit(props);
+  const { range, size, knobIcon, tooltip, ...thumbState } = state;
   const { children, ...restProps } = sliderProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
@@ -55,11 +57,20 @@ export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
     ...componentProps.filledTrackProps,
   };
 
+  const thumbProps: SliderThumbProps = {
+    size,
+    knobIcon,
+    tooltip,
+    sliderState: thumbState,
+    ...componentProps.thumbProps,
+  };
+
   return {
     state,
     wrapperProps,
     trackWrapperProps,
     trackProps,
+    thumbProps,
     filledTrackProps,
     finalChildren,
   };
