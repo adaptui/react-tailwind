@@ -56,6 +56,7 @@ export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
   };
 
   return {
+    state,
     wrapperProps,
     trackWrapperProps,
     trackProps,

@@ -1,6 +1,7 @@
 import { createComponent, createHook } from "reakit-system";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
@@ -31,11 +32,8 @@ export const useSliderFilledTrack = createHook<
       ...restHtmlProps
     } = htmlProps;
 
-    // const theme = useTheme("slider");
-    const className = cx(
-      "absolute h-1 transform -translate-y-1/2 bg-blue-600 rounded-sm top-1/2",
-      htmlClassName,
-    );
+    const theme = useTheme("slider");
+    const className = cx(theme.track.filled, htmlClassName);
     const style = {
       width: `${getValuePercent(values[0]) * 100}%`,
       ...htmlStyle,

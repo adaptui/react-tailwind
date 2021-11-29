@@ -6,6 +6,7 @@ import {
 } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_WRAPPER_KEYS } from "./__keys";
@@ -27,11 +28,8 @@ export const useSliderWrapper = createHook<
   useProps(options, htmlProps) {
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    // const theme = useTheme("slider");
-    const className = cx(
-      "relative inline-block outline-none select-none touch-action-none w-80",
-      htmlClassName,
-    );
+    const theme = useTheme("slider");
+    const className = cx(theme.wrapper, htmlClassName);
 
     return { className, ...restHtmlProps };
   },

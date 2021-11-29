@@ -6,6 +6,7 @@ import {
 } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_THUMB_CONTAINER_KEYS } from "./__keys";
@@ -28,11 +29,8 @@ export const useSliderThumbContainer = createHook<
   useProps(options, htmlProps) {
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    // const theme = useTheme("slider");
-    const className = cx(
-      "w-3.5 h-3.5 bg-blue-100 flex items-center justify-center rounded-full shadow-thumb select-none touch-action-none cursor-pointer focus-within:ring-2 focus-within:ring-blue-600",
-      htmlClassName,
-    );
+    const theme = useTheme("slider");
+    const className = cx(theme.thumb.container, htmlClassName);
 
     return { className, ...restHtmlProps };
   },

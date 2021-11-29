@@ -6,6 +6,7 @@ import {
 } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_TRACK_WRAPPER_KEYS } from "./__keys";
@@ -28,11 +29,8 @@ export const useSliderTrackWrapper = createHook<
   useProps(options, htmlProps) {
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    // const theme = useTheme("slider");
-    const className = cx(
-      "relative w-full py-[7px] cursor-pointer",
-      htmlClassName,
-    );
+    const theme = useTheme("slider");
+    const className = cx(theme.track.wrapper, htmlClassName);
 
     return { className, ...restHtmlProps };
   },

@@ -1,6 +1,7 @@
 import { createComponent, createHook } from "reakit-system";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_THUMB_WRAPPER_KEYS } from "./__keys";
@@ -32,11 +33,8 @@ export const useSliderThumbWrapper = createHook<
       ...restHtmlProps
     } = htmlProps;
 
-    // const theme = useTheme("slider");
-    const className = cx(
-      "absolute top-0.5 flex flex-col items-center z-10 focus-within:z-20",
-      htmlClassName,
-    );
+    const theme = useTheme("slider");
+    const className = cx(theme.thumb.wrapper, htmlClassName);
     const style = {
       left: `calc(${getThumbPercent(index) * 100}% - 7px)`,
       ...htmlStyle,

@@ -3,6 +3,7 @@ import * as React from "react";
 import { SliderFilledTrack } from "./SliderFilledTrack";
 import { useSliderProps } from "./SliderProps";
 import { SliderInitialState } from "./SliderState";
+import { SliderThumb } from "./SliderThumb";
 import { SliderTrack } from "./SliderTrack";
 import { SliderTrackWrapper } from "./SliderTrackWrapper";
 import { SliderWrapper, SliderWrapperHTMLProps } from "./SliderWrapper";
@@ -18,7 +19,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       trackWrapperProps,
       trackProps,
       filledTrackProps,
-      finalChildren,
+      state,
     } = useSliderProps(props);
 
     return (
@@ -27,7 +28,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           <SliderTrack {...trackProps} />
           <SliderFilledTrack {...filledTrackProps} />
         </SliderTrackWrapper>
-        {finalChildren}
+        <SliderThumb index={0} sliderState={state} aria-label="Thumb" />
       </SliderWrapper>
     );
   },
