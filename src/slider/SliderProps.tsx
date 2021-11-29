@@ -33,7 +33,6 @@ export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
     children,
     state,
   );
-  console.log("%cfinalChildren", "color: #d0bfff", finalChildren);
 
   const wrapperProps: SliderWrapperProps = {
     ...state,
