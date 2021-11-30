@@ -6,13 +6,19 @@ import {
 } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { RenderPropType, tcm } from "../utils";
 
 import { TOOLTIP_ARROW_CONTENT_KEYS } from "./__keys";
+import { TooltipStateReturn } from "./TooltipState";
 
-export type TooltipContentOptions = RenderlesskitTooltipContentOptions;
+export type TooltipContentOptions = RenderlesskitTooltipContentOptions & {
+  prefix: RenderPropType<TooltipStateReturn>;
+};
 
-export type TooltipContentHTMLProps = RenderlesskitTooltipContentHTMLProps;
+export type TooltipContentHTMLProps = Omit<
+  RenderlesskitTooltipContentHTMLProps,
+  "prefix"
+>;
 
 export type TooltipContentProps = TooltipContentOptions &
   TooltipContentHTMLProps;

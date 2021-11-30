@@ -13,13 +13,13 @@ import { TooltipInitialState, useTooltipState } from "./TooltipState";
 import { TooltipWrapperProps } from "./TooltipWrapper";
 
 export const useTooltipStateSplit = (props: TooltipProps) => {
-  const [stateProps, switchProps] = splitProps(
+  const [stateProps, tooltipProps] = splitProps(
     props,
     USE_TOOLTIP_STATE_KEYS,
   ) as [TooltipInitialState, TooltipOwnProps];
   const state = useTooltipState(stateProps);
 
-  return [state, switchProps, stateProps] as const;
+  return [state, tooltipProps, stateProps] as const;
 };
 
 const componentMap = {
@@ -33,9 +33,9 @@ const componentMap = {
 export const useTooltipProps = (
   props: React.PropsWithChildren<TooltipProps>,
 ) => {
-  const [state, switchProps] = useTooltipStateSplit(props);
-  const { trigger, arrowIcon, prefix, suffix } = state;
-  const { children, ...restProps } = switchProps;
+  const [state, tooltipProps] = useTooltipStateSplit(props);
+  const { content, arrowIcon, prefix, suffix } = state;
+  const { children, ...restProps } = tooltipProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
@@ -44,7 +44,7 @@ export const useTooltipProps = (
 
   const referenceChildren: React.ReactNode = (referenceProps: any) =>
     // @ts-ignore
-    React.cloneElement(runIfFn(trigger, state), referenceProps);
+    React.cloneElement(runIfFn(finalChildren[0], state), referenceProps);
 
   const _arrowIcon: TooltipProps["arrowIcon"] =
     componentProps?.arrowIconProps?.children || arrowIcon;
@@ -62,7 +62,6 @@ export const useTooltipProps = (
 
   const contentProps: TooltipContentProps = {
     ...state,
-    transitionPresent: true,
     ...restProps,
     ...componentProps.contentProps,
   };
@@ -81,10 +80,9 @@ export const useTooltipProps = (
   return {
     state,
     arrowIcon,
-    trigger,
+    content,
     prefix,
     suffix,
-    finalChildren,
     referenceProps,
     wrapperProps,
     contentProps,

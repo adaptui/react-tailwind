@@ -1,99 +1,54 @@
+import * as React from "react";
+
+import { Tooltip } from "../tooltip";
+import { runIfFn, withIconA11y } from "../utils";
+
+import { SliderThumbContainer } from "./SliderThumbContainer";
+import { SliderThumbInput } from "./SliderThumbInput";
+import { useSliderThumbProps } from "./SliderThumbProps";
+import { SliderThumbInitialState } from "./SliderThumbState";
 import {
-  SliderInput,
-  SliderStateReturn,
-  SliderThumb as RenderlessSliderThumb,
-} from "@renderlesskit/react";
+  SliderThumbWrapper,
+  SliderThumbWrapperHTMLProps,
+} from "./SliderThumbWrapper";
 
-import { BoxProps } from "../box";
-import { useFormControl } from "../form-field";
-import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+export type SliderThumbOwnProps = SliderThumbWrapperHTMLProps & {};
 
-import { useSliderValues } from "./hooks/useSliderValues";
-import {
-  SliderContextType,
-  SliderProps,
-  useSliderContext,
-  useSliderPropsContext,
-} from "./Slider";
+export type SliderThumbProps = SliderThumbInitialState & SliderThumbOwnProps;
 
-type SliderThumbProps = BoxProps &
-  Omit<SliderProps, "size" | "orientation" | "origin">;
+export const SliderThumb = React.forwardRef<HTMLDivElement, SliderThumbProps>(
+  (props, ref) => {
+    const { wrapperProps, containerProps, inputProps, state } =
+      useSliderThumbProps(props);
 
-export const SliderThumb = forwardRefWithAs<
-  SliderThumbProps,
-  HTMLDivElement,
-  "div"
->(({ children, className, ...props }, ref) => {
-  const theme = useTheme();
-
-  const {
-    thumbSize,
-    orientation = "horizontal",
-    size = "md",
-    origin = 0,
-  } = useSliderPropsContext() as SliderContextType;
-
-  const { isVertical, isReversed, getThumbPercent, state } = useSliderValues({
-    orientation: orientation,
-    origin: origin,
-  });
-
-  const thumbHandleStyles = tcm(
-    theme.slider.common.thumb.base,
-    theme.slider.common.thumb.size[size],
-    theme.slider[orientation].thumb.base,
-    className,
-  );
-
-  const { isDisabled, isReadOnly } = useSliderContext() as SliderStateReturn & {
-    isReadOnly?: boolean;
-  };
-  const fieldInputProps = useFormControl({
-    isDisabled,
-    isReadOnly,
-  });
-
-  const thumbDynamicStyles = (index: number) => {
-    const percent = getThumbPercent(index) * 100;
-    const offset =
-      percent -
-      (thumbSize.current.height / (isVertical ? 2 : 4)) *
-        getThumbPercent(index);
-    const offsetPercent = `${offset}%`;
-
-    return {
-      right: isReversed ? offsetPercent : "",
-      left: !isReversed && !isVertical ? offsetPercent : "",
-      bottom: isVertical ? offsetPercent : "",
-    };
-  };
-
-  return (
-    <>
-      {[...new Array(state?.values.length).keys()].map(index => {
-        return (
-          <RenderlessSliderThumb
-            ref={ref}
-            key={`thumb-${index}`}
-            style={thumbDynamicStyles(index)}
-            index={index}
-            {...state}
-            {...props}
-            className={thumbHandleStyles}
+    return (
+      <SliderThumbWrapper {...wrapperProps}>
+        {state.tooltip && !state.sliderState.baseState.isDisabled ? (
+          <Tooltip
+            side="top"
+            withArrow
+            content={state.sliderState.baseState.getThumbValueLabel(
+              state.index,
+            )}
           >
-            <SliderInput
-              className={theme.slider.common.input}
-              index={index}
-              {...fieldInputProps}
-              {...state}
-            />
-            {children}
-          </RenderlessSliderThumb>
-        );
-      })}
-    </>
-  );
-});
+            <SliderThumbContainer {...containerProps} tabIndex={-1}>
+              <SliderThumbInput ref={ref} {...inputProps} />
+              {state.knobIcon
+                ? withIconA11y(runIfFn(state.knobIcon, state))
+                : null}
+            </SliderThumbContainer>
+          </Tooltip>
+        ) : (
+          <SliderThumbContainer {...containerProps} tabIndex={-1}>
+            <SliderThumbInput ref={ref} {...inputProps} />
+            {state.knobIcon
+              ? withIconA11y(runIfFn(state.knobIcon, state))
+              : null}
+          </SliderThumbContainer>
+        )}
+      </SliderThumbWrapper>
+    );
+  },
+);
 
 SliderThumb.displayName = "SliderThumb";

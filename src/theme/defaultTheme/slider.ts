@@ -1,61 +1,57 @@
 export const slider = {
-  common: {
-    input: "sr-only",
-    wrapper: {
-      base: "text-gray-800 relative inline-block touch-action-none select-none outline-none",
-    },
-    track: {
-      base: "relative top-0 cursor-pointer",
-      main: "bg-gray-300 rounded-full",
-      filled: "absolute bg-current pointer-events-none rounded-full",
-    },
-    thumb: {
-      base: "absolute z-10 flex items-center bg-white justify-center rounded-full select-none cursor-pointer shadow-thumb text-current focus-within:ring-2 focus-within:ring-current",
-      size: {
-        sm: "w-3 h-3 text-[0.625rem]",
-        md: "w-4 h-4 text-xs",
-        lg: "w-5 h-5 text-sm",
-      },
-    },
-    minmax: {
-      base: "flex  items-center mt-0.5 justify-between text-xs text-gray-400",
-      reversed: "flex-row-reverse",
-    },
-  },
-  horizontal: {
-    wrapper: {
-      base: "w-full top-0",
-    },
-    track: {
-      base: "w-full",
-      main: "",
-      filled: "",
+  wrapper:
+    "relative inline-block outline-none select-none touch-action-none w-80",
+  track: {
+    wrapper: "relative w-full py-1.5 cursor-pointer",
+    base: {
+      normal: "w-full bg-gray-200 rounded-2xl",
       size: {
         sm: "h-0.5",
         md: "h-1",
         lg: "h-2",
       },
     },
-    thumb: {
-      base: "flex-col top-1/4 transform -translate-y-1/4",
-    },
-  },
-  vertical: {
-    wrapper: {
-      base: "h-full",
-    },
-    track: {
-      base: "h-full w-fit",
-      main: "h-full",
-      filled: "top-unset bottom-0",
+    filled: {
+      normal:
+        "absolute transform -translate-y-1/2 bg-gray-800 rounded-2xl top-1/2",
       size: {
-        sm: "w-0.5",
-        md: "w-1",
-        lg: "w-2",
+        sm: "h-0.5",
+        md: "h-1",
+        lg: "h-2",
       },
     },
-    thumb: {
-      base: "flex-row top-unset left-1/2 transform -translate-x-1/2",
+  },
+  thumb: {
+    wrapper: {
+      normal:
+        "absolute top-0 flex flex-col items-center z-10 focus-within:z-20",
+      size: {
+        sm: "7px",
+        md: "8px",
+        lg: "10px",
+      },
+    },
+    container: {
+      base: {
+        normal:
+          "flex items-center justify-center rounded-full select-none touch-action-none cursor-pointer transition-all",
+        size: {
+          sm: "w-3.5 h-3.5",
+          md: "w-4 h-4",
+          lg: "w-5 h-5",
+        },
+      },
+      normal:
+        "bg-white shadow-csm hover:shadow-thumbHover active:shadow-thumbHover focus-within:ring-2 focus-within:ring-gray-800",
+      disabled: "bg-gray-200",
+    },
+    input: "sr-only",
+  },
+  icon: {
+    size: {
+      sm: "text-[10px]",
+      md: "text-[10px]",
+      lg: "text-xs",
     },
   },
 };

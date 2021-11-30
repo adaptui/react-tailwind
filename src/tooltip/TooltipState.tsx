@@ -1,4 +1,5 @@
 import {
+  TooltipActions as RenderlesskitTooltipActions,
   TooltipInitialState as RenderlesskitTooltipInitialState,
   TooltipState as RenderlesskitTooltipState,
   useTooltipState as useRenderlesskitTooltipState,
@@ -11,7 +12,7 @@ export type TooltipState = RenderlesskitTooltipState & {
   /**
    * Label for the Tooltip.
    */
-  trigger: RenderPropType<TooltipStateReturn>;
+  content: RenderPropType<TooltipStateReturn>;
 
   /**
    * Label for the Tooltip.
@@ -34,7 +35,7 @@ export type TooltipState = RenderlesskitTooltipState & {
   arrowIcon: RenderPropType<TooltipStateReturn>;
 };
 
-export type TooltipActions = {};
+export type TooltipActions = RenderlesskitTooltipActions & {};
 
 export type TooltipStateReturn = TooltipState & TooltipActions;
 
@@ -42,7 +43,7 @@ export type TooltipInitialState = RenderlesskitTooltipInitialState &
   Partial<
     Pick<
       TooltipState,
-      "trigger" | "arrowIcon" | "withArrow" | "prefix" | "suffix"
+      "content" | "arrowIcon" | "withArrow" | "prefix" | "suffix"
     >
   >;
 
@@ -50,7 +51,7 @@ export function useTooltipState(
   props: TooltipInitialState = {},
 ): TooltipStateReturn {
   const {
-    trigger,
+    content,
     arrowIcon = <ArrowIcon />,
     withArrow = false,
     prefix,
@@ -61,7 +62,7 @@ export function useTooltipState(
 
   return {
     ...state,
-    trigger,
+    content,
     arrowIcon,
     withArrow,
     prefix,

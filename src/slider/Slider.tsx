@@ -1,146 +1,45 @@
 import * as React from "react";
-import {
-  SliderInitialState,
-  SliderStateReturn,
-  useSliderState,
-} from "@renderlesskit/react";
 
-import { Box, BoxProps } from "../box";
-import { useFormControl } from "../form-field";
-import { useTheme } from "../theme";
-import {
-  createContext,
-  forwardRefWithAs,
-  RenderProp,
-  runIfFn,
-  tcm,
-} from "../utils";
-
-import { useSliderDimensions } from "./hooks/useSliderDimensions";
-import { SliderMinMax } from "./SliderMinMax";
+import { SliderFilledTrack } from "./SliderFilledTrack";
+import { useSliderProps } from "./SliderProps";
+import { SliderInitialState } from "./SliderState";
 import { SliderThumb } from "./SliderThumb";
 import { SliderTrack } from "./SliderTrack";
+import { SliderTrackWrapper } from "./SliderTrackWrapper";
+import { SliderWrapper, SliderWrapperHTMLProps } from "./SliderWrapper";
 
-const [SliderStateProvider, useSliderContext] = createContext<
-  SliderStateReturn & { isReadOnly?: boolean }
->({
-  name: "SliderState",
-  strict: false,
-});
+export type SliderOwnProps = Omit<SliderWrapperHTMLProps, "defaultValue"> & {};
 
-export type SliderContextType = Pick<
-  SliderProps,
-  "orientation" | "size" | "origin" | "showMinMax"
-> & {
-  thumbSize: React.MutableRefObject<{
-    width: number;
-    height: number;
-  }>;
-  padding: number;
-};
+export type SliderProps = SliderInitialState & SliderOwnProps;
 
-const [SliderPropsContext, useSliderPropsContext] =
-  createContext<SliderContextType>({
-    name: "SliderProps",
-    strict: false,
-  });
+export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
+  (props, ref) => {
+    const {
+      wrapperProps,
+      trackWrapperProps,
+      trackProps,
+      filledTrackProps,
+      thumbProps,
+      state,
+    } = useSliderProps(props);
 
-export { useSliderContext, useSliderPropsContext };
-
-export type SliderProps = SliderInitialState &
-  Omit<BoxProps, "onChange"> & {
-    isReadOnly?: boolean;
-    origin?: number;
-    thumbContent?: React.ReactNode | ((value: number[]) => JSX.Element);
-    size?: keyof Renderlesskit.GetThemeValue<
-      "slider",
-      "common",
-      "thumb",
-      "size"
-    >;
-    showMinMax?: boolean;
-  };
-
-type SliderRenderProps = RenderProp<{
-  state: SliderStateReturn;
-  trackRef: React.RefObject<HTMLDivElement>;
-  thumbRef: React.RefObject<HTMLDivElement>;
-}>;
-
-export const Slider = forwardRefWithAs<
-  SliderProps & SliderRenderProps,
-  HTMLDivElement,
-  "div"
->((props, ref) => {
-  const {
-    orientation = "horizontal",
-    thumbContent,
-    children,
-    origin,
-    size = "md",
-    className,
-    values,
-    min,
-    max,
-    step,
-    isDisabled,
-    reversed,
-    onChange,
-    onChangeEnd,
-    onChangeStart,
-    formatOptions,
-    defaultValues,
-    showMinMax,
-    isReadOnly,
-    ...rest
-  } = props;
-
-  const theme = useTheme();
-
-  const { readOnly: fieldReadOnly, disabled: fieldDisabled } = useFormControl({
-    isReadOnly,
-    isDisabled,
-  });
-  const state = useSliderState({
-    ...props,
-    orientation,
-    isDisabled: fieldReadOnly || fieldDisabled,
-  });
-  const { thumbSize, padding, thumbRef, trackRef } = useSliderDimensions();
-
-  const sliderWrapperStyles = tcm(
-    theme.slider.common.wrapper.base,
-    theme.slider[orientation].wrapper.base,
-    className,
-  );
-
-  const contextProps = React.useMemo(
-    () => ({ size, orientation, origin, thumbSize, padding, showMinMax }),
-    [size, orientation, origin, thumbSize, padding, showMinMax],
-  );
-
-  return (
-    <SliderPropsContext {...contextProps}>
-      <SliderStateProvider {...state}>
-        <Box ref={ref} className={sliderWrapperStyles} {...rest}>
-          {children ? (
-            runIfFn(children, { state, trackRef, thumbRef, showMinMax })
-          ) : (
-            <>
-              <SliderTrack ref={trackRef}>
-                <SliderThumb ref={thumbRef}>
-                  {thumbContent
-                    ? runIfFn(thumbContent, state.values)
-                    : thumbContent}
-                </SliderThumb>
-              </SliderTrack>
-              {showMinMax ? <SliderMinMax /> : null}
-            </>
-          )}
-        </Box>
-      </SliderStateProvider>
-    </SliderPropsContext>
-  );
-});
+    return (
+      <SliderWrapper ref={ref} {...wrapperProps}>
+        <SliderTrackWrapper {...trackWrapperProps}>
+          <SliderTrack {...trackProps} />
+          <SliderFilledTrack {...filledTrackProps} />
+        </SliderTrackWrapper>
+        {!state.range ? (
+          <SliderThumb {...thumbProps} aria-label="Thumb" index={0} />
+        ) : (
+          <>
+            <SliderThumb {...thumbProps} aria-label="Thumb 0" index={0} />
+            <SliderThumb {...thumbProps} aria-label="Thumb 1" index={1} />
+          </>
+        )}
+      </SliderWrapper>
+    );
+  },
+);
 
 Slider.displayName = "Slider";

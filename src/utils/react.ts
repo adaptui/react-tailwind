@@ -44,19 +44,15 @@ export function runIfFnChildren<T, U>(
   valueOrFn: T | ((...fnArgs: U[]) => T),
   ...args: U[]
 ): T {
-  // Know bug but this is the only way to make it work
-  // {({ isChecked }) => {
-  //   return (
-  //     <>
-  //       <SwitchText data-testid="testid-mode">
-  //         {isChecked ? DARK_MODE : LIGHT_MODE}
-  //       </SwitchText>
-  //     </>
-  //   );
-  // }}
-  // Need a wrapper to get the children when the children is a function
+  if (!isFunction(valueOrFn)) return valueOrFn;
+
   // @ts-ignore
-  return isFunction(valueOrFn) ? valueOrFn(...args).props.children : valueOrFn;
+  if (valueOrFn(...args).type.toString() !== "Symbol(react.fragment)")
+    // @ts-ignore
+    return [valueOrFn(...args)];
+
+  // @ts-ignore
+  return valueOrFn(...args).props.children;
 }
 
 /**

@@ -6,8 +6,8 @@ export type TooltipBasicProps = TooltipInitialState & {};
 
 export const TooltipBasic: React.FC<TooltipBasicProps> = props => {
   return (
-    <Tooltip trigger={<Button>Tooltip</Button>} {...props}>
-      Add your information
+    <Tooltip content="Add your information" {...props}>
+      <Button>Tooltip</Button>
     </Tooltip>
   );
 };

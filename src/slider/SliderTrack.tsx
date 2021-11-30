@@ -1,85 +1,44 @@
-import { SliderTrack as RenderlessSliderTrack } from "@renderlesskit/react";
+import { createComponent, createHook } from "reakit-system";
 
-import { BoxProps } from "../box";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx } from "../utils";
 
-import { useSliderValues } from "./hooks/useSliderValues";
-import {
-  SliderContextType,
-  SliderProps,
-  useSliderPropsContext,
-} from "./Slider";
+import { SLIDER_TRACK_KEYS } from "./__keys";
+import { SliderStateReturn } from "./SliderState";
 
-export type SliderTrackProps = BoxProps &
-  Omit<SliderProps, "thumbContent" | "size" | "orientation" | "origin">;
+export type SliderTrackOptions = BoxOptions &
+  Pick<SliderStateReturn, "size"> & {};
 
-export const SliderTrack = forwardRefWithAs<
-  SliderTrackProps,
-  HTMLDivElement,
-  "div"
->(({ className, ...props }, ref) => {
-  const theme = useTheme();
-  const {
-    padding,
-    orientation = "horizontal",
-    size = "md",
-    origin = 0,
-  } = useSliderPropsContext() as SliderContextType;
+export type SliderTrackHTMLProps = BoxHTMLProps;
 
-  const {
-    isVertical,
-    isRange,
-    isMulti,
-    isReversed,
-    trackWidth,
-    trackLeft,
-    trackRight,
-    getThumbPercent,
-    state,
-  } = useSliderValues({ orientation: orientation, origin: origin });
+export type SliderTrackProps = SliderTrackOptions & SliderTrackHTMLProps;
 
-  const trackContainerStyles = tcm(
-    theme.slider.common.track.base,
-    theme.slider[orientation].track.base,
-    className,
-  );
+export const useSliderTrack = createHook<
+  SliderTrackOptions,
+  SliderTrackHTMLProps
+>({
+  name: "SliderTrack",
+  compose: useBox,
+  keys: SLIDER_TRACK_KEYS,
 
-  const trackMainStyles = tcm(
-    theme.slider.common.track.main,
-    theme.slider[orientation].track.main,
-    theme.slider[orientation].track.size[size],
-  );
+  useProps(options, htmlProps) {
+    const { size } = options;
+    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-  const trackFilledStyles = tcm(
-    theme.slider.common.track.filled,
-    theme.slider[orientation].track.filled,
-    theme.slider[orientation].track.size[size],
-  );
+    const theme = useTheme("slider");
+    const className = cx(
+      theme.track.base.normal,
+      theme.track.base.size[size],
+      htmlClassName,
+    );
 
-  const trackDynamicStyles = {
-    [isVertical ? "height" : "width"]: trackWidth,
-    left: !isReversed && !isVertical && trackLeft ? trackLeft : "",
-    right: isReversed ? trackRight : "",
-    bottom: isVertical && isRange ? `${getThumbPercent(0) * 100}%` : "",
-  };
-
-  return (
-    <RenderlessSliderTrack
-      {...state}
-      ref={ref}
-      className={trackContainerStyles}
-      style={{ padding: `${padding}px 0` }}
-      {...props}
-    >
-      <div className={trackMainStyles}>
-        {!isMulti ? (
-          <div className={trackFilledStyles} style={trackDynamicStyles} />
-        ) : null}
-        {props.children}
-      </div>
-    </RenderlessSliderTrack>
-  );
+    return { className, ...restHtmlProps };
+  },
 });
 
-SliderTrack.displayName = "SliderTrack";
+export const SliderTrack = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useSliderTrack,
+});

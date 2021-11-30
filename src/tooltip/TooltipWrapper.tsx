@@ -5,11 +5,16 @@ import {
   useTooltip,
 } from "@renderlesskit/react";
 
+import { RenderPropType } from "../utils";
+
 import { TOOLTIP_WRAPPER_KEYS } from "./__keys";
+import { TooltipStateReturn } from "./TooltipState";
 
-export type TooltipWrapperOptions = TooltipOptions;
+export type TooltipWrapperOptions = TooltipOptions & {
+  prefix: RenderPropType<TooltipStateReturn>;
+};
 
-export type TooltipWrapperHTMLProps = TooltipHTMLProps;
+export type TooltipWrapperHTMLProps = Omit<TooltipHTMLProps, "prefix">;
 
 export type TooltipWrapperProps = TooltipWrapperOptions &
   TooltipWrapperHTMLProps;
