@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { Switch, SwitchText } from "..";
+import { Switch, SwitchText } from "../index";
 
 import js from "./templates/SwitchBasicJsx";
 import ts from "./templates/SwitchBasicTsx";

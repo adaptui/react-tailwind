@@ -11,6 +11,8 @@ export const SLIDER_STATE_KEYS = [
   "range",
   "tooltip",
   "knobIcon",
+  "isDragging",
+  "setIsDragging",
 ] as const;
 export const USE_SLIDER_STATE_KEYS = [
   "orientation",
@@ -44,6 +46,8 @@ export const SLIDER_THUMB_STATE_KEYS = [
   "index",
   "tooltip",
   "knobIcon",
+  "isDragging",
+  "setIsDragging",
 ] as const;
 export const USE_SLIDER_THUMB_STATE_KEYS = [
   "sliderState",
@@ -69,6 +73,8 @@ export const USE_SLIDER_THUMB_STATE_KEYS = [
   "size",
   "knobIcon",
   "tooltip",
+  "isDragging",
+  "setIsDragging",
 ] as const;
 export const SLIDER_FILLED_TRACK_KEYS = [
   ...SLIDER_STATE_KEYS,

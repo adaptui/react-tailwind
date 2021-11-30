@@ -5,7 +5,7 @@ import {
   useTooltipAnchor as useRenderlesskitTooltipAnchor,
 } from "@renderlesskit/react";
 
-import { RenderPropType } from "..";
+import { RenderPropType } from "../utils";
 
 import { TOOLTIP_REFERENCE_KEYS } from "./__keys";
 import { TooltipStateReturn } from "./TooltipState";

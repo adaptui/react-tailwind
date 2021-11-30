@@ -28,7 +28,15 @@ const componentMap = {
 
 export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
   const [state, sliderProps] = useSliderStateSplit(props);
-  const { range, size, knobIcon, tooltip, ...thumbState } = state;
+  const {
+    range,
+    size,
+    knobIcon,
+    tooltip,
+    isDragging,
+    setIsDragging,
+    ...thumbState
+  } = state;
   const { children, ...restProps } = sliderProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
@@ -61,6 +69,8 @@ export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
     size,
     knobIcon,
     tooltip,
+    isDragging,
+    setIsDragging,
     sliderState: thumbState,
     ...componentProps.thumbProps,
   };
