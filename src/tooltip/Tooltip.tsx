@@ -1,7 +1,7 @@
 import * as React from "react";
 
+import { useTheme } from "../theme";
 import { cx, RenderProp, withIconA11y } from "../utils";
-import { useTheme } from "..";
 
 import { TooltipArrow } from "./TooltipArrow";
 import { TooltipArrowContent } from "./TooltipArrowContent";

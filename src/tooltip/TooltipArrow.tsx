@@ -5,7 +5,7 @@ import {
   useTooltipArrow as useRenderlesskitTooltipArrow,
 } from "@renderlesskit/react";
 
-import { RenderPropType } from "..";
+import { RenderPropType } from "../utils";
 
 import { TOOLTIP_ARROW_KEYS } from "./__keys";
 import { TooltipStateReturn } from "./TooltipState";

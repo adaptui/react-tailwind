@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   SliderAction as RenderlesskitSliderActions,
   SliderInitialState as RenderlesskitSliderInitialState,
@@ -34,9 +35,19 @@ export type SliderState = RenderlesskitSliderState & {
    * Provide custom icons as a replacement for the default ones.
    */
   knobIcon: RenderPropType<SliderThumbStateReturn>;
+
+  /**
+   * True, if the value start to change.
+   */
+  isDragging: boolean;
 };
 
-export type SliderActions = RenderlesskitSliderActions & {};
+export type SliderActions = RenderlesskitSliderActions & {
+  /**
+   * Action to change the draggin state
+   */
+  setIsDragging: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export type SliderStateReturn = SliderState & SliderActions;
 
@@ -47,13 +58,45 @@ export function useSliderState(props: SliderInitialState): SliderStateReturn {
   const {
     range = false,
     size = "md",
-    knobIcon,
     tooltip = true,
+    knobIcon,
+    onChange: onInitialOnChange,
+    onChangeEnd: onInitialOnChangeEnd,
     ...rest
   } = props;
-  const slider = useRenderlesskitSliderState(rest);
+  const [isDragging, setIsDragging] = React.useState(false);
 
-  return { ...slider, range, size, knobIcon, tooltip };
+  const onChange = React.useCallback(
+    (value: number[]) => {
+      onInitialOnChange?.(value);
+      if (!isDragging) setIsDragging(true);
+    },
+    [isDragging, onInitialOnChange],
+  );
+
+  const onChangeEnd = React.useCallback(
+    (value: number[]) => {
+      onInitialOnChangeEnd?.(value);
+      setIsDragging(false);
+    },
+    [onInitialOnChangeEnd],
+  );
+
+  const sliderState = useRenderlesskitSliderState({
+    ...rest,
+    onChange,
+    onChangeEnd,
+  });
+
+  return {
+    ...sliderState,
+    range,
+    size,
+    knobIcon,
+    tooltip,
+    isDragging,
+    setIsDragging,
+  };
 }
 
 export const SliderDefaultKnobIcon: SliderProps["knobIcon"] = state => {
