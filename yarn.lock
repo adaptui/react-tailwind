@@ -3161,15 +3161,6 @@
     "@react-aria/utils" "^3.9.0"
     "@react-types/shared" "^3.9.0"
 
-"@react-aria/interactions@^3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.7.0.tgz#eb19c1068b557a6b6df1e1c4abef07de719e9f25"
-  integrity sha512-Xomchjb9bqvh3ocil+QCEYFSxsTy8PHEz43mNP6z2yuu3UqTpl2FsWfyKgF/Yy0WKVkyV2dO2uz758KJTCLZhw==
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/utils" "^3.10.0"
-    "@react-types/shared" "^3.10.0"
-
 "@react-aria/label@^3.1.3":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@react-aria/label/-/label-3.2.1.tgz#e6562259e6b17e3856c4c3e0060903cf705d094b"
@@ -3338,10 +3329,10 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
-"@renderlesskit/react@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.9.1.tgz#cd49f345ccec19fd18096a6ca41754027fc25e3d"
-  integrity sha512-foNfrzJAwH6QxDUiPeMU41ZibvSNyhW4f29PZ9S3RsOocFW+cXak+efqrvAFgL3wTA7DBgq/XYiAMFOnUI0IvQ==
+"@renderlesskit/react@^0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.9.2.tgz#33aabe8fe1edfae87e9b52e249948c76296e87e2"
+  integrity sha512-wPPHcTM80I7XpMLqfQQn2T53iTYv0kGDfBpT4b0kUw3KGYxPC+vV23yzv1aLvTbx4+508SN4LvXxzui7yldoCg==
   dependencies:
     "@chakra-ui/counter" "^1.2.1"
     "@chakra-ui/hooks" "^1.7.1"

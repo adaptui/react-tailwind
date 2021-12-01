@@ -34,6 +34,11 @@ export type SliderThumbState = RenderlesskitSliderThumbState & {
    * True, if the value start to change.
    */
   isDragging: boolean;
+
+  /**
+   * True, if the slider is disabled.
+   */
+  isDisabled: boolean | undefined;
 };
 
 export type SliderThumbActions = RenderlesskitSliderThumbActions & {
@@ -70,5 +75,6 @@ export function useSliderThumbState(
     tooltip,
     isDragging,
     setIsDragging,
+    isDisabled: rest.isDisabled,
   };
 }

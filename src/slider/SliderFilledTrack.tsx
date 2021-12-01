@@ -5,10 +5,11 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
+import { useSliderContext } from "./SliderProps";
 import { SliderStateReturn } from "./SliderState";
 
 export type SliderFilledTrackOptions = BoxOptions &
-  Pick<SliderStateReturn, "baseState" | "range" | "size"> & {};
+  Pick<SliderStateReturn, "range" | "size"> & {};
 
 export type SliderFilledTrackHTMLProps = BoxHTMLProps;
 
@@ -24,8 +25,9 @@ export const useSliderFilledTrack = createHook<
   keys: SLIDER_FILLED_TRACK_KEYS,
 
   useProps(options, htmlProps) {
-    const { baseState, range, size } = options;
-    const { getValuePercent, getThumbPercent, values } = baseState;
+    const { range, size } = options;
+    let state = useSliderContext();
+
     const {
       className: htmlClassName,
       style: htmlStyle,
@@ -39,10 +41,12 @@ export const useSliderFilledTrack = createHook<
       htmlClassName,
     );
     const style = {
-      width: !range
-        ? `${getValuePercent(values[0]) * 100}%`
-        : `${(getThumbPercent(1) - getThumbPercent(0)) * 100}%`,
-      left: !range ? undefined : `${getThumbPercent(0) * 100}%`,
+      width: state
+        ? !range
+          ? `${state.getValuePercent(state.values[0]) * 100}%`
+          : `${(state.getThumbPercent(1) - state.getThumbPercent(0)) * 100}%`
+        : undefined,
+      left: !state || !range ? undefined : `${state.getThumbPercent(0) * 100}%`,
       ...htmlStyle,
     };
 

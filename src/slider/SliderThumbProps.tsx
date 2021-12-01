@@ -15,9 +15,9 @@ export const useSliderThumbStateSplit = (props: SliderThumbProps) => {
     props,
     USE_SLIDER_THUMB_STATE_KEYS,
   ) as [SliderThumbInitialState, SliderThumbOwnProps];
-  const state = useSliderThumbState(stateProps);
+  const thumbState = useSliderThumbState(stateProps);
 
-  return [state, sliderProps, stateProps] as const;
+  return [stateProps.state, thumbState, sliderProps, stateProps] as const;
 };
 
 const componentMap = {
@@ -29,25 +29,31 @@ const componentMap = {
 export const useSliderThumbProps = (
   props: React.PropsWithChildren<SliderThumbProps>,
 ) => {
-  const [state, sliderProps] = useSliderThumbStateSplit(props);
+  const [state, thumbState, sliderProps] = useSliderThumbStateSplit(props);
   const { children, ...restProps } = sliderProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
   const wrapperProps: SliderThumbWrapperProps = {
-    ...state,
+    ...thumbState,
     ...restProps,
     ...componentProps.wrapperProps,
   };
 
   const containerProps: SliderThumbContainerProps = {
-    ...state,
+    ...thumbState,
     ...componentProps.containerProps,
   };
 
   const inputProps: SliderThumbInputProps = {
-    ...state,
+    ...thumbState,
     ...componentProps.inputProps,
   };
 
-  return { wrapperProps, containerProps, inputProps, state };
+  return {
+    wrapperProps,
+    containerProps,
+    inputProps,
+    state,
+    thumbState,
+  };
 };

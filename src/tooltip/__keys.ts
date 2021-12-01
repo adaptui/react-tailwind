@@ -61,7 +61,6 @@ export const USE_TOOLTIP_STATE_KEYS = [
 export const SLIDER_TOOLTIP_REFERENCE_KEYS = [
   ...TOOLTIP_STATE_KEYS,
   "isDragging",
-  "setIsDragging",
 ] as const;
 export const TOOLTIP_ANCHOR_KEYS = TOOLTIP_STATE_KEYS;
 export const TOOLTIP_ARROW_KEYS = TOOLTIP_ANCHOR_KEYS;

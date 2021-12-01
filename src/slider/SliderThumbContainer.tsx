@@ -14,7 +14,7 @@ import { SliderThumbStateReturn } from "./SliderThumbState";
 
 export type SliderThumbContainerOptions = BoxOptions &
   SliderThumbOptions &
-  Pick<SliderThumbStateReturn, "sliderState" | "index" | "size"> & {};
+  Pick<SliderThumbStateReturn, "index" | "size" | "isDisabled"> & {};
 
 export type SliderThumbContainerHTMLProps = BoxHTMLProps & SliderThumbHTMLProps;
 
@@ -30,9 +30,7 @@ export const useSliderThumbContainer = createHook<
   keys: SLIDER_THUMB_CONTAINER_KEYS,
 
   useProps(options, htmlProps) {
-    const { sliderState, size } = options;
-    const { baseState } = sliderState;
-    const { isDisabled } = baseState;
+    const { size, isDisabled } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("slider");

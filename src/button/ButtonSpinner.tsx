@@ -7,7 +7,7 @@ import { cx, passProps } from "../utils";
 import { ButtonProps } from "./Button";
 
 export type ButtonSpinnerProps = Partial<
-  Pick<ButtonProps, "spinner" | "size" | "iconOnly" | "prefix" | "suffix">
+  Pick<ButtonProps, "spinner" | "size" | "prefix" | "suffix">
 > & {};
 
 export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
@@ -24,25 +24,20 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
       ? button.size.prefix[size]
       : suffix
       ? button.size.suffix[size]
-      : button.size.iconOnly.text[size],
+      : button.size.iconOnly.spinner[size],
   );
 
   return <>{passProps(spinner, { className: spinnerStyles })}</>;
 };
 
 export const ButtonFullWidthSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const {
-    size = "md",
-    spinner = <Spinner size="em" />,
-    iconOnly,
-    children,
-  } = props;
+  const { size = "md", spinner = <Spinner size="em" />, children } = props;
 
   // This is only the grey area in button for now which user cannot customize
   return (
     <>
       <div className="absolute flex items-center justify-center">
-        <ButtonSpinner spinner={spinner} iconOnly={iconOnly} size={size} />
+        <ButtonSpinner spinner={spinner} size={size} />
       </div>
       <div className="opacity-0">{children}</div>
     </>

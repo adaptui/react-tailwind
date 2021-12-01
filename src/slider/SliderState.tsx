@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  SliderAction as RenderlesskitSliderActions,
+  SliderActions as RenderlesskitSliderActions,
   SliderInitialState as RenderlesskitSliderInitialState,
   SliderState as RenderlesskitSliderState,
   useSliderState as useRenderlesskitSliderState,
@@ -82,14 +82,14 @@ export function useSliderState(props: SliderInitialState): SliderStateReturn {
     [onInitialOnChangeEnd],
   );
 
-  const sliderState = useRenderlesskitSliderState({
+  const state = useRenderlesskitSliderState({
     ...rest,
     onChange,
     onChangeEnd,
   });
 
   return {
-    ...sliderState,
+    ...state,
     range,
     size,
     knobIcon,
@@ -101,7 +101,6 @@ export function useSliderState(props: SliderInitialState): SliderStateReturn {
 
 export const SliderDefaultKnobIcon: SliderProps["knobIcon"] = state => {
   const { size } = state;
-
   const theme = useTheme("slider");
   const className = theme.icon.size[size];
 

@@ -1,7 +1,8 @@
 import * as React from "react";
+import { useSliderBaseState } from "@renderlesskit/react";
 
 import { SliderFilledTrack } from "./SliderFilledTrack";
-import { useSliderProps } from "./SliderProps";
+import { SliderContextProvider, useSliderProps } from "./SliderProps";
 import { SliderInitialState } from "./SliderState";
 import { SliderThumb } from "./SliderThumb";
 import { SliderTrack } from "./SliderTrack";
@@ -14,30 +15,48 @@ export type SliderProps = SliderInitialState & SliderOwnProps;
 
 export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
   (props, ref) => {
+    const state = useSliderBaseState(props);
     const {
       wrapperProps,
       trackWrapperProps,
       trackProps,
       filledTrackProps,
       thumbProps,
-      state,
-    } = useSliderProps(props);
+      state: sliderState,
+    } = useSliderProps({ ...props, state });
 
     return (
-      <SliderWrapper ref={ref} {...wrapperProps}>
-        <SliderTrackWrapper {...trackWrapperProps}>
-          <SliderTrack {...trackProps} />
-          <SliderFilledTrack {...filledTrackProps} />
-        </SliderTrackWrapper>
-        {!state.range ? (
-          <SliderThumb {...thumbProps} aria-label="Thumb" index={0} />
-        ) : (
-          <>
-            <SliderThumb {...thumbProps} aria-label="Thumb 0" index={0} />
-            <SliderThumb {...thumbProps} aria-label="Thumb 1" index={1} />
-          </>
-        )}
-      </SliderWrapper>
+      <SliderContextProvider {...state}>
+        <SliderWrapper ref={ref} {...wrapperProps}>
+          <SliderTrackWrapper {...trackWrapperProps}>
+            <SliderTrack {...trackProps} />
+            <SliderFilledTrack {...filledTrackProps} />
+          </SliderTrackWrapper>
+          {!sliderState.range ? (
+            <SliderThumb
+              {...thumbProps}
+              state={state}
+              aria-label="Thumb"
+              index={0}
+            />
+          ) : (
+            <>
+              <SliderThumb
+                {...thumbProps}
+                state={state}
+                aria-label="Thumb 0"
+                index={0}
+              />
+              <SliderThumb
+                {...thumbProps}
+                state={state}
+                aria-label="Thumb 1"
+                index={1}
+              />
+            </>
+          )}
+        </SliderWrapper>
+      </SliderContextProvider>
     );
   },
 );
