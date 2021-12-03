@@ -1,4 +1,6 @@
-import { getComponentProps, splitProps } from "../utils";
+import { SliderBaseStateReturn } from "@renderlesskit/react";
+
+import { createContext, getComponentProps, splitProps } from "../utils";
 
 import { USE_SLIDER_STATE_KEYS } from "./__keys";
 import { SliderOwnProps, SliderProps } from "./Slider";
@@ -14,9 +16,9 @@ export const useSliderStateSplit = (props: SliderProps) => {
     props,
     USE_SLIDER_STATE_KEYS,
   ) as [SliderInitialState, SliderOwnProps];
-  const state = useSliderState(stateProps);
+  const sliderState = useSliderState(stateProps);
 
-  return [state, sliderProps, stateProps] as const;
+  return [sliderState, sliderProps, stateProps] as const;
 };
 
 const componentMap = {
@@ -27,16 +29,8 @@ const componentMap = {
 };
 
 export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
-  const [state, sliderProps] = useSliderStateSplit(props);
-  const {
-    range,
-    size,
-    knobIcon,
-    tooltip,
-    isDragging,
-    setIsDragging,
-    ...thumbState
-  } = state;
+  const [state, sliderProps, stateProps] = useSliderStateSplit(props);
+  const { size, knobIcon, tooltip, isDragging, setIsDragging } = state;
   const { children, ...restProps } = sliderProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
@@ -66,12 +60,14 @@ export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
   };
 
   const thumbProps: SliderThumbProps = {
+    trackRef: state.trackRef,
+    orientation: stateProps.orientation,
+    isDisabled: stateProps.isDisabled,
     size,
     knobIcon,
     tooltip,
     isDragging,
     setIsDragging,
-    sliderState: thumbState,
     ...componentProps.thumbProps,
   };
 
@@ -85,3 +81,11 @@ export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
     finalChildren,
   };
 };
+
+const [SliderContextProvider, useSliderContext] =
+  createContext<SliderBaseStateReturn>({
+    name: "SliderContextProvider",
+    strict: false,
+  });
+
+export { SliderContextProvider, useSliderContext };

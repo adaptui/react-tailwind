@@ -81,10 +81,8 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       spinner = <Spinner size="em" />,
       ...restOptions
     } = options;
-    const { disabled: htmlDisabled } = htmlProps;
-    const disabled = htmlDisabled || loading;
 
-    return { size, variant, loading, spinner, disabled, ...restOptions };
+    return { size, variant, loading, spinner, ...restOptions };
   },
 
   useProps(options, htmlProps) {
@@ -98,12 +96,14 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       suffix,
     } = options;
 
-    const {
+    let {
       className: htmlClassName,
       children: htmlChildren,
+      disabled: htmlDisabled,
       ...restHtmlProps
     } = htmlProps;
 
+    const disabled = htmlDisabled || loading;
     const groupcontext = useButtonGroupContext();
     const size = groupcontext?.size || _size;
     const variant = groupcontext?.variant || _variant;
@@ -162,7 +162,7 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       </>
     );
 
-    return { className, children, ...restHtmlProps };
+    return { className, children, disabled, ...restHtmlProps };
   },
 });
 

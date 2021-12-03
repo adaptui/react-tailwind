@@ -26,30 +26,30 @@ export type SliderThumbProps = SliderThumbInitialState & SliderThumbOwnProps;
 
 export const SliderThumb = React.forwardRef<HTMLDivElement, SliderThumbProps>(
   (props, ref) => {
-    const { wrapperProps, containerProps, inputProps, state } =
+    const { state, index } = props;
+    const { wrapperProps, containerProps, inputProps, thumbState } =
       useSliderThumbProps(props);
 
-    const tooltip = useTooltipState({});
+    const tooltip = useTooltipState({ side: "top" });
 
     return (
       <SliderThumbWrapper {...wrapperProps}>
-        {state.tooltip && !state.sliderState.baseState.isDisabled ? (
+        {thumbState.tooltip && !thumbState.isDisabled ? (
           <>
             <SliderTooltipReference
-              isDragging={state.isDragging}
-              setIsDragging={state.setIsDragging}
+              isDragging={state.isThumbDragging(index)}
               {...tooltip}
             >
               <SliderThumbContainer {...containerProps} tabIndex={-1}>
                 <SliderThumbInput ref={ref} {...inputProps} />
-                {state.knobIcon
-                  ? withIconA11y(runIfFn(state.knobIcon, state))
+                {thumbState.knobIcon
+                  ? withIconA11y(runIfFn(thumbState.knobIcon, thumbState))
                   : null}
               </SliderThumbContainer>
             </SliderTooltipReference>
             <TooltipWrapper ref={ref} {...tooltip}>
               <TooltipContent {...tooltip}>
-                {state.sliderState.baseState.getThumbValueLabel(state.index)}
+                {state.getThumbValueLabel(thumbState.index)}
                 <TooltipArrow {...tooltip}>
                   <TooltipArrowContent {...tooltip}>
                     {withIconA11y(runIfFn(<ArrowIcon />, state))}
@@ -61,8 +61,8 @@ export const SliderThumb = React.forwardRef<HTMLDivElement, SliderThumbProps>(
         ) : (
           <SliderThumbContainer {...containerProps} tabIndex={-1}>
             <SliderThumbInput ref={ref} {...inputProps} />
-            {state.knobIcon
-              ? withIconA11y(runIfFn(state.knobIcon, state))
+            {thumbState.knobIcon
+              ? withIconA11y(runIfFn(thumbState.knobIcon, thumbState))
               : null}
           </SliderThumbContainer>
         )}

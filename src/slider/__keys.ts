@@ -1,8 +1,6 @@
 // Automatically generated
 export const SLIDER_STATE_KEYS = [
   "trackRef",
-  "baseState",
-  "orientation",
   "labelProps",
   "groupProps",
   "trackProps",
@@ -30,14 +28,13 @@ export const USE_SLIDER_STATE_KEYS = [
   "aria-labelledby",
   "aria-describedby",
   "aria-details",
-  "formatOptions",
+  "state",
   "size",
   "range",
   "knobIcon",
   "tooltip",
 ] as const;
 export const SLIDER_THUMB_STATE_KEYS = [
-  "sliderState",
   "inputRef",
   "thumbProps",
   "inputProps",
@@ -47,10 +44,10 @@ export const SLIDER_THUMB_STATE_KEYS = [
   "tooltip",
   "knobIcon",
   "isDragging",
+  "isDisabled",
   "setIsDragging",
 ] as const;
 export const USE_SLIDER_THUMB_STATE_KEYS = [
-  "sliderState",
   "orientation",
   "isDisabled",
   "index",
@@ -70,6 +67,8 @@ export const USE_SLIDER_THUMB_STATE_KEYS = [
   "aria-describedby",
   "aria-details",
   "aria-errormessage",
+  "trackRef",
+  "state",
   "size",
   "knobIcon",
   "tooltip",

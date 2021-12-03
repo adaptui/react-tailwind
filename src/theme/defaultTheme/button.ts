@@ -50,7 +50,7 @@ export const button = {
         lg: "min-h-9 rounded-[10px] w-9",
         xl: "min-h-11 rounded-xl w-11",
       },
-      text: {
+      spinner: {
         sm: "text-base",
         md: "text-base",
         lg: "text-base",

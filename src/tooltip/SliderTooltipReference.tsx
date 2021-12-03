@@ -1,9 +1,9 @@
 import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
 import { useForkRef, useLiveRef } from "reakit-utils";
-import { useFocusVisible } from "@react-aria/interactions";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { useMediaQuery, usePrevious } from "../hooks";
 import { RenderPropType } from "../utils";
 
 import { SLIDER_TOOLTIP_REFERENCE_KEYS } from "./__keys";
@@ -11,10 +11,9 @@ import { TooltipStateReturn } from "./TooltipState";
 
 export type SliderTooltipReferenceOptions = BoxOptions &
   Pick<Partial<TooltipStateReturn>, "setAnchor" | "baseId"> &
-  Pick<TooltipStateReturn, "show" | "hide"> & {
+  Pick<TooltipStateReturn, "show" | "hide" | "visible"> & {
     prefix: RenderPropType<TooltipStateReturn>;
     isDragging?: boolean;
-    setIsDragging: React.Dispatch<React.SetStateAction<boolean>>;
   };
 
 export type SliderTooltipReferenceHTMLProps = Omit<BoxHTMLProps, "prefix">;
@@ -38,27 +37,29 @@ export const useSliderTooltipReference = createHook<
       onBlur: htmlOnBlur,
       onMouseEnter: htmlOnMouseEnter,
       onMouseLeave: htmlOnMouseLeave,
-      onPointerDown: htmlOnPointerDown,
       children: htmlChildren,
       ...htmlProps
     },
   ) {
-    const { show, hide, baseId, setAnchor, isDragging, setIsDragging } =
-      options;
+    const { visible, show, hide, baseId, setAnchor, isDragging } = options;
     const onFocusRef = useLiveRef(htmlOnFocus);
     const onBlurRef = useLiveRef(htmlOnBlur);
     const onMouseEnterRef = useLiveRef(htmlOnMouseEnter);
     const onMouseLeaveRef = useLiveRef(htmlOnMouseLeave);
-    const onPointerDownRef = useLiveRef(htmlOnPointerDown);
 
+    const [isMobile] = useMediaQuery("(max-width: 640px)");
     const [hasMouseLeft, setHasMouseLeft] = React.useState(false);
-    const { isFocusVisible } = useFocusVisible();
+    const wasDragging = usePrevious(isDragging);
 
     React.useEffect(() => {
-      if (!isFocusVisible && hasMouseLeft && !isDragging) {
-        hide();
+      if (isMobile) {
+        if (!isDragging && wasDragging && visible) hide();
+      } else {
+        if (hasMouseLeft && !isDragging && wasDragging && visible) hide();
       }
-    }, [hide, isDragging, hasMouseLeft, isFocusVisible]);
+
+      if (isDragging && !visible) show();
+    }, [hide, wasDragging, isDragging, hasMouseLeft, visible, isMobile, show]);
 
     const onFocus = React.useCallback(
       (event: React.FocusEvent) => {
@@ -68,16 +69,6 @@ export const useSliderTooltipReference = createHook<
         show?.();
       },
       [onFocusRef, show],
-    );
-
-    const onPointerDown = React.useCallback(
-      (event: React.PointerEvent) => {
-        onPointerDownRef.current?.(event);
-        setIsDragging(true);
-
-        if (event.defaultPrevented) return;
-      },
-      [onPointerDownRef, setIsDragging],
     );
 
     const onBlur = React.useCallback(
@@ -123,7 +114,6 @@ export const useSliderTooltipReference = createHook<
       onBlur,
       onMouseEnter,
       onMouseLeave,
-      onPointerDown,
       "aria-describedby": baseId,
       children: referenceChildren,
       ...htmlProps,
