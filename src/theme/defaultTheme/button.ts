@@ -1,5 +1,10 @@
 export const button = {
-  base: "inline-flex items-center justify-center relative translate-y-0 hover:-translate-y-px active:translate-y-0 transition-all will-change-transform disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
+  base: {
+    normal:
+      "inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
+    notCollapsed:
+      "translate-y-0 hover:-translate-y-px active:translate-y-0 will-change-transform",
+  },
   variant: {
     default: {
       solid: "bg-gray-800 text-white border border-transparent",

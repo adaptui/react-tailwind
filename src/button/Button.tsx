@@ -110,7 +110,8 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
 
     const button = useTheme("button");
     const className = cx(
-      button.base,
+      button.base.normal,
+      groupcontext?.collapsed ? "" : button.base.notCollapsed,
       !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
       button.variant.default[variant],
       button.variant.hover[variant],
