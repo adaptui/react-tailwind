@@ -43,10 +43,10 @@ export const button = {
   },
   size: {
     default: {
-      sm: "min-h-[26px] px-2 rounded-lg text-cxs font-medium w-auto min-w-[26px] pb-px",
-      md: "min-h-[30px] px-2.5 rounded-lg text-sm font-medium w-auto min-w-[30px]",
-      lg: "min-h-9 px-3 rounded-[10px] text-sm font-medium w-auto min-w-9",
-      xl: "min-h-11 px-4 rounded-xl text-base font-medium w-auto min-w-11",
+      sm: "min-h-[26px] w-auto min-w-[26px] pb-px px-2 rounded-lg text-cxs font-medium",
+      md: "min-h-[30px] w-auto min-w-[30px] px-2.5 rounded-lg text-sm font-medium",
+      lg: "min-h-9 w-auto min-w-9 px-3 rounded-[10px] text-sm font-medium",
+      xl: "min-h-11 w-auto min-w-11 px-4 rounded-xl text-base font-medium",
     },
     iconOnly: {
       base: {
