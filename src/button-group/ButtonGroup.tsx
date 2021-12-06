@@ -52,7 +52,11 @@ export const useButtonGroup = createHook<
     const wrapElement = React.useCallback(
       (element: React.ReactNode) => {
         element = (
-          <ButtonGroupContextProvider size={size} variant={variant}>
+          <ButtonGroupContextProvider
+            size={size}
+            variant={variant}
+            collapsed={collapsed}
+          >
             {element}
           </ButtonGroupContextProvider>
         );
@@ -63,7 +67,7 @@ export const useButtonGroup = createHook<
 
         return element;
       },
-      [htmlWrapElement, size, variant],
+      [htmlWrapElement, size, variant, collapsed],
     );
 
     return { className, wrapElement, ...restHtmlProps };
