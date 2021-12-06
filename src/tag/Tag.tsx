@@ -1,139 +1,89 @@
 import * as React from "react";
-import { Clickable, CompositeItem } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 
-import { Box, BoxProps } from "../box";
-import { CloseIcon } from "../icons";
+import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
+import { cx, passProps, RenderPropType, runIfFn, withIconA11y } from "../utils";
 
-import { useTagGroup } from "./TagGroup";
+import { TAG_KEYS } from "./__keys";
 
-export type TagProps = Omit<BoxProps, "prefix"> & {
+export type TagOptions = BoxOptions & {
   /**
-   * id for the tag
-   */
-  id?: string;
-  /**
-   * How large should the tag be?
+   * How large should the button be?
    *
-   * @default "md"
+   * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"tag", "size">;
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size", "default">;
+
   /**
-   * How the tag should be styled?
+   * How the button should look?
    *
-   * @default "primary"
+   * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"tag", "variant">;
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
+
   /**
-   * If added, tag will show prefix the content before the tag's label
+   * If added, the button will show an icon before the button's text.
    */
-  prefix?: React.ReactElement;
+  prefix?: RenderPropType;
+
   /**
-   * Is tag closable?
-   *
-   * @default false
+   * If added, the button will show an icon before the button's text.
    */
-  closable?: boolean;
-  /**
-   * If added, tag will show suffix after the tag's label.
-   * NOTE: This will only show if closable is set to `true`
-   */
-  suffix?: React.ReactElement;
-  /**
-   * Callback to fire when close icon is clicked?
-   */
-  onClose?: (id?: string) => void;
+  closable?: RenderPropType;
 };
 
-export const Tag = forwardRefWithAs<TagProps, HTMLSpanElement, "span">(
-  (props, ref) => {
-    const {
-      id,
-      size,
-      variant,
-      prefix,
-      suffix = <CloseIcon />,
-      closable = false,
-      onClose,
-      className,
-      children,
-      ...rest
-    } = props;
+export type TagHTMLProps = Omit<BoxHTMLProps, "prefix"> & {};
 
-    const group = useTagGroup();
-    const _size = size || group?.size || "md";
-    const _variant = variant || group?.variant || "primary";
+export type TagProps = TagOptions & TagHTMLProps;
 
-    const theme = useTheme();
-    const tagStyles = tcm(
-      theme.tag.base,
-      theme.tag.size[_size],
-      theme.tag.variant[_variant],
-      className,
-    );
+export const useTag = createHook<TagOptions, TagHTMLProps>({
+  name: "Tag",
+  compose: useBox,
+  keys: TAG_KEYS,
 
-    // TODO: Clean this up
-    if (
-      !closable &&
-      suffix.type.displayName !== (CloseIcon as any).displayName
-    ) {
-      console.warn(
-        "Tag: `suffix` will not be visible because `closable` is set to false, please set `closable` to true",
-      );
-    }
+  useOptions(options, htmlProps) {
+    const { size = "md", variant = "solid", ...restOptions } = options;
 
-    return (
-      <Box as="span" ref={ref} className={tagStyles} {...rest}>
-        {prefix && (
-          <Box as="span" className={theme.tag.prefix[_size]}>
-            {prefix}
-          </Box>
-        )}
-        {children}
-        {closable && suffix && (
-          <ClosableElement handleClick={() => onClose?.(id)}>
-            {suffix}
-          </ClosableElement>
-        )}
-      </Box>
-    );
+    return { size, variant, ...restOptions };
   },
-);
 
-Tag.displayName = "Tag";
+  useProps(options, htmlProps) {
+    const { size = "md", variant = "solid", prefix, closable } = options;
 
-export type ClosableElementProps = Pick<TagProps, "size"> & {
-  handleClick?: () => void;
-};
+    let {
+      className: htmlClassName,
+      children: htmlChildren,
+      ...restHtmlProps
+    } = htmlProps;
 
-export const ClosableElement = forwardRefWithAs<
-  ClosableElementProps,
-  HTMLButtonElement,
-  "button"
->((props, ref) => {
-  const { handleClick, size, className, children, ...rest } = props;
-  const group = useTagGroup();
-  const _composite = group?.composite || {};
-  const _size = size || group?.size || "sm";
+    const theme = useTheme("tag");
+    const className = cx(
+      theme.base.normal,
+      theme.size.default[size],
+      theme.variant.default[variant],
+      theme.variant.hover[variant],
+      theme.variant.active[variant],
+      htmlClassName,
+    );
+    const prefixStyles = cx(theme.size.prefix[size]);
 
-  const theme = useTheme();
-  const closableElementStyles = tcm(theme.tag.suffix[_size], className);
+    const children = (
+      <>
+        {prefix ? (
+          <>{withIconA11y(prefix, { className: prefixStyles })}</>
+        ) : null}
+        <span>{htmlChildren}</span>
+        {closable ? <>{passProps(closable, options)}</> : null}
+      </>
+    );
 
-  return (
-    <CompositeItem
-      aria-label="close"
-      data-testid="testid-close-element"
-      as={Clickable}
-      ref={ref}
-      onClick={handleClick}
-      className={closableElementStyles}
-      {..._composite}
-      {...rest}
-    >
-      {children}
-    </CompositeItem>
-  );
+    return { className, children, ...restHtmlProps };
+  },
 });
 
-ClosableElement.displayName = "ClosableElement";
+export const Tag = createComponent({
+  as: "div",
+  memo: true,
+  useHook: useTag,
+});
