@@ -3,7 +3,7 @@ import { createComponent, createHook } from "reakit-system";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, passProps, RenderPropType, runIfFn, withIconA11y } from "../utils";
+import { cx, passProps, RenderPropType, withIconA11y } from "../utils";
 
 import { TAG_KEYS } from "./__keys";
 
