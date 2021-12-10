@@ -1,27 +1,13 @@
-const path = require("path");
-const defaultTheme = require("tailwindcss/defaultTheme");
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
+module.exports = {
+  presets: [require("./preset")],
+  content: ["./src/**/*", "./renderlesskit.config.ts", "./.storybook/**/*"],
 
-const preset = require("./preset");
-
-module.exports = preset({
-  mode: "jit",
-  purge: [
-    path.resolve(__dirname, "./src/**/*"),
-    path.resolve(__dirname, "./renderlesskit.config.ts"),
-    path.resolve(__dirname, "./.storybook/**/*"),
-  ],
-
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-      },
-    },
-  },
+  theme: { extend: {} },
 
   plugins: [
     require("@tailwindcss/forms")({
       strategy: "class",
     }),
   ],
-});
+};

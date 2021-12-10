@@ -28,15 +28,6 @@ const utilities = plugin(function ({ addUtilities, theme }) {
       "border-top-left-radius": "0px",
       "border-bottom-left-radius": "0px",
     },
-    ".touch-action-none": {
-      "touch-action": "none",
-    },
-    ".will-change-transform": {
-      "will-change": "transform",
-    },
-    ".will-change-width": {
-      "will-change": "width",
-    },
   };
 
   addUtilities(utilities);

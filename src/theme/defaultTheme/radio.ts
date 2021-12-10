@@ -40,7 +40,7 @@ export const radio = {
   },
   input: "peer sr-only",
   icon: {
-    base: "inline-flex items-center justify-center flex-shrink-0 align-top select-none transition-all",
+    base: "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
     description: "self-start",
     size: {
       sm: "w-3.5 h-3.5 border-[1.5px] text-[6px] rounded-full",

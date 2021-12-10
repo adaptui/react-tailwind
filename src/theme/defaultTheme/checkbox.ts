@@ -40,7 +40,7 @@ export const checkbox = {
   },
   input: "peer sr-only",
   icon: {
-    base: "inline-flex items-center justify-center flex-shrink-0 align-top select-none transition-all",
+    base: "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
     size: {
       sm: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
       md: "w-4 h-4 text-xs border-[1.5px] rounded",

@@ -1,6 +1,6 @@
 export const input = {
   wrapper: "relative inline-flex",
-  base: "appearance-none w-full outline-none px-2 py-1 text-xs shadow-sm font-medium placeholder-text-gray-500 border h-6 border-gray-300 hover:border-gray-400 rounded-md text-gray-800 focus-visible:border-blue-500 focus-visible:shadow-input disabled:bg-gray-100 disabled:shadow-none disabled:cursor-not-allowed disabled:border-gray-300",
+  main: "appearance-none w-full outline-none px-2 py-1 shadow-sm font-medium placeholder:text-gray-500 placeholder-text-cxs border h-6 border-gray-300 hover:border-gray-400 rounded-md text-gray-800 focus-visible:border-blue-500 focus-visible:shadow-input disabled:bg-gray-100 disabled:shadow-none disabled:cursor-not-allowed disabled:border-gray-300",
   invalid: "border-red-300 hover:border-red-400",
   children: {
     pointerEventsNone: "pointer-events-none",

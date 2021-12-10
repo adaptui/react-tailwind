@@ -25,7 +25,7 @@ export const useInputWrapper = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("input");
-    const className = cx(htmlClassName);
+    const className = cx(theme.wrapper, htmlClassName);
 
     return { className, ...restHtmlProps };
   },

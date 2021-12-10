@@ -6,7 +6,7 @@ export const toast = {
     show: "opacity-100",
     hide: "opacity-0",
   },
-  icon: "inline-flex box-content flex-shrink-0 mr-2 w-4 h-4 py-0.5",
+  icon: "inline-flex box-content shrink-0 mr-2 w-4 h-4 py-0.5",
   body: {
     base: "flex flex-col text-sm flex-wrap mr-2",
     title: "font-medium",

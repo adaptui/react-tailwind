@@ -22,7 +22,7 @@ export const useInputMain = createHook<InputMainOptions, InputMainHTMLProps>({
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("input");
-    const className = cx(htmlClassName);
+    const className = cx(theme.main, htmlClassName);
 
     return { className, ...restHtmlProps };
   },

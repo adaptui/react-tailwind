@@ -1,7 +1,7 @@
 export const circularProgress = {
   wrapper: "relative inline-flex w-fit",
   hint: {
-    base: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium text-gray-900",
+    base: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-medium text-gray-900",
     size: {
       sm: "text-xs",
       md: "text-sm",
