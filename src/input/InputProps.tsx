@@ -27,7 +27,7 @@ const componentMap = {
 
 export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const [state, inputProps] = useInputStateSplit(props);
-  const {} = state;
+  const { prefix, suffix } = state;
   const { className, style, children, ...restProps } = inputProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 

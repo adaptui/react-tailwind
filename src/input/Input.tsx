@@ -17,14 +17,15 @@ export type InputProps = InputInitialState &
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
-    const { wrapperProps, mainProps, prefixProps, suffixProps } =
+    const { state, wrapperProps, mainProps, prefixProps, suffixProps } =
       useInputProps(props);
+    const { prefix, suffix } = state;
 
     return (
       <InputWrapper {...wrapperProps}>
-        <InputPrefix {...prefixProps} />
+        {prefix ? <InputPrefix {...prefixProps} /> : null}
         <InputMain {...mainProps} />
-        <InputSuffix {...suffixProps} />
+        {suffix ? <InputSuffix {...suffixProps} /> : null}
       </InputWrapper>
     );
   },
