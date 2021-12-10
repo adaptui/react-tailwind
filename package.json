@@ -104,7 +104,7 @@
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",
     "reakit-warning": "^0.6.2",
-    "tailwind-merge": "^0.9.0"
+    "tailwind-merge": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.16.0",

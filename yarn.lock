@@ -17738,10 +17738,10 @@ table@^6.0.9:
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
 
-tailwind-merge@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-0.9.0.tgz#3c7df4983515d291cc1136dd9269c7e8d8d37c7e"
-  integrity sha512-nHI0CoAAais8+0lwIiDposkhmdr4ejRVZxJH8bzZFbB7d6/jkciyl9lgHmkNpCJ0MMYi4Xg8JjHXZX7/67g3Tw==
+tailwind-merge@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.0.0.tgz#6c620bbb8ff2a07a19a545ae81270485250c84d3"
+  integrity sha512-Krw/NZVWzfFAxdAHZtpgwB6uPqd76K8PxxwcGXaMQkxnNqelAjwb4Uu3qe6RJC6oAsIpfKUGwfC49BAxuyq+Kw==
   dependencies:
     hashlru "^2.3.0"
 
