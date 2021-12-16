@@ -5,8 +5,10 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { INPUT_WRAPPER_KEYS } from "./__keys";
+import { InputStateReturn } from "./InputState";
 
-export type InputPrefixOptions = BoxOptions & {};
+export type InputPrefixOptions = BoxOptions &
+  Pick<InputStateReturn, "size" | "variant"> & {};
 
 export type InputPrefixHTMLProps = BoxHTMLProps;
 
@@ -21,11 +23,16 @@ export const useInputPrefix = createHook<
   keys: INPUT_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
-    const {} = options;
+    const { size, variant } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("input");
-    const className = cx(htmlClassName);
+    const className = cx(
+      theme.prefix.base,
+      theme.prefix.size[size],
+      theme.prefix.variant[variant],
+      htmlClassName,
+    );
 
     return { className, ...restHtmlProps };
   },

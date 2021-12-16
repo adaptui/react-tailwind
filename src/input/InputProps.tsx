@@ -1,5 +1,8 @@
+import * as React from "react";
+
+import { useSafeLayoutEffect } from "../hooks";
 import { getComponentProps } from "../index";
-import { splitProps } from "../utils";
+import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_INPUT_STATE_KEYS } from "./__keys";
 import { InputOwnProps, InputProps } from "./Input";
@@ -31,6 +34,42 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const { className, style, children, ...restProps } = inputProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setHasPaddingCalculated] = React.useState(false);
+
+  const _prefix: InputProps["prefix"] =
+    componentProps?.prefixProps?.children || prefix;
+  const _suffix: InputProps["suffix"] =
+    componentProps?.suffixProps?.children || suffix;
+
+  const inputInlineStyles = React.useRef<Record<string, any>>({});
+  const prefixRef = React.useRef<HTMLElement>(null);
+  const suffixRef = React.useRef<HTMLElement>(null);
+
+  React.useLayoutEffect(() => {
+    let key = "";
+
+    const prefixElement = prefixRef.current;
+    const suffixElement = suffixRef.current;
+    if (_prefix && prefixElement) {
+      key = "paddingLeft";
+
+      if (!key) return;
+      inputInlineStyles.current[key] =
+        prefixElement.getBoundingClientRect().width;
+    }
+
+    if (_suffix && suffixElement) {
+      key = "paddingRight";
+
+      if (!key) return;
+      inputInlineStyles.current[key] =
+        suffixElement.getBoundingClientRect().width;
+    }
+
+    setHasPaddingCalculated(true);
+  }, [_prefix, _suffix]);
+
   const wrapperProps: InputWrapperProps = {
     ...state,
     className,
@@ -41,17 +80,22 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const mainProps: InputWrapperProps = {
     ...state,
     ...restProps,
+    style: { ...inputInlineStyles.current },
     ...componentProps.mainProps,
   };
 
   const prefixProps: InputPrefixProps = {
     ...state,
     ...componentProps.prefixProps,
+    ref: prefixRef,
+    children: withIconA11y(runIfFn(_prefix, state)),
   };
 
   const suffixProps: InputSuffixProps = {
     ...state,
     ...componentProps.suffixProps,
+    ref: suffixRef,
+    children: withIconA11y(runIfFn(_suffix, state)),
   };
 
   return {

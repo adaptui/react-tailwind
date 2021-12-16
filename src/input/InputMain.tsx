@@ -5,10 +5,12 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { INPUT_WRAPPER_KEYS } from "./__keys";
+import { InputStateReturn } from "./InputState";
 
-export type InputMainOptions = InputOptions & {};
+export type InputMainOptions = InputOptions &
+  Pick<InputStateReturn, "size" | "variant" | "prefix" | "suffix"> & {};
 
-export type InputMainHTMLProps = InputHTMLProps;
+export type InputMainHTMLProps = Omit<InputHTMLProps, "size" | "prefix">;
 
 export type InputMainProps = InputMainOptions & InputMainHTMLProps;
 
@@ -18,13 +20,22 @@ export const useInputMain = createHook<InputMainOptions, InputMainHTMLProps>({
   keys: INPUT_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
-    const {} = options;
+    const { size, variant, prefix, suffix } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("input");
-    const className = cx(theme.main, htmlClassName);
+    const className = cx(
+      theme.main.base,
+      theme.main.size[size].base,
+      !prefix || !suffix ? theme.main.size[size].default : "",
+      theme.main.variant[variant],
+      htmlClassName,
+    );
 
-    return { className, ...restHtmlProps };
+    return {
+      className,
+      ...restHtmlProps,
+    };
   },
 });
 

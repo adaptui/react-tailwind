@@ -3,16 +3,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { CaretDownIcon, ClockIcon } from "../../icons";
 
-import js from "./templates/InputBasicJsx";
-import ts from "./templates/InputBasicTsx";
-import { InputBasic } from "./InputBasic.component";
+import js from "./templates/InputStackJsx";
+import ts from "./templates/InputStackTsx";
+import { InputStack } from "./InputStack.component";
 
-type Meta = ComponentMeta<typeof InputBasic>;
-type Story = ComponentStoryObj<typeof InputBasic>;
+type Meta = ComponentMeta<typeof InputStack>;
+type Story = ComponentStoryObj<typeof InputStack>;
 
 export default {
-  title: "Forms/Input/Basic",
-  component: InputBasic,
+  title: "Forms/Input/Stack",
+  component: InputStack,
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
@@ -42,43 +42,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: {},
-};
-
-export const WithPlaceholder: Story = {
   args: { placeholder: "Search" },
-};
-
-export const Small: Story = {
-  args: { size: "sm", placeholder: "Search" },
-};
-
-export const Medium: Story = {
-  args: { size: "md", placeholder: "Search" },
-};
-
-export const Large: Story = {
-  args: { size: "lg", placeholder: "Search" },
-};
-
-export const ExtraLarge: Story = {
-  args: { size: "xl", placeholder: "Search" },
-};
-
-export const Outline: Story = {
-  args: { variant: "outline", placeholder: "Search" },
-};
-
-export const Subtle: Story = {
-  args: { variant: "subtle", placeholder: "Search" },
-};
-
-export const Underline: Story = {
-  args: { variant: "underline", placeholder: "Search" },
-};
-
-export const Ghost: Story = {
-  args: { variant: "ghost", placeholder: "Search" },
 };
 
 export const Disabled: Story = {

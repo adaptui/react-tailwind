@@ -23,8 +23,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <InputWrapper {...wrapperProps}>
+        <InputMain ref={ref} {...mainProps} />
         {prefix ? <InputPrefix {...prefixProps} /> : null}
-        <InputMain {...mainProps} />
         {suffix ? <InputSuffix {...suffixProps} /> : null}
       </InputWrapper>
     );

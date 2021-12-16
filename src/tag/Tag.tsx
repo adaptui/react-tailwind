@@ -9,26 +9,26 @@ import { TAG_KEYS } from "./__keys";
 
 export type TagOptions = BoxOptions & {
   /**
-   * How large should the button be?
+   * How large should the tag be?
    *
    * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"button", "size", "default">;
+  size?: keyof Renderlesskit.GetThemeValue<"tag", "size", "default">;
 
   /**
-   * How the button should look?
+   * How the tag should look?
    *
    * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
+  variant?: keyof Renderlesskit.GetThemeValue<"tag", "variant", "default">;
 
   /**
-   * If added, the button will show an icon before the button's text.
+   * If added, the tag will show an icon before the tag's text.
    */
   prefix?: RenderPropType;
 
   /**
-   * If added, the button will show an icon before the button's text.
+   * If added, the tag will show an icon before the tag's text.
    */
   closable?: RenderPropType;
 };
