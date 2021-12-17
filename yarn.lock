@@ -4510,7 +4510,7 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@tailwindcss/forms@^0.4.0":
+"@tailwindcss/forms@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.4.0.tgz#a46715e347a32d216a3973eb67473bd29ae3798e"
   integrity sha512-DeaQBx6EgEeuZPQACvC+mKneJsD8am1uiJugjgQK1+/Vt+Ai0GpFBC2T2fqnUad71WgOxyrZPE6BG1VaI6YqfQ==
@@ -17628,10 +17628,10 @@ table@^6.0.9:
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
 
-tailwind-merge@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-0.9.0.tgz#3c7df4983515d291cc1136dd9269c7e8d8d37c7e"
-  integrity sha512-nHI0CoAAais8+0lwIiDposkhmdr4ejRVZxJH8bzZFbB7d6/jkciyl9lgHmkNpCJ0MMYi4Xg8JjHXZX7/67g3Tw==
+tailwind-merge@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.1.1.tgz#a87bef312d9105429e756071f19025e58c63796f"
+  integrity sha512-NlTHB8rq3oU/mHyPhueMJN9kOJWfKwVskPRHng/cyODeUSV8a15kLcO2dwDajzJqfs/TMCGPsMIgv7lDqIhkFw==
   dependencies:
     hashlru "^2.3.0"
 

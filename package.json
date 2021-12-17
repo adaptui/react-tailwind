@@ -104,7 +104,7 @@
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",
     "reakit-warning": "^0.6.2",
-    "tailwind-merge": "^0.9.0"
+    "tailwind-merge": "^1.1.1"
   },
   "devDependencies": {
     "@babel/cli": "7.16.0",
@@ -128,7 +128,7 @@
     "@storybook/react": "6.4.9",
     "@swc/cli": "0.1.52",
     "@swc/core": "1.2.118",
-    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/forms": "0.4.0",
     "@testing-library/dom": "8.11.1",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
