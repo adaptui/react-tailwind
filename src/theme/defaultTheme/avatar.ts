@@ -1,6 +1,6 @@
 export const avatar = {
   wrapper: {
-    base: "relative inline-flex items-center justify-center flex-shrink-0 rounded bg-gray-100",
+    base: "relative inline-flex items-center justify-center shrink-0 rounded bg-gray-100",
     circular: "rounded-full",
     border: {
       size: {

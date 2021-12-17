@@ -5,7 +5,7 @@ export const _switch = {
   },
   input: "peer sr-only",
   icon: {
-    base: "relative inline-flex items-center justify-start flex-shrink-0 align-top select-none transition-all peer-children",
+    base: "relative inline-flex items-center justify-start shrink-0 align-top select-none transition-all peer-children",
     description: "self-start",
     size: {
       sm: "h-3.5 w-6 rounded-full",

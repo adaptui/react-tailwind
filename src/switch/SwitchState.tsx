@@ -14,7 +14,7 @@ import { SwitchInputOptions, SwitchInputProps } from "./SwitchInput";
 
 export type SwitchState = CheckboxState & {
   /**
-   * How large should the button be?
+   * How large should the switch be?
    *
    * @default md
    */

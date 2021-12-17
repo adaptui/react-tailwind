@@ -1,6 +1,5 @@
 export const slider = {
-  wrapper:
-    "relative inline-block outline-none select-none touch-action-none w-80",
+  wrapper: "relative inline-block outline-none select-none touch-none w-80",
   track: {
     wrapper: "relative w-full py-1.5 cursor-pointer",
     base: {
@@ -12,8 +11,7 @@ export const slider = {
       },
     },
     filled: {
-      normal:
-        "absolute transform -translate-y-1/2 bg-gray-800 rounded-2xl top-1/2",
+      normal: "absolute -translate-y-1/2 bg-gray-800 rounded-2xl top-1/2",
       size: {
         sm: "h-0.5",
         md: "h-1",
@@ -34,7 +32,7 @@ export const slider = {
     container: {
       base: {
         normal:
-          "flex items-center justify-center rounded-full select-none touch-action-none cursor-pointer transition-all",
+          "flex items-center justify-center rounded-full select-none touch-none cursor-pointer transition-all",
         size: {
           sm: "w-3.5 h-3.5",
           md: "w-4 h-4",

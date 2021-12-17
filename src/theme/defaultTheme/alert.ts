@@ -1,6 +1,6 @@
 export const alert = {
   base: "flex w-full overflow-hidden px-3 py-2.5 rounded-md",
-  icon: "inline-flex box-content flex-shrink-0 mr-2 w-4 h-4 py-0.5",
+  icon: "inline-flex box-content shrink-0 mr-2 w-4 h-4 py-0.5",
   body: {
     base: "flex text-sm flex-wrap",
     desktop: "",

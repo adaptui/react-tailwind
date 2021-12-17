@@ -6,7 +6,7 @@ function animationDuration({ matchUtilities, theme }) {
       },
     },
     {
-      values: theme("animationDelay"),
+      values: theme("animationDuration"),
     },
   );
 }
