@@ -29,7 +29,7 @@ const CustomToast: React.FC<CustomToastProps> = ({
         <div className="flex flex-col flex-wrap text-sm">
           <div className="font-medium">{title}</div>
         </div>
-        <div className="inline-flex box-content flex-shrink-0 mr-2 w-4 h-4 py-0.5">
+        <div className="inline-flex box-content shrink-0 mr-2 w-4 h-4 py-0.5">
           <InfoCircleIcon />
         </div>
       </div>

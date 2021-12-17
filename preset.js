@@ -1,9 +1,8 @@
-const deepMerge = require("deepmerge");
 const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
-const renderlesskitConfig = {
+module.exports = {
   theme: {
     animationDelay: {
       75: "75ms",
@@ -29,17 +28,14 @@ const renderlesskitConfig = {
     },
     extend: {
       colors: {
-        orange: colors.orange,
-        gray: colors.gray,
-        emarald: colors.emerald,
-        violet: colors.violet,
+        gray: colors.zinc,
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         xs: ["12px", "115%"],
-        cxs: ["13px", "100%"],
+        cxs: ["13px", "115%"],
         sm: ["14px", "115%"],
         base: ["16px", "115%"],
         "paragraph-cxs": ["13px", "150%"],
@@ -51,12 +47,6 @@ const renderlesskitConfig = {
       },
       inset: {
         unset: "unset",
-      },
-      width: {
-        fit: "fit-content",
-      },
-      height: {
-        fit: "fit-content",
       },
       minWidth: {
         ...defaultTheme.spacing,
@@ -70,7 +60,7 @@ const renderlesskitConfig = {
           "0px 0px 1px rgba(0, 0, 0, 0.2), 0px 2px 3px rgba(0, 0, 0, 0.05), 0px 3px 5px rgba(0, 0, 0, 0.15)",
         thumb:
           "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
-        input: "0px 0px 2px rgba(59, 130, 246, 0.6);",
+        "input-underline": "inset 0px -1px 0px #E4E4E7",
         "switch-md":
           "0px 0px 0px 0.5px #FFFFFF, 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06)",
         "switch-none": "0px 0px 0px 0.5px #FFFFFF",
@@ -109,28 +99,3 @@ const renderlesskitConfig = {
     require("./tailwindPlugins/animationDuration"),
   ],
 };
-
-function arrayMergeFn(destinationArray, sourceArray) {
-  return destinationArray.concat(sourceArray).reduce((acc, cur) => {
-    if (acc.includes(cur)) return acc;
-    return [...acc, cur];
-  }, []);
-}
-
-function preset(tailwindConfig) {
-  let purge;
-  if (Array.isArray(tailwindConfig.purge)) {
-    purge = {
-      content: tailwindConfig.purge,
-    };
-  } else {
-    purge = tailwindConfig.purge;
-  }
-  // @ts-ignore
-  return deepMerge({ ...tailwindConfig, purge }, renderlesskitConfig, {
-    // @ts-ignore
-    arrayMerge: arrayMergeFn,
-  });
-}
-
-module.exports = preset;

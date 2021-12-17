@@ -12,7 +12,7 @@ exports[`Switch should render correctly 1`] = `
     />
     <span
       aria-hidden="true"
-      class="relative inline-flex items-center justify-start flex-shrink-0 align-top select-none transition-all peer-children h-4 w-[26px] rounded-full bg-gray-200 peer-hover:bg-gray-300 peer-active:bg-gray-300 peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300 peer-disabled:bg-gray-300"
+      class="relative inline-flex items-center justify-start shrink-0 align-top select-none transition-all peer-children h-4 w-[26px] rounded-full bg-gray-200 peer-hover:bg-gray-300 peer-active:bg-gray-300 peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300 peer-disabled:bg-gray-300"
       role="img"
     >
       <span

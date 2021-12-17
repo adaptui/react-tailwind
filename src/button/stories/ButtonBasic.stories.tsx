@@ -114,7 +114,7 @@ export const ExtendedPrefixSuffix: Story = {
     ...Default.args,
     className: "p-5 text-lg",
     prefix: <ClockIcon className="mx-4 text-lg text-orange-500" />,
-    suffix: <CaretRightIcon className="mx-4 text-lg text-emarald-500" />,
+    suffix: <CaretRightIcon className="mx-4 text-lg text-emerald-500" />,
   },
 };
 
