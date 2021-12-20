@@ -23,8 +23,8 @@ describe("<Icon />", () => {
     render(<Icon as={Custom} />);
 
     expect(screen.queryByTestId("testid-icon")).not.toBeInTheDocument();
-    expect(screen.queryByTestId("testid-customicon")).toBeInTheDocument();
-    expect(screen.queryByTestId("testid-customicon")).toHaveAttribute(
+    expect(screen.getByTestId("testid-customicon")).toBeInTheDocument();
+    expect(screen.getByTestId("testid-customicon")).toHaveAttribute(
       "viewBox",
       viewbox,
     );
@@ -37,9 +37,9 @@ describe("<Icon />", () => {
       </Icon>,
     );
 
-    expect(screen.queryByTestId("testid-icon")).toBeInTheDocument();
-    expect(screen.queryByTestId("testid-icon")?.tagName).toBe("DIV");
-    expect(screen.queryByTestId("testid-faicon")).toBeInTheDocument();
+    expect(screen.getByTestId("testid-icon")).toBeInTheDocument();
+    expect(screen.getByTestId("testid-icon")?.tagName).toBe("DIV");
+    expect(screen.getByTestId("testid-faicon")).toBeInTheDocument();
   });
 
   it("should render custom icon with path children", () => {
@@ -53,9 +53,9 @@ describe("<Icon />", () => {
       </Icon>,
     );
 
-    expect(screen.queryByTestId("testid-icon")).toBeInTheDocument();
-    expect(screen.queryByTestId("testid-icon")?.tagName).toBe("svg");
-    expect(screen.queryByTestId("testid-path")).toBeInTheDocument();
+    expect(screen.getByTestId("testid-icon")).toBeInTheDocument();
+    expect(screen.getByTestId("testid-icon")?.tagName).toBe("svg");
+    expect(screen.getByTestId("testid-path")).toBeInTheDocument();
   });
 
   it("should not have a11y violations", async () => {

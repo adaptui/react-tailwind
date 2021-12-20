@@ -152,7 +152,7 @@
     "babel-plugin-jsx-remove-data-test-id": "3.0.0",
     "babel-preset-react-app": "10.0.1",
     "browserlist": "1.0.1",
-    "chalk": "5.0.0",
+    "chalk": "4.1.2",
     "concurrently": "6.5.1",
     "cross-env": "7.0.3",
     "deepmerge": "4.2.2",

@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { useSafeLayoutEffect } from "../hooks";
 import { getComponentProps } from "../index";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 

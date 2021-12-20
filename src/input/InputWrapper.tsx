@@ -21,7 +21,6 @@ export const useInputWrapper = createHook<
   keys: INPUT_WRAPPER_KEYS,
 
   useProps(options, htmlProps) {
-    const {} = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("input");
