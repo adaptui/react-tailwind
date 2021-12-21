@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 import { render, testA11y } from "../../utils/testUtils";
 import { Tag } from "../Tag";

@@ -68,6 +68,6 @@ export const FormatOptions = {
   },
 };
 
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   args: { size: "md", defaultValue: [25, 75], isDisabled: true },
 };
