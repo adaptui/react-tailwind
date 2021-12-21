@@ -1,22 +1,17 @@
-import { Input as ReakitInput, InputProps as ReakitInputProps } from "reakit";
-
-import { Box } from "../box";
-import { useFormControl } from "../form-field";
+import { Box, BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
 import { useAutoSize } from "./useAutoSize";
 
-export type TextareaProps = ReakitInputProps & {
-  resize?: keyof Renderlesskit.GetThemeValue<"textarea", "resize">;
-  cols?: number;
-  rowsMin?: number;
-  rowsMax?: number;
-  autoSize?: boolean;
-  isDisabled?: boolean;
-  isReadOnly?: boolean;
-  isInvalid?: boolean;
-};
+export type TextareaProps = BoxProps &
+  React.TextareaHTMLAttributes<any> & {
+    resize?: keyof Renderlesskit.GetThemeValue<"textarea", "resize">;
+    cols?: number;
+    rowsMin?: number;
+    rowsMax?: number;
+    autoSize?: boolean;
+  };
 
 export const Textarea = forwardRefWithAs<
   TextareaProps,
@@ -24,9 +19,6 @@ export const Textarea = forwardRefWithAs<
   "textarea"
 >((props, ref) => {
   const {
-    isDisabled,
-    isReadOnly,
-    isInvalid,
     autoSize,
     resize = "horizontal",
     rows,
@@ -49,20 +41,10 @@ export const Textarea = forwardRefWithAs<
     onChange,
     placeholder: props.placeholder,
   });
-  const formFieldProps = useFormControl({
-    isDisabled: isDisabled || props.disabled,
-    isReadOnly: isReadOnly || props.readOnly,
-    isInvalid,
-    ...rest,
-  });
 
-  const theme = useTheme();
-  const textaresStyles = tcm(
-    theme.textarea.base,
-    theme.textarea.resize[resize],
-    className,
-  );
-  const shadowTextareaStyles = tcm(textaresStyles, theme.textarea.shadow);
+  const theme = useTheme("textarea");
+  const textaresStyles = tcm(theme.base, theme.resize[resize], className);
+  const shadowTextareaStyles = tcm(textaresStyles, theme.shadow);
   const textareaInlineStyles = {
     height: inlineStyles.outerHeightStyle,
     // Need a large enough difference to allow scrolling.
@@ -73,7 +55,7 @@ export const Textarea = forwardRefWithAs<
 
   return (
     <>
-      <ReakitInput
+      <Box
         as="textarea"
         ref={handleRef}
         value={value}
@@ -82,7 +64,7 @@ export const Textarea = forwardRefWithAs<
         cols={cols}
         style={textareaInlineStyles}
         className={textaresStyles}
-        {...formFieldProps}
+        {...rest}
       />
       <Box
         as="textarea"

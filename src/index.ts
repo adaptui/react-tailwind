@@ -22,6 +22,7 @@ export * from "./meter";
 export * from "./progress";
 export * from "./radio";
 export * from "./radio-group";
+export * from "./select";
 export * from "./slider";
 export * from "./spinner";
 export * from "./switch";
