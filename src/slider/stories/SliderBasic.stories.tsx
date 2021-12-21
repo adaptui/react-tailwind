@@ -77,6 +77,6 @@ export const FormatOptions = {
   },
 };
 
-export const isDisabled: Story = {
+export const IsDisabled: Story = {
   args: { defaultValue: [50], isDisabled: true },
 };
