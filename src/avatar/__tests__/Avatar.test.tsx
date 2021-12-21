@@ -25,34 +25,36 @@ describe("<Avatar />", () => {
 
   it("renders a name avatar if no src", () => {
     const name = "Dan Abramov";
-    const { getByLabelText } = render(<Avatar name="Dan Abramov" />);
+    render(<Avatar name="Dan Abramov" />);
 
-    const content = getByLabelText(name);
+    const content = screen.getByLabelText(name);
     expect(content).toHaveTextContent("DA");
   });
 
   it("renders a custom fallback if src & name both are not provided", () => {
     const fallbackContent = "I'm a fallback";
-    const { getByLabelText } = render(
+    render(
       <Avatar icon={<div aria-label="fallback">{fallbackContent}</div>} />,
     );
 
-    expect(getByLabelText("fallback")).toHaveTextContent(fallbackContent);
+    expect(screen.getByLabelText("fallback")).toHaveTextContent(
+      fallbackContent,
+    );
   });
 
   it("prioritize name between fallback & name", () => {
     const fallbackContent = "I'm a fallback";
     const name = "Anurag Hazra";
-    const { queryByLabelText } = render(
+    render(
       <Avatar
         name={name}
         icon={<div aria-label="fallback">{fallbackContent}</div>}
       />,
     );
 
-    const content = queryByLabelText(name);
+    const content = screen.queryByLabelText(name);
     expect(content).toHaveTextContent("AH");
-    expect(queryByLabelText("fallback")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("fallback")).not.toBeInTheDocument();
   });
 
   it("prioritize src between fallback, name & src", async () => {

@@ -14,7 +14,7 @@ describe("Testing Button", () => {
     render(<Button iconOnly={<p>Icon only</p>}>hello world</Button>);
 
     expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Icon only/i)).toBeInTheDocument();
+    expect(screen.getByText(/Icon only/i)).toBeInTheDocument();
   });
 
   test("prefix, suffix & children should be ignored when iconOnly is set", () => {
@@ -31,7 +31,7 @@ describe("Testing Button", () => {
     expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
     expect(screen.queryByText("prefix")).not.toBeInTheDocument();
     expect(screen.queryByText("suffix")).not.toBeInTheDocument();
-    expect(screen.queryByText(/Icon only/i)).toBeInTheDocument();
+    expect(screen.getByText(/Icon only/i)).toBeInTheDocument();
   });
 
   test("when loading & iconOnly is set: prefix, suffix & children should be ignored and show spinner", () => {
@@ -49,10 +49,7 @@ describe("Testing Button", () => {
     expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
     expect(screen.queryByText("prefix")).not.toBeInTheDocument();
     expect(screen.queryByText("suffix")).not.toBeInTheDocument();
-    expect(screen.queryByText(/Icon only/i)).toHaveAttribute("aria-hidden");
-    expect(screen.queryByText(/Icon only/i)?.parentElement).toHaveClass(
-      "opacity-0",
-    );
+    expect(screen.getByText(/Icon only/i)).toHaveAttribute("aria-hidden");
     expect(screen.getByTestId("testid-spinner")).toBeInTheDocument();
   });
 
@@ -69,7 +66,7 @@ describe("Testing Button", () => {
       </Button>,
     );
 
-    expect(screen.queryByText("spinning")).toBeInTheDocument();
+    expect(screen.getByText("spinning")).toBeInTheDocument();
   });
 
   it("should render with prefix suffix", () => {
@@ -79,8 +76,8 @@ describe("Testing Button", () => {
       </Button>,
     );
 
-    expect(screen.queryByText("prefix")).toBeInTheDocument();
-    expect(screen.queryByText("suffix")).toBeInTheDocument();
+    expect(screen.getByText("prefix")).toBeInTheDocument();
+    expect(screen.getByText("suffix")).toBeInTheDocument();
   });
 
   test("when loading, replace prefix with spinner when prefix is provided", () => {
@@ -112,7 +109,7 @@ describe("Testing Button", () => {
       </Button>,
     );
 
-    expect(screen.queryByText("prefix")).toBeInTheDocument();
+    expect(screen.getByText("prefix")).toBeInTheDocument();
     expect(screen.queryByText("suffix")).not.toBeInTheDocument();
     expect(screen.getByTestId("testid-spinner")).toBeInTheDocument();
   });
