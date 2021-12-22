@@ -95,7 +95,7 @@ const TriggerDefaultToasts = () => {
                 title: "Proper Vercel Toast with better state.",
                 actions: [
                   {
-                    variant: "primary",
+                    variant: "solid",
                     label: "Delete",
                     handleClick: toast => removeToast(toast?.id),
                   },
@@ -136,7 +136,7 @@ const TriggerOptionsToasts = () => {
                 title: "Proper Vercel Toast with better state.",
                 actions: [
                   {
-                    variant: "primary",
+                    variant: "solid",
                     label: "Delete",
                     handleClick: toast => removeToast(toast?.id),
                   },
@@ -156,7 +156,7 @@ const TriggerOptionsToasts = () => {
                 title: "Proper Vercel Toast with better state.",
                 actions: [
                   {
-                    variant: "primary",
+                    variant: "solid",
                     label: "Delete",
                     handleClick: toast => removeToast(toast?.id),
                   },
@@ -176,7 +176,7 @@ const TriggerOptionsToasts = () => {
                 title: "Proper Vercel Toast with better state.",
                 actions: [
                   {
-                    variant: "primary",
+                    variant: "solid",
                     label: "Delete",
                     handleClick: toast => removeToast(toast?.id),
                   },
@@ -225,7 +225,7 @@ const TriggerTypesToasts = () => {
                     description: "With both Title & Description",
                     actions: [
                       {
-                        variant: "primary",
+                        variant: "solid",
                         label: "Delete",
                         handleClick: toast => removeToast(toast?.id),
                       },
@@ -308,7 +308,7 @@ const TriggerAlertOptionsToasts = () => {
                 description: "With both Title & Description",
                 actions: [
                   {
-                    variant: "primary",
+                    variant: "solid",
                     label: "Delete",
                     handleClick: toast => removeToast(toast?.id),
                   },
@@ -329,12 +329,12 @@ const TriggerAlertOptionsToasts = () => {
                 description: "With both Title & Description",
                 actions: [
                   {
-                    variant: "primary",
+                    variant: "solid",
                     label: "Delete",
                     handleClick: toast => removeToast(toast?.id),
                   },
                   {
-                    variant: "secondary",
+                    variant: "subtle",
                     label: "Cancel",
                     handleClick: toast => removeToast(toast?.id),
                   },

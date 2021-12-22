@@ -136,7 +136,7 @@
     "@testing-library/user-event": "13.5.0",
     "@types/jest": "27.0.3",
     "@types/jest-axe": "3.5.3",
-    "@types/node": "16.11.15",
+    "@types/node": "17.0.2",
     "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",
     "@types/tailwindcss": "2.2.4",
@@ -151,7 +151,6 @@
     "chalk": "4.1.2",
     "concurrently": "6.5.1",
     "cross-env": "7.0.3",
-    "deepmerge": "4.2.2",
     "eslint": "8.5.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-react-app": "7.0.0",
@@ -195,7 +194,6 @@
     "webpack": "5.65.0"
   },
   "peerDependencies": {
-    "deepmerge": "4.x",
     "react": "16.x || 17.x",
     "react-dom": "16.x || 17.x"
   },
