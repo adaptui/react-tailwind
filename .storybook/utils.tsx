@@ -126,7 +126,6 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
     },
     devDependencies: {
       autoprefixer: "10.4.0",
-      deepmerge: "4.2.2",
       eslint: "8.2.0",
       "eslint-config-next": "12.0.3",
       postcss: "8.3.11",
@@ -177,7 +176,6 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
     devDependencies: {
       "@types/react": "17.0.34",
       autoprefixer: "10.4.0",
-      deepmerge: "4.2.2",
       eslint: "8.2.0",
       "eslint-config-next": "12.0.3",
       postcss: "8.3.11",

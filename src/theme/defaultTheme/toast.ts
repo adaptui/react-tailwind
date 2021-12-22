@@ -15,9 +15,9 @@ export const toast = {
   actions: {
     base: "space-x-2 ml-auto flex items-center",
     button: {
-      ghost: "",
-      primary: "",
-      secondary: "",
+      solid: "bg-white hover:bg-white active:bg-white",
+      subtle: "text-white",
+      ghost: "bg-transparent text-white hover:bg-white active:bg-white",
     },
   },
 
@@ -27,9 +27,9 @@ export const toast = {
     body: { description: "text-gray-300" },
     actions: {
       button: {
-        ghost: "text-white bg-transparent hover:text-gray-800 hover:bg-white",
-        primary: "text-gray-800 bg-white",
-        secondary: "text-white bg-gray-700",
+        solid: "text-gray-800",
+        subtle: "bg-gray-700 hover:bg-gray-700 active:bg-gray-700",
+        ghost: "hover:text-gray-800",
       },
     },
   },
@@ -38,9 +38,9 @@ export const toast = {
     body: { description: "text-blue-300" },
     actions: {
       button: {
-        ghost: "text-white bg-transparent hover:text-blue-800 hover:bg-white",
-        primary: "text-blue-800 bg-white",
-        secondary: "text-white bg-blue-700",
+        solid: "text-blue-800",
+        subtle: "bg-blue-700 hover:bg-blue-700 active:bg-blue-700",
+        ghost: "hover:text-blue-800",
       },
     },
   },
@@ -49,9 +49,9 @@ export const toast = {
     body: { description: "text-orange-300" },
     actions: {
       button: {
-        ghost: "text-white bg-transparent hover:text-orange-800 hover:bg-white",
-        primary: "text-orange-800 bg-white",
-        secondary: "text-white bg-orange-700",
+        solid: "text-orange-800",
+        subtle: "bg-orange-700 hover:bg-oranger-700 active:bg-oranger-700",
+        ghost: "hover:text-orange-800",
       },
     },
   },
@@ -60,9 +60,9 @@ export const toast = {
     body: { description: "text-red-300" },
     actions: {
       button: {
-        ghost: "text-white bg-transparent hover:text-red-800 hover:bg-white",
-        primary: "text-red-800 bg-white",
-        secondary: "text-white bg-red-700",
+        solid: "text-red-800",
+        subtle: "bg-red-700 hover:bg-red-700 active:bg-red-700",
+        ghost: "hover:text-red-800",
       },
     },
   },
