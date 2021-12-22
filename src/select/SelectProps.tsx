@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { getComponentProps } from "../index";
+import { Spinner } from "../spinner";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_SELECT_STATE_KEYS } from "./__keys";
@@ -29,8 +30,8 @@ const componentMap = {
 
 export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
   const [state, inputProps] = useSelectStateSplit(props);
-  const { prefix, suffix } = state;
-  const { className, style, children, ...restProps } = inputProps;
+  const { prefix, suffix, loading, size } = state;
+  const { className, style, children, disabled, ...restProps } = inputProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
@@ -42,8 +43,15 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
 
   const _prefix: SelectProps["prefix"] =
     componentProps?.prefixProps?.children || prefix;
-  const _suffix: SelectProps["suffix"] =
+  const __suffix: SelectProps["suffix"] =
     componentProps?.suffixProps?.children || suffix;
+  const _suffix: SelectProps["suffix"] = React.useMemo(() => {
+    return loading ? (
+      <Spinner size={size !== "xl" ? "xs" : "md"} />
+    ) : (
+      withIconA11y(runIfFn(__suffix, state))
+    );
+  }, [__suffix, loading, size, state]);
 
   const inputInlineStyles = React.useRef<Record<string, any>>({});
   const prefixRef = React.useRef<HTMLElement>(null);
@@ -82,6 +90,7 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
 
   const mainProps: SelectWrapperProps = {
     ...state,
+    disabled,
     ...restProps,
     style: { ...inputInlineStyles.current },
     children: finalChildren,
@@ -90,6 +99,7 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
 
   const prefixProps: SelectPrefixProps = {
     ...state,
+    disabled,
     ...componentProps.prefixProps,
     ref: prefixRef,
     children: withIconA11y(runIfFn(_prefix, state)),
@@ -97,13 +107,16 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
 
   const suffixProps: SelectSuffixProps = {
     ...state,
+    disabled,
     ...componentProps.suffixProps,
     ref: suffixRef,
-    children: withIconA11y(runIfFn(_suffix, state)),
+    children: _suffix,
   };
 
   return {
     state,
+    prefix: _prefix,
+    suffix: _suffix,
     wrapperProps,
     mainProps,
     prefixProps,

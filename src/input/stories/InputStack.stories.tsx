@@ -45,14 +45,30 @@ export const Default: Story = {
   args: { placeholder: "Search" },
 };
 
-export const Disabled: Story = {
-  args: { placeholder: "Search", disabled: true },
+export const Invalid: Story = {
+  args: { placeholder: "Search", invalid: true },
 };
 
 export const Prefix: Story = {
   args: {
     placeholder: "Search",
     prefix: <ClockIcon />,
+  },
+};
+
+export const PrefixDisabled: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <ClockIcon />,
+    disabled: true,
+  },
+};
+
+export const PrefixInvalid: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <ClockIcon />,
+    invalid: true,
   },
 };
 
@@ -63,10 +79,53 @@ export const Suffix: Story = {
   },
 };
 
+export const SuffixDisabled: Story = {
+  args: {
+    placeholder: "Search",
+    suffix: <ClockIcon />,
+    disabled: true,
+  },
+};
+
+export const SuffixInvalid: Story = {
+  args: {
+    placeholder: "Search",
+    suffix: <ClockIcon />,
+    invalid: true,
+  },
+};
+
 export const PrefixSuffix: Story = {
   args: {
     placeholder: "Search",
     prefix: <ClockIcon />,
     suffix: <CaretDownIcon />,
+  },
+};
+
+export const PrefixSuffixDisabled: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <ClockIcon />,
+    suffix: <CaretDownIcon />,
+    disabled: true,
+  },
+};
+
+export const PrefixSuffixInvalid: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <ClockIcon />,
+    suffix: <CaretDownIcon />,
+    invalid: true,
+  },
+};
+
+export const PrefixSuffixLoading: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <ClockIcon />,
+    suffix: <CaretDownIcon />,
+    loading: true,
   },
 };

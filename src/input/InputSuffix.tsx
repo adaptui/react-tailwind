@@ -5,10 +5,13 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 import { INPUT_SUFFIX_KEYS } from "./__keys";
+import { InputProps } from "./Input";
 import { InputStateReturn } from "./InputState";
 
 export type InputSuffixOptions = BoxOptions &
-  Pick<InputStateReturn, "size" | "variant"> & {};
+  Pick<InputStateReturn, "size" | "variant" | "invalid"> & {
+    disabled: InputProps["disabled"];
+  };
 
 export type InputSuffixHTMLProps = BoxHTMLProps;
 
@@ -23,14 +26,17 @@ export const useInputSuffix = createHook<
   keys: INPUT_SUFFIX_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, variant } = options;
+    const { size, variant, disabled, invalid } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const theme = useTheme("input");
+    const theme = useTheme("select");
     const className = cx(
-      theme.suffix.base,
+      theme.suffix.common,
       theme.suffix.size[size],
-      theme.suffix.variant[variant],
+      theme.suffix.variant[variant].common,
+      disabled || invalid ? "" : theme.suffix.variant[variant].interactions,
+      disabled ? theme.suffix.variant[variant].disabled : "",
+      invalid ? theme.suffix.variant[variant].invalid : "",
       htmlClassName,
     );
 

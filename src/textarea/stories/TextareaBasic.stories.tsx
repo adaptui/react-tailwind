@@ -48,10 +48,12 @@ export default {
 
 export const Default: Story = {
   args: {
+    size: "md",
+    variant: "outline",
     placeholder: "",
     defaultValue: "",
     rowsMax: 100,
-    rowsMin: 10,
+    rowsMin: 3,
     cols: 30,
     resize: "both",
     autoSize: false,
@@ -61,11 +63,51 @@ export const Default: Story = {
 const lorem =
   "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.";
 
-export const Placeholder = {
+export const Placeholder: Story = {
   args: { ...Default.args, placeholder: "Sample placeholder" },
 };
 
-export const Content = {
+export const Small: Story = {
+  args: { ...Default.args, placeholder: "Sample placeholder", size: "sm" },
+};
+
+export const Medium: Story = {
+  args: { ...Default.args, placeholder: "Sample placeholder", size: "md" },
+};
+
+export const Large: Story = {
+  args: { ...Default.args, placeholder: "Sample placeholder", size: "lg" },
+};
+
+export const ExtraLarge: Story = {
+  args: { ...Default.args, placeholder: "Sample placeholder", size: "xl" },
+};
+
+export const Outline: Story = {
+  args: {
+    ...Default.args,
+    placeholder: "Sample placeholder",
+    variant: "outline",
+  },
+};
+
+export const Underline: Story = {
+  args: {
+    ...Default.args,
+    placeholder: "Sample placeholder",
+    variant: "underline",
+  },
+};
+
+export const Subtle: Story = {
+  args: {
+    ...Default.args,
+    placeholder: "Sample placeholder",
+    variant: "subtle",
+  },
+};
+
+export const Content: Story = {
   args: {
     ...Default.args,
     placeholder: "Sample placeholder",
@@ -73,7 +115,7 @@ export const Content = {
   },
 };
 
-export const Disabled = {
+export const Disabled: Story = {
   args: {
     ...Default.args,
     disabled: true,
@@ -81,7 +123,15 @@ export const Disabled = {
   },
 };
 
-export const AutoSize = {
+export const Invalid: Story = {
+  args: {
+    ...Default.args,
+    invalid: true,
+    defaultValue: lorem,
+  },
+};
+
+export const AutoSize: Story = {
   args: {
     ...Default.args,
     autoSize: true,

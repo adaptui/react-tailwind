@@ -4,9 +4,11 @@ export const USE_SELECT_STATE_KEYS = [
   "suffix",
   "size",
   "variant",
+  "invalid",
+  "loading",
 ] as const;
 export const SELECT_STATE_KEYS = USE_SELECT_STATE_KEYS;
-export const SELECT_MAIN_KEYS = SELECT_STATE_KEYS;
-export const SELECT_PREFIX_KEYS = SELECT_MAIN_KEYS;
+export const SELECT_BASE_KEYS = SELECT_STATE_KEYS;
+export const SELECT_PREFIX_KEYS = [...SELECT_BASE_KEYS, "disabled"] as const;
 export const SELECT_SUFFIX_KEYS = SELECT_PREFIX_KEYS;
-export const SELECT_WRAPPER_KEYS = SELECT_SUFFIX_KEYS;
+export const SELECT_WRAPPER_KEYS = SELECT_BASE_KEYS;
