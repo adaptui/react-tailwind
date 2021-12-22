@@ -4,29 +4,29 @@ import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_PREFIX_KEYS } from "./__keys";
-import { InputStateReturn } from "./InputState";
+import { SELECT_PREFIX_KEYS } from "./__keys";
+import { SelectStateReturn } from "./SelectState";
 
-export type InputPrefixOptions = BoxOptions &
-  Pick<InputStateReturn, "size" | "variant"> & {};
+export type SelectPrefixOptions = BoxOptions &
+  Pick<SelectStateReturn, "size" | "variant"> & {};
 
-export type InputPrefixHTMLProps = BoxHTMLProps;
+export type SelectPrefixHTMLProps = BoxHTMLProps;
 
-export type InputPrefixProps = InputPrefixOptions & InputPrefixHTMLProps;
+export type SelectPrefixProps = SelectPrefixOptions & SelectPrefixHTMLProps;
 
-export const useInputPrefix = createHook<
-  InputPrefixOptions,
-  InputPrefixHTMLProps
+export const useSelectPrefix = createHook<
+  SelectPrefixOptions,
+  SelectPrefixHTMLProps
 >({
-  name: "InputPrefix",
+  name: "SelectPrefix",
   compose: useBox,
-  keys: INPUT_PREFIX_KEYS,
+  keys: SELECT_PREFIX_KEYS,
 
   useProps(options, htmlProps) {
     const { size, variant } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const theme = useTheme("input");
+    const theme = useTheme("select");
     const className = cx(
       theme.prefix.base,
       theme.prefix.size[size],
@@ -38,8 +38,8 @@ export const useInputPrefix = createHook<
   },
 });
 
-export const InputPrefix = createComponent({
+export const SelectPrefix = createComponent({
   as: "div",
   memo: true,
-  useHook: useInputPrefix,
+  useHook: useSelectPrefix,
 });
