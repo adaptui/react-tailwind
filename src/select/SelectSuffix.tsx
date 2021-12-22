@@ -4,29 +4,29 @@ import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_SUFFIX_KEYS } from "./__keys";
-import { InputStateReturn } from "./InputState";
+import { SELECT_SUFFIX_KEYS } from "./__keys";
+import { SelectStateReturn } from "./SelectState";
 
-export type InputSuffixOptions = BoxOptions &
-  Pick<InputStateReturn, "size" | "variant"> & {};
+export type SelectSuffixOptions = BoxOptions &
+  Pick<SelectStateReturn, "size" | "variant"> & {};
 
-export type InputSuffixHTMLProps = BoxHTMLProps;
+export type SelectSuffixHTMLProps = BoxHTMLProps;
 
-export type InputSuffixProps = InputSuffixOptions & InputSuffixHTMLProps;
+export type SelectSuffixProps = SelectSuffixOptions & SelectSuffixHTMLProps;
 
-export const useInputSuffix = createHook<
-  InputSuffixOptions,
-  InputSuffixHTMLProps
+export const useSelectSuffix = createHook<
+  SelectSuffixOptions,
+  SelectSuffixHTMLProps
 >({
-  name: "InputSuffix",
+  name: "SelectSuffix",
   compose: useBox,
-  keys: INPUT_SUFFIX_KEYS,
+  keys: SELECT_SUFFIX_KEYS,
 
   useProps(options, htmlProps) {
     const { size, variant } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const theme = useTheme("input");
+    const theme = useTheme("select");
     const className = cx(
       theme.suffix.base,
       theme.suffix.size[size],
@@ -38,8 +38,8 @@ export const useInputSuffix = createHook<
   },
 });
 
-export const InputSuffix = createComponent({
+export const SelectSuffix = createComponent({
   as: "div",
   memo: true,
-  useHook: useInputSuffix,
+  useHook: useSelectSuffix,
 });

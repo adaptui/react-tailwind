@@ -4,7 +4,7 @@ import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_WRAPPER_KEYS } from "./__keys";
+import { INPUT_MAIN_KEYS } from "./__keys";
 import { InputStateReturn } from "./InputState";
 
 export type InputMainOptions = InputOptions &
@@ -17,7 +17,7 @@ export type InputMainProps = InputMainOptions & InputMainHTMLProps;
 export const useInputMain = createHook<InputMainOptions, InputMainHTMLProps>({
   name: "InputMain",
   compose: useInput,
-  keys: INPUT_WRAPPER_KEYS,
+  keys: INPUT_MAIN_KEYS,
 
   useProps(options, htmlProps) {
     const { size, variant, prefix, suffix } = options;

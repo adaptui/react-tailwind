@@ -1,6 +1,6 @@
 module.exports = {
-  core: { builder: "webpack5" },
   framework: "@storybook/react",
+  core: { builder: "webpack5" },
   features: { storyStoreV7: true, babelModeV7: true },
   stories: ["../src/*/stories/*.stories.@(ts|tsx)"],
   addons: [
