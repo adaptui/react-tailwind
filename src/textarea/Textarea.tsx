@@ -3,6 +3,7 @@ import { ariaAttr } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
+import { Box, ClockIcon } from "..";
 
 import { useAutoSize } from "./useAutoSize";
 
@@ -59,7 +60,7 @@ export const Textarea = forwardRefWithAs<
     size = "md",
     variant = "outline",
     autoSize = false,
-    resize = "horizontal",
+    resize = autoSize ? "none" : "horizontal",
     rows,
     rowsMax,
     rowsMin = rows || 1,
@@ -104,7 +105,7 @@ export const Textarea = forwardRefWithAs<
   };
 
   return (
-    <>
+    <Box as="div" className="relative">
       <Tabbable
         as="textarea"
         ref={handleRef}
@@ -118,6 +119,12 @@ export const Textarea = forwardRefWithAs<
         aria-invalid={ariaAttr(invalid)}
         {...rest}
       />
+      <Box
+        as="span"
+        className="absolute bottom-2.5 flex items-center justify-center text-xs text-red-500 bg-transparent pointer-events-none right-1"
+      >
+        <ClockIcon />
+      </Box>
       <Tabbable
         as="textarea"
         ref={shadowRef}
@@ -126,7 +133,7 @@ export const Textarea = forwardRefWithAs<
         tabIndex={-1}
         className={shadowTextareaStyles}
       />
-    </>
+    </Box>
   );
 });
 

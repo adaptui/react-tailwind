@@ -50,13 +50,8 @@ export const Default: Story = {
   args: {
     size: "md",
     variant: "outline",
-    placeholder: "",
-    defaultValue: "",
-    rowsMax: 100,
     rowsMin: 3,
     cols: 30,
-    resize: "both",
-    autoSize: false,
   },
 };
 
@@ -127,6 +122,7 @@ export const Invalid: Story = {
   args: {
     ...Default.args,
     invalid: true,
+    autoSize: true,
     defaultValue: lorem,
   },
 };
