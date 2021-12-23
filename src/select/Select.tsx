@@ -2,14 +2,14 @@ import * as React from "react";
 
 import { RenderProp } from "../utils";
 
-import { SelectMain, SelectMainHTMLProps } from "./SelectMain";
+import { SelectBase, SelectBaseHTMLProps } from "./SelectBase";
 import { SelectPrefix } from "./SelectPrefix";
 import { useSelectProps } from "./SelectProps";
 import { SelectInitialState, SelectStateReturn } from "./SelectState";
 import { SelectSuffix } from "./SelectSuffix";
 import { SelectWrapper } from "./SelectWrapper";
 
-export type SelectOwnProps = SelectMainHTMLProps & {};
+export type SelectOwnProps = SelectBaseHTMLProps & {};
 
 export type SelectProps = SelectInitialState &
   SelectOwnProps &
@@ -17,13 +17,18 @@ export type SelectProps = SelectInitialState &
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (props, ref) => {
-    const { state, wrapperProps, mainProps, prefixProps, suffixProps } =
-      useSelectProps(props);
-    const { prefix, suffix } = state;
+    const {
+      wrapperProps,
+      mainProps,
+      prefixProps,
+      suffixProps,
+      suffix,
+      prefix,
+    } = useSelectProps(props);
 
     return (
       <SelectWrapper {...wrapperProps}>
-        <SelectMain ref={ref} {...mainProps} />
+        <SelectBase ref={ref} {...mainProps} />
         {prefix ? <SelectPrefix {...prefixProps} /> : null}
         {suffix ? <SelectSuffix {...suffixProps} /> : null}
       </SelectWrapper>

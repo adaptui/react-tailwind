@@ -81,6 +81,10 @@ export const Disabled: Story = {
   args: { disabled: true },
 };
 
+export const Invalid: Story = {
+  args: { invalid: true },
+};
+
 export const Prefix: Story = {
   args: {
     prefix: <ClockIcon />,
@@ -98,4 +102,8 @@ export const PrefixSuffix: Story = {
     prefix: <ClockIcon />,
     suffix: <CaretDownIcon />,
   },
+};
+
+export const Loading: Story = {
+  args: { loading: true },
 };

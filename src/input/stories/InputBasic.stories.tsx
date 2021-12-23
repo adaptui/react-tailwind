@@ -85,6 +85,10 @@ export const Disabled: Story = {
   args: { placeholder: "Search", disabled: true },
 };
 
+export const Invalid: Story = {
+  args: { placeholder: "Search", invalid: true },
+};
+
 export const Prefix: Story = {
   args: {
     placeholder: "Search",
@@ -105,4 +109,8 @@ export const PrefixSuffix: Story = {
     prefix: <ClockIcon />,
     suffix: <CaretDownIcon />,
   },
+};
+
+export const Loading: Story = {
+  args: { placeholder: "Search", loading: true },
 };

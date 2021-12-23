@@ -9,5 +9,10 @@ export const tcm = extendTailwindMerge({
         text: ["cxs", "paragraph-cxs", "paragraph-sm", "2base"],
       },
     ],
+    shadow: [
+      {
+        shadow: ["input-underline"],
+      },
+    ],
   },
 });

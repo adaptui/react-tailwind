@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { getComponentProps } from "../index";
+import { Spinner } from "../spinner";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_INPUT_STATE_KEYS } from "./__keys";
@@ -29,8 +30,8 @@ const componentMap = {
 
 export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const [state, inputProps] = useInputStateSplit(props);
-  const { prefix, suffix } = state;
-  const { className, style, children, ...restProps } = inputProps;
+  const { prefix, suffix, loading, size } = state;
+  const { className, style, children, disabled, ...restProps } = inputProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,8 +39,15 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
 
   const _prefix: InputProps["prefix"] =
     componentProps?.prefixProps?.children || prefix;
-  const _suffix: InputProps["suffix"] =
+  const __suffix: InputProps["suffix"] =
     componentProps?.suffixProps?.children || suffix;
+  const _suffix: InputProps["suffix"] = React.useMemo(() => {
+    return loading ? (
+      <Spinner size={size !== "xl" ? "xs" : "md"} />
+    ) : (
+      withIconA11y(runIfFn(__suffix, state))
+    );
+  }, [__suffix, loading, size, state]);
 
   const inputInlineStyles = React.useRef<Record<string, any>>({});
   const prefixRef = React.useRef<HTMLElement>(null);
@@ -78,6 +86,7 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
 
   const mainProps: InputWrapperProps = {
     ...state,
+    disabled,
     ...restProps,
     style: { ...inputInlineStyles.current },
     ...componentProps.mainProps,
@@ -85,6 +94,7 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
 
   const prefixProps: InputPrefixProps = {
     ...state,
+    disabled,
     ...componentProps.prefixProps,
     ref: prefixRef,
     children: withIconA11y(runIfFn(_prefix, state)),
@@ -92,13 +102,16 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
 
   const suffixProps: InputSuffixProps = {
     ...state,
+    disabled,
     ...componentProps.suffixProps,
     ref: suffixRef,
-    children: withIconA11y(runIfFn(_suffix, state)),
+    children: _suffix,
   };
 
   return {
     state,
+    prefix: _prefix,
+    suffix: _suffix,
     wrapperProps,
     mainProps,
     prefixProps,
