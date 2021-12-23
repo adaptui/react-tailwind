@@ -1,16 +1,53 @@
-import { Box, BoxProps } from "../box";
+import { Tabbable, TabbableProps } from "reakit";
+import { ariaAttr } from "@renderlesskit/react";
+
 import { useTheme } from "../theme";
 import { forwardRefWithAs, tcm } from "../utils";
 
 import { useAutoSize } from "./useAutoSize";
 
-export type TextareaProps = BoxProps &
+export type TextareaProps = TabbableProps &
   React.TextareaHTMLAttributes<any> & {
-    resize?: keyof Renderlesskit.GetThemeValue<"textarea", "resize">;
-    cols?: number;
+    /**
+     * How large should the textarea be?
+     *
+     * @default md
+     */
+    size?: keyof Renderlesskit.GetThemeValue<"textarea", "base", "size">;
+
+    /**
+     * How the textarea should look?
+     *
+     * @default solid
+     */
+    variant?: keyof Renderlesskit.GetThemeValue<"textarea", "base", "variant">;
+
+    /**
+     * Minimum number of rows to be displayed.
+     *
+     * @default 1
+     */
     rowsMin?: number;
+
+    /**
+     * Maximum number of rows to be displayed.
+     */
     rowsMax?: number;
+
+    /**
+     * Direction of the textarea in which it can be resized.
+     */
+    resize?: keyof Renderlesskit.GetThemeValue<"textarea", "base", "resize">;
+
+    /**
+     * Whether the textarea should autosize on typing.
+     */
     autoSize?: boolean;
+
+    /**
+     * True, if the input text to the textarea is invalid.
+     */
+    invalid?: boolean;
   };
 
 export const Textarea = forwardRefWithAs<
@@ -19,7 +56,9 @@ export const Textarea = forwardRefWithAs<
   "textarea"
 >((props, ref) => {
   const {
-    autoSize,
+    size = "md",
+    variant = "outline",
+    autoSize = false,
     resize = "horizontal",
     rows,
     rowsMax,
@@ -30,6 +69,8 @@ export const Textarea = forwardRefWithAs<
     style,
     children,
     onChange,
+    invalid = false,
+    disabled,
     ...rest
   } = props;
   const { handleChange, handleRef, shadowRef, inlineStyles } = useAutoSize({
@@ -43,7 +84,16 @@ export const Textarea = forwardRefWithAs<
   });
 
   const theme = useTheme("textarea");
-  const textaresStyles = tcm(theme.base, theme.resize[resize], className);
+  const textaresStyles = tcm(
+    theme.base.common,
+    theme.base.size[size],
+    theme.base.variant[variant].common,
+    disabled || invalid ? "" : theme.base.variant[variant].interactions,
+    disabled ? theme.base.variant[variant].disabled : "",
+    invalid ? theme.base.variant[variant].invalid : "",
+    theme.base.resize[resize],
+    className,
+  );
   const shadowTextareaStyles = tcm(textaresStyles, theme.shadow);
   const textareaInlineStyles = {
     height: inlineStyles.outerHeightStyle,
@@ -55,7 +105,7 @@ export const Textarea = forwardRefWithAs<
 
   return (
     <>
-      <Box
+      <Tabbable
         as="textarea"
         ref={handleRef}
         value={value}
@@ -64,9 +114,11 @@ export const Textarea = forwardRefWithAs<
         cols={cols}
         style={textareaInlineStyles}
         className={textaresStyles}
+        disabled={disabled}
+        aria-invalid={ariaAttr(invalid)}
         {...rest}
       />
-      <Box
+      <Tabbable
         as="textarea"
         ref={shadowRef}
         aria-hidden

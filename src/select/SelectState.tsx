@@ -6,14 +6,14 @@ export type SelectState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"select", "main", "size">;
+  size: keyof Renderlesskit.GetThemeValue<"select", "base", "size">;
 
   /**
    * How the select should look?
    *
    * @default solid
    */
-  variant: keyof Renderlesskit.GetThemeValue<"select", "main", "variant">;
+  variant: keyof Renderlesskit.GetThemeValue<"select", "base", "variant">;
 
   /**
    * Description for the Switch.
@@ -24,6 +24,16 @@ export type SelectState = {
    * Description for the Switch.
    */
   suffix: RenderPropType<SelectStateReturn>;
+
+  /**
+   * True, if the value of the textarea is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * True, if the input is loading.
+   */
+  loading?: boolean;
 };
 
 export type SelectActions = {};
@@ -31,13 +41,23 @@ export type SelectActions = {};
 export type SelectStateReturn = SelectState & SelectActions;
 
 export type SelectInitialState = Partial<
-  Pick<SelectState, "prefix" | "suffix" | "size" | "variant">
+  Pick<
+    SelectState,
+    "prefix" | "suffix" | "size" | "variant" | "invalid" | "loading"
+  >
 > & {};
 
 export function useSelectState(
   props: SelectInitialState = {},
 ): SelectStateReturn {
-  const { prefix, suffix, size = "md", variant = "outline" } = props;
+  const {
+    prefix,
+    suffix,
+    size = "md",
+    variant = "outline",
+    invalid = false,
+    loading = false,
+  } = props;
 
-  return { prefix, suffix, size, variant };
+  return { prefix, suffix, size, variant, invalid, loading };
 }
