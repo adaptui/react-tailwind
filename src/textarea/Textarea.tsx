@@ -1,142 +1,51 @@
-import { Tabbable, TabbableProps } from "reakit";
-import { ariaAttr } from "@renderlesskit/react";
+import * as React from "react";
 
-import { useTheme } from "../theme";
-import { forwardRefWithAs, tcm } from "../utils";
-import { Box, ClockIcon } from "..";
+import { RenderProp } from "../utils";
 
+import { TextareaBase, TextareaBaseHTMLProps } from "./TextareaBase";
+import { TextareaGhost } from "./TextareaGhost";
+import { TextareaIcon } from "./TextareaIcon";
+import { useTextareaProps } from "./TextareaProps";
+import { TextareaInitialState, TextareaStateReturn } from "./TextareaState";
+import { TextareaWrapper } from "./TextareaWrapper";
 import { useAutoSize } from "./useAutoSize";
 
-export type TextareaProps = TabbableProps &
-  React.TextareaHTMLAttributes<any> & {
-    /**
-     * How large should the textarea be?
-     *
-     * @default md
-     */
-    size?: keyof Renderlesskit.GetThemeValue<"textarea", "base", "size">;
+export type TextareaOwnProps = TextareaBaseHTMLProps & {};
 
-    /**
-     * How the textarea should look?
-     *
-     * @default solid
-     */
-    variant?: keyof Renderlesskit.GetThemeValue<"textarea", "base", "variant">;
+export type TextareaProps = TextareaInitialState &
+  TextareaOwnProps &
+  RenderProp<TextareaStateReturn>;
 
-    /**
-     * Minimum number of rows to be displayed.
-     *
-     * @default 1
-     */
-    rowsMin?: number;
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (props, ref) => {
+    const { wrapperProps, baseProps, iconProps, ghostProps, icon, state } =
+      useTextareaProps(props);
 
-    /**
-     * Maximum number of rows to be displayed.
-     */
-    rowsMax?: number;
+    const { handleChange, handleRef, shadowRef, inlineStyles } = useAutoSize({
+      ref,
+      ...state,
+      ...props,
+    });
+    const textareaInlineStyles = {
+      height: inlineStyles.outerHeightStyle,
+      // Need a large enough difference to allow scrolling.
+      // This prevents infinite rendering loop.
+      overflow: inlineStyles.overflow ? "hidden" : undefined,
+    };
 
-    /**
-     * Direction of the textarea in which it can be resized.
-     */
-    resize?: keyof Renderlesskit.GetThemeValue<"textarea", "base", "resize">;
-
-    /**
-     * Whether the textarea should autosize on typing.
-     */
-    autoSize?: boolean;
-
-    /**
-     * True, if the input text to the textarea is invalid.
-     */
-    invalid?: boolean;
-  };
-
-export const Textarea = forwardRefWithAs<
-  TextareaProps,
-  HTMLTextAreaElement,
-  "textarea"
->((props, ref) => {
-  const {
-    size = "md",
-    variant = "outline",
-    autoSize = false,
-    resize = autoSize ? "none" : "horizontal",
-    rows,
-    rowsMax,
-    rowsMin = rows || 1,
-    cols,
-    value,
-    className,
-    style,
-    children,
-    onChange,
-    invalid = false,
-    disabled,
-    ...rest
-  } = props;
-  const { handleChange, handleRef, shadowRef, inlineStyles } = useAutoSize({
-    ref,
-    value,
-    rowsMax,
-    autoSize,
-    rowsMin,
-    onChange,
-    placeholder: props.placeholder,
-  });
-
-  const theme = useTheme("textarea");
-  const textaresStyles = tcm(
-    theme.base.common,
-    theme.base.size[size],
-    theme.base.variant[variant].common,
-    disabled || invalid ? "" : theme.base.variant[variant].interactions,
-    disabled ? theme.base.variant[variant].disabled : "",
-    invalid ? theme.base.variant[variant].invalid : "",
-    theme.base.resize[resize],
-    className,
-  );
-  const shadowTextareaStyles = tcm(textaresStyles, theme.shadow);
-  const textareaInlineStyles = {
-    height: inlineStyles.outerHeightStyle,
-    // Need a large enough difference to allow scrolling.
-    // This prevents infinite rendering loop.
-    overflow: inlineStyles.overflow ? "hidden" : undefined,
-    ...style,
-  };
-
-  return (
-    <Box as="div" className="relative">
-      <Tabbable
-        as="textarea"
-        ref={handleRef}
-        value={value}
-        onChange={handleChange}
-        rows={rowsMin}
-        cols={cols}
-        style={textareaInlineStyles}
-        className={textaresStyles}
-        disabled={disabled}
-        aria-invalid={ariaAttr(invalid)}
-        {...rest}
-      />
-      <Box
-        as="span"
-        className="absolute bottom-2.5 flex items-center justify-center text-xs text-red-500 bg-transparent pointer-events-none right-1"
-      >
-        <ClockIcon />
-      </Box>
-      <Tabbable
-        as="textarea"
-        ref={shadowRef}
-        aria-hidden
-        readOnly
-        tabIndex={-1}
-        className={shadowTextareaStyles}
-      />
-    </Box>
-  );
-});
+    return (
+      <TextareaWrapper {...wrapperProps}>
+        <TextareaBase
+          ref={handleRef}
+          onChange={handleChange}
+          style={textareaInlineStyles}
+          {...baseProps}
+        />
+        {icon ? <TextareaIcon {...iconProps} /> : null}
+        <TextareaGhost ref={shadowRef} {...ghostProps} />
+      </TextareaWrapper>
+    );
+  },
+);
 
 Textarea.displayName = "Textarea";
-
-export default Textarea;

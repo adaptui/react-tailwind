@@ -6,7 +6,7 @@ import { Box } from "../../box";
 import { Input } from "../../input";
 import { Radio } from "../../radio";
 import { RadioGroup } from "../../radio-group";
-import { Textarea, TextareaProps } from "../Textarea";
+import { Textarea, TextareaProps } from "../TextareaOld";
 
 import js from "./templates/TextareaBasicJsx";
 import ts from "./templates/TextareaBasicTsx";
