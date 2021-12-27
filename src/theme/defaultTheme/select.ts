@@ -27,15 +27,14 @@ export const select = {
           "bg-white border border-gray-200 text-gray-700 placeholder:text-gray-500 ",
         interactions:
           "hover:shadow-sm hover:border-gray-300 active:border-gray-400 focus-visible:border-gray-400 focus-visible:ring-2 focus-visible:ring-gray-200",
-        disabled: "bg-gray-50",
+        disabled: "bg-gray-50 text-gray-500",
         invalid: "border-red-300",
       },
       subtle: {
-        common:
-          "bg-gray-100 text-gray-700 border border-transparent placeholder:text-gray-500 ",
+        common: "bg-gray-100 text-gray-700 placeholder:text-gray-500 ",
         interactions:
-          "hover:bg-gray-200 active:bg-transparent active:border-gray-300 active:shadow-sm focus-visible:bg-transparent focus-visible:border-gray-400 focus-visible:ring-2 focus-visible:ring-gray-200",
-        disabled: "bg-gray-50 border-gray-200",
+          "hover:bg-gray-200 active:bg-gray-200 active:shadow-sm focus-visible:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-200",
+        disabled: "bg-gray-50 text-gray-500",
         invalid: "bg-red-50",
       },
       underline: {
