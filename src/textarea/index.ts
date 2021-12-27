@@ -1,1 +1,1 @@
-export * from "./TextareaOld";
+export * from "./Textarea";

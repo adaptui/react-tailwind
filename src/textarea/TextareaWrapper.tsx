@@ -24,7 +24,7 @@ export const useTextareaWrapper = createHook<
   useProps(options, htmlProps) {
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const theme = useTheme("input");
+    const theme = useTheme("textarea");
     const className = cx(theme.wrapper, htmlClassName);
 
     return { className, ...restHtmlProps };

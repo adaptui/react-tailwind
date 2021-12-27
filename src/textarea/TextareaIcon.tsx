@@ -8,7 +8,7 @@ import { TEXTAREA_ICON_KEYS } from "./__keys";
 import { TextareaStateReturn } from "./TextareaState";
 
 export type TextareaIconOptions = BoxOptions &
-  Pick<TextareaStateReturn, "size" | "variant" | "invalid"> & {};
+  Pick<TextareaStateReturn, "size" | "invalid" | "autoSize"> & {};
 
 export type TextareaIconHTMLProps = BoxHTMLProps;
 
@@ -23,16 +23,15 @@ export const useTextareaIcon = createHook<
   keys: TEXTAREA_ICON_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, variant, invalid } = options;
+    const { size, invalid, autoSize } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const theme = useTheme("input");
+    const theme = useTheme("textarea");
     const className = cx(
-      theme.prefix.common,
-      theme.prefix.size[size],
-      theme.prefix.variant[variant].common,
-      invalid ? "" : theme.prefix.variant[variant].interactions,
-      invalid ? theme.prefix.variant[variant].invalid : "",
+      theme.icon.common,
+      autoSize ? theme.icon.normal : "",
+      theme.icon.size[size],
+      invalid ? theme.icon.invalid : "",
       htmlClassName,
     );
 

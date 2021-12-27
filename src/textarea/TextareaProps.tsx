@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { getComponentProps } from "../index";
-import { Spinner } from "../spinner";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_TEXTAREA_STATE_KEYS } from "./__keys";
@@ -13,13 +12,13 @@ import { TextareaInitialState, useTextareaState } from "./TextareaState";
 import { TextareaWrapperProps } from "./TextareaWrapper";
 
 export const useTextareaStateSplit = (props: TextareaProps) => {
-  const [stateProps, switchProps] = splitProps(
+  const [stateProps, textareaProps] = splitProps(
     props,
     USE_TEXTAREA_STATE_KEYS,
   ) as [TextareaInitialState, TextareaOwnProps];
   const state = useTextareaState(stateProps);
 
-  return [state, switchProps, stateProps] as const;
+  return [state, textareaProps, stateProps] as const;
 };
 
 const componentMap = {
@@ -32,20 +31,14 @@ const componentMap = {
 export const useTextareaProps = (
   props: React.PropsWithChildren<TextareaProps>,
 ) => {
-  const [state, inputProps] = useTextareaStateSplit(props);
-  const { icon, loading, size } = state;
-  const { className, style, children, ...restProps } = inputProps;
+  const [state, textareaProps, stateProps] = useTextareaStateSplit(props);
+  const { placeholder, value, onChange } = stateProps;
+  const { icon } = state;
+  const { className, style, children, ...restProps } = textareaProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const __icon: TextareaProps["icon"] =
+  const _icon: TextareaProps["icon"] =
     componentProps?.iconProps?.children || icon;
-  const _icon: TextareaProps["icon"] = React.useMemo(() => {
-    return loading ? (
-      <Spinner size={size !== "xl" ? "xs" : "md"} />
-    ) : (
-      withIconA11y(runIfFn(__icon, state))
-    );
-  }, [__icon, loading, size, state]);
 
   const wrapperProps: TextareaWrapperProps = {
     ...state,
@@ -57,13 +50,16 @@ export const useTextareaProps = (
   const baseProps: TextareaBaseProps = {
     ...state,
     ...restProps,
+    placeholder,
+    value,
+    onChange,
     ...componentProps.baseProps,
   };
 
   const iconProps: TextareaIconProps = {
     ...state,
     ...componentProps.iconProps,
-    children: _icon,
+    children: withIconA11y(runIfFn(_icon, state)),
   };
 
   const ghostProps: TextareaGhostProps = {

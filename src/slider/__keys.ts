@@ -30,9 +30,9 @@ export const USE_SLIDER_STATE_KEYS = [
   "aria-details",
   "state",
   "size",
+  "tooltip",
   "range",
   "knobIcon",
-  "tooltip",
 ] as const;
 export const SLIDER_THUMB_STATE_KEYS = [
   "inputRef",
@@ -70,8 +70,8 @@ export const USE_SLIDER_THUMB_STATE_KEYS = [
   "trackRef",
   "state",
   "size",
-  "knobIcon",
   "tooltip",
+  "knobIcon",
   "isDragging",
   "setIsDragging",
 ] as const;

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { CaretDownIcon, ClockIcon } from "../../icons";
+import { SlotIcon } from "../../icons";
 
 import js from "./templates/InputBasicJsx";
 import ts from "./templates/InputBasicTsx";
@@ -92,22 +92,22 @@ export const Invalid: Story = {
 export const Prefix: Story = {
   args: {
     placeholder: "Search",
-    prefix: <ClockIcon />,
+    prefix: <SlotIcon />,
   },
 };
 
 export const Suffix: Story = {
   args: {
     placeholder: "Search",
-    suffix: <CaretDownIcon />,
+    suffix: <SlotIcon />,
   },
 };
 
 export const PrefixSuffix: Story = {
   args: {
     placeholder: "Search",
-    prefix: <ClockIcon />,
-    suffix: <CaretDownIcon />,
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
   },
 };
 

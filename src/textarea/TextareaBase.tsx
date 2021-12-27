@@ -1,5 +1,7 @@
+import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
 import { TabbableHTMLProps, TabbableOptions, useTabbable } from "reakit";
+import { useForkRef, useLiveRef } from "reakit-utils";
 import { ariaAttr } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -11,10 +13,19 @@ import { TextareaStateReturn } from "./TextareaState";
 export type TextareaBaseOptions = TabbableOptions &
   Pick<
     TextareaStateReturn,
-    "size" | "variant" | "icon" | "invalid" | "resize"
+    | "size"
+    | "variant"
+    | "icon"
+    | "invalid"
+    | "resize"
+    | "rowsMin"
+    | "inputRef"
+    | "inputStyles"
+    | "onChange"
   > & {};
 
-export type TextareaBaseHTMLProps = Omit<TabbableHTMLProps, "size" | "prefix">;
+export type TextareaBaseHTMLProps = Omit<TabbableHTMLProps, "size" | "prefix"> &
+  React.TextareaHTMLAttributes<any>;
 
 export type TextareaBaseProps = TextareaBaseOptions & TextareaBaseHTMLProps;
 
@@ -27,9 +38,26 @@ export const useTextareaBase = createHook<
   keys: TEXTAREA_BASE_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, variant, invalid, disabled, resize } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    const {
+      size,
+      variant,
+      invalid,
+      disabled,
+      resize,
+      rowsMin,
+      inputRef,
+      inputStyles,
+      onChange: autoSizeOnChange,
+    } = options;
 
+    const {
+      className: htmlClassName,
+      ref: htmlRef,
+      style: htmlStyle,
+      onChange: htmlOnChange,
+      ...restHtmlProps
+    } = htmlProps;
+    const onChangeRef = useLiveRef(htmlOnChange);
     const theme = useTheme("textarea");
     const className = tcm(
       theme.base.common,
@@ -42,9 +70,23 @@ export const useTextareaBase = createHook<
       htmlClassName,
     );
 
+    const onChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        onChangeRef.current?.(event);
+        if (event.defaultPrevented) return;
+
+        autoSizeOnChange?.(event);
+      },
+      [onChangeRef, autoSizeOnChange],
+    );
+
     return {
+      ref: useForkRef(inputRef, htmlRef),
       className,
       disabled,
+      style: { ...inputStyles, ...htmlStyle },
+      onChange,
+      rows: rowsMin,
       "aria-invalid": ariaAttr(invalid),
       ...restHtmlProps,
     };

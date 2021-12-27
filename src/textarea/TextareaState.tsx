@@ -1,4 +1,10 @@
-import { RenderPropType } from "../utils";
+import { SlotIcon } from "../icons";
+import { Spinner } from "../spinner";
+import { useTheme } from "../theme";
+import { RenderPropType, tcm } from "../utils";
+
+import { TextareaBaseProps } from "./TextareaBase";
+import { useAutoSize } from "./useAutoSize";
 
 export type TextareaState = {
   /**
@@ -14,11 +20,6 @@ export type TextareaState = {
    * @default solid
    */
   variant: keyof Renderlesskit.GetThemeValue<"textarea", "base", "variant">;
-
-  /**
-   * Description for the Switch.
-   */
-  icon: RenderPropType<TextareaStateReturn>;
 
   /**
    * Minimum number of rows to be displayed.
@@ -48,9 +49,39 @@ export type TextareaState = {
   invalid: boolean;
 
   /**
+   * Description for the Switch.
+   */
+  icon: RenderPropType<TextareaStateReturn>;
+
+  /**
    * True, if the input is loading.
    */
   loading: boolean;
+
+  /**
+   * Description for the Switch.
+   */
+  spinner: RenderPropType<TextareaStateReturn>;
+
+  /**
+   * Input ref needed by useAutoSize hook.
+   */
+  inputRef: React.RefObject<HTMLTextAreaElement>;
+
+  /**
+   * Ghost ref needed by useAutoSize hook.
+   */
+  ghostRef: React.RefObject<HTMLTextAreaElement>;
+
+  /**
+   * Inline styles for the textarea when autosize.
+   */
+  inputStyles: React.CSSProperties;
+
+  /**
+   * onChange handler to merge with textarea onChange to update the autoSize height.
+   */
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export type TextareaActions = {};
@@ -69,14 +100,15 @@ export type TextareaInitialState = Partial<
     | "resize"
     | "invalid"
     | "loading"
+    | "spinner"
   >
-> & {};
+> &
+  Partial<Pick<TextareaBaseProps, "placeholder" | "value" | "onChange">> & {};
 
 export function useTextareaState(
   props: TextareaInitialState = {},
 ): TextareaStateReturn {
   const {
-    icon,
     size = "md",
     variant = "outline",
     autoSize = false,
@@ -85,10 +117,13 @@ export function useTextareaState(
     rowsMin = 1,
     invalid = false,
     loading = false,
+    icon = <SlotIcon />,
+    spinner = DefaultTextareaSpinner,
   } = props;
 
+  const autoSizeState = useAutoSize(props);
+
   return {
-    icon,
     size,
     variant,
     invalid,
@@ -97,5 +132,20 @@ export function useTextareaState(
     rowsMin,
     resize,
     autoSize,
+    ...autoSizeState,
+    icon,
+    spinner,
   };
 }
+
+export const DefaultTextareaSpinner = (state: TextareaStateReturn) => {
+  const { autoSize, size } = state;
+  const theme = useTheme("textarea");
+
+  return (
+    <Spinner
+      className={tcm(theme.icon.common, autoSize ? theme.icon.normal : "")}
+      size={size !== "xl" ? "xs" : "md"}
+    />
+  );
+};

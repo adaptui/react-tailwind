@@ -1,5 +1,6 @@
 import { createComponent, createHook } from "reakit-system";
 import { TabbableHTMLProps, TabbableOptions, useTabbable } from "reakit";
+import { useForkRef } from "reakit-utils";
 import { ariaAttr } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
@@ -11,7 +12,7 @@ import { TextareaStateReturn } from "./TextareaState";
 export type TextareaGhostOptions = TabbableOptions &
   Pick<
     TextareaStateReturn,
-    "size" | "variant" | "icon" | "invalid" | "resize"
+    "size" | "variant" | "icon" | "invalid" | "resize" | "ghostRef"
   > & {};
 
 export type TextareaGhostHTMLProps = Omit<TabbableHTMLProps, "size" | "prefix">;
@@ -27,8 +28,12 @@ export const useTextareaGhost = createHook<
   keys: TEXTAREA_GHOST_KEYS,
 
   useProps(options, htmlProps) {
-    const { size, variant, invalid, disabled, resize } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    const { size, variant, invalid, disabled, resize, ghostRef } = options;
+    const {
+      className: htmlClassName,
+      ref: htmlRef,
+      ...restHtmlProps
+    } = htmlProps;
 
     const theme = useTheme("textarea");
     const className = tcm(
@@ -39,11 +44,12 @@ export const useTextareaGhost = createHook<
       disabled ? theme.base.variant[variant].disabled : "",
       invalid ? theme.base.variant[variant].invalid : "",
       theme.base.resize[resize],
-      theme.shadow,
+      theme.ghost,
       htmlClassName,
     );
 
     return {
+      ref: useForkRef(ghostRef, htmlRef),
       className,
       disabled,
       "aria-invalid": ariaAttr(invalid),
