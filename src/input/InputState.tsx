@@ -1,5 +1,5 @@
+import { Spinner } from "../spinner";
 import { RenderPropType } from "../utils";
-import { SelectStateReturn, Spinner } from "..";
 
 export type InputState = {
   /**
@@ -39,7 +39,7 @@ export type InputState = {
   /**
    * Spinner component to display when loading.
    */
-  spinner: RenderPropType<SelectStateReturn>;
+  spinner: RenderPropType<InputStateReturn>;
 };
 
 export type InputActions = {};
@@ -61,13 +61,13 @@ export function useInputState(props: InputInitialState = {}): InputStateReturn {
     variant = "outline",
     invalid = false,
     loading = false,
-    spinner = DefaultSelectSpinner,
+    spinner = DefaultInputSpinner,
   } = props;
 
   return { prefix, suffix, size, variant, invalid, loading, spinner };
 }
 
-export const DefaultSelectSpinner = (state: SelectStateReturn) => {
+export const DefaultInputSpinner = (state: InputStateReturn) => {
   const { size } = state;
 
   return <Spinner size={size !== "xl" ? "xs" : "md"} />;
