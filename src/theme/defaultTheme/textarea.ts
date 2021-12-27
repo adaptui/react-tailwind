@@ -1,7 +1,8 @@
 export const textarea = {
+  wrapper: "relative inline-flex h-fit",
   base: {
     common:
-      "font-normal transition-all appearance-none outline-none disabled:cursor-not-allowed",
+      "font-normal w-full transition-all appearance-none outline-none disabled:cursor-not-allowed",
     size: {
       sm: "text-cxs rounded-lg px-2 py-[5.5px]",
       md: "text-sm rounded-lg px-2.5 py-[7px]",
@@ -41,5 +42,17 @@ export const textarea = {
       none: "resize-none",
     },
   },
-  shadow: "invisible absolute overflow-hidden h-0 top-0 left-0 transform-gpu",
+  icon: {
+    common:
+      "absolute bottom-2.5 flex items-center justify-center text-gray-400 bg-transparent pointer-events-none right-1 w-[1em] h-[1em]",
+    normal: "bottom-1",
+    size: {
+      sm: "text-xs",
+      md: "text-xs",
+      lg: "text-xs",
+      xl: "text-base",
+    },
+    invalid: "text-red-500",
+  },
+  ghost: "invisible absolute overflow-hidden h-0 top-0 left-0 transform-gpu",
 };

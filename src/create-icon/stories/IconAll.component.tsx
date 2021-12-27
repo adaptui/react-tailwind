@@ -13,7 +13,9 @@ import {
   CloseIcon,
   DashIcon,
   EqualsIcon,
+  ErrorIcon,
   SleepStatusIcon,
+  SlotIcon,
   TypingLargeStatusIcon,
   TypingSmallStatusIcon,
   UserIcon,
@@ -25,6 +27,7 @@ export const Icon: React.FC<IconProps> = props => {
   return (
     <div className="flex flex-col space-y-2">
       <div className="space-x-4 text-5xl">
+        <SlotIcon />
         <CaretDownIcon />
         <CaretLeftIcon />
         <CaretRightIcon />
@@ -41,6 +44,7 @@ export const Icon: React.FC<IconProps> = props => {
         <TypingLargeStatusIcon className="inline-block w-12" />
         <ArrowIcon className="inline-block w-12 h-12" />
         <EqualsIcon />
+        <ErrorIcon />
       </div>
     </div>
   );

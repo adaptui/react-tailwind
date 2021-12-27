@@ -28,12 +28,12 @@ export type SelectState = {
   /**
    * True, if the value of the textarea is invalid.
    */
-  invalid?: boolean;
+  invalid: boolean;
 
   /**
    * True, if the input is loading.
    */
-  loading?: boolean;
+  loading: boolean;
 };
 
 export type SelectActions = {};

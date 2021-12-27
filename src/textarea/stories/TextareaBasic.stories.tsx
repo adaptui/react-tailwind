@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { Box } from "../../box";
+import { SlotIcon } from "../../icons";
 import { Input } from "../../input";
 import { Radio } from "../../radio";
 import { RadioGroup } from "../../radio-group";
@@ -50,13 +51,8 @@ export const Default: Story = {
   args: {
     size: "md",
     variant: "outline",
-    placeholder: "",
-    defaultValue: "",
-    rowsMax: 100,
     rowsMin: 3,
     cols: 30,
-    resize: "both",
-    autoSize: false,
   },
 };
 
@@ -123,22 +119,32 @@ export const Disabled: Story = {
   },
 };
 
-export const Invalid: Story = {
-  args: {
-    ...Default.args,
-    invalid: true,
-    defaultValue: lorem,
-  },
-};
-
 export const AutoSize: Story = {
   args: {
     ...Default.args,
     autoSize: true,
     resize: "none",
     cols: 50,
-    defaultValue:
-      "Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam.",
+    defaultValue: lorem,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    ...Default.args,
+    autoSize: true,
+    loading: true,
+    defaultValue: lorem,
+  },
+};
+
+export const Invalid: Story = {
+  args: {
+    ...Default.args,
+    autoSize: true,
+    invalid: true,
+    icon: <SlotIcon />,
+    defaultValue: lorem,
   },
 };
 

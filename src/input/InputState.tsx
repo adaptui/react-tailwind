@@ -28,12 +28,12 @@ export type InputState = {
   /**
    * True, if the value of the input is invalid.
    */
-  invalid?: boolean;
+  invalid: boolean;
 
   /**
    * True, if the input is loading.
    */
-  loading?: boolean;
+  loading: boolean;
 };
 
 export type InputActions = {};

@@ -70,28 +70,24 @@ export const input = {
         interactions:
           "peer-active:text-gray-600 peer-focus-visible:text-gray-600 peer-disabled:text-gray-400",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
       subtle: {
         common: "text-gray-500",
         interactions:
           "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
       underline: {
         common: "pl-0.5 text-gray-500",
         interactions:
           "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
       ghost: {
         common: "text-gray-400",
         interactions:
           "peer-hover:text-gray-500 peer-active:text-gray-500  peer-focus-visible:text-gray-500",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
     },
   },

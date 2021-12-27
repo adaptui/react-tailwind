@@ -1,27 +1,19 @@
 import * as React from "react";
 
-import { useMergeRefs, useSafeLayoutEffect } from "../hooks";
+import { useSafeLayoutEffect } from "../hooks";
 import { debounce } from "../utils";
 
 import { TextareaProps } from "./index";
 
-type UseAutoSizeProps = Pick<
+export type UseAutoSizeProps = Pick<
   TextareaProps,
-  | "autoSize"
-  | "value"
-  | "rowsMax"
-  | "onChange"
-  | "ref"
-  | "placeholder"
-  | "rowsMin"
+  "autoSize" | "value" | "rowsMax" | "placeholder" | "rowsMin"
 >;
 
 export const useAutoSize = (props: UseAutoSizeProps) => {
-  const { ref, value, rowsMax, onChange, autoSize, rowsMin, placeholder } =
-    props;
+  const { value, rowsMax, autoSize, rowsMin, placeholder } = props;
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
-  const handleRef = useMergeRefs(ref, inputRef);
-  const shadowRef = React.useRef<HTMLTextAreaElement>(null);
+  const ghostRef = React.useRef<HTMLTextAreaElement>(null);
 
   const { current: isControlled } = React.useRef(value != null);
   const renders = React.useRef(0);
@@ -38,7 +30,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
 
     const computedStyle = window.getComputedStyle(input as unknown as Element);
 
-    const inputShallow = shadowRef.current;
+    const inputShallow = ghostRef.current;
     if (inputShallow == null) return;
 
     inputShallow.style.width = computedStyle.width;
@@ -139,7 +131,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     renders.current = 0;
   }, [value]);
 
-  const handleChange = React.useCallback(
+  const autoSizeOnChange = React.useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       renders.current = 0;
 
@@ -148,13 +140,18 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
 
         syncHeight();
       }
-
-      onChange?.(event);
     },
-    [autoSize, isControlled, onChange, syncHeight],
+    [autoSize, isControlled, syncHeight],
   );
 
-  return { handleChange, inlineStyles, handleRef, shadowRef };
+  const inputStyles: React.CSSProperties = {
+    height: inlineStyles.outerHeightStyle,
+    // Need a large enough difference to allow scrolling.
+    // This prevents infinite rendering loop.
+    overflow: inlineStyles.overflow ? "hidden" : undefined,
+  };
+
+  return { autoSizeOnChange, inputStyles, inputRef, ghostRef };
 };
 
 function getStyleValue(
