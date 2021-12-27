@@ -29,7 +29,7 @@ export const checkbox = {
   },
   label: {
     base: "relative inline-flex cursor-pointer align-top",
-    only: "hover:bg-gray-100 focus-within:ring-2 focus-within:ring-gray-300",
+    only: "hover:bg-gray-100",
     disabled: "pointer-events-none",
     size: {
       sm: "min-h-[26px] px-2 py-[6px] rounded-lg",

@@ -9,7 +9,7 @@ import { SwitchProps } from "./Switch";
 import { SwitchStateReturn } from "./SwitchState";
 
 export type SwitchLabelOptions = BoxOptions &
-  Pick<SwitchStateReturn, "size" | "description"> & {
+  Pick<SwitchStateReturn, "size" | "description" | "label"> & {
     disabled?: SwitchProps["disabled"];
   };
 
@@ -26,12 +26,14 @@ export const useSwitchLabel = createHook<
   keys: SWITCH_LABEL_KEYS,
 
   useProps(options, htmlProps) {
-    const { disabled } = options;
+    const { disabled, description, size, label } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("switch");
     const className = cx(
       theme.label.base,
+      label && !description ? theme.label.size[size] : "",
+      label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
       htmlClassName,
     );

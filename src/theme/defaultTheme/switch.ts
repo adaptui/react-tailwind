@@ -1,6 +1,12 @@
 export const _switch = {
   label: {
     base: "relative inline-flex items-center cursor-pointer align-top",
+    only: "hover:bg-gray-100",
+    size: {
+      sm: "min-h-[26px] px-2 py-[6px] rounded-lg",
+      md: "min-h-[30px] px-2.5 py-[7px] rounded-lg",
+      lg: "min-h-9 px-3 py-2 rounded-[10px]",
+    },
     disabled: "pointer-events-none",
   },
   input: "peer sr-only",
@@ -29,6 +35,7 @@ export const _switch = {
     },
     children: {
       base: "absolute box-border bg-white transition-all duration-200",
+      disabled: "opacity-60",
       size: {
         default: {
           sm: "w-2.5 h-2.5 top-0.5 rounded-full shadow-switch-md peer-children-active:w-3 ",
@@ -60,19 +67,19 @@ export const _switch = {
   text: {
     base: "text-gray-700 font-medium select-none",
     size: {
-      sm: "text-cxs ml-2",
-      md: "text-sm ml-2",
-      lg: "text-base ml-2",
-      xl: "text-base ml-3",
+      sm: "text-cxs mr-2",
+      md: "text-sm mr-2",
+      lg: "text-base mr-2",
+      xl: "text-base mr-3",
     },
   },
   description: {
     base: "text-gray-500 select-none",
     size: {
-      sm: "text-cxs mt-1 ml-2",
-      md: "text-sm mt-1 ml-2",
-      lg: "text-sm mt-1.5 ml-2",
-      xl: "text-sm mt-[5px] ml-3",
+      sm: "text-cxs mt-1 mr-2",
+      md: "text-sm mt-1 mr-2",
+      lg: "text-sm mt-1.5 mr-2",
+      xl: "text-sm mt-[5px] mr-3",
     },
   },
 };
