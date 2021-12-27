@@ -13,7 +13,7 @@ export const TEXTAREA_STATE_KEYS = [
   "inputRef",
   "ghostRef",
   "inputStyles",
-  "onChange",
+  "autoSizeOnChange",
 ] as const;
 export const USE_TEXTAREA_STATE_KEYS = [
   "size",
@@ -26,7 +26,6 @@ export const USE_TEXTAREA_STATE_KEYS = [
   "invalid",
   "loading",
   "spinner",
-  "onChange",
   "placeholder",
   "value",
 ] as const;

@@ -7,18 +7,11 @@ import { TextareaProps } from "./index";
 
 export type UseAutoSizeProps = Pick<
   TextareaProps,
-  "autoSize" | "value" | "rowsMax" | "onChange" | "placeholder" | "rowsMin"
+  "autoSize" | "value" | "rowsMax" | "placeholder" | "rowsMin"
 >;
 
 export const useAutoSize = (props: UseAutoSizeProps) => {
-  const {
-    value,
-    rowsMax,
-    onChange: htmlOnChange,
-    autoSize,
-    rowsMin,
-    placeholder,
-  } = props;
+  const { value, rowsMax, autoSize, rowsMin, placeholder } = props;
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const ghostRef = React.useRef<HTMLTextAreaElement>(null);
 
@@ -138,7 +131,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     renders.current = 0;
   }, [value]);
 
-  const onChange = React.useCallback(
+  const autoSizeOnChange = React.useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       renders.current = 0;
 
@@ -147,10 +140,8 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
 
         syncHeight();
       }
-
-      htmlOnChange?.(event);
     },
-    [autoSize, isControlled, htmlOnChange, syncHeight],
+    [autoSize, isControlled, syncHeight],
   );
 
   const inputStyles: React.CSSProperties = {
@@ -160,7 +151,7 @@ export const useAutoSize = (props: UseAutoSizeProps) => {
     overflow: inlineStyles.overflow ? "hidden" : undefined,
   };
 
-  return { onChange, inputStyles, inputRef, ghostRef };
+  return { autoSizeOnChange, inputStyles, inputRef, ghostRef };
 };
 
 function getStyleValue(

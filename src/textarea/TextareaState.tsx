@@ -81,7 +81,7 @@ export type TextareaState = {
   /**
    * onChange handler to merge with textarea onChange to update the autoSize height.
    */
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  autoSizeOnChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export type TextareaActions = {};
@@ -103,7 +103,7 @@ export type TextareaInitialState = Partial<
     | "spinner"
   >
 > &
-  Partial<Pick<TextareaBaseProps, "placeholder" | "value" | "onChange">> & {};
+  Partial<Pick<TextareaBaseProps, "placeholder" | "value">> & {};
 
 export function useTextareaState(
   props: TextareaInitialState = {},

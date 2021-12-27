@@ -32,7 +32,7 @@ export const useTextareaProps = (
   props: React.PropsWithChildren<TextareaProps>,
 ) => {
   const [state, textareaProps, stateProps] = useTextareaStateSplit(props);
-  const { placeholder, value, onChange } = stateProps;
+  const { placeholder, value } = stateProps;
   const { icon } = state;
   const { className, style, children, ...restProps } = textareaProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
@@ -52,7 +52,6 @@ export const useTextareaProps = (
     ...restProps,
     placeholder,
     value,
-    onChange,
     ...componentProps.baseProps,
   };
 

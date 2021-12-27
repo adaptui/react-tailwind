@@ -21,7 +21,7 @@ export type TextareaBaseOptions = TabbableOptions &
     | "rowsMin"
     | "inputRef"
     | "inputStyles"
-    | "onChange"
+    | "autoSizeOnChange"
   > & {};
 
 export type TextareaBaseHTMLProps = Omit<TabbableHTMLProps, "size" | "prefix"> &
@@ -47,7 +47,7 @@ export const useTextareaBase = createHook<
       rowsMin,
       inputRef,
       inputStyles,
-      onChange: autoSizeOnChange,
+      autoSizeOnChange,
     } = options;
 
     const {
@@ -73,6 +73,7 @@ export const useTextareaBase = createHook<
     const onChange = React.useCallback(
       (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         onChangeRef.current?.(event);
+        console.log("%cevent", "color: #bfffc8", event);
         if (event.defaultPrevented) return;
 
         autoSizeOnChange?.(event);
