@@ -24,8 +24,11 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <TextareaWrapper {...wrapperProps}>
         <TextareaBase ref={ref} {...baseProps} />
-        {loading ? runIfFn(spinner, state) : null}
-        {invalid ? <TextareaIcon {...iconProps} /> : null}
+        {loading ? (
+          runIfFn(spinner, state)
+        ) : invalid ? (
+          <TextareaIcon {...iconProps} />
+        ) : null}
         <TextareaGhost {...ghostProps} />
       </TextareaWrapper>
     );
