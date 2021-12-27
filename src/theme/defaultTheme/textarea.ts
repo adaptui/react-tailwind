@@ -1,5 +1,5 @@
 export const textarea = {
-  wrapper: "relative inline-flex",
+  wrapper: "relative inline-flex h-fit",
   base: {
     common:
       "font-normal w-full transition-all appearance-none outline-none disabled:cursor-not-allowed",
