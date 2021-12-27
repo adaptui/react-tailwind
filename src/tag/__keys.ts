@@ -1,2 +1,8 @@
 // Automatically generated
-export const TAG_KEYS = ["size", "variant", "prefix", "closable"] as const;
+export const TAG_KEYS = [
+  "size",
+  "variant",
+  "prefix",
+  "closable",
+  "suffix",
+] as const;
