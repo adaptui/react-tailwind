@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { getComponentProps } from "../index";
-import { Spinner } from "../spinner";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_INPUT_STATE_KEYS } from "./__keys";
@@ -30,7 +29,7 @@ const componentMap = {
 
 export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const [state, inputProps] = useInputStateSplit(props);
-  const { prefix, suffix, loading, size } = state;
+  const { prefix, suffix, loading, spinner } = state;
   const { className, style, children, disabled, ...restProps } = inputProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
 
@@ -42,12 +41,10 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const __suffix: InputProps["suffix"] =
     componentProps?.suffixProps?.children || suffix;
   const _suffix: InputProps["suffix"] = React.useMemo(() => {
-    return loading ? (
-      <Spinner size={size !== "xl" ? "xs" : "md"} />
-    ) : (
-      withIconA11y(runIfFn(__suffix, state))
-    );
-  }, [__suffix, loading, size, state]);
+    return loading
+      ? runIfFn(spinner, state)
+      : withIconA11y(runIfFn(__suffix, state));
+  }, [loading, spinner, state, __suffix]);
 
   const inputInlineStyles = React.useRef<Record<string, any>>({});
   const prefixRef = React.useRef<HTMLElement>(null);

@@ -1,13 +1,13 @@
-import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
+import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { cx, passProps, RenderPropType, withIconA11y } from "../utils";
+import { cx, RenderPropType, tcm, withIconA11y } from "../utils";
 
 import { TAG_KEYS } from "./__keys";
 
-export type TagOptions = BoxOptions & {
+export type TagOptions = ButtonOptions & {
   /**
    * How large should the tag be?
    *
@@ -30,16 +30,21 @@ export type TagOptions = BoxOptions & {
   /**
    * If added, the tag will show an icon before the tag's text.
    */
-  closable?: RenderPropType;
+  closable?: boolean;
+
+  /**
+   * If added, the tag will show an icon before the tag's text.
+   */
+  suffix?: RenderPropType;
 };
 
-export type TagHTMLProps = Omit<BoxHTMLProps, "prefix"> & {};
+export type TagHTMLProps = Omit<ButtonHTMLProps, "prefix"> & {};
 
 export type TagProps = TagOptions & TagHTMLProps;
 
 export const useTag = createHook<TagOptions, TagHTMLProps>({
   name: "Tag",
-  compose: useBox,
+  compose: useButton,
   keys: TAG_KEYS,
 
   useOptions(options, htmlProps) {
@@ -49,7 +54,14 @@ export const useTag = createHook<TagOptions, TagHTMLProps>({
   },
 
   useProps(options, htmlProps) {
-    const { size = "md", variant = "solid", prefix, closable } = options;
+    const {
+      size = "md",
+      variant = "solid",
+      prefix,
+      closable = false,
+      suffix = closable ? <CloseIcon /> : null,
+      disabled,
+    } = options;
 
     let {
       className: htmlClassName,
@@ -62,11 +74,17 @@ export const useTag = createHook<TagOptions, TagHTMLProps>({
       theme.base.normal,
       theme.size.default[size],
       theme.variant.default[variant],
-      theme.variant.hover[variant],
-      theme.variant.active[variant],
+      disabled
+        ? theme.variant.disabled[variant]
+        : tcm(
+            theme.variant.hover[variant],
+            theme.variant.active[variant],
+            theme.variant.focus[variant],
+          ),
       htmlClassName,
     );
     const prefixStyles = cx(theme.size.prefix[size]);
+    const suffixStyles = cx(theme.size.suffix[size]);
 
     const children = (
       <>
@@ -74,7 +92,9 @@ export const useTag = createHook<TagOptions, TagHTMLProps>({
           <>{withIconA11y(prefix, { className: prefixStyles })}</>
         ) : null}
         <span>{htmlChildren}</span>
-        {closable ? <>{passProps(closable, options)}</> : null}
+        {closable && suffix ? (
+          <>{withIconA11y(suffix, { className: suffixStyles })}</>
+        ) : null}
       </>
     );
 
@@ -83,7 +103,7 @@ export const useTag = createHook<TagOptions, TagHTMLProps>({
 });
 
 export const Tag = createComponent({
-  as: "div",
+  as: "button",
   memo: true,
   useHook: useTag,
 });

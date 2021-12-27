@@ -27,15 +27,14 @@ export const select = {
           "bg-white border border-gray-200 text-gray-700 placeholder:text-gray-500 ",
         interactions:
           "hover:shadow-sm hover:border-gray-300 active:border-gray-400 focus-visible:border-gray-400 focus-visible:ring-2 focus-visible:ring-gray-200",
-        disabled: "bg-gray-50",
+        disabled: "bg-gray-50 text-gray-500",
         invalid: "border-red-300",
       },
       subtle: {
-        common:
-          "bg-gray-100 text-gray-700 border border-transparent placeholder:text-gray-500 ",
+        common: "bg-gray-100 text-gray-700 placeholder:text-gray-500 ",
         interactions:
-          "hover:bg-gray-200 active:bg-transparent active:border-gray-300 active:shadow-sm focus-visible:bg-transparent focus-visible:border-gray-400 focus-visible:ring-2 focus-visible:ring-gray-200",
-        disabled: "bg-gray-50 border-gray-200",
+          "hover:bg-gray-200 active:bg-gray-200 active:shadow-sm focus-visible:bg-gray-100 focus-visible:ring-2 focus-visible:ring-gray-200",
+        disabled: "bg-gray-50 text-gray-500",
         invalid: "bg-red-50",
       },
       underline: {
@@ -70,28 +69,24 @@ export const select = {
         interactions:
           "peer-active:text-gray-600 peer-focus-visible:text-gray-600 peer-disabled:text-gray-400",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
       subtle: {
         common: "text-gray-500",
         interactions:
           "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
       underline: {
         common: "pl-0.5 text-gray-500",
         interactions:
           "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
       ghost: {
         common: "text-gray-400",
         interactions:
           "peer-hover:text-gray-500 peer-active:text-gray-500  peer-focus-visible:text-gray-500",
         disabled: "text-gray-400",
-        invalid: "text-red-500",
       },
     },
   },

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { CaretDownIcon, ClockIcon } from "../../icons";
+import { SlotIcon } from "../../icons";
 
 import js from "./templates/SelectStackJsx";
 import ts from "./templates/SelectStackTsx";
@@ -53,73 +53,33 @@ export const Invalid: Story = {
   args: { invalid: true },
 };
 
+export const Loading: Story = {
+  args: { loading: true },
+};
+
 export const Prefix: Story = {
   args: {
-    prefix: <ClockIcon />,
+    prefix: <SlotIcon />,
   },
 };
 
 export const PrefixDisabled: Story = {
   args: {
-    prefix: <ClockIcon />,
+    prefix: <SlotIcon />,
     disabled: true,
   },
 };
 
 export const PrefixInvalid: Story = {
   args: {
-    prefix: <ClockIcon />,
+    prefix: <SlotIcon />,
     invalid: true,
   },
 };
 
-export const Suffix: Story = {
+export const PrefixLoading: Story = {
   args: {
-    suffix: <CaretDownIcon />,
-  },
-};
-
-export const SuffixDisabled: Story = {
-  args: {
-    suffix: <ClockIcon />,
-    disabled: true,
-  },
-};
-
-export const SuffixInvalid: Story = {
-  args: {
-    suffix: <ClockIcon />,
-    invalid: true,
-  },
-};
-
-export const PrefixSuffix: Story = {
-  args: {
-    prefix: <ClockIcon />,
-    suffix: <CaretDownIcon />,
-  },
-};
-
-export const PrefixSuffixDisabled: Story = {
-  args: {
-    prefix: <ClockIcon />,
-    suffix: <CaretDownIcon />,
-    disabled: true,
-  },
-};
-
-export const PrefixSuffixInvalid: Story = {
-  args: {
-    prefix: <ClockIcon />,
-    suffix: <CaretDownIcon />,
-    invalid: true,
-  },
-};
-
-export const PrefixSuffixLoading: Story = {
-  args: {
-    prefix: <ClockIcon />,
-    suffix: <CaretDownIcon />,
+    prefix: <SlotIcon />,
     loading: true,
   },
 };

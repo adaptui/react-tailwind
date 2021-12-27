@@ -29,7 +29,7 @@ export const useInputSuffix = createHook<
     const { size, variant, disabled, invalid } = options;
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
-    const theme = useTheme("select");
+    const theme = useTheme("input");
     const className = cx(
       theme.suffix.common,
       theme.suffix.size[size],

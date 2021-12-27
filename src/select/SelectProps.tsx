@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { getComponentProps } from "../index";
-import { Spinner } from "../spinner";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_SELECT_STATE_KEYS } from "./__keys";
@@ -12,13 +11,13 @@ import { SelectSuffixProps } from "./SelectSuffix";
 import { SelectWrapperProps } from "./SelectWrapper";
 
 export const useSelectStateSplit = (props: SelectProps) => {
-  const [stateProps, switchProps] = splitProps(
+  const [stateProps, selectProps] = splitProps(
     props,
     USE_SELECT_STATE_KEYS,
   ) as [SelectInitialState, SelectOwnProps];
   const state = useSelectState(stateProps);
 
-  return [state, switchProps, stateProps] as const;
+  return [state, selectProps, stateProps] as const;
 };
 
 const componentMap = {
@@ -29,9 +28,9 @@ const componentMap = {
 };
 
 export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
-  const [state, inputProps] = useSelectStateSplit(props);
-  const { prefix, suffix, loading, size } = state;
-  const { className, style, children, disabled, ...restProps } = inputProps;
+  const [state, selectProps] = useSelectStateSplit(props);
+  const { prefix, suffix, loading, spinner } = state;
+  const { className, style, children, disabled, ...restProps } = selectProps;
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
@@ -46,12 +45,10 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
   const __suffix: SelectProps["suffix"] =
     componentProps?.suffixProps?.children || suffix;
   const _suffix: SelectProps["suffix"] = React.useMemo(() => {
-    return loading ? (
-      <Spinner size={size !== "xl" ? "xs" : "md"} />
-    ) : (
-      withIconA11y(runIfFn(__suffix, state))
-    );
-  }, [__suffix, loading, size, state]);
+    return loading
+      ? runIfFn(spinner, state)
+      : withIconA11y(runIfFn(__suffix, state));
+  }, [__suffix, loading, spinner, state]);
 
   const inputInlineStyles = React.useRef<Record<string, any>>({});
   const prefixRef = React.useRef<HTMLElement>(null);

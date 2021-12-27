@@ -1,13 +1,13 @@
 export const tag = {
   base: {
     normal:
-      "inline-flex items-center justify-center relative transition-all appearance-none select-none whitespace-nowrap align-middle",
+      "inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
   },
   variant: {
     default: {
       solid: "bg-gray-800 text-white border border-transparent",
       subtle: "bg-gray-100 text-gray-600 border border-transparent",
-      outline: "bg-white text-gray-600 border border-gray-200",
+      outline: "bg-white text-gray-600 border border-gray-300",
     },
     hover: {
       solid: "hover:bg-gray-700",
@@ -18,6 +18,19 @@ export const tag = {
       solid: "active:bg-gray-800",
       subtle: "active:bg-gray-100",
       outline: "active:bg-gray-100 active:border-gray-300",
+    },
+    focus: {
+      solid:
+        "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
+      subtle:
+        "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
+      outline:
+        "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
+    },
+    disabled: {
+      solid: "disabled:bg-gray-100 disabled:text-gray-400",
+      subtle: "disabled:bg-gray-100 disabled:text-gray-400",
+      outline: "disabled:text-gray-400 disabled:border-gray-200",
     },
   },
   size: {
@@ -33,7 +46,7 @@ export const tag = {
       lg: "text-xs mr-1",
       xl: "text-base mr-1",
     },
-    closable: {
+    suffix: {
       sm: "text-xs ml-1",
       md: "text-xs ml-1",
       lg: "text-xs ml-1",

@@ -14,6 +14,7 @@ import {
   DashIcon,
   EqualsIcon,
   ErrorIcon,
+  SelectIcon,
   SleepStatusIcon,
   SlotIcon,
   TypingLargeStatusIcon,
@@ -45,6 +46,7 @@ export const Icon: React.FC<IconProps> = props => {
         <ArrowIcon className="inline-block w-12 h-12" />
         <EqualsIcon />
         <ErrorIcon />
+        <SelectIcon />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ export const USE_SELECT_STATE_KEYS = [
   "variant",
   "invalid",
   "loading",
+  "spinner",
 ] as const;
 export const SELECT_STATE_KEYS = USE_SELECT_STATE_KEYS;
 export const SELECT_BASE_KEYS = SELECT_STATE_KEYS;

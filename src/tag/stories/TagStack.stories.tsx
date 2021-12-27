@@ -1,9 +1,7 @@
-import { cx } from "@renderlesskit/react";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { TagOptions, useTheme } from "../..";
-import { ClockIcon, CloseIcon } from "../../icons";
+import { SlotIcon } from "../../icons";
 
 import js from "./templates/TagStackJsx";
 import ts from "./templates/TagStackTsx";
@@ -36,24 +34,20 @@ export const Default: Story = {};
 
 export const PrefixStack: Story = {
   ...Default,
-  args: { prefix: <ClockIcon /> },
-};
-
-const CloseButton = (options: TagOptions) => {
-  const theme = useTheme("tag");
-  const { size = "md" } = options;
-  const closableStyles = cx(theme.size.closable[size], "leading-[0]");
-
-  return (
-    <button className={closableStyles}>
-      <CloseIcon />
-    </button>
-  );
+  args: { prefix: <SlotIcon /> },
 };
 
 export const ClosableStack: Story = {
   ...Default,
   args: {
-    closable: <CloseButton />,
+    closable: true,
+  },
+};
+
+export const DisabledStack: Story = {
+  ...Default,
+  args: {
+    closable: true,
+    disabled: true,
   },
 };

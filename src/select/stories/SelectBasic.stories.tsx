@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { CaretDownIcon, ClockIcon } from "../../icons";
+import { SlotIcon } from "../../icons";
 
 import js from "./templates/SelectBasicJsx";
 import ts from "./templates/SelectBasicTsx";
@@ -87,23 +87,10 @@ export const Invalid: Story = {
 
 export const Prefix: Story = {
   args: {
-    prefix: <ClockIcon />,
-  },
-};
-
-export const Suffix: Story = {
-  args: {
-    suffix: <CaretDownIcon />,
-  },
-};
-
-export const PrefixSuffix: Story = {
-  args: {
-    prefix: <ClockIcon />,
-    suffix: <CaretDownIcon />,
+    prefix: <SlotIcon />,
   },
 };
 
 export const Loading: Story = {
-  args: { loading: true },
+  args: { loading: true, prefix: <SlotIcon /> },
 };
