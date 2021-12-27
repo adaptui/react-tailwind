@@ -18,8 +18,8 @@ export const USE_CHECKBOX_STATE_KEYS = [
   "state",
   "onStateChange",
   "size",
-  "value",
   "icon",
+  "value",
   "label",
   "description",
 ] as const;

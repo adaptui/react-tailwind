@@ -36,7 +36,6 @@ export const useInputPrefix = createHook<
       theme.prefix.variant[variant].common,
       disabled || invalid ? "" : theme.prefix.variant[variant].interactions,
       disabled ? theme.prefix.variant[variant].disabled : "",
-      invalid ? theme.prefix.variant[variant].invalid : "",
       htmlClassName,
     );
 

@@ -1,7 +1,7 @@
 // Automatically generated
 export const USE_RADIO_STATE_KEYS = [
-  "value",
   "icon",
+  "value",
   "label",
   "description",
   "baseId",
