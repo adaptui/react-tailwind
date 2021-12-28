@@ -11,7 +11,7 @@ import { RadioStateReturn } from "./RadioState";
 export type RadioLabelOptions = BoxOptions &
   Pick<
     RadioStateReturn,
-    "maxVisibleItems" | "size" | "stack" | "description"
+    "maxVisibleItems" | "size" | "stack" | "description" | "label"
   > & {
     disabled?: RadioProps["disabled"];
   };
@@ -27,14 +27,15 @@ export const useRadioLabel = createHook<RadioLabelOptions, RadioLabelHTMLProps>(
     keys: RADIO_LABEL_KEYS,
 
     useProps(options, htmlProps) {
-      const { size, description, disabled, maxVisibleItems, stack } = options;
+      const { size, description, disabled, maxVisibleItems, stack, label } =
+        options;
       const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
       const theme = useTheme("radio");
       const className = cx(
         theme.label.base,
-        !description ? theme.label.size[size] : "",
-        !description ? theme.label.only : "",
+        label && !description ? theme.label.size[size] : "",
+        label && !description ? (disabled ? "" : theme.label.only) : "",
         disabled ? theme.label.disabled : "",
         maxVisibleItems != null ? theme.label.showMore[stack] : "",
         htmlClassName,

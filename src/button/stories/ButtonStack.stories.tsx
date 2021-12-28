@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { CaretRightIcon, ClockIcon } from "../../index";
+import { SlotIcon } from "../../index";
 
 import js from "./templates/ButtonStackJsx";
 import ts from "./templates/ButtonStackTsx";
@@ -57,20 +57,20 @@ export const LoadingStack: Story = {
 
 export const IconOnlyStack: Story = {
   ...ButtonStack,
-  args: { iconOnly: <ClockIcon /> },
+  args: { iconOnly: <SlotIcon /> },
 };
 
 export const SuffixStack: Story = {
   ...ButtonStack,
-  args: { suffix: <CaretRightIcon /> },
+  args: { suffix: <SlotIcon /> },
 };
 
 export const PrefixStack: Story = {
   ...ButtonStack,
-  args: { prefix: <ClockIcon /> },
+  args: { prefix: <SlotIcon /> },
 };
 
 export const PrefixSuffixStack: Story = {
   ...ButtonStack,
-  args: { prefix: <ClockIcon />, suffix: <CaretRightIcon /> },
+  args: { prefix: <SlotIcon />, suffix: <SlotIcon /> },
 };

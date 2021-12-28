@@ -24,7 +24,7 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
       ? button.size.prefix[size]
       : suffix
       ? button.size.suffix[size]
-      : button.size.iconOnly.spinner[size],
+      : button.size.iconOnly[size],
   );
 
   return <>{passProps(spinner, { className: spinnerStyles })}</>;

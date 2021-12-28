@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button, CaretRightIcon, ClockIcon } from "../../index";
+import { Button, SlotIcon } from "../../index";
 
 export type ButtonLoadingA11yProps = {};
 
@@ -25,8 +25,8 @@ export const ButtonLoadingA11y: React.FC<ButtonLoadingA11yProps> = props => {
         size="md"
         variant="solid"
         loading={state}
-        prefix={<ClockIcon />}
-        suffix={<CaretRightIcon />}
+        prefix={<SlotIcon />}
+        suffix={<SlotIcon />}
         onClick={() => setState(!state)}
       >
         Send Email

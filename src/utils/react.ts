@@ -75,7 +75,7 @@ export const passProps = (component: RenderPropType, props?: Dict) => {
         ...component.props,
         className: cx(props?.className, component.props.className),
       })
-    : runIfFn(component, { ...props });
+    : runIfFn(component, props);
 };
 
 // Add a11y to the icon passed
