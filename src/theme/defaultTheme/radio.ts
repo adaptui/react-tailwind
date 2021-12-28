@@ -1,7 +1,7 @@
 export const radio = {
   group: {
     vertical: {
-      base: "flex flex-col items-start",
+      common: "flex flex-col items-start",
       size: {
         sm: "space-y-1",
         md: "space-y-2",
@@ -9,7 +9,7 @@ export const radio = {
       },
     },
     horizontal: {
-      base: "flex flex-row w-fit",
+      common: "flex flex-row w-fit",
       size: {
         sm: "space-x-4",
         md: "space-x-4",
@@ -18,7 +18,7 @@ export const radio = {
     },
     showMore: {
       button: {
-        base: { vertical: "justify-start w-full", horizontal: "min-w-max" },
+        common: { vertical: "justify-start w-full", horizontal: "min-w-max" },
         expanded: { vertical: "!mt-0", horizontal: "!ml-0" },
       },
       content: {
@@ -28,7 +28,7 @@ export const radio = {
     },
   },
   label: {
-    base: "relative inline-flex items-center cursor-pointer align-top",
+    common: "relative inline-flex items-center cursor-pointer align-top",
     only: "hover:bg-gray-100",
     disabled: "pointer-events-none",
     size: {
@@ -40,7 +40,8 @@ export const radio = {
   },
   input: "peer sr-only",
   icon: {
-    base: "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
+    common:
+      "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
     description: "self-start",
     size: {
       sm: "w-3.5 h-3.5 border-[1.5px] text-[6px] rounded-full",
@@ -69,7 +70,7 @@ export const radio = {
     },
   },
   text: {
-    base: "text-gray-700 font-medium select-none",
+    common: "text-gray-700 font-medium select-none",
     size: {
       sm: "text-cxs ml-1.5",
       md: "text-sm ml-2",
@@ -77,7 +78,7 @@ export const radio = {
     },
   },
   description: {
-    base: "text-gray-500 select-none",
+    common: "text-gray-500 select-none",
     size: {
       sm: "text-cxs mt-1 ml-1.5",
       md: "text-sm mt-1 ml-2",

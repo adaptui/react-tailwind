@@ -25,7 +25,7 @@ export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
 
     const theme = useTheme("radio");
     const className = cx(
-      theme.icon.base,
+      theme.icon.common,
       description ? theme.icon.description : "",
       theme.icon.size[size],
       isChecked

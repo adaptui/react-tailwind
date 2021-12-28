@@ -29,7 +29,7 @@ export const useRadioDescription = createHook<
 
     const theme = useTheme("radio");
     const className = cx(
-      theme.description.base,
+      theme.description.common,
       theme.description.size[size],
       htmlClassName,
     );
