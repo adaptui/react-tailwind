@@ -1,3 +1,4 @@
+import { Spinner } from "../spinner";
 import { RenderPropType } from "../utils";
 
 export type InputState = {
@@ -34,6 +35,11 @@ export type InputState = {
    * True, if the input is loading.
    */
   loading: boolean;
+
+  /**
+   * Spinner component to display when loading.
+   */
+  spinner: RenderPropType<InputStateReturn>;
 };
 
 export type InputActions = {};
@@ -43,7 +49,7 @@ export type InputStateReturn = InputState & InputActions;
 export type InputInitialState = Partial<
   Pick<
     InputState,
-    "prefix" | "suffix" | "size" | "variant" | "invalid" | "loading"
+    "prefix" | "suffix" | "size" | "variant" | "invalid" | "loading" | "spinner"
   >
 > & {};
 
@@ -55,7 +61,14 @@ export function useInputState(props: InputInitialState = {}): InputStateReturn {
     variant = "outline",
     invalid = false,
     loading = false,
+    spinner = DefaultInputSpinner,
   } = props;
 
-  return { prefix, suffix, size, variant, invalid, loading };
+  return { prefix, suffix, size, variant, invalid, loading, spinner };
 }
+
+export const DefaultInputSpinner = (state: InputStateReturn) => {
+  const { size } = state;
+
+  return <Spinner size={size !== "xl" ? "xs" : "md"} />;
+};

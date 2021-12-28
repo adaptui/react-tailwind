@@ -6,6 +6,7 @@ export const USE_INPUT_STATE_KEYS = [
   "variant",
   "invalid",
   "loading",
+  "spinner",
 ] as const;
 export const INPUT_STATE_KEYS = USE_INPUT_STATE_KEYS;
 export const INPUT_BASE_KEYS = INPUT_STATE_KEYS;
