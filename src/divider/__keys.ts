@@ -1,2 +1,2 @@
 // Automatically generated
-export const DIVIDER_KEYS = [] as const;
+export const DIVIDER_KEYS = ["label"] as const;

@@ -124,6 +124,23 @@ export const TypingSquaredStatus: Story = {
   },
 };
 
+export const OrgStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "org",
+  },
+};
+
+export const OrgSquaredStatus: Story = {
+  args: {
+    size: "xl",
+    src: "https://i.pravatar.cc/300??img=61",
+    status: "org",
+    circular: false,
+  },
+};
+
 export const ParentBackgroundMatch: Story = {
   args: {
     size: "xl",

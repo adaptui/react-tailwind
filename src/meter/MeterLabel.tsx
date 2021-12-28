@@ -36,7 +36,7 @@ export const useMeterLabel = createHook<MeterLabelOptions, MeterLabelHTMLProps>(
 
       const theme = useTheme("meter");
       const className = cx(
-        theme.label.base,
+        theme.label.common,
         theme.label.size[size],
         htmlClassName,
       );

@@ -1,6 +1,7 @@
 export const avatar = {
   wrapper: {
-    base: "relative inline-flex items-center justify-center shrink-0 rounded bg-gray-100",
+    common:
+      "relative inline-flex items-center justify-center shrink-0 rounded bg-gray-100",
     circular: "rounded-full",
     border: {
       size: {
@@ -24,7 +25,7 @@ export const avatar = {
     },
   },
   icon: {
-    base: "inline-flex items-center justify-center text-gray-600",
+    common: "inline-flex items-center justify-center text-gray-600",
     size: {
       xs: "text-[0.625rem]",
       sm: "text-[0.625rem]",
@@ -36,7 +37,7 @@ export const avatar = {
     },
   },
   initials: {
-    base: "text-gray-600 font-medium text-center uppercase",
+    common: "text-gray-600 font-medium text-center uppercase",
     size: {
       xs: "text-xs",
       sm: "text-cxs",
@@ -48,19 +49,19 @@ export const avatar = {
     },
   },
   image: {
-    base: "rounded w-full h-full object-cover",
+    common: "rounded w-full h-full object-cover",
     circular: "rounded-full",
   },
   statusIndicator: {
-    base: "absolute flex items-center justify-center bottom-0 right-0",
+    common: "absolute flex items-center justify-center -bottom-px -right-px",
   },
   statusIndicators: {
     none: {
-      base: "",
+      common: "",
       size: { xs: "", sm: "", md: "", lg: "", xl: "", "2xl": "" },
     },
     active: {
-      base: "text-green-500 ring-1.5 rounded-full",
+      common: "text-green-500 ring-1.5 rounded-full",
       size: {
         xs: "text-[4px]",
         sm: "text-[5px]",
@@ -72,7 +73,7 @@ export const avatar = {
       },
     },
     sleep: {
-      base: "text-gray-500 ring-1.5 rounded-full",
+      common: "text-gray-500 ring-1.5 rounded-full",
       size: {
         xs: "text-[4px]",
         sm: "text-[5px]",
@@ -84,7 +85,7 @@ export const avatar = {
       },
     },
     away: {
-      base: "text-gray-500 ring-1.5 rounded-full",
+      common: "text-gray-500 ring-1.5 rounded-full",
       size: {
         xs: "text-[4px]",
         sm: "text-[5px]",
@@ -96,7 +97,7 @@ export const avatar = {
       },
     },
     typing: {
-      base: "text-gray-500 ring-1.5 rounded-full",
+      common: "text-gray-500 ring-1.5 rounded-full",
       size: {
         xs: "w-2",
         sm: "w-[9px]",
@@ -107,9 +108,21 @@ export const avatar = {
         "3xl": "w-[17px]",
       },
     },
+    org: {
+      common: "rounded-full",
+      size: {
+        xs: "text-[6px]",
+        sm: "text-[6px]",
+        md: "text-[8px]",
+        lg: "text-[10px]",
+        xl: "text-xs",
+        "2xl": "text-sm",
+        "3xl": "text-base",
+      },
+    },
   },
   group: {
-    base: "inline-flex items-center",
+    common: "inline-flex items-center",
     size: {
       xs: "-space-x-px",
       sm: "-space-x-px",

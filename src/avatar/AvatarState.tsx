@@ -52,7 +52,7 @@ export type AvatarState = {
    *
    * @default none
    */
-  status: "none" | "active" | "typing" | "sleep" | "away";
+  status: "none" | "active" | "typing" | "sleep" | "away" | "org";
 
   /**
    * Status Indicators to show based on the statu.

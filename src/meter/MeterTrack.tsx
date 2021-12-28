@@ -25,7 +25,7 @@ export const useMeterTrack = createHook<MeterTrackOptions, MeterTrackHTMLProps>(
 
       const theme = useTheme("meter");
       const className = cx(
-        theme.track.base,
+        theme.track.common,
         theme.track.size[size],
         htmlClassName,
       );

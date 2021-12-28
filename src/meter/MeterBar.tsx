@@ -29,7 +29,7 @@ export const useMeterBar = createHook<MeterBarOptions, MeterBarHTMLProps>({
 
     const meter = useTheme("meter");
     const className = cx(
-      meter.bar.base,
+      meter.bar.common,
       flatBorders ? meter.bar.flatBroders : "",
       htmlClassName,
     );

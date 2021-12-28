@@ -25,7 +25,7 @@ export const useAvatarIcon = createHook<AvatarIconOptions, AvatarIconHTMLProps>(
 
       const theme = useTheme("avatar");
       const className = cx(
-        theme.icon.base,
+        theme.icon.common,
         theme.icon.size[size],
         htmlClassName,
       );
