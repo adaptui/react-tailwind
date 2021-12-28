@@ -22,8 +22,3 @@ export default {
 export const Default: Story = {
   args: { direction: "vertical" },
 };
-
-// export const Horizontal: Story = {
-//   render: args => <ShowMoreHorizontalComponent {...args} />,
-//   args: { direction: "horizontal" },
-// };
