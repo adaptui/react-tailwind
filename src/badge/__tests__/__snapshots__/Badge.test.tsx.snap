@@ -5,7 +5,9 @@ exports[`<Badge /> should render properly 1`] = `
   <div
     class="inline-flex items-center justify-center relative whitespace-nowrap align-middle transition-all px-1.5 py-[3px] rounded-2xl text-xs font-medium bg-gray-800 text-white"
   >
-    Hello world
+    <span>
+      Hello world
+    </span>
   </div>
 </DocumentFragment>
 `;

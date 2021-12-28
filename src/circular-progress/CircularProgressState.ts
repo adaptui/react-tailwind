@@ -15,7 +15,7 @@ export type CircularProgressState = RenderlesskitProgressState & {
   size: keyof Renderlesskit.GetThemeValue<
     "circularProgress",
     "barWrapper",
-    "base",
+    "common",
     "size"
   >;
 

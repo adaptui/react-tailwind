@@ -35,11 +35,11 @@ export const useSliderThumbContainer = createHook<
 
     const theme = useTheme("slider");
     const className = cx(
-      theme.thumb.container.base.normal,
+      theme.thumb.container.base.common,
       theme.thumb.container.base.size[size],
       isDisabled
         ? theme.thumb.container.disabled
-        : theme.thumb.container.normal,
+        : theme.thumb.container.common,
       htmlClassName,
     );
 

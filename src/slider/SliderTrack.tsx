@@ -28,7 +28,7 @@ export const useSliderTrack = createHook<
 
     const theme = useTheme("slider");
     const className = cx(
-      theme.track.base.normal,
+      theme.track.base.common,
       theme.track.base.size[size],
       htmlClassName,
     );

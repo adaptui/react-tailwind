@@ -2,7 +2,7 @@ export const progress = {
   wrapper:
     "inline-flex flex-row flex-wrap justify-between items-center align-top w-full",
   label: {
-    base: "flex-1 text-left mb-3 text-gray-700 font-medium",
+    common: "flex-1 text-left mb-3 text-gray-700 font-medium",
     size: {
       sm: "text-cxs",
       md: "text-sm",
@@ -11,7 +11,7 @@ export const progress = {
     },
   },
   hint: {
-    base: "ml-3 mb-3 text-gray-500 ",
+    common: "ml-3 mb-3 text-gray-500 font-normal",
     size: {
       sm: "text-cxs",
       md: "text-sm",
@@ -20,7 +20,7 @@ export const progress = {
     },
   },
   track: {
-    base: "w-full overflow-hidden bg-gray-200 rounded-2xl z-10",
+    common: "w-full overflow-hidden bg-gray-200 rounded-2xl z-10",
     size: {
       sm: "h-0.5",
       md: "h-1",
@@ -29,7 +29,7 @@ export const progress = {
     },
   },
   bar: {
-    base: "h-full bg-gray-800 rounded-2xl transition-all",
+    common: "h-full bg-gray-800 rounded-2xl transition-all",
     indeterminate: "min-w-[50%] animate-progress",
   },
 };

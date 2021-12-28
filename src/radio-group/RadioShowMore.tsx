@@ -30,7 +30,7 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
 
   const theme = useTheme("radio");
-  const buttonClassName = cx(theme.group.showMore.button.base[stack]);
+  const buttonClassName = cx(theme.group.showMore.button.common[stack]);
   const contentClassName = cx(
     theme.group.showMore.content[stack],
     hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],

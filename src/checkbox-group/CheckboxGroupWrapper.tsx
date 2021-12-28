@@ -32,7 +32,7 @@ export const useCheckboxGroupContextWrapper = createHook<
 
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.group[stack].base,
+      theme.group[stack].common,
       theme.group[stack].size[size],
       htmlClassName,
     );

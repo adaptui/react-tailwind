@@ -32,7 +32,7 @@ export const useProgressBar = createHook<
 
     const progress = useTheme("progress");
     const className = cx(
-      progress.bar.base,
+      progress.bar.common,
       isIndeterminate ? progress.bar.indeterminate : "",
       htmlClassName,
     );

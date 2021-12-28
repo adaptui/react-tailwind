@@ -35,6 +35,10 @@ export const Large: Story = {
   args: { size: "lg", defaultValue: [50] },
 };
 
+export const ExtraLarge: Story = {
+  args: { size: "xl", defaultValue: [50] },
+};
+
 export const KnobIcon: Story = {
   args: { size: "md", defaultValue: [50], knobIcon: SliderDefaultKnobIcon },
 };

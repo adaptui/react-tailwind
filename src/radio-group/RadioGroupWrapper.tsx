@@ -31,7 +31,7 @@ export const useRadioGroupWrapper = createHook<
 
     const theme = useTheme("radio");
     const className = cx(
-      theme.group[stack].base,
+      theme.group[stack].common,
       theme.group[stack].size[size],
       htmlClassName,
     );

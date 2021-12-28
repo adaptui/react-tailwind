@@ -24,14 +24,14 @@ export type ButtonOptions = BoxOptions &
      *
      * @default md
      */
-    size?: keyof Renderlesskit.GetThemeValue<"button", "size", "default">;
+    size?: keyof Renderlesskit.GetThemeValue<"button", "size", "common">;
 
     /**
      * How the button should look?
      *
      * @default solid
      */
-    variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
+    variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "common">;
 
     /**
      * If added, the button will only show an icon ignoring other childrens.
@@ -110,15 +110,15 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
 
     const button = useTheme("button");
     const className = cx(
-      button.base.normal,
+      button.base.common,
       groupcontext?.collapsed ? "" : button.base.notCollapsed,
       !iconOnly
-        ? button.size.default[size]
+        ? button.size.common[size]
         : tcm(
             button.size.iconOnly.base[size],
             button.size.iconOnly.spinner[size],
           ),
-      button.variant.default[variant],
+      button.variant.common[variant],
       button.variant.hover[variant],
       button.variant.active[variant],
       button.variant.focus[variant],

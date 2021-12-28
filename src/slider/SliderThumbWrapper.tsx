@@ -34,7 +34,7 @@ export const useSliderThumbWrapper = createHook<
     } = htmlProps;
 
     const theme = useTheme("slider");
-    const className = cx(theme.thumb.wrapper.normal, htmlClassName);
+    const className = cx(theme.thumb.wrapper.common, htmlClassName);
     const style = {
       left: state
         ? `calc(${state.getThumbPercent(index) * 100}% - ${
