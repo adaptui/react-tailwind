@@ -92,7 +92,12 @@ export const SwitchDefaultIcon: SwitchProps["icon"] = state => {
     isChecked
       ? theme.icon.children.size.checked[size]
       : theme.icon.children.size.unChecked[size],
-    disabled ? theme.icon.children.size.disabled[size] : "",
+    disabled
+      ? tcm(
+          theme.icon.children.disabled,
+          theme.icon.children.size.disabled[size],
+        )
+      : "",
   );
 
   return <Box as="span" className={switchIconContentStyles} />;

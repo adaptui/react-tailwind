@@ -12,7 +12,7 @@ import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, withIconA11y } from "../utils";
+import { cx, RenderPropType, tcm, withIconA11y } from "../utils";
 
 import { BUTTON_KEYS } from "./__keys";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
@@ -81,8 +81,10 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       spinner = <Spinner size="em" />,
       ...restOptions
     } = options;
+    const { disabled: htmlDisabled } = htmlProps;
+    const disabled = htmlDisabled || loading;
 
-    return { size, variant, loading, spinner, ...restOptions };
+    return { size, variant, loading, spinner, disabled, ...restOptions };
   },
 
   useProps(options, htmlProps) {
@@ -99,11 +101,9 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
     let {
       className: htmlClassName,
       children: htmlChildren,
-      disabled: htmlDisabled,
       ...restHtmlProps
     } = htmlProps;
 
-    const disabled = htmlDisabled || loading;
     const groupcontext = useButtonGroupContext();
     const size = groupcontext?.size || _size;
     const variant = groupcontext?.variant || _variant;
@@ -112,7 +112,12 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
     const className = cx(
       button.base.normal,
       groupcontext?.collapsed ? "" : button.base.notCollapsed,
-      !iconOnly ? button.size.default[size] : button.size.iconOnly.base[size],
+      !iconOnly
+        ? button.size.default[size]
+        : tcm(
+            button.size.iconOnly.base[size],
+            button.size.iconOnly.spinner[size],
+          ),
       button.variant.default[variant],
       button.variant.hover[variant],
       button.variant.active[variant],
@@ -163,7 +168,7 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       </>
     );
 
-    return { className, children, disabled, ...restHtmlProps };
+    return { className, children, ...restHtmlProps };
   },
 });
 

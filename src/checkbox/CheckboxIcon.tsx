@@ -50,7 +50,7 @@ export const useCheckboxIcon = createHook<
             theme.icon.unChecked.default,
             theme.icon.unChecked.hover,
             theme.icon.unChecked.active,
-            !label || (label && description) ? theme.icon.unChecked.focus : "",
+            theme.icon.unChecked.focus,
             theme.icon.unChecked.disabled,
           )
         : "",
@@ -59,7 +59,7 @@ export const useCheckboxIcon = createHook<
             theme.icon.checked.default,
             theme.icon.checked.hover,
             theme.icon.checked.active,
-            !label || (label && description) ? theme.icon.checked.focus : "",
+            theme.icon.checked.focus,
             theme.icon.checked.disabled,
           )
         : "",

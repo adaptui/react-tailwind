@@ -1,13 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import {
-  CaretRightIcon,
-  ClockIcon,
-  cx,
-  Spinner,
-  SpinnerProps,
-} from "../../index";
+import { cx, SlotIcon, Spinner, SpinnerProps } from "../../index";
 
 import js from "./templates/ButtonBasicJsx";
 import ts from "./templates/ButtonBasicTsx";
@@ -74,25 +68,35 @@ export const Ghost: Story = {
 
 export const IconOnly: Story = {
   ...Default,
-  args: { ...Default.args, iconOnly: <ClockIcon /> },
+  args: { ...Default.args, iconOnly: <SlotIcon /> },
 };
 
 export const Suffix: Story = {
   ...Default,
-  args: { ...Default.args, suffix: <CaretRightIcon /> },
+  args: { ...Default.args, suffix: <SlotIcon /> },
 };
 
 export const Prefix: Story = {
   ...Default,
-  args: { ...Default.args, prefix: <ClockIcon /> },
+  args: { ...Default.args, prefix: <SlotIcon /> },
 };
 
 export const PrefixSuffix: Story = {
   ...Default,
   args: {
     ...Default.args,
-    prefix: <ClockIcon />,
-    suffix: <CaretRightIcon />,
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
+  },
+};
+
+export const Disabled: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
+    disabled: true,
   },
 };
 
@@ -113,8 +117,8 @@ export const ExtendedPrefixSuffix: Story = {
   args: {
     ...Default.args,
     className: "p-5 text-lg",
-    prefix: <ClockIcon className="mx-4 text-lg text-orange-500" />,
-    suffix: <CaretRightIcon className="mx-4 text-lg text-emerald-500" />,
+    prefix: <SlotIcon className="mx-4 text-lg text-orange-500" />,
+    suffix: <SlotIcon className="mx-4 text-lg text-emerald-500" />,
   },
 };
 

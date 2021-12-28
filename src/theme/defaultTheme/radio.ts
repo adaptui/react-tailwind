@@ -32,9 +32,9 @@ export const radio = {
     only: "hover:bg-gray-100",
     disabled: "pointer-events-none",
     size: {
-      sm: "min-h-[26px] px-2 pb-px rounded-lg",
-      md: "min-h-[30px] px-2.5 rounded-lg",
-      lg: "min-h-11 px-4 rounded-xl",
+      sm: "min-h-[26px] px-2 py-[6px] rounded-lg",
+      md: "min-h-[30px] px-2.5 py-[7px] rounded-lg",
+      lg: "min-h-9 px-3 py-2 rounded-[10px]",
     },
     showMore: { vertical: "flex w-full", horizontal: "flex" },
   },
