@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { CaretDownIcon, InfoCircleIcon } from "../../icons";
+import { SlotIcon } from "../../icons";
 
 import js from "./templates/TooltipBasicJsx";
 import ts from "./templates/TooltipBasicTsx";
@@ -31,17 +31,17 @@ export const ArrowLeft: Story = { args: { withArrow: true, side: "left" } };
 export const ArrowTop: Story = { args: { withArrow: true, side: "top" } };
 
 export const Prefix: Story = {
-  args: { withArrow: true, side: "top", prefix: <InfoCircleIcon /> },
+  args: { withArrow: true, side: "top", prefix: <SlotIcon /> },
 };
 
 export const Suffix: Story = {
-  args: { withArrow: true, side: "top", suffix: <CaretDownIcon /> },
+  args: { withArrow: true, side: "top", suffix: <SlotIcon /> },
 };
 export const PrefixSuffix: Story = {
   args: {
     withArrow: true,
     side: "top",
-    prefix: <InfoCircleIcon />,
-    suffix: <CaretDownIcon />,
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
   },
 };
