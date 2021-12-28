@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { SlotIcon } from "../..";
 
 import js from "./templates/BadgeStackJsx";
 import ts from "./templates/BadgeStackTsx";
@@ -30,3 +31,6 @@ export default {
 } as Meta;
 
 export const Default: Story = {};
+export const Prefix: Story = {
+  args: { prefix: <SlotIcon /> },
+};

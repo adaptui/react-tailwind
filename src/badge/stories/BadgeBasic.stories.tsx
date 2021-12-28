@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { SlotIcon } from "../..";
 
 import js from "./templates/BadgeBasicJsx";
 import ts from "./templates/BadgeBasicTsx";
@@ -65,4 +66,13 @@ export const Success: Story = {
 export const Danger: Story = {
   ...Default,
   args: { ...Default.args, themeColor: "danger" },
+};
+
+export const Prefix: Story = {
+  args: {
+    size: "md",
+    variant: "solid",
+    themeColor: "default",
+    prefix: <SlotIcon />,
+  },
 };

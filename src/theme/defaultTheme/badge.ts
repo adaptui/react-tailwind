@@ -1,9 +1,16 @@
 export const badge = {
   base: "inline-flex items-center justify-center relative whitespace-nowrap align-middle transition-all",
   size: {
-    sm: "px-1.5 py-px rounded-2xl text-xs font-medium",
-    md: "px-1.5 py-[3px] rounded-2xl text-xs font-medium",
-    lg: "px-2 py-[4.5px] rounded-2xl text-cxs font-medium",
+    common: {
+      sm: "px-1.5 py-px rounded-2xl text-xs font-medium",
+      md: "px-1.5 py-[3px] rounded-2xl text-xs font-medium",
+      lg: "px-2 py-[4.5px] rounded-2xl text-cxs font-medium",
+    },
+    prefix: {
+      sm: "text-[6px] mr-1",
+      md: "text-[6px] mr-1",
+      lg: "text-[8px] mr-1.5",
+    },
   },
   variant: {
     solid: {
