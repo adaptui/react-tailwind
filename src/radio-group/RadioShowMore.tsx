@@ -33,11 +33,9 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   const buttonClassName = cx(
     theme.group.showMore.button.common[stack],
     size === "lg" ? theme.group.showMore.button.lg : "",
-  );
-  const contentClassName = cx(
-    theme.group.showMore.content[stack],
     hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
   );
+  const contentClassName = cx(theme.group.showMore.content[stack]);
 
   const finalChildren = React.Children.map(children, child => {
     return passProps(child, {
