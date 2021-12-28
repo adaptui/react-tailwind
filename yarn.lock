@@ -4923,10 +4923,10 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
-"@types/tailwindcss@2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@types/tailwindcss/-/tailwindcss-2.2.4.tgz#c3bca7d265e608ffc50a6d1a4932b5b53be14553"
-  integrity sha512-8mIk+0BoReKiaBI4e3hjaz9YDQto+rdZ2eEExHf6AfS38FZcALQ6s8mTd+74N8BtBaLnTzLdNe5GbkzObWlSXw==
+"@types/tailwindcss@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/tailwindcss/-/tailwindcss-3.0.0.tgz#2f0daf9a5788d3bc9a83e5fbcab76206e130ae27"
+  integrity sha512-322KvIsPYb5ryo+I60WN2Os7uBkdkc6G6n1SGcQZJAma6bygaOkEFJVWX8yy8wKo5yhnsOHb7L4LyBrcRnN29Q==
 
 "@types/tapable@^1", "@types/tapable@^1.0.5":
   version "1.0.8"
