@@ -29,7 +29,7 @@ export const useSwitchDescription = createHook<
 
     const theme = useTheme("switch");
     const className = cx(
-      theme.description.base,
+      theme.description.common,
       theme.description.size[size],
       htmlClassName,
     );

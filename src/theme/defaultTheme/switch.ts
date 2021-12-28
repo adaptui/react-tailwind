@@ -1,6 +1,6 @@
 export const _switch = {
   label: {
-    base: "relative inline-flex items-center cursor-pointer align-top",
+    common: "relative inline-flex items-center cursor-pointer align-top",
     only: "hover:bg-gray-100",
     size: {
       sm: "min-h-[26px] px-2 py-[6px] rounded-lg",
@@ -12,7 +12,8 @@ export const _switch = {
   },
   input: "peer sr-only",
   icon: {
-    base: "relative inline-flex items-center justify-start shrink-0 align-top select-none transition-all peer-children",
+    common:
+      "relative inline-flex items-center justify-start shrink-0 align-top select-none transition-all peer-children",
     description: "self-start",
     size: {
       sm: "h-3.5 w-6 rounded-full",
@@ -35,7 +36,7 @@ export const _switch = {
       disabled: "peer-disabled:bg-gray-500",
     },
     children: {
-      base: "absolute box-border bg-white transition-all duration-200",
+      common: "absolute box-border bg-white transition-all duration-200",
       disabled: "opacity-60",
       size: {
         default: {
@@ -66,7 +67,7 @@ export const _switch = {
     },
   },
   text: {
-    base: "text-gray-700 font-medium select-none",
+    common: "text-gray-700 font-medium select-none",
     size: {
       sm: "text-cxs mr-2",
       md: "text-sm mr-2",
@@ -75,7 +76,7 @@ export const _switch = {
     },
   },
   description: {
-    base: "text-gray-500 select-none",
+    common: "text-gray-500 select-none",
     size: {
       sm: "text-cxs mt-1 mr-2",
       md: "text-sm mt-1 mr-2",

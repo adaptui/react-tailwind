@@ -25,7 +25,7 @@ export const useSwitchText = createHook<SwitchTextOptions, SwitchTextHTMLProps>(
 
       const theme = useTheme("switch");
       const className = cx(
-        theme.text.base,
+        theme.text.common,
         theme.text.size[size],
         htmlClassName,
       );

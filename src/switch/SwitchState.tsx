@@ -87,7 +87,7 @@ export const SwitchDefaultIcon: SwitchProps["icon"] = state => {
 
   const theme = useTheme("switch");
   const switchIconContentStyles = tcm(
-    theme.icon.children.base,
+    theme.icon.children.common,
     theme.icon.children.size.default[size],
     isChecked
       ? theme.icon.children.size.checked[size]
