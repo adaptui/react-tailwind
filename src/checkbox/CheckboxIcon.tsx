@@ -43,7 +43,7 @@ export const useCheckboxIcon = createHook<
 
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.icon.base,
+      theme.icon.common,
       theme.icon.size[size],
       isUnchecked
         ? cx(

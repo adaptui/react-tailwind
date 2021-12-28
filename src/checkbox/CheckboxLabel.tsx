@@ -35,7 +35,7 @@ export const useCheckboxLabel = createHook<
 
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.label.base,
+      theme.label.common,
       label && !description ? theme.label.size[size] : "",
       label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
