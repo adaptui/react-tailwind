@@ -28,7 +28,7 @@ export const useProgressTrack = createHook<
 
     const theme = useTheme("progress");
     const className = cx(
-      theme.track.base,
+      theme.track.common,
       theme.track.size[size],
       htmlClassName,
     );
