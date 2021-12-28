@@ -1,8 +1,5 @@
 export const tag = {
-  base: {
-    normal:
-      "inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
-  },
+  base: "inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
   variant: {
     default: {
       solid: "bg-gray-800 text-white border border-transparent",
