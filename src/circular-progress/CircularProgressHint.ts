@@ -28,7 +28,11 @@ export const useCircularProgressHint = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("circularProgress");
-    const className = cx(theme.hint.base, theme.hint.size[size], htmlClassName);
+    const className = cx(
+      theme.hint.common,
+      theme.hint.size[size],
+      htmlClassName,
+    );
 
     return { className, ...restHtmlProps };
   },
