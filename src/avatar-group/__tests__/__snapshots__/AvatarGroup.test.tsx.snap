@@ -33,7 +33,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       </span>
       <div
         aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center bottom-0 right-0"
+        class="absolute flex items-center justify-center -bottom-px -right-px"
       />
     </span>
     <span
@@ -62,7 +62,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
       </span>
       <div
         aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center bottom-0 right-0"
+        class="absolute flex items-center justify-center -bottom-px -right-px"
       />
     </span>
   </div>
@@ -102,7 +102,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       </span>
       <div
         aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center bottom-0 right-0"
+        class="absolute flex items-center justify-center -bottom-px -right-px"
       />
     </span>
     <span
@@ -131,7 +131,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
       </span>
       <div
         aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center bottom-0 right-0"
+        class="absolute flex items-center justify-center -bottom-px -right-px"
       />
     </span>
   </div>
@@ -171,7 +171,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       </span>
       <div
         aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center bottom-0 right-0"
+        class="absolute flex items-center justify-center -bottom-px -right-px"
       />
     </span>
     <span
@@ -200,7 +200,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
       </span>
       <div
         aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center bottom-0 right-0"
+        class="absolute flex items-center justify-center -bottom-px -right-px"
       />
     </span>
   </div>

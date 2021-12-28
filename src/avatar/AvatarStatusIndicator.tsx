@@ -25,7 +25,7 @@ export const useAvatarStatusIndicator = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("avatar");
-    const className = cx(theme.statusIndicator.base, htmlClassName);
+    const className = cx(theme.statusIndicator.common, htmlClassName);
 
     return {
       className,

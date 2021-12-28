@@ -4,6 +4,7 @@ import {
   ActiveStatusIcon,
   AwayStatusIcon,
   SleepStatusIcon,
+  TimelessIcon,
   TypingLargeStatusIcon,
   TypingSmallStatusIcon,
 } from "../icons";
@@ -19,7 +20,7 @@ export const AvatarDefaultStatusIndicators: AvatarProps["statusIndicators"] =
 
     const theme = useTheme("avatar");
     const className = tcm(
-      theme.statusIndicators[status].base,
+      theme.statusIndicators[status].common,
       theme.statusIndicators[status].size[size],
       ...parentsBackground,
     );
@@ -45,6 +46,8 @@ export const StatusIndicators: React.FC<StatusIndicatorsProps> = props => {
     ) : (
       <TypingLargeStatusIcon {...rest} />
     );
+
+  if (status === "org") return <TimelessIcon {...rest} />;
 
   return null;
 };

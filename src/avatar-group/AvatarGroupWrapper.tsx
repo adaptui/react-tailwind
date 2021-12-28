@@ -31,7 +31,7 @@ export const useAvatarGroupContextWrapper = createHook<
 
     const theme = useTheme("avatar");
     const className = cx(
-      theme.group.base,
+      theme.group.common,
       theme.group.size[size],
       htmlClassName,
     );

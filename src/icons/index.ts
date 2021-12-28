@@ -22,6 +22,7 @@ export * from "./Plus";
 export * from "./Select";
 export * from "./SleepStatus";
 export * from "./Slot";
+export * from "./Timeless";
 export * from "./TypingLargeStatus";
 export * from "./TypingSmallStatus";
 export * from "./User";

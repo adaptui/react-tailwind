@@ -28,7 +28,7 @@ exports[`<Avatar /> should render Avatar 1`] = `
     </span>
     <div
       aria-label="avatar status indicator"
-      class="absolute flex items-center justify-center bottom-0 right-0"
+      class="absolute flex items-center justify-center -bottom-px -right-px"
     />
   </span>
 </DocumentFragment>
@@ -62,7 +62,7 @@ exports[`<Avatar /> should render with AvatarStatusIndicator 1`] = `
     </span>
     <div
       aria-label="avatar status indicator"
-      class="absolute flex items-center justify-center bottom-0 right-0"
+      class="absolute flex items-center justify-center -bottom-px -right-px"
     >
       <svg
         aria-hidden="true"

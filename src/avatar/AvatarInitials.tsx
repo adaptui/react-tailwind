@@ -29,7 +29,7 @@ export const useAvatarInitials = createHook<
 
     const theme = useTheme("avatar");
     const className = cx(
-      theme.initials.base,
+      theme.initials.common,
       theme.initials.size[size],
       htmlClassName,
     );

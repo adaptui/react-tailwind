@@ -29,7 +29,7 @@ export const useAvatarImage = createHook<
 
     const theme = useTheme("avatar");
     const className = cx(
-      theme.image.base,
+      theme.image.common,
       circular ? theme.image.circular : "",
       htmlClassName,
     );
