@@ -1,13 +1,17 @@
+import React from "react";
 import { createComponent, createHook } from "reakit-system";
 import { SeparatorHTMLProps, SeparatorOptions, useSeparator } from "reakit";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { cx, RenderPropType, runIfFn } from "../utils";
 
 import { DIVIDER_KEYS } from "./__keys";
 
-export type DividerOptions = BoxOptions & SeparatorOptions;
+export type DividerOptions = BoxOptions &
+  SeparatorOptions & {
+    label?: RenderPropType;
+  };
 
 export type DividerHTMLProps = BoxHTMLProps & SeparatorHTMLProps;
 
@@ -19,8 +23,12 @@ export const useDivider = createHook<DividerOptions, DividerHTMLProps>({
   keys: DIVIDER_KEYS,
 
   useProps(options, htmlProps) {
-    const { orientation } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    const { orientation, label } = options;
+    const {
+      className: htmlClassName,
+      wrapElement: htmlWrapElement,
+      ...restHtmlProps
+    } = htmlProps;
 
     const divider = useTheme("divider");
     const className = cx(
@@ -28,8 +36,31 @@ export const useDivider = createHook<DividerOptions, DividerHTMLProps>({
       orientation === "horizontal" ? divider.horizontal : divider.vertical,
       htmlClassName,
     );
+    const labelClassName = divider.label;
 
-    return { className, ...restHtmlProps };
+    const wrapElement = React.useCallback(
+      (element: React.ReactNode) => {
+        if (label) {
+          element = (
+            <div className="w-full h-full">
+              {element}
+              <span className={labelClassName}>
+                {runIfFn(label, { orientation })}
+              </span>
+            </div>
+          );
+        }
+
+        if (htmlWrapElement) {
+          element = htmlWrapElement(element);
+        }
+
+        return element;
+      },
+      [htmlWrapElement, label, labelClassName, orientation],
+    );
+
+    return { className, wrapElement, ...restHtmlProps };
   },
 });
 

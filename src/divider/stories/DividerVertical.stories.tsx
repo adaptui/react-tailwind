@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
+import { Button } from "../../button";
 
 import js from "./templates/DividerVerticalJsx";
 import ts from "./templates/DividerVerticalTsx";
@@ -20,3 +21,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {};
+
+export const Label: Story = {
+  args: { label: <Button variant="outline">Continue</Button> },
+};
