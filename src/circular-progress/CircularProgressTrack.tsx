@@ -34,7 +34,7 @@ export const useCircularProgressTrack = createHook<
       viewBox: "0 0 100 100",
       cx: 50,
       cy: 50,
-      r: 42,
+      r: 44,
       fill: "transparent",
       stroke: "currentColor",
       strokeWidth: hint ? "5px" : "15px",

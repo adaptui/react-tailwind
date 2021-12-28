@@ -71,7 +71,7 @@ export const useTag = createHook<TagOptions, TagHTMLProps>({
 
     const theme = useTheme("tag");
     const className = cx(
-      theme.base.normal,
+      theme.base,
       theme.size.default[size],
       theme.variant.default[variant],
       disabled

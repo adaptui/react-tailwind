@@ -26,7 +26,7 @@ export const useSwitchIcon = createHook<SwitchIconOptions, SwitchIconHTMLProps>(
 
       const theme = useTheme("switch");
       const className = cx(
-        theme.icon.base,
+        theme.icon.common,
         theme.icon.size[size],
         description ? theme.icon.description : "",
         isChecked

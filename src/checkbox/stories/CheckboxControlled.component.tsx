@@ -65,7 +65,7 @@ function capitalizeFirstLetter(string: string) {
 
 const RadioComponent: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup aria-label="checkbox state" {...props}>
+    <RadioGroup aria-label="checkbox state" className="space-x-2" {...props}>
       <Radio value="checked" label="Checked" />
       <Radio value="unchecked" label="Unchecked" />
       <Radio value="indeterminate" label="Indeterminate" />

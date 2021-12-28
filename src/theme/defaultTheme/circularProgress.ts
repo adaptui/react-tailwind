@@ -1,7 +1,8 @@
 export const circularProgress = {
   wrapper: "relative inline-flex w-fit",
   hint: {
-    base: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-medium text-gray-900",
+    common:
+      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-medium text-gray-900",
     size: {
       sm: "text-xs",
       md: "text-sm",
@@ -10,7 +11,7 @@ export const circularProgress = {
     },
   },
   barWrapper: {
-    base: {
+    common: {
       size: {
         sm: "w-3.5 h-3.5",
         md: "w-4 h-4",
@@ -30,7 +31,7 @@ export const circularProgress = {
   },
   track: "text-gray-300",
   bar: {
-    base: "text-gray-700 transition-all",
+    common: "text-gray-700 transition-all",
     indeterminate: "animate-circularProgress",
   },
 };

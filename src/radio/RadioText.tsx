@@ -23,7 +23,11 @@ export const useRadioText = createHook<RadioTextOptions, RadioTextHTMLProps>({
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("radio");
-    const className = cx(theme.text.base, theme.text.size[size], htmlClassName);
+    const className = cx(
+      theme.text.common,
+      theme.text.size[size],
+      htmlClassName,
+    );
 
     return { className, ...restHtmlProps };
   },

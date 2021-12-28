@@ -38,6 +38,8 @@ module.exports = {
         cxs: ["13px", "115%"],
         sm: ["14px", "115%"],
         base: ["16px", "115%"],
+        lg: ["18px", "115%"],
+        xl: ["20px", "115%"],
         "paragraph-cxs": ["13px", "150%"],
         "paragraph-sm": ["14px", "150%"],
         "2base": ["32px", "115%"],

@@ -1,2 +1,2 @@
 // Automatically generated
-export const BADGE_KEYS = ["size", "variant", "themeColor"] as const;
+export const BADGE_KEYS = ["size", "variant", "themeColor", "prefix"] as const;

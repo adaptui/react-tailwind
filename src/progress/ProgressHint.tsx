@@ -31,7 +31,11 @@ export const useProgressHint = createHook<
     const { className: htmlClassName, ...restHtmlProps } = htmlProps;
 
     const theme = useTheme("progress");
-    const className = cx(theme.hint.base, theme.hint.size[size], htmlClassName);
+    const className = cx(
+      theme.hint.common,
+      theme.hint.size[size],
+      htmlClassName,
+    );
 
     return { className, ...restHtmlProps };
   },

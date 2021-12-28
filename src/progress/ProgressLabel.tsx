@@ -38,7 +38,7 @@ export const useProgressLabel = createHook<
 
     const theme = useTheme("progress");
     const className = cx(
-      theme.label.base,
+      theme.label.common,
       theme.label.size[size],
       htmlClassName,
     );

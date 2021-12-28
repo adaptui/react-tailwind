@@ -29,7 +29,7 @@ export const useCheckboxDescription = createHook<
 
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.description.base,
+      theme.description.common,
       theme.description.size[size],
       htmlClassName,
     );

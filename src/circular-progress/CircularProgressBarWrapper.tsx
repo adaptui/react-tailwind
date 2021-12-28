@@ -31,7 +31,7 @@ export const useCircularProgressBarWrapper = createHook<
     const className = cx(
       hint
         ? theme.barWrapper.hint.size[size]
-        : theme.barWrapper.base.size[size],
+        : theme.barWrapper.common.size[size],
       isIndeterminate ? theme.barWrapper.indeterminate : "",
       htmlClassName,
     );
