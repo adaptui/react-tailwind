@@ -1,5 +1,6 @@
 import * as React from "react";
-import { isUndefined } from "lodash";
+
+import { isUndefined } from "./assertions";
 
 export interface CreateContextOptions<ContextType> {
   /**
