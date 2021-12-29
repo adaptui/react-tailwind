@@ -33,6 +33,7 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
   const theme = useTheme("checkbox");
   const buttonClassName = cx(
     theme.group.showMore.button.common[stack],
+    size === "lg" ? theme.group.showMore.button.lg : "",
     hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
   );
   const contentClassName = cx(theme.group.showMore.content[stack]);
