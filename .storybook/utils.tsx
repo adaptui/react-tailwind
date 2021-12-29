@@ -119,21 +119,23 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@renderlesskit/react-tailwind": "0.0.1-alpha.30",
-      next: "12.0.3",
+      "@renderlesskit/react-tailwind": "0.0.1-alpha.32",
+      next: "12.0.7",
       react: "17.0.2",
       "react-dom": "17.0.2",
     },
     devDependencies: {
       autoprefixer: "10.4.0",
-      eslint: "8.2.0",
-      "eslint-config-next": "12.0.3",
-      postcss: "8.3.11",
-      tailwindcss: "2.2.19",
+      eslint: "8.5.0",
+      "eslint-config-next": "12.0.7",
+      postcss: "8.4.5",
+      tailwindcss: "3.0.8",
     },
     files: {
       "pages/_app.js":
         'import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";\n\nimport "../styles/index.css";\nimport theme from "../renderlesskit.config";\n\nfunction MyApp({ Component, pageProps }) {\n  return (\n    <RenderlesskitProvider extend={theme}>\n      <Component {...pageProps} />\n    </RenderlesskitProvider>\n  );\n}\n\nexport default MyApp;\n',
+      "pages/_document.js":
+        "import Document, { Html, Head, Main, NextScript } from \"next/document\";\n\nclass MyDocument extends Document {\n  render() {\n    return (\n      <Html>\n        <Head>\n          <link href='https://rsms.me/inter/inter.css' rel='stylesheet' />\n        </Head>\n        <body>\n          <Main />\n          <NextScript />\n        </body>\n      </Html>\n    );\n  }\n}\n\nexport default MyDocument;\n",
       "pages/index.js":
         "import Head from \"next/head\";\nimport Component from \"../components\";\n\nexport default function Home() {\n  return (\n    <div>\n      <Head>\n        <title>Renderlesskit React Tailwind Example</title>\n        <link rel='icon' href='/favicon.ico' />\n      </Head>\n\n      <main className='flex items-center justify-center min-h-screen'>\n        <Component />\n      </main>\n    </div>\n  );\n}\n",
       "styles/index.css":
@@ -143,13 +145,13 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
       ".gitignore":
         "# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n\n# dependencies\n/node_modules\n/.pnp\n.pnp.js\n\n# testing\n/coverage\n\n# next.js\n/.next/\n/out/\n\n# production\n/build\n\n# misc\n.DS_Store\n*.pem\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# local env files\n.env.local\n.env.development.local\n.env.test.local\n.env.production.local\n\n# vercel\n.vercel\n",
       "postcss.config.js":
-        "module.exports = {\n  plugins: {\n    tailwindcss: {},\n    autoprefixer: {},\n  },\n};\n",
+        '// If you want to use other PostCSS plugins, see the following:\n// https://tailwindcss.com/docs/using-with-preprocessors\nmodule.exports = {\n  plugins: ["tailwindcss", "autoprefixer"],\n};\n',
       "README.md":
         "# next-tailwind-jit\n\n[View on Vercel](https://next-tailwind-jit.vercel.app/)\n\n[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/next-tailwind-jit-evzkdg)\n",
       "renderlesskit.config.js":
         'import { extendTheme } from "@renderlesskit/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
       "tailwind.config.js":
-        'const path = require("path");\n\nconst preset = require("@renderlesskit/react-tailwind/preset");\n\nmodule.exports = preset({\n  mode: "jit",\n  purge: [\n    path.resolve(__dirname, "./components/**/*"),\n    path.resolve(__dirname, "./pages/**/*"),\n    path.resolve(__dirname, "./renderlesskit.config.ts"),\n    "node_modules/@renderlesskit/react-tailwind/**/*",\n  ],\n  theme: {\n    extend: {},\n  },\n  variants: {},\n  plugins: [],\n});\n',
+        'module.exports = {\n  presets: [require("@renderlesskit/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./renderlesskit.config.ts",\n    "node_modules/@renderlesskit/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
       ...files,
     },
   };
@@ -168,23 +170,27 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@renderlesskit/react-tailwind": "0.0.1-alpha.30",
-      next: "12.0.3",
+      "@renderlesskit/react-tailwind": "0.0.1-alpha.32",
+      next: "12.0.7",
       react: "17.0.2",
       "react-dom": "17.0.2",
     },
     devDependencies: {
-      "@types/react": "17.0.34",
+      "@types/node": "17.0.5",
+      "@types/react": "17.0.38",
+      "@types/react-dom": "17.0.11",
       autoprefixer: "10.4.0",
-      eslint: "8.2.0",
-      "eslint-config-next": "12.0.3",
-      postcss: "8.3.11",
-      tailwindcss: "2.2.19",
-      typescript: "4.4.4",
+      eslint: "8.5.0",
+      "eslint-config-next": "12.0.7",
+      postcss: "8.4.5",
+      tailwindcss: "3.0.8",
+      typescript: "4.5.4",
     },
     files: {
       "pages/_app.tsx":
         'import type { AppProps } from "next/app";\nimport React from "react";\nimport { RenderlesskitProvider } from "@renderlesskit/react-tailwind";\n\nimport "../styles/index.css";\nimport theme from "../renderlesskit.config";\n\nfunction MyApp({ Component, pageProps }: AppProps) {\n  return (\n    <RenderlesskitProvider extend={theme}>\n      <Component {...pageProps} />\n    </RenderlesskitProvider>\n  );\n}\n\nexport default MyApp;\n',
+      "pages/_document.tsx":
+        "import Document, { Html, Head, Main, NextScript } from \"next/document\";\n\nclass MyDocument extends Document {\n  render() {\n    return (\n      <Html>\n        <Head>\n          <link href='https://rsms.me/inter/inter.css' rel='stylesheet' />\n        </Head>\n        <body>\n          <Main />\n          <NextScript />\n        </body>\n      </Html>\n    );\n  }\n}\n\nexport default MyDocument;\n",
       "pages/index.tsx":
         "import type { NextPage } from \"next\";\nimport Head from \"next/head\";\n\nimport Component from \"../components\";\n\nconst Home: NextPage = () => {\n  return (\n    <div className=''>\n      <Head>\n        <title>Create Next App</title>\n        <meta name='description' content='Generated by create next app' />\n        <link rel='icon' href='/favicon.ico' />\n      </Head>\n\n      <main className='flex items-center justify-center min-h-screen'>\n        <Component />\n      </main>\n    </div>\n  );\n};\n\nexport default Home;\n",
       "styles/index.css":
@@ -194,15 +200,15 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
       ".gitignore":
         "# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n\n# dependencies\n/node_modules\n/.pnp\n.pnp.js\n\n# testing\n/coverage\n\n# next.js\n/.next/\n/out/\n\n# production\n/build\n\n# misc\n.DS_Store\n*.pem\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# local env files\n.env.local\n.env.development.local\n.env.test.local\n.env.production.local\n\n# vercel\n.vercel\n",
       "next-env.d.ts":
-        '/// <reference types="next" />\n/// <reference types="next/types/global" />\n/// <reference types="next/image-types/global" />\n\n// NOTE: This file should not be edited\n// see https://nextjs.org/docs/basic-features/typescript for more information.\n',
+        '/// <reference types="next" />\n/// <reference types="next/image-types/global" />\n\n// NOTE: This file should not be edited\n// see https://nextjs.org/docs/basic-features/typescript for more information.\n',
       "postcss.config.js":
-        "module.exports = {\n  plugins: {\n    tailwindcss: {},\n    autoprefixer: {},\n  },\n};\n",
+        '// If you want to use other PostCSS plugins, see the following:\n// https://tailwindcss.com/docs/using-with-preprocessors\nmodule.exports = {\n  plugins: ["tailwindcss", "autoprefixer"],\n};\n',
       "README.md":
         "# next-tailwind-jit-ts\n\n[View on Vercel](https://next-tailwind-jit-ts.vercel.app/)\n\n[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/github-jntzof)\n",
       "renderlesskit.config.js":
         'import { extendTheme } from "@renderlesskit/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
       "tailwind.config.js":
-        'const path = require("path");\n\nconst preset = require("@renderlesskit/react-tailwind/preset");\n\nmodule.exports = preset({\n  mode: "jit",\n  purge: [\n    path.resolve(__dirname, "./components/**/*"),\n    path.resolve(__dirname, "./pages/**/*"),\n    path.resolve(__dirname, "./renderlesskit.config.ts"),\n    "node_modules/@renderlesskit/react-tailwind/**/*",\n  ],\n  theme: {\n    extend: {},\n  },\n  variants: {},\n  plugins: [],\n});\n',
+        'module.exports = {\n  presets: [require("@renderlesskit/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./renderlesskit.config.ts",\n    "node_modules/@renderlesskit/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
       "tsconfig.json":
         '{\n  "compilerOptions": {\n    "target": "es5",\n    "lib": ["dom", "dom.iterable", "esnext"],\n    "allowJs": true,\n    "skipLibCheck": true,\n    "strict": true,\n    "forceConsistentCasingInFileNames": true,\n    "noEmit": true,\n    "esModuleInterop": true,\n    "module": "esnext",\n    "moduleResolution": "node",\n    "resolveJsonModule": true,\n    "isolatedModules": true,\n    "jsx": "preserve",\n    "incremental": true\n  },\n  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],\n  "exclude": ["node_modules"]\n}\n',
       ...files,
