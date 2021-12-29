@@ -4,7 +4,7 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
 <DocumentFragment>
   <div
     aria-label="avatar group"
-    class="inline-flex items-center -space-x-1"
+    class="inline-flex items-center -space-x-0.5"
     role="group"
   >
     <span
@@ -73,7 +73,7 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
 <DocumentFragment>
   <div
     aria-label="avatar group"
-    class="inline-flex items-center -space-x-1"
+    class="inline-flex items-center -space-x-0.5"
     role="group"
   >
     <span
@@ -142,7 +142,7 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
 <DocumentFragment>
   <div
     aria-label="avatar group"
-    class="inline-flex items-center -space-x-1.5"
+    class="inline-flex items-center -space-x-1"
     role="group"
   >
     <span

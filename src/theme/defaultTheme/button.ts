@@ -13,10 +13,10 @@ export const button = {
       ghost: "bg-white text-gray-600 border border-transparent",
     },
     hover: {
-      solid: "hover:bg-gray-700",
-      subtle: "hover:bg-gray-200",
-      outline: "hover:border-gray-300 hover:shadow-sm",
-      ghost: "hover:bg-gray-100",
+      solid: "hover:bg-gray-700 hover:z-10",
+      subtle: "hover:bg-gray-200 hover:z-10",
+      outline: "hover:border-gray-300 hover:shadow-sm hover:z-10",
+      ghost: "hover:bg-gray-100 hover:z-10",
     },
     active: {
       solid: "active:bg-gray-800",
@@ -30,7 +30,7 @@ export const button = {
       subtle:
         "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
       outline:
-        "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
+        "focus-visible:border-gray-300 focus-visible:!border-r-[1px] focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
       ghost:
         "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
     },
