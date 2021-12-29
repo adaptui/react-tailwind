@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { getComponentProps } from "../index";
+import { getComponentProps, useSafeLayoutEffect } from "../index";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
 import { USE_SELECT_STATE_KEYS } from "./__keys";
@@ -54,7 +54,7 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
   const prefixRef = React.useRef<HTMLElement>(null);
   const suffixRef = React.useRef<HTMLElement>(null);
 
-  React.useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     let key = "";
 
     const prefixElement = prefixRef.current;

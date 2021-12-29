@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { useSafeLayoutEffect } from "../hooks";
 import { getComponentProps } from "../index";
 import { runIfFn, splitProps, withIconA11y } from "../utils";
 
@@ -50,7 +51,7 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
   const prefixRef = React.useRef<HTMLElement>(null);
   const suffixRef = React.useRef<HTMLElement>(null);
 
-  React.useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     let key = "";
 
     const prefixElement = prefixRef.current;
