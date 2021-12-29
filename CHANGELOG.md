@@ -1,3 +1,17 @@
+### [0.0.1-alpha.33](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.32...v0.0.1-alpha.33) (2021-12-29)
+
+
+### Bug Fixes
+
+* **borders:** 🐛 update tag & textarea styles bugs ([2e5c44d](https://github.com/timelessco/renderlesskit-react-tailwind/commit/2e5c44d7bf1ed62150ad5b63e374bd034a402668))
+* **icon:** 🐛 rename fill rule in timeless icon ([7cb5b2a](https://github.com/timelessco/renderlesskit-react-tailwind/commit/7cb5b2ab98a591a31b12adef43a07bf60865631d))
+* **react:** 🐛 use safelayouteffect for uselayouteffect ([be8d83e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/be8d83ef92bd2ffa9bea9cfec3525ad9c5e4c133))
+
+
+### Documentation Changes
+
+* **csb:** 📝 update csb js & ts template ([9df8f8e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9df8f8eb3dbcf9928b8ee37b7afb569713c2188d))
+
 ### [0.0.1-alpha.32](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.31...v0.0.1-alpha.32) (2021-12-29)
 
 
