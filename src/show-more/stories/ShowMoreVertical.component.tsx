@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ShowMore, ShowMoreProps } from "../ShowMore";
+import { ShowMore, ShowMoreProps } from "../../index";
 
 export const ShowMoreVertical: React.FC<ShowMoreProps> = props => {
   return (
