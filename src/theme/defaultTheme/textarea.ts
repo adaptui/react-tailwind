@@ -24,7 +24,7 @@ export const textarea = {
         interactions:
           "hover:shadow-gray-300 active:shadow-gray-400 focus-visible:shadow-gray-400 ",
         disabled: "placeholder:text-gray-400 text-gray-400 shadow-gray-200",
-        invalid: "border-red-300",
+        invalid: "shadow-red-300",
       },
       subtle: {
         common:

@@ -4,7 +4,7 @@ export const tag = {
     default: {
       solid: "bg-gray-800 text-white border border-transparent",
       subtle: "bg-gray-100 text-gray-600 border border-transparent",
-      outline: "bg-white text-gray-600 border border-gray-300",
+      outline: "bg-white text-gray-600 border border-gray-200",
     },
     hover: {
       solid: "hover:bg-gray-700",
@@ -22,7 +22,7 @@ export const tag = {
       subtle:
         "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
       outline:
-        "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
+        "focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
     },
     disabled: {
       solid: "disabled:bg-gray-100 disabled:text-gray-400",
