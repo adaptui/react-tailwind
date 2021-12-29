@@ -1,3 +1,10 @@
+### [0.0.1-alpha.32](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.31...v0.0.1-alpha.32) (2021-12-29)
+
+
+### Bug Fixes
+
+* **utils:** 🐛 remove wrong lodash import ([68b03a2](https://github.com/timelessco/renderlesskit-react-tailwind/commit/68b03a2817bbe0bf1e987383fa3fd14e556d9317))
+
 ### [0.0.1-alpha.31](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.30...v0.0.1-alpha.31) (2021-12-29)
 
 
