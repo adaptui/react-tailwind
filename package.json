@@ -127,7 +127,7 @@
     "@storybook/manager-webpack5": "6.4.9",
     "@storybook/react": "6.4.9",
     "@swc/cli": "0.1.55",
-    "@swc/core": "1.2.125",
+    "@swc/core": "1.2.126",
     "@tailwindcss/forms": "0.4.0",
     "@testing-library/dom": "8.11.1",
     "@testing-library/jest-dom": "5.16.1",
