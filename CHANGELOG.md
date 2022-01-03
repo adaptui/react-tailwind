@@ -1,3 +1,23 @@
+### [0.0.1-alpha.34](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.33...v0.0.1-alpha.34) (2022-01-03)
+
+
+### Bug Fixes
+
+* **customization:** 🐛 getComponentProps for memo & forwardRef in ssr ([5c1064b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/5c1064bea319bbb90e34cdca82dbfe554ce894ba))
+
+
+### Documentation Changes
+
+* **csb:** update to latest renderless alpha ([55ae0e7](https://github.com/timelessco/renderlesskit-react-tailwind/commit/55ae0e703ee83a28989e684449ec1b7adab83857))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency concurrently to v7 ([#249](https://github.com/timelessco/renderlesskit-react-tailwind/issues/249)) ([203bdd5](https://github.com/timelessco/renderlesskit-react-tailwind/commit/203bdd5d790b3438e7e878f0b29b611605e1bf12))
+* **deps:** ⬆️ update dev dependencies (minor) ([#246](https://github.com/timelessco/renderlesskit-react-tailwind/issues/246)) ([9aafe1a](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9aafe1a9b9a8ba755cf69ad5a567cb7e82622df6))
+* **deps:** ⬆️ update dev dependencies (minor) ([#247](https://github.com/timelessco/renderlesskit-react-tailwind/issues/247)) ([64d1a00](https://github.com/timelessco/renderlesskit-react-tailwind/commit/64d1a0014ec15efad31d1529aaff50d8cd41b5d6))
+* **deps:** ⬆️ update dev dependencies (minor) ([#248](https://github.com/timelessco/renderlesskit-react-tailwind/issues/248)) ([3f410c4](https://github.com/timelessco/renderlesskit-react-tailwind/commit/3f410c4e9797e6dde15cf97e689d575859cc0372))
+
 ### [0.0.1-alpha.33](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.32...v0.0.1-alpha.33) (2021-12-29)
 
 
