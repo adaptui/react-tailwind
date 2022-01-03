@@ -99,13 +99,20 @@ export const getComponentProps = <T, P>(
   const finalChildren: React.ReactNode[] = [];
 
   if (validChildren.length > 0) {
-    validChildren.forEach(child => {
+    validChildren.forEach(function (child) {
       // @ts-ignore
       if (componentMaps[child.type.displayName]) {
-        componentProps[
-          // @ts-ignore
-          componentMaps[child.type.displayName]
-        ] = child.props;
+        // @ts-ignore
+        componentProps[componentMaps[child.type.displayName]] = child.props; // @ts-ignore
+      } else if (componentMaps[child.type.type.displayName]) {
+        // @ts-ignore
+        componentProps[componentMaps[child.type.type.displayName]] = // @ts-ignore
+          child.props;
+        // @ts-ignore
+      } else if (componentMaps[child.type.type.render.displayName]) {
+        // @ts-ignore
+        componentProps[componentMaps[child.type.type.render.displayName]] = // @ts-ignore
+          child.props;
       } else {
         finalChildren.push(child);
       }
