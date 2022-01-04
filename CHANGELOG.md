@@ -1,3 +1,10 @@
+### [0.0.1-alpha.37](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.36...v0.0.1-alpha.37) (2022-01-04)
+
+
+### Bug Fixes
+
+* **csr:** 🐛 bug with mounted in checkbox ([9f2d4db](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9f2d4dbe4ae51e124c04e65b14f11e9179740f14))
+
 ### [0.0.1-alpha.36](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.35...v0.0.1-alpha.36) (2022-01-04)
 
 
