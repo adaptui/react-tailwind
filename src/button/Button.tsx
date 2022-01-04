@@ -1,10 +1,11 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import {
   ButtonHTMLProps as ReakitButtonHTMLProps,
   ButtonOptions as ReakitButtonOptions,
   useButton as useReakitButton,
 } from "reakit";
+import { createComponent } from "@renderlesskit/react";
 import { announce } from "@react-aria/live-announcer";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";

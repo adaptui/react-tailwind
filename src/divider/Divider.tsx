@@ -1,6 +1,7 @@
 import React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { SeparatorHTMLProps, SeparatorOptions, useSeparator } from "reakit";
+import { createComponent } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";

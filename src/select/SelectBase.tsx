@@ -1,6 +1,6 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { TabbableHTMLProps, TabbableOptions, useTabbable } from "reakit";
-import { ariaAttr } from "@renderlesskit/react";
+import { ariaAttr, createComponent } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { cx } from "../utils";

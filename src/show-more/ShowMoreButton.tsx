@@ -1,5 +1,5 @@
-import { createComponent } from "reakit-system";
 import {
+  createComponent,
   disclosureComposableButton,
   DisclosureHTMLProps,
   DisclosureOptions,
@@ -15,15 +15,14 @@ export type ShowMoreButtonHTMLProps = ButtonHTMLProps & DisclosureHTMLProps;
 export type ShowMoreButtonProps = ShowMoreButtonOptions &
   ShowMoreButtonHTMLProps;
 
-export const useShowMoreButton = disclosureComposableButton(useButton) as Hook<
-  ShowMoreButtonOptions,
-  ShowMoreButtonHTMLProps
->;
+export const useShowMoreButton = disclosureComposableButton({
+  name: "ShowMoreButton",
+  compose: useButton,
+}) as Hook<ShowMoreButtonOptions, ShowMoreButtonHTMLProps>;
 
 export const ShowMoreButton = createComponent({
   as: "button",
   memo: true,
   useHook: useShowMoreButton,
 });
-
-ShowMoreButton.displayName = "ShowMoreButton";
+console.log("%cShowMoreButton", "color: #ff6600", ShowMoreButton);

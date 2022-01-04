@@ -100,23 +100,10 @@ export const getComponentProps = <T, P>(
 
   if (validChildren.length > 0) {
     validChildren.forEach(function (child) {
-      // For only React Element
       // @ts-ignore
-      if (componentMaps[child?.type]) {
+      if (componentMaps[child?.type?.__displayName]) {
         // @ts-ignore
-        componentProps[componentMaps[child?.displayName]] = child.props;
-        // For Forwarded Ref with React Element
-        // @ts-ignore
-      } else if (componentMaps[child?.type?.render?.displayName]) {
-        // @ts-ignore
-        componentProps[componentMaps[child?.type?.render?.displayName]] =
-          child.props;
-        // For Memoised Forwarded Ref with React Element
-        // @ts-ignore
-      } else if (componentMaps[child?.type?.type?.render?.displayName]) {
-        // @ts-ignore
-        componentProps[componentMaps[child?.type?.type?.render?.displayName]] =
-          child.props;
+        componentProps[componentMaps[child?.type?.__displayName]] = child.props;
       } else {
         finalChildren.push(child);
       }

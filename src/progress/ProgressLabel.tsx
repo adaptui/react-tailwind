@@ -1,9 +1,10 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import {
   unstable_IdHTMLProps,
   unstable_IdOptions,
   unstable_useId,
 } from "reakit";
+import { createComponent } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";

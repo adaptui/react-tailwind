@@ -4057,10 +4057,10 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
-"@renderlesskit/react@^0.9.2":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.9.2.tgz#33aabe8fe1edfae87e9b52e249948c76296e87e2"
-  integrity sha512-wPPHcTM80I7XpMLqfQQn2T53iTYv0kGDfBpT4b0kUw3KGYxPC+vV23yzv1aLvTbx4+508SN4LvXxzui7yldoCg==
+"@renderlesskit/react@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-0.10.1.tgz#cbc3acdc6b834fed85f1b6085a74f283917c8993"
+  integrity sha512-qRtk1KSnBtIYBG/dIKYoxW052kyrwBzIg5SRu/J3+eDZXUiXfKTjCpNWaOe0TIps7RZ7QS7HEHkyxBYvEnlKbg==
   dependencies:
     "@chakra-ui/counter" "^1.2.1"
     "@chakra-ui/hooks" "^1.7.1"

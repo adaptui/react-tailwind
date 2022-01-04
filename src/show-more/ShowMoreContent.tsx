@@ -1,5 +1,5 @@
-import { createComponent } from "reakit-system";
 import {
+  createComponent,
   disclosureCollapseComposableContent,
   DisclosureCollapseContentHTMLProps,
   DisclosureCollapseContentOptions,
@@ -17,14 +17,13 @@ export type ShowMoreContentHTMLProps = BoxHTMLProps &
 export type ShowMoreContentProps = ShowMoreContentOptions &
   ShowMoreContentHTMLProps;
 
-export const useShowMoreContent = disclosureCollapseComposableContent(
-  useBox,
-) as Hook<ShowMoreContentOptions, ShowMoreContentHTMLProps>;
+export const useShowMoreContent = disclosureCollapseComposableContent({
+  name: "ShowMoreContent",
+  compose: useBox,
+}) as Hook<ShowMoreContentOptions, ShowMoreContentHTMLProps>;
 
 export const ShowMoreContent = createComponent({
   as: "div",
   memo: true,
   useHook: useShowMoreContent,
 });
-
-ShowMoreContent.displayName = "ShowMoreContent";

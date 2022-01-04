@@ -1,8 +1,9 @@
 import * as React from "react";
 
-import { ShowMore, ShowMoreProps } from "../../index";
+import { ShowMore, ShowMoreButton, ShowMoreProps } from "../../index";
 
 export const ShowMoreHorizontal: React.FC<ShowMoreProps> = props => {
+  console.log("%cShowMore", "color: #d0bfff", ShowMoreButton);
   return (
     <div className="overflow-x-scroll w-96">
       <div className="flex flex-row items-center h-10 space-x-2 w-fit">

@@ -78,6 +78,7 @@ export const useTooltipProps = (
   };
 
   return {
+    render: false,
     state,
     arrowIcon,
     content,

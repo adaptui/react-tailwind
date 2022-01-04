@@ -1,6 +1,7 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { useForkRef, useLiveRef } from "reakit-utils";
+import { createComponent } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useMediaQuery, usePrevious } from "../hooks";

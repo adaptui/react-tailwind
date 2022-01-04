@@ -1,5 +1,6 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
+import { createComponent } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { ButtonProps } from "../button";

@@ -20,6 +20,7 @@ export type TooltipProps = TooltipInitialState &
 export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
   (props, ref) => {
     const {
+      render,
       state,
       content,
       prefix,
@@ -34,6 +35,10 @@ export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
     const theme = useTheme("tooltip");
     const suffixStyles = cx(theme.suffix);
     const prefixStyles = cx(theme.prefix);
+
+    if (!render) {
+      return null;
+    }
 
     return (
       <>

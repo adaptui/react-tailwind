@@ -1,5 +1,6 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import {
+  createComponent,
   TooltipReferenceHTMLProps as RenderlesskitTooltipReferenceHTMLProps,
   TooltipReferenceOptions as RenderlesskitTooltipReferenceOptions,
   useTooltipReference as useRenderlesskitTooltipReference,
