@@ -1,3 +1,11 @@
+### [0.0.1-alpha.36](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.35...v0.0.1-alpha.36) (2022-01-04)
+
+
+### Bug Fixes
+
+* **displayname:** 🐛 bug with create composable hook ([b59b20e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b59b20ef2ad16f6fb00f8f241f2fd11708484120))
+* **ssr:** 🐛 add ssr & mounted checks ([7226cd2](https://github.com/timelessco/renderlesskit-react-tailwind/commit/7226cd23ccb40984bd9f4fe28cf660d2450a7478))
+
 ### [0.0.1-alpha.35](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.34...v0.0.1-alpha.35) (2022-01-04)
 
 
