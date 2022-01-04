@@ -123,5 +123,6 @@ export const useSliderTooltipReference = createHook<
 
 export const SliderTooltipReference = createComponent({
   as: "div",
+  memo: true,
   useHook: useSliderTooltipReference,
 });

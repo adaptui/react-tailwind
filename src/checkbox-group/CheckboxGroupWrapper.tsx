@@ -43,6 +43,7 @@ export const useCheckboxGroupContextWrapper = createHook<
 
 export const CheckboxGroupWrapper = createComponent({
   as: "div",
+  memo: true,
   useHook: useCheckboxGroupContextWrapper,
   useCreateElement: (type, props, children) => {
     useWarning(
