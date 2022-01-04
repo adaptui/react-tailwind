@@ -1,3 +1,16 @@
+### [0.0.1-alpha.35](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.34...v0.0.1-alpha.35) (2022-01-04)
+
+
+### Bug Fixes
+
+* **componentProps:** 🐛 proper solution for all cases ([e33161f](https://github.com/timelessco/renderlesskit-react-tailwind/commit/e33161f076f8d75f111a282232f741d66d541f33))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency @swc/core to v1.2.126 ([#250](https://github.com/timelessco/renderlesskit-react-tailwind/issues/250)) ([e57f07c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/e57f07c0bd042b3a486a5a52c012397fe040df78))
+* **deps:** ⬆️ update dev dependencies (minor) ([#251](https://github.com/timelessco/renderlesskit-react-tailwind/issues/251)) ([2e2aa68](https://github.com/timelessco/renderlesskit-react-tailwind/commit/2e2aa688bca4fb1af147578f364dbaee0a5d2f5e))
+
 ### [0.0.1-alpha.34](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.33...v0.0.1-alpha.34) (2022-01-03)
 
 
