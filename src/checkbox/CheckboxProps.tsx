@@ -4,6 +4,7 @@ import {
   runIfFn,
   splitProps,
 } from "../utils";
+import { useHasMounted } from "..";
 
 import { USE_CHECKBOX_STATE_KEYS } from "./__keys";
 import { CheckboxOwnProps, CheckboxProps } from "./Checkbox";
@@ -43,6 +44,7 @@ export const useCheckboxProps = (
   const { icon, label, description } = state;
   const { className, style, children, ...restProps } = checkboxProps;
   const { componentProps } = getComponentProps(componentMap, children, state);
+  const mounted = useHasMounted();
 
   const _icon: CheckboxState["icon"] =
     componentProps?.iconProps?.children || icon;
@@ -88,7 +90,7 @@ export const useCheckboxProps = (
   };
 
   return {
-    ssr: isEmptyObject(componentProps),
+    csr: !isEmptyObject(componentProps) && !mounted,
     state,
     labelProps,
     inputProps,

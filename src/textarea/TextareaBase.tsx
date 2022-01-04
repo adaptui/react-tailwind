@@ -73,7 +73,6 @@ export const useTextareaBase = createHook<
     const onChange = React.useCallback(
       (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         onChangeRef.current?.(event);
-        console.log("%cevent", "color: #bfffc8", event);
         if (event.defaultPrevented) return;
 
         autoSizeOnChange?.(event);

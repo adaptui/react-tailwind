@@ -25,4 +25,3 @@ export const ShowMoreButton = createComponent({
   memo: true,
   useHook: useShowMoreButton,
 });
-console.log("%cShowMoreButton", "color: #ff6600", ShowMoreButton);

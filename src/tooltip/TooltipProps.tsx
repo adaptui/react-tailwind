@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { getComponentProps, runIfFn } from "../index";
+import { getComponentProps, runIfFn, useHasMounted } from "../index";
 import { splitProps, withIconA11y } from "../utils";
 
 import { USE_TOOLTIP_STATE_KEYS } from "./__keys";
@@ -41,6 +41,7 @@ export const useTooltipProps = (
     children,
     state,
   );
+  const mounted = useHasMounted();
 
   const referenceChildren: React.ReactNode = (referenceProps: any) =>
     // @ts-ignore
@@ -78,7 +79,7 @@ export const useTooltipProps = (
   };
 
   return {
-    render: false,
+    csr: !mounted,
     state,
     arrowIcon,
     content,
