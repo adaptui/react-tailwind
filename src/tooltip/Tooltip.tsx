@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { useHasMounted } from "../hooks/useMounted";
 import { useTheme } from "../theme";
 import { cx, RenderProp, withIconA11y } from "../utils";
 
@@ -20,7 +21,6 @@ export type TooltipProps = TooltipInitialState &
 export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
   (props, ref) => {
     const {
-      render,
       state,
       content,
       prefix,
@@ -36,7 +36,9 @@ export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
     const suffixStyles = cx(theme.suffix);
     const prefixStyles = cx(theme.prefix);
 
-    if (!render) {
+    const mounted = useHasMounted();
+
+    if (!mounted) {
       return null;
     }
 

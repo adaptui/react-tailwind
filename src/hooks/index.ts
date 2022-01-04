@@ -4,5 +4,6 @@ export * from "./useId";
 export * from "./useImage";
 export * from "./useMediaQuery";
 export * from "./useMergeRefs";
+export * from "./useMounted";
 export * from "./usePrevious";
 export * from "./useSafeLayoutEffect";

@@ -1,4 +1,9 @@
-import { getComponentProps, runIfFn, splitProps } from "../utils";
+import {
+  getComponentProps,
+  isEmptyObject,
+  runIfFn,
+  splitProps,
+} from "../utils";
 
 import { USE_CHECKBOX_STATE_KEYS } from "./__keys";
 import { CheckboxOwnProps, CheckboxProps } from "./Checkbox";
@@ -83,6 +88,7 @@ export const useCheckboxProps = (
   };
 
   return {
+    ssr: isEmptyObject(componentProps),
     state,
     labelProps,
     inputProps,

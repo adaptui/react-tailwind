@@ -19,6 +19,7 @@ export type CheckboxProps = CheckboxInitialState &
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const {
+      ssr,
       label,
       description,
       labelProps,
@@ -27,6 +28,10 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       textProps,
       descriptionProps,
     } = useCheckboxProps(props);
+
+    if (!ssr) {
+      return null;
+    }
 
     return (
       <CheckboxLabel {...labelProps}>
