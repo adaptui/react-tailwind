@@ -117,7 +117,7 @@
     "@babel/preset-typescript": "7.16.7",
     "@commitlint/cli": "16.0.2",
     "@commitlint/config-conventional": "16.0.0",
-    "@release-it/conventional-changelog": "3.3.0",
+    "@release-it/conventional-changelog": "4.1.0",
     "@size-limit/preset-big-lib": "5.0.5",
     "@storybook/addon-a11y": "6.4.12",
     "@storybook/addon-actions": "6.4.12",
