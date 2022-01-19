@@ -164,7 +164,7 @@
     "husky": "7.0.4",
     "jest": "27.4.7",
     "jest-axe": "5.0.1",
-    "lint-staged": "12.1.7",
+    "lint-staged": "12.2.0",
     "lodash": "4.17.21",
     "node-fetch": "2.6.1",
     "outdent": "0.8.0",
