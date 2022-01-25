@@ -11,6 +11,9 @@ import { DIVIDER_KEYS } from "./__keys";
 
 export type DividerOptions = BoxOptions &
   SeparatorOptions & {
+    /**
+     * Provide a label to name the divider at the center to mark it as a section.
+     */
     label?: RenderPropType;
   };
 
@@ -43,7 +46,7 @@ export const useDivider = createHook<DividerOptions, DividerHTMLProps>({
       (element: React.ReactNode) => {
         if (label) {
           element = (
-            <div className="w-full h-full">
+            <div className="relative w-full h-full">
               {element}
               <span className={labelClassName}>
                 {runIfFn(label, { orientation })}
