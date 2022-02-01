@@ -9,7 +9,7 @@ export const CheckboxStack: React.FC<CheckboxStackProps> = props => {
   return (
     <div className="flex flex-col space-y-4">
       <Group
-        className="flex flex-row space-x-4 w-fit"
+        className="flex w-fit flex-row space-x-4"
         aria-label="Checkbox small example"
       >
         <Checkbox size="sm" {...props} />
@@ -17,7 +17,7 @@ export const CheckboxStack: React.FC<CheckboxStackProps> = props => {
         <Checkbox size="sm" defaultState={"indeterminate"} {...props} />
       </Group>
       <Group
-        className="flex flex-row space-x-4 w-fit"
+        className="flex w-fit flex-row space-x-4"
         aria-label="Checkbox medium example"
       >
         <Checkbox size="md" {...props} />
@@ -25,7 +25,7 @@ export const CheckboxStack: React.FC<CheckboxStackProps> = props => {
         <Checkbox size="md" defaultState={"indeterminate"} {...props} />
       </Group>
       <Group
-        className="flex flex-row space-x-4 w-fit"
+        className="flex w-fit flex-row space-x-4"
         aria-label="Checkbox large example"
       >
         <Checkbox size="lg" {...props} />

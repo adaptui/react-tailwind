@@ -34,7 +34,7 @@ export const TypingSmallStatusIcon = React.forwardRef<
         y="1.5"
         fill="#fff"
         rx="1"
-        className="animate-pulse animation-duration-1000 animation-delay-500"
+        className="animate-pulse animation-delay-500 animation-duration-1000"
       ></rect>
     </Box>
   );

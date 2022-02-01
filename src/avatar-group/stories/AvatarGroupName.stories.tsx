@@ -47,7 +47,7 @@ export const ParentBackgroundMatch: Story = {
   decorators: [
     Story => {
       return (
-        <div className="flex items-center justify-center bg-yellow-200 w-80 h-80">
+        <div className="flex h-80 w-80 items-center justify-center bg-yellow-200">
           <Story />
         </div>
       );

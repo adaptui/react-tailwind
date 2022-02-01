@@ -17,7 +17,7 @@ export const CheckboxGroupBasic: React.FC<CheckboxGroupBasicProps> = props => {
   if (!Array.isArray(state)) return null;
 
   return (
-    <div className="flex flex-col space-y-4 min-h-96">
+    <div className="flex min-h-96 flex-col space-y-4">
       <div className="text-xl font-bold" id="label">
         Pick fruits to eat
       </div>

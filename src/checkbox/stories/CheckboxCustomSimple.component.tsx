@@ -22,7 +22,7 @@ export const CheckboxCustomSimple: React.FC<CheckboxCustomSimpleProps> = () => {
       label="Checkbox"
       description="Fruits in the basket"
     >
-      <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+      <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
       <CheckboxIcon className="bg-red-500">{CustomIconElement}</CheckboxIcon>
       <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
       <CheckboxDescription className="text-orange-500">

@@ -152,7 +152,7 @@ export const Controlled = () => {
   const [text, setText] = React.useState<string>("");
 
   return (
-    <Box className="flex flex-col space-y-2 break-words w-80">
+    <Box className="flex w-80 flex-col space-y-2 break-words">
       <Textarea
         aria-label="Textarea Story Controlled Example"
         placeholder="Controlled textarea"
@@ -175,7 +175,7 @@ export const Resizes = () => {
     <>
       <RadioGroup
         aria-label="fruits"
-        className="flex flex-col mb-2 space-y-2 w-36"
+        className="mb-2 flex w-36 flex-col space-y-2"
         state={resize}
         onStateChange={e => setResize(e as TextareaProps["resize"])}
       >
@@ -200,7 +200,7 @@ export const RowsCols = () => {
 
   return (
     <Box className="flex flex-col space-y-2">
-      <div className="flex mb-2 space-x-2">
+      <div className="mb-2 flex space-x-2">
         <label htmlFor="rows" className="flex flex-col space-y-2">
           <span>Enter Rows</span>
           <Input

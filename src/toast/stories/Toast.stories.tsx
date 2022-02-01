@@ -69,7 +69,7 @@ const TriggerDefaultToasts = () => {
   const { showToast, removeToast } = useToastHandlers();
 
   return (
-    <div className="flex flex-col space-y-2 justify-items-center">
+    <div className="flex flex-col justify-items-center space-y-2">
       <div className="space-x-2">
         <Button
           className="my-2"
@@ -126,7 +126,7 @@ const TriggerOptionsToasts = () => {
   const { removeToast } = useToastHandlers();
 
   return (
-    <div className="flex flex-col space-y-2 justify-items-center">
+    <div className="flex flex-col justify-items-center space-y-2">
       <div className="space-x-2">
         <Button
           className="my-2"
@@ -211,7 +211,7 @@ const TriggerTypesToasts = () => {
   const types = ["success", "info", "warning", "error"] as const;
 
   return (
-    <div className="flex flex-col space-y-2 justify-items-center">
+    <div className="flex flex-col justify-items-center space-y-2">
       <div className="space-x-2">
         {types.map(type => {
           return (
@@ -255,7 +255,7 @@ const TriggerAlertOptionsToasts = () => {
   const { removeToast } = useToastHandlers();
 
   return (
-    <div className="flex flex-col space-y-2 justify-items-center">
+    <div className="flex flex-col justify-items-center space-y-2">
       <div className="space-x-2">
         <Button
           className="my-2"
@@ -370,7 +370,7 @@ const TriggerPlacementToasts = () => {
   ] as const;
 
   return (
-    <div className="flex flex-col space-y-2 justify-items-center">
+    <div className="flex flex-col justify-items-center space-y-2">
       <div className="space-x-2">
         {placements.map(placement => {
           return (

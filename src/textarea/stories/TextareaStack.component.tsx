@@ -7,7 +7,7 @@ export type TextareaStackProps = TextareaProps & {};
 export const TextareaStack: React.FC<TextareaStackProps> = props => {
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Textarea {...props} size="sm" variant="outline">
           Continue
         </Textarea>
@@ -21,7 +21,7 @@ export const TextareaStack: React.FC<TextareaStackProps> = props => {
           Continue
         </Textarea>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Textarea {...props} size="sm" variant="subtle">
           Continue
         </Textarea>
@@ -35,7 +35,7 @@ export const TextareaStack: React.FC<TextareaStackProps> = props => {
           Continue
         </Textarea>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Textarea {...props} size="sm" variant="underline">
           Continue
         </Textarea>

@@ -39,14 +39,14 @@ export const RadioGroupControlled: React.FC<RadioGroupControlledProps> = () => {
   const radioState = getRadioState();
 
   return (
-    <div className="flex flex-col items-center space-y-4 w-96">
+    <div className="flex w-96 flex-col items-center space-y-4">
       <RadioComponent
         state={radioState}
         onStateChange={onRadioStateChange}
         stack="horizontal"
       />
 
-      <Separator className="w-full my-4" />
+      <Separator className="my-4 w-full" />
 
       <Checkbox
         state={checkboxState}

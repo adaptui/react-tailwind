@@ -40,14 +40,14 @@ export const SwitchControlled: React.FC<SwitchControlledProps> = () => {
   const radioState = getRadioState();
 
   return (
-    <div className="flex flex-col items-center space-y-4 w-96">
+    <div className="flex w-96 flex-col items-center space-y-4">
       <Switch
         state={switchState}
         onStateChange={setSwitchState}
         label={capitalizeFirstLetter(radioState as string)}
       />
 
-      <Separator className="w-full my-4" />
+      <Separator className="my-4 w-full" />
 
       <RadioComponent
         state={radioState}
@@ -55,7 +55,7 @@ export const SwitchControlled: React.FC<SwitchControlledProps> = () => {
         stack="horizontal"
       />
 
-      <Separator className="w-full my-4" />
+      <Separator className="my-4 w-full" />
 
       <Checkbox
         state={switchState}

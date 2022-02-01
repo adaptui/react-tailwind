@@ -27,7 +27,7 @@ export type IconProps = {};
 
 export const Icon: React.FC<IconProps> = props => {
   return (
-    <div className="inline-grid grid-cols-6 gap-4 text-5xl place-items-center">
+    <div className="inline-grid grid-cols-6 place-items-center gap-4 text-5xl">
       <SlotIcon />
       <CaretDownIcon />
       <CaretLeftIcon />
@@ -43,7 +43,7 @@ export const Icon: React.FC<IconProps> = props => {
       <AwayStatusIcon />
       <TypingSmallStatusIcon className="inline-block w-12" />
       <TypingLargeStatusIcon className="inline-block w-12" />
-      <ArrowIcon className="inline-block w-12 h-12" />
+      <ArrowIcon className="inline-block h-12 w-12" />
       <EqualsIcon />
       <ErrorIcon />
       <SelectIcon />
