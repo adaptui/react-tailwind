@@ -1,7 +1,6 @@
 import React from "react";
-import { createHook } from "reakit-system";
 import { SeparatorHTMLProps, SeparatorOptions, useSeparator } from "reakit";
-import { createComponent } from "@renderlesskit/react";
+import { createComponent, createHook } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
@@ -11,6 +10,9 @@ import { DIVIDER_KEYS } from "./__keys";
 
 export type DividerOptions = BoxOptions &
   SeparatorOptions & {
+    /**
+     * Provide a label to name the divider at the center to mark it as a section.
+     */
     label?: RenderPropType;
   };
 
@@ -43,7 +45,7 @@ export const useDivider = createHook<DividerOptions, DividerHTMLProps>({
       (element: React.ReactNode) => {
         if (label) {
           element = (
-            <div className="h-full w-full">
+            <div className="relative h-full w-full">
               {element}
               <span className={labelClassName}>
                 {runIfFn(label, { orientation })}

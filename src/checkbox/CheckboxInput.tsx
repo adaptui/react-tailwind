@@ -1,8 +1,8 @@
-import { createHook } from "reakit-system";
 import {
   CheckboxHTMLProps,
   CheckboxOptions,
   createComponent,
+  createHook,
   useCheckbox,
 } from "@renderlesskit/react";
 

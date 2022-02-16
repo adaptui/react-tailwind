@@ -1,8 +1,7 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import { TabbableHTMLProps, TabbableOptions, useTabbable } from "reakit";
 import { useForkRef, useLiveRef } from "reakit-utils";
-import { ariaAttr, createComponent } from "@renderlesskit/react";
+import { ariaAttr, createComponent, createHook } from "@renderlesskit/react";
 
 import { useTheme } from "../theme";
 import { tcm } from "../utils";

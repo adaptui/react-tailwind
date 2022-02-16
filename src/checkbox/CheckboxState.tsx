@@ -46,7 +46,7 @@ export type CheckboxState = RenderlesskitCheckboxState &
     icon: RenderPropType<CheckboxStateReturn>;
 
     /**
-     * Description for the Checkbox.
+     * Label for the Checkbox.
      */
     label: RenderPropType<CheckboxStateReturn>;
 

@@ -1,6 +1,5 @@
-import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
-import { createComponent } from "@renderlesskit/react";
+import { createComponent, createHook } from "@renderlesskit/react";
 
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
@@ -29,12 +28,12 @@ export type TagOptions = ButtonOptions & {
   prefix?: RenderPropType;
 
   /**
-   * If added, the tag will show an icon before the tag's text.
+   * If added, the tag will allow to show an icon before the tag's text.
    */
   closable?: boolean;
 
   /**
-   * If added, the tag will show an icon before the tag's text.
+   * If added, the tag will show an icon after the tag's text.
    */
   suffix?: RenderPropType;
 };

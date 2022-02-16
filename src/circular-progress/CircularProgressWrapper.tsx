@@ -1,6 +1,6 @@
-import { createHook } from "reakit-system";
 import {
   createComponent,
+  createHook,
   ProgressHTMLProps as ReakitProgressHTMLProps,
   ProgressOptions as ReakitProgressOptions,
   useProgress as useReakitProgress,

@@ -1,5 +1,4 @@
-import { createHook } from "reakit-system";
-import { createComponent } from "@renderlesskit/react";
+import { createComponent, createHook } from "@renderlesskit/react";
 
 import { CloseIcon } from "../icons";
 

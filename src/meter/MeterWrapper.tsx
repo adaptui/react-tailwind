@@ -1,6 +1,6 @@
-import { createHook } from "reakit-system";
 import {
   createComponent,
+  createHook,
   MeterHTMLProps as ReakitMeterHTMLProps,
   MeterOptions as ReakitMeterOptions,
   useMeter as useReakitMeter,
