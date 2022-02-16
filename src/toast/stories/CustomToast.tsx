@@ -19,7 +19,7 @@ const CustomToast: React.FC<CustomToastProps> = ({
   showAlertContent,
 }) => {
   return (
-    <div className="flex w-full px-3 py-2 text-white bg-gray-800 rounded-md shadow-lg">
+    <div className="flex w-full rounded-md bg-gray-800 px-3 py-2 text-white shadow-lg">
       <div
         className={tcm(
           "flex w-full justify-between transition-opacity",
@@ -29,7 +29,7 @@ const CustomToast: React.FC<CustomToastProps> = ({
         <div className="flex flex-col flex-wrap text-sm">
           <div className="font-medium">{title}</div>
         </div>
-        <div className="inline-flex box-content shrink-0 mr-2 w-4 h-4 py-0.5">
+        <div className="mr-2 box-content inline-flex h-4 w-4 shrink-0 py-0.5">
           <InfoCircleIcon />
         </div>
       </div>

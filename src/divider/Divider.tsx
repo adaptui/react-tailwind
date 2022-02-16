@@ -46,7 +46,7 @@ export const useDivider = createHook<DividerOptions, DividerHTMLProps>({
       (element: React.ReactNode) => {
         if (label) {
           element = (
-            <div className="relative w-full h-full">
+            <div className="relative h-full w-full">
               {element}
               <span className={labelClassName}>
                 {runIfFn(label, { orientation })}

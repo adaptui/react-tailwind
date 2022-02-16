@@ -7,7 +7,7 @@ export type SelectStackProps = SelectProps & {};
 export const SelectStack: React.FC<SelectStackProps> = props => {
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Select {...props} size="sm" variant="outline">
           <option value="">Select anyone</option>
           <option value="dog">Dog</option>
@@ -45,7 +45,7 @@ export const SelectStack: React.FC<SelectStackProps> = props => {
           <option value="goldfish">Goldfish</option>
         </Select>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Select {...props} size="sm" variant="subtle">
           <option value="">Select anyone</option>
           <option value="dog">Dog</option>
@@ -83,7 +83,7 @@ export const SelectStack: React.FC<SelectStackProps> = props => {
           <option value="goldfish">Goldfish</option>
         </Select>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Select {...props} size="sm" variant="underline">
           <option value="">Select anyone</option>
           <option value="dog">Dog</option>
@@ -121,7 +121,7 @@ export const SelectStack: React.FC<SelectStackProps> = props => {
           <option value="goldfish">Goldfish</option>
         </Select>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Select {...props} size="sm" variant="ghost">
           <option value="">Select anyone</option>
           <option value="dog">Dog</option>

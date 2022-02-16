@@ -11,7 +11,7 @@ export const BoxAs: React.FC<BoxAsProps> = props => {
     <Box
       as={Button}
       suffix={<ClockIcon />}
-      className={tcm("bg-red-500 rounded-lg", className)}
+      className={tcm("rounded-lg bg-red-500", className)}
       {...rest}
     >
       Box

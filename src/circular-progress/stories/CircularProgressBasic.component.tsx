@@ -52,10 +52,10 @@ const ActionButtons: React.FC<{
 }> = ({ setValue }) => {
   return (
     <>
-      <Button type="reset" className="block mt-4" onClick={() => setValue(0)}>
+      <Button type="reset" className="mt-4 block" onClick={() => setValue(0)}>
         Restart CircularProgress
       </Button>
-      <Button onClick={() => setValue(null)} className="block mt-2">
+      <Button onClick={() => setValue(null)} className="mt-2 block">
         Make Indeterminate - Sets value to `null`
       </Button>
     </>

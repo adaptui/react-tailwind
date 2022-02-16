@@ -16,7 +16,7 @@ export const MeterInterval: React.FC<MeterIntervalProps> = props => {
   const [value, setValue] = useMeterState(0, max, stepState.valueAsNumber);
 
   return (
-    <div className="space-y-4 w-80">
+    <div className="w-80 space-y-4">
       <div className="flex justify-between space-x-4">
         <Input state={intervalState} label="Interval" />
         <Input state={stepState} label="Step" />
@@ -67,7 +67,7 @@ const ActionButtons: React.FC<{
 }> = ({ setValue }) => {
   return (
     <>
-      <Button type="reset" className="block mt-2" onClick={() => setValue(0)}>
+      <Button type="reset" className="mt-2 block" onClick={() => setValue(0)}>
         Restart Meter
       </Button>
     </>
@@ -81,12 +81,12 @@ const Input: React.FC<{
   const { state, label } = props;
   return (
     <label>
-      <span className="inline-block mb-1 text-sm font-medium text-gray-700">
+      <span className="mb-1 inline-block text-sm font-medium text-gray-700">
         {label}
       </span>
       <NumberInput
         id="interval"
-        className="block w-full border-gray-300 rounded-md shadow-sm form-input focus:ring-gray-300 focus:border-gray-500 sm:text-sm"
+        className="form-input block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-300 sm:text-sm"
         {...state}
       />
     </label>

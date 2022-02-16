@@ -19,7 +19,7 @@ export const CheckboxCustomMedium: React.FC<CheckboxCustomMediumProps> = () => {
       {state => {
         return (
           <>
-            <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+            <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
             <CheckboxIcon
               className={
                 state.isChecked

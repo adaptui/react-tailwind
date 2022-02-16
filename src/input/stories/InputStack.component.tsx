@@ -7,7 +7,7 @@ export type InputStackProps = InputProps & {};
 export const InputStack: React.FC<InputStackProps> = props => {
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Input {...props} size="sm" variant="outline">
           Continue
         </Input>
@@ -21,7 +21,7 @@ export const InputStack: React.FC<InputStackProps> = props => {
           Continue
         </Input>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Input {...props} size="sm" variant="subtle">
           Continue
         </Input>
@@ -35,7 +35,7 @@ export const InputStack: React.FC<InputStackProps> = props => {
           Continue
         </Input>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Input {...props} size="sm" variant="underline">
           Continue
         </Input>
@@ -49,7 +49,7 @@ export const InputStack: React.FC<InputStackProps> = props => {
           Continue
         </Input>
       </div>
-      <div className="flex flex-col space-y-4 md:space-x-4 md:space-y-0 md:flex-row">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
         <Input {...props} size="sm" variant="ghost">
           Continue
         </Input>

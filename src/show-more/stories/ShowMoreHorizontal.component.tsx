@@ -4,8 +4,8 @@ import { ShowMore, ShowMoreProps } from "../../index";
 
 export const ShowMoreHorizontal: React.FC<ShowMoreProps> = props => {
   return (
-    <div className="overflow-x-scroll w-96">
-      <div className="flex flex-row items-center h-10 space-x-2 w-fit">
+    <div className="w-96 overflow-x-scroll">
+      <div className="flex h-10 w-fit flex-row items-center space-x-2">
         <div>Apple</div>
         <div>Orange</div>
         <div>Watermelon</div>

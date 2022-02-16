@@ -6,7 +6,7 @@ export type DividerVerticalProps = DividerProps & {};
 
 export const DividerVertical: React.FC<DividerVerticalProps> = props => {
   return (
-    <div className="flex items-center justify-center h-80">
+    <div className="flex h-80 items-center justify-center">
       <Divider orientation="vertical" {...props} />
     </div>
   );

@@ -143,7 +143,7 @@ export const ExtendedSpinner: Story = {
 
 const CustomSpinnerComponent = () => {
   return (
-    <div className="inline-block w-4 h-4 m-2 after:block after:w-4 after:h-4 rounded-[50%] border-2 border-t-green-500 border-r-transparent border-b-green-500 border-l-transparent animate-spin" />
+    <div className="m-2 inline-block h-4 w-4 animate-spin rounded-[50%] border-2 border-t-green-500 border-r-transparent border-b-green-500 border-l-transparent after:block after:h-4 after:w-4" />
   );
 };
 

@@ -35,7 +35,7 @@ export const TypingLargeStatusIcon = React.forwardRef<
         y="2.5"
         fill="#fff"
         rx="1"
-        className="animate-pulse animation-duration-1000 animation-delay-333"
+        className="animate-pulse animation-delay-333 animation-duration-1000"
       />
       <rect
         width="2"
@@ -44,7 +44,7 @@ export const TypingLargeStatusIcon = React.forwardRef<
         y="2.5"
         fill="#fff"
         rx="1"
-        className="animate-pulse animation-duration-1000 animation-delay-667"
+        className="animate-pulse animation-delay-667 animation-duration-1000"
       />
     </Box>
   );

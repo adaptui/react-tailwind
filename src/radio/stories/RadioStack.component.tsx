@@ -9,21 +9,21 @@ export const RadioStack: React.FC<RadioStackProps> = props => {
   return (
     <div className="flex flex-col space-y-4">
       <Group
-        className="flex flex-row space-x-4 w-fit"
+        className="flex w-fit flex-row space-x-4"
         aria-label="Radio small example"
       >
         <Radio size="sm" value="apple" {...props} />
         <Radio size="sm" state={"apple"} value="apple" {...props} />
       </Group>
       <Group
-        className="flex flex-row space-x-4 w-fit"
+        className="flex w-fit flex-row space-x-4"
         aria-label="Radio medium example"
       >
         <Radio size="md" value="apple" {...props} />
         <Radio size="md" state={"apple"} value="apple" {...props} />
       </Group>
       <Group
-        className="flex flex-row space-x-4 w-fit"
+        className="flex w-fit flex-row space-x-4"
         aria-label="Radio large example"
       >
         <Radio size="lg" value="apple" {...props} />
