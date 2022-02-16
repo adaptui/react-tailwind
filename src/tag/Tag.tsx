@@ -1,6 +1,5 @@
-import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
-import { createComponent } from "@renderlesskit/react";
+import { createComponent, createHook } from "@renderlesskit/react";
 
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";

@@ -1,6 +1,6 @@
-import { createHook } from "reakit-system";
 import {
   createComponent,
+  createHook,
   TooltipArrowHTMLProps as RenderlesskitTooltipArrowHTMLProps,
   TooltipArrowOptions as RenderlesskitTooltipArrowOptions,
   useTooltipArrow as useRenderlesskitTooltipArrow,

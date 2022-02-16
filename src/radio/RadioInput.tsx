@@ -1,6 +1,6 @@
-import { createHook } from "reakit-system";
 import {
   createComponent,
+  createHook,
   cx,
   RadioHTMLProps,
   RadioOptions,

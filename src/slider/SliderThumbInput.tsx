@@ -1,6 +1,6 @@
-import { createHook } from "reakit-system";
 import {
   createComponent,
+  createHook,
   SliderInputHTMLProps,
   SliderInputOptions,
   useSliderInput,

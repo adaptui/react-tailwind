@@ -1,6 +1,6 @@
-import { createHook } from "reakit-system";
 import {
   createComponent,
+  createHook,
   TooltipHTMLProps,
   TooltipOptions,
   useTooltip,

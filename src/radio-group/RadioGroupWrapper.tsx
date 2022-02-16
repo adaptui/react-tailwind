@@ -1,6 +1,5 @@
-import { createHook } from "reakit-system";
 import { RadioGroupHTMLProps, RadioGroupOptions, useRadioGroup } from "reakit";
-import { createComponent } from "@renderlesskit/react";
+import { createComponent, createHook } from "@renderlesskit/react";
 
 import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
