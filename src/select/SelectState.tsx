@@ -18,12 +18,12 @@ export type SelectState = {
   variant: keyof Renderlesskit.GetThemeValue<"select", "base", "variant">;
 
   /**
-   * Description for the Switch.
+   * Prefix for the Select.
    */
   prefix: RenderPropType<SelectStateReturn>;
 
   /**
-   * Description for the Switch.
+   * Suffix for the Select.
    */
   suffix: RenderPropType<SelectStateReturn>;
 

@@ -17,7 +17,7 @@ export type TextareaState = {
   /**
    * How the textarea should look?
    *
-   * @default solid
+   * @default outline
    */
   variant: keyof Renderlesskit.GetThemeValue<"textarea", "base", "variant">;
 
@@ -49,7 +49,7 @@ export type TextareaState = {
   invalid: boolean;
 
   /**
-   * Description for the Switch.
+   * Icon for the Textarea.
    */
   icon: RenderPropType<TextareaStateReturn>;
 
@@ -59,7 +59,7 @@ export type TextareaState = {
   loading: boolean;
 
   /**
-   * Description for the Switch.
+   * Spinner for the Textarea.
    */
   spinner: RenderPropType<TextareaStateReturn>;
 

@@ -25,12 +25,12 @@ export type TooltipState = RenderlesskitTooltipState & {
   suffix: RenderPropType<TooltipStateReturn>;
 
   /**
-   * Should render arrow for the Tooltip.
+   * If `true`, Tooltip will render an arrow.
    */
   withArrow: boolean;
 
   /**
-   * Label for the Tooltip.
+   * Custom arrowIcon for the Tooltip.
    */
   arrowIcon: RenderPropType<TooltipStateReturn>;
 };

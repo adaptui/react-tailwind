@@ -17,12 +17,12 @@ export type InputState = {
   variant: keyof Renderlesskit.GetThemeValue<"input", "base", "variant">;
 
   /**
-   * Description for the Switch.
+   * Prefix for the Input.
    */
   prefix: RenderPropType<InputStateReturn>;
 
   /**
-   * Description for the Switch.
+   * Suffix for the Input.
    */
   suffix: RenderPropType<InputStateReturn>;
 
