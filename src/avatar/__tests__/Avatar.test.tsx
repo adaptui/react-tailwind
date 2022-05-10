@@ -1,12 +1,9 @@
 import { screen } from "@testing-library/react";
 
-import { mockImage, render } from "../../utils/testUtils";
+import { render } from "../../utils/testUtils";
 import { Avatar } from "../index";
 
 jest.useFakeTimers("modern");
-afterEach(() => {
-  mockImage.restoreMock();
-});
 
 describe("<Avatar />", () => {
   expect.assertions(1);
@@ -55,43 +52,5 @@ describe("<Avatar />", () => {
     const content = screen.queryByLabelText(name);
     expect(content).toHaveTextContent("AH");
     expect(screen.queryByLabelText("fallback")).not.toBeInTheDocument();
-  });
-
-  it("prioritize src between fallback, name & src", async () => {
-    mockImage.load();
-    const fallbackContent = "I'm a fallback";
-    const name = "Anurag Hazra";
-    const src = "demo.png";
-    render(
-      <Avatar
-        src={src}
-        name={name}
-        icon={<div aria-label="fallback">{fallbackContent}</div>}
-      />,
-    );
-
-    await mockImage.advanceTimer();
-
-    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
-  });
-
-  it("Avatar Image loads", async () => {
-    mockImage.load();
-    render(<Avatar src={"demo.png"}></Avatar>);
-
-    await mockImage.advanceTimer();
-
-    expect(screen.getByTestId("testid-avatarimg")).toBeInTheDocument();
-  });
-
-  it("Avatar onError", async () => {
-    mockImage.error();
-    const onErrorFn = jest.fn();
-
-    render(<Avatar src={"demo.png"} onError={onErrorFn}></Avatar>);
-
-    await mockImage.advanceTimer();
-
-    expect(onErrorFn).toBeCalledTimes(1);
   });
 });
