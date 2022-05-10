@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export type RenderPropType<T = any> =
-  | React.ReactNode
+  | React.ReactElement
   | ((args: T) => JSX.Element);
 
 export type RenderProp<T> = {

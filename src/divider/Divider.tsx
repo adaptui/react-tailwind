@@ -1,74 +1,61 @@
 import React from "react";
-import { SeparatorHTMLProps, SeparatorOptions, useSeparator } from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+import { SeparatorOptions, useSeparator } from "ariakit";
+import { useWrapElement } from "ariakit-utils";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx, RenderPropType, runIfFn } from "../utils";
 
-import { DIVIDER_KEYS } from "./__keys";
+export const useDivider = createHook<DividerOptions>(({ label, ...props }) => {
+  const theme = useTheme("divider");
+  const className = cx(
+    theme.base,
+    props.orientation === "horizontal" ? theme.horizontal : theme.vertical,
+    props.className,
+  );
+  const labelClassName = theme.label;
 
-export type DividerOptions = BoxOptions &
-  SeparatorOptions & {
-    /**
-     * Provide a label to name the divider at the center to mark it as a section.
-     */
-    label?: RenderPropType;
-  };
+  props = useWrapElement(
+    props,
+    element => {
+      if (label) {
+        return (
+          <div className="relative h-full w-full">
+            {element}
+            <span className={labelClassName}>
+              {runIfFn(label, { orientation: props.orientation })}
+            </span>
+          </div>
+        );
+      }
 
-export type DividerHTMLProps = BoxHTMLProps & SeparatorHTMLProps;
+      return element;
+    },
+    [label, labelClassName, props.orientation],
+  );
 
-export type DividerProps = DividerOptions & DividerHTMLProps;
+  props = { ...props, className };
+  props = useSeparator(props);
 
-export const useDivider = createHook<DividerOptions, DividerHTMLProps>({
-  name: "Divider",
-  compose: [useBox, useSeparator],
-  keys: DIVIDER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { orientation, label } = options;
-    const {
-      className: htmlClassName,
-      wrapElement: htmlWrapElement,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const divider = useTheme("divider");
-    const className = cx(
-      divider.base,
-      orientation === "horizontal" ? divider.horizontal : divider.vertical,
-      htmlClassName,
-    );
-    const labelClassName = divider.label;
-
-    const wrapElement = React.useCallback(
-      (element: React.ReactNode) => {
-        if (label) {
-          element = (
-            <div className="relative h-full w-full">
-              {element}
-              <span className={labelClassName}>
-                {runIfFn(label, { orientation })}
-              </span>
-            </div>
-          );
-        }
-
-        if (htmlWrapElement) {
-          element = htmlWrapElement(element);
-        }
-
-        return element;
-      },
-      [htmlWrapElement, label, labelClassName, orientation],
-    );
-
-    return { className, wrapElement, ...restHtmlProps };
-  },
+  return props;
 });
 
-export const Divider = createComponent({
-  as: "hr",
-  memo: true,
-  useHook: useDivider,
+export const Divider = createComponent<DividerOptions>(props => {
+  const htmlProps = useDivider(props);
+
+  return createElement("hr", htmlProps);
 });
+
+export type DividerOptions<T extends As = "hr"> = SeparatorOptions<T> & {
+  /**
+   * Provide a label to name the divider at the center to mark it as a section.
+   */
+  label?: RenderPropType;
+};
+
+export type DividerProps<T extends As = "hr"> = Props<DividerOptions<T>>;

@@ -1,28 +1,26 @@
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+import { RoleOptions, useRole } from "ariakit";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
 import { tcm } from "../utils";
 
-export type BoxOptions = RoleOptions;
+export const useBox = createHook<BoxOptions>(props => {
+  props = { ...props, className: tcm(props.className) };
+  props = useRole(props);
 
-export type BoxHTMLProps = RoleHTMLProps;
-
-export type BoxProps = BoxOptions & BoxHTMLProps;
-
-export const useBox = createHook<BoxOptions, BoxHTMLProps>({
-  name: "Box",
-  compose: useRole,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-    const className = tcm(htmlClassName);
-
-    return { className, ...restHtmlProps };
-  },
+  return props;
 });
 
-export const Box = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useBox,
+export const Box = createComponent<BoxOptions>(props => {
+  const htmlProps = useBox(props);
+
+  return createElement("div", htmlProps);
 });
+
+export type BoxOptions<T extends As = "div"> = RoleOptions<T>;
+
+export type BoxProps<T extends As = "div"> = Props<BoxOptions<T>>;

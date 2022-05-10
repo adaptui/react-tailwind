@@ -8,7 +8,9 @@ import { ButtonProps } from "./Button";
 
 export type ButtonSpinnerProps = Partial<
   Pick<ButtonProps, "spinner" | "size" | "prefix" | "suffix">
-> & {};
+> & {
+  children?: React.ReactNode;
+};
 
 export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const {

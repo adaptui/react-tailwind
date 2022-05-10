@@ -1,12 +1,44 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SPINNER_KEYS } from "./__keys";
+export const useSpinner = createHook<SpinnerOptions>(
+  ({ size = "md", label = "Loading...", stroke = "transparent", ...props }) => {
+    const theme = useTheme("spinner");
+    const className = cx(
+      theme.base,
+      theme.size[size],
+      theme.stroke[stroke],
+      props.className,
+    );
 
-export type SpinnerOptions = BoxOptions & {
+    const children = props.children ? (
+      props.children
+    ) : (
+      <>{label ? <span className={theme.label}>{label}</span> : null}</>
+    );
+
+    props = { ...props, className, children, "data-testid": "testid-spinner" };
+    props = useBox(props);
+
+    return props;
+  },
+);
+
+export const Spinner = createComponent<SpinnerOptions>(props => {
+  const htmlProps = useSpinner(props);
+
+  return createElement("div", htmlProps);
+});
+
+export type SpinnerOptions<T extends As = "div"> = BoxOptions<T> & {
   /**
    * For accessibility, it is important to add a fallback loading text.
    * This text will be visible to screen readers.
@@ -30,63 +62,4 @@ export type SpinnerOptions = BoxOptions & {
   stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
 };
 
-export type SpinnerHTMLProps = BoxHTMLProps;
-
-export type SpinnerProps = SpinnerOptions & SpinnerHTMLProps;
-
-export const useSpinner = createHook<SpinnerOptions, SpinnerHTMLProps>({
-  name: "Spinner",
-  compose: useBox,
-  keys: SPINNER_KEYS,
-
-  useOptions(options, htmlProps) {
-    const {
-      size = "md",
-      label = "Loading...",
-      stroke = "transparent",
-      ...restOptions
-    } = options;
-
-    return { size, label, stroke, ...restOptions };
-  },
-
-  useProps(options, htmlProps) {
-    const {
-      size = "md",
-      label = "Loading...",
-      stroke = "transparent",
-    } = options;
-    const {
-      className: htmlClassName,
-      children: htmlChildren,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const theme = useTheme("spinner");
-    const className = cx(
-      theme.base,
-      theme.size[size],
-      theme.stroke[stroke],
-      htmlClassName,
-    );
-
-    const children = htmlChildren ? (
-      htmlChildren
-    ) : (
-      <>{label ? <span className={theme.label}>{label}</span> : null}</>
-    );
-
-    return {
-      className,
-      children,
-      "data-testid": "testid-spinner",
-      ...restHtmlProps,
-    };
-  },
-});
-
-export const Spinner = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSpinner,
-});
+export type SpinnerProps<T extends As = "div"> = Props<SpinnerOptions<T>>;
