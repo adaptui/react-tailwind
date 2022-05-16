@@ -3,22 +3,21 @@ import { Separator } from "reakit";
 
 import {
   Checkbox,
-  CheckboxStateReturn,
   Radio,
   RadioGroup,
   RadioGroupProps,
   RadioGroupStateReturn,
 } from "../../index";
+import { Value } from "../CheckboxState";
 
 export type CheckboxControlledProps = {};
 
 export const CheckboxControlled: React.FC<CheckboxControlledProps> = () => {
-  const [checkboxState, setCheckboxState] =
-    React.useState<CheckboxStateReturn["state"]>(true);
+  const [checkboxState, setCheckboxState] = React.useState<Value>(true);
 
   const onRadioStateChange: RadioGroupStateReturn["setState"] = state => {
-    if (state === "indeterminate") {
-      setCheckboxState("indeterminate");
+    if (state === "mixed") {
+      setCheckboxState("mixed");
       return;
     }
 
@@ -31,7 +30,7 @@ export const CheckboxControlled: React.FC<CheckboxControlledProps> = () => {
   };
 
   const getRadioState = (): RadioGroupStateReturn["state"] => {
-    if (checkboxState === "indeterminate") return "indeterminate";
+    if (checkboxState === "mixed") return "mixed";
     if (checkboxState === true) return "checked";
     return "unchecked";
   };
@@ -41,8 +40,8 @@ export const CheckboxControlled: React.FC<CheckboxControlledProps> = () => {
   return (
     <div className="flex w-96 flex-col items-center space-y-4">
       <Checkbox
-        state={checkboxState}
-        onStateChange={setCheckboxState}
+        options={checkboxState}
+        setOptions={setCheckboxState}
         label={capitalizeFirstLetter(radioState as string)}
       />
 
@@ -68,7 +67,7 @@ const RadioComponent: React.FC<RadioGroupProps> = props => {
     <RadioGroup aria-label="checkbox state" className="space-x-2" {...props}>
       <Radio value="checked" label="Checked" />
       <Radio value="unchecked" label="Unchecked" />
-      <Radio value="indeterminate" label="Indeterminate" />
+      <Radio value="mixed" label="Indeterminate" />
     </RadioGroup>
   );
 };

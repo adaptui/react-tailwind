@@ -1,33 +1,14 @@
-import {
-  getComponentProps,
-  isEmptyObject,
-  runIfFn,
-  splitProps,
-} from "../utils";
-import { useHasMounted } from "..";
+import { useMemo } from "react";
 
-import { USE_CHECKBOX_STATE_KEYS } from "./__keys";
-import { CheckboxOwnProps, CheckboxProps } from "./Checkbox";
+import { getComponentProps, isString, runIfFn } from "../utils";
+
+import { CheckboxProps } from "./Checkbox";
 import { CheckboxDescriptionProps } from "./CheckboxDescription";
 import { CheckboxIconProps } from "./CheckboxIcon";
 import { CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxLabelProps } from "./CheckboxLabel";
-import {
-  CheckboxInitialState,
-  CheckboxState,
-  useCheckboxState,
-} from "./CheckboxState";
+import { CheckboxState, useCheckboxState } from "./CheckboxState";
 import { CheckboxTextProps } from "./CheckboxText";
-
-export const useCheckboxStateSplit = (props: CheckboxProps) => {
-  const [stateProps, checkboxProps] = splitProps(
-    props,
-    USE_CHECKBOX_STATE_KEYS,
-  ) as [CheckboxInitialState, CheckboxOwnProps];
-  const state = useCheckboxState(stateProps);
-
-  return [state, checkboxProps, stateProps] as const;
-};
 
 const componentMap = {
   CheckboxLabel: "labelProps",
@@ -37,68 +18,129 @@ const componentMap = {
   CheckboxDescription: "descriptionProps",
 };
 
-export const useCheckboxProps = (
+export function useCheckboxProps(
   props: React.PropsWithChildren<CheckboxProps>,
-) => {
-  const [state, checkboxProps] = useCheckboxStateSplit(props);
-  const { icon, label, description } = state;
-  const { className, style, children, ...restProps } = checkboxProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
-  const mounted = useHasMounted();
-
-  const _icon: CheckboxState["icon"] =
-    componentProps?.iconProps?.children || icon;
-  const _label: CheckboxState["label"] =
-    componentProps?.textProps?.children || label;
-  const _description: CheckboxState["description"] =
-    componentProps?.descriptionProps?.children || description;
-
-  const labelProps: CheckboxLabelProps = {
-    ...state,
+): CheckboxPropsReturn {
+  const {
+    defaultOptions,
+    options,
+    setOptions,
+    size,
+    icon,
+    label,
+    description,
+    state: _state,
+    children,
     className,
     style,
-    label: _label,
-    description: _description,
-    disabled: restProps.disabled,
-    ...componentProps.labelProps,
-  };
+    ...restProps
+  } = props;
+  const state = useCheckboxState({
+    defaultOptions,
+    options,
+    setOptions,
+    state: _state,
+    size,
+    icon,
+    label,
+    description,
+    value: restProps.value,
+  });
 
-  const inputProps: CheckboxInputProps = {
-    ...state,
-    ...restProps,
-    ...componentProps.inputProps,
-  };
+  const { componentProps } = getComponentProps(componentMap, children, state);
 
-  const iconProps: CheckboxIconProps = {
-    ...state,
-    label: _label,
-    description: _description,
-    ...componentProps.iconProps,
-    children: runIfFn(_icon, state),
-  };
+  const _icon: CheckboxProps["icon"] =
+    componentProps?.iconProps?.children || state.icon;
+  const _label: CheckboxProps["label"] =
+    componentProps?.textProps?.children || state.label;
+  const _description: CheckboxProps["description"] =
+    componentProps?.descriptionProps?.children || state.description;
 
-  const textProps: CheckboxTextProps = {
-    ...state,
-    ...componentProps.textProps,
-    children: runIfFn(_label, state),
-  };
+  const labelProps: CheckboxLabelProps = useMemo(
+    () => ({
+      state: { ...state, label: _label, description: _description },
+      className,
+      style,
+      disabled: restProps.disabled,
+      ...componentProps.labelProps,
+    }),
+    [
+      _description,
+      _label,
+      className,
+      componentProps.labelProps,
+      restProps.disabled,
+      state,
+      style,
+    ],
+  );
 
-  const descriptionProps: CheckboxDescriptionProps = {
-    ...state,
-    ...componentProps.descriptionProps,
-    children: runIfFn(_description, state),
-  };
+  const inputProps: CheckboxInputProps = useMemo(
+    () => ({
+      state: state,
+      ...restProps,
+      ...componentProps.inputProps,
+    }),
+    [componentProps.inputProps, restProps, state],
+  );
 
-  return {
-    csr: !isEmptyObject(componentProps) && !mounted,
-    state,
-    labelProps,
-    inputProps,
-    iconProps,
-    textProps,
-    descriptionProps,
-    icon: _icon,
-    label: _label,
-    description: _description,
-  };
+  const iconProps: CheckboxIconProps = useMemo(
+    () => ({
+      state: { ...state, label: _label, description: _description },
+      ...componentProps.iconProps,
+      children: runIfFn(_icon, state),
+    }),
+    [_description, _icon, _label, state, componentProps.iconProps],
+  );
+
+  const textProps: CheckboxTextProps = useMemo(
+    () => ({
+      state,
+      ...componentProps.textProps,
+      children: isString(_label) ? _label : runIfFn(_label, state),
+    }),
+    [_label, state, componentProps.textProps],
+  );
+
+  const descriptionProps: CheckboxDescriptionProps = useMemo(
+    () => ({
+      state,
+      ...componentProps.descriptionProps,
+      children: isString(_description)
+        ? _description
+        : runIfFn(_description, state),
+    }),
+    [_description, state, componentProps.descriptionProps],
+  );
+
+  const compoundedProps = useMemo(
+    () => ({
+      labelProps,
+      inputProps,
+      iconProps,
+      textProps,
+      descriptionProps,
+      state: { ...state, label: _label, description: _description },
+    }),
+    [
+      labelProps,
+      inputProps,
+      iconProps,
+      textProps,
+      descriptionProps,
+      state,
+      _label,
+      _description,
+    ],
+  );
+  return compoundedProps;
+}
+
+export type CheckboxPropsReturn = {
+  labelProps: CheckboxLabelProps;
+  inputProps: CheckboxInputProps;
+  iconProps: CheckboxIconProps;
+  textProps: CheckboxTextProps;
+  descriptionProps: CheckboxDescriptionProps;
+  state: CheckboxState;
 };

@@ -13,24 +13,24 @@ export const CheckboxStack: React.FC<CheckboxStackProps> = props => {
         aria-label="Checkbox small example"
       >
         <Checkbox size="sm" {...props} />
-        <Checkbox size="sm" defaultState={true} {...props} />
-        <Checkbox size="sm" defaultState={"indeterminate"} {...props} />
+        <Checkbox size="sm" defaultOptions={true} {...props} />
+        <Checkbox size="sm" defaultOptions={"mixed"} {...props} />
       </Group>
       <Group
         className="flex w-fit flex-row space-x-4"
         aria-label="Checkbox medium example"
       >
         <Checkbox size="md" {...props} />
-        <Checkbox size="md" defaultState={true} {...props} />
-        <Checkbox size="md" defaultState={"indeterminate"} {...props} />
+        <Checkbox size="md" defaultOptions={true} {...props} />
+        <Checkbox size="md" defaultOptions={"mixed"} {...props} />
       </Group>
       <Group
         className="flex w-fit flex-row space-x-4"
         aria-label="Checkbox large example"
       >
         <Checkbox size="lg" {...props} />
-        <Checkbox size="lg" defaultState={true} {...props} />
-        <Checkbox size="lg" defaultState={"indeterminate"} {...props} />
+        <Checkbox size="lg" defaultOptions={true} {...props} />
+        <Checkbox size="lg" defaultOptions={"mixed"} {...props} />
       </Group>
     </div>
   );

@@ -88,7 +88,7 @@ export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
   });
 };
 
-export const getComponentProps = <T, P>(
+export const getComponentProps = <T extends React.ReactNode, P>(
   componentMaps: Dict<string>,
   children: T,
   props: P,
@@ -101,9 +101,9 @@ export const getComponentProps = <T, P>(
   if (validChildren.length > 0) {
     validChildren.forEach(function (child) {
       // @ts-ignore
-      if (componentMaps[child?.type?.__displayName]) {
+      if (componentMaps[child?.type?.displayName]) {
         // @ts-ignore
-        componentProps[componentMaps[child?.type?.__displayName]] = child.props;
+        componentProps[componentMaps[child?.type?.displayName]] = child.props;
       } else {
         finalChildren.push(child);
       }

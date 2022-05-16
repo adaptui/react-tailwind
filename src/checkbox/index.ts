@@ -1,4 +1,3 @@
-export * from "./__keys";
 export * from "./Checkbox";
 export * from "./CheckboxDescription";
 export * from "./CheckboxIcon";

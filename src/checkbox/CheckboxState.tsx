@@ -1,111 +1,124 @@
+import { useMemo } from "react";
 import {
-  CheckboxActions as RenderlesskitCheckboxActions,
-  CheckboxInitialState as RenderlesskitCheckboxInitialState,
-  CheckboxState as RenderlesskitCheckboxState,
-  useCheckboxState as useRenderlesskitCheckboxState,
-} from "@renderlesskit/react";
+  CheckboxState as AriakitCheckboxState,
+  useCheckboxState as useAriakitCheckboxState,
+} from "ariakit";
+import { RenderProp, SetState } from "ariakit-utils";
 
-import { CheckboxGroupState, useCheckboxGroupContext } from "../checkbox-group";
-import { CheckIcon, DashIcon } from "../icons";
-import { RenderPropType, withIconA11y } from "../utils";
+import { RenderPropType } from "../utils";
 
+import { CheckboxDefaultIcon } from "./__utils";
 import { CheckboxInputOptions } from "./CheckboxInput";
 
-export type CheckboxState = RenderlesskitCheckboxState &
-  Pick<CheckboxGroupState, "maxVisibleItems" | "stack"> & {
-    /**
-     * How large should the button be?
-     *
-     * @default md
-     */
-    size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
-
-    /**
-     * If true, Checkbox is checked.
-     */
-    isChecked: boolean;
-
-    /**
-     * If true, Checkbox is indeterminate.
-     */
-    isIndeterminate: boolean;
-
-    /**
-     * If true, Checkbox is unchecked.
-     */
-    isUnchecked: boolean;
-
-    /**
-     * Input's value.
-     */
-    value: CheckboxInputOptions["value"];
-
-    /**
-     * Provide custom icons as a replacement for the default ones.
-     */
-    icon: RenderPropType<CheckboxStateReturn>;
-
-    /**
-     * Label for the Checkbox.
-     */
-    label: RenderPropType<CheckboxStateReturn>;
-
-    /**
-     * Description for the Checkbox.
-     */
-    description: RenderPropType<CheckboxStateReturn>;
-  };
-
-export type CheckboxActions = RenderlesskitCheckboxActions & {};
-
-export type CheckboxStateReturn = CheckboxState & CheckboxActions;
-
-export type CheckboxInitialState = RenderlesskitCheckboxInitialState &
-  Partial<
-    Pick<CheckboxState, "size" | "value" | "label" | "description" | "icon">
-  >;
-
 export function useCheckboxState(
-  props: CheckboxInitialState = {},
-): CheckboxStateReturn {
-  const { state, setState } = useRenderlesskitCheckboxState(props);
+  props: CheckboxStateProps = {},
+): CheckboxState {
   const {
-    size: originalSize,
-    value,
+    state: groupState,
+    size = "md",
     icon = CheckboxDefaultIcon,
     label,
     description,
+    value,
+    defaultOptions,
+    options,
+    setOptions,
   } = props;
-  const contextState = useCheckboxGroupContext();
+
+  const fallbackState = useAriakitCheckboxState({
+    defaultValue: defaultOptions,
+    value: options,
+    setValue: setOptions,
+  });
+  const checked = groupState ?? fallbackState;
 
   const isChecked =
-    Array.isArray(state) && value ? state.includes(value) : state === true;
-  const isIndeterminate = state === "indeterminate";
+    checked && value && Array.isArray(checked.value)
+      ? checked.value.includes(value)
+      : checked.value === true;
+  const isIndeterminate = checked.value === "mixed";
   const isUnchecked = !isChecked && !isIndeterminate;
+  console.log("%cisChecked", "color: #00b300", isChecked);
 
-  return {
-    state,
-    setState,
-    size: originalSize ?? contextState?.size ?? "md",
-    value,
-    isChecked,
-    isIndeterminate,
-    isUnchecked,
-    maxVisibleItems: contextState?.maxVisibleItems ?? null,
-    stack: contextState?.stack ?? "horizontal",
-    icon,
-    label,
-    description,
-  };
+  const state = useMemo(
+    () => ({
+      size,
+      icon,
+      label,
+      description,
+      state: checked,
+      isChecked,
+      isIndeterminate,
+      isUnchecked,
+    }),
+    [
+      size,
+      icon,
+      label,
+      description,
+      checked,
+      isChecked,
+      isIndeterminate,
+      isUnchecked,
+    ],
+  );
+
+  return state;
 }
 
-export const CheckboxDefaultIcon: CheckboxState["icon"] = state => {
-  const { isChecked, isIndeterminate } = state;
+export type CheckboxState = {
+  /**
+   * The State of the Checkbox.
+   */
+  state: AriakitCheckboxState;
 
-  return (
-    <>
-      {isChecked ? withIconA11y(<CheckIcon />) : null}
-      {isIndeterminate ? withIconA11y(<DashIcon />) : null}
-    </>
-  );
+  /**
+   * If true, Checkbox is checked.
+   */
+  isChecked: boolean;
+
+  /**
+   * If true, Checkbox is indeterminate.
+   */
+  isIndeterminate: boolean;
+
+  /**
+   * If true, Checkbox is unchecked.
+   */
+  isUnchecked: boolean;
+
+  /**
+   * How large should the button be?
+   *
+   * @default md
+   */
+  size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+
+  /**
+   * Provide custom icons as a replacement for the default ones.
+   *
+   * @default CheckboxDefaultIcon
+   */
+  icon: RenderProp<CheckboxState>;
+
+  /**
+   * Label for the Checkbox.
+   */
+  label?: RenderPropType<CheckboxState> | string;
+
+  /**
+   * Description for the Checkbox.
+   */
+  description?: RenderPropType<CheckboxState> | string;
 };
+
+export type Value = boolean | string | number | Array<string | number>;
+
+export type CheckboxStateProps = Partial<
+  Pick<CheckboxState, "size" | "icon" | "label" | "description" | "state">
+> &
+  Pick<CheckboxInputOptions, "value"> & {
+    defaultOptions?: Value;
+    options?: Value;
+    setOptions?: SetState<Value>;
+  };

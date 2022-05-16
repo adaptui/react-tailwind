@@ -24,7 +24,7 @@ const fallbackIcon = {
   viewBox: "0 0 24 24",
 };
 
-export type IconProps = React.SVGAttributes<SVGElement> & BoxProps & {};
+export type IconProps = React.SVGAttributes<SVGElement> & BoxProps<"svg"> & {};
 
 export const Icon = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
   (props, ref) => {

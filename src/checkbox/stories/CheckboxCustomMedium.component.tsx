@@ -5,6 +5,7 @@ import {
   CheckboxDescription,
   CheckboxIcon,
   CheckboxLabel,
+  CheckboxState,
   CheckboxText,
   EyeClose,
   EyeOpen,
@@ -16,7 +17,7 @@ export type CheckboxCustomMediumProps = {};
 export const CheckboxCustomMedium: React.FC<CheckboxCustomMediumProps> = () => {
   return (
     <Checkbox label="Checkbox" description="Fruits in the basket">
-      {state => {
+      {(state: CheckboxState) => {
         return (
           <>
             <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />

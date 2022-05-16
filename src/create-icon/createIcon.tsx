@@ -44,6 +44,7 @@ export function createIcon(options: CreateIconOptions) {
   const IconComponent = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
     (props, ref) => {
       return (
+        // @ts-ignore
         <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
           {path ?? <path fill="currentColor" d={pathDefinition} />}
         </Icon>
