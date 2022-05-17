@@ -1,4 +1,3 @@
-import { CheckboxState } from "ariakit";
 import {
   createComponent,
   createElement,
@@ -10,18 +9,16 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import {
-  CheckboxBasicProps,
-  CheckboxUiState,
-} from "./stories/CheckboxBasic.component";
+import { CheckboxUIProps } from "./CheckboxProps";
 
 export const useCheckboxIcon = createHook<CheckboxIconOptions>(
   ({
     state,
+    size,
     isChecked,
     isIndeterminate,
     isUnchecked,
-    size = "md",
+    icon,
     label,
     description,
     ...props
@@ -29,8 +26,8 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
     const theme = useTheme("checkbox");
     const className = cx(
       theme.icon.common,
-      theme.icon.size[size],
-      isUnchecked
+      size ? theme.icon.size[size] : "",
+      isUnchecked === true
         ? cx(
             theme.icon.unChecked.default,
             theme.icon.unChecked.hover,
@@ -39,7 +36,7 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
             theme.icon.unChecked.disabled,
           )
         : "",
-      isChecked
+      isChecked === true
         ? cx(
             theme.icon.checked.default,
             theme.icon.checked.hover,
@@ -48,7 +45,7 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
             theme.icon.checked.disabled,
           )
         : "",
-      isIndeterminate
+      isIndeterminate === true
         ? cx(
             theme.icon.checked.default,
             theme.icon.indeterminate.hover,
@@ -74,14 +71,7 @@ export const CheckboxIcon = createComponent<CheckboxIconOptions>(props => {
 });
 
 export type CheckboxIconOptions<T extends As = "span"> = BoxOptions<T> &
-  Pick<CheckboxBasicProps, "size" | "label" | "description"> &
-  Pick<CheckboxUiState, "isChecked" | "isIndeterminate" | "isUnchecked"> & {
-    /**
-     * Object returned by the `useCheckboxState` hook. If not provided, the
-     * internal state will be used.
-     */
-    state: CheckboxState;
-  };
+  Partial<CheckboxUIProps> & {};
 
 export type CheckboxIconProps<T extends As = "span"> = Props<
   CheckboxIconOptions<T>

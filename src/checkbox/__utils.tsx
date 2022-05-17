@@ -1,9 +1,9 @@
 import { CheckIcon, DashIcon } from "../icons";
 import { withIconA11y } from "../utils";
 
-import { CheckboxUiProps } from "./stories/CheckboxBasic.component";
+import { CheckboxUIProps } from "./CheckboxProps";
 
-export const CheckboxDefaultIcon = (props: CheckboxUiProps) => {
+export const CheckboxDefaultIcon = (props: CheckboxUIProps) => {
   const { isChecked, isIndeterminate } = props;
 
   return (

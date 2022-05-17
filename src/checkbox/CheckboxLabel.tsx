@@ -1,4 +1,3 @@
-import { CheckboxState } from "ariakit";
 import {
   createComponent,
   createElement,
@@ -10,15 +9,26 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CheckboxBasicProps } from "./stories/CheckboxBasic.component";
 import { CheckboxInputOptions } from "./CheckboxInput";
+import { CheckboxUIProps } from "./CheckboxProps";
 
 export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
-  ({ state, label, description, size = "md", disabled, ...props }) => {
+  ({
+    state,
+    size,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+    icon,
+    label,
+    description,
+    disabled,
+    ...props
+  }) => {
     const theme = useTheme("checkbox");
     const className = cx(
       theme.label.common,
-      label && !description ? theme.label.size[size] : "",
+      label && !description ? (size ? theme.label.size[size] : "") : "",
       label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
       // maxVisibleItems != null ? theme.label.showMore[stack] : "",
@@ -40,13 +50,7 @@ export const CheckboxLabel = createComponent<CheckboxLabelOptions>(props => {
 
 export type CheckboxLabelOptions<T extends As = "label"> = BoxOptions<T> &
   Pick<CheckboxInputOptions, "disabled"> &
-  Pick<CheckboxBasicProps, "size" | "label" | "description"> & {
-    /**
-     * Object returned by the `useCheckboxState` hook. If not provided, the
-     * internal state will be used.
-     */
-    state: CheckboxState;
-  };
+  Partial<CheckboxUIProps> & {};
 
 export type CheckboxLabelProps<T extends As = "label"> = Props<
   CheckboxLabelOptions<T>

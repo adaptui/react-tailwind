@@ -4,10 +4,11 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { EyeClose, EyeOpen } from "../../icons";
 import { withIconA11y } from "../../utils";
+import { CheckboxUIProps } from "../CheckboxProps";
 
 import js from "./templates/CheckboxBasicJsx";
 import ts from "./templates/CheckboxBasicTsx";
-import { CheckboxBasic, CheckboxUiProps } from "./CheckboxBasic.component";
+import { CheckboxBasic } from "./CheckboxBasic.component";
 
 type Meta = ComponentMeta<typeof CheckboxBasic>;
 type Story = ComponentStoryObj<typeof CheckboxBasic>;
@@ -124,7 +125,7 @@ export const DisabledDescription: Story = {
   },
 };
 
-const CustomIconElement = (props: CheckboxUiProps) => (
+const CustomIconElement = (props: CheckboxUIProps) => (
   <>
     {props.isUnchecked ? withIconA11y(<EyeClose />) : null}
     {props.isChecked ? withIconA11y(<EyeOpen />) : null}

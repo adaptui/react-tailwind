@@ -1,4 +1,3 @@
-import { CheckboxState } from "ariakit";
 import {
   createComponent,
   createElement,
@@ -10,14 +9,24 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CheckboxBasicProps } from "./stories/CheckboxBasic.component";
+import { CheckboxUIProps } from "./CheckboxProps";
 
 export const useCheckboxText = createHook<CheckboxTextOptions>(
-  ({ state, size = "md", ...props }) => {
+  ({
+    state,
+    size,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+    icon,
+    label,
+    description,
+    ...props
+  }) => {
     const theme = useTheme("checkbox");
     const className = cx(
       theme.text.common,
-      theme.text.size[size],
+      size ? theme.text.size[size] : "",
       props.className,
     );
 
@@ -35,13 +44,7 @@ export const CheckboxText = createComponent<CheckboxTextOptions>(props => {
 });
 
 export type CheckboxTextOptions<T extends As = "div"> = BoxOptions<T> &
-  Pick<CheckboxBasicProps, "size"> & {
-    /**
-     * Object returned by the `useCheckboxState` hook. If not provided, the
-     * internal state will be used.
-     */
-    state: CheckboxState;
-  };
+  Partial<CheckboxUIProps> & {};
 
 export type CheckboxTextProps<T extends As = "div"> = Props<
   CheckboxTextOptions<T>

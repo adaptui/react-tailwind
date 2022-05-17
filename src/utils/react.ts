@@ -7,6 +7,7 @@ import {
   ComponentWithAs,
   Dict,
   PropsWithAs,
+  RenderProp,
   RenderPropType,
 } from "./types";
 
@@ -88,7 +89,7 @@ export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
   });
 };
 
-export const getComponentProps = <T extends React.ReactNode, P>(
+export const getComponentProps = <T extends React.ReactNode | RenderProp, P>(
   componentMaps: Dict<string>,
   children: T,
   props: P,

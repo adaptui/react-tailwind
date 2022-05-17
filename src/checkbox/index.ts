@@ -4,5 +4,5 @@ export * from "./CheckboxIcon";
 export * from "./CheckboxInput";
 export * from "./CheckboxLabel";
 export * from "./CheckboxProps";
-export * from "./CheckboxState";
 export * from "./CheckboxText";
+export * from "./CheckboxUIState";

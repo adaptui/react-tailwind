@@ -8,7 +8,7 @@ import {
   RadioGroupProps,
   RadioGroupStateReturn,
 } from "../../index";
-import { Value } from "../CheckboxState";
+import { Value } from "../CheckboxUIState";
 
 export type CheckboxControlledProps = {};
 
@@ -40,8 +40,8 @@ export const CheckboxControlled: React.FC<CheckboxControlledProps> = () => {
   return (
     <div className="flex w-96 flex-col items-center space-y-4">
       <Checkbox
-        options={checkboxState}
-        setOptions={setCheckboxState}
+        value={checkboxState}
+        setValue={setCheckboxState}
         label={capitalizeFirstLetter(radioState as string)}
       />
 

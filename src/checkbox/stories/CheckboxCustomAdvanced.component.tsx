@@ -4,11 +4,11 @@ import { CheckboxState, useCheckboxState } from "ariakit";
 import {
   CheckboxIcon,
   CheckboxInput,
-  CheckboxInputProps,
   CheckboxLabel,
-  CheckboxStateProps,
   tcm,
+  useCheckboxUIState,
 } from "../../index";
+import { CheckboxProps, CheckboxUIProps } from "../CheckboxProps";
 
 export type CheckboxCustomAdvancedProps = {};
 
@@ -16,16 +16,17 @@ export const CheckboxCustomAdvanced: React.FC<
   CheckboxCustomAdvancedProps
 > = () => {
   const state = useCheckboxState<string[]>({ defaultValue: [] });
+  console.log("%cstate", "color: #408059", state);
 
   return (
     <>
-      <CustomCheckbox value="one" state={state}>
+      <CustomCheckbox inputValue="one" state={state}>
         Button one 😁
       </CustomCheckbox>
-      <CustomCheckbox className="ml-2" value="two" state={state}>
+      <CustomCheckbox className="ml-2" inputValue="two" state={state}>
         Button two 🤓
       </CustomCheckbox>
-      <CustomCheckbox className="ml-2" value="three" state={state}>
+      <CustomCheckbox className="ml-2" inputValue="three" state={state}>
         Button three 👻
       </CustomCheckbox>
     </>
@@ -34,20 +35,44 @@ export const CheckboxCustomAdvanced: React.FC<
 
 export default CheckboxCustomAdvanced;
 
-type CustomCheckboxProps = Omit<CheckboxInputProps, "state"> & {
+export type CustomCheckboxProps = CheckboxProps & {
   state: CheckboxState;
 };
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
-  const { state, value, className, children, ...inputProps } = props;
+  const {
+    state,
+    inputValue,
+    size,
+    icon,
+    label,
+    description,
+    className,
+    style,
+    children,
+    ...restProps
+  } = props;
+  const uiState = useCheckboxUIState({
+    state,
+    inputValue,
+    size,
+    icon,
+    label,
+    description,
+  });
+  const uiProps: CheckboxUIProps = React.useMemo(
+    () => ({ state, ...uiState }),
+    [state, uiState],
+  );
+  console.log("%cuiState", "color: #f279ca", uiState);
 
   return (
     <CheckboxLabel
-      state={state}
+      {...uiState}
       className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)}
     >
-      <CheckboxInput {...inputProps} state={state} />
-      {Array(state).includes(value) ? (
+      <CheckboxInput {...uiProps} value={inputValue} {...restProps} />
+      {uiProps.isChecked ? (
         <CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
           <svg
             className="h-5 w-5"

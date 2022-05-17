@@ -5,7 +5,6 @@ import {
   CheckboxDescription,
   CheckboxIcon,
   CheckboxLabel,
-  CheckboxState,
   CheckboxText,
   EyeClose,
   EyeOpen,
@@ -17,20 +16,20 @@ export type CheckboxCustomMediumProps = {};
 export const CheckboxCustomMedium: React.FC<CheckboxCustomMediumProps> = () => {
   return (
     <Checkbox label="Checkbox" description="Fruits in the basket">
-      {(state: CheckboxState) => {
+      {uiProps => {
         return (
           <>
             <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
             <CheckboxIcon
               className={
-                state.isChecked
+                uiProps.isChecked
                   ? "bg-red-500 peer-hover:bg-red-400"
                   : "bg-green-500 peer-hover:bg-green-400"
               }
             >
               <>
-                {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-                {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+                {uiProps.isUnchecked ? withIconA11y(<EyeClose />) : null}
+                {uiProps.isChecked ? withIconA11y(<EyeOpen />) : null}
               </>
             </CheckboxIcon>
             <CheckboxText className="text-green-500">
