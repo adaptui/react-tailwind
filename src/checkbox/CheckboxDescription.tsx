@@ -21,6 +21,8 @@ export const useCheckboxDescription = createHook<CheckboxDescriptionOptions>(
     icon,
     label,
     description,
+    stack,
+    maxVisibleItems,
     ...props
   }) => {
     if (!state) return props;

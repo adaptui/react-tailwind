@@ -1,62 +1,87 @@
-import { getComponentProps, runIfFn, splitProps } from "../utils";
+import { useMemo } from "react";
+import {
+  DisclosureState,
+  DisclosureStateProps,
+  useDisclosureState,
+} from "ariakit";
 
-import { USE_SHOW_MORE_STATE_KEYS } from "./__keys";
-import { ShowMoreOwnProps, ShowMoreProps } from "./ShowMore";
+import { Children, getComponentProps, RenderProp, runIfFn } from "../utils";
+
 import { ShowMoreButtonProps } from "./ShowMoreButton";
 import { ShowMoreContentProps } from "./ShowMoreContent";
-import { ShowMoreInitialState, useShowMoreState } from "./ShowMoreState";
-
-export const useShowMoreSplit = (props: ShowMoreProps) => {
-  const [stateProps, showMorerops] = splitProps(
-    props,
-    USE_SHOW_MORE_STATE_KEYS,
-  ) as [ShowMoreInitialState, ShowMoreOwnProps];
-  const state = useShowMoreState(stateProps);
-
-  return [state, showMorerops, stateProps] as const;
-};
+import { ShowMoreUIState, useShowMoreUIState } from "./ShowMoreUIState";
 
 const componentMap = {
   ShowMoreContent: "contentProps",
   ShowMoreButton: "buttonProps",
 };
 
-export const useShowMoreProps = (
-  props: React.PropsWithChildren<ShowMoreProps>,
-) => {
-  const [state, showMoreProps] = useShowMoreSplit(props);
-  const { button } = state;
-  const { children, ...restProps } = showMoreProps;
+export const useShowMoreProps = ({
+  visible,
+  defaultVisible,
+  setVisible,
+  animated,
+  button,
+  children,
+  ...props
+}: ShowMoreProps): ShowMorePropsReturn => {
+  const state = useDisclosureState({
+    visible,
+    defaultVisible,
+    setVisible,
+    animated,
+  });
+  const uiState = useShowMoreUIState({ state, button });
+  let uiProps: ShowMoreUIProps = useMemo(
+    () => ({ state, ...uiState }),
+    [state, uiState],
+  );
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
-    state,
+    uiProps,
   );
+  console.log("%ccomponentProps", "color: #364cd9", componentProps);
 
-  const _content: ShowMoreOwnProps["children"] =
+  const _content: RenderProp<ShowMoreUIProps> =
     componentProps?.contentProps?.children || finalChildren;
-
   const _button: ShowMoreProps["button"] =
-    componentProps?.buttonProps?.children || button;
+    componentProps?.buttonProps?.children || uiProps.button;
+
+  uiProps = { ...uiProps, button: _button };
 
   const contentProps: ShowMoreContentProps = {
-    ...state,
-    ...restProps,
+    ...uiProps,
+    ...props,
     ...componentProps.contentProps,
     children: runIfFn(_content, state),
   };
 
   const buttonProps: ShowMoreButtonProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.buttonProps,
     children: runIfFn(_button, state),
   };
 
   return {
-    state,
+    uiProps,
     contentProps,
     buttonProps,
-    content: _content,
-    button: _button,
+    finalChildren,
   };
+};
+
+export type ShowMoreUIProps = ShowMoreUIState & {
+  state: DisclosureState;
+};
+
+export type ShowMoreProps = DisclosureStateProps &
+  Omit<ShowMoreContentProps, "children" | "state"> &
+  Pick<ShowMoreUIState, "button"> & { children?: Children<ShowMoreUIProps> };
+
+export type ShowMorePropsReturn = {
+  contentProps: ShowMoreContentProps;
+  buttonProps: ShowMoreButtonProps;
+  finalChildren: Children<ShowMoreUIProps>[];
+  uiProps: ShowMoreUIProps;
 };

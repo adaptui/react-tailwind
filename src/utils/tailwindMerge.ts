@@ -1,6 +1,7 @@
 import { extendTailwindMerge } from "tailwind-merge";
 
-export { cx } from "@renderlesskit/react";
+export const cx = (...classNames: any[]) =>
+  classNames.filter(Boolean).join(" ");
 
 export const tcm = extendTailwindMerge({
   classGroups: {

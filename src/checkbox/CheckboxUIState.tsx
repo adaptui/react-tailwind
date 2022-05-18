@@ -6,7 +6,7 @@ import { CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
 
 export const useCheckboxUIState = (
-  props: CheckboxUiStateProps,
+  props: CheckboxUIStateProps,
 ): CheckboxUIState => {
   const {
     state,
@@ -16,6 +16,7 @@ export const useCheckboxUIState = (
     label,
     description,
   } = props;
+
   const isChecked =
     state && inputValue && Array.isArray(state.value)
       ? state.value.includes(inputValue)
@@ -77,7 +78,7 @@ export type CheckboxUIState = {
   description?: RenderProp<CheckboxUIProps> | string;
 };
 
-export type CheckboxUiStateProps = Partial<
+export type CheckboxUIStateProps = Partial<
   Pick<CheckboxUIState, "icon" | "label" | "description" | "size">
 > & {
   state: CheckboxState;

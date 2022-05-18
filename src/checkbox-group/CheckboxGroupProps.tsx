@@ -1,54 +1,101 @@
-import { getComponentProps, splitProps } from "../utils";
+import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
 
-import { USE_CHECKBOX_GROUP_STATE_KEYS } from "./__keys";
-import { CheckboxGroupOwnProps, CheckboxGroupProps } from "./CheckboxGroup";
+import { CheckboxUIProps } from "../checkbox/CheckboxProps";
+import { Value } from "../checkbox/CheckboxUIState";
+import { ShowMoreButtonProps, ShowMoreContentProps } from "../show-more";
+import { Children, getComponentProps } from "../utils";
+
 import {
-  CheckboxGroupInitialState,
-  useCheckboxGroupState,
-} from "./CheckboxGroupState";
-
-export const useCheckboxGroupStateSplit = (props: CheckboxGroupProps) => {
-  const [stateProps, checkboxGroupProps] = splitProps(
-    props,
-    USE_CHECKBOX_GROUP_STATE_KEYS,
-  ) as [CheckboxGroupInitialState, CheckboxGroupOwnProps];
-  const state = useCheckboxGroupState(stateProps);
-
-  return [state, checkboxGroupProps, stateProps] as const;
-};
+  CheckboxGroupUIState,
+  CheckboxGroupUIStateProps,
+  useCheckboxUIState,
+} from "./CheckboxGroupUIState";
+import { CheckboxGroupWrapperProps } from "./CheckboxGroupWrapper";
 
 const componentMap = {
+  CheckboxGroupWrapper: "wrapperProps",
   ShowMoreContent: "contentProps",
   ShowMoreButton: "buttonProps",
 };
 
-export const useCheckboxGroupProps = (
-  props: React.PropsWithChildren<CheckboxGroupProps>,
-) => {
-  const [state, checkboxGroupProps] = useCheckboxGroupStateSplit(props);
-  const { children, ...restProps } = checkboxGroupProps;
+export const useCheckboxGroupProps = ({
+  withState = true,
+  defaultValue = false,
+  value,
+  setValue,
+  size,
+  stack,
+  maxVisibleItems,
+  children,
+  ...restProps
+}: CheckboxGroupProps): CheckboxGroupPropsReturn => {
+  const state = useCheckboxState<Value>({
+    defaultValue,
+    value,
+    setValue,
+  });
+  const uiState = useCheckboxUIState({ size, stack, maxVisibleItems });
+  const uiProps: CheckboxGroupUIProps = {
+    state: withState ? state : undefined,
+    ...uiState,
+  };
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
-    state,
+    uiProps,
   );
 
-  const visibleChildren =
-    state.maxVisibleItems == null
-      ? finalChildren
-      : finalChildren.slice(0, state.maxVisibleItems);
+  const visibleChildren: React.ReactNode =
+    uiProps.maxVisibleItems == null
+      ? (finalChildren as React.ReactNode)
+      : (finalChildren.slice(0, uiProps.maxVisibleItems) as React.ReactNode);
 
-  const moreChildren =
-    state.maxVisibleItems == null ||
-    finalChildren.length <= state.maxVisibleItems
+  const moreChildren: React.ReactNode =
+    uiProps.maxVisibleItems == null ||
+    finalChildren.length <= uiProps.maxVisibleItems
       ? null
-      : finalChildren.slice(state.maxVisibleItems);
+      : (finalChildren.slice(uiProps.maxVisibleItems) as React.ReactNode);
+
+  const wrapperProps: CheckboxGroupWrapperProps = {
+    ...uiProps,
+    ...restProps,
+    ...componentProps?.wrapperProps,
+  };
+
+  const buttonProps: ShowMoreButtonProps = {
+    ...componentProps?.buttonProps,
+  };
+
+  const contentProps: ShowMoreContentProps = {
+    ...componentProps?.contentProps,
+  };
 
   return {
-    state,
-    componentProps,
+    uiProps,
     visibleChildren,
     moreChildren,
-    ...restProps,
+    wrapperProps,
+    buttonProps,
+    contentProps,
   };
+};
+
+export type CheckboxGroupProps = CheckboxStateProps &
+  Omit<CheckboxGroupWrapperProps, "size" | "children" | "defaultValue"> &
+  CheckboxGroupUIStateProps & {
+    withState?: boolean;
+    children?: Children<CheckboxUIProps>;
+  };
+
+export type CheckboxGroupUIProps = CheckboxGroupUIState & {
+  state?: CheckboxState;
+};
+
+export type CheckboxGroupPropsReturn = {
+  wrapperProps: CheckboxGroupWrapperProps;
+  contentProps: ShowMoreContentProps;
+  buttonProps: ShowMoreButtonProps;
+  uiProps: CheckboxGroupUIProps;
+  visibleChildren: React.ReactNode;
+  moreChildren: React.ReactNode;
 };

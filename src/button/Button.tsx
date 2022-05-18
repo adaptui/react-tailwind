@@ -109,7 +109,10 @@ export const Button = createComponent<ButtonOptions>(props => {
   return createElement("button", htmlProps);
 });
 
-export type ButtonOptions<T extends As = "button"> = {
+export type ButtonOptions<T extends As = "button"> = Omit<
+  AriakitButtonOptions<T>,
+  "size" | "prefix"
+> & {
   /**
    * How large should the button be?
    *
@@ -152,6 +155,6 @@ export type ButtonOptions<T extends As = "button"> = {
    * @default Spinner Component
    */
   spinner?: RenderPropType;
-} & AriakitButtonOptions<T>;
+};
 
 export type ButtonProps<T extends As = "button"> = Props<ButtonOptions<T>>;

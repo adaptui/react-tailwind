@@ -21,6 +21,8 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
     icon,
     label,
     description,
+    stack,
+    maxVisibleItems,
     ...props
   }) => {
     const theme = useTheme("checkbox");

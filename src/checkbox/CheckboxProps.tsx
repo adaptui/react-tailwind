@@ -2,7 +2,11 @@ import { useMemo } from "react";
 import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
 import { RenderProp } from "ariakit-utils";
 
-import { getComponentProps, runIfFn } from "../utils";
+import {
+  CheckboxGroupUIProps,
+  useCheckboxGroupContext,
+} from "../checkbox-group";
+import { Children, getComponentProps, runIfFn } from "../utils";
 
 import { CheckboxDescriptionProps } from "./CheckboxDescription";
 import { CheckboxIconProps } from "./CheckboxIcon";
@@ -35,32 +39,44 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     children,
     ...restProps
   } = props;
-
   const _state = useCheckboxState<Value>({
     defaultValue,
     value,
     setValue,
   });
-
+  const groupState = useCheckboxGroupContext();
+  const finalState = groupState?.state || state || _state;
   const uiState = useCheckboxUIState({
-    state: state || _state,
+    state: finalState,
     inputValue,
     size,
     icon,
     label,
     description,
   });
-  const uiProps: CheckboxUIProps = useMemo(
-    () => ({ state: state || _state, ...uiState }),
-    [_state, state, uiState],
+  let uiProps: CheckboxUIProps = useMemo(
+    () => ({
+      ...uiState,
+      ...(groupState ? groupState : undefined),
+      state: finalState,
+    }),
+    [finalState, groupState, uiState],
   );
+
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
-  const _icon: CheckboxProps["icon"] =
-    componentProps?.iconProps?.children || uiState.icon;
+  const _icon: RenderProp<CheckboxUIProps> =
+    componentProps?.iconProps?.children || uiProps.icon;
   const _label: CheckboxProps["label"] =
-    componentProps?.textProps?.children || uiState.label;
+    componentProps?.textProps?.children || uiProps.label;
   const _description: CheckboxProps["description"] =
-    componentProps?.descriptionProps?.children || uiState.description;
+    componentProps?.descriptionProps?.children || uiProps.description;
+
+  uiProps = {
+    ...uiProps,
+    icon: _icon,
+    label: _label,
+    description: _description,
+  };
 
   const labelProps: CheckboxLabelProps = useMemo(
     () => ({
@@ -76,37 +92,38 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
   const inputProps: CheckboxInputProps = useMemo(
     () => ({
       ...uiProps,
+      value: inputValue,
       ...restProps,
       ...componentProps.inputProps,
     }),
-    [componentProps.inputProps, restProps, uiProps],
+    [componentProps.inputProps, inputValue, restProps, uiProps],
   );
 
   const iconProps: CheckboxIconProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.iconProps,
-      children: runIfFn(_icon, uiProps),
+      children: runIfFn(uiProps.icon, uiProps),
     }),
-    [uiProps, componentProps.iconProps, _icon],
+    [uiProps, componentProps.iconProps],
   );
 
   const textProps: CheckboxTextProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.textProps,
-      children: runIfFn(_label, uiProps),
+      children: runIfFn(uiProps.label, uiProps),
     }),
-    [uiProps, componentProps.textProps, _label],
+    [uiProps, componentProps.textProps],
   );
 
   const descriptionProps: CheckboxDescriptionProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.descriptionProps,
-      children: runIfFn(_description, uiProps),
+      children: runIfFn(uiProps.description, uiProps),
     }),
-    [uiProps, componentProps.descriptionProps, _description],
+    [uiProps, componentProps.descriptionProps],
   );
 
   const compoundedProps = useMemo(
@@ -116,24 +133,17 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
       iconProps,
       textProps,
       descriptionProps,
-      ...uiProps,
+      uiProps,
     }),
     [labelProps, inputProps, iconProps, textProps, descriptionProps, uiProps],
   );
   return compoundedProps;
 }
 
-export type CheckboxPropsReturn = {
-  labelProps: CheckboxLabelProps;
-  inputProps: CheckboxInputProps;
-  iconProps: CheckboxIconProps;
-  textProps: CheckboxTextProps;
-  descriptionProps: CheckboxDescriptionProps;
-} & CheckboxUIProps;
-
-export type CheckboxUIProps = CheckboxUIState & {
-  state: CheckboxState;
-};
+export type CheckboxUIProps = CheckboxUIState &
+  Partial<CheckboxGroupUIProps> & {
+    state: CheckboxState;
+  };
 
 export type CheckboxProps = CheckboxStateProps &
   Omit<CheckboxInputProps, "value" | "size" | "defaultValue" | "children"> &
@@ -141,4 +151,13 @@ export type CheckboxProps = CheckboxStateProps &
   Partial<Pick<CheckboxUIState, "size" | "icon">> & {
     state?: CheckboxState;
     inputValue?: CheckboxInputProps["value"];
-  } & { children?: React.ReactNode | RenderProp<CheckboxUIProps> };
+  } & { children?: Children<CheckboxUIProps> };
+
+export type CheckboxPropsReturn = {
+  labelProps: CheckboxLabelProps;
+  inputProps: CheckboxInputProps;
+  iconProps: CheckboxIconProps;
+  textProps: CheckboxTextProps;
+  descriptionProps: CheckboxDescriptionProps;
+  uiProps: CheckboxUIProps;
+};

@@ -1,40 +1,36 @@
 import * as React from "react";
 
-import { RenderProp } from "../utils";
-
-import { useCheckboxGroupProps } from "./CheckboxGroupProps";
+import { CheckboxGroupContextProvider } from "./__utils";
 import {
-  CheckboxGroupContextProvider,
-  CheckboxGroupInitialState,
-  CheckboxGroupStateReturn,
-} from "./CheckboxGroupState";
-import {
-  CheckboxGroupWrapper,
-  CheckboxGroupWrapperHTMLProps,
-} from "./CheckboxGroupWrapper";
+  CheckboxGroupProps,
+  useCheckboxGroupProps,
+} from "./CheckboxGroupProps";
+import { CheckboxGroupWrapper } from "./CheckboxGroupWrapper";
 import { CheckboxShowMore } from "./CheckboxShowMore";
-
-export type CheckboxGroupOwnProps = CheckboxGroupWrapperHTMLProps & {};
-
-export type CheckboxGroupProps = CheckboxGroupInitialState &
-  CheckboxGroupOwnProps &
-  RenderProp<CheckboxGroupStateReturn>;
 
 export const CheckboxGroup = React.forwardRef<
   HTMLDivElement,
   CheckboxGroupProps
 >((props, ref) => {
-  const { state, componentProps, visibleChildren, moreChildren, ...restProps } =
-    useCheckboxGroupProps(props);
+  const {
+    visibleChildren,
+    moreChildren,
+    wrapperProps,
+    buttonProps,
+    contentProps,
+    uiProps,
+  } = useCheckboxGroupProps(props);
 
   return (
-    <CheckboxGroupWrapper ref={ref} {...state} {...restProps}>
-      <CheckboxGroupContextProvider {...state}>
+    <CheckboxGroupWrapper ref={ref} {...wrapperProps}>
+      <CheckboxGroupContextProvider {...uiProps}>
         {visibleChildren}
         {moreChildren ? (
           <CheckboxShowMore
-            children={moreChildren}
-            componentProps={componentProps}
+            moreChildren={moreChildren}
+            buttonProps={buttonProps}
+            contentProps={contentProps}
+            uiProps={uiProps}
           />
         ) : null}
       </CheckboxGroupContextProvider>

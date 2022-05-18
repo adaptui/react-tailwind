@@ -11,12 +11,11 @@ import { ButtonOptions, useButton } from "./Button";
 
 export const useCloseButton = createHook<CloseButtonOptions>(props => {
   props = { ...props, "aria-label": "close" };
-  // @ts-ignore
   props = useButton({
     ...props,
     iconOnly:
-      (props.children as React.ReactElement) ||
-      ((<CloseIcon />) as React.ReactElement),
+      (props.children as React.ReactNode) ||
+      ((<CloseIcon />) as React.ReactNode),
   });
 
   return props;

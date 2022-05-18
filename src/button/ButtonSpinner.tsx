@@ -7,7 +7,7 @@ import { cx, passProps } from "../utils";
 import { ButtonProps } from "./Button";
 
 export type ButtonSpinnerProps = Partial<
-  Pick<ButtonProps, "spinner" | "size" | "prefix" | "suffix">
+  Pick<ButtonProps, "spinner" | "size" | "prefix" | "suffix" | "children">
 > & {
   children?: React.ReactNode;
 };

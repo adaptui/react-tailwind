@@ -1,27 +1,34 @@
+import { DisclosureOptions, useDisclosure } from "ariakit";
 import {
   createComponent,
-  disclosureComposableButton,
-  DisclosureHTMLProps,
-  DisclosureOptions,
-  Hook,
-} from "@renderlesskit/react";
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { ButtonHTMLProps, ButtonOptions, useButton } from "../button";
+import { ButtonOptions, useButton } from "../button";
 
-export type ShowMoreButtonOptions = ButtonOptions & DisclosureOptions;
+import { ShowMoreUIProps } from "./ShowMoreProps";
 
-export type ShowMoreButtonHTMLProps = ButtonHTMLProps & DisclosureHTMLProps;
+export const useShowMoreButton = createHook<ShowMoreButtonOptions>(
+  ({ state, button, ...props }) => {
+    props = useButton(props);
+    // @ts-ignore
+    props = useDisclosure({ state, ...props });
 
-export type ShowMoreButtonProps = ShowMoreButtonOptions &
-  ShowMoreButtonHTMLProps;
+    return props;
+  },
+);
 
-export const useShowMoreButton = disclosureComposableButton({
-  name: "ShowMoreButton",
-  compose: useButton,
-}) as Hook<ShowMoreButtonOptions, ShowMoreButtonHTMLProps>;
+export const ShowMoreButton = createComponent<ShowMoreButtonOptions>(props => {
+  const htmlProps = useShowMoreButton(props);
 
-export const ShowMoreButton = createComponent({
-  as: "button",
-  memo: true,
-  useHook: useShowMoreButton,
+  return createElement("button", htmlProps);
 });
+
+export type ShowMoreButtonOptions<T extends As = "button"> =
+  DisclosureOptions<T> & ButtonOptions<T> & Partial<ShowMoreUIProps> & {};
+
+export type ShowMoreButtonProps<T extends As = "button"> = Props<
+  ShowMoreButtonOptions<T>
+>;

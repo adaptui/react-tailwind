@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { Checkbox, CheckboxGroup, CheckboxProps } from "../../index";
+import { Value } from "../../checkbox/CheckboxUIState";
+import { Checkbox, CheckboxGroup } from "../../index";
 
 export type CheckboxGroupTriStringStateProps = {};
 
@@ -8,14 +9,11 @@ export const CheckboxGroupTriStringState: React.FC<
   CheckboxGroupTriStringStateProps
 > = () => {
   const values = React.useMemo(() => ["Apple", "Orange", "Watermelon"], []);
-  const [itemState, setItemState] = React.useState<
-    NonNullable<CheckboxProps["state"]>
-  >([]);
-  const [groupState, setGroupState] =
-    React.useState<NonNullable<CheckboxProps["state"]>>(false);
+  const [itemState, setItemState] = React.useState<Value>([]);
+  const [groupState, setGroupState] = React.useState<Value>(false);
 
   const isAllChecked = groupState === true;
-  const isIndeterminate = groupState === "indeterminate";
+  const isIndeterminate = groupState === "mixed";
 
   // updates items when group is toggled
   React.useEffect(() => {
@@ -33,17 +31,20 @@ export const CheckboxGroupTriStringState: React.FC<
     if (itemState.length === values.length) {
       setGroupState(true);
     } else if (itemState.length) {
-      setGroupState("indeterminate");
+      setGroupState("mixed");
     } else {
       setGroupState(false);
     }
   }, [itemState, values]);
 
   return (
-    <CheckboxGroup aria-label="Tristate Checkbox using string values">
+    <CheckboxGroup
+      aria-label="Tristate Checkbox using string values"
+      withState={false}
+    >
       <Checkbox
-        state={groupState}
-        onStateChange={setGroupState}
+        value={groupState}
+        setValue={setGroupState}
         label={
           isIndeterminate
             ? "Fruits in the basket"
@@ -57,15 +58,16 @@ export const CheckboxGroupTriStringState: React.FC<
         role="presentation"
         aria-label="For presentation"
         stack="horizontal"
+        withState={false}
       >
         {values.map((value, i) => {
           return (
             <Checkbox
               key={i}
               id={`check${i + 1}`}
-              state={itemState}
-              onStateChange={setItemState}
-              value={value}
+              value={itemState}
+              setValue={setItemState}
+              inputValue={value}
               label={capitalizeFirstLetter(value)}
             />
           );

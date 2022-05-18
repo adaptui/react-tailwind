@@ -21,14 +21,17 @@ export const useCheckboxInput = createHook<CheckboxInputOptions>(
     icon,
     label,
     description,
+    stack,
+    maxVisibleItems,
     ...props
   }) => {
+    console.log("%cprops", "color: #00a3cc", props);
     const theme = useTheme("checkbox");
     const className = cx(theme.input, props.className);
 
     props = { ...props, className };
 
-    props = useCheckbox({ state, ...props }) as CheckboxProps;
+    props = useCheckbox({ ...props, state }) as CheckboxProps;
 
     return props;
   },

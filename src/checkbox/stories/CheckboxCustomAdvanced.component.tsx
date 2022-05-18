@@ -35,13 +35,17 @@ export const CheckboxCustomAdvanced: React.FC<
 
 export default CheckboxCustomAdvanced;
 
-export type CustomCheckboxProps = CheckboxProps & {
+export type CustomCheckboxProps = Omit<CheckboxProps, "children"> & {
   state: CheckboxState;
+  children: React.ReactNode;
 };
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
   const {
     state,
+    value,
+    defaultValue,
+    setValue,
     inputValue,
     size,
     icon,
@@ -64,14 +68,13 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
     () => ({ state, ...uiState }),
     [state, uiState],
   );
-  console.log("%cuiState", "color: #f279ca", uiState);
 
   return (
     <CheckboxLabel
       {...uiState}
       className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)}
     >
-      <CheckboxInput {...uiProps} value={inputValue} {...restProps} />
+      <CheckboxInput {...uiProps} {...restProps} value={inputValue} />
       {uiProps.isChecked ? (
         <CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
           <svg

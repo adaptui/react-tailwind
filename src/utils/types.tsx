@@ -1,12 +1,18 @@
 import * as React from "react";
 
 export type RenderPropType<T = any> =
-  | React.ReactElement
+  | React.ReactNode
   | ((args: T) => JSX.Element);
 
 export type RenderProp<T> = {
   children?: RenderPropType<T>;
 };
+
+/**
+ * The `children` prop that supports a function.
+ * @template T Element type.
+ */
+export declare type Children<T = any> = React.ReactNode | RenderPropType<T>;
 
 export type As<Props = any> = React.ElementType<Props>;
 

@@ -23,6 +23,8 @@ export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
     label,
     description,
     disabled,
+    stack,
+    maxVisibleItems,
     ...props
   }) => {
     const theme = useTheme("checkbox");
@@ -31,7 +33,7 @@ export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
       label && !description ? (size ? theme.label.size[size] : "") : "",
       label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
-      // maxVisibleItems != null ? theme.label.showMore[stack] : "",
+      stack && maxVisibleItems != null ? theme.label.showMore[stack] : "",
       props.className,
     );
 

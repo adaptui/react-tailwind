@@ -21,6 +21,8 @@ export const useCheckboxText = createHook<CheckboxTextOptions>(
     icon,
     label,
     description,
+    stack,
+    maxVisibleItems,
     ...props
   }) => {
     const theme = useTheme("checkbox");

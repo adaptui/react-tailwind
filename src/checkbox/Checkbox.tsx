@@ -10,14 +10,14 @@ import { CheckboxText } from "./CheckboxText";
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const {
-      label,
-      description,
       labelProps,
       inputProps,
       iconProps,
       textProps,
       descriptionProps,
+      uiProps,
     } = useCheckboxProps(props);
+    const { label, description } = uiProps;
 
     return (
       <CheckboxLabel {...labelProps}>
