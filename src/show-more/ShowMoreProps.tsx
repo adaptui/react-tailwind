@@ -41,7 +41,6 @@ export const useShowMoreProps = ({
     children,
     uiProps,
   );
-  console.log("%ccomponentProps", "color: #364cd9", componentProps);
 
   const _content: RenderProp<ShowMoreUIProps> =
     componentProps?.contentProps?.children || finalChildren;

@@ -1,64 +1,66 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SWITCH_ICON_KEYS } from "./__keys";
-import { SwitchStateReturn } from "./SwitchState";
+import { SwitchUIProps } from "./SwitchProps";
 
-export type SwitchIconOptions = BoxOptions &
-  Pick<SwitchStateReturn, "isChecked" | "size" | "description"> & {};
+export const useSwitchIcon = createHook<SwitchIconOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    icon,
+    label,
+    description,
+    disabled,
+    ...props
+  }) => {
+    const theme = useTheme("switch");
+    const className = cx(
+      theme.icon.common,
+      size ? theme.icon.size[size] : "",
+      description ? theme.icon.description : "",
+      isChecked
+        ? cx(
+            theme.icon.checked.default,
+            theme.icon.checked.hover,
+            theme.icon.checked.active,
+            theme.icon.checked.focus,
+            theme.icon.checked.disabled,
+          )
+        : cx(
+            theme.icon.unChecked.default,
+            theme.icon.unChecked.hover,
+            theme.icon.unChecked.active,
+            theme.icon.unChecked.focus,
+            theme.icon.unChecked.disabled,
+          ),
+      props.className,
+    );
 
-export type SwitchIconHTMLProps = BoxHTMLProps;
+    props = { role: "img", "aria-hidden": true, ...props, className };
+    props = useBox(props);
 
-export type SwitchIconProps = SwitchIconOptions & SwitchIconHTMLProps;
-
-export const useSwitchIcon = createHook<SwitchIconOptions, SwitchIconHTMLProps>(
-  {
-    name: "SwitchIcon",
-    compose: useBox,
-    keys: SWITCH_ICON_KEYS,
-
-    useProps(options, htmlProps) {
-      const { isChecked, size, description } = options;
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-      const theme = useTheme("switch");
-      const className = cx(
-        theme.icon.common,
-        theme.icon.size[size],
-        description ? theme.icon.description : "",
-        isChecked
-          ? cx(
-              theme.icon.checked.default,
-              theme.icon.checked.hover,
-              theme.icon.checked.active,
-              theme.icon.checked.focus,
-              theme.icon.checked.disabled,
-            )
-          : cx(
-              theme.icon.unChecked.default,
-              theme.icon.unChecked.hover,
-              theme.icon.unChecked.active,
-              theme.icon.unChecked.focus,
-              theme.icon.unChecked.disabled,
-            ),
-        htmlClassName,
-      );
-
-      return {
-        role: "img",
-        "aria-hidden": true,
-        className,
-        ...restHtmlProps,
-      };
-    },
+    return props;
   },
 );
 
-export const SwitchIcon = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useSwitchIcon,
+export const SwitchIcon = createComponent<SwitchIconOptions>(props => {
+  const htmlProps = useSwitchIcon(props);
+
+  return createElement("span", htmlProps);
 });
+
+export type SwitchIconOptions<T extends As = "span"> = BoxOptions<T> &
+  Partial<SwitchUIProps> & {};
+
+export type SwitchIconProps<T extends As = "span"> = Props<
+  SwitchIconOptions<T>
+>;

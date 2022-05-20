@@ -1,44 +1,34 @@
 import * as React from "react";
 
-import { RenderProp } from "../utils";
-
 import { RadioDescription } from "./RadioDescription";
 import { RadioIcon } from "./RadioIcon";
-import { RadioInput, RadioInputHTMLProps } from "./RadioInput";
+import { RadioInput } from "./RadioInput";
 import { RadioLabel } from "./RadioLabel";
-import { useRadioProps } from "./RadioProps";
-import { RadioInitialState, RadioStateReturn } from "./RadioState";
+import { RadioProps, useRadioProps } from "./RadioProps";
 import { RadioText } from "./RadioText";
-
-export type RadioOwnProps = RadioInputHTMLProps & {};
-
-export type RadioProps = RadioOwnProps &
-  RadioInitialState &
-  RenderProp<RadioStateReturn>;
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   (props, ref) => {
     const {
-      label,
-      description,
       labelProps,
       inputProps,
       iconProps,
       textProps,
       descriptionProps,
+      uiProps,
     } = useRadioProps(props);
+    const { label, description } = uiProps;
 
     return (
       <RadioLabel {...labelProps}>
         <RadioInput ref={ref} {...inputProps} />
         <RadioIcon {...iconProps} />
-        {label && !description ? <RadioText {...textProps} /> : null}
-        {label && description ? (
-          <div>
-            <RadioText {...textProps} />
+        <div>
+          {label ? <RadioText {...textProps} /> : null}
+          {label && description ? (
             <RadioDescription {...descriptionProps} />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </RadioLabel>
     );
   },

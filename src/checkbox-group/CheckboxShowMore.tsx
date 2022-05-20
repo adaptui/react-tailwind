@@ -13,14 +13,12 @@ import { cx, passProps } from "../utils";
 
 import { CheckboxGroupUIProps } from "./CheckboxGroupProps";
 
-export type CheckboxShowMoreOwnProps = {
+export type CheckboxShowMoreProps = {
   contentProps: ShowMoreContentProps;
   buttonProps: ShowMoreButtonProps;
   uiProps: CheckboxGroupUIProps;
   moreChildren: React.ReactNode;
 };
-
-export type CheckboxShowMoreProps = CheckboxShowMoreOwnProps;
 
 export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
   const { contentProps, moreChildren, buttonProps, uiProps } = props;

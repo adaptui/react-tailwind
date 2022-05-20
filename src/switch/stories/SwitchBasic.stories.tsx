@@ -27,7 +27,7 @@ export default {
         "setState",
         "checked",
         "value",
-        "defaultState",
+        "defaultValue",
         "state",
         "onStateChange",
         "icon",
@@ -42,7 +42,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", defaultState: false },
+  args: { size: "md", defaultValue: false },
 };
 
 export const Small: Story = {
@@ -62,7 +62,7 @@ export const ExtraLarge: Story = {
 export const UnChecked: Story = { ...Default };
 export const Checked: Story = {
   ...Default,
-  args: { ...Default.args, defaultState: true },
+  args: { ...Default.args, defaultValue: true },
 };
 
 export const Label: Story = {
@@ -98,7 +98,7 @@ export const Custom = () => {
   const DARK_MODE = "Dark Mode";
   const LIGHT_MODE = "Light Mode";
   return (
-    <Switch defaultState={true}>
+    <Switch defaultValue={true}>
       {({ isChecked }) => {
         return (
           <>

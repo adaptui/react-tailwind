@@ -5,20 +5,20 @@ import { Radio, RadioGroup, RadioGroupProps } from "../../index";
 export const RadioGroupBasic: React.FC<RadioGroupProps> = props => {
   return (
     <RadioGroup aria-label="fruits" {...props}>
-      <Radio value="apple" label="Apple" />
-      <Radio value="orange" label="Orange" />
-      <Radio value="watermelon" label="Watermelon" />
-      <Radio value="grapes" label="Grapes" />
-      <Radio value="banana" label="Banana" />
-      <Radio value="blueberry" label="Blueberry" />
-      <Radio value="sapota" label="Sapota" />
-      <Radio value="papaya" label="Papaya" />
-      <Radio value="avocado" label="Avocado" />
-      <Radio value="strawberry" label="Strawberry" />
-      <Radio value="cherry" label="Cherry" />
-      <Radio value="fig" label="Fig" />
-      <Radio value="guava" label="Guava" />
-      <Radio value="mango" label="Mango" />
+      <Radio inputValue="apple" label="Apple" />
+      <Radio inputValue="orange" label="Orange" />
+      <Radio inputValue="watermelon" label="Watermelon" />
+      <Radio inputValue="grapes" label="Grapes" />
+      <Radio inputValue="banana" label="Banana" />
+      <Radio inputValue="blueberry" label="Blueberry" />
+      <Radio inputValue="sapota" label="Sapota" />
+      <Radio inputValue="papaya" label="Papaya" />
+      <Radio inputValue="avocado" label="Avocado" />
+      <Radio inputValue="strawberry" label="Strawberry" />
+      <Radio inputValue="cherry" label="Cherry" />
+      <Radio inputValue="fig" label="Fig" />
+      <Radio inputValue="guava" label="Guava" />
+      <Radio inputValue="mango" label="Mango" />
     </RadioGroup>
   );
 };

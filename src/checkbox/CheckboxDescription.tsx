@@ -25,8 +25,6 @@ export const useCheckboxDescription = createHook<CheckboxDescriptionOptions>(
     maxVisibleItems,
     ...props
   }) => {
-    if (!state) return props;
-
     const theme = useTheme("checkbox");
     const className = cx(
       theme.description.common,

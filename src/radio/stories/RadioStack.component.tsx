@@ -12,22 +12,22 @@ export const RadioStack: React.FC<RadioStackProps> = props => {
         className="flex w-fit flex-row space-x-4"
         aria-label="Radio small example"
       >
-        <Radio size="sm" value="apple" {...props} />
-        <Radio size="sm" state={"apple"} value="apple" {...props} />
+        <Radio size="sm" inputValue="apple" {...props} />
+        <Radio size="sm" defaultValue={"apple"} inputValue="apple" {...props} />
       </Group>
       <Group
         className="flex w-fit flex-row space-x-4"
         aria-label="Radio medium example"
       >
-        <Radio size="md" value="apple" {...props} />
-        <Radio size="md" state={"apple"} value="apple" {...props} />
+        <Radio size="md" inputValue="apple" {...props} />
+        <Radio size="md" defaultValue={"apple"} inputValue="apple" {...props} />
       </Group>
       <Group
         className="flex w-fit flex-row space-x-4"
         aria-label="Radio large example"
       >
-        <Radio size="lg" value="apple" {...props} />
-        <Radio size="lg" state={"apple"} value="apple" {...props} />
+        <Radio size="lg" inputValue="apple" {...props} />
+        <Radio size="lg" defaultValue={"apple"} inputValue="apple" {...props} />
       </Group>
     </div>
   );

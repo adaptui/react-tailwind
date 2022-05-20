@@ -29,7 +29,7 @@ export default {
         "wrap",
         "shift",
         "unstable_includesBaseElement",
-        "defaultState",
+        "defaultValue",
         "state",
         "onStateChange",
         "wrapElement",
@@ -50,7 +50,7 @@ export const Default: Story = {
 
 export const WithDefaultState: Story = {
   ...Default,
-  args: { ...Default.args, defaultState: "orange" },
+  args: { ...Default.args, defaultValue: "orange" },
 };
 
 export const Small: Story = {

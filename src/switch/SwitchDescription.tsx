@@ -1,45 +1,52 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SWITCH_DESCRIPTION_KEYS } from "./__keys";
-import { SwitchStateReturn } from "./SwitchState";
+import { SwitchUIProps } from "./SwitchProps";
 
-export type SwitchDescriptionOptions = BoxOptions &
-  Pick<SwitchStateReturn, "size">;
-
-export type SwitchDescriptionHTMLProps = BoxHTMLProps;
-
-export type SwitchDescriptionProps = SwitchDescriptionOptions &
-  SwitchDescriptionHTMLProps;
-
-export const useSwitchDescription = createHook<
-  SwitchDescriptionOptions,
-  SwitchDescriptionHTMLProps
->({
-  name: "SwitchDescription",
-  compose: useBox,
-  keys: SWITCH_DESCRIPTION_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSwitchDescription = createHook<SwitchDescriptionOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    icon,
+    label,
+    description,
+    disabled,
+    ...props
+  }) => {
     const theme = useTheme("switch");
     const className = cx(
       theme.description.common,
-      theme.description.size[size],
-      htmlClassName,
+      size ? theme.description.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
-  },
-});
+    props = { ...props, className };
+    props = useBox(props);
 
-export const SwitchDescription = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSwitchDescription,
-});
+    return props;
+  },
+);
+
+export const SwitchDescription = createComponent<SwitchDescriptionOptions>(
+  props => {
+    const htmlProps = useSwitchDescription(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type SwitchDescriptionOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<SwitchUIProps> & {};
+
+export type SwitchDescriptionProps<T extends As = "div"> = Props<
+  SwitchDescriptionOptions<T>
+>;

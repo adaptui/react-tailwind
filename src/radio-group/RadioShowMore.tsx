@@ -4,28 +4,25 @@ import { PlusIcon } from "../icons";
 import {
   ShowMore,
   ShowMoreButton,
+  ShowMoreButtonProps,
   ShowMoreContent,
-  ShowMoreProps,
+  ShowMoreContentProps,
 } from "../show-more";
 import { useTheme } from "../theme";
-import { cx, Dict, passProps } from "../utils";
+import { cx, passProps } from "../utils";
 
-import { useRadioGroupContext } from "./RadioGroupState";
+import { RadioGroupUIProps } from "./RadioGroupProps";
 
-export type RadioShowMoreOwnProps = { componentProps?: Dict<any> };
-
-export type RadioShowMoreProps = ShowMoreProps & RadioShowMoreOwnProps;
+export type RadioShowMoreProps = {
+  contentProps: ShowMoreContentProps;
+  buttonProps: ShowMoreButtonProps;
+  uiProps: RadioGroupUIProps;
+  moreChildren: React.ReactNode;
+};
 
 export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
-  const { children, componentProps, direction, ...restProps } = props;
-  const contextState = useRadioGroupContext();
-  const size = contextState?.size || "md";
-  const stack = contextState?.stack || direction || "vertical";
-  const sizeMap = {
-    sm: "sm",
-    md: "md",
-    lg: "xl",
-  } as const;
+  const { contentProps, moreChildren, buttonProps, uiProps } = props;
+  const { stack, size } = uiProps;
 
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
 
@@ -37,27 +34,25 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   );
   const contentClassName = cx(theme.group.showMore.content[stack]);
 
-  const finalChildren = React.Children.map(children, child => {
-    return passProps(child, {
-      disabled: hasExpandStarted ? false : true,
-    });
+  const finalChildren = React.Children.map(moreChildren, child => {
+    return passProps(child, { disabled: hasExpandStarted ? false : true });
   });
 
   return (
-    <ShowMore direction={stack} {...restProps}>
+    <ShowMore direction={stack}>
       {finalChildren}
       <ShowMoreContent
         className={contentClassName}
         onExpandStart={() => setHasExpandStarted(true)}
         onCollapseStart={() => setHasExpandStarted(false)}
-        {...componentProps?.contentProps}
+        {...contentProps}
       />
       <ShowMoreButton
         variant="ghost"
-        size={sizeMap[size]}
+        size={size}
         prefix={<PlusIcon />}
         className={buttonClassName}
-        {...componentProps?.buttonProps}
+        {...buttonProps}
       />
     </ShowMore>
   );

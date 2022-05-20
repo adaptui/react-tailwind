@@ -1,33 +1,33 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { RADIO_ICON_KEYS } from "./__keys";
-import { RadioStateReturn } from "./RadioState";
+import { RadioUIProps } from "./RadioProps";
 
-export type RadioIconOptions = BoxOptions &
-  Pick<RadioStateReturn, "size" | "isChecked" | "description"> & {};
-
-export type RadioIconHTMLProps = BoxHTMLProps;
-
-export type RadioIconProps = RadioIconOptions & RadioIconHTMLProps;
-
-export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
-  name: "RadioIcon",
-  compose: useBox,
-  keys: RADIO_ICON_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, isChecked, description } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useRadioIcon = createHook<RadioIconOptions>(
+  ({
+    state,
+    isChecked,
+    size,
+    icon,
+    label,
+    description,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
     const theme = useTheme("radio");
     const className = cx(
       theme.icon.common,
       description ? theme.icon.description : "",
-      theme.icon.size[size],
+      size ? theme.icon.size[size] : "",
       isChecked
         ? cx(
             theme.icon.checked.default,
@@ -43,15 +43,23 @@ export const useRadioIcon = createHook<RadioIconOptions, RadioIconHTMLProps>({
             theme.icon.unChecked.focus,
             theme.icon.unChecked.disabled,
           ),
-      htmlClassName,
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const RadioIcon = createComponent<RadioIconOptions>(props => {
+  const htmlProps = useRadioIcon(props);
+
+  return createElement("span", htmlProps);
 });
 
-export const RadioIcon = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useRadioIcon,
-});
+export type RadioIconOptions<T extends As = "span"> = BoxOptions<T> &
+  Partial<RadioUIProps> & {};
+
+export type RadioIconProps<T extends As = "span"> = Props<RadioIconOptions<T>>;

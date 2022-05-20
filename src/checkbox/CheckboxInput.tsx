@@ -7,7 +7,7 @@ import {
 import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
 import { CheckboxUIProps } from "./CheckboxProps";
 
@@ -25,9 +25,8 @@ export const useCheckboxInput = createHook<CheckboxInputOptions>(
     maxVisibleItems,
     ...props
   }) => {
-    console.log("%cprops", "color: #00a3cc", props);
     const theme = useTheme("checkbox");
-    const className = cx(theme.input, props.className);
+    const className = tcm(theme.input, props.className);
 
     props = { ...props, className };
 

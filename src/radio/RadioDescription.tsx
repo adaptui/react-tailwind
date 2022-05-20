@@ -1,45 +1,53 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { RADIO_DESCRIPTION_KEYS } from "./__keys";
-import { RadioStateReturn } from "./RadioState";
+import { RadioUIProps } from "./RadioProps";
 
-export type RadioDescriptionOptions = BoxOptions &
-  Pick<RadioStateReturn, "size">;
-
-export type RadioDescriptionHTMLProps = BoxHTMLProps;
-
-export type RadioDescriptionProps = RadioDescriptionOptions &
-  RadioDescriptionHTMLProps;
-
-export const useRadioDescription = createHook<
-  RadioDescriptionOptions,
-  RadioDescriptionHTMLProps
->({
-  name: "RadioDescription",
-  compose: useBox,
-  keys: RADIO_DESCRIPTION_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useRadioDescription = createHook<RadioDescriptionOptions>(
+  ({
+    state,
+    isChecked,
+    size,
+    icon,
+    label,
+    description,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
     const theme = useTheme("radio");
     const className = cx(
       theme.description.common,
-      theme.description.size[size],
-      htmlClassName,
+      size ? theme.description.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
-  },
-});
+    props = { ...props, className };
+    props = useBox(props);
 
-export const RadioDescription = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useRadioDescription,
-});
+    return props;
+  },
+);
+
+export const RadioDescription = createComponent<RadioDescriptionOptions>(
+  props => {
+    const htmlProps = useRadioDescription(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type RadioDescriptionOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<RadioUIProps> & {};
+
+export type RadioDescriptionProps<T extends As = "div"> = Props<
+  RadioDescriptionOptions<T>
+>;
