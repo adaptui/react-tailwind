@@ -3,26 +3,21 @@ import * as React from "react";
 import { ProgressBar } from "./ProgressBar";
 import { ProgressHint } from "./ProgressHint";
 import { ProgressLabel } from "./ProgressLabel";
-import { useProgressProps } from "./ProgressProps";
-import { ProgressInitialState } from "./ProgressState";
+import { ProgressProps, useProgressProps } from "./ProgressProps";
 import { ProgressTrack } from "./ProgressTrack";
-import { ProgressWrapper, ProgressWrapperHTMLProps } from "./ProgressWrapper";
-
-export type ProgressOwnProps = ProgressWrapperHTMLProps & {};
-
-export type ProgressProps = ProgressInitialState & ProgressOwnProps;
+import { ProgressWrapper } from "./ProgressWrapper";
 
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   (props, ref) => {
     const {
-      label,
-      hint,
+      uiProps,
       wrapperProps,
       labelProps,
       hintProps,
       barProps,
       trackProps,
     } = useProgressProps(props);
+    const { label, hint } = uiProps;
 
     return (
       <ProgressWrapper ref={ref} {...wrapperProps}>

@@ -37,7 +37,7 @@ const useCircularProgressState = (initialValue: number | null = 0) => {
   React.useEffect(() => {
     const clearId = setInterval(() => {
       setValue(prevValue => {
-        if (isNull(prevValue)) return prevValue;
+        if (prevValue == null) return prevValue;
         return prevValue + 5;
       });
     }, 500);

@@ -1,46 +1,42 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CIRCULAR_PROGRESS_HINT_KEYS } from "./__keys";
-import { CircularProgressStateReturn } from "./CircularProgressState";
+import { CircularProgressUIProps } from "./CircularProgressProps";
 
-export type CircularProgressHintOptions = BoxOptions &
-  Pick<CircularProgressStateReturn, "size">;
-
-export type CircularProgressHintHTMLProps = BoxHTMLProps;
-
-export type CircularProgressHintProps = CircularProgressHintOptions &
-  CircularProgressHintHTMLProps;
-
-export const useCircularProgressHint = createHook<
-  CircularProgressHintOptions,
-  CircularProgressHintHTMLProps
->({
-  name: "CircularProgressHint",
-  compose: useBox,
-  keys: CIRCULAR_PROGRESS_HINT_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useCircularProgressHint = createHook<CircularProgressHintOptions>(
+  ({ state, size, hint, ...props }) => {
     const theme = useTheme("circularProgress");
     const className = cx(
       theme.hint.common,
-      theme.hint.size[size],
-      htmlClassName,
+      size ? theme.hint.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
-  },
-});
+    props = { ...props, className };
+    props = useBox(props);
 
-export const CircularProgressHint = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useCircularProgressHint,
-});
-CircularProgressHint.displayName = "CircularProgressHint";
+    return props;
+  },
+);
+
+export const CircularProgressHint =
+  createComponent<CircularProgressHintOptions>(props => {
+    const htmlProps = useCircularProgressHint(props);
+
+    return createElement("span", htmlProps);
+  });
+
+export type CircularProgressHintOptions<T extends As = "span"> = BoxOptions<T> &
+  Partial<CircularProgressUIProps> & {};
+
+export type CircularProgressHintProps<T extends As = "span"> = Props<
+  CircularProgressHintOptions<T>
+>;

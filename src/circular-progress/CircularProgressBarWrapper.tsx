@@ -1,47 +1,47 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CIRCULAR_PROGRESS_BAR_WRAPPER_KEYS } from "./__keys";
-import { CircularProgressStateReturn } from "./CircularProgressState";
+import { CircularProgressUIProps } from "./CircularProgressProps";
 
-export type CircularProgressBarWrapperOptions = BoxOptions &
-  Pick<CircularProgressStateReturn, "isIndeterminate" | "size" | "hint"> & {};
+export const useCircularProgressBarWrapper =
+  createHook<CircularProgressBarWrapperOptions>(
+    ({ state, size, hint, ...props }) => {
+      const theme = useTheme("circularProgress");
+      const className = cx(
+        size
+          ? hint
+            ? theme.barWrapper.hint.size[size]
+            : theme.barWrapper.common.size[size]
+          : "",
+        state?.isIndeterminate ? theme.barWrapper.indeterminate : "",
+        props.className,
+      );
 
-export type CircularProgressBarWrapperHTMLProps = BoxHTMLProps;
+      props = { viewBox: "0 0 100 100", ...props, className };
+      props = useBox(props);
 
-export type CircularProgressBarWrapperProps =
-  CircularProgressBarWrapperOptions & CircularProgressBarWrapperHTMLProps;
+      return props;
+    },
+  );
 
-export const useCircularProgressBarWrapper = createHook<
-  CircularProgressBarWrapperOptions,
-  CircularProgressBarWrapperHTMLProps
->({
-  name: "CircularProgressBarWrapper",
-  compose: useBox,
-  keys: CIRCULAR_PROGRESS_BAR_WRAPPER_KEYS,
+export const CircularProgressBarWrapper =
+  createComponent<CircularProgressBarWrapperOptions>(props => {
+    const htmlProps = useCircularProgressBarWrapper(props);
 
-  useProps(options, htmlProps) {
-    const { isIndeterminate, size, hint } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    return createElement("svg", htmlProps);
+  });
 
-    const theme = useTheme("circularProgress");
-    const className = cx(
-      hint
-        ? theme.barWrapper.hint.size[size]
-        : theme.barWrapper.common.size[size],
-      isIndeterminate ? theme.barWrapper.indeterminate : "",
-      htmlClassName,
-    );
+export type CircularProgressBarWrapperOptions<T extends As = "svg"> =
+  BoxProps<T> & Partial<CircularProgressUIProps> & {};
 
-    return { className, viewBox: "0 0 100 100", ...restHtmlProps };
-  },
-});
-
-export const CircularProgressBarWrapper = createComponent({
-  as: "svg",
-  memo: true,
-  useHook: useCircularProgressBarWrapper,
-});
+export type CircularProgressBarWrapperProps<T extends As = "svg"> = Props<
+  CircularProgressBarWrapperOptions<T>
+>;

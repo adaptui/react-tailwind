@@ -1,24 +1,19 @@
-import { getComponentProps, runIfFn, splitProps } from "../utils";
+import { useMemo } from "react";
+import {
+  MeterState,
+  MeterStateProps,
+  useMeterState,
+} from "@renderlesskit/react";
 
-import { USE_METER_STATE_KEYS } from "./__keys";
-import { MeterOwnProps, MeterProps } from "./Meter";
+import { Children, getComponentProps, runIfFn } from "../utils";
+
 import { MeterBarProps } from "./MeterBar";
 import { MeterBarWrapperProps } from "./MeterBarWrapper";
 import { MeterHintProps } from "./MeterHint";
 import { MeterLabelProps } from "./MeterLabel";
-import { MeterInitialState, MeterState, useMeterState } from "./MeterState";
 import { MeterTrackProps } from "./MeterTrack";
+import { MeterUIState, useMeterUIState } from "./MeterUIState";
 import { MeterWrapperProps } from "./MeterWrapper";
-
-export const useMeterStateSplit = (props: MeterProps) => {
-  const [stateProps, meterProps] = splitProps(props, USE_METER_STATE_KEYS) as [
-    MeterInitialState,
-    MeterOwnProps,
-  ];
-  const state = useMeterState(stateProps);
-
-  return [state, meterProps, stateProps] as const;
-};
 
 const componentMap = {
   MeterWrapper: "wrapperProps",
@@ -29,54 +24,86 @@ const componentMap = {
   MeterTrack: "trackProps",
 };
 
-export const useMeterProps = (props: React.PropsWithChildren<MeterProps>) => {
-  const [state, meterProps] = useMeterStateSplit(props);
-  const { label, hint } = state;
-  const { children, ...restProps } = meterProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
+export function useMeterProps(props: MeterProps): MeterPropsReturn {
+  let {
+    value,
+    min,
+    max,
+    size,
+    intervals,
+    flatBorders,
+    label,
+    hint,
+    children,
+    ...restProps
+  } = props;
+  const state = useMeterState({
+    value,
+    min,
+    max,
+  });
+  const uiState = useMeterUIState({
+    size,
+    flatBorders,
+    intervals,
+    label,
+    hint,
+  });
+  let uiProps: MeterUIProps = useMemo(
+    () => ({
+      state,
+      ...uiState,
+    }),
+    [state, uiState],
+  );
 
-  const _label: MeterState["label"] =
-    componentProps?.textProps?.children || label;
-  const _hint: MeterState["hint"] = componentProps?.hintProps?.children || hint;
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
+  const _label: MeterProps["label"] =
+    componentProps?.textProps?.children || uiProps.label;
+  const _hint: MeterProps["hint"] =
+    componentProps?.hintProps?.children || uiProps.hint;
+
+  uiProps = {
+    ...uiProps,
+    label: _label,
+    hint: _hint,
+  };
 
   const wrapperProps: MeterWrapperProps = {
-    ...state,
+    ...uiProps,
     ...restProps,
-    label: _label,
     ...componentProps.wrapperProps,
   };
 
   const barProps: MeterBarProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.barProps,
   };
 
   const barWrapperProps: MeterBarWrapperProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.barWrapperProps,
   };
 
   const trackProps: MeterTrackProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.trackProps,
   };
 
   const labelProps: MeterLabelProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.labelProps,
-    children: runIfFn(_label, state),
+    children: runIfFn(_label, uiProps),
   };
 
   const hintProps: MeterHintProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.trackProps,
-    children: runIfFn(_hint, state),
+    children: runIfFn(_hint, uiProps),
   };
 
   return {
-    label: _label,
-    hint: _hint,
-    state,
+    uiProps,
     wrapperProps,
     labelProps,
     hintProps,
@@ -84,4 +111,25 @@ export const useMeterProps = (props: React.PropsWithChildren<MeterProps>) => {
     barProps,
     trackProps,
   };
+}
+
+export type MeterUIProps = MeterUIState & {
+  state: MeterState;
+};
+
+export type MeterProps = MeterStateProps &
+  Omit<MeterWrapperProps, "state" | "children"> &
+  Pick<MeterUIState, "hint" | "label"> &
+  Partial<Pick<MeterUIState, "size" | "intervals" | "flatBorders">> & {
+    children?: Children<MeterUIProps>;
+  };
+
+export type MeterPropsReturn = {
+  barWrapperProps: MeterBarWrapperProps;
+  wrapperProps: MeterWrapperProps;
+  hintProps: MeterHintProps;
+  labelProps: MeterLabelProps;
+  barProps: MeterBarProps;
+  trackProps: MeterTrackProps;
+  uiProps: MeterUIProps;
 };

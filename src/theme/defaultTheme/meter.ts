@@ -34,6 +34,6 @@ export const meter = {
   },
   bar: {
     common: "h-full bg-gray-800 rounded-2xl transition-all",
-    flatBroders: "rounded-none",
+    flatBorders: "rounded-none",
   },
 };

@@ -1,46 +1,41 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { METER_BAR_KEYS } from "./__keys";
-import { MeterStateReturn } from "./MeterState";
+import { MeterUIProps } from "./MeterProps";
 
-export type MeterBarOptions = BoxOptions &
-  Partial<Pick<MeterStateReturn, "percent" | "flatBorders">>;
-
-export type MeterBarHTMLProps = BoxHTMLProps;
-
-export type MeterBarProps = MeterBarOptions & MeterBarHTMLProps;
-
-export const useMeterBar = createHook<MeterBarOptions, MeterBarHTMLProps>({
-  name: "MeterBar",
-  compose: useBox,
-  keys: METER_BAR_KEYS,
-
-  useProps(options, htmlProps) {
-    const { percent, flatBorders } = options;
-    const {
-      style: htmlStyle,
-      className: htmlClassName,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const meter = useTheme("meter");
+export const useMeterBar = createHook<MeterBarOptions>(
+  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+    console.log("%cstate", "color: #408059", state);
+    const theme = useTheme("meter");
     const className = cx(
-      meter.bar.common,
-      flatBorders ? meter.bar.flatBroders : "",
-      htmlClassName,
+      theme.bar.common,
+      flatBorders ? theme.bar.flatBorders : "",
+      props.className,
     );
-    const style = { width: `${percent}%`, ...htmlStyle };
+    const style = { width: `${state?.percent}%`, ...props.style };
 
-    return { className, style, ...restHtmlProps };
+    props = { ...props, style, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const MeterBar = createComponent<MeterBarOptions>(props => {
+  const htmlProps = useMeterBar(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const MeterBar = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useMeterBar,
-});
+export type MeterBarOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<MeterUIProps> & {};
+
+export type MeterBarProps<T extends As = "div"> = Props<MeterBarOptions<T>>;

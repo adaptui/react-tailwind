@@ -1,49 +1,42 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { PROGRESS_BAR_KEYS } from "./__keys";
-import { ProgressStateReturn } from "./ProgressState";
+import { ProgressUIProps } from "./ProgressProps";
 
-export type ProgressBarOptions = BoxOptions &
-  Partial<Pick<ProgressStateReturn, "value" | "percent" | "isIndeterminate">>;
-
-export type ProgressBarHTMLProps = BoxHTMLProps;
-
-export type ProgressBarProps = ProgressBarOptions & ProgressBarHTMLProps;
-
-export const useProgressBar = createHook<
-  ProgressBarOptions,
-  ProgressBarHTMLProps
->({
-  name: "ProgressBar",
-  compose: useBox,
-  keys: PROGRESS_BAR_KEYS,
-
-  useProps(options, htmlProps) {
-    const { percent, isIndeterminate } = options;
-    const {
-      style: htmlStyle,
-      className: htmlClassName,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const progress = useTheme("progress");
+export const useProgressBar = createHook<ProgressBarOptions>(
+  ({ state, size, label, hint, ...props }) => {
+    const theme = useTheme("progress");
     const className = cx(
-      progress.bar.common,
-      isIndeterminate ? progress.bar.indeterminate : "",
-      htmlClassName,
+      theme.bar.common,
+      state?.isIndeterminate ? theme.bar.indeterminate : "",
+      props.className,
     );
-    const style = { width: `${percent}%`, ...htmlStyle };
+    const style = { width: `${state?.percent}%`, ...props.style };
 
-    return { className, style, ...restHtmlProps };
+    props = { ...props, style, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const ProgressBar = createComponent<ProgressBarOptions>(props => {
+  const htmlProps = useProgressBar(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const ProgressBar = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useProgressBar,
-});
+export type ProgressBarOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<ProgressUIProps> & {};
+
+export type ProgressBarProps<T extends As = "div"> = Props<
+  ProgressBarOptions<T>
+>;

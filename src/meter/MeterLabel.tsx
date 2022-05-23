@@ -1,53 +1,41 @@
+import { GroupLabelOptions, useGroupLabel } from "ariakit";
 import {
-  unstable_IdHTMLProps,
-  unstable_IdOptions,
-  unstable_useId,
-} from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { METER_LABEL_KEYS } from "./__keys";
-import { MeterStateReturn } from "./MeterState";
+import { MeterUIProps } from "./MeterProps";
 
-export type MeterLabelOptions = BoxOptions &
-  unstable_IdOptions &
-  Pick<MeterStateReturn, "size">;
+export const useMeterLabel = createHook<MeterLabelOptions>(
+  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+    const theme = useTheme("meter");
+    const className = tcm(
+      theme.label.common,
+      size ? theme.label.size[size] : "",
+      props.className,
+    );
 
-export type MeterLabelHTMLProps = BoxHTMLProps & unstable_IdHTMLProps;
+    props = { ...props, className };
+    props = useGroupLabel(props);
 
-export type MeterLabelProps = MeterLabelOptions & MeterLabelHTMLProps;
-
-export const useMeterLabel = createHook<MeterLabelOptions, MeterLabelHTMLProps>(
-  {
-    name: "MeterLabel",
-    compose: [useBox, unstable_useId],
-    keys: METER_LABEL_KEYS,
-
-    useOptions(options, htmlProps) {
-      return options;
-    },
-
-    useProps(options, htmlProps) {
-      const { size } = options;
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-      const theme = useTheme("meter");
-      const className = cx(
-        theme.label.common,
-        theme.label.size[size],
-        htmlClassName,
-      );
-
-      return { className, ...restHtmlProps };
-    },
+    return props;
   },
 );
 
-export const MeterLabel = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useMeterLabel,
+export const MeterLabel = createComponent<MeterLabelOptions>(props => {
+  const htmlProps = useMeterLabel(props);
+
+  return createElement("span", htmlProps);
 });
+
+export type MeterLabelOptions<T extends As = "span"> = GroupLabelOptions<T> &
+  Partial<MeterUIProps> & {};
+
+export type MeterLabelProps<T extends As = "span"> = Props<
+  MeterLabelOptions<T>
+>;

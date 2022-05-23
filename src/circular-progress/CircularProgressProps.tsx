@@ -1,87 +1,129 @@
-import { getComponentProps, runIfFn, splitProps } from "../utils";
-
-import { USE_CIRCULAR_PROGRESS_STATE_KEYS } from "./__keys";
+import { useMemo } from "react";
 import {
-  CircularProgressOwnProps,
-  CircularProgressProps,
-} from "./CircularProgress";
+  ProgressState,
+  ProgressStateProps,
+  useProgressState,
+} from "@renderlesskit/react";
+
+import { Children, getComponentProps, runIfFn } from "../utils";
+
 import { CircularProgressBarProps } from "./CircularProgressBar";
 import { CircularProgressBarWrapperProps } from "./CircularProgressBarWrapper";
 import { CircularProgressHintProps } from "./CircularProgressHint";
-import {
-  CircularProgressInitialState,
-  CircularProgressState,
-  useCircularProgressState,
-} from "./CircularProgressState";
 import { CircularProgressTrackProps } from "./CircularProgressTrack";
+import {
+  CircularProgressUIState,
+  useCircularProgressUIState,
+} from "./CircularProgressUIState";
 import { CircularProgressWrapperProps } from "./CircularProgressWrapper";
-
-export const useCircularProgressStateSplit = (props: CircularProgressProps) => {
-  const [stateProps, progressProps] = splitProps(
-    props,
-    USE_CIRCULAR_PROGRESS_STATE_KEYS,
-  ) as [CircularProgressInitialState, CircularProgressOwnProps];
-  const state = useCircularProgressState(stateProps);
-
-  return [state, progressProps, stateProps] as const;
-};
 
 const componentMap = {
   CircularProgressWrapper: "wrapperProps",
-  CircularProgressHint: "hintProps",
   CircularProgressBarWrapper: "barWrapperProps",
-  CircularProgressTrack: "trackProps",
+  CircularProgressHint: "hintProps",
   CircularProgressBar: "barProps",
+  CircularProgressTrack: "trackProps",
 };
 
-export const useCircularProgressProps = (
-  props: React.PropsWithChildren<CircularProgressProps>,
-) => {
-  const [state, progressProps] = useCircularProgressStateSplit(props);
-  const { hint } = state;
-  const { children, ...restProps } = progressProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
+export function useCircularProgressProps(
+  props: CircularProgressProps,
+): CircularProgressPropsReturn {
+  let { value, min, max, size, hint, children, ...restProps } = props;
+  const state = useProgressState({
+    value,
+    min,
+    max,
+  });
+  const uiState = useCircularProgressUIState({ size, hint });
+  let uiProps: CircularProgressUIProps = useMemo(
+    () => ({
+      state,
+      ...uiState,
+    }),
+    [state, uiState],
+  );
 
-  const _hint: CircularProgressState["hint"] =
-    componentProps?.textProps?.children || hint;
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
+  const _hint: CircularProgressProps["hint"] =
+    componentProps?.hintProps?.children || uiProps.hint;
 
-  const wrapperProps: CircularProgressWrapperProps = {
-    ...state,
-    ...restProps,
-    ...componentProps.wrapperProps,
-  };
-
-  const barWrapperProps: CircularProgressBarWrapperProps = {
-    ...state,
+  uiProps = {
+    ...uiProps,
     hint: _hint,
-    ...componentProps.barWrapperProps,
   };
 
-  const trackProps: CircularProgressTrackProps = {
-    ...state,
-    hint: _hint,
-    ...componentProps.trackProps,
+  const wrapperProps: CircularProgressWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps.wrapperProps,
+    }),
+    [componentProps.wrapperProps, restProps, uiProps],
+  );
+
+  const barWrapperProps: CircularProgressBarWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.barWrapperProps,
+    }),
+    [componentProps.barWrapperProps, uiProps],
+  );
+
+  const hintProps: CircularProgressHintProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.hintProps,
+      children: runIfFn(uiProps.hint, uiProps),
+    }),
+    [uiProps, componentProps.hintProps],
+  );
+
+  const barProps: CircularProgressBarProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.barProps,
+    }),
+    [uiProps, componentProps.barProps],
+  );
+
+  const trackProps: CircularProgressTrackProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.trackProps,
+    }),
+    [uiProps, componentProps.trackProps],
+  );
+
+  const compoundedProps = useMemo(
+    () => ({
+      barWrapperProps,
+      wrapperProps,
+      hintProps,
+      trackProps,
+      barProps,
+      uiProps,
+    }),
+    [barWrapperProps, wrapperProps, hintProps, trackProps, barProps, uiProps],
+  );
+  return compoundedProps;
+}
+
+export type CircularProgressUIProps = CircularProgressUIState & {
+  state: ProgressState;
+};
+
+export type CircularProgressProps = ProgressStateProps &
+  Omit<CircularProgressWrapperProps, "state" | "children"> &
+  Pick<CircularProgressUIState, "hint"> &
+  Partial<Pick<CircularProgressUIState, "size">> & {
+    children?: Children<CircularProgressUIProps>;
   };
 
-  const barProps: CircularProgressBarProps = {
-    ...state,
-    hint: _hint,
-    ...componentProps.barProps,
-  };
-
-  const hintProps: CircularProgressHintProps = {
-    ...state,
-    ...componentProps.hintProps,
-    children: runIfFn(_hint, state),
-  };
-
-  return {
-    hint: _hint,
-    state,
-    wrapperProps,
-    hintProps,
-    barWrapperProps,
-    trackProps,
-    barProps,
-  };
+export type CircularProgressPropsReturn = {
+  barWrapperProps: CircularProgressBarWrapperProps;
+  wrapperProps: CircularProgressWrapperProps;
+  hintProps: CircularProgressHintProps;
+  barProps: CircularProgressBarProps;
+  trackProps: CircularProgressTrackProps;
+  uiProps: CircularProgressUIProps;
 };

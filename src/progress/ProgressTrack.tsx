@@ -1,44 +1,41 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { PROGRESS_TRACK_KEYS } from "./__keys";
-import { ProgressStateReturn } from "./ProgressState";
+import { ProgressUIProps } from "./ProgressProps";
 
-export type ProgressTrackOptions = BoxOptions &
-  Pick<ProgressStateReturn, "size">;
-
-export type ProgressTrackHTMLProps = BoxHTMLProps;
-
-export type ProgressTrackProps = ProgressTrackOptions & ProgressTrackHTMLProps;
-
-export const useProgressTrack = createHook<
-  ProgressTrackOptions,
-  ProgressTrackHTMLProps
->({
-  name: "ProgressTrack",
-  compose: useBox,
-  keys: PROGRESS_TRACK_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useProgressTrack = createHook<ProgressTrackOptions>(
+  ({ state, size, label, hint, ...props }) => {
     const theme = useTheme("progress");
     const className = cx(
       theme.track.common,
-      theme.track.size[size],
-      htmlClassName,
+      size ? theme.track.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const ProgressTrack = createComponent<ProgressTrackOptions>(props => {
+  const htmlProps = useProgressTrack(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const ProgressTrack = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useProgressTrack,
-});
+export type ProgressTrackOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<ProgressUIProps> & {};
+
+export type ProgressTrackProps<T extends As = "div"> = Props<
+  ProgressTrackOptions<T>
+>;

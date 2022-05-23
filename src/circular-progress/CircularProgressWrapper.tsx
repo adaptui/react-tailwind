@@ -1,45 +1,41 @@
+import { ProgressOptions, useProgress } from "@renderlesskit/react";
+import { GroupProps, useGroup } from "ariakit";
 import {
   createComponent,
+  createElement,
   createHook,
-  ProgressHTMLProps as ReakitProgressHTMLProps,
-  ProgressOptions as ReakitProgressOptions,
-  useProgress as useReakitProgress,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { CIRCULAR_PROGRESS_WRAPPER_KEYS } from "./__keys";
+import { CircularProgressUIProps } from "./CircularProgressProps";
 
-export type CircularProgressWrapperOptions = BoxOptions & ReakitProgressOptions;
+export const useCircularProgressWrapper =
+  createHook<CircularProgressWrapperOptions>(
+    ({ state, size, hint, ...props }) => {
+      const theme = useTheme("circularProgress");
+      const className = tcm(theme.wrapper, props.className);
 
-export type CircularProgressWrapperHTMLProps = BoxHTMLProps &
-  ReakitProgressHTMLProps;
+      props = { ...props, className };
+      props = useProgress({ state, ...props });
+      props = useGroup(props);
 
-export type CircularProgressWrapperProps = CircularProgressWrapperOptions &
-  CircularProgressWrapperHTMLProps;
+      return props;
+    },
+  );
 
-export const useCircularProgressWrapper = createHook<
-  CircularProgressWrapperOptions,
-  CircularProgressWrapperHTMLProps
->({
-  name: "CircularProgressWrapper",
-  compose: [useBox, useReakitProgress],
-  keys: CIRCULAR_PROGRESS_WRAPPER_KEYS,
+export const CircularProgressWrapper =
+  createComponent<CircularProgressWrapperOptions>(props => {
+    const htmlProps = useCircularProgressWrapper(props);
 
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    return createElement("div", htmlProps);
+  });
 
-    const theme = useTheme("circularProgress");
-    const className = cx(theme.wrapper, htmlClassName);
+export type CircularProgressWrapperOptions<T extends As = "div"> =
+  GroupProps<T> & ProgressOptions<T> & Partial<CircularProgressUIProps> & {};
 
-    return { "aria-label": "circular progress", className, ...restHtmlProps };
-  },
-});
-
-export const CircularProgressWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useCircularProgressWrapper,
-});
+export type CircularProgressWrapperProps<T extends As = "div"> = Props<
+  CircularProgressWrapperOptions<T>
+>;
