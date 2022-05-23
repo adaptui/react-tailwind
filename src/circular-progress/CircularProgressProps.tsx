@@ -5,7 +5,7 @@ import {
   useProgressState,
 } from "@renderlesskit/react";
 
-import { Children, getComponentProps, runIfFn } from "../utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { CircularProgressBarProps } from "./CircularProgressBar";
 import { CircularProgressBarWrapperProps } from "./CircularProgressBarWrapper";
@@ -13,6 +13,7 @@ import { CircularProgressHintProps } from "./CircularProgressHint";
 import { CircularProgressTrackProps } from "./CircularProgressTrack";
 import {
   CircularProgressUIState,
+  CircularProgressUIStateProps,
   useCircularProgressUIState,
 } from "./CircularProgressUIState";
 import { CircularProgressWrapperProps } from "./CircularProgressWrapper";
@@ -114,9 +115,8 @@ export type CircularProgressUIProps = CircularProgressUIState & {
 
 export type CircularProgressProps = ProgressStateProps &
   Omit<CircularProgressWrapperProps, "state" | "children"> &
-  Pick<CircularProgressUIState, "hint"> &
-  Partial<Pick<CircularProgressUIState, "size">> & {
-    children?: Children<CircularProgressUIProps>;
+  CircularProgressUIStateProps & {
+    children?: RenderProp<CircularProgressUIProps>;
   };
 
 export type CircularProgressPropsReturn = {

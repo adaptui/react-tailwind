@@ -15,7 +15,7 @@ import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, tcm, withIconA11y } from "../utils";
+import { cx, RenderProp, tcm, withIconA11y } from "../utils";
 
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
@@ -130,17 +130,17 @@ export type ButtonOptions<T extends As = "button"> = Omit<
   /**
    * If added, the button will only show an icon ignoring other childrens.
    */
-  iconOnly?: RenderPropType;
+  iconOnly?: RenderProp;
 
   /**
    * If added, the button will show an icon before the button's text.
    */
-  suffix?: RenderPropType;
+  suffix?: RenderProp;
 
   /**
    * If added, the button will show an icon before the button's text.
    */
-  prefix?: RenderPropType;
+  prefix?: RenderProp;
 
   /**
    * If `true`, the button will show a spinner.
@@ -154,7 +154,7 @@ export type ButtonOptions<T extends As = "button"> = Omit<
    *
    * @default Spinner Component
    */
-  spinner?: RenderPropType;
+  spinner?: RenderProp;
 };
 
 export type ButtonProps<T extends As = "button"> = Props<ButtonOptions<T>>;

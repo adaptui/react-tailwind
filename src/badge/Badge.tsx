@@ -7,7 +7,7 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, withIconA11y } from "../utils";
+import { cx, RenderProp, withIconA11y } from "../utils";
 
 export const useBadge = createHook<BadgeOptions>(
   ({
@@ -74,7 +74,7 @@ export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
   /**
    * If added, the tag will show an icon before the tag's text.
    */
-  prefix?: RenderPropType;
+  prefix?: RenderProp;
 };
 
 export type BadgeProps<T extends As = "div"> = Props<BadgeOptions<T>>;

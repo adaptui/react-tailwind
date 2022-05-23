@@ -5,7 +5,7 @@ import {
   useDisclosureState,
 } from "ariakit";
 
-import { Children, getComponentProps, RenderProp, runIfFn } from "../utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { ShowMoreButtonProps } from "./ShowMoreButton";
 import { ShowMoreContentProps } from "./ShowMoreContent";
@@ -53,13 +53,13 @@ export const useShowMoreProps = ({
     ...uiProps,
     ...props,
     ...componentProps.contentProps,
-    children: runIfFn(_content, state),
+    children: runIfFn(_content, uiProps),
   };
 
   const buttonProps: ShowMoreButtonProps = {
     ...uiProps,
     ...componentProps.buttonProps,
-    children: runIfFn(_button, state),
+    children: runIfFn(_button, uiProps),
   };
 
   return {
@@ -76,11 +76,11 @@ export type ShowMoreUIProps = ShowMoreUIState & {
 
 export type ShowMoreProps = DisclosureStateProps &
   Omit<ShowMoreContentProps, "children" | "state"> &
-  Pick<ShowMoreUIState, "button"> & { children?: Children<ShowMoreUIProps> };
+  Pick<ShowMoreUIState, "button"> & { children?: RenderProp<ShowMoreUIProps> };
 
 export type ShowMorePropsReturn = {
   contentProps: ShowMoreContentProps;
   buttonProps: ShowMoreButtonProps;
-  finalChildren: Children<ShowMoreUIProps>[];
+  finalChildren: RenderProp<ShowMoreUIProps>[];
   uiProps: ShowMoreUIProps;
 };

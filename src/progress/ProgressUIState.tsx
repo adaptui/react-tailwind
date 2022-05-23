@@ -1,4 +1,4 @@
-import { RenderProp } from "ariakit-utils";
+import { RenderProp } from "../utils";
 
 import { ProgressUIProps } from "./ProgressProps";
 

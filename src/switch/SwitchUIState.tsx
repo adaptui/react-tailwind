@@ -1,5 +1,6 @@
 import { CheckboxState } from "ariakit";
-import { RenderProp } from "ariakit-utils";
+
+import { RenderProp } from "../utils";
 
 import { SwitchDefaultIcon } from "./__utils";
 import { SwitchInputProps } from "./SwitchInput";
@@ -18,7 +19,7 @@ export const useSwitchUIState = (props: SwitchUIStateProps): SwitchUIState => {
   const isChecked =
     state && inputValue && Array.isArray(state.value)
       ? state.value.includes(inputValue)
-      : state.value === true;
+      : state?.value === true;
 
   return {
     isChecked,
@@ -52,17 +53,17 @@ export type SwitchUIState = {
   /**
    * Label for the Switch.
    */
-  label?: RenderProp<SwitchUIProps> | string;
+  label?: RenderProp<SwitchUIProps>;
 
   /**
    * Description for the Switch.
    */
-  description?: RenderProp<SwitchUIProps> | string;
+  description?: RenderProp<SwitchUIProps>;
 };
 
 export type SwitchUIStateProps = Partial<
   Pick<SwitchUIState, "icon" | "label" | "description" | "size">
 > & {
-  state: CheckboxState;
-  inputValue: SwitchInputProps["value"];
+  state?: CheckboxState;
+  inputValue?: SwitchInputProps["value"];
 };

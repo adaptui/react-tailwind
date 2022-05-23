@@ -1,17 +1,20 @@
 import { useMemo } from "react";
 import { RadioState, RadioStateProps, useRadioState } from "ariakit";
-import { RenderProp } from "ariakit-utils";
 
 import { RadioGroupUIProps } from "../radio-group";
 import { useRadioGroupContext } from "../radio-group/__utils";
-import { Children, getComponentProps, runIfFn } from "../utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { RadioDescriptionProps } from "./RadioDescription";
 import { RadioIconProps } from "./RadioIcon";
 import { RadioInputProps } from "./RadioInput";
 import { RadioLabelProps } from "./RadioLabel";
 import { RadioTextProps } from "./RadioText";
-import { RadioUIState, useRadioUIState } from "./RadioUIState";
+import {
+  RadioUIState,
+  RadioUIStateProps,
+  useRadioUIState,
+} from "./RadioUIState";
 
 const componentMap = {
   RadioLabel: "labelProps",
@@ -173,11 +176,7 @@ export type RadioUIProps = RadioUIState &
 
 export type RadioProps = RadioStateProps &
   Omit<RadioInputProps, "value" | "size" | "children"> &
-  Pick<RadioUIState, "label" | "description"> &
-  Partial<Pick<RadioUIState, "size" | "icon">> & {
-    state?: RadioState;
-    inputValue?: RadioInputProps["value"];
-  } & { children?: Children<RadioUIProps> };
+  RadioUIStateProps & { children?: RenderProp<RadioUIProps> };
 
 export type RadioPropsReturn = {
   labelProps: RadioLabelProps;

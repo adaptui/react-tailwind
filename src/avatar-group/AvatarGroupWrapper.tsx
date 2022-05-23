@@ -1,51 +1,46 @@
-import { GroupHTMLProps, GroupOptions, useGroup } from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+import { GroupProps, useGroup } from "ariakit";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { AVATAR_GROUP_WRAPPER_KEYS } from "./__keys";
-import { AvatarGroupStateReturn } from "./AvatarGroupState";
+import { AvatarGroupUIProps } from "./AvatarGroupProps";
 
-export type AvatarGroupWrapperOptions = BoxOptions &
-  GroupOptions &
-  Pick<AvatarGroupStateReturn, "size">;
-
-export type AvatarGroupWrapperHTMLProps = BoxHTMLProps & GroupHTMLProps;
-
-export type AvatarGroupWrapperProps = AvatarGroupWrapperOptions &
-  AvatarGroupWrapperHTMLProps;
-
-export const useAvatarGroupContextWrapper = createHook<
-  AvatarGroupWrapperOptions,
-  AvatarGroupWrapperHTMLProps
->({
-  name: "AvatarGroupWrapper",
-  compose: [useBox, useGroup],
-  keys: AVATAR_GROUP_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useAvatarGroupWrapper = createHook<AvatarGroupWrapperOptions>(
+  ({ size, circular, showRing, ringColor, max, ...props }) => {
     const theme = useTheme("avatar");
     const className = cx(
       theme.group.common,
-      theme.group.size[size],
-      htmlClassName,
+      size ? theme.group.size[size] : "",
+      props.className,
     );
 
-    return {
-      className,
-      "aria-label": "avatar group",
-      ...restHtmlProps,
-    };
-  },
-});
+    props = { "aria-label": "avatar group", ...props, className };
+    props = useBox(props);
+    props = useGroup(props);
 
-export const AvatarGroupWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useAvatarGroupContextWrapper,
-});
+    return props;
+  },
+);
+
+export const AvatarGroupWrapper = createComponent<AvatarGroupWrapperOptions>(
+  props => {
+    const htmlProps = useAvatarGroupWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type AvatarGroupWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  GroupProps<T> &
+  Partial<AvatarGroupUIProps> & {};
+
+export type AvatarGroupWrapperProps<T extends As = "div"> = Props<
+  AvatarGroupWrapperOptions<T>
+>;

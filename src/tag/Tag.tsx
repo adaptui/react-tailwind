@@ -8,7 +8,7 @@ import { As, Props } from "ariakit-utils/types";
 import { BoxOptions, useBox } from "../box";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, tcm, withIconA11y } from "../utils";
+import { cx, RenderProp, tcm, withIconA11y } from "../utils";
 
 export const useTag = createHook<TagOptions>(
   ({
@@ -80,7 +80,7 @@ export type TagOptions<T extends As = "button"> = BoxOptions<T> & {
   /**
    * If added, the tag will show an icon before the tag's text.
    */
-  prefix?: RenderPropType;
+  prefix?: RenderProp;
 
   /**
    * If added, the tag will allow to show an icon before the tag's text.
@@ -90,7 +90,7 @@ export type TagOptions<T extends As = "button"> = BoxOptions<T> & {
   /**
    * If added, the tag will show an icon after the tag's text.
    */
-  suffix?: RenderPropType;
+  suffix?: RenderProp;
 };
 
 export type TagProps<T extends As = "button"> = Props<TagOptions<T>>;

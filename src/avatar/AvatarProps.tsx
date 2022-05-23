@@ -1,24 +1,16 @@
-import {
-  getComponentProps,
-  isNull,
-  runIfFn,
-  splitProps,
-  withIconA11y,
-} from "../utils";
+import { useMemo } from "react";
 
-import { USE_AVATAR_IMAGE_STATE_KEYS, USE_AVATAR_STATE_KEYS } from "./__keys";
-import { AvatarOwnProps, AvatarProps } from "./Avatar";
+import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
+
 import { AvatarIconProps } from "./AvatarIcon";
 import { AvatarImageProps } from "./AvatarImage";
 import { AvatarInitialsProps } from "./AvatarInitials";
-import {
-  AvatarImageInitialState,
-  AvatarInitialState,
-  AvatarOwnInitialState,
-  AvatarState,
-  useAvatarState,
-} from "./AvatarState";
 import { AvatarStatusIndicatorProps } from "./AvatarStatusIndicator";
+import {
+  AvatarUIState,
+  AvatarUIStateProps,
+  useAvatarUIState,
+} from "./AvatarUIState";
 import { AvatarWrapperProps } from "./AvatarWrapper";
 
 const componentMap = {
@@ -29,89 +21,120 @@ const componentMap = {
   AvatarStatusIndicator: "statusIndicatorProps",
 };
 
-export const useAvatarStateSplit = (props: AvatarProps) => {
-  const [fullStateProps, avatarProps] = splitProps(
-    props,
-    USE_AVATAR_STATE_KEYS,
-  ) as [AvatarInitialState, AvatarOwnProps];
+export const useAvatarProps = ({
+  circular,
+  size,
+  icon,
+  statusIndicators,
+  name,
+  status,
+  parentsBackground,
+  getInitialsFromName,
+  showRing,
+  ringColor,
+  src,
+  srcSet,
+  sizes,
+  onLoad,
+  onError,
+  ignoreFallback,
+  crossOrigin,
+  loading,
+  children,
+  ...restProps
+}: AvatarProps) => {
+  const uiState = useAvatarUIState({
+    circular,
+    size,
+    icon,
+    statusIndicators,
+    name,
+    status,
+    parentsBackground,
+    getInitialsFromName,
+    showRing,
+    ringColor,
+    src,
+    srcSet,
+    sizes,
+    onLoad,
+    onError,
+    ignoreFallback,
+    crossOrigin,
+    loading,
+  });
+  let uiProps: AvatarUIProps = useMemo(() => ({ ...uiState }), [uiState]);
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
-  const state = useAvatarState(fullStateProps);
+  const _icon: AvatarUIState["icon"] =
+    componentProps?.iconProps?.children || uiProps.icon;
+  const _statusIndicators: AvatarUIState["statusIndicators"] =
+    componentProps?.statusIndicatorProps?.children || uiProps.statusIndicators;
 
-  const [imageProps, stateProps] = splitProps(
-    fullStateProps,
-    USE_AVATAR_IMAGE_STATE_KEYS,
-  ) as [AvatarImageInitialState, AvatarOwnInitialState];
-
-  return [state, avatarProps, imageProps, stateProps] as const;
-};
-
-export const useAvatarProps = (props: React.PropsWithChildren<AvatarProps>) => {
-  const [state, avatarProps, imageProps] = useAvatarStateSplit(props);
-  const { children, ...restProps } = avatarProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
-
-  const _icon: AvatarState["icon"] =
-    componentProps?.iconProps?.children || state.icon;
-
-  const _statusIndicator: AvatarState["statusIndicators"] =
-    componentProps?.statusIndicatorProps?.children || state.statusIndicators;
+  uiProps = {
+    ...uiProps,
+    icon: _icon,
+    statusIndicators: _statusIndicators,
+  };
 
   const wrapperProps: AvatarWrapperProps = {
-    ...state,
+    ...uiProps,
     ...restProps,
     ...componentProps.wrapperProps,
   };
 
   const iconProps: AvatarIconProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.iconProps,
-    children: withIconA11y(runIfFn(_icon, state)),
+    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
   };
 
   const initialsProps: AvatarInitialsProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.initialsProps,
-    children: state.initials,
+    children: uiProps.initials,
   };
 
-  const _imageProps: AvatarImageProps = {
-    ...state,
-    ...imageProps,
+  const imageProps: AvatarImageProps = {
+    ...uiProps,
+    src,
+    srcSet,
+    sizes,
+    loading,
+    crossOrigin,
+    onLoad,
+    onError,
     ...componentProps.imageProps,
   };
 
   const statusIndicatorProps: AvatarStatusIndicatorProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.statusIndicatorProps,
-    children: withIconA11y(runIfFn(_statusIndicator, state)),
+    children: withIconA11y(runIfFn(uiProps.statusIndicators, uiProps)),
   };
 
   return {
-    state,
-    icon: _icon,
+    uiProps,
     wrapperProps,
     iconProps,
     initialsProps,
-    imageProps: _imageProps,
+    imageProps,
     statusIndicatorProps,
   };
 };
 
-export function getInitialsFromNameDefault(
-  name: AvatarState["name"],
-  size: AvatarState["size"],
-) {
-  if (isNull(name)) return null;
+export type AvatarUIProps = AvatarUIState;
 
-  const [firstName, lastName] = name.split(" ");
-  const oneLetterInitialSizes = ["xs", "sm", "md"];
+export type AvatarProps = Omit<AvatarWrapperProps, "children"> &
+  AvatarUIStateProps & {
+    children?: RenderProp<AvatarUIProps>;
+  };
 
-  const initials =
-    firstName && lastName
-      ? `${firstName.charAt(0)}${lastName.charAt(0)}`
-      : `${firstName.charAt(0)}${firstName.charAt(1)}`;
-
-  return oneLetterInitialSizes.includes(size)
-    ? initials.toUpperCase().charAt(0)
-    : initials.toUpperCase();
-}
+export type AvatarPropsReturn = {
+  wrapperProps: AvatarWrapperProps;
+  initialsProps: AvatarInitialsProps;
+  imageProps: AvatarImageProps;
+  iconProps: AvatarIconProps;
+  statusIndicatorProps: AvatarStatusIndicatorProps;
+  uiProps: AvatarUIProps;
+};

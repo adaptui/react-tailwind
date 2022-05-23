@@ -1,9 +1,8 @@
 import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
 
-import { CheckboxUIProps } from "../checkbox/CheckboxProps";
-import { Value } from "../checkbox/CheckboxUIState";
+import { CheckboxUIProps, Value } from "../checkbox";
 import { ShowMoreButtonProps, ShowMoreContentProps } from "../show-more";
-import { Children, getComponentProps } from "../utils";
+import { getComponentProps, RenderProp } from "../utils";
 
 import {
   CheckboxGroupUIState,
@@ -84,7 +83,7 @@ export type CheckboxGroupProps = CheckboxStateProps &
   Omit<CheckboxGroupWrapperProps, "size" | "children" | "defaultValue"> &
   CheckboxGroupUIStateProps & {
     withState?: boolean;
-    children?: Children<CheckboxUIProps>;
+    children?: RenderProp<CheckboxUIProps>;
   };
 
 export type CheckboxGroupUIProps = CheckboxGroupUIState & {

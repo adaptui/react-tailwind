@@ -5,14 +5,18 @@ import {
   useMeterState,
 } from "@renderlesskit/react";
 
-import { Children, getComponentProps, runIfFn } from "../utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { MeterBarProps } from "./MeterBar";
 import { MeterBarWrapperProps } from "./MeterBarWrapper";
 import { MeterHintProps } from "./MeterHint";
 import { MeterLabelProps } from "./MeterLabel";
 import { MeterTrackProps } from "./MeterTrack";
-import { MeterUIState, useMeterUIState } from "./MeterUIState";
+import {
+  MeterUIState,
+  MeterUIStateProps,
+  useMeterUIState,
+} from "./MeterUIState";
 import { MeterWrapperProps } from "./MeterWrapper";
 
 const componentMap = {
@@ -119,9 +123,8 @@ export type MeterUIProps = MeterUIState & {
 
 export type MeterProps = MeterStateProps &
   Omit<MeterWrapperProps, "state" | "children"> &
-  Pick<MeterUIState, "hint" | "label"> &
-  Partial<Pick<MeterUIState, "size" | "intervals" | "flatBorders">> & {
-    children?: Children<MeterUIProps>;
+  MeterUIStateProps & {
+    children?: RenderProp<MeterUIProps>;
   };
 
 export type MeterPropsReturn = {

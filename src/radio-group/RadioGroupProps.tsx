@@ -2,7 +2,7 @@ import { RadioState, RadioStateProps, useRadioState } from "ariakit";
 
 import { RadioUIProps } from "../radio/RadioProps";
 import { ShowMoreButtonProps, ShowMoreContentProps } from "../show-more";
-import { Children, getComponentProps } from "../utils";
+import { getComponentProps, RenderProp } from "../utils";
 
 import {
   RadioGroupUIState,
@@ -97,7 +97,7 @@ export type RadioGroupProps = RadioStateProps &
   Omit<RadioGroupWrapperProps, "state" | "size" | "children" | "defaultValue"> &
   RadioGroupUIStateProps & {
     withState?: boolean;
-    children?: Children<RadioUIProps>;
+    children?: RenderProp<RadioUIProps>;
   };
 
 export type RadioGroupUIProps = RadioGroupUIState & {

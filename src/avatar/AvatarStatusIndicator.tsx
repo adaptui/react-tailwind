@@ -1,42 +1,54 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { AVATAR_STATUS_INDICATOR_KEYS } from "./__keys";
+import { AvatarUIProps } from "./AvatarProps";
 
-export type AvatarStatusIndicatorOptions = BoxOptions & {};
+export const useAvatarStatusIndicator =
+  createHook<AvatarStatusIndicatorOptions>(
+    ({
+      circular,
+      size,
+      icon,
+      name,
+      initials,
+      status,
+      parentsBackground,
+      getInitialsFromName,
+      imageStatus,
+      showFallback,
+      statusIndicators,
+      showRing,
+      ringColor,
+      ...props
+    }) => {
+      const theme = useTheme("avatar");
+      const className = cx(theme.statusIndicator.common, props.className);
 
-export type AvatarStatusIndicatorHTMLProps = BoxHTMLProps;
+      props = { "aria-label": "avatar status indicator", ...props, className };
+      props = useBox(props);
 
-export type AvatarStatusIndicatorProps = AvatarStatusIndicatorOptions &
-  AvatarStatusIndicatorHTMLProps;
+      return props;
+    },
+  );
 
-export const useAvatarStatusIndicator = createHook<
-  AvatarStatusIndicatorOptions,
-  AvatarStatusIndicatorHTMLProps
->({
-  name: "AvatarStatusIndicator",
-  compose: useBox,
-  keys: AVATAR_STATUS_INDICATOR_KEYS,
+export const AvatarStatusIndicator =
+  createComponent<AvatarStatusIndicatorOptions>(props => {
+    const htmlProps = useAvatarStatusIndicator(props);
 
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    return createElement("div", htmlProps);
+  });
 
-    const theme = useTheme("avatar");
-    const className = cx(theme.statusIndicator.common, htmlClassName);
+export type AvatarStatusIndicatorOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<AvatarUIProps> & {};
 
-    return {
-      className,
-      "aria-label": "avatar status indicator",
-      ...restHtmlProps,
-    };
-  },
-});
-
-export const AvatarStatusIndicator = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useAvatarStatusIndicator,
-});
+export type AvatarStatusIndicatorProps<T extends As = "div"> = Props<
+  AvatarStatusIndicatorOptions<T>
+>;

@@ -5,13 +5,17 @@ import {
   useProgressState,
 } from "@renderlesskit/react";
 
-import { Children, getComponentProps, runIfFn } from "../utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { ProgressBarProps } from "./ProgressBar";
 import { ProgressHintProps } from "./ProgressHint";
 import { ProgressLabelProps } from "./ProgressLabel";
 import { ProgressTrackProps } from "./ProgressTrack";
-import { ProgressUIState, useProgressUIState } from "./ProgressUIState";
+import {
+  ProgressUIState,
+  ProgressUIStateProps,
+  useProgressUIState,
+} from "./ProgressUIState";
 import { ProgressWrapperProps } from "./ProgressWrapper";
 
 const componentMap = {
@@ -113,9 +117,8 @@ export type ProgressUIProps = ProgressUIState & {
 
 export type ProgressProps = ProgressStateProps &
   Omit<ProgressWrapperProps, "state" | "children"> &
-  Pick<ProgressUIState, "label" | "hint"> &
-  Partial<Pick<ProgressUIState, "size">> & {
-    children?: Children<ProgressUIProps>;
+  ProgressUIStateProps & {
+    children?: RenderProp<ProgressUIProps>;
   };
 
 export type ProgressPropsReturn = {

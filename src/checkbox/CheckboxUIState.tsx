@@ -1,5 +1,6 @@
 import { CheckboxState } from "ariakit";
-import { RenderProp } from "ariakit-utils";
+
+import { RenderProp } from "../utils";
 
 import { CheckboxDefaultIcon } from "./__utils";
 import { CheckboxInputProps } from "./CheckboxInput";
@@ -20,8 +21,8 @@ export const useCheckboxUIState = (
   const isChecked =
     state && inputValue && Array.isArray(state.value)
       ? state.value.includes(inputValue)
-      : state.value === true;
-  const isIndeterminate = state.value === "mixed";
+      : state?.value === true;
+  const isIndeterminate = state?.value === "mixed";
   const isUnchecked = !isChecked && !isIndeterminate;
 
   return {
@@ -70,17 +71,17 @@ export type CheckboxUIState = {
   /**
    * Label for the Checkbox.
    */
-  label?: RenderProp<CheckboxUIProps> | string;
+  label?: RenderProp<CheckboxUIProps>;
 
   /**
    * Description for the Checkbox.
    */
-  description?: RenderProp<CheckboxUIProps> | string;
+  description?: RenderProp<CheckboxUIProps>;
 };
 
 export type CheckboxUIStateProps = Partial<
   Pick<CheckboxUIState, "icon" | "label" | "description" | "size">
 > & {
-  state: CheckboxState;
-  inputValue: CheckboxInputProps["value"];
+  state?: CheckboxState;
+  inputValue?: CheckboxInputProps["value"];
 };

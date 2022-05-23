@@ -1,15 +1,19 @@
 import { useMemo } from "react";
 import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
-import { RenderProp } from "ariakit-utils";
 
-import { Children, getComponentProps, runIfFn } from "../utils";
+import { Value } from "../checkbox";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { SwitchDescriptionProps } from "./SwitchDescription";
 import { SwitchIconProps } from "./SwitchIcon";
 import { SwitchInputProps } from "./SwitchInput";
 import { SwitchLabelProps } from "./SwitchLabel";
 import { SwitchTextProps } from "./SwitchText";
-import { SwitchUIState, useSwitchUIState, Value } from "./SwitchUIState";
+import {
+  SwitchUIState,
+  SwitchUIStateProps,
+  useSwitchUIState,
+} from "./SwitchUIState";
 
 const componentMap = {
   SwitchLabel: "labelProps",
@@ -142,11 +146,7 @@ export type SwitchUIProps = SwitchUIState & {
 
 export type SwitchProps = CheckboxStateProps &
   Omit<SwitchInputProps, "value" | "size" | "defaultValue" | "children"> &
-  Pick<SwitchUIState, "label" | "description"> &
-  Partial<Pick<SwitchUIState, "size" | "icon">> & {
-    state?: CheckboxState;
-    inputValue?: SwitchInputProps["value"];
-  } & { children?: Children<SwitchUIProps> };
+  SwitchUIStateProps & { children?: RenderProp<SwitchUIProps> };
 
 export type SwitchPropsReturn = {
   labelProps: SwitchLabelProps;

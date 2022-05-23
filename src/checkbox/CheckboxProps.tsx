@@ -1,19 +1,23 @@
 import { useMemo } from "react";
 import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
-import { RenderProp } from "ariakit-utils";
 
 import {
   CheckboxGroupUIProps,
   useCheckboxGroupContext,
 } from "../checkbox-group";
-import { Children, getComponentProps, runIfFn } from "../utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
 
 import { CheckboxDescriptionProps } from "./CheckboxDescription";
 import { CheckboxIconProps } from "./CheckboxIcon";
 import { CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxLabelProps } from "./CheckboxLabel";
 import { CheckboxTextProps } from "./CheckboxText";
-import { CheckboxUIState, useCheckboxUIState, Value } from "./CheckboxUIState";
+import {
+  CheckboxUIState,
+  CheckboxUIStateProps,
+  useCheckboxUIState,
+  Value,
+} from "./CheckboxUIState";
 
 const componentMap = {
   CheckboxLabel: "labelProps",
@@ -147,11 +151,7 @@ export type CheckboxUIProps = CheckboxUIState &
 
 export type CheckboxProps = CheckboxStateProps &
   Omit<CheckboxInputProps, "value" | "size" | "defaultValue" | "children"> &
-  Pick<CheckboxUIState, "label" | "description"> &
-  Partial<Pick<CheckboxUIState, "size" | "icon">> & {
-    state?: CheckboxState;
-    inputValue?: CheckboxInputProps["value"];
-  } & { children?: Children<CheckboxUIProps> };
+  CheckboxUIStateProps & { children?: RenderProp<CheckboxUIProps> };
 
 export type CheckboxPropsReturn = {
   labelProps: CheckboxLabelProps;

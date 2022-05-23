@@ -1,5 +1,6 @@
 import { RadioState } from "ariakit";
-import { RenderProp } from "ariakit-utils";
+
+import { RenderProp } from "../utils";
 
 import { RadioDefaultIcon } from "./__utils";
 import { RadioInputProps } from "./RadioInput";
