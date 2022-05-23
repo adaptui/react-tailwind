@@ -8,7 +8,7 @@ import { Children, getComponentProps } from "../utils";
 import {
   CheckboxGroupUIState,
   CheckboxGroupUIStateProps,
-  useCheckboxUIState,
+  useCheckboxGroupUIState,
 } from "./CheckboxGroupUIState";
 import { CheckboxGroupWrapperProps } from "./CheckboxGroupWrapper";
 
@@ -34,7 +34,7 @@ export const useCheckboxGroupProps = ({
     value,
     setValue,
   });
-  const uiState = useCheckboxUIState({ size, stack, maxVisibleItems });
+  const uiState = useCheckboxGroupUIState({ size, stack, maxVisibleItems });
   const uiProps: CheckboxGroupUIProps = {
     state: withState ? state : undefined,
     ...uiState,

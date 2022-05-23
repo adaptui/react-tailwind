@@ -29,8 +29,6 @@ export const useSwitchUIState = (props: SwitchUIStateProps): SwitchUIState => {
   };
 };
 
-export type Value = boolean | string | number | Array<string | number>;
-
 export type SwitchUIState = {
   /**
    * If true, Switch is checked.

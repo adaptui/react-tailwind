@@ -1,4 +1,4 @@
-export const useCheckboxUIState = (
+export const useCheckboxGroupUIState = (
   props: CheckboxGroupUIStateProps,
 ): CheckboxGroupUIState => {
   const { size = "md", stack = "vertical", maxVisibleItems = null } = props;

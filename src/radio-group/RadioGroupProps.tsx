@@ -7,7 +7,7 @@ import { Children, getComponentProps } from "../utils";
 import {
   RadioGroupUIState,
   RadioGroupUIStateProps,
-  useRadioUIState,
+  useRadioGroupUIState,
 } from "./RadioGroupUIState";
 import { RadioGroupWrapperProps } from "./RadioGroupWrapper";
 
@@ -47,7 +47,7 @@ export const useRadioGroupProps = ({
     value,
     setValue,
   });
-  const uiState = useRadioUIState({ size, stack, maxVisibleItems });
+  const uiState = useRadioGroupUIState({ size, stack, maxVisibleItems });
   const uiProps: RadioGroupUIProps = {
     state: withState ? state : undefined,
     ...uiState,

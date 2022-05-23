@@ -25,7 +25,6 @@ export * from "./switch";
 export * from "./tag";
 export * from "./textarea";
 export * from "./theme";
-export * from "./toast";
 export * from "./tooltip";
 export * from "./utils";
 export * from "./utils/types";

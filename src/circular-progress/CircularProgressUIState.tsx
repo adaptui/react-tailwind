@@ -10,8 +10,6 @@ export const useCircularProgressUIState = (
   return { size, hint };
 };
 
-export type Value = boolean | string | number | Array<string | number>;
-
 export type CircularProgressUIState = {
   /**
    * How large should the progress be?

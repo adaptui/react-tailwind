@@ -1,4 +1,4 @@
-export const useRadioUIState = (
+export const useRadioGroupUIState = (
   props: RadioGroupUIStateProps,
 ): RadioGroupUIState => {
   const { size = "md", stack = "vertical", maxVisibleItems = null } = props;
