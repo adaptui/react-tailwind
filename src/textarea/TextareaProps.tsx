@@ -1,78 +1,110 @@
-import * as React from "react";
-
 import { getComponentProps } from "../index";
-import { runIfFn, splitProps, withIconA11y } from "../utils";
+import { RenderProp, runIfFn, withIconA11y } from "../utils";
 
-import { USE_TEXTAREA_STATE_KEYS } from "./__keys";
-import { TextareaOwnProps, TextareaProps } from "./Textarea";
 import { TextareaBaseProps } from "./TextareaBase";
 import { TextareaGhostProps } from "./TextareaGhost";
 import { TextareaIconProps } from "./TextareaIcon";
-import { TextareaInitialState, useTextareaState } from "./TextareaState";
+import {
+  TextareaUIState,
+  TextareaUIStateProps,
+  useTextareaUIState,
+} from "./TextareaUIState";
 import { TextareaWrapperProps } from "./TextareaWrapper";
-
-export const useTextareaStateSplit = (props: TextareaProps) => {
-  const [stateProps, textareaProps] = splitProps(
-    props,
-    USE_TEXTAREA_STATE_KEYS,
-  ) as [TextareaInitialState, TextareaOwnProps];
-  const state = useTextareaState(stateProps);
-
-  return [state, textareaProps, stateProps] as const;
-};
 
 const componentMap = {
   TextareaWrapper: "wrapperProps",
-  TextareaMain: "baseProps",
-  TextareaPrefix: "iconProps",
+  TextareaBase: "baseProps",
+  TextareaIcon: "iconProps",
   TextareaGhost: "ghostProps",
 };
 
-export const useTextareaProps = (
-  props: React.PropsWithChildren<TextareaProps>,
-) => {
-  const [state, textareaProps, stateProps] = useTextareaStateSplit(props);
-  const { placeholder, value } = stateProps;
-  const { icon } = state;
-  const { className, style, children, ...restProps } = textareaProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
+export const useTextareaProps = ({
+  size,
+  variant,
+  autoSize,
+  resize,
+  rowsMax,
+  rowsMin,
+  invalid,
+  loading,
+  icon,
+  spinner,
+  placeholder,
+  value,
+  className,
+  style,
+  children,
+  ...restProps
+}: TextareaProps): TextareaPropsReturn => {
+  const uiState = useTextareaUIState({
+    size,
+    variant,
+    autoSize,
+    resize,
+    rowsMax,
+    rowsMin,
+    invalid,
+    loading,
+    icon,
+    spinner,
+    placeholder,
+    value,
+  });
+  let uiProps = uiState;
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   const _icon: TextareaProps["icon"] =
     componentProps?.iconProps?.children || icon;
 
+  uiProps = { ...uiProps, icon: _icon };
+
   const wrapperProps: TextareaWrapperProps = {
-    ...state,
+    ...uiProps,
     className,
     style,
     ...componentProps.wrapperProps,
   };
 
   const baseProps: TextareaBaseProps = {
-    ...state,
-    ...restProps,
+    ...uiProps,
     placeholder,
     value,
+    ...restProps,
     ...componentProps.baseProps,
   };
 
   const iconProps: TextareaIconProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.iconProps,
-    children: withIconA11y(runIfFn(_icon, state)),
+    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
   };
 
   const ghostProps: TextareaGhostProps = {
-    ...state,
+    ...uiProps,
     ...restProps,
     ...componentProps.ghostProps,
   };
 
   return {
-    state,
-    icon: _icon,
+    uiProps,
     wrapperProps,
     baseProps,
     iconProps,
     ghostProps,
   };
+};
+
+export type TextareaUIProps = TextareaUIState;
+
+export type TextareaProps = Omit<TextareaBaseProps, "children"> &
+  TextareaUIStateProps & {
+    children?: RenderProp<TextareaUIProps>;
+  };
+
+export type TextareaPropsReturn = {
+  wrapperProps: TextareaWrapperProps;
+  baseProps: TextareaBaseProps;
+  ghostProps: TextareaGhostProps;
+  iconProps: TextareaIconProps;
+  uiProps: TextareaUIProps;
 };

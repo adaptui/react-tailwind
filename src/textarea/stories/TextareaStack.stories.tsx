@@ -62,6 +62,7 @@ export const Invalid: Story = {
     placeholder: "Search",
     invalid: true,
     icon: <SlotIcon />,
+    autoSize: true,
   },
 };
 

@@ -1,64 +1,73 @@
-import { TabbableHTMLProps, TabbableOptions, useTabbable } from "reakit";
-import { useForkRef } from "reakit-utils";
-import { ariaAttr, createComponent, createHook } from "@renderlesskit/react";
+import { useForkRef } from "ariakit-utils";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { cx } from "../utils";
 
-import { TEXTAREA_GHOST_KEYS } from "./__keys";
-import { TextareaStateReturn } from "./TextareaState";
+import { TextareaUIProps } from "./TextareaProps";
 
-export type TextareaGhostOptions = TabbableOptions &
-  Pick<
-    TextareaStateReturn,
-    "size" | "variant" | "icon" | "invalid" | "resize" | "ghostRef"
-  > & {};
-
-export type TextareaGhostHTMLProps = Omit<TabbableHTMLProps, "size" | "prefix">;
-
-export type TextareaGhostProps = TextareaGhostOptions & TextareaGhostHTMLProps;
-
-export const useTextareaGhost = createHook<
-  TextareaGhostOptions,
-  TextareaGhostHTMLProps
->({
-  name: "TextareaGhost",
-  compose: useTabbable,
-  keys: TEXTAREA_GHOST_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, variant, invalid, disabled, resize, ghostRef } = options;
-    const {
-      className: htmlClassName,
-      ref: htmlRef,
-      ...restHtmlProps
-    } = htmlProps;
-
+export const useTextareaGhost = createHook<TextareaGhostOptions>(
+  ({
+    size,
+    variant,
+    autoSize,
+    resize,
+    rowsMax,
+    rowsMin,
+    invalid,
+    loading,
+    icon,
+    spinner,
+    autoSizeOnChange,
+    inputStyles,
+    inputRef,
+    ghostRef,
+    ...props
+  }) => {
     const theme = useTheme("textarea");
-    const className = tcm(
+    const className = cx(
       theme.base.common,
-      theme.base.size[size],
-      theme.base.variant[variant].common,
-      disabled || invalid ? "" : theme.base.variant[variant].interactions,
-      disabled ? theme.base.variant[variant].disabled : "",
-      invalid ? theme.base.variant[variant].invalid : "",
-      theme.base.resize[resize],
+      size ? theme.base.size[size] : "",
+      variant ? theme.base.variant[variant].common : "",
+      props.disabled || invalid
+        ? ""
+        : variant
+        ? theme.base.variant[variant].interactions
+        : "",
+      variant && props.disabled ? theme.base.variant[variant].disabled : "",
+      variant && invalid ? theme.base.variant[variant].invalid : "",
+      resize ? theme.base.resize[resize] : "",
       theme.ghost,
-      htmlClassName,
+      props.className,
     );
 
-    return {
-      ref: useForkRef(ghostRef, htmlRef),
+    props = {
+      "aria-invalid": invalid,
+      ...props,
       className,
-      disabled,
-      "aria-invalid": ariaAttr(invalid),
-      ...restHtmlProps,
+      ref: useForkRef(ghostRef, props.ref),
     };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const TextareaGhost = createComponent<TextareaGhostOptions>(props => {
+  const htmlProps = useTextareaGhost(props);
+
+  return createElement("textarea", htmlProps);
 });
 
-export const TextareaGhost = createComponent({
-  as: "textarea",
-  memo: true,
-  useHook: useTextareaGhost,
-});
+export type TextareaGhostOptions<T extends As = "textarea"> = BoxOptions<T> &
+  Partial<TextareaUIProps> & {};
+
+export type TextareaGhostProps<T extends As = "textarea"> = Props<
+  TextareaGhostOptions<T>
+>;

@@ -33,7 +33,7 @@ export const useInputProps = ({
   children,
   disabled,
   ...restProps
-}: InputProps) => {
+}: InputProps): InputPropsReturn => {
   const uiState = useInputUIState({
     prefix,
     suffix,
@@ -142,4 +142,5 @@ export type InputPropsReturn = {
   baseProps: InputBaseProps;
   prefixProps: InputPrefixProps;
   suffixProps: InputSuffixProps;
+  uiProps: InputUIProps;
 };

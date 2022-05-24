@@ -7,7 +7,8 @@ import { SlotIcon } from "../../icons";
 import { Input } from "../../input";
 import { Radio } from "../../radio";
 import { RadioGroup } from "../../radio-group";
-import { Textarea, TextareaProps } from "../Textarea";
+import { Textarea } from "../Textarea";
+import { TextareaProps } from "../TextareaProps";
 
 import js from "./templates/TextareaBasicJsx";
 import ts from "./templates/TextareaBasicTsx";
@@ -176,13 +177,13 @@ export const Resizes = () => {
       <RadioGroup
         aria-label="fruits"
         className="mb-2 flex w-36 flex-col space-y-2"
-        state={resize}
-        onStateChange={e => setResize(e as TextareaProps["resize"])}
+        value={resize}
+        setValue={e => setResize(e as TextareaProps["resize"])}
       >
-        <Radio value="horizontal" label="Horizontal" />
-        <Radio value="vertical" label="Vertical" />
-        <Radio value="both" label="Both" />
-        <Radio value="none" label="None" />
+        <Radio inputValue="horizontal" label="Horizontal" />
+        <Radio inputValue="vertical" label="Vertical" />
+        <Radio inputValue="both" label="Both" />
+        <Radio inputValue="none" label="None" />
       </RadioGroup>
 
       <Textarea

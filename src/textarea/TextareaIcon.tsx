@@ -1,46 +1,59 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { TEXTAREA_ICON_KEYS } from "./__keys";
-import { TextareaStateReturn } from "./TextareaState";
+import { TextareaUIProps } from "./TextareaProps";
 
-export type TextareaIconOptions = BoxOptions &
-  Pick<TextareaStateReturn, "size" | "invalid" | "autoSize"> & {};
-
-export type TextareaIconHTMLProps = BoxHTMLProps;
-
-export type TextareaIconProps = TextareaIconOptions & TextareaIconHTMLProps;
-
-export const useTextareaIcon = createHook<
-  TextareaIconOptions,
-  TextareaIconHTMLProps
->({
-  name: "TextareaIcon",
-  compose: useBox,
-  keys: TEXTAREA_ICON_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, invalid, autoSize } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useTextareaIcon = createHook<TextareaIconOptions>(
+  ({
+    size,
+    variant,
+    autoSize,
+    resize,
+    rowsMax,
+    rowsMin,
+    invalid,
+    loading,
+    icon,
+    spinner,
+    autoSizeOnChange,
+    inputStyles,
+    inputRef,
+    ghostRef,
+    ...props
+  }) => {
     const theme = useTheme("textarea");
     const className = cx(
       theme.icon.common,
       autoSize ? theme.icon.normal : "",
-      theme.icon.size[size],
+      size ? theme.icon.size[size] : "",
       invalid ? theme.icon.invalid : "",
-      htmlClassName,
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const TextareaIcon = createComponent<TextareaIconOptions>(props => {
+  const htmlProps = useTextareaIcon(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const TextareaIcon = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useTextareaIcon,
-});
+export type TextareaIconOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<TextareaUIProps> & {};
+
+export type TextareaIconProps<T extends As = "div"> = Props<
+  TextareaIconOptions<T>
+>;

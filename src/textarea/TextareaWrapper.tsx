@@ -1,38 +1,55 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { TEXTAREA_WRAPPER_KEYS } from "./__keys";
+import { TextareaUIProps } from "./TextareaProps";
 
-export type TextareaWrapperOptions = BoxOptions & {};
-
-export type TextareaWrapperHTMLProps = BoxHTMLProps;
-
-export type TextareaWrapperProps = TextareaWrapperOptions &
-  TextareaWrapperHTMLProps;
-
-export const useTextareaWrapper = createHook<
-  TextareaWrapperOptions,
-  TextareaWrapperHTMLProps
->({
-  name: "TextareaWrapper",
-  compose: useBox,
-  keys: TEXTAREA_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useTextareaWrapper = createHook<TextareaWrapperOptions>(
+  ({
+    size,
+    variant,
+    autoSize,
+    resize,
+    rowsMax,
+    rowsMin,
+    invalid,
+    loading,
+    icon,
+    spinner,
+    autoSizeOnChange,
+    inputStyles,
+    inputRef,
+    ghostRef,
+    ...props
+  }) => {
     const theme = useTheme("textarea");
-    const className = cx(theme.wrapper, htmlClassName);
+    const className = cx(theme.wrapper, props.className);
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
-});
+);
 
-export const TextareaWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useTextareaWrapper,
-});
+export const TextareaWrapper = createComponent<TextareaWrapperOptions>(
+  props => {
+    const htmlProps = useTextareaWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type TextareaWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<TextareaUIProps> & {};
+
+export type TextareaWrapperProps<T extends As = "div"> = Props<
+  TextareaWrapperOptions<T>
+>;
