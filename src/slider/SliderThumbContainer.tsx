@@ -1,56 +1,48 @@
+import { SliderThumbOptions, useSliderThumb } from "@renderlesskit/react";
 import {
   createComponent,
+  createElement,
   createHook,
-  SliderThumbHTMLProps,
-  SliderThumbOptions,
-  useSliderThumb,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SLIDER_THUMB_CONTAINER_KEYS } from "./__keys";
-import { SliderThumbStateReturn } from "./SliderThumbState";
+import { SliderThumbUIProps } from "./SliderThumbProps";
 
-export type SliderThumbContainerOptions = BoxOptions &
-  SliderThumbOptions &
-  Pick<SliderThumbStateReturn, "index" | "size" | "isDisabled"> & {};
-
-export type SliderThumbContainerHTMLProps = BoxHTMLProps & SliderThumbHTMLProps;
-
-export type SliderThumbContainerProps = SliderThumbContainerOptions &
-  SliderThumbContainerHTMLProps;
-
-export const useSliderThumbContainer = createHook<
-  SliderThumbContainerOptions,
-  SliderThumbContainerHTMLProps
->({
-  name: "SliderThumbContainer",
-  compose: [useBox, useSliderThumb],
-  keys: SLIDER_THUMB_CONTAINER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, isDisabled } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSliderThumbContainer = createHook<SliderThumbContainerOptions>(
+  ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
     const theme = useTheme("slider");
     const className = cx(
       theme.thumb.container.base.common,
-      theme.thumb.container.base.size[size],
+      size ? theme.thumb.container.base.size[size] : "",
       isDisabled
         ? theme.thumb.container.disabled
         : theme.thumb.container.common,
-      htmlClassName,
+      props.className,
     );
 
-    // For removing the tabIndex from the thumb container caused by Tooltip
-    return { className, ...restHtmlProps, tabIndex: -1 };
-  },
-});
+    props = { ...props, className };
+    props = useSliderThumb({ state, ...props });
+    props = useBox(props);
 
-export const SliderThumbContainer = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSliderThumbContainer,
-});
+    return props;
+  },
+);
+
+export const SliderThumbContainer =
+  createComponent<SliderThumbContainerOptions>(props => {
+    const htmlProps = useSliderThumbContainer(props);
+
+    return createElement("div", htmlProps);
+  });
+
+export type SliderThumbContainerOptions<T extends As = "div"> = BoxProps<T> &
+  SliderThumbOptions<T> &
+  Partial<SliderThumbUIProps> & {};
+
+export type SliderThumbContainerProps<T extends As = "div"> = Props<
+  SliderThumbContainerOptions<T>
+>;

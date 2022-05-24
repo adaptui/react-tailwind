@@ -1,44 +1,42 @@
+import { SliderInputOptions, useSliderInput } from "@renderlesskit/react";
 import {
   createComponent,
+  createElement,
   createHook,
-  SliderInputHTMLProps,
-  SliderInputOptions,
-  useSliderInput,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SLIDER_THUMB_INPUT_KEYS } from "./__keys";
+import { SliderThumbUIProps } from "./SliderThumbProps";
 
-export type SliderThumbInputOptions = BoxOptions & SliderInputOptions & {};
-
-export type SliderThumbInputHTMLProps = BoxHTMLProps & SliderInputHTMLProps;
-
-export type SliderThumbInputProps = SliderThumbInputOptions &
-  SliderThumbInputHTMLProps;
-
-export const useSliderThumbInput = createHook<
-  SliderThumbInputOptions,
-  SliderThumbInputHTMLProps
->({
-  name: "SliderThumbInput",
-  compose: [useBox, useSliderInput],
-  keys: SLIDER_THUMB_INPUT_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSliderThumbInput = createHook<SliderThumbInputOptions>(
+  ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(theme.thumb.input, htmlClassName);
+    const className = cx(theme.thumb.input, props.className);
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useSliderInput({ state, ...props });
+    props = useBox(props);
+
+    return props;
   },
-});
+);
 
-export const SliderThumbInput = createComponent({
-  as: "input",
-  memo: true,
-  useHook: useSliderThumbInput,
-});
+export const SliderThumbInput = createComponent<SliderThumbInputOptions>(
+  props => {
+    const htmlProps = useSliderThumbInput(props);
+
+    return createElement("input", htmlProps);
+  },
+);
+
+export type SliderThumbInputOptions<T extends As = "input"> = BoxProps<T> &
+  SliderInputOptions<T> &
+  Partial<SliderThumbUIProps> & {};
+
+export type SliderThumbInputProps<T extends As = "input"> = Props<
+  SliderThumbInputOptions<T>
+>;

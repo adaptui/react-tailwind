@@ -1,44 +1,42 @@
+import { SliderTrackOptions, useSliderTrack } from "@renderlesskit/react";
 import {
   createComponent,
+  createElement,
   createHook,
-  SliderTrackHTMLProps,
-  SliderTrackOptions,
-  useSliderTrack,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { SLIDER_TRACK_WRAPPER_KEYS } from "./__keys";
+import { SliderUIProps } from "./SliderProps";
 
-export type SliderTrackWrapperOptions = BoxOptions & SliderTrackOptions & {};
-
-export type SliderTrackWrapperHTMLProps = BoxHTMLProps & SliderTrackHTMLProps;
-
-export type SliderTrackWrapperProps = SliderTrackWrapperOptions &
-  SliderTrackWrapperHTMLProps;
-
-export const useSliderTrackWrapper = createHook<
-  SliderTrackWrapperOptions,
-  SliderTrackWrapperHTMLProps
->({
-  name: "SliderTrackWrapper",
-  compose: [useBox, useSliderTrack],
-  keys: SLIDER_TRACK_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSliderTrackWrapper = createHook<SliderTrackWrapperOptions>(
+  ({ state, range, size, knobIcon, tooltip, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(theme.track.wrapper, htmlClassName);
+    const className = tcm(theme.track.wrapper, props.className);
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useSliderTrack({ state, ...props });
+    props = useBox(props);
+
+    return props;
   },
-});
+);
 
-export const SliderTrackWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSliderTrackWrapper,
-});
+export const SliderTrackWrapper = createComponent<SliderTrackWrapperOptions>(
+  props => {
+    const htmlProps = useSliderTrackWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type SliderTrackWrapperOptions<T extends As = "div"> = BoxProps<T> &
+  SliderTrackOptions<T> &
+  Partial<SliderUIProps> & {};
+
+export type SliderTrackWrapperProps<T extends As = "div"> = Props<
+  SliderTrackWrapperOptions<T>
+>;

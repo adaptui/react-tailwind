@@ -3582,22 +3582,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@floating-ui/core@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-0.7.0.tgz#f2442168d65c22daeb48cfb730cbc3a29a846ac7"
-  integrity sha512-W7+i5Suhhvv97WDTW//KqUA43f/2a4abprM1rWqtLM9lIlJ29tbFI8h232SvqunXon0WmKNEKVjbOsgBhTnbLw==
-
 "@floating-ui/core@^0.7.1":
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-0.7.1.tgz#022710066a8facd4613b86a1b2b78ac2bc79b77d"
   integrity sha512-grcqEmI8DTIolufpxhJagVeJmvloxBXE6xxSrVnSXz/Wz1uUIsC85ad+UNBqAoBOvzLxE42wvDj3YkmSGqWRxA==
-
-"@floating-ui/dom@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-0.5.0.tgz#e4efd9e609ff3ee6778fbe4273930d6d1c220f2e"
-  integrity sha512-PS75dnMg4GdWjDFOiOs15cDzYJpukRNHqQn0ugrBlsrpk2n+y8bwZ24XrsdLSL7kxshmxxr2nTNycLnmRIvV7g==
-  dependencies:
-    "@floating-ui/core" "^0.7.0"
 
 "@floating-ui/dom@0.5.1":
   version "0.5.1"
@@ -3674,7 +3662,7 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
-"@internationalized/date@3.0.0-rc.0":
+"@internationalized/date@3.0.0-rc.0", "@internationalized/date@^3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@internationalized/date/-/date-3.0.0-rc.0.tgz#7050a46c7abc036e32311b6bda79553dd249a867"
   integrity sha512-R8ui3O2G43fZ/z5cBdJuU6nswKtuVrKloDE6utvqKEeGf6igFoiapcjg7jbQ+WvWIDGtdUytOp2fOq/X4efBdQ==
@@ -4248,7 +4236,7 @@
     "@react-stately/toggle" "^3.2.7"
     "@react-types/button" "^3.4.5"
 
-"@react-aria/calendar@3.0.0-rc.0":
+"@react-aria/calendar@^3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@react-aria/calendar/-/calendar-3.0.0-rc.0.tgz#f6e6db8f6a0bd9c21824e9acb859ad91e33201e7"
   integrity sha512-hSH5d0W30UfhlvcqCnMyMjF+QUqIApKW3Q+ylTIikeSkRfmW1CHMWSHUn7+t1vVQegAfWOdyPuGkqEn5cR76EQ==
@@ -4264,7 +4252,7 @@
     "@react-types/calendar" "3.0.0-rc.0"
     "@react-types/shared" "^3.12.0"
 
-"@react-aria/datepicker@3.0.0-rc.0":
+"@react-aria/datepicker@^3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@react-aria/datepicker/-/datepicker-3.0.0-rc.0.tgz#7fb13a64bf932ae61e583e7eb02454f647ed44ce"
   integrity sha512-2aD0ulOBLCf52jet54XFhanzG1eEE5sEgx9GRlgl6D5fquWZWkvBMmzfR6U1iaOMQteiURagmiRjOV0pQkD4ig==
@@ -4423,7 +4411,7 @@
     "@react-aria/utils" "^3.12.0"
     clsx "^1.1.1"
 
-"@react-stately/calendar@3.0.0-rc.0":
+"@react-stately/calendar@3.0.0-rc.0", "@react-stately/calendar@^3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@react-stately/calendar/-/calendar-3.0.0-rc.0.tgz#b5c071409cb1de39348353408ee8d324687ef45e"
   integrity sha512-G4FCaZTuYBln0ziZon653g/K5G3uUlxqpp9B/Co3elGS1XcIzw7jwU9hxY5pR8Hq5DYoxKilwO+PrviQTo4SzA==
@@ -4435,7 +4423,7 @@
     "@react-types/datepicker" "3.0.0-rc.0"
     "@react-types/shared" "^3.12.0"
 
-"@react-stately/datepicker@3.0.0-rc.0":
+"@react-stately/datepicker@3.0.0-rc.0", "@react-stately/datepicker@^3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@react-stately/datepicker/-/datepicker-3.0.0-rc.0.tgz#a31abb573d06135dca159148d5b96a2e714d59da"
   integrity sha512-pIBcW1dkC0pZRX8cj1kMQF914c2bOX4U7Rk2PTXaY/omZGs0PHd15EzxSMpphPskMgcMGXMRS8ZdbeJAzmE1+Q==
@@ -4599,28 +4587,28 @@
     conventional-changelog "^3.1.25"
     conventional-recommended-bump "^6.1.0"
 
-"@renderlesskit/react@^1.0.0-1":
-  version "1.0.0-1"
-  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-1.0.0-1.tgz#9e81fead45d9b31d411d168ece481a30fc978501"
-  integrity sha512-GeNEB8zUD4O8EMtkwGNacexbADQ4OBQldWy4Wq6gdly3iVLZjpiev8P0v5pcbZ2aXJBXH16NgxsxdlBCRX69jQ==
+"@renderlesskit/react@^1.0.0-2":
+  version "1.0.0-2"
+  resolved "https://registry.yarnpkg.com/@renderlesskit/react/-/react-1.0.0-2.tgz#9181faa6cfdfafb334af1dfe192085519d62647f"
+  integrity sha512-PmXuTGqLIok7Ry84v5uH/a1WnM5Y+YEeoFM7povWZQXDF9yrYn4ch1VX/5tIyPVBdMz3oGFUBYPC2Lj5eO7Sog==
   dependencies:
     "@chakra-ui/react-utils" "^2.0.0"
     "@chakra-ui/utils" "^2.0.0"
-    "@internationalized/date" "3.0.0-rc.0"
+    "@internationalized/date" "^3.0.0-rc.0"
     "@react-aria/button" "^3.4.4"
-    "@react-aria/calendar" "3.0.0-rc.0"
-    "@react-aria/datepicker" "3.0.0-rc.0"
+    "@react-aria/calendar" "^3.0.0-rc.0"
+    "@react-aria/datepicker" "^3.0.0-rc.0"
     "@react-aria/i18n" "^3.3.9"
     "@react-aria/numberfield" "^3.1.6"
     "@react-aria/slider" "^3.0.8"
     "@react-aria/spinbutton" "^3.0.6"
     "@react-aria/utils" "^3.12.0"
-    "@react-stately/calendar" "3.0.0-rc.0"
-    "@react-stately/datepicker" "3.0.0-rc.0"
+    "@react-stately/calendar" "^3.0.0-rc.0"
+    "@react-stately/datepicker" "^3.0.0-rc.0"
     "@react-stately/numberfield" "^3.0.7"
     "@react-stately/slider" "^3.0.8"
-    ariakit "2.0.0-next.27"
-    ariakit-utils "0.17.0-next.18"
+    ariakit "^2.0.0-next.27"
+    ariakit-utils "^0.17.0-next.18"
     date-fns "^2.28.0"
     raf "^3.4.1"
     react-remove-scroll "^2.5.3"
@@ -7141,25 +7129,12 @@ aria-query@^5.0.0:
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-5.0.0.tgz#210c21aaf469613ee8c9a62c7f86525e058db52c"
   integrity sha512-V+SM7AbUwJ+EBnB8+DXs0hPZHO0W6pqBcc0dW90OwtVG02PswOu/teuARoLQjdDOH+t9pJgGnW5/Qmouf3gPJg==
 
-ariakit-utils@0.17.0-next.18:
-  version "0.17.0-next.18"
-  resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.18.tgz#5bf9a3be399b30c1f9b8573dbd24b06f552cc5fd"
-  integrity sha512-uDPWUW850ootTSIeYWkDU83bjJeM+QB3WAurw0RUoqOsUbJOFqxG5opVikDhvelRMR8+gV52MC2v2iy10wxb7Q==
-
-ariakit-utils@0.17.0-next.19:
+ariakit-utils@0.17.0-next.19, ariakit-utils@^0.17.0-next.18, ariakit-utils@^0.17.0-next.19:
   version "0.17.0-next.19"
   resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.19.tgz#e2dc2054b8818d403fb55a15a70fbced84712a40"
   integrity sha512-rEC2npqK0WQtnNPEAicfcwxd/sQ9EdaRqf6p10ExhL5EUy/xoJpTGBAb67xSSHBu1hrqDFtfmF3FrHd6JOj2EA==
 
-ariakit@2.0.0-next.27:
-  version "2.0.0-next.27"
-  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.27.tgz#a04a68ce31398a190c6d91a5275c35d2a747d862"
-  integrity sha512-PvZxNDARg6N/fKG1WW7L3UoOoXTBIeKYYTn6fUoBANbRS+K4u73wwkCVme8oWUzniUbNdx+w/pfvqZ8/cQyaUA==
-  dependencies:
-    "@floating-ui/dom" "0.5.0"
-    ariakit-utils "0.17.0-next.18"
-
-ariakit@2.0.0-next.28:
+ariakit@^2.0.0-next.27, ariakit@^2.0.0-next.28:
   version "2.0.0-next.28"
   resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.28.tgz#72167584cb14e2012ebf9d25930a911c8ecb629a"
   integrity sha512-2p21YRxWKjxeGfj4a+Gq3nN68n+gkD0CpsE72UgNvdzyvs8lyZyWIOwovHYR0hcS6RZY4hTOq68ln+INGHF35g==

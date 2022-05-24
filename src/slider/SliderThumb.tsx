@@ -1,40 +1,22 @@
 import * as React from "react";
 
-import { ArrowIcon } from "../icons";
-import {
-  TooltipArrow,
-  TooltipArrowContent,
-  TooltipContent,
-  TooltipWrapper,
-  useTooltipState,
-} from "../tooltip";
-import { SliderTooltipReference } from "../tooltip/SliderTooltipReference";
 import { runIfFn, withIconA11y } from "../utils";
 
 import { SliderThumbContainer } from "./SliderThumbContainer";
 import { SliderThumbInput } from "./SliderThumbInput";
-import { useSliderThumbProps } from "./SliderThumbProps";
-import { SliderThumbInitialState } from "./SliderThumbState";
-import {
-  SliderThumbWrapper,
-  SliderThumbWrapperHTMLProps,
-} from "./SliderThumbWrapper";
+import { SliderThumbProps, useSliderThumbProps } from "./SliderThumbProps";
+import { SliderThumbWrapper } from "./SliderThumbWrapper";
 
-export type SliderThumbOwnProps = SliderThumbWrapperHTMLProps & {};
-
-export type SliderThumbProps = SliderThumbInitialState & SliderThumbOwnProps;
-
-export const SliderThumb = React.forwardRef<HTMLDivElement, SliderThumbProps>(
+export const SliderThumb = React.forwardRef<HTMLInputElement, SliderThumbProps>(
   (props, ref) => {
-    const { state, index } = props;
-    const { wrapperProps, containerProps, inputProps, thumbState } =
+    const { wrapperProps, containerProps, inputProps, uiProps } =
       useSliderThumbProps(props);
 
-    const tooltip = useTooltipState({ side: "top" });
+    // const tooltip = useTooltipState({ side: "top" });
 
     return (
       <SliderThumbWrapper {...wrapperProps}>
-        {thumbState.tooltip && !thumbState.isDisabled ? (
+        {/* {thumbState.tooltip && !thumbState.isDisabled ? (
           <>
             <SliderTooltipReference
               isDragging={state.isThumbDragging(index)}
@@ -58,14 +40,14 @@ export const SliderThumb = React.forwardRef<HTMLDivElement, SliderThumbProps>(
               </TooltipContent>
             </TooltipWrapper>
           </>
-        ) : (
-          <SliderThumbContainer {...containerProps} tabIndex={-1}>
-            <SliderThumbInput ref={ref} {...inputProps} />
-            {thumbState.knobIcon
-              ? withIconA11y(runIfFn(thumbState.knobIcon, thumbState))
-              : null}
-          </SliderThumbContainer>
-        )}
+        ) : ( */}
+        <SliderThumbContainer {...containerProps} tabIndex={-1}>
+          <SliderThumbInput ref={ref} {...inputProps} />
+          {uiProps.knobIcon
+            ? withIconA11y(runIfFn(uiProps.knobIcon, uiProps))
+            : null}
+        </SliderThumbContainer>
+        {/* )} */}
       </SliderThumbWrapper>
     );
   },

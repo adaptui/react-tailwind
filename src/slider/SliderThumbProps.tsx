@@ -1,24 +1,19 @@
-import { getComponentProps, splitProps } from "../utils";
+import {
+  SliderThumbState,
+  SliderThumbStateProps,
+  useSliderThumbState,
+} from "@renderlesskit/react";
 
-import { USE_SLIDER_THUMB_STATE_KEYS } from "./__keys";
-import { SliderThumbOwnProps, SliderThumbProps } from "./SliderThumb";
+import { getComponentProps, RenderProp } from "../utils";
+
 import { SliderThumbContainerProps } from "./SliderThumbContainer";
 import { SliderThumbInputProps } from "./SliderThumbInput";
 import {
-  SliderThumbInitialState,
-  useSliderThumbState,
-} from "./SliderThumbState";
+  SliderThumbUIState,
+  SliderThumbUIStateProps,
+  useSliderThumbUIState,
+} from "./SliderThumbUIState";
 import { SliderThumbWrapperProps } from "./SliderThumbWrapper";
-
-export const useSliderThumbStateSplit = (props: SliderThumbProps) => {
-  const [stateProps, sliderProps] = splitProps(
-    props,
-    USE_SLIDER_THUMB_STATE_KEYS,
-  ) as [SliderThumbInitialState, SliderThumbOwnProps];
-  const thumbState = useSliderThumbState(stateProps);
-
-  return [stateProps.state, thumbState, sliderProps, stateProps] as const;
-};
 
 const componentMap = {
   SliderThumbWrapper: "wrapperProps",
@@ -26,26 +21,83 @@ const componentMap = {
   SliderThumbInput: "inputProps",
 };
 
-export const useSliderThumbProps = (
-  props: React.PropsWithChildren<SliderThumbProps>,
-) => {
-  const [state, thumbState, sliderProps] = useSliderThumbStateSplit(props);
-  const { children, ...restProps } = sliderProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
+export const useSliderThumbProps = ({
+  size,
+  knobIcon,
+  tooltip,
+  index,
+  state,
+  trackRef,
+  orientation,
+  isDisabled,
+  isRequired,
+  label,
+  validationState,
+  autoFocus,
+  id,
+  excludeFromTabOrder,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
+  "aria-details": ariaDetails,
+  "aria-errormessage": ariaErrorMessage,
+  onKeyDown,
+  onKeyUp,
+  onFocus,
+  onBlur,
+  onFocusChange,
+  className,
+  style,
+  children,
+  ...restProps
+}: SliderThumbProps) => {
+  const _state = useSliderThumbState({
+    state,
+    index,
+    trackRef,
+    orientation,
+    isDisabled,
+    isRequired,
+    label,
+    validationState,
+    autoFocus,
+    id,
+    excludeFromTabOrder,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    "aria-describedby": ariaDescribedBy,
+    "aria-details": ariaDetails,
+    "aria-errormessage": ariaErrorMessage,
+    onKeyDown,
+    onKeyUp,
+    onFocus,
+    onBlur,
+    onFocusChange,
+  });
+  const uiState = useSliderThumbUIState({ size, knobIcon, tooltip });
+  const uiProps: SliderThumbUIProps = {
+    ...uiState,
+    index,
+    isDisabled,
+    state: _state,
+  };
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   const wrapperProps: SliderThumbWrapperProps = {
-    ...thumbState,
-    ...restProps,
+    ...uiProps,
+    className,
+    style,
     ...componentProps.wrapperProps,
   };
 
   const containerProps: SliderThumbContainerProps = {
-    ...thumbState,
+    ...uiProps,
     ...componentProps.containerProps,
   };
 
   const inputProps: SliderThumbInputProps = {
-    ...thumbState,
+    ...uiProps,
+    ...restProps,
     ...componentProps.inputProps,
   };
 
@@ -53,7 +105,24 @@ export const useSliderThumbProps = (
     wrapperProps,
     containerProps,
     inputProps,
-    state,
-    thumbState,
+    uiProps,
   };
+};
+
+export type SliderThumbUIProps = SliderThumbUIState &
+  Pick<SliderThumbStateProps, "index" | "isDisabled"> & {
+    state: SliderThumbState;
+  };
+
+export type SliderThumbProps = SliderThumbStateProps &
+  Omit<SliderThumbInputProps, "state" | "children" | "index"> &
+  SliderThumbUIStateProps & {
+    children?: RenderProp<SliderThumbUIProps>;
+  };
+
+export type SliderThumbPropsReturn = {
+  wrapperProps: SliderThumbWrapperProps;
+  containerProps: SliderThumbContainerProps;
+  inputProps: SliderThumbInputProps;
+  uiProps: SliderThumbUIProps;
 };

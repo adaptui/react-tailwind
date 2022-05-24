@@ -1,43 +1,40 @@
+import { SliderOptions, useSlider } from "@renderlesskit/react";
 import {
   createComponent,
+  createElement,
   createHook,
-  SliderGroupHTMLProps,
-  SliderGroupOptions,
-  useSliderGroup,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { SLIDER_WRAPPER_KEYS } from "./__keys";
+import { SliderUIProps } from "./SliderProps";
 
-export type SliderWrapperOptions = BoxOptions & SliderGroupOptions & {};
-
-export type SliderWrapperHTMLProps = BoxHTMLProps & SliderGroupHTMLProps;
-
-export type SliderWrapperProps = SliderWrapperOptions & SliderWrapperHTMLProps;
-
-export const useSliderWrapper = createHook<
-  SliderWrapperOptions,
-  SliderWrapperHTMLProps
->({
-  name: "SliderWrapper",
-  compose: [useBox, useSliderGroup],
-  keys: SLIDER_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSliderWrapper = createHook<SliderWrapperOptions>(
+  ({ state, range, size, knobIcon, tooltip, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(theme.wrapper, htmlClassName);
+    const className = tcm(theme.wrapper, props.className);
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useSlider({ state, ...props });
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const SliderWrapper = createComponent<SliderWrapperOptions>(props => {
+  const htmlProps = useSliderWrapper(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const SliderWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSliderWrapper,
-});
+export type SliderWrapperOptions<T extends As = "div"> = BoxProps<T> &
+  SliderOptions<T> &
+  Partial<SliderUIProps> & {};
+
+export type SliderWrapperProps<T extends As = "div"> = Props<
+  SliderWrapperOptions<T>
+>;

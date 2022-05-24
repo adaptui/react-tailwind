@@ -1,46 +1,31 @@
 import {
+  TooltipAnchorOptions as TooltipAnchorAriakitOptions,
+  useTooltipAnchor as useTooltipAnchorAriakit,
+} from "ariakit";
+import {
   createComponent,
+  createElement,
   createHook,
-  TooltipAnchorHTMLProps as RenderlesskitTooltipAnchorHTMLProps,
-  TooltipAnchorOptions as RenderlesskitTooltipAnchorOptions,
-  useTooltipAnchor as useRenderlesskitTooltipAnchor,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { RenderPropType } from "../utils";
+import { TooltipUIProps } from "./TooltipProps";
 
-import { TOOLTIP_REFERENCE_KEYS } from "./__keys";
-import { TooltipStateReturn } from "./TooltipState";
+export const useTooltipAnchor = createHook<TooltipAnchorOptions>(
+  ({ state, content, arrowIcon, withArrow, prefix, suffix, ...props }) => {
+    props = useTooltipAnchorAriakit({ state, ...props });
+    return props;
+  },
+);
 
-export type TooltipAnchorOptions = RenderlesskitTooltipAnchorOptions & {
-  prefix: RenderPropType<TooltipStateReturn>;
-};
+export const TooltipAnchor = createComponent<TooltipAnchorOptions>(props => {
+  const htmlProps = useTooltipAnchor(props);
+  return createElement("div", htmlProps);
+});
 
-export type TooltipAnchorHTMLProps = Omit<
-  RenderlesskitTooltipAnchorHTMLProps,
-  "prefix"
+export type TooltipAnchorOptions<T extends As = "div"> =
+  TooltipAnchorAriakitOptions<T> & Partial<TooltipUIProps> & {};
+
+export type TooltipAnchorProps<T extends As = "div"> = Props<
+  TooltipAnchorOptions<T>
 >;
-
-export type TooltipAnchorProps = TooltipAnchorOptions & TooltipAnchorHTMLProps;
-
-export const useTooltipAnchor = createHook<
-  TooltipAnchorOptions,
-  TooltipAnchorHTMLProps
->({
-  name: "TooltipAnchor",
-  compose: useRenderlesskitTooltipAnchor,
-  keys: TOOLTIP_REFERENCE_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
-  useProps(options, htmlProps) {
-    return htmlProps;
-  },
-});
-
-export const TooltipAnchor = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useTooltipAnchor,
-});

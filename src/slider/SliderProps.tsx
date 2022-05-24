@@ -1,25 +1,23 @@
-import { SliderBaseStateReturn } from "@renderlesskit/react";
+import {
+  SliderBaseStateProps,
+  SliderState,
+  SliderStateProps,
+  useSliderBaseState,
+  useSliderState,
+} from "@renderlesskit/react";
 
-import { createContext, getComponentProps, splitProps } from "../utils";
+import { getComponentProps, RenderProp } from "../utils";
 
-import { USE_SLIDER_STATE_KEYS } from "./__keys";
-import { SliderOwnProps, SliderProps } from "./Slider";
 import { SliderFilledTrackProps } from "./SliderFilledTrack";
-import { SliderInitialState, useSliderState } from "./SliderState";
-import { SliderThumbProps } from "./SliderThumb";
+import { SliderThumbProps } from "./SliderThumbProps";
 import { SliderTrackProps } from "./SliderTrack";
 import { SliderTrackWrapperProps } from "./SliderTrackWrapper";
+import {
+  SliderUIState,
+  SliderUIStateProps,
+  useSliderUIState,
+} from "./SliderUIState";
 import { SliderWrapperProps } from "./SliderWrapper";
-
-export const useSliderStateSplit = (props: SliderProps) => {
-  const [stateProps, sliderProps] = splitProps(
-    props,
-    USE_SLIDER_STATE_KEYS,
-  ) as [SliderInitialState, SliderOwnProps];
-  const sliderState = useSliderState(stateProps);
-
-  return [sliderState, sliderProps, stateProps] as const;
-};
 
 const componentMap = {
   SliderWrapper: "wrapperProps",
@@ -28,64 +26,123 @@ const componentMap = {
   SliderFilledTrack: "filledTrackProps",
 };
 
-export const useSliderProps = (props: React.PropsWithChildren<SliderProps>) => {
-  const [state, sliderProps, stateProps] = useSliderStateSplit(props);
-  const { size, knobIcon, tooltip, isDragging, setIsDragging } = state;
-  const { children, ...restProps } = sliderProps;
-  const { componentProps, finalChildren } = getComponentProps(
-    componentMap,
-    children,
-    state,
-  );
+export const useSliderProps = ({
+  range,
+  size,
+  knobIcon,
+  tooltip,
+  children,
+  value,
+  defaultValue,
+  onChange,
+  onChangeEnd,
+  minValue,
+  maxValue,
+  step,
+  orientation,
+  isDisabled,
+  label,
+  formatOptions,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
+  "aria-details": ariaDetails,
+  ...restProps
+}: SliderProps): SliderPropsReturn => {
+  const baseState = useSliderBaseState({
+    value,
+    defaultValue,
+    onChange,
+    onChangeEnd,
+    minValue,
+    maxValue,
+    step,
+    orientation,
+    isDisabled,
+    label,
+  });
+  const state = useSliderState({
+    state: baseState,
+    value,
+    defaultValue,
+    onChange,
+    onChangeEnd,
+    minValue,
+    maxValue,
+    step,
+    orientation,
+    isDisabled,
+    label,
+    id,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
+    "aria-describedby": ariaDescribedBy,
+    "aria-details": ariaDetails,
+  });
+  const uiState = useSliderUIState({ range, size, knobIcon, tooltip });
+  let uiProps: SliderUIProps = { ...uiState, state };
+
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   const wrapperProps: SliderWrapperProps = {
-    ...state,
+    ...uiProps,
     ...restProps,
     ...componentProps.wrapperProps,
   };
 
   const trackWrapperProps: SliderTrackWrapperProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.trackWrapperProps,
   };
 
   const trackProps: SliderTrackProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.trackProps,
   };
 
   const filledTrackProps: SliderFilledTrackProps = {
-    ...state,
+    ...uiProps,
     ...componentProps.filledTrackProps,
   };
 
   const thumbProps: SliderThumbProps = {
-    trackRef: state.trackRef,
-    orientation: stateProps.orientation,
-    isDisabled: stateProps.isDisabled,
     size,
     knobIcon,
     tooltip,
-    isDragging,
-    setIsDragging,
+    state: state.baseState,
+    trackRef: state.trackRef,
+    orientation,
+    isDisabled,
     ...componentProps.thumbProps,
   };
 
   return {
-    state,
+    uiProps,
     wrapperProps,
     trackWrapperProps,
     trackProps,
-    thumbProps,
     filledTrackProps,
-    finalChildren,
+    thumbProps,
   };
 };
 
-const [SliderContextProvider, useSliderContext] =
-  createContext<SliderBaseStateReturn>({
-    name: "SliderContextProvider",
-    strict: false,
-  });
+export type SliderUIProps = SliderUIState & {
+  state: SliderState;
+};
 
-export { SliderContextProvider, useSliderContext };
+export type SliderProps = Omit<SliderStateProps, "state"> &
+  Pick<SliderBaseStateProps, "formatOptions"> &
+  Omit<SliderWrapperProps, "state" | "children" | "defaultValue" | "onChange"> &
+  SliderUIStateProps & {
+    children?: RenderProp<SliderUIProps>;
+  };
+
+export type SliderPropsReturn = {
+  wrapperProps: SliderWrapperProps;
+  trackWrapperProps: SliderTrackWrapperProps;
+  trackProps: SliderTrackProps;
+  filledTrackProps: SliderFilledTrackProps;
+  thumbProps: SliderThumbProps;
+  uiProps: SliderUIProps;
+};

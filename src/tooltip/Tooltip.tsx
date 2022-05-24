@@ -1,59 +1,34 @@
 import * as React from "react";
 
+import { Button } from "../button";
 import { useTheme } from "../theme";
-import { cx, RenderProp, withIconA11y } from "../utils";
+import { cx, withIconA11y } from "../utils";
 
+import { TooltipAnchor } from "./TooltipAnchor";
 import { TooltipArrow } from "./TooltipArrow";
-import { TooltipArrowContent } from "./TooltipArrowContent";
-import { TooltipContent } from "./TooltipContent";
-import { useTooltipProps } from "./TooltipProps";
-import { TooltipReference } from "./TooltipReference";
-import { TooltipInitialState, TooltipStateReturn } from "./TooltipState";
-import { TooltipWrapper, TooltipWrapperHTMLProps } from "./TooltipWrapper";
+import { TooltipProps, useTooltipProps } from "./TooltipProps";
+import { TooltipWrapper } from "./TooltipWrapper";
 
-export type TooltipOwnProps = Omit<TooltipWrapperHTMLProps, "prefix"> & {};
-
-export type TooltipProps = TooltipInitialState &
-  TooltipOwnProps &
-  RenderProp<TooltipStateReturn>;
-
-export const Tooltip = React.forwardRef<HTMLInputElement, TooltipProps>(
+export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (props, ref) => {
-    const {
-      csr,
-      state,
-      content,
-      prefix,
-      suffix,
-      wrapperProps,
-      referenceProps,
-      contentProps,
-      arrowProps,
-      arrowContentProps,
-    } = useTooltipProps(props);
+    const { uiProps, wrapperProps, anchorProps, arrowProps } =
+      useTooltipProps(props);
+    const { prefix, content, suffix, withArrow } = uiProps;
 
     const theme = useTheme("tooltip");
     const suffixStyles = cx(theme.suffix);
     const prefixStyles = cx(theme.prefix);
 
-    if (csr) {
-      return null;
-    }
-
     return (
       <>
-        <TooltipReference {...referenceProps} />
+        <TooltipAnchor as={Button} {...anchorProps}>
+          Tooltip
+        </TooltipAnchor>
         <TooltipWrapper ref={ref} {...wrapperProps}>
-          <TooltipContent {...contentProps}>
-            {prefix ? withIconA11y(prefix, { className: prefixStyles }) : null}
-            {content}
-            {suffix ? withIconA11y(suffix, { className: suffixStyles }) : null}
-            {state?.withArrow ? (
-              <TooltipArrow {...arrowProps}>
-                <TooltipArrowContent {...arrowContentProps} />
-              </TooltipArrow>
-            ) : null}
-          </TooltipContent>
+          {prefix ? withIconA11y(prefix, { className: prefixStyles }) : null}
+          {content}
+          {suffix ? withIconA11y(suffix, { className: suffixStyles }) : null}
+          {withArrow ? <TooltipArrow {...arrowProps} /> : null}
         </TooltipWrapper>
       </>
     );

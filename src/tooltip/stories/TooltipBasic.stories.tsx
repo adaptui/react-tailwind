@@ -20,27 +20,33 @@ export default {
   },
 } as Meta;
 
-export const Bottom: Story = { args: { side: "bottom" } };
-export const Right: Story = { args: { side: "right" } };
-export const Left: Story = { args: { side: "left" } };
-export const Top: Story = { args: { side: "top" } };
+export const Bottom: Story = { args: { placement: "bottom" } };
+export const Right: Story = { args: { placement: "right" } };
+export const Left: Story = { args: { placement: "left" } };
+export const Top: Story = { args: { placement: "top" } };
 
-export const ArrowBottom: Story = { args: { withArrow: true, side: "bottom" } };
-export const ArrowRight: Story = { args: { withArrow: true, side: "right" } };
-export const ArrowLeft: Story = { args: { withArrow: true, side: "left" } };
-export const ArrowTop: Story = { args: { withArrow: true, side: "top" } };
+export const ArrowBottom: Story = {
+  args: { withArrow: true, placement: "bottom" },
+};
+export const ArrowRight: Story = {
+  args: { withArrow: true, placement: "right" },
+};
+export const ArrowLeft: Story = {
+  args: { withArrow: true, placement: "left" },
+};
+export const ArrowTop: Story = { args: { withArrow: true, placement: "top" } };
 
 export const Prefix: Story = {
-  args: { withArrow: true, side: "top", prefix: <SlotIcon /> },
+  args: { withArrow: true, placement: "top", prefix: <SlotIcon /> },
 };
 
 export const Suffix: Story = {
-  args: { withArrow: true, side: "top", suffix: <SlotIcon /> },
+  args: { withArrow: true, placement: "top", suffix: <SlotIcon /> },
 };
 export const PrefixSuffix: Story = {
   args: {
     withArrow: true,
-    side: "top",
+    placement: "top",
     prefix: <SlotIcon />,
     suffix: <SlotIcon />,
   },

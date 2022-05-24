@@ -1,46 +1,38 @@
 import {
+  TooltipArrowOptions as TooltipArrowAriakitOptions,
+  useTooltipArrow as useTooltipArrowAriakit,
+} from "ariakit";
+import {
   createComponent,
+  createElement,
   createHook,
-  TooltipArrowHTMLProps as RenderlesskitTooltipArrowHTMLProps,
-  TooltipArrowOptions as RenderlesskitTooltipArrowOptions,
-  useTooltipArrow as useRenderlesskitTooltipArrow,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { RenderPropType } from "../utils";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 
-import { TOOLTIP_ARROW_KEYS } from "./__keys";
-import { TooltipStateReturn } from "./TooltipState";
+import { TooltipUIProps } from "./TooltipProps";
 
-export type TooltipArrowOptions = RenderlesskitTooltipArrowOptions & {
-  prefix: RenderPropType<TooltipStateReturn>;
-};
+export const useTooltipArrow = createHook<TooltipArrowOptions>(
+  ({ state, content, arrowIcon, withArrow, prefix, suffix, ...props }) => {
+    const theme = useTheme("tooltip");
+    const className = tcm(theme.arrow, props.className);
 
-export type TooltipArrowHTMLProps = Omit<
-  RenderlesskitTooltipArrowHTMLProps,
-  "prefix"
+    props = { ...props, className };
+    props = useTooltipArrowAriakit({ state, ...props });
+    return props;
+  },
+);
+
+export const TooltipArrow = createComponent<TooltipArrowOptions>(props => {
+  const htmlProps = useTooltipArrow(props);
+  return createElement("div", htmlProps);
+});
+
+export type TooltipArrowOptions<T extends As = "div"> =
+  TooltipArrowAriakitOptions<T> & Partial<TooltipUIProps> & {};
+
+export type TooltipArrowProps<T extends As = "div"> = Props<
+  TooltipArrowOptions<T>
 >;
-
-export type TooltipArrowProps = TooltipArrowOptions & TooltipArrowHTMLProps;
-
-export const useTooltipArrow = createHook<
-  TooltipArrowOptions,
-  TooltipArrowHTMLProps
->({
-  name: "TooltipArrow",
-  compose: useRenderlesskitTooltipArrow,
-  keys: TOOLTIP_ARROW_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
-  useProps(options, htmlProps) {
-    return htmlProps;
-  },
-});
-
-export const TooltipArrow = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useTooltipArrow,
-});
