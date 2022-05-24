@@ -1,57 +1,53 @@
-import { TabbableHTMLProps, TabbableOptions, useTabbable } from "reakit";
-import { ariaAttr, createComponent, createHook } from "@renderlesskit/react";
+import { FocusableOptions, useFocusable } from "ariakit";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SELECT_BASE_KEYS } from "./__keys";
-import { SelectStateReturn } from "./SelectState";
+import { SelectUIProps } from "./SelectProps";
 
-export type SelectBaseOptions = TabbableOptions &
-  Pick<
-    SelectStateReturn,
-    "size" | "variant" | "prefix" | "suffix" | "invalid"
-  > & {};
+export const useSelectBase = createHook<SelectBaseOptions>(
+  ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
+    const theme = useTheme("input");
+    const className = cx(
+      theme.base.common,
+      size ? theme.base.size[size].common : "",
+      variant ? theme.base.variant[variant].common : "",
+      size && (!prefix || !suffix) ? theme.base.size[size].withoutAddon : "",
+      props.disabled || invalid
+        ? ""
+        : variant
+        ? theme.base.variant[variant].interactions
+        : "",
+      variant && props.disabled ? theme.base.variant[variant].disabled : "",
+      variant && invalid ? theme.base.variant[variant].invalid : "",
+      props.className,
+    );
 
-export type SelectBaseHTMLProps = Omit<TabbableHTMLProps, "size" | "prefix"> &
-  Omit<React.SelectHTMLAttributes<any>, "size" | "prefix">;
+    props = { "aria-invalid": invalid, ...props, className };
+    props = useBox(props);
+    props = useFocusable(props);
 
-export type SelectBaseProps = SelectBaseOptions & SelectBaseHTMLProps;
-
-export const useSelectBase = createHook<SelectBaseOptions, SelectBaseHTMLProps>(
-  {
-    name: "SelectBase",
-    compose: useTabbable,
-    keys: SELECT_BASE_KEYS,
-
-    useProps(options, htmlProps) {
-      const { size, variant, prefix, suffix, invalid, disabled } = options;
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-      const theme = useTheme("select");
-      const className = cx(
-        theme.base.common,
-        theme.base.size[size].common,
-        !prefix || !suffix ? theme.base.size[size].withoutAddon : "",
-        theme.base.variant[variant].common,
-        disabled || invalid ? "" : theme.base.variant[variant].interactions,
-        disabled ? theme.base.variant[variant].disabled : "",
-        invalid ? theme.base.variant[variant].invalid : "",
-        htmlClassName,
-      );
-
-      return {
-        className,
-        disabled,
-        "aria-invalid": ariaAttr(invalid),
-        ...restHtmlProps,
-      };
-    },
+    return props;
   },
 );
 
-export const SelectBase = createComponent({
-  as: "select",
-  memo: true,
-  useHook: useSelectBase,
+export const SelectBase = createComponent<SelectBaseOptions>(props => {
+  const htmlProps = useSelectBase(props);
+
+  return createElement("select", htmlProps);
 });
+
+export type SelectBaseOptions<T extends As = "select"> = BoxOptions<T> &
+  FocusableOptions<T> &
+  Partial<SelectUIProps> & {};
+
+export type SelectBaseProps<T extends As = "select"> = Props<
+  SelectBaseOptions<T>
+>;
