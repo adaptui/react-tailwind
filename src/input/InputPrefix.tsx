@@ -1,50 +1,60 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_PREFIX_KEYS } from "./__keys";
-import { InputProps } from "./Input";
-import { InputStateReturn } from "./InputState";
+import { InputBaseProps } from "./InputBase";
+import { InputUIProps } from "./InputProps";
 
-export type InputPrefixOptions = BoxOptions &
-  Pick<InputStateReturn, "size" | "variant" | "invalid"> & {
-    disabled: InputProps["disabled"];
-  };
-
-export type InputPrefixHTMLProps = BoxHTMLProps;
-
-export type InputPrefixProps = InputPrefixOptions & InputPrefixHTMLProps;
-
-export const useInputPrefix = createHook<
-  InputPrefixOptions,
-  InputPrefixHTMLProps
->({
-  name: "InputPrefix",
-  compose: useBox,
-  keys: INPUT_PREFIX_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, variant, invalid, disabled } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useInputPrefix = createHook<InputPrefixOptions>(
+  ({
+    prefix,
+    suffix,
+    size,
+    variant,
+    invalid,
+    loading,
+    spinner,
+    disabled,
+    ...props
+  }) => {
     const theme = useTheme("input");
     const className = cx(
       theme.prefix.common,
-      theme.prefix.size[size],
-      theme.prefix.variant[variant].common,
-      disabled || invalid ? "" : theme.prefix.variant[variant].interactions,
-      disabled ? theme.prefix.variant[variant].disabled : "",
-      htmlClassName,
+      size ? theme.prefix.size[size] : "",
+      variant ? theme.prefix.variant[variant].common : "",
+      disabled || invalid
+        ? ""
+        : variant
+        ? theme.prefix.variant[variant].interactions
+        : "",
+      variant && disabled ? theme.prefix.variant[variant].disabled : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const InputPrefix = createComponent<InputPrefixOptions>(props => {
+  const htmlProps = useInputPrefix(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const InputPrefix = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useInputPrefix,
-});
+export type InputPrefixOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<InputUIProps> &
+  Pick<InputBaseProps, "disabled"> & {};
+
+export type InputPrefixProps<T extends As = "div"> = Props<
+  InputPrefixOptions<T>
+>;

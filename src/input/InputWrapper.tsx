@@ -1,37 +1,37 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_WRAPPER_KEYS } from "./__keys";
+import { InputUIProps } from "./InputProps";
 
-export type InputWrapperOptions = BoxOptions & {};
-
-export type InputWrapperHTMLProps = BoxHTMLProps;
-
-export type InputWrapperProps = InputWrapperOptions & InputWrapperHTMLProps;
-
-export const useInputWrapper = createHook<
-  InputWrapperOptions,
-  InputWrapperHTMLProps
->({
-  name: "InputWrapper",
-  compose: useBox,
-  keys: INPUT_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useInputWrapper = createHook<InputWrapperOptions>(
+  ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
     const theme = useTheme("input");
-    const className = cx(theme.wrapper, htmlClassName);
+    const className = cx(theme.wrapper, props.className);
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const InputWrapper = createComponent<InputWrapperOptions>(props => {
+  const htmlProps = useInputWrapper(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const InputWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useInputWrapper,
-});
+export type InputWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<InputUIProps> & {};
+
+export type InputWrapperProps<T extends As = "div"> = Props<
+  InputWrapperOptions<T>
+>;
