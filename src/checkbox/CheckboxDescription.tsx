@@ -1,45 +1,55 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CHECKBOX_DESCRIPTION_KEYS } from "./__keys";
-import { CheckboxStateReturn } from "./CheckboxState";
+import { CheckboxUIProps } from "./CheckboxProps";
 
-export type CheckboxDescriptionOptions = BoxOptions &
-  Pick<CheckboxStateReturn, "size">;
-
-export type CheckboxDescriptionHTMLProps = BoxHTMLProps;
-
-export type CheckboxDescriptionProps = CheckboxDescriptionOptions &
-  CheckboxDescriptionHTMLProps;
-
-export const useCheckboxDescription = createHook<
-  CheckboxDescriptionOptions,
-  CheckboxDescriptionHTMLProps
->({
-  name: "CheckboxDescription",
-  compose: useBox,
-  keys: CHECKBOX_DESCRIPTION_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useCheckboxDescription = createHook<CheckboxDescriptionOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+    icon,
+    label,
+    description,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
     const theme = useTheme("checkbox");
     const className = cx(
       theme.description.common,
-      theme.description.size[size],
-      htmlClassName,
+      size ? theme.description.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
-  },
-});
+    props = { ...props, className };
+    props = useBox(props);
 
-export const CheckboxDescription = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useCheckboxDescription,
-});
+    return props;
+  },
+);
+
+export const CheckboxDescription = createComponent<CheckboxDescriptionOptions>(
+  props => {
+    const htmlProps = useCheckboxDescription(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type CheckboxDescriptionOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<CheckboxUIProps> & {};
+
+export type CheckboxDescriptionProps<T extends As = "div"> = Props<
+  CheckboxDescriptionOptions<T>
+>;

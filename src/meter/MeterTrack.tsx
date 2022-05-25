@@ -1,42 +1,39 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { METER_TRACK_KEYS } from "./__keys";
-import { MeterStateReturn } from "./MeterState";
+import { MeterUIProps } from "./MeterProps";
 
-export type MeterTrackOptions = BoxOptions & Pick<MeterStateReturn, "size">;
+export const useMeterTrack = createHook<MeterTrackOptions>(
+  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+    const theme = useTheme("meter");
+    const className = cx(
+      theme.track.common,
+      size ? theme.track.size[size] : "",
+      props.className,
+    );
 
-export type MeterTrackHTMLProps = BoxHTMLProps;
+    props = { ...props, className };
+    props = useBox(props);
 
-export type MeterTrackProps = MeterTrackOptions & MeterTrackHTMLProps;
-
-export const useMeterTrack = createHook<MeterTrackOptions, MeterTrackHTMLProps>(
-  {
-    name: "MeterTrack",
-    compose: useBox,
-    keys: METER_TRACK_KEYS,
-
-    useProps(options, htmlProps) {
-      const { size } = options;
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-      const theme = useTheme("meter");
-      const className = cx(
-        theme.track.common,
-        theme.track.size[size],
-        htmlClassName,
-      );
-
-      return { className, ...restHtmlProps };
-    },
+    return props;
   },
 );
 
-export const MeterTrack = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useMeterTrack,
+export const MeterTrack = createComponent<MeterTrackOptions>(props => {
+  const htmlProps = useMeterTrack(props);
+
+  return createElement("div", htmlProps);
 });
+
+export type MeterTrackOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<MeterUIProps> & {};
+
+export type MeterTrackProps<T extends As = "div"> = Props<MeterTrackOptions<T>>;

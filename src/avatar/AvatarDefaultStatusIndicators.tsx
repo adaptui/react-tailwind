@@ -11,43 +11,40 @@ import {
 import { useTheme } from "../theme";
 import { passProps, tcm } from "../utils";
 
-import { AvatarProps } from "./Avatar";
-import { AvatarStateReturn } from "./AvatarState";
+import { AvatarUIProps } from "./AvatarProps";
 
-export const AvatarDefaultStatusIndicators: AvatarProps["statusIndicators"] =
-  state => {
-    const { status, size, parentsBackground } = state;
+export const AvatarDefaultStatusIndicators = (props: AvatarUIProps) => {
+  const { size, status, parentsBackground } = props;
 
-    const theme = useTheme("avatar");
-    const className = tcm(
-      theme.statusIndicators[status].common,
-      theme.statusIndicators[status].size[size],
-      ...parentsBackground,
-    );
+  const theme = useTheme("avatar");
+  const className = tcm(
+    theme.statusIndicators[status].common,
+    theme.statusIndicators[status].size[size],
+    ...parentsBackground,
+  );
 
-    return passProps(runIfFn(<StatusIndicators state={state} />), {
-      className,
-    });
-  };
+  return passProps(runIfFn(<StatusIndicators {...props} />), { className });
+};
 
-export type StatusIndicatorsProps = { state: AvatarStateReturn };
+export type StatusIndicatorsProps = AvatarUIProps & {
+  className?: string;
+};
 
 export const StatusIndicators: React.FC<StatusIndicatorsProps> = props => {
-  const { state, ...rest } = props;
-  const { status, size } = state;
+  const { status, size, className } = props;
 
-  if (status === "active") return <ActiveStatusIcon {...rest} />;
-  if (status === "sleep") return <SleepStatusIcon {...rest} />;
-  if (status === "away") return <AwayStatusIcon {...rest} />;
+  if (status === "active") return <ActiveStatusIcon className={className} />;
+  if (status === "sleep") return <SleepStatusIcon className={className} />;
+  if (status === "away") return <AwayStatusIcon className={className} />;
 
   if (status === "typing")
     return ["xs", "sm", "md"].includes(size) ? (
-      <TypingSmallStatusIcon {...rest} />
+      <TypingSmallStatusIcon className={className} />
     ) : (
-      <TypingLargeStatusIcon {...rest} />
+      <TypingLargeStatusIcon className={className} />
     );
 
-  if (status === "org") return <TimelessIcon {...rest} />;
+  if (status === "org") return <TimelessIcon />;
 
   return null;
 };

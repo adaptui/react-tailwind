@@ -13,8 +13,10 @@ export const MeterHint: React.FC<MeterHintProps> = props => {
         value={value}
         max={75}
         label="Charging..."
-        hint={({ percent }: { percent: any }) =>
-          percent === null ? undefined : `${percent}%`
+        hint={props =>
+          props.state?.percent === null
+            ? undefined
+            : `${Math.ceil(props.state?.percent)}%`
         }
         {...props}
       />

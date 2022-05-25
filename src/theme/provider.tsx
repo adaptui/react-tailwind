@@ -44,7 +44,7 @@ export type RenderlesskitProviderProps = {
 };
 
 export const RenderlesskitProvider: React.FC<
-  RenderlesskitProviderProps
+  React.PropsWithChildren<RenderlesskitProviderProps>
 > = props => {
   const { children, theme = defaultTheme, extend } = props;
 

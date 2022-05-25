@@ -1,42 +1,48 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SWITCH_TEXT_KEYS } from "./__keys";
-import { SwitchStateReturn } from "./SwitchState";
+import { SwitchUIProps } from "./SwitchProps";
 
-export type SwitchTextOptions = BoxOptions & Pick<SwitchStateReturn, "size">;
+export const useSwitchText = createHook<SwitchTextOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    icon,
+    label,
+    description,
+    disabled,
+    ...props
+  }) => {
+    const theme = useTheme("switch");
+    const className = cx(
+      theme.text.common,
+      size ? theme.text.size[size] : "",
+      props.className,
+    );
 
-export type SwitchTextHTMLProps = BoxHTMLProps;
+    props = { ...props, className };
+    props = useBox(props);
 
-export type SwitchTextProps = SwitchTextOptions & SwitchTextHTMLProps;
-
-export const useSwitchText = createHook<SwitchTextOptions, SwitchTextHTMLProps>(
-  {
-    name: "SwitchText",
-    compose: useBox,
-    keys: SWITCH_TEXT_KEYS,
-
-    useProps(options, htmlProps) {
-      const { size } = options;
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-      const theme = useTheme("switch");
-      const className = cx(
-        theme.text.common,
-        theme.text.size[size],
-        htmlClassName,
-      );
-
-      return { className, ...restHtmlProps };
-    },
+    return props;
   },
 );
 
-export const SwitchText = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSwitchText,
+export const SwitchText = createComponent<SwitchTextOptions>(props => {
+  const htmlProps = useSwitchText(props);
+
+  return createElement("div", htmlProps);
 });
+
+export type SwitchTextOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<SwitchUIProps> & {};
+
+export type SwitchTextProps<T extends As = "div"> = Props<SwitchTextOptions<T>>;

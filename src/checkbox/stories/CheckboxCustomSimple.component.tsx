@@ -5,8 +5,8 @@ import {
   CheckboxDescription,
   CheckboxIcon,
   CheckboxLabel,
-  CheckboxState,
   CheckboxText,
+  CheckboxUIProps,
   EyeClose,
   EyeOpen,
   withIconA11y,
@@ -23,7 +23,9 @@ export const CheckboxCustomSimple: React.FC<CheckboxCustomSimpleProps> = () => {
       description="Fruits in the basket"
     >
       <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
-      <CheckboxIcon className="bg-red-500">{CustomIconElement}</CheckboxIcon>
+      <CheckboxIcon className="bg-red-500">
+        {CustomIconElement as unknown as React.ReactNode}
+      </CheckboxIcon>
       <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
       <CheckboxDescription className="text-orange-500">
         New Description
@@ -34,9 +36,9 @@ export const CheckboxCustomSimple: React.FC<CheckboxCustomSimpleProps> = () => {
 
 export default CheckboxCustomSimple;
 
-const CustomIconElement: CheckboxState["icon"] = state => (
+const CustomIconElement = (props: CheckboxUIProps) => (
   <>
-    {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-    {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+    {props.isUnchecked ? withIconA11y(<EyeClose />) : null}
+    {props.isChecked ? withIconA11y(<EyeOpen />) : null}
   </>
 );

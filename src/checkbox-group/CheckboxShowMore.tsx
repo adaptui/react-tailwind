@@ -4,29 +4,25 @@ import { PlusIcon } from "../icons";
 import {
   ShowMore,
   ShowMoreButton,
+  ShowMoreButtonProps,
   ShowMoreContent,
-  ShowMoreProps,
+  ShowMoreContentProps,
 } from "../show-more";
 import { useTheme } from "../theme";
-import { cx, Dict, passProps } from "../utils";
+import { cx, passProps } from "../utils";
 
-import { useCheckboxGroupContext } from "./CheckboxGroupState";
+import { CheckboxGroupUIProps } from "./CheckboxGroupProps";
 
-export type CheckboxShowMoreOwnProps = { componentProps?: Dict<any> };
-
-export type CheckboxShowMoreProps = ShowMoreProps & CheckboxShowMoreOwnProps;
+export type CheckboxShowMoreProps = {
+  contentProps: ShowMoreContentProps;
+  buttonProps: ShowMoreButtonProps;
+  uiProps: CheckboxGroupUIProps;
+  moreChildren: React.ReactNode;
+};
 
 export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
-  const { children, componentProps, direction, ...restProps } = props;
-  const contextState = useCheckboxGroupContext();
-  const size = contextState?.size || "md";
-  const stack = contextState?.stack || direction || "vertical";
-
-  const sizeMap = {
-    sm: "sm",
-    md: "md",
-    lg: "xl",
-  } as const;
+  const { contentProps, moreChildren, buttonProps, uiProps } = props;
+  const { stack, size } = uiProps;
 
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
 
@@ -38,25 +34,25 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = props => {
   );
   const contentClassName = cx(theme.group.showMore.content[stack]);
 
-  const finalChildren = React.Children.map(children, child => {
+  const finalChildren = React.Children.map(moreChildren, child => {
     return passProps(child, { disabled: hasExpandStarted ? false : true });
   });
 
   return (
-    <ShowMore direction={stack} {...restProps}>
+    <ShowMore direction={stack}>
       {finalChildren}
       <ShowMoreContent
         className={contentClassName}
         onExpandStart={() => setHasExpandStarted(true)}
         onCollapseStart={() => setHasExpandStarted(false)}
-        {...componentProps?.contentProps}
+        {...contentProps}
       />
       <ShowMoreButton
         variant="ghost"
-        size={sizeMap[size]}
+        size={size}
         prefix={<PlusIcon />}
         className={buttonClassName}
-        {...componentProps?.buttonProps}
+        {...buttonProps}
       />
     </ShowMore>
   );

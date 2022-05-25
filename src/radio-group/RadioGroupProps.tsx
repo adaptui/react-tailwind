@@ -1,51 +1,114 @@
-import { getComponentProps, splitProps } from "../utils";
+import { RadioState, RadioStateProps, useRadioState } from "ariakit";
 
-import { USE_RADIO_GROUP_STATE_KEYS } from "./__keys";
-import { RadioGroupOwnProps, RadioGroupProps } from "./RadioGroup";
-import { RadioGroupInitialState, useRadioGroupState } from "./RadioGroupState";
+import { RadioUIProps } from "../radio/RadioProps";
+import { ShowMoreButtonProps, ShowMoreContentProps } from "../show-more";
+import { getComponentProps, RenderProp } from "../utils";
 
-export const useRadioGroupStateSplit = (props: RadioGroupProps) => {
-  const [stateProps, GroupProps] = splitProps(
-    props,
-    USE_RADIO_GROUP_STATE_KEYS,
-  ) as [RadioGroupInitialState, RadioGroupOwnProps];
-  const state = useRadioGroupState(stateProps);
-
-  return [state, GroupProps, stateProps] as const;
-};
+import {
+  RadioGroupUIState,
+  RadioGroupUIStateProps,
+  useRadioGroupUIState,
+} from "./RadioGroupUIState";
+import { RadioGroupWrapperProps } from "./RadioGroupWrapper";
 
 const componentMap = {
+  RadioGroupWrapper: "wrapperProps",
   ShowMoreContent: "contentProps",
   ShowMoreButton: "buttonProps",
 };
 
-export const useRadioGroupProps = (
-  props: React.PropsWithChildren<RadioGroupProps>,
-) => {
-  const [state, radioGroupProps] = useRadioGroupStateSplit(props);
-  const { children, ...restProps } = radioGroupProps;
+export const useRadioGroupProps = ({
+  withState = true,
+  value,
+  defaultValue,
+  setValue,
+  virtualFocus,
+  orientation,
+  rtl,
+  focusLoop,
+  focusWrap,
+  focusShift,
+  moves,
+  setMoves,
+  includesBaseElement,
+  activeId,
+  defaultActiveId,
+  setActiveId,
+  items,
+  setItems,
+  size,
+  stack,
+  maxVisibleItems,
+  children,
+  ...restProps
+}: RadioGroupProps): RadioGroupPropsReturn => {
+  const state = useRadioState({
+    defaultValue,
+    value,
+    setValue,
+  });
+  const uiState = useRadioGroupUIState({ size, stack, maxVisibleItems });
+  const uiProps: RadioGroupUIProps = {
+    state: withState ? state : undefined,
+    ...uiState,
+  };
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
-    state,
+    uiProps,
   );
 
-  const visibleChildren =
-    state.maxVisibleItems == null
-      ? finalChildren
-      : finalChildren.slice(0, state.maxVisibleItems);
+  const visibleChildren: React.ReactNode =
+    uiProps.maxVisibleItems == null
+      ? (finalChildren as React.ReactNode)
+      : (finalChildren.slice(0, uiProps.maxVisibleItems) as React.ReactNode);
 
-  const moreChildren =
-    state.maxVisibleItems == null ||
-    finalChildren.length <= state.maxVisibleItems
+  const moreChildren: React.ReactNode =
+    uiProps.maxVisibleItems == null ||
+    finalChildren.length <= uiProps.maxVisibleItems
       ? null
-      : finalChildren.slice(state.maxVisibleItems);
+      : (finalChildren.slice(uiProps.maxVisibleItems) as React.ReactNode);
+
+  const wrapperProps: RadioGroupWrapperProps = {
+    ...uiProps,
+    ...restProps,
+    ...componentProps?.wrapperProps,
+  };
+
+  const buttonProps: ShowMoreButtonProps = {
+    ...componentProps?.buttonProps,
+  };
+
+  const contentProps: ShowMoreContentProps = {
+    ...componentProps?.contentProps,
+  };
 
   return {
-    state,
-    componentProps,
+    uiProps,
     visibleChildren,
     moreChildren,
-    ...restProps,
+    wrapperProps,
+    buttonProps,
+    contentProps,
   };
+};
+
+export type RadioGroupProps = RadioStateProps &
+  Omit<RadioGroupWrapperProps, "state" | "size" | "children" | "defaultValue"> &
+  RadioGroupUIStateProps & {
+    withState?: boolean;
+    children?: RenderProp<RadioUIProps>;
+  };
+
+export type RadioGroupUIProps = RadioGroupUIState & {
+  state?: RadioState;
+};
+
+export type RadioGroupPropsReturn = {
+  wrapperProps: RadioGroupWrapperProps;
+  contentProps: ShowMoreContentProps;
+  buttonProps: ShowMoreButtonProps;
+  uiProps: RadioGroupUIProps;
+  visibleChildren: React.ReactNode;
+  moreChildren: React.ReactNode;
 };

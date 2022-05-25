@@ -1,49 +1,61 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
-import { UseImageProps } from "../hooks";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { AVATAR_IMAGE_KEYS } from "./__keys";
-import { AvatarStateReturn } from "./AvatarState";
+import { AvatarUIProps } from "./AvatarProps";
 
-export type AvatarImageOptions = BoxOptions &
-  Pick<AvatarStateReturn, "size" | "circular">;
-
-export type AvatarImageHTMLProps = BoxHTMLProps & UseImageProps;
-
-export type AvatarImageProps = AvatarImageOptions & AvatarImageHTMLProps;
-
-export const useAvatarImage = createHook<
-  AvatarImageOptions,
-  AvatarImageHTMLProps
->({
-  name: "AvatarImage",
-  compose: useBox,
-  keys: AVATAR_IMAGE_KEYS,
-
-  useProps(options, htmlProps) {
-    const { circular } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useAvatarImage = createHook<AvatarImageOptions>(
+  ({
+    circular,
+    size,
+    icon,
+    name,
+    initials,
+    status,
+    parentsBackground,
+    getInitialsFromName,
+    imageStatus,
+    showFallback,
+    statusIndicators,
+    showRing,
+    ringColor,
+    max,
+    ...props
+  }) => {
     const theme = useTheme("avatar");
     const className = cx(
       theme.image.common,
       circular ? theme.image.circular : "",
-      htmlClassName,
+      props.className,
     );
 
-    return {
-      className,
+    props = {
       "data-testid": "testid-avatarimg",
-      ...restHtmlProps,
+      ...props,
+      className,
     };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const AvatarImage = createComponent<AvatarImageOptions>(props => {
+  const htmlProps = useAvatarImage(props);
+
+  return createElement("img", htmlProps);
 });
 
-export const AvatarImage = createComponent({
-  as: "img",
-  memo: true,
-  useHook: useAvatarImage,
-});
+export type AvatarImageOptions<T extends As = "img"> = BoxOptions<T> &
+  Partial<AvatarUIProps> & {};
+
+export type AvatarImageProps<T extends As = "img"> = Props<
+  AvatarImageOptions<T>
+>;

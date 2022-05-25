@@ -1,31 +1,21 @@
 import { Avatar } from "../avatar";
 import { forwardRefWithAs } from "../utils";
 
-import { useAvatarGroupProps } from "./AvatarGroupProps";
-import {
-  AvatarGroupContextProvider,
-  AvatarGroupInitialState,
-} from "./AvatarGroupState";
-import {
-  AvatarGroupWrapper,
-  AvatarGroupWrapperHTMLProps,
-} from "./AvatarGroupWrapper";
-
-export type AvatarGroupOwnProps = AvatarGroupWrapperHTMLProps;
-
-export type AvatarGroupProps = AvatarGroupInitialState & AvatarGroupOwnProps;
+import { AvatarGroupContextProvider } from "./__utils";
+import { AvatarGroupProps, useAvatarGroupProps } from "./AvatarGroupProps";
+import { AvatarGroupWrapper } from "./AvatarGroupWrapper";
 
 export const AvatarGroup = forwardRefWithAs<
   AvatarGroupProps,
   HTMLDivElement,
   "div"
 >((props, ref) => {
-  const { childrenWithinMax, excessChildrenCount, state, context, ...rest } =
+  const { childrenWithinMax, excessChildrenCount, uiProps, wrapperProps } =
     useAvatarGroupProps(props);
 
   return (
-    <AvatarGroupWrapper ref={ref} {...state} {...rest}>
-      <AvatarGroupContextProvider {...context}>
+    <AvatarGroupWrapper ref={ref} {...uiProps} {...wrapperProps}>
+      <AvatarGroupContextProvider {...uiProps}>
         {childrenWithinMax}
         {excessChildrenCount > 0 ? (
           <Avatar

@@ -15,9 +15,9 @@ export interface CreateIconOptions {
   /**
    * The `svg` path or group element
    *
-   * @type React.ReactElement | React.ReactElement[]
+   * @type React.ReactNode | React.ReactNode[]
    */
-  path?: React.ReactElement | React.ReactElement[];
+  path?: React.ReactNode | React.ReactNode[];
   /**
    * If the has a single path, simply copy the path's `d` attribute
    */
@@ -44,6 +44,7 @@ export function createIcon(options: CreateIconOptions) {
   const IconComponent = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
     (props, ref) => {
       return (
+        // @ts-ignore
         <Icon ref={ref} viewBox={viewBox} {...defaultProps} {...props}>
           {path ?? <path fill="currentColor" d={pathDefinition} />}
         </Icon>

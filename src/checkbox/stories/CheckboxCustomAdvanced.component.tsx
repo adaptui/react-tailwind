@@ -1,42 +1,32 @@
 import * as React from "react";
+import { CheckboxState, useCheckboxState } from "ariakit";
 
 import {
   CheckboxIcon,
-  CheckboxInitialState,
   CheckboxInput,
-  CheckboxInputHTMLProps,
   CheckboxLabel,
-  CheckboxState,
   tcm,
-  useCheckboxStateSplit,
+  useCheckboxUIState,
 } from "../../index";
+import { CheckboxProps, CheckboxUIProps } from "../CheckboxProps";
 
 export type CheckboxCustomAdvancedProps = {};
 
 export const CheckboxCustomAdvanced: React.FC<
   CheckboxCustomAdvancedProps
 > = () => {
-  const [state, onStateChange] = React.useState<CheckboxState["state"]>([]);
+  const state = useCheckboxState<string[]>({ defaultValue: [] });
+  console.log("%cstate", "color: #408059", state);
 
   return (
     <>
-      <CustomCheckbox value="one" state={state} onStateChange={onStateChange}>
+      <CustomCheckbox inputValue="one" state={state}>
         Button one 😁
       </CustomCheckbox>
-      <CustomCheckbox
-        className="ml-2"
-        value="two"
-        state={state}
-        onStateChange={onStateChange}
-      >
+      <CustomCheckbox className="ml-2" inputValue="two" state={state}>
         Button two 🤓
       </CustomCheckbox>
-      <CustomCheckbox
-        className="ml-2"
-        value="three"
-        state={state}
-        onStateChange={onStateChange}
-      >
+      <CustomCheckbox className="ml-2" inputValue="three" state={state}>
         Button three 👻
       </CustomCheckbox>
     </>
@@ -45,19 +35,47 @@ export const CheckboxCustomAdvanced: React.FC<
 
 export default CheckboxCustomAdvanced;
 
-type CustomCheckboxProps = CheckboxInputHTMLProps & CheckboxInitialState;
+export type CustomCheckboxProps = Omit<CheckboxProps, "children"> & {
+  state: CheckboxState;
+  children: React.ReactNode;
+};
 
 const CustomCheckbox: React.FC<CustomCheckboxProps> = props => {
-  const [state, checkboxProps] = useCheckboxStateSplit(props);
-  const { className, children, ...inputProps } = checkboxProps;
+  const {
+    state,
+    value,
+    defaultValue,
+    setValue,
+    inputValue,
+    size,
+    icon,
+    label,
+    description,
+    className,
+    style,
+    children,
+    ...restProps
+  } = props;
+  const uiState = useCheckboxUIState({
+    state,
+    inputValue,
+    size,
+    icon,
+    label,
+    description,
+  });
+  const uiProps: CheckboxUIProps = React.useMemo(
+    () => ({ state, ...uiState }),
+    [state, uiState],
+  );
 
   return (
     <CheckboxLabel
-      {...state}
+      {...uiState}
       className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)}
     >
-      <CheckboxInput {...state} {...inputProps} />
-      {state.isChecked ? (
+      <CheckboxInput {...uiProps} {...restProps} value={inputValue} />
+      {uiProps.isChecked ? (
         <CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
           <svg
             className="h-5 w-5"

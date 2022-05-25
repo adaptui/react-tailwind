@@ -1,9 +1,48 @@
-// Credits to https://github.com/chakra-ui/chakra-ui/tree/main/packages/icon
-import * as React from "react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { Box, BoxProps } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, forwardRefWithAs } from "../utils";
+import { cx } from "../utils";
+
+export const useIcon = createHook<IconOptions>(props => {
+  const theme = useTheme();
+  const iconStyles = theme.icon.base;
+
+  const className = cx(iconStyles, props.className);
+
+  props = { ...props, "data-testid": "testid-icon", className };
+
+  props = useBox(props);
+  /**
+   * If you're using an icon library like `react-icons`.
+   * Note: anyone passing the `as` prop, should manage the `viewBox` from the external component
+   */
+  if (props.as && typeof props.path !== "string") {
+    return props;
+  }
+
+  const _viewBox = props.viewBox ?? fallbackIcon.viewBox;
+  const _path = (props.children ?? fallbackIcon.path) as string;
+
+  props = { ...props, viewBox: _viewBox, children: _path };
+
+  return props;
+});
+
+export const Icon = createComponent<IconOptions>(props => {
+  const htmlProps = useIcon(props);
+
+  return createElement("svg", htmlProps);
+});
+
+export type IconOptions<T extends As = "svg"> = BoxOptions<T> & {};
+
+export type IconProps<T extends As = "svg"> = Props<IconOptions<T>>;
 
 const fallbackIcon = {
   path: (
@@ -23,56 +62,3 @@ const fallbackIcon = {
   ),
   viewBox: "0 0 24 24",
 };
-
-export type IconProps = React.SVGAttributes<SVGElement> & BoxProps & {};
-
-export const Icon = forwardRefWithAs<IconProps, HTMLOrSVGElement, "svg">(
-  (props, ref) => {
-    const {
-      as: element = "svg",
-      viewBox,
-      focusable = false,
-      children,
-      className,
-      ...rest
-    } = props;
-
-    const theme = useTheme();
-    const iconStyles = theme.icon.base;
-
-    const shared: any = {
-      ref,
-      focusable,
-      className: cx(iconStyles, className),
-    };
-
-    const _viewBox = viewBox ?? fallbackIcon.viewBox;
-
-    /**
-     * If you're using an icon library like `react-icons`.
-     * Note: anyone passing the `as` prop, should manage the `viewBox` from the external component
-     */
-    if (element && typeof element !== "string") {
-      return <Box as={element} {...shared} {...rest} />;
-    }
-
-    const _path = (children ?? fallbackIcon.path) as React.ReactNode;
-
-    return (
-      <Box
-        ref={ref}
-        data-testid="testid-icon"
-        as={element}
-        viewBox={_viewBox}
-        {...shared}
-        {...rest}
-      >
-        {_path}
-      </Box>
-    );
-  },
-);
-
-Icon.displayName = "Icon";
-
-export default Icon;

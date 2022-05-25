@@ -1,51 +1,35 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CHECKBOX_ICON_KEYS } from "./__keys";
-import { CheckboxStateReturn } from "./CheckboxState";
+import { CheckboxUIProps } from "./CheckboxProps";
 
-export type CheckboxIconOptions = BoxOptions &
-  Pick<
-    CheckboxStateReturn,
-    | "isChecked"
-    | "isIndeterminate"
-    | "isUnchecked"
-    | "size"
-    | "label"
-    | "description"
-  > & {};
-
-export type CheckboxIconHTMLProps = BoxHTMLProps;
-
-export type CheckboxIconProps = CheckboxIconOptions & CheckboxIconHTMLProps;
-
-export const useCheckboxIcon = createHook<
-  CheckboxIconOptions,
-  CheckboxIconHTMLProps
->({
-  name: "CheckboxIcon",
-  compose: useBox,
-  keys: CHECKBOX_ICON_KEYS,
-
-  useProps(options, htmlProps) {
-    const {
-      isChecked,
-      isIndeterminate,
-      isUnchecked,
-      size,
-      label,
-      description,
-    } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useCheckboxIcon = createHook<CheckboxIconOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+    icon,
+    label,
+    description,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
     const theme = useTheme("checkbox");
     const className = cx(
       theme.icon.common,
-      theme.icon.size[size],
-      isUnchecked
+      size ? theme.icon.size[size] : "",
+      isUnchecked === true
         ? cx(
             theme.icon.unChecked.default,
             theme.icon.unChecked.hover,
@@ -54,7 +38,7 @@ export const useCheckboxIcon = createHook<
             theme.icon.unChecked.disabled,
           )
         : "",
-      isChecked
+      isChecked === true
         ? cx(
             theme.icon.checked.default,
             theme.icon.checked.hover,
@@ -63,26 +47,34 @@ export const useCheckboxIcon = createHook<
             theme.icon.checked.disabled,
           )
         : "",
-      isIndeterminate
+      isIndeterminate === true
         ? cx(
             theme.icon.checked.default,
             theme.icon.indeterminate.hover,
             theme.icon.indeterminate.active,
-            !label || (label && description)
-              ? theme.icon.indeterminate.focus
-              : "",
+            !label || description ? theme.icon.indeterminate.focus : "",
             theme.icon.indeterminate.disabled,
           )
         : "",
-      htmlClassName,
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const CheckboxIcon = createComponent<CheckboxIconOptions>(props => {
+  const htmlProps = useCheckboxIcon(props);
+
+  return createElement("span", htmlProps);
 });
 
-export const CheckboxIcon = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useCheckboxIcon,
-});
+export type CheckboxIconOptions<T extends As = "span"> = BoxOptions<T> &
+  Partial<CheckboxUIProps> & {};
+
+export type CheckboxIconProps<T extends As = "span"> = Props<
+  CheckboxIconOptions<T>
+>;

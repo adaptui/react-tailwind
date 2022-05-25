@@ -1,19 +1,14 @@
 import * as React from "react";
 
-import {
-  Button,
-  Tooltip,
-  TooltipInitialState,
-  TooltipWrapper,
-} from "../../index";
+import { Button } from "../../button";
+import { Tooltip, TooltipProps } from "../../index";
 
-export type TooltipBasicProps = TooltipInitialState & {};
+export type TooltipBasicProps = TooltipProps & {};
 
 export const TooltipBasic: React.FC<TooltipBasicProps> = props => {
   return (
-    <Tooltip content="Add your information" {...props}>
-      <TooltipWrapper className="z-50" />
-      <Button>Tooltip</Button>
+    <Tooltip as={Button} content="Add your information" {...props}>
+      Tooltip
     </Tooltip>
   );
 };

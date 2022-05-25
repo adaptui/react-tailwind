@@ -1,56 +1,72 @@
 import * as React from "react";
 
-import { getComponentProps, useSafeLayoutEffect } from "../index";
-import { runIfFn, splitProps, withIconA11y } from "../utils";
+import { useSafeLayoutEffect } from "../hooks";
+import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
 
-import { USE_SELECT_STATE_KEYS } from "./__keys";
-import { SelectOwnProps, SelectProps } from "./Select";
+import { SelectBaseProps } from "./SelectBase";
 import { SelectPrefixProps } from "./SelectPrefix";
-import { SelectInitialState, useSelectState } from "./SelectState";
 import { SelectSuffixProps } from "./SelectSuffix";
+import {
+  SelectUIState,
+  SelectUIStateProps,
+  useSelectUIState,
+} from "./SelectUIState";
 import { SelectWrapperProps } from "./SelectWrapper";
-
-export const useSelectStateSplit = (props: SelectProps) => {
-  const [stateProps, selectProps] = splitProps(
-    props,
-    USE_SELECT_STATE_KEYS,
-  ) as [SelectInitialState, SelectOwnProps];
-  const state = useSelectState(stateProps);
-
-  return [state, selectProps, stateProps] as const;
-};
 
 const componentMap = {
   SelectWrapper: "wrapperProps",
-  SelectMain: "mainProps",
+  SelectBase: "baseProps",
   SelectPrefix: "prefixProps",
   SelectSuffix: "suffixProps",
 };
 
-export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
-  const [state, selectProps] = useSelectStateSplit(props);
-  const { prefix, suffix, loading, spinner } = state;
-  const { className, style, children, disabled, ...restProps } = selectProps;
+export const useSelectProps = ({
+  prefix,
+  suffix,
+  size,
+  variant,
+  invalid,
+  loading,
+  spinner,
+  className,
+  style,
+  children,
+  disabled,
+  ...restProps
+}: SelectProps): SelectPropsReturn => {
+  const uiState = useSelectUIState({
+    prefix,
+    suffix,
+    size,
+    variant,
+    invalid,
+    loading,
+    spinner,
+  });
+  let uiProps: SelectUIProps = uiState;
+
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
-    state,
+    uiProps,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setHasPaddingCalculated] = React.useState(false);
 
   const _prefix: SelectProps["prefix"] =
-    componentProps?.prefixProps?.children || prefix;
+    componentProps?.prefixProps?.children || uiProps.prefix;
   const __suffix: SelectProps["suffix"] =
-    componentProps?.suffixProps?.children || suffix;
+    componentProps?.suffixProps?.children || uiProps.suffix;
   const _suffix: SelectProps["suffix"] = React.useMemo(() => {
-    return loading
-      ? runIfFn(spinner, state)
-      : withIconA11y(runIfFn(__suffix, state));
-  }, [__suffix, loading, spinner, state]);
+    return uiProps.loading
+      ? runIfFn(uiProps.spinner, uiProps)
+      : withIconA11y(runIfFn(__suffix, uiProps));
+  }, [uiProps, __suffix]);
 
-  const inputInlineStyles = React.useRef<Record<string, any>>({});
+  uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix };
+
+  const selectInlineStyles = React.useRef<Record<string, any>>({});
   const prefixRef = React.useRef<HTMLElement>(null);
   const suffixRef = React.useRef<HTMLElement>(null);
 
@@ -59,64 +75,77 @@ export const useSelectProps = (props: React.PropsWithChildren<SelectProps>) => {
 
     const prefixElement = prefixRef.current;
     const suffixElement = suffixRef.current;
-    if (_prefix && prefixElement) {
+    if (uiProps.prefix && prefixElement) {
       key = "paddingLeft";
 
       if (!key) return;
-      inputInlineStyles.current[key] =
+      selectInlineStyles.current[key] =
         prefixElement.getBoundingClientRect().width;
     }
 
-    if (_suffix && suffixElement) {
+    if (uiProps.suffix && suffixElement) {
       key = "paddingRight";
 
       if (!key) return;
-      inputInlineStyles.current[key] =
+      selectInlineStyles.current[key] =
         suffixElement.getBoundingClientRect().width;
     }
 
     setHasPaddingCalculated(true);
-  }, [_prefix, _suffix]);
+  }, [uiProps.prefix, uiProps.suffix]);
 
   const wrapperProps: SelectWrapperProps = {
-    ...state,
+    ...uiProps,
     className,
     style,
     ...componentProps.wrapperProps,
   };
 
-  const mainProps: SelectWrapperProps = {
-    ...state,
+  const baseProps: SelectBaseProps = {
+    ...uiProps,
     disabled,
     ...restProps,
-    style: { ...inputInlineStyles.current },
+    style: { ...selectInlineStyles.current },
     children: finalChildren,
-    ...componentProps.mainProps,
+    ...componentProps.baseProps,
   };
 
   const prefixProps: SelectPrefixProps = {
-    ...state,
+    ...uiProps,
     disabled,
     ...componentProps.prefixProps,
     ref: prefixRef,
-    children: withIconA11y(runIfFn(_prefix, state)),
+    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
   };
 
   const suffixProps: SelectSuffixProps = {
-    ...state,
+    ...uiProps,
     disabled,
     ...componentProps.suffixProps,
     ref: suffixRef,
-    children: _suffix,
+    children: uiProps.suffix,
   };
 
   return {
-    state,
-    prefix: _prefix,
-    suffix: _suffix,
+    uiProps,
     wrapperProps,
-    mainProps,
+    baseProps,
     prefixProps,
     suffixProps,
   };
+};
+
+export type SelectUIProps = SelectUIState;
+
+export type SelectProps = Omit<SelectBaseProps, "children"> &
+  SelectUIStateProps & {
+    children?: RenderProp<SelectUIProps>;
+  };
+
+export type SelectPropsReturn = {
+  wrapperProps: SelectWrapperProps;
+  baseProps: SelectBaseProps;
+  prefixProps: SelectPrefixProps;
+  suffixProps: SelectSuffixProps;
+  uiProps: SelectUIProps;
 };

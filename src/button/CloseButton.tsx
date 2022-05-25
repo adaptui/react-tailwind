@@ -1,37 +1,34 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
 import { CloseIcon } from "../icons";
 
-import { CLOSE_BUTTON_KEYS } from "./__keys";
-import { ButtonHTMLProps, ButtonOptions, useButton } from "./Button";
+import { ButtonOptions, useButton } from "./Button";
 
-export type CloseButtonOptions = ButtonOptions;
+export const useCloseButton = createHook<CloseButtonOptions>(props => {
+  props = { ...props, "aria-label": "close" };
+  props = useButton({
+    ...props,
+    iconOnly:
+      (props.children as React.ReactNode) ||
+      ((<CloseIcon />) as React.ReactNode),
+  });
 
-export type CloseButtonHTMLProps = ButtonHTMLProps;
-
-export type CloseButtonProps = CloseButtonOptions & CloseButtonHTMLProps;
-
-export const useCloseButton = createHook<
-  CloseButtonOptions,
-  CloseButtonHTMLProps
->({
-  name: "CloseButton",
-  compose: useButton,
-  keys: CLOSE_BUTTON_KEYS,
-
-  useOptions(options, htmlProps) {
-    const { children } = htmlProps;
-    const { iconOnly = children || <CloseIcon />, ...restOptions } = options;
-    return { iconOnly, ...restOptions };
-  },
-
-  useProps(options, htmlProps) {
-    return { "aria-label": "close", ...htmlProps };
-  },
+  return props;
 });
 
-export const CloseButton = createComponent({
-  as: "button",
-  memo: true,
-  useHook: useCloseButton,
+export const CloseButton = createComponent<CloseButtonOptions>(props => {
+  const htmlProps = useCloseButton(props);
+
+  return createElement("button", htmlProps);
 });
+
+export type CloseButtonOptions<T extends As = "button"> = ButtonOptions<T> & {};
+
+export type CloseButtonProps<T extends As = "button"> = Props<
+  CloseButtonOptions<T>
+>;

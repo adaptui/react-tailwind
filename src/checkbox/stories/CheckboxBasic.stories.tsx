@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { EyeClose, EyeOpen } from "../../icons";
 import { withIconA11y } from "../../utils";
-import { CheckboxProps } from "../index";
+import { CheckboxUIProps } from "../CheckboxProps";
 
 import js from "./templates/CheckboxBasicJsx";
 import ts from "./templates/CheckboxBasicTsx";
@@ -30,7 +30,7 @@ export default {
         "setState",
         "checked",
         "value",
-        "defaultState",
+        "defaultValue",
         "state",
         "onStateChange",
         "icon",
@@ -45,7 +45,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", defaultState: false },
+  args: { size: "md", defaultValue: false },
 };
 
 export const Small: Story = {
@@ -72,11 +72,11 @@ export const Large: Story = {
 export const UnChecked: Story = { ...Default };
 export const Checked: Story = {
   ...Default,
-  args: { ...Default.args, defaultState: true },
+  args: { ...Default.args, defaultValue: true },
 };
 export const Indeterminate: Story = {
   ...Default,
-  args: { ...Default.args, defaultState: "indeterminate" },
+  args: { ...Default.args, defaultValue: "mixed" },
 };
 
 export const Label: Story = {
@@ -125,10 +125,10 @@ export const DisabledDescription: Story = {
   },
 };
 
-const CustomIconElement: CheckboxProps["icon"] = state => (
+const CustomIconElement = (props: CheckboxUIProps) => (
   <>
-    {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-    {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+    {props.isUnchecked ? withIconA11y(<EyeClose />) : null}
+    {props.isChecked ? withIconA11y(<EyeOpen />) : null}
   </>
 );
 

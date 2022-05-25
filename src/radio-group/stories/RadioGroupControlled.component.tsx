@@ -1,24 +1,18 @@
 import * as React from "react";
 import { Separator } from "reakit";
 
-import {
-  Checkbox,
-  CheckboxStateReturn,
-  Radio,
-  RadioGroup,
-  RadioGroupProps,
-  RadioGroupStateReturn,
-} from "../../index";
+import { CheckboxGroupProps } from "../../checkbox-group";
+import { Checkbox, Radio, RadioGroup, RadioGroupProps } from "../../index";
 
 export type RadioGroupControlledProps = {};
 
 export const RadioGroupControlled: React.FC<RadioGroupControlledProps> = () => {
   const [checkboxState, setCheckboxState] =
-    React.useState<CheckboxStateReturn["state"]>(true);
+    React.useState<CheckboxGroupProps["value"]>(true);
 
-  const onRadioStateChange: RadioGroupStateReturn["setState"] = state => {
-    if (state === "indeterminate") {
-      setCheckboxState("indeterminate");
+  const onRadioStateChange: RadioGroupProps["setValue"] = state => {
+    if (state === "mixed") {
+      setCheckboxState("mixed");
       return;
     }
 
@@ -30,8 +24,8 @@ export const RadioGroupControlled: React.FC<RadioGroupControlledProps> = () => {
     setCheckboxState(false);
   };
 
-  const getRadioState = (): RadioGroupStateReturn["state"] => {
-    if (checkboxState === "indeterminate") return "indeterminate";
+  const getRadioState = (): RadioGroupProps["value"] => {
+    if (checkboxState === "mixed") return "mixed";
     if (checkboxState === true) return "checked";
     return "unchecked";
   };
@@ -41,16 +35,16 @@ export const RadioGroupControlled: React.FC<RadioGroupControlledProps> = () => {
   return (
     <div className="flex w-96 flex-col items-center space-y-4">
       <RadioComponent
-        state={radioState}
-        onStateChange={onRadioStateChange}
+        value={radioState}
+        setValue={onRadioStateChange}
         stack="horizontal"
       />
 
       <Separator className="my-4 w-full" />
 
       <Checkbox
-        state={checkboxState}
-        onStateChange={setCheckboxState}
+        value={checkboxState}
+        setValue={setCheckboxState}
         label={capitalizeFirstLetter(radioState as string)}
       />
     </div>
@@ -66,9 +60,9 @@ function capitalizeFirstLetter(string: string) {
 const RadioComponent: React.FC<RadioGroupProps> = props => {
   return (
     <RadioGroup aria-label="checkbox state" {...props}>
-      <Radio value="checked" label="Checked" />
-      <Radio value="unchecked" label="Unchecked" />
-      <Radio value="indeterminate" label="Indeterminate" />
+      <Radio inputValue="checked" label="Checked" />
+      <Radio inputValue="unchecked" label="Unchecked" />
+      <Radio inputValue="mixed" label="Mixed" />
     </RadioGroup>
   );
 };

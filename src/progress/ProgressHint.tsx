@@ -1,48 +1,41 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { PROGRESS_HINT_KEYS } from "./__keys";
-import { ProgressStateReturn } from "./ProgressState";
+import { ProgressUIProps } from "./ProgressProps";
 
-export type ProgressHintOptions = BoxOptions &
-  Pick<ProgressStateReturn, "size">;
-
-export type ProgressHintHTMLProps = BoxHTMLProps;
-
-export type ProgressHintProps = ProgressHintOptions & ProgressHintHTMLProps;
-
-export const useProgressHint = createHook<
-  ProgressHintOptions,
-  ProgressHintHTMLProps
->({
-  name: "ProgressHint",
-  compose: useBox,
-  keys: PROGRESS_HINT_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useProgressHint = createHook<ProgressHintOptions>(
+  ({ state, size, label, hint, ...props }) => {
     const theme = useTheme("progress");
     const className = cx(
       theme.hint.common,
-      theme.hint.size[size],
-      htmlClassName,
+      size ? theme.hint.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const ProgressHint = createComponent<ProgressHintOptions>(props => {
+  const htmlProps = useProgressHint(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const ProgressHint = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useProgressHint,
-});
+export type ProgressHintOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<ProgressUIProps> & {};
+
+export type ProgressHintProps<T extends As = "div"> = Props<
+  ProgressHintOptions<T>
+>;

@@ -1,44 +1,50 @@
+import { CheckboxOptions, CheckboxProps, useCheckbox } from "ariakit";
 import {
-  CheckboxHTMLProps,
-  CheckboxOptions,
   createComponent,
+  createElement,
   createHook,
-  useCheckbox,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
 import { tcm } from "../utils";
 
-import { CHECKBOX_INPUT_KEYS } from "./__keys";
-import { CheckboxStateReturn } from "./CheckboxState";
+import { CheckboxUIProps } from "./CheckboxProps";
 
-export type CheckboxInputOptions = CheckboxOptions &
-  Pick<CheckboxStateReturn, "size">;
-
-export type CheckboxInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
-
-export type CheckboxInputProps = CheckboxInputOptions & CheckboxInputHTMLProps;
-
-export const useCheckboxInput = createHook<
-  CheckboxInputOptions,
-  CheckboxInputHTMLProps
->({
-  name: "CheckboxInput",
-  compose: useCheckbox,
-  keys: CHECKBOX_INPUT_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useCheckboxInput = createHook<CheckboxInputOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+    icon,
+    label,
+    description,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
     const theme = useTheme("checkbox");
-    const className = tcm(theme.input, htmlClassName);
+    const className = tcm(theme.input, props.className);
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+
+    props = useCheckbox({ ...props, state }) as CheckboxProps;
+
+    return props;
   },
+);
+
+export const CheckboxInput = createComponent<CheckboxInputOptions>(props => {
+  const htmlProps = useCheckboxInput(props);
+
+  return createElement("input", htmlProps);
 });
 
-export const CheckboxInput = createComponent({
-  as: "input",
-  memo: true,
-  useHook: useCheckboxInput,
-});
+export type CheckboxInputOptions<T extends As = "input"> = CheckboxOptions<T> &
+  Partial<CheckboxUIProps> & {};
+
+export type CheckboxInputProps<T extends As = "input"> = Props<
+  CheckboxInputOptions<T>
+>;

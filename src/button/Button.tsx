@@ -1,108 +1,36 @@
-import * as React from "react";
-import {
-  ButtonHTMLProps as ReakitButtonHTMLProps,
-  ButtonOptions as ReakitButtonOptions,
-  useButton as useReakitButton,
-} from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+import React from "react";
 import { announce } from "@react-aria/live-announcer";
+import {
+  ButtonOptions as AriakitButtonOptions,
+  useButton as useAriakitButton,
+} from "ariakit";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, tcm, withIconA11y } from "../utils";
+import { cx, RenderProp, tcm, withIconA11y } from "../utils";
 
-import { BUTTON_KEYS } from "./__keys";
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
-export type ButtonOptions = BoxOptions &
-  ReakitButtonOptions & {
-    /**
-     * How large should the button be?
-     *
-     * @default md
-     */
-    size?: keyof Renderlesskit.GetThemeValue<"button", "size", "common">;
-
-    /**
-     * How the button should look?
-     *
-     * @default solid
-     */
-    variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "common">;
-
-    /**
-     * If added, the button will only show an icon ignoring other childrens.
-     */
-    iconOnly?: RenderPropType;
-
-    /**
-     * If added, the button will show an icon before the button's text.
-     */
-    suffix?: RenderPropType;
-
-    /**
-     * If added, the button will show an icon before the button's text.
-     */
-    prefix?: RenderPropType;
-
-    /**
-     * If `true`, the button will show a spinner.
-     *
-     * @default false
-     */
-    loading?: boolean;
-
-    /**
-     * If added, the button will show this spinner components
-     *
-     * @default Spinner Component
-     */
-    spinner?: RenderPropType;
-  };
-
-export type ButtonHTMLProps = Omit<BoxHTMLProps, "prefix"> &
-  Omit<ReakitButtonHTMLProps, "prefix"> & {};
-
-export type ButtonProps = ButtonOptions & ButtonHTMLProps;
-
-export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
-  name: "Button",
-  compose: [useBox, useReakitButton],
-  keys: BUTTON_KEYS,
-
-  useOptions(options, htmlProps) {
-    const {
-      size = "md",
-      variant = "solid",
-      loading = false,
-      spinner = <Spinner size="em" />,
-      ...restOptions
-    } = options;
-    const { disabled: htmlDisabled } = htmlProps;
-    const disabled = htmlDisabled || loading;
-
-    return { size, variant, loading, spinner, disabled, ...restOptions };
-  },
-
-  useProps(options, htmlProps) {
-    const {
-      size: _size = "md",
-      variant: _variant = "solid",
-      loading = false,
-      spinner = <Spinner size="em" />,
-      iconOnly,
-      prefix,
-      suffix,
-    } = options;
-
-    let {
-      className: htmlClassName,
-      children: htmlChildren,
-      ...restHtmlProps
-    } = htmlProps;
+export const useButton = createHook<ButtonOptions>(
+  ({
+    size: _size = "md",
+    variant: _variant = "solid",
+    prefix,
+    suffix,
+    iconOnly,
+    loading = false,
+    spinner = <Spinner size="em" />,
+    ...props
+  }) => {
+    const disabled = props.disabled || loading;
 
     const groupcontext = useButtonGroupContext();
     const size = groupcontext?.size || _size;
@@ -123,7 +51,7 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
       button.variant.active[variant],
       button.variant.focus[variant],
       button.variant.disabled[variant],
-      htmlClassName,
+      props.className,
     );
     const suffixStyles = cx(button.size.suffix[size]);
     const prefixStyles = cx(button.size.prefix[size]);
@@ -141,10 +69,14 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
         {(!prefix && !suffix) || iconOnly ? (
           loading ? (
             <ButtonFullWidthSpinner size={size} spinner={spinner}>
-              {iconOnly ? withIconA11y(iconOnly) : htmlChildren}
+              <>
+                {iconOnly
+                  ? withIconA11y(iconOnly)
+                  : (props.children as React.ReactNode)}
+              </>
             </ButtonFullWidthSpinner>
           ) : (
-            <>{iconOnly ? withIconA11y(iconOnly) : htmlChildren}</>
+            <>{iconOnly ? withIconA11y(iconOnly) : props.children}</>
           )
         ) : (
           <>
@@ -155,7 +87,7 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
                 <>{withIconA11y(prefix, { className: prefixStyles })}</>
               )
             ) : null}
-            <span>{htmlChildren}</span>
+            <span>{props.children as React.ReactNode}</span>
             {suffix ? (
               loading ? (
                 <ButtonSpinner size={size} spinner={spinner} suffix={suffix} />
@@ -167,13 +99,65 @@ export const useButton = createHook<ButtonOptions, ButtonHTMLProps>({
         )}
       </>
     );
+    props = { ...props, className, children, disabled };
+    props = useAriakitButton(props);
 
-    return { className, children, ...restHtmlProps };
+    return props;
   },
+);
+
+export const Button = createComponent<ButtonOptions>(props => {
+  const htmlProps = useButton(props);
+
+  return createElement("button", htmlProps);
 });
 
-export const Button = createComponent({
-  as: "button",
-  memo: true,
-  useHook: useButton,
-});
+export type ButtonOptions<T extends As = "button"> = Omit<
+  AriakitButtonOptions<T>,
+  "size" | "prefix"
+> & {
+  /**
+   * How large should the button be?
+   *
+   * @default md
+   */
+  size?: keyof Renderlesskit.GetThemeValue<"button", "size", "common">;
+
+  /**
+   * How the button should look?
+   *
+   * @default solid
+   */
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "common">;
+
+  /**
+   * If added, the button will only show an icon ignoring other childrens.
+   */
+  iconOnly?: RenderProp;
+
+  /**
+   * If added, the button will show an icon before the button's text.
+   */
+  suffix?: RenderProp;
+
+  /**
+   * If added, the button will show an icon before the button's text.
+   */
+  prefix?: RenderProp;
+
+  /**
+   * If `true`, the button will show a spinner.
+   *
+   * @default false
+   */
+  loading?: boolean;
+
+  /**
+   * If added, the button will show this spinner components
+   *
+   * @default Spinner Component
+   */
+  spinner?: RenderProp;
+};
+
+export type ButtonProps<T extends As = "button"> = Props<ButtonOptions<T>>;

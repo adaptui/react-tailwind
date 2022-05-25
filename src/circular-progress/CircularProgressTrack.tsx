@@ -1,51 +1,49 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CIRCULAR_PROGRESS_TRACK_KEYS } from "./__keys";
-import { CircularProgressProps } from "./CircularProgress";
+import { CircularProgressUIProps } from "./CircularProgressProps";
 
-export type CircularProgressTrackOptions = BoxOptions &
-  Pick<CircularProgressProps, "hint"> & {};
+export const useCircularProgressTrack =
+  createHook<CircularProgressTrackOptions>(
+    ({ state, size, hint, ...props }) => {
+      const theme = useTheme("circularProgress");
+      const className = cx(theme.track, props.className);
 
-export type CircularProgressTrackHTMLProps = BoxHTMLProps;
+      props = {
+        viewBox: "0 0 100 100",
+        cx: 50,
+        cy: 50,
+        r: 44,
+        fill: "transparent",
+        stroke: "currentColor",
+        strokeWidth: hint ? "5px" : "10px",
+        ...props,
+        className,
+      };
+      props = useBox(props);
 
-export type CircularProgressTrackProps = CircularProgressTrackOptions &
-  CircularProgressTrackHTMLProps;
+      return props;
+    },
+  );
 
-export const useCircularProgressTrack = createHook<
-  CircularProgressTrackOptions,
-  CircularProgressTrackHTMLProps
->({
-  name: "CircularProgressTrack",
-  compose: useBox,
-  keys: CIRCULAR_PROGRESS_TRACK_KEYS,
+export const CircularProgressTrack =
+  createComponent<CircularProgressTrackOptions>(props => {
+    const htmlProps = useCircularProgressTrack(props);
 
-  useProps(options, htmlProps) {
-    const { hint } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
+    return createElement("circle", htmlProps);
+  });
 
-    const theme = useTheme("circularProgress");
-    const className = cx(theme.track, htmlClassName);
+export type CircularProgressTrackOptions<T extends As = "circle"> =
+  BoxOptions<T> & Partial<CircularProgressUIProps> & {};
 
-    return {
-      viewBox: "0 0 100 100",
-      cx: 50,
-      cy: 50,
-      r: 44,
-      fill: "transparent",
-      stroke: "currentColor",
-      strokeWidth: hint ? "5px" : "15px",
-      className,
-      ...restHtmlProps,
-    };
-  },
-});
-
-export const CircularProgressTrack = createComponent({
-  as: "circle",
-  memo: true,
-  useHook: useCircularProgressTrack,
-});
+export type CircularProgressTrackProps<T extends As = "circle"> = Props<
+  CircularProgressTrackOptions<T>
+>;

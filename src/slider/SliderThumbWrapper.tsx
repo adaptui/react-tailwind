@@ -1,55 +1,48 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SLIDER_THUMB_WRAPPER_KEYS } from "./__keys";
-import { SliderThumbStateReturn } from "./SliderThumbState";
-import { useSliderContext } from ".";
+import { SliderThumbUIProps } from "./SliderThumbProps";
 
-export type SliderThumbWrapperOptions = BoxOptions &
-  Pick<SliderThumbStateReturn, "index" | "size">;
-
-export type SliderThumbWrapperHTMLProps = BoxHTMLProps;
-
-export type SliderThumbWrapperProps = SliderThumbWrapperOptions &
-  SliderThumbWrapperHTMLProps;
-
-export const useSliderThumbWrapper = createHook<
-  SliderThumbWrapperOptions,
-  SliderThumbWrapperHTMLProps
->({
-  name: "SliderThumbWrapper",
-  compose: useBox,
-  keys: SLIDER_THUMB_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { index, size } = options;
-    let state = useSliderContext();
-    const {
-      className: htmlClassName,
-      style: htmlStyle,
-      ...restHtmlProps
-    } = htmlProps;
-
+export const useSliderThumbWrapper = createHook<SliderThumbWrapperOptions>(
+  ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(theme.thumb.wrapper.common, htmlClassName);
+    const className = cx(theme.thumb.wrapper.common, props.className);
     const style = {
-      left: state
-        ? `calc(${state.getThumbPercent(index) * 100}% - ${
-            theme.thumb.wrapper.size[size]
-          })`
-        : undefined,
-      ...htmlStyle,
+      left:
+        state && index != null && size
+          ? `calc(${state.baseState.getThumbPercent(index) * 100}% - ${
+              theme.thumb.wrapper.size[size]
+            })`
+          : undefined,
+      ...props.style,
     };
 
-    return { className, style, ...restHtmlProps };
-  },
-});
+    props = { ...props, className, style };
+    props = useBox(props);
 
-export const SliderThumbWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSliderThumbWrapper,
-});
+    return props;
+  },
+);
+
+export const SliderThumbWrapper = createComponent<SliderThumbWrapperOptions>(
+  props => {
+    const htmlProps = useSliderThumbWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type SliderThumbWrapperOptions<T extends As = "div"> = BoxProps<T> &
+  Partial<SliderThumbUIProps> & {};
+
+export type SliderThumbWrapperProps<T extends As = "div"> = Props<
+  SliderThumbWrapperOptions<T>
+>;

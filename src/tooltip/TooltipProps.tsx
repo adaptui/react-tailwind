@@ -1,94 +1,154 @@
-import * as React from "react";
+import { TooltipState, TooltipStateProps, useTooltipState } from "ariakit";
 
-import { getComponentProps, runIfFn, useHasMounted } from "../index";
-import { splitProps, withIconA11y } from "../utils";
+import {
+  getComponentProps,
+  TooltipUIState,
+  TooltipUIStateProps,
+  useTooltipUIState,
+} from "../index";
+import { RenderProp, runIfFn, withIconA11y } from "../utils";
 
-import { USE_TOOLTIP_STATE_KEYS } from "./__keys";
-import { TooltipOwnProps, TooltipProps } from "./Tooltip";
+import { TooltipAnchorProps } from "./TooltipAnchor";
 import { TooltipArrowProps } from "./TooltipArrow";
-import { TooltipArrowContentProps } from "./TooltipArrowContent";
-import { TooltipContentProps } from "./TooltipContent";
-import { TooltipReferenceProps } from "./TooltipReference";
-import { TooltipInitialState, useTooltipState } from "./TooltipState";
+import { TooltipPrefixProps } from "./TooltipPrefix";
+import { TooltipSuffixProps } from "./TooltipSuffix";
 import { TooltipWrapperProps } from "./TooltipWrapper";
 
-export const useTooltipStateSplit = (props: TooltipProps) => {
-  const [stateProps, tooltipProps] = splitProps(
-    props,
-    USE_TOOLTIP_STATE_KEYS,
-  ) as [TooltipInitialState, TooltipOwnProps];
-  const state = useTooltipState(stateProps);
-
-  return [state, tooltipProps, stateProps] as const;
-};
-
 const componentMap = {
-  TooltipReference: "referenceProps",
+  TooltipAnchor: "anchorProps",
   TooltipWrapper: "wrapperProps",
-  TooltipContent: "contentProps",
+  TooltipPrefix: "prefixProps",
+  TooltipSuffix: "suffixProps",
   TooltipArrow: "arrowProps",
-  TooltipArrowContent: "arrowContentProps",
 };
 
-export const useTooltipProps = (
-  props: React.PropsWithChildren<TooltipProps>,
-) => {
-  const [state, tooltipProps] = useTooltipStateSplit(props);
-  const { content, arrowIcon, prefix, suffix } = state;
-  const { children, ...restProps } = tooltipProps;
-  const { componentProps, finalChildren } = getComponentProps(
-    componentMap,
-    children,
-    state,
-  );
-  const mounted = useHasMounted();
-
-  const referenceChildren: React.ReactNode = (referenceProps: any) =>
-    // @ts-ignore
-    React.cloneElement(runIfFn(finalChildren[0], state), referenceProps);
-
-  const _arrowIcon: TooltipProps["arrowIcon"] =
-    componentProps?.arrowIconProps?.children || arrowIcon;
-
-  const referenceProps: TooltipReferenceProps = {
-    ...state,
-    ...componentProps.referenceProps,
-    children: referenceChildren,
-  };
-
-  const wrapperProps: TooltipWrapperProps = {
-    ...state,
-    ...componentProps.wrapperProps,
-  };
-
-  const contentProps: TooltipContentProps = {
-    ...state,
-    ...restProps,
-    ...componentProps.contentProps,
-  };
-
-  const arrowProps: TooltipArrowProps = {
-    ...state,
-    ...componentProps.arrowProps,
-  };
-
-  const arrowContentProps: TooltipArrowContentProps = {
-    ...state,
-    ...componentProps.arrowContentProps,
-    children: withIconA11y(runIfFn(_arrowIcon, state)),
-  };
-
-  return {
-    csr: !mounted,
-    state,
-    arrowIcon,
+export const useTooltipProps = ({
+  content,
+  prefix,
+  suffix,
+  withArrow,
+  isDragging,
+  visible,
+  defaultVisible,
+  setVisible,
+  animated = true,
+  placement,
+  gutter,
+  timeout,
+  getAnchorRect,
+  fixed,
+  shift,
+  flip,
+  slide,
+  overlap,
+  sameWidth,
+  fitViewport,
+  arrowPadding,
+  overflowPadding,
+  renderCallback,
+  children,
+  as,
+  ...restProps
+}: TooltipProps): TooltipPropsReturn => {
+  const state = useTooltipState({
+    visible,
+    defaultVisible,
+    setVisible,
+    animated,
+    placement,
+    gutter,
+    timeout,
+    getAnchorRect,
+    fixed,
+    shift,
+    flip,
+    slide,
+    overlap,
+    sameWidth,
+    fitViewport,
+    arrowPadding,
+    overflowPadding,
+    renderCallback,
+  });
+  const uiState = useTooltipUIState({
     content,
     prefix,
     suffix,
-    referenceProps,
-    wrapperProps,
-    contentProps,
-    arrowProps,
-    arrowContentProps,
+    withArrow,
+    isDragging,
+  });
+  let uiProps: TooltipUIProps = { ...uiState, state };
+
+  const { componentProps, finalChildren } = getComponentProps(
+    componentMap,
+    children,
+    uiProps,
+  );
+
+  const _prefix: TooltipProps["prefix"] =
+    componentProps?.prefixProps?.children || uiProps.prefix;
+  const _suffix: TooltipProps["suffix"] =
+    componentProps?.suffixProps?.children || uiProps.suffix;
+  const _content: TooltipProps["content"] = runIfFn(uiProps.content, uiProps);
+
+  uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix, content: _content };
+
+  const anchorProps: TooltipAnchorProps = {
+    ...uiProps,
+    as,
+    children: finalChildren,
+    ...componentProps.anchorProps,
   };
+
+  const wrapperProps: TooltipWrapperProps = {
+    ...uiProps,
+    ...restProps,
+    ...componentProps.wrapperProps,
+  };
+
+  const arrowProps: TooltipArrowProps = {
+    ...uiProps,
+    ...componentProps.arrowProps,
+  };
+
+  const prefixProps: TooltipArrowProps = {
+    ...uiProps,
+    ...componentProps.prefixProps,
+    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
+  };
+
+  const suffixProps: TooltipArrowProps = {
+    ...uiProps,
+    ...componentProps.suffixProps,
+    children: withIconA11y(runIfFn(uiProps.suffix, uiProps)),
+  };
+
+  return {
+    uiProps,
+    anchorProps,
+    wrapperProps,
+    arrowProps,
+    prefixProps,
+    suffixProps,
+  };
+};
+
+export type TooltipUIProps = TooltipUIState & {
+  state: TooltipState;
+};
+
+export type TooltipProps = TooltipStateProps &
+  TooltipUIStateProps &
+  Omit<TooltipWrapperProps, "as" | "state" | "children"> &
+  Pick<TooltipAnchorProps, "as"> & {
+    children?: RenderProp<TooltipUIProps>;
+  };
+
+export type TooltipPropsReturn = {
+  anchorProps: TooltipAnchorProps;
+  wrapperProps: TooltipWrapperProps;
+  arrowProps: TooltipArrowProps;
+  prefixProps: TooltipPrefixProps;
+  suffixProps: TooltipSuffixProps;
+  uiProps: TooltipUIProps;
 };

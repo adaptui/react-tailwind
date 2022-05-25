@@ -1,51 +1,66 @@
 import * as React from "react";
 
 import { useSafeLayoutEffect } from "../hooks";
-import { getComponentProps } from "../index";
-import { runIfFn, splitProps, withIconA11y } from "../utils";
+import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
 
-import { USE_INPUT_STATE_KEYS } from "./__keys";
-import { InputOwnProps, InputProps } from "./Input";
+import { InputBaseProps } from "./InputBase";
 import { InputPrefixProps } from "./InputPrefix";
-import { InputInitialState, useInputState } from "./InputState";
 import { InputSuffixProps } from "./InputSuffix";
+import {
+  InputUIState,
+  InputUIStateProps,
+  useInputUIState,
+} from "./InputUIState";
 import { InputWrapperProps } from "./InputWrapper";
-
-export const useInputStateSplit = (props: InputProps) => {
-  const [stateProps, switchProps] = splitProps(props, USE_INPUT_STATE_KEYS) as [
-    InputInitialState,
-    InputOwnProps,
-  ];
-  const state = useInputState(stateProps);
-
-  return [state, switchProps, stateProps] as const;
-};
 
 const componentMap = {
   InputWrapper: "wrapperProps",
-  InputMain: "mainProps",
+  InputBase: "baseProps",
   InputPrefix: "prefixProps",
   InputSuffix: "suffixProps",
 };
 
-export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
-  const [state, inputProps] = useInputStateSplit(props);
-  const { prefix, suffix, loading, spinner } = state;
-  const { className, style, children, disabled, ...restProps } = inputProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
+export const useInputProps = ({
+  prefix,
+  suffix,
+  size,
+  variant,
+  invalid,
+  loading,
+  spinner,
+  className,
+  style,
+  children,
+  disabled,
+  ...restProps
+}: InputProps): InputPropsReturn => {
+  const uiState = useInputUIState({
+    prefix,
+    suffix,
+    size,
+    variant,
+    invalid,
+    loading,
+    spinner,
+  });
+  let uiProps: InputUIProps = uiState;
+
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setHasPaddingCalculated] = React.useState(false);
 
   const _prefix: InputProps["prefix"] =
-    componentProps?.prefixProps?.children || prefix;
+    componentProps?.prefixProps?.children || uiProps.prefix;
   const __suffix: InputProps["suffix"] =
-    componentProps?.suffixProps?.children || suffix;
+    componentProps?.suffixProps?.children || uiProps.suffix;
   const _suffix: InputProps["suffix"] = React.useMemo(() => {
-    return loading
-      ? runIfFn(spinner, state)
-      : withIconA11y(runIfFn(__suffix, state));
-  }, [loading, spinner, state, __suffix]);
+    return uiProps.loading
+      ? runIfFn(uiProps.spinner, uiProps)
+      : withIconA11y(runIfFn(__suffix, uiProps));
+  }, [uiProps, __suffix]);
+
+  uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix };
 
   const inputInlineStyles = React.useRef<Record<string, any>>({});
   const prefixRef = React.useRef<HTMLElement>(null);
@@ -56,7 +71,7 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
 
     const prefixElement = prefixRef.current;
     const suffixElement = suffixRef.current;
-    if (_prefix && prefixElement) {
+    if (uiProps.prefix && prefixElement) {
       key = "paddingLeft";
 
       if (!key) return;
@@ -64,7 +79,7 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
         prefixElement.getBoundingClientRect().width;
     }
 
-    if (_suffix && suffixElement) {
+    if (uiProps.suffix && suffixElement) {
       key = "paddingRight";
 
       if (!key) return;
@@ -73,46 +88,59 @@ export const useInputProps = (props: React.PropsWithChildren<InputProps>) => {
     }
 
     setHasPaddingCalculated(true);
-  }, [_prefix, _suffix]);
+  }, [uiProps.prefix, uiProps.suffix]);
 
   const wrapperProps: InputWrapperProps = {
-    ...state,
+    ...uiProps,
     className,
     style,
     ...componentProps.wrapperProps,
   };
 
-  const mainProps: InputWrapperProps = {
-    ...state,
+  const baseProps: InputBaseProps = {
+    ...uiProps,
     disabled,
     ...restProps,
     style: { ...inputInlineStyles.current },
-    ...componentProps.mainProps,
+    ...componentProps.baseProps,
   };
 
   const prefixProps: InputPrefixProps = {
-    ...state,
+    ...uiProps,
     disabled,
     ...componentProps.prefixProps,
     ref: prefixRef,
-    children: withIconA11y(runIfFn(_prefix, state)),
+    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
   };
 
   const suffixProps: InputSuffixProps = {
-    ...state,
+    ...uiProps,
     disabled,
     ...componentProps.suffixProps,
     ref: suffixRef,
-    children: _suffix,
+    children: uiProps.suffix,
   };
 
   return {
-    state,
-    prefix: _prefix,
-    suffix: _suffix,
+    uiProps,
     wrapperProps,
-    mainProps,
+    baseProps,
     prefixProps,
     suffixProps,
   };
+};
+
+export type InputUIProps = InputUIState;
+
+export type InputProps = Omit<InputBaseProps, "children"> &
+  InputUIStateProps & {
+    children?: RenderProp<InputUIProps>;
+  };
+
+export type InputPropsReturn = {
+  wrapperProps: InputWrapperProps;
+  baseProps: InputBaseProps;
+  prefixProps: InputPrefixProps;
+  suffixProps: InputSuffixProps;
+  uiProps: InputUIProps;
 };

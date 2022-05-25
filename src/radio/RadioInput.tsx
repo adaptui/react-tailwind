@@ -1,45 +1,47 @@
+import { RadioOptions, RadioProps, useRadio } from "ariakit";
 import {
   createComponent,
+  createElement,
   createHook,
-  cx,
-  RadioHTMLProps,
-  RadioOptions,
-  useRadio,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
 
-import { RADIO_INPUT_KEYS } from "./__keys";
-import { RadioStateReturn } from "./RadioState";
+import { RadioUIProps } from "./RadioProps";
 
-export type RadioInputOptions = BoxOptions &
-  RadioOptions &
-  Pick<RadioStateReturn, "size">;
+export const useRadioInput = createHook<RadioInputOptions>(
+  ({
+    state,
+    isChecked,
+    size,
+    icon,
+    label,
+    description,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
+    const theme = useTheme("radio");
+    const className = tcm(theme.input, props.className);
 
-export type RadioInputHTMLProps = BoxHTMLProps & Omit<RadioHTMLProps, "size">;
+    props = { ...props, className };
+    props = useRadio({ state, ...props }) as RadioProps;
 
-export type RadioInputProps = RadioInputOptions & RadioInputHTMLProps;
-
-export const useRadioInput = createHook<RadioInputOptions, RadioInputHTMLProps>(
-  {
-    name: "RadioInput",
-    compose: [useBox, useRadio],
-    keys: RADIO_INPUT_KEYS,
-
-    useProps(options, htmlProps) {
-      const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-      const theme = useTheme("radio");
-      const className = cx(theme.input, htmlClassName);
-
-      return { className, ...restHtmlProps };
-    },
+    return props;
   },
 );
 
-export const RadioInput = createComponent({
-  as: "input",
-  memo: true,
-  useHook: useRadioInput,
+export const RadioInput = createComponent<RadioInputOptions>(props => {
+  const htmlProps = useRadioInput(props);
+
+  return createElement("input", htmlProps);
 });
+
+export type RadioInputOptions<T extends As = "input"> = RadioOptions<T> &
+  Partial<RadioUIProps> & {};
+
+export type RadioInputProps<T extends As = "input"> = Props<
+  RadioInputOptions<T>
+>;

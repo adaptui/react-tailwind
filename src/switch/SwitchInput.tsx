@@ -1,44 +1,37 @@
+import { CheckboxOptions, CheckboxProps, useCheckbox } from "ariakit";
 import {
-  CheckboxHTMLProps,
-  CheckboxOptions,
   createComponent,
+  createElement,
   createHook,
-  useCheckbox,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
 import { tcm } from "../utils";
 
-import { SWITCH_INPUT_KEYS } from "./__keys";
-import { SwitchStateReturn } from "./SwitchState";
+import { SwitchUIProps } from "./SwitchProps";
 
-export type SwitchInputOptions = CheckboxOptions &
-  Pick<SwitchStateReturn, "size">;
-
-export type SwitchInputHTMLProps = Omit<CheckboxHTMLProps, "size">;
-
-export type SwitchInputProps = SwitchInputOptions & SwitchInputHTMLProps;
-
-export const useSwitchInput = createHook<
-  SwitchInputOptions,
-  SwitchInputHTMLProps
->({
-  name: "SwitchInput",
-  compose: useCheckbox,
-  keys: SWITCH_INPUT_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSwitchInput = createHook<SwitchInputOptions>(
+  ({ state, size, isChecked, icon, label, description, ...props }) => {
     const theme = useTheme("switch");
-    const className = tcm(theme.input, htmlClassName);
+    const className = tcm(theme.input, props.className);
 
-    return { role: "switch", className, ...restHtmlProps };
+    props = useCheckbox({ ...props, state }) as CheckboxProps;
+    props = { ...props, className, role: "switch" };
+
+    return props;
   },
+);
+
+export const SwitchInput = createComponent<SwitchInputOptions>(props => {
+  const htmlProps = useSwitchInput(props);
+
+  return createElement("input", htmlProps);
 });
 
-export const SwitchInput = createComponent({
-  as: "input",
-  memo: true,
-  useHook: useSwitchInput,
-});
+export type SwitchInputOptions<T extends As = "input"> = CheckboxOptions<T> &
+  Partial<Omit<SwitchUIProps, "disabled">> & {};
+
+export type SwitchInputProps<T extends As = "input"> = Props<
+  SwitchInputOptions<T>
+>;

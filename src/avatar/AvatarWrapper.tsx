@@ -1,51 +1,60 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { AVATAR_WRAPPER_KEYS } from "./__keys";
-import { AvatarStateReturn } from "./AvatarState";
+import { AvatarUIProps } from "./AvatarProps";
 
-export type AvatarWrapperOptions = BoxOptions &
-  Pick<AvatarStateReturn, "size" | "circular" | "showRing" | "ringColor">;
-
-export type AvatarWrapperHTMLProps = BoxHTMLProps;
-
-export type AvatarWrapperProps = AvatarWrapperOptions & AvatarWrapperHTMLProps;
-
-export const useAvatarWrapper = createHook<
-  AvatarWrapperOptions,
-  AvatarWrapperHTMLProps
->({
-  name: "AvatarWrapper",
-  compose: useBox,
-  keys: AVATAR_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, circular, showRing, ringColor } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useAvatarWrapper = createHook<AvatarWrapperOptions>(
+  ({
+    circular,
+    size,
+    icon,
+    name,
+    initials,
+    status,
+    parentsBackground,
+    getInitialsFromName,
+    imageStatus,
+    showFallback,
+    statusIndicators,
+    showRing,
+    ringColor,
+    max,
+    ...props
+  }) => {
     const theme = useTheme("avatar");
     const className = cx(
       theme.wrapper.common,
       circular ? theme.wrapper.circular : "",
-      theme.wrapper.size[size],
-      showRing ? theme.wrapper.border.size[size] : "",
+      size ? theme.wrapper.size[size] : "",
+      size && showRing ? theme.wrapper.border.size[size] : "",
       showRing && ringColor ? ringColor : "",
-      htmlClassName,
+      props.className,
     );
 
-    return {
-      className,
-      "data-testid": "testid-avatar_children",
-      ...restHtmlProps,
-    };
+    props = { "data-testid": "testid-avatar_children", ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const AvatarWrapper = createComponent<AvatarWrapperOptions>(props => {
+  const htmlProps = useAvatarWrapper(props);
+
+  return createElement("span", htmlProps);
 });
 
-export const AvatarWrapper = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useAvatarWrapper,
-});
+export type AvatarWrapperOptions<T extends As = "span"> = BoxOptions<T> &
+  Partial<AvatarUIProps> & {};
+
+export type AvatarWrapperProps<T extends As = "span"> = Props<
+  AvatarWrapperOptions<T>
+>;

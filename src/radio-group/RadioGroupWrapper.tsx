@@ -1,47 +1,43 @@
-import { RadioGroupHTMLProps, RadioGroupOptions, useRadioGroup } from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+import { RadioGroupOptions, useRadioGroup } from "ariakit";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { RADIO_GROUP_WRAPPER_KEYS } from "./__keys";
-import { RadioGroupState } from "./RadioGroupState";
+import { RadioGroupUIProps } from "./RadioGroupProps";
 
-export type RadioGroupWrapperOptions = BoxOptions &
-  RadioGroupOptions &
-  Pick<RadioGroupState, "stack" | "size">;
-
-export type RadioGroupWrapperHTMLProps = BoxHTMLProps & RadioGroupHTMLProps;
-
-export type RadioGroupWrapperProps = RadioGroupWrapperOptions &
-  RadioGroupWrapperHTMLProps;
-
-export const useRadioGroupWrapper = createHook<
-  RadioGroupWrapperOptions,
-  RadioGroupWrapperHTMLProps
->({
-  name: "RadioGroupWrapper",
-  compose: [useBox, useRadioGroup],
-  keys: RADIO_GROUP_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { stack, size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useRadioGroupWrapper = createHook<RadioGroupWrapperOptions>(
+  ({ state, size, stack, maxVisibleItems, prefix, ...props }) => {
     const theme = useTheme("radio");
     const className = cx(
-      theme.group[stack].common,
-      theme.group[stack].size[size],
-      htmlClassName,
+      stack ? theme.group[stack].common : "",
+      stack && size ? theme.group[stack].size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
-  },
-});
+    props = { ...props, className };
+    props = useRadioGroup({ state, ...props });
 
-export const RadioGroupWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useRadioGroupWrapper,
-});
+    return props;
+  },
+);
+
+export const RadioGroupWrapper = createComponent<RadioGroupWrapperOptions>(
+  props => {
+    const htmlProps = useRadioGroupWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type RadioGroupWrapperOptions<T extends As = "div"> =
+  RadioGroupOptions<T> & Partial<RadioGroupUIProps> & {};
+
+export type RadioGroupWrapperProps<T extends As = "div"> = Props<
+  RadioGroupWrapperOptions<T>
+>;

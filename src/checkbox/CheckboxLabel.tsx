@@ -1,54 +1,59 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { CHECKBOX_LABEL_KEYS } from "./__keys";
-import { CheckboxInputProps } from "./CheckboxInput";
-import { CheckboxStateReturn } from "./CheckboxState";
+import { CheckboxInputOptions } from "./CheckboxInput";
+import { CheckboxUIProps } from "./CheckboxProps";
 
-export type CheckboxLabelOptions = BoxOptions &
-  Pick<
-    CheckboxStateReturn,
-    "size" | "maxVisibleItems" | "stack" | "label" | "description"
-  > & {
-    disabled?: CheckboxInputProps["disabled"];
-  };
-
-export type CheckboxLabelHTMLProps = BoxHTMLProps;
-
-export type CheckboxLabelProps = CheckboxLabelOptions & CheckboxLabelHTMLProps;
-
-export const useCheckboxLabel = createHook<
-  CheckboxLabelOptions,
-  CheckboxLabelHTMLProps
->({
-  name: "CheckboxLabel",
-  compose: useBox,
-  keys: CHECKBOX_LABEL_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, disabled, label, description, maxVisibleItems, stack } =
-      options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    isIndeterminate,
+    isUnchecked,
+    icon,
+    label,
+    description,
+    disabled,
+    stack,
+    maxVisibleItems,
+    ...props
+  }) => {
     const theme = useTheme("checkbox");
     const className = cx(
       theme.label.common,
-      label && !description ? theme.label.size[size] : "",
+      label && !description ? (size ? theme.label.size[size] : "") : "",
       label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
-      maxVisibleItems != null ? theme.label.showMore[stack] : "",
-      htmlClassName,
+      stack && maxVisibleItems != null ? theme.label.showMore[stack] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const CheckboxLabel = createComponent<CheckboxLabelOptions>(props => {
+  const htmlProps = useCheckboxLabel(props);
+
+  return createElement("label", htmlProps);
 });
 
-export const CheckboxLabel = createComponent({
-  as: "label",
-  memo: true,
-  useHook: useCheckboxLabel,
-});
+export type CheckboxLabelOptions<T extends As = "label"> = BoxOptions<T> &
+  Pick<CheckboxInputOptions, "disabled"> &
+  Partial<CheckboxUIProps> & {};
+
+export type CheckboxLabelProps<T extends As = "label"> = Props<
+  CheckboxLabelOptions<T>
+>;

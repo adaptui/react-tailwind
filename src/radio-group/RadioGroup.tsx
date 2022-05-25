@@ -1,43 +1,31 @@
 import * as React from "react";
 
-import { RenderProp } from "../utils";
-
-import { useRadioGroupProps } from "./RadioGroupProps";
-import {
-  RadioGroupContextProvider,
-  RadioGroupInitialState,
-  RadioGroupStateReturn,
-} from "./RadioGroupState";
-import {
-  RadioGroupWrapper,
-  RadioGroupWrapperHTMLProps,
-} from "./RadioGroupWrapper";
+import { RadioGroupContextProvider } from "./__utils";
+import { RadioGroupProps, useRadioGroupProps } from "./RadioGroupProps";
+import { RadioGroupWrapper } from "./RadioGroupWrapper";
 import { RadioShowMore } from "./RadioShowMore";
-
-export type RadioGroupOwnProps = RadioGroupWrapperHTMLProps & {};
-
-export type RadioGroupProps = RadioGroupInitialState &
-  RadioGroupOwnProps &
-  RenderProp<RadioGroupStateReturn>;
 
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (props, ref) => {
     const {
-      state,
-      componentProps,
       visibleChildren,
       moreChildren,
-      ...restProps
+      wrapperProps,
+      buttonProps,
+      contentProps,
+      uiProps,
     } = useRadioGroupProps(props);
 
     return (
-      <RadioGroupWrapper ref={ref} {...state} {...restProps}>
-        <RadioGroupContextProvider {...state}>
+      <RadioGroupWrapper ref={ref} {...wrapperProps}>
+        <RadioGroupContextProvider {...uiProps}>
           {visibleChildren}
           {moreChildren ? (
             <RadioShowMore
-              children={moreChildren}
-              componentProps={componentProps}
+              moreChildren={moreChildren}
+              buttonProps={buttonProps}
+              contentProps={contentProps}
+              uiProps={uiProps}
             />
           ) : null}
         </RadioGroupContextProvider>

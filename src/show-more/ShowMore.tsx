@@ -1,30 +1,20 @@
-import { RenderProp } from "../utils";
+import * as React from "react";
 
 import { ShowMoreButton } from "./ShowMoreButton";
-import {
-  ShowMoreContent,
-  ShowMoreContentHTMLProps,
-  ShowMoreContentOptions,
-} from "./ShowMoreContent";
-import { useShowMoreProps } from "./ShowMoreProps";
-import { ShowMoreInitialState, ShowMoreStateReturn } from "./ShowMoreState";
+import { ShowMoreContent } from "./ShowMoreContent";
+import { ShowMoreProps, useShowMoreProps } from "./ShowMoreProps";
 
-export type ShowMoreOwnProps = Partial<ShowMoreContentOptions> &
-  ShowMoreContentHTMLProps & {};
+export const ShowMore = React.forwardRef<HTMLDivElement, ShowMoreProps>(
+  (props, ref) => {
+    const { buttonProps, contentProps } = useShowMoreProps(props);
 
-export type ShowMoreProps = ShowMoreInitialState &
-  ShowMoreOwnProps &
-  RenderProp<ShowMoreStateReturn>;
-
-export const ShowMore: React.FC<ShowMoreProps> = props => {
-  const { buttonProps, contentProps } = useShowMoreProps(props);
-
-  return (
-    <>
-      <ShowMoreContent {...contentProps} />
-      <ShowMoreButton {...buttonProps} />
-    </>
-  );
-};
+    return (
+      <>
+        <ShowMoreContent {...contentProps} ref={ref} />
+        <ShowMoreButton {...buttonProps} />
+      </>
+    );
+  },
+);
 
 ShowMore.displayName = "ShowMore";

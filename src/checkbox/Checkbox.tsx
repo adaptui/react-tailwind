@@ -1,37 +1,23 @@
 import * as React from "react";
 
-import { RenderProp } from "../utils";
-
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";
-import { CheckboxInput, CheckboxInputHTMLProps } from "./CheckboxInput";
+import { CheckboxInput } from "./CheckboxInput";
 import { CheckboxLabel } from "./CheckboxLabel";
-import { useCheckboxProps } from "./CheckboxProps";
-import { CheckboxInitialState, CheckboxStateReturn } from "./CheckboxState";
+import { CheckboxProps, useCheckboxProps } from "./CheckboxProps";
 import { CheckboxText } from "./CheckboxText";
-
-export type CheckboxOwnProps = CheckboxInputHTMLProps & {};
-
-export type CheckboxProps = CheckboxInitialState &
-  CheckboxOwnProps &
-  RenderProp<CheckboxStateReturn>;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const {
-      csr,
-      label,
-      description,
       labelProps,
       inputProps,
       iconProps,
       textProps,
       descriptionProps,
+      uiProps,
     } = useCheckboxProps(props);
-
-    if (csr) {
-      return null;
-    }
+    const { label, description } = uiProps;
 
     return (
       <CheckboxLabel {...labelProps}>

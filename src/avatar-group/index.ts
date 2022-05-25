@@ -1,5 +1,5 @@
-export * from "./__keys";
+export * from "./__utils";
 export * from "./AvatarGroup";
 export * from "./AvatarGroupProps";
-export * from "./AvatarGroupState";
+export * from "./AvatarGroupUIState";
 export * from "./AvatarGroupWrapper";

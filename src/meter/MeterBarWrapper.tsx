@@ -1,45 +1,43 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { METER_BAR_WRAPPER_KEYS } from "./__keys";
-import { MeterStateReturn } from "./MeterState";
+import { MeterUIProps } from "./MeterProps";
 
-export type MeterBarWrapperOptions = BoxOptions &
-  Pick<MeterStateReturn, "flatBorders">;
-
-export type MeterBarWrapperHTMLProps = BoxHTMLProps;
-
-export type MeterBarWrapperProps = MeterBarWrapperOptions &
-  MeterBarWrapperHTMLProps;
-
-export const useMeterBarWrapper = createHook<
-  MeterBarWrapperOptions,
-  MeterBarWrapperHTMLProps
->({
-  name: "MeterBarWrapper",
-  compose: useBox,
-  keys: METER_BAR_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { flatBorders } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useMeterBarWrapper = createHook<MeterBarWrapperOptions>(
+  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
     const theme = useTheme("meter");
     const className = cx(
       theme.barWrapper.common,
       flatBorders ? theme.barWrapper.flatBorders : "",
-      htmlClassName,
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
-  },
-});
+    props = { ...props, className };
+    props = useBox(props);
 
-export const MeterBarWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useMeterBarWrapper,
-});
+    return props;
+  },
+);
+
+export const MeterBarWrapper = createComponent<MeterBarWrapperOptions>(
+  props => {
+    const htmlProps = useMeterBarWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type MeterBarWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<MeterUIProps> & {};
+
+export type MeterBarWrapperProps<T extends As = "div"> = Props<
+  MeterBarWrapperOptions<T>
+>;

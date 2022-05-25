@@ -1,51 +1,40 @@
+import { MeterOptions, useMeter } from "@renderlesskit/react";
+import { GroupProps, useGroup } from "ariakit";
 import {
   createComponent,
+  createElement,
   createHook,
-  MeterHTMLProps as ReakitMeterHTMLProps,
-  MeterOptions as ReakitMeterOptions,
-  useMeter as useReakitMeter,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { METER_BAR_KEYS } from "./__keys";
-import { MeterStateReturn } from "./MeterState";
+import { MeterUIProps } from "./MeterProps";
 
-export type MeterWrapperOptions = BoxOptions &
-  ReakitMeterOptions &
-  Pick<MeterStateReturn, "baseId" | "label"> & {};
-
-export type MeterWrapperHTMLProps = BoxHTMLProps & ReakitMeterHTMLProps & {};
-
-export type MeterWrapperProps = MeterWrapperOptions & MeterWrapperHTMLProps;
-
-export const useMeterWrapper = createHook<
-  MeterWrapperOptions,
-  MeterWrapperHTMLProps
->({
-  name: "MeterWrapper",
-  compose: [useBox, useReakitMeter],
-  keys: METER_BAR_KEYS,
-
-  useProps(options, htmlProps) {
-    const { baseId, label } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useMeterWrapper = createHook<MeterWrapperOptions>(
+  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
     const theme = useTheme("meter");
-    const className = cx(theme.wrapper, htmlClassName);
+    const className = tcm(theme.wrapper, props.className);
 
-    const ariaLabel = label
-      ? { "aria-labelledby": baseId }
-      : { "aria-label": "meter" };
+    props = { ...props, className };
+    props = useMeter({ state, ...props });
+    props = useGroup(props);
 
-    return { ...ariaLabel, className, ...restHtmlProps };
+    return props;
   },
+);
+
+export const MeterWrapper = createComponent<MeterWrapperOptions>(props => {
+  const htmlProps = useMeterWrapper(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const MeterWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useMeterWrapper,
-});
+export type MeterWrapperOptions<T extends As = "div"> = GroupProps<T> &
+  MeterOptions<T> &
+  Partial<MeterUIProps> & {};
+
+export type MeterWrapperProps<T extends As = "div"> = Props<
+  MeterWrapperOptions<T>
+>;

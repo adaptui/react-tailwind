@@ -1,54 +1,51 @@
-import { InputHTMLProps, InputOptions, useInput } from "reakit";
-import { ariaAttr, createComponent, createHook } from "@renderlesskit/react";
+import { FocusableOptions, useFocusable } from "ariakit";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_BASE_KEYS } from "./__keys";
-import { InputStateReturn } from "./InputState";
+import { InputUIProps } from "./InputProps";
 
-export type InputBaseOptions = InputOptions &
-  Pick<
-    InputStateReturn,
-    "size" | "variant" | "prefix" | "suffix" | "invalid"
-  > & {};
-
-export type InputBaseHTMLProps = Omit<InputHTMLProps, "size" | "prefix">;
-
-export type InputBaseProps = InputBaseOptions & InputBaseHTMLProps;
-
-export const useInputBase = createHook<InputBaseOptions, InputBaseHTMLProps>({
-  name: "InputBase",
-  compose: useInput,
-  keys: INPUT_BASE_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, variant, prefix, suffix, invalid, disabled } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useInputBase = createHook<InputBaseOptions>(
+  ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
     const theme = useTheme("input");
     const className = cx(
       theme.base.common,
-      theme.base.size[size].common,
-      !prefix || !suffix ? theme.base.size[size].withoutAddon : "",
-      theme.base.variant[variant].common,
-      disabled || invalid ? "" : theme.base.variant[variant].interactions,
-      disabled ? theme.base.variant[variant].disabled : "",
-      invalid ? theme.base.variant[variant].invalid : "",
-      htmlClassName,
+      size ? theme.base.size[size].common : "",
+      variant ? theme.base.variant[variant].common : "",
+      size && (!prefix || !suffix) ? theme.base.size[size].withoutAddon : "",
+      props.disabled || invalid
+        ? ""
+        : variant
+        ? theme.base.variant[variant].interactions
+        : "",
+      variant && props.disabled ? theme.base.variant[variant].disabled : "",
+      variant && invalid ? theme.base.variant[variant].invalid : "",
+      props.className,
     );
 
-    return {
-      className,
-      disabled,
-      "aria-invalid": ariaAttr(invalid),
-      ...restHtmlProps,
-    };
+    props = { "aria-invalid": invalid, ...props, className };
+    props = useBox(props);
+    props = useFocusable(props);
+
+    return props;
   },
+);
+
+export const InputBase = createComponent<InputBaseOptions>(props => {
+  const htmlProps = useInputBase(props);
+
+  return createElement("input", htmlProps);
 });
 
-export const InputBase = createComponent({
-  as: "input",
-  memo: true,
-  useHook: useInputBase,
-});
+export type InputBaseOptions<T extends As = "input"> = BoxOptions<T> &
+  FocusableOptions<T> &
+  Partial<InputUIProps> & {};
+
+export type InputBaseProps<T extends As = "input"> = Props<InputBaseOptions<T>>;

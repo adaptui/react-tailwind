@@ -1,29 +1,35 @@
 import {
-  createComponent,
-  disclosureCollapseComposableContent,
-  DisclosureCollapseContentHTMLProps,
-  DisclosureCollapseContentOptions,
-  Hook,
+  DisclosureCollapsibleContentOptions,
+  useDisclosureCollapsibleContent,
 } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { ShowMoreUIProps } from "./ShowMoreProps";
 
-export type ShowMoreContentOptions = BoxOptions &
-  DisclosureCollapseContentOptions;
+export const useShowMoreContent = createHook<ShowMoreContentOptions>(
+  ({ state, button, ...props }) => {
+    props = useDisclosureCollapsibleContent({ state, ...props });
 
-export type ShowMoreContentHTMLProps = BoxHTMLProps &
-  DisclosureCollapseContentHTMLProps;
+    return props;
+  },
+);
 
-export type ShowMoreContentProps = ShowMoreContentOptions &
-  ShowMoreContentHTMLProps;
+export const ShowMoreContent = createComponent<ShowMoreContentOptions>(
+  props => {
+    const htmlProps = useShowMoreContent(props);
 
-export const useShowMoreContent = disclosureCollapseComposableContent({
-  name: "ShowMoreContent",
-  compose: useBox,
-}) as Hook<ShowMoreContentOptions, ShowMoreContentHTMLProps>;
+    return createElement("div", htmlProps);
+  },
+);
 
-export const ShowMoreContent = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useShowMoreContent,
-});
+export type ShowMoreContentOptions<T extends As = "div"> =
+  DisclosureCollapsibleContentOptions<T> & Partial<ShowMoreUIProps> & {};
+
+export type ShowMoreContentProps<T extends As = "div"> = Props<
+  ShowMoreContentOptions<T>
+>;

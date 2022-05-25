@@ -1,37 +1,37 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SELECT_WRAPPER_KEYS } from "./__keys";
+import { SelectUIProps } from "./SelectProps";
 
-export type SelectWrapperOptions = BoxOptions & {};
+export const useSelectWrapper = createHook<SelectWrapperOptions>(
+  ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
+    const theme = useTheme("input");
+    const className = cx(theme.wrapper, props.className);
 
-export type SelectWrapperHTMLProps = BoxHTMLProps;
+    props = { ...props, className };
+    props = useBox(props);
 
-export type SelectWrapperProps = SelectWrapperOptions & SelectWrapperHTMLProps;
-
-export const useSelectWrapper = createHook<
-  SelectWrapperOptions,
-  SelectWrapperHTMLProps
->({
-  name: "SelectWrapper",
-  compose: useBox,
-  keys: SELECT_WRAPPER_KEYS,
-
-  useProps(options, htmlProps) {
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
-    const theme = useTheme("select");
-    const className = cx(theme.wrapper, htmlClassName);
-
-    return { className, ...restHtmlProps };
+    return props;
   },
+);
+
+export const SelectWrapper = createComponent<SelectWrapperOptions>(props => {
+  const htmlProps = useSelectWrapper(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const SelectWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSelectWrapper,
-});
+export type SelectWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<SelectUIProps> & {};
+
+export type SelectWrapperProps<T extends As = "div"> = Props<
+  SelectWrapperOptions<T>
+>;

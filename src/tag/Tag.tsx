@@ -1,13 +1,68 @@
-import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, tcm, withIconA11y } from "../utils";
+import { cx, RenderProp, tcm, withIconA11y } from "../utils";
 
-import { TAG_KEYS } from "./__keys";
+export const useTag = createHook<TagOptions>(
+  ({
+    size = "md",
+    variant = "solid",
+    closable = false,
+    prefix,
+    suffix = closable ? <CloseIcon /> : null,
+    disabled,
+    ...props
+  }) => {
+    const theme = useTheme("tag");
+    const className = cx(
+      theme.base,
+      theme.size.default[size],
+      theme.variant.default[variant],
+      disabled
+        ? theme.variant.disabled[variant]
+        : tcm(
+            theme.variant.hover[variant],
+            theme.variant.active[variant],
+            theme.variant.focus[variant],
+          ),
+      props.className,
+    );
+    const prefixStyles = cx(theme.size.prefix[size]);
+    const suffixStyles = cx(theme.size.suffix[size]);
 
-export type TagOptions = ButtonOptions & {
+    const children = (
+      <>
+        {prefix ? (
+          <>{withIconA11y(prefix, { className: prefixStyles })}</>
+        ) : null}
+        <span>{props.children as React.ReactNode}</span>
+        {closable && suffix ? (
+          <>{withIconA11y(suffix, { className: suffixStyles })}</>
+        ) : null}
+      </>
+    );
+
+    props = { ...props, className, children };
+    props = useBox(props);
+
+    return props;
+  },
+);
+
+export const Tag = createComponent<TagOptions>(props => {
+  const htmlProps = useTag(props);
+
+  return createElement("button", htmlProps);
+});
+
+export type TagOptions<T extends As = "button"> = BoxOptions<T> & {
   /**
    * How large should the tag be?
    *
@@ -25,7 +80,7 @@ export type TagOptions = ButtonOptions & {
   /**
    * If added, the tag will show an icon before the tag's text.
    */
-  prefix?: RenderPropType;
+  prefix?: RenderProp;
 
   /**
    * If added, the tag will allow to show an icon before the tag's text.
@@ -35,75 +90,7 @@ export type TagOptions = ButtonOptions & {
   /**
    * If added, the tag will show an icon after the tag's text.
    */
-  suffix?: RenderPropType;
+  suffix?: RenderProp;
 };
 
-export type TagHTMLProps = Omit<ButtonHTMLProps, "prefix"> & {};
-
-export type TagProps = TagOptions & TagHTMLProps;
-
-export const useTag = createHook<TagOptions, TagHTMLProps>({
-  name: "Tag",
-  compose: useButton,
-  keys: TAG_KEYS,
-
-  useOptions(options, htmlProps) {
-    const { size = "md", variant = "solid", ...restOptions } = options;
-
-    return { size, variant, ...restOptions };
-  },
-
-  useProps(options, htmlProps) {
-    const {
-      size = "md",
-      variant = "solid",
-      prefix,
-      closable = false,
-      suffix = closable ? <CloseIcon /> : null,
-      disabled,
-    } = options;
-
-    let {
-      className: htmlClassName,
-      children: htmlChildren,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const theme = useTheme("tag");
-    const className = cx(
-      theme.base,
-      theme.size.default[size],
-      theme.variant.default[variant],
-      disabled
-        ? theme.variant.disabled[variant]
-        : tcm(
-            theme.variant.hover[variant],
-            theme.variant.active[variant],
-            theme.variant.focus[variant],
-          ),
-      htmlClassName,
-    );
-    const prefixStyles = cx(theme.size.prefix[size]);
-    const suffixStyles = cx(theme.size.suffix[size]);
-
-    const children = (
-      <>
-        {prefix ? (
-          <>{withIconA11y(prefix, { className: prefixStyles })}</>
-        ) : null}
-        <span>{htmlChildren}</span>
-        {closable && suffix ? (
-          <>{withIconA11y(suffix, { className: suffixStyles })}</>
-        ) : null}
-      </>
-    );
-
-    return { className, children, ...restHtmlProps };
-  },
-});
-
-export const Tag = createComponent({
-  as: "button",
-  memo: true,
-  useHook: useTag,
-});
+export type TagProps<T extends As = "button"> = Props<TagOptions<T>>;

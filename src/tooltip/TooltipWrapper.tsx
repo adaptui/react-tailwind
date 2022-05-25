@@ -1,44 +1,35 @@
+import { TooltipOptions, useTooltip } from "ariakit";
 import {
   createComponent,
+  createElement,
   createHook,
-  TooltipHTMLProps,
-  TooltipOptions,
-  useTooltip,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { RenderPropType } from "../utils";
+import { useTheme } from "../theme";
+import { tcm } from "../utils";
 
-import { TOOLTIP_WRAPPER_KEYS } from "./__keys";
-import { TooltipStateReturn } from "./TooltipState";
+import { TooltipUIProps } from "./TooltipProps";
 
-export type TooltipWrapperOptions = TooltipOptions & {
-  prefix: RenderPropType<TooltipStateReturn>;
-};
+export const useTooltipWrapper = createHook<TooltipWrapperOptions>(
+  ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
+    const theme = useTheme("tooltip");
+    const className = tcm(theme.content, props.className);
 
-export type TooltipWrapperHTMLProps = Omit<TooltipHTMLProps, "prefix">;
-
-export type TooltipWrapperProps = TooltipWrapperOptions &
-  TooltipWrapperHTMLProps;
-
-export const useTooltipWrapper = createHook<
-  TooltipWrapperOptions,
-  TooltipWrapperHTMLProps
->({
-  name: "TooltipWrapper",
-  compose: useTooltip,
-  keys: TOOLTIP_WRAPPER_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
+    props = { ...props, className };
+    props = useTooltip({ state, ...props });
+    return props;
   },
+);
 
-  useProps(options, htmlProps) {
-    return htmlProps;
-  },
+export const TooltipWrapper = createComponent<TooltipWrapperOptions>(props => {
+  const htmlProps = useTooltipWrapper(props);
+  return createElement("div", htmlProps);
 });
 
-export const TooltipWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useTooltipWrapper,
-});
+export type TooltipWrapperOptions<T extends As = "div"> = TooltipOptions<T> &
+  Partial<TooltipUIProps> & {};
+
+export type TooltipWrapperProps<T extends As = "div"> = Props<
+  TooltipWrapperOptions<T>
+>;

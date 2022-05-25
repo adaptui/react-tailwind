@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { SliderDefaultKnobIcon } from "../SliderState";
+import { SliderDefaultKnobIcon } from "../__utils";
 
 import js from "./templates/SliderRangeJsx";
 import ts from "./templates/SliderRangeTsx";

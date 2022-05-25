@@ -1,44 +1,41 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { SLIDER_TRACK_KEYS } from "./__keys";
-import { SliderStateReturn } from "./SliderState";
+import { SliderUIProps } from "./SliderProps";
 
-export type SliderTrackOptions = BoxOptions &
-  Pick<SliderStateReturn, "size"> & {};
-
-export type SliderTrackHTMLProps = BoxHTMLProps;
-
-export type SliderTrackProps = SliderTrackOptions & SliderTrackHTMLProps;
-
-export const useSliderTrack = createHook<
-  SliderTrackOptions,
-  SliderTrackHTMLProps
->({
-  name: "SliderTrack",
-  compose: useBox,
-  keys: SLIDER_TRACK_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSliderTrack = createHook<SliderTrackOptions>(
+  ({ state, range, size, knobIcon, tooltip, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(
+    const className = tcm(
       theme.track.base.common,
-      theme.track.base.size[size],
-      htmlClassName,
+      size ? theme.track.base.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const SliderTrack = createComponent<SliderTrackOptions>(props => {
+  const htmlProps = useSliderTrack(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const SliderTrack = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSliderTrack,
-});
+export type SliderTrackOptions<T extends As = "div"> = BoxProps<T> &
+  Partial<SliderUIProps> & {};
+
+export type SliderTrackProps<T extends As = "div"> = Props<
+  SliderTrackOptions<T>
+>;

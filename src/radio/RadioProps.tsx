@@ -1,23 +1,20 @@
-import { getComponentProps, runIfFn, splitProps } from "../utils";
+import { useMemo } from "react";
+import { RadioState, RadioStateProps, useRadioState } from "ariakit";
 
-import { USE_RADIO_STATE_KEYS } from "./__keys";
-import { RadioOwnProps, RadioProps } from "./Radio";
+import { RadioGroupUIProps } from "../radio-group";
+import { useRadioGroupContext } from "../radio-group/__utils";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
+
 import { RadioDescriptionProps } from "./RadioDescription";
 import { RadioIconProps } from "./RadioIcon";
 import { RadioInputProps } from "./RadioInput";
 import { RadioLabelProps } from "./RadioLabel";
-import { RadioInitialState, useRadioState } from "./RadioState";
 import { RadioTextProps } from "./RadioText";
-
-export const useRadioStateSplit = (props: RadioProps) => {
-  const [stateProps, radioProps] = splitProps(props, USE_RADIO_STATE_KEYS) as [
-    RadioInitialState,
-    RadioOwnProps,
-  ];
-  const state = useRadioState(stateProps);
-
-  return [state, radioProps, stateProps] as const;
-};
+import {
+  RadioUIState,
+  RadioUIStateProps,
+  useRadioUIState,
+} from "./RadioUIState";
 
 const componentMap = {
   RadioLabel: "labelProps",
@@ -27,61 +24,165 @@ const componentMap = {
   RadioDescription: "descriptionProps",
 };
 
-export const useRadioProps = (props: React.PropsWithChildren<RadioProps>) => {
-  const [state, radioProps] = useRadioStateSplit(props);
-  const { icon, label, description } = state;
-  const { className, style, children, ...restProps } = radioProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
-
-  const _icon: RadioProps["icon"] = componentProps?.iconProps?.children || icon;
-  const _label: RadioProps["label"] =
-    componentProps?.textProps?.children || label;
-  const _description: RadioProps["description"] =
-    componentProps?.descriptionProps?.children || description;
-
-  const labelProps: RadioLabelProps = {
-    ...state,
+export function useRadioProps(props: RadioProps): RadioPropsReturn {
+  let {
+    state,
+    value,
+    defaultValue,
+    setValue,
+    virtualFocus,
+    orientation,
+    rtl,
+    focusLoop,
+    focusWrap,
+    focusShift,
+    moves,
+    setMoves,
+    includesBaseElement,
+    activeId,
+    defaultActiveId,
+    setActiveId,
+    items,
+    setItems,
+    inputValue,
+    size,
+    icon,
+    label,
+    description,
     className,
     style,
-    description: _description,
-    disabled: restProps.disabled,
-    ...componentProps?.labelProps,
-  };
+    children,
+    ...restProps
+  } = props;
+  const _state = useRadioState({
+    value,
+    defaultValue,
+    setValue,
+    virtualFocus,
+    orientation,
+    rtl,
+    focusLoop,
+    focusWrap,
+    focusShift,
+    moves,
+    setMoves,
+    includesBaseElement,
+    activeId,
+    defaultActiveId,
+    setActiveId,
+    items,
+    setItems,
+  });
+  const groupState = useRadioGroupContext();
+  const finalState = groupState?.state || state || _state;
+  const uiState = useRadioUIState({
+    state: finalState,
+    inputValue,
+    size,
+    icon,
+    label,
+    description,
+  });
+  let uiProps: RadioUIProps = useMemo(
+    () => ({
+      ...uiState,
+      ...(groupState ? groupState : undefined),
+      state: finalState,
+    }),
+    [finalState, groupState, uiState],
+  );
 
-  const inputProps: RadioInputProps = {
-    ...state,
-    ...restProps,
-    ...componentProps.inputProps,
-  };
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
+  const _icon: RenderProp<RadioUIProps> =
+    componentProps?.iconProps?.children || uiProps.icon;
+  const _label: RadioProps["label"] =
+    componentProps?.textProps?.children || uiProps.label;
+  const _description: RadioProps["description"] =
+    componentProps?.descriptionProps?.children || uiProps.description;
 
-  const iconProps: RadioIconProps = {
-    ...state,
-    ...componentProps.iconProps,
-    description: _description,
-    children: runIfFn(_icon, state),
-  };
-
-  const textProps: RadioTextProps = {
-    ...state,
-    ...componentProps.textProps,
-    children: runIfFn(_label, state),
-  };
-
-  const descriptionProps: RadioDescriptionProps = {
-    ...state,
-    ...componentProps.descriptionProps,
-    children: runIfFn(_description, state),
-  };
-
-  return {
-    state,
-    labelProps,
-    inputProps,
-    iconProps,
-    textProps,
-    descriptionProps,
+  uiProps = {
+    ...uiProps,
     icon: _icon,
     label: _label,
     description: _description,
   };
+
+  const labelProps: RadioLabelProps = useMemo(
+    () => ({
+      ...uiProps,
+      className,
+      style,
+      disabled: restProps.disabled,
+      ...componentProps.labelProps,
+    }),
+    [className, componentProps.labelProps, restProps.disabled, style, uiProps],
+  );
+
+  const inputProps: RadioInputProps = useMemo(
+    () => ({
+      ...uiProps,
+      value: inputValue,
+      ...restProps,
+      ...componentProps.inputProps,
+    }),
+    [componentProps.inputProps, inputValue, restProps, uiProps],
+  );
+
+  const iconProps: RadioIconProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.iconProps,
+      children: runIfFn(uiProps.icon, uiProps),
+    }),
+    [uiProps, componentProps.iconProps],
+  );
+
+  const textProps: RadioTextProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.textProps,
+      children: runIfFn(uiProps.label, uiProps),
+    }),
+    [uiProps, componentProps.textProps],
+  );
+
+  const descriptionProps: RadioDescriptionProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.descriptionProps,
+      children: runIfFn(uiProps.description, uiProps),
+    }),
+    [uiProps, componentProps.descriptionProps],
+  );
+
+  const compoundedProps = useMemo(
+    () => ({
+      labelProps,
+      inputProps,
+      iconProps,
+      textProps,
+      descriptionProps,
+      uiProps,
+    }),
+    [labelProps, inputProps, iconProps, textProps, descriptionProps, uiProps],
+  );
+  return compoundedProps;
+}
+
+export type RadioUIProps = RadioUIState &
+  Partial<RadioGroupUIProps> & {
+    state?: RadioState;
+  };
+
+export type RadioProps = RadioStateProps &
+  Omit<RadioInputProps, "value" | "size" | "children"> &
+  RadioUIStateProps & { children?: RenderProp<RadioUIProps> };
+
+export type RadioPropsReturn = {
+  labelProps: RadioLabelProps;
+  inputProps: RadioInputProps;
+  iconProps: RadioIconProps;
+  textProps: RadioTextProps;
+  descriptionProps: RadioDescriptionProps;
+  uiProps: RadioUIProps;
 };

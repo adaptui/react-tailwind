@@ -1,61 +1,61 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
-import { useSliderContext } from "./SliderProps";
-import { SliderStateReturn } from "./SliderState";
+import { SliderUIProps } from "./SliderProps";
 
-export type SliderFilledTrackOptions = BoxOptions &
-  Pick<SliderStateReturn, "range" | "size"> & {};
-
-export type SliderFilledTrackHTMLProps = BoxHTMLProps;
-
-export type SliderFilledTrackProps = SliderFilledTrackOptions &
-  SliderFilledTrackHTMLProps;
-
-export const useSliderFilledTrack = createHook<
-  SliderFilledTrackOptions,
-  SliderFilledTrackHTMLProps
->({
-  name: "SliderFilledTrack",
-  compose: useBox,
-  keys: SLIDER_FILLED_TRACK_KEYS,
-
-  useProps(options, htmlProps) {
-    const { range, size } = options;
-    let state = useSliderContext();
-
-    const {
-      className: htmlClassName,
-      style: htmlStyle,
-      ...restHtmlProps
-    } = htmlProps;
-
+export const useSliderFilledTrack = createHook<SliderFilledTrackOptions>(
+  ({ state, range, size, knobIcon, tooltip, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(
+    const className = tcm(
       theme.track.filled.common,
-      theme.track.filled.size[size],
-      htmlClassName,
+      size ? theme.track.filled.size[size] : "",
+      props.className,
     );
     const style = {
       width: state
         ? !range
-          ? `${state.getValuePercent(state.values[0]) * 100}%`
-          : `${(state.getThumbPercent(1) - state.getThumbPercent(0)) * 100}%`
+          ? `${
+              state.baseState.getValuePercent(state.baseState.values[0]) * 100
+            }%`
+          : `${
+              (state.baseState.getThumbPercent(1) -
+                state.baseState.getThumbPercent(0)) *
+              100
+            }%`
         : undefined,
-      left: !state || !range ? undefined : `${state.getThumbPercent(0) * 100}%`,
-      ...htmlStyle,
+      left:
+        !state || !range
+          ? undefined
+          : `${state.baseState.getThumbPercent(0) * 100}%`,
+      ...props.style,
     };
 
-    return { className, style, ...restHtmlProps };
-  },
-});
+    props = { ...props, className, style };
+    props = useBox(props);
 
-export const SliderFilledTrack = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useSliderFilledTrack,
-});
+    return props;
+  },
+);
+
+export const SliderFilledTrack = createComponent<SliderFilledTrackOptions>(
+  props => {
+    const htmlProps = useSliderFilledTrack(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type SliderFilledTrackOptions<T extends As = "div"> = BoxProps<T> &
+  Partial<SliderUIProps> & {};
+
+export type SliderFilledTrackProps<T extends As = "div"> = Props<
+  SliderFilledTrackOptions<T>
+>;

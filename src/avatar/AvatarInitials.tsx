@@ -1,50 +1,62 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { AVATAR_IMAGE_KEYS } from "./__keys";
-import { AvatarStateReturn } from "./AvatarState";
+import { AvatarUIProps } from "./AvatarProps";
 
-export type AvatarInitialsOptions = BoxOptions &
-  Pick<AvatarStateReturn, "size" | "name">;
-
-export type AvatarInitialsHTMLProps = BoxHTMLProps;
-
-export type AvatarInitialsProps = AvatarInitialsOptions &
-  AvatarInitialsHTMLProps;
-
-export const useAvatarInitials = createHook<
-  AvatarInitialsOptions,
-  AvatarInitialsHTMLProps
->({
-  name: "AvatarInitials",
-  compose: useBox,
-  keys: AVATAR_IMAGE_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, name } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useAvatarInitials = createHook<AvatarInitialsOptions>(
+  ({
+    circular,
+    size,
+    icon,
+    name,
+    initials,
+    status,
+    parentsBackground,
+    getInitialsFromName,
+    imageStatus,
+    showFallback,
+    statusIndicators,
+    showRing,
+    ringColor,
+    max,
+    ...props
+  }) => {
     const theme = useTheme("avatar");
     const className = cx(
       theme.initials.common,
-      theme.initials.size[size],
-      htmlClassName,
+      size ? theme.initials.size[size] : "",
+      props.className,
     );
 
-    return {
-      className,
+    props = {
       role: "img",
       "aria-label": name as string,
-      ...restHtmlProps,
+      ...props,
+      className,
     };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const AvatarInitials = createComponent<AvatarInitialsOptions>(props => {
+  const htmlProps = useAvatarInitials(props);
+
+  return createElement("span", htmlProps);
 });
 
-export const AvatarInitials = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useAvatarInitials,
-});
+export type AvatarInitialsOptions<T extends As = "span"> = BoxOptions<T> &
+  Partial<AvatarUIProps> & {};
+
+export type AvatarInitialsProps<T extends As = "span"> = Props<
+  AvatarInitialsOptions<T>
+>;

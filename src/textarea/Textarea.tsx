@@ -1,31 +1,24 @@
 import * as React from "react";
 
-import { RenderProp, runIfFn } from "../utils";
+import { runIfFn } from "../utils";
 
-import { TextareaBase, TextareaBaseHTMLProps } from "./TextareaBase";
+import { TextareaBase } from "./TextareaBase";
 import { TextareaGhost } from "./TextareaGhost";
 import { TextareaIcon } from "./TextareaIcon";
-import { useTextareaProps } from "./TextareaProps";
-import { TextareaInitialState, TextareaStateReturn } from "./TextareaState";
+import { TextareaProps, useTextareaProps } from "./TextareaProps";
 import { TextareaWrapper } from "./TextareaWrapper";
-
-export type TextareaOwnProps = TextareaBaseHTMLProps & {};
-
-export type TextareaProps = TextareaInitialState &
-  TextareaOwnProps &
-  RenderProp<TextareaStateReturn>;
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
-    const { wrapperProps, baseProps, iconProps, ghostProps, state } =
+    const { wrapperProps, baseProps, iconProps, ghostProps, uiProps } =
       useTextareaProps(props);
-    const { loading, invalid, spinner } = state;
+    const { loading, invalid, spinner } = uiProps;
 
     return (
       <TextareaWrapper {...wrapperProps}>
         <TextareaBase ref={ref} {...baseProps} />
         {loading ? (
-          runIfFn(spinner, state)
+          runIfFn(spinner, uiProps)
         ) : invalid ? (
           <TextareaIcon {...iconProps} />
         ) : null}

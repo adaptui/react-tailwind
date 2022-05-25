@@ -47,7 +47,15 @@ export const slider = {
         "bg-white shadow-csm hover:shadow-thumbHover active:shadow-thumbHover focus-within:ring-2 focus-within:ring-gray-800",
       disabled: "bg-gray-200",
     },
-    input: "sr-only",
+    input: {
+      common: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+      size: {
+        sm: "w-3.5 h-3.5",
+        md: "w-4 h-4",
+        lg: "w-5 h-5",
+        xl: "w-6 h-6",
+      },
+    },
   },
   icon: {
     size: {

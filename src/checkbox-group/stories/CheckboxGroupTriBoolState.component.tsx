@@ -17,10 +17,13 @@ export const CheckboxGroupTriBoolState: React.FC<
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
   return (
-    <CheckboxGroup aria-label="Tristate checkbox using boolean values">
+    <CheckboxGroup
+      aria-label="Tristate checkbox using boolean values"
+      withState={false}
+    >
       <Checkbox
-        state={isIndeterminate ? "indeterminate" : allChecked}
-        onStateChange={value =>
+        value={isIndeterminate ? "mixed" : allChecked}
+        setValue={value =>
           setCheckedItems([
             value as boolean,
             value as boolean,
@@ -34,22 +37,24 @@ export const CheckboxGroupTriBoolState: React.FC<
         role="presentation"
         aria-label="For presentation"
         stack="horizontal"
+        withState={false}
       >
         <Checkbox
-          state={checkedItems[0]}
-          onStateChange={value =>
+          value={checkedItems[0]}
+          setValue={value => {
+            console.log("%cvalue", "color: #9c66cc", value);
             setCheckedItems([
               value as boolean,
               checkedItems[1],
               checkedItems[2],
-            ])
-          }
+            ]);
+          }}
           label="Item 1"
           id="check1"
         />
         <Checkbox
-          state={checkedItems[1]}
-          onStateChange={value =>
+          value={checkedItems[1]}
+          setValue={value =>
             setCheckedItems([
               checkedItems[0],
               value as boolean,
@@ -60,8 +65,8 @@ export const CheckboxGroupTriBoolState: React.FC<
           id="check2"
         />
         <Checkbox
-          state={checkedItems[2]}
-          onStateChange={value =>
+          value={checkedItems[2]}
+          setValue={value =>
             setCheckedItems([
               checkedItems[0],
               checkedItems[1],

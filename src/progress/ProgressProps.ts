@@ -1,27 +1,22 @@
-import { getComponentProps, runIfFn, splitProps } from "../utils";
+import { useMemo } from "react";
+import {
+  ProgressState,
+  ProgressStateProps,
+  useProgressState,
+} from "@renderlesskit/react";
 
-import { USE_PROGRESS_STATE_KEYS } from "./__keys";
-import { ProgressOwnProps, ProgressProps } from "./Progress";
+import { getComponentProps, RenderProp, runIfFn } from "../utils";
+
 import { ProgressBarProps } from "./ProgressBar";
 import { ProgressHintProps } from "./ProgressHint";
 import { ProgressLabelProps } from "./ProgressLabel";
-import {
-  ProgressInitialState,
-  ProgressState,
-  useProgressState,
-} from "./ProgressState";
 import { ProgressTrackProps } from "./ProgressTrack";
+import {
+  ProgressUIState,
+  ProgressUIStateProps,
+  useProgressUIState,
+} from "./ProgressUIState";
 import { ProgressWrapperProps } from "./ProgressWrapper";
-
-export const useProgressStateSplit = (props: ProgressProps) => {
-  const [stateProps, progressProps] = splitProps(
-    props,
-    USE_PROGRESS_STATE_KEYS,
-  ) as [ProgressInitialState, ProgressOwnProps];
-  const state = useProgressState(stateProps);
-
-  return [state, progressProps, stateProps] as const;
-};
 
 const componentMap = {
   ProgressWrapper: "wrapperProps",
@@ -31,56 +26,106 @@ const componentMap = {
   ProgressTrack: "trackProps",
 };
 
-export const useProgressProps = (
-  props: React.PropsWithChildren<ProgressProps>,
-) => {
-  const [state, progressProps] = useProgressStateSplit(props);
-  const { label, hint } = state;
-  const { children, ...restProps } = progressProps;
-  const { componentProps } = getComponentProps(componentMap, children, state);
+export function useProgressProps(props: ProgressProps): ProgressPropsReturn {
+  let { value, min, max, size, label, hint, children, ...restProps } = props;
+  const state = useProgressState({
+    value,
+    min,
+    max,
+  });
+  const uiState = useProgressUIState({ size, label, hint });
+  let uiProps: ProgressUIProps = useMemo(
+    () => ({
+      state,
+      ...uiState,
+    }),
+    [state, uiState],
+  );
 
-  const _label: ProgressState["label"] =
-    componentProps?.textProps?.children || label;
-  const _hint: ProgressState["hint"] =
-    componentProps?.hintProps?.children || hint;
+  const { componentProps } = getComponentProps(componentMap, children, uiProps);
+  const _hint: ProgressProps["hint"] =
+    componentProps?.hintProps?.children || uiProps.hint;
+  const _label: ProgressProps["label"] =
+    componentProps?.textProps?.children || uiProps.label;
 
-  const wrapperProps: ProgressWrapperProps = {
-    ...state,
-    ...restProps,
-    label: _label,
-    ...componentProps.wrapperProps,
-  };
-
-  const barProps: ProgressBarProps = {
-    ...state,
-    ...componentProps.barProps,
-  };
-
-  const trackProps: ProgressTrackProps = {
-    ...state,
-    ...componentProps.trackProps,
-  };
-
-  const labelProps: ProgressLabelProps = {
-    ...state,
-    ...componentProps.labelProps,
-    children: runIfFn(_label, state),
-  };
-
-  const hintProps: ProgressHintProps = {
-    ...state,
-    ...componentProps.trackProps,
-    children: runIfFn(_hint, state),
-  };
-
-  return {
+  uiProps = {
+    ...uiProps,
     label: _label,
     hint: _hint,
-    state,
-    wrapperProps,
-    labelProps,
-    hintProps,
-    barProps,
-    trackProps,
   };
+
+  const wrapperProps: ProgressWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps.wrapperProps,
+    }),
+    [componentProps.wrapperProps, restProps, uiProps],
+  );
+
+  const labelProps: ProgressLabelProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.labelProps,
+      children: runIfFn(uiProps.label, uiProps),
+    }),
+    [componentProps.labelProps, uiProps],
+  );
+
+  const hintProps: ProgressHintProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.hintProps,
+      children: runIfFn(uiProps.hint, uiProps),
+    }),
+    [uiProps, componentProps.hintProps],
+  );
+
+  const barProps: ProgressBarProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.barProps,
+    }),
+    [uiProps, componentProps.barProps],
+  );
+
+  const trackProps: ProgressTrackProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.trackProps,
+    }),
+    [uiProps, componentProps.trackProps],
+  );
+
+  const compoundedProps = useMemo(
+    () => ({
+      labelProps,
+      wrapperProps,
+      hintProps,
+      trackProps,
+      barProps,
+      uiProps,
+    }),
+    [labelProps, wrapperProps, hintProps, trackProps, barProps, uiProps],
+  );
+  return compoundedProps;
+}
+
+export type ProgressUIProps = ProgressUIState & {
+  state: ProgressState;
+};
+
+export type ProgressProps = ProgressStateProps &
+  Omit<ProgressWrapperProps, "state" | "children"> &
+  ProgressUIStateProps & {
+    children?: RenderProp<ProgressUIProps>;
+  };
+
+export type ProgressPropsReturn = {
+  labelProps: ProgressLabelProps;
+  wrapperProps: ProgressWrapperProps;
+  hintProps: ProgressHintProps;
+  barProps: ProgressBarProps;
+  trackProps: ProgressTrackProps;
+  uiProps: ProgressUIProps;
 };

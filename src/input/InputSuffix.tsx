@@ -1,51 +1,61 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { INPUT_SUFFIX_KEYS } from "./__keys";
-import { InputProps } from "./Input";
-import { InputStateReturn } from "./InputState";
+import { InputBaseProps } from "./InputBase";
+import { InputUIProps } from "./InputProps";
 
-export type InputSuffixOptions = BoxOptions &
-  Pick<InputStateReturn, "size" | "variant" | "invalid"> & {
-    disabled: InputProps["disabled"];
-  };
-
-export type InputSuffixHTMLProps = BoxHTMLProps;
-
-export type InputSuffixProps = InputSuffixOptions & InputSuffixHTMLProps;
-
-export const useInputSuffix = createHook<
-  InputSuffixOptions,
-  InputSuffixHTMLProps
->({
-  name: "InputSuffix",
-  compose: useBox,
-  keys: INPUT_SUFFIX_KEYS,
-
-  useProps(options, htmlProps) {
-    const { size, variant, disabled, invalid } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useInputSuffix = createHook<InputSuffixOptions>(
+  ({
+    prefix,
+    suffix,
+    size,
+    variant,
+    invalid,
+    loading,
+    spinner,
+    disabled,
+    ...props
+  }) => {
     const theme = useTheme("input");
     const className = cx(
       theme.suffix.common,
-      theme.suffix.size[size],
-      theme.suffix.variant[variant].common,
-      disabled || invalid ? "" : theme.suffix.variant[variant].interactions,
-      disabled ? theme.suffix.variant[variant].disabled : "",
-      invalid ? theme.suffix.variant[variant].invalid : "",
-      htmlClassName,
+      size ? theme.suffix.size[size] : "",
+      variant ? theme.suffix.variant[variant].common : "",
+      disabled || invalid
+        ? ""
+        : variant
+        ? theme.suffix.variant[variant].interactions
+        : "",
+      variant && disabled ? theme.suffix.variant[variant].disabled : "",
+      variant && invalid ? theme.suffix.variant[variant].invalid : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const InputSuffix = createComponent<InputSuffixOptions>(props => {
+  const htmlProps = useInputSuffix(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const InputSuffix = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useInputSuffix,
-});
+export type InputSuffixOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<InputUIProps> &
+  Pick<InputBaseProps, "disabled"> & {};
+
+export type InputSuffixProps<T extends As = "div"> = Props<
+  InputSuffixOptions<T>
+>;

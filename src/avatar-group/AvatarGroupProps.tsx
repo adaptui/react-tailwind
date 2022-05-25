@@ -1,28 +1,28 @@
-import { getValidChildren, isUndefined, splitProps } from "../utils";
+import { getValidChildren, RenderProp } from "../utils";
 
-import { USE_AVATAR_GROUP_STATE_KEYS } from "./__keys";
-import { AvatarGroupOwnProps, AvatarGroupProps } from "./AvatarGroup";
 import {
-  AvatarGroupInitialState,
-  useAvatarGroupState,
-} from "./AvatarGroupState";
+  AvatarGroupUIState,
+  AvatarGroupUIStateProps,
+  useAvatarGroupUIState,
+} from "./AvatarGroupUIState";
+import { AvatarGroupWrapperProps } from "./AvatarGroupWrapper";
 
-export const useAvatarGroupStateSplit = (props: AvatarGroupProps) => {
-  const [stateProps, GroupProps] = splitProps(
-    props,
-    USE_AVATAR_GROUP_STATE_KEYS,
-  ) as [AvatarGroupInitialState, AvatarGroupOwnProps];
-  const state = useAvatarGroupState(stateProps);
-
-  return [state, GroupProps, stateProps] as const;
-};
-
-export const useAvatarGroupProps = (
-  props: React.PropsWithChildren<AvatarGroupProps>,
-) => {
-  const [state, groupProps] = useAvatarGroupStateSplit(props);
-  const { children, ...restProps } = groupProps;
-  const { max, ...restState } = state;
+export const useAvatarGroupProps = ({
+  size,
+  circular,
+  showRing,
+  ringColor,
+  max,
+  children,
+  ...restProps
+}: AvatarGroupProps) => {
+  const uiState = useAvatarGroupUIState({
+    size,
+    circular,
+    showRing,
+    ringColor,
+    max,
+  });
 
   /**
    * Check if all the children are valid React components.
@@ -32,20 +32,32 @@ export const useAvatarGroupProps = (
   /**
    * Get the avatars within the max
    */
-  const childrenWithinMax = isUndefined(max)
-    ? validChildren
-    : validChildren.slice(0, max);
+  const childrenWithinMax =
+    max == null ? validChildren : validChildren.slice(0, max);
 
   /**
    * Get the remaining avatar count
    */
-  const excessChildrenCount = isUndefined(max) ? 0 : validChildren.length - max;
+  const excessChildrenCount = max == null ? 0 : validChildren.length - max;
 
   return {
-    state,
+    uiProps: uiState,
     childrenWithinMax,
     excessChildrenCount,
-    context: restState,
-    ...restProps,
+    wrapperProps: { ...restProps },
   };
+};
+
+export type AvatarGroupUIProps = AvatarGroupUIState;
+
+export type AvatarGroupProps = Omit<AvatarGroupWrapperProps, "children"> &
+  AvatarGroupUIStateProps & {
+    children?: RenderProp<AvatarGroupUIProps>;
+  };
+
+export type AvatarGroupPropsReturn = {
+  uiProps: AvatarGroupUIProps;
+  childrenWithinMax: React.ReactNode[];
+  excessChildrenCount: number;
+  wrapperProps: Omit<AvatarGroupWrapperProps, "children">;
 };

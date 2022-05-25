@@ -1,54 +1,41 @@
+import { GroupLabelOptions, useGroupLabel } from "ariakit";
 import {
-  unstable_IdHTMLProps,
-  unstable_IdOptions,
-  unstable_useId,
-} from "reakit";
-import { createComponent, createHook } from "@renderlesskit/react";
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
-import { PROGRESS_LABEL_KEYS } from "./__keys";
-import { ProgressStateReturn } from "./ProgressState";
+import { ProgressUIProps } from "./ProgressProps";
 
-export type ProgressLabelOptions = BoxOptions &
-  unstable_IdOptions &
-  Pick<ProgressStateReturn, "size">;
-
-export type ProgressLabelHTMLProps = BoxHTMLProps & unstable_IdHTMLProps;
-
-export type ProgressLabelProps = ProgressLabelOptions & ProgressLabelHTMLProps;
-
-export const useProgressLabel = createHook<
-  ProgressLabelOptions,
-  ProgressLabelHTMLProps
->({
-  name: "ProgressLabel",
-  compose: [useBox, unstable_useId],
-  keys: PROGRESS_LABEL_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useProgressLabel = createHook<ProgressLabelOptions>(
+  ({ state, size, label, hint, ...props }) => {
     const theme = useTheme("progress");
-    const className = cx(
+    const className = tcm(
       theme.label.common,
-      theme.label.size[size],
-      htmlClassName,
+      size ? theme.label.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useGroupLabel(props);
+
+    return props;
   },
+);
+
+export const ProgressLabel = createComponent<ProgressLabelOptions>(props => {
+  const htmlProps = useProgressLabel(props);
+
+  return createElement("span", htmlProps);
 });
 
-export const ProgressLabel = createComponent({
-  as: "span",
-  memo: true,
-  useHook: useProgressLabel,
-});
+export type ProgressLabelOptions<T extends As = "span"> = GroupLabelOptions<T> &
+  Partial<ProgressUIProps> & {};
+
+export type ProgressLabelProps<T extends As = "span"> = Props<
+  ProgressLabelOptions<T>
+>;

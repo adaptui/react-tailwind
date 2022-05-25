@@ -1,12 +1,55 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderPropType, withIconA11y } from "../utils";
+import { cx, RenderProp, withIconA11y } from "../utils";
 
-import { BADGE_KEYS } from "./__keys";
+export const useBadge = createHook<BadgeOptions>(
+  ({
+    size = "md",
+    variant = "solid",
+    themeColor = "default",
+    prefix,
+    ...props
+  }) => {
+    const theme = useTheme("badge");
+    const className = cx(
+      theme.base,
+      theme.size.common[size],
+      theme.variant[variant][themeColor],
+      props.className,
+    );
 
-export type BadgeOptions = BoxOptions & {
+    const prefixStyles = cx(theme.size.prefix[size]);
+
+    const children = (
+      <>
+        {prefix ? (
+          <>{withIconA11y(prefix, { className: prefixStyles })}</>
+        ) : null}
+        <span>{props.children as React.ReactNode}</span>
+      </>
+    );
+
+    props = { ...props, className, children };
+    props = useBox(props);
+
+    return props;
+  },
+);
+
+export const Badge = createComponent<BadgeOptions>(props => {
+  const htmlProps = useBadge(props);
+
+  return createElement("div", htmlProps);
+});
+
+export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
   /**
    * How large should the badge be?
    *
@@ -31,67 +74,7 @@ export type BadgeOptions = BoxOptions & {
   /**
    * If added, the tag will show an icon before the tag's text.
    */
-  prefix?: RenderPropType;
+  prefix?: RenderProp;
 };
 
-export type BadgeHTMLProps = Omit<BoxHTMLProps, "prefix">;
-
-export type BadgeProps = BadgeOptions & BadgeHTMLProps;
-
-export const useBadge = createHook<BadgeOptions, BadgeHTMLProps>({
-  name: "Badge",
-  compose: useBox,
-  keys: BADGE_KEYS,
-
-  useOptions(options, htmlProps) {
-    const {
-      size = "md",
-      variant = "solid",
-      themeColor = "default",
-      ...restOptions
-    } = options;
-
-    return { size, variant, themeColor, ...restOptions };
-  },
-
-  useProps(options, htmlProps) {
-    const {
-      size = "md",
-      variant = "solid",
-      themeColor = "default",
-      prefix,
-    } = options;
-    const {
-      className: htmlClassName,
-      children: htmlChildren,
-      ...restHtmlProps
-    } = htmlProps;
-
-    const theme = useTheme("badge");
-    const className = cx(
-      theme.base,
-      theme.size.common[size],
-      theme.variant[variant][themeColor],
-      htmlClassName,
-    );
-
-    const prefixStyles = cx(theme.size.prefix[size]);
-
-    const children = (
-      <>
-        {prefix ? (
-          <>{withIconA11y(prefix, { className: prefixStyles })}</>
-        ) : null}
-        <span>{htmlChildren}</span>
-      </>
-    );
-
-    return { className, children, ...restHtmlProps };
-  },
-});
-
-export const Badge = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useBadge,
-});
+export type BadgeProps<T extends As = "div"> = Props<BadgeOptions<T>>;

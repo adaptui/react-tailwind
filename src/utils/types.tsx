@@ -1,12 +1,13 @@
 import * as React from "react";
+import { AnyObject, RenderProp as AriakitRenderProp } from "ariakit-utils";
 
-export type RenderPropType<T = any> =
+/**
+ * The `children` prop that supports a function.
+ * @template T Element type.
+ */
+export declare type RenderProp<T = AnyObject> =
   | React.ReactNode
-  | ((args: T) => JSX.Element);
-
-export type RenderProp<T> = {
-  children?: RenderPropType<T>;
-};
+  | AriakitRenderProp<T>;
 
 export type As<Props = any> = React.ElementType<Props>;
 

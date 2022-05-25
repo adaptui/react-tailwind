@@ -50,7 +50,7 @@ export const Default: Story = {
 
 export const WithDefaultState: Story = {
   ...Default,
-  args: { ...Default.args, state: "apple" },
+  args: { ...Default.args, defaultValue: "apple" },
 };
 
 export const Small: Story = {

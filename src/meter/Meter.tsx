@@ -1,25 +1,29 @@
 import * as React from "react";
-import { valueToPercent } from "@renderlesskit/react";
 
 import { MeterBar } from "./MeterBar";
 import { MeterBarWrapper } from "./MeterBarWrapper";
 import { MeterHint } from "./MeterHint";
 import { MeterLabel } from "./MeterLabel";
-import { useMeterProps } from "./MeterProps";
-import { MeterInitialState } from "./MeterState";
+import { MeterProps, useMeterProps } from "./MeterProps";
 import { MeterTrack } from "./MeterTrack";
-import { MeterWrapper, MeterWrapperHTMLProps } from "./MeterWrapper";
+import { MeterWrapper } from "./MeterWrapper";
 
-export type MeterOwnProps = MeterWrapperHTMLProps & {};
-
-export type MeterProps = MeterInitialState & MeterOwnProps;
+/**
+ * Convert a value to percentage based on lower and upper bound values
+ *
+ * @param value the value in number
+ * @param min the minimum value
+ * @param max the maximum value
+ */
+// ! Remove after next core update
+export function valueToPercent(value: number, min: number, max: number) {
+  return ((value - min) * 100) / (max - min);
+}
 
 export const Meter = React.forwardRef<HTMLDivElement, MeterProps>(
   (props, ref) => {
     const {
-      state,
-      label,
-      hint,
+      uiProps,
       wrapperProps,
       labelProps,
       hintProps,
@@ -27,9 +31,12 @@ export const Meter = React.forwardRef<HTMLDivElement, MeterProps>(
       barProps,
       trackProps,
     } = useMeterProps(props);
-    const { intervals, value, max } = state;
+    const { state, label, hint, intervals } = uiProps;
+    console.log("%cintervals", "color: #ffcc00", intervals);
+    const { value, max } = state;
     const maxMultiplier = max / intervals;
     const intervalValue = value / maxMultiplier;
+    console.log("%cintervalValue", "color: #e5de73", intervalValue);
 
     return (
       <MeterWrapper ref={ref} {...wrapperProps}>
@@ -41,13 +48,17 @@ export const Meter = React.forwardRef<HTMLDivElement, MeterProps>(
                 .fill(0)
                 .map((_, i) => {
                   const interval = i + 1;
+                  console.log("%cinterval", "color: #33cc99", interval);
 
                   return (
                     <MeterTrack key={`interval-${interval}`} {...trackProps}>
                       {intervalValue >= i ? (
                         <MeterBar
                           {...barProps}
-                          percent={valueToPercent(intervalValue, i, interval)}
+                          state={{
+                            ...state,
+                            percent: valueToPercent(intervalValue, i, interval),
+                          }}
                         />
                       ) : null}
                     </MeterTrack>

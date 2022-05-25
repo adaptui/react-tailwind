@@ -6,18 +6,17 @@ import {
   Radio,
   RadioGroup,
   RadioGroupProps,
-  RadioGroupStateReturn,
   Switch,
-  SwitchStateReturn,
+  SwitchProps,
 } from "../../index";
 
 export type SwitchControlledProps = {};
 
 export const SwitchControlled: React.FC<SwitchControlledProps> = () => {
   const [switchState, setSwitchState] =
-    React.useState<SwitchStateReturn["state"]>(true);
+    React.useState<SwitchProps["value"]>(true);
 
-  const onRadioStateChange: RadioGroupStateReturn["setState"] = state => {
+  const onRadioStateChange: RadioGroupProps["setValue"] = state => {
     if (state === "indeterminate") {
       setSwitchState("indeterminate");
       return;
@@ -31,7 +30,7 @@ export const SwitchControlled: React.FC<SwitchControlledProps> = () => {
     setSwitchState(false);
   };
 
-  const getRadioState = (): RadioGroupStateReturn["state"] => {
+  const getRadioState = (): RadioGroupProps["value"] => {
     if (switchState === true) return "checked";
 
     return "unchecked";
@@ -42,24 +41,24 @@ export const SwitchControlled: React.FC<SwitchControlledProps> = () => {
   return (
     <div className="flex w-96 flex-col items-center space-y-4">
       <Switch
-        state={switchState}
-        onStateChange={setSwitchState}
+        value={switchState}
+        setValue={setSwitchState}
         label={capitalizeFirstLetter(radioState as string)}
       />
 
       <Separator className="my-4 w-full" />
 
       <RadioComponent
-        state={radioState}
-        onStateChange={onRadioStateChange}
+        value={radioState}
+        setValue={onRadioStateChange}
         stack="horizontal"
       />
 
       <Separator className="my-4 w-full" />
 
       <Checkbox
-        state={switchState}
-        onStateChange={setSwitchState}
+        value={switchState}
+        setValue={setSwitchState}
         label={capitalizeFirstLetter(radioState as string)}
       />
     </div>
@@ -75,8 +74,8 @@ function capitalizeFirstLetter(string: string) {
 const RadioComponent: React.FC<RadioGroupProps> = props => {
   return (
     <RadioGroup aria-label="checkbox state" {...props}>
-      <Radio value="checked" label="Checked" />
-      <Radio value="unchecked" label="Unchecked" />
+      <Radio inputValue="checked" label="Checked" />
+      <Radio inputValue="unchecked" label="Unchecked" />
     </RadioGroup>
   );
 };

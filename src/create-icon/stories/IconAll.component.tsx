@@ -2,7 +2,6 @@ import * as React from "react";
 
 import {
   ActiveStatusIcon,
-  ArrowIcon,
   AwayStatusIcon,
   CaretDownIcon,
   CaretLeftIcon,
@@ -43,7 +42,6 @@ export const Icon: React.FC<IconProps> = props => {
       <AwayStatusIcon />
       <TypingSmallStatusIcon className="inline-block w-12" />
       <TypingLargeStatusIcon className="inline-block w-12" />
-      <ArrowIcon className="inline-block h-12 w-12" />
       <EqualsIcon />
       <ErrorIcon />
       <SelectIcon />

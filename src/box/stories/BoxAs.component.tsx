@@ -8,6 +8,7 @@ export const BoxAs: React.FC<BoxAsProps> = props => {
   const { className, ...rest } = props;
 
   return (
+    // @ts-ignore
     <Box
       as={Button}
       suffix={<ClockIcon />}

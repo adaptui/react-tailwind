@@ -5,9 +5,11 @@ import { debounce } from "../utils";
 
 import { TextareaProps } from "./index";
 
-export type UseAutoSizeProps = Pick<
-  TextareaProps,
-  "autoSize" | "value" | "rowsMax" | "placeholder" | "rowsMin"
+export type UseAutoSizeProps = Partial<
+  Pick<
+    TextareaProps,
+    "autoSize" | "value" | "rowsMax" | "placeholder" | "rowsMin"
+  >
 >;
 
 export const useAutoSize = (props: UseAutoSizeProps) => {

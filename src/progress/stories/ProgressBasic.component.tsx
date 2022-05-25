@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button, isNull, Progress, ProgressProps } from "../../index";
+import { Button, Progress, ProgressProps } from "../../index";
 
 export type ProgressBasicProps = ProgressProps & {};
 
@@ -23,7 +23,7 @@ const useProgressState = (initialValue: number | null = 0) => {
   React.useEffect(() => {
     const clearId = setInterval(() => {
       setValue(prevValue => {
-        if (isNull(prevValue)) return prevValue;
+        if (prevValue == null) return prevValue;
         return prevValue + 5;
       });
     }, 500);

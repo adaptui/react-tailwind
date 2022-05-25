@@ -1,61 +1,42 @@
+import { ProgressOptions, useProgress } from "@renderlesskit/react";
+import { GroupProps, useGroup } from "ariakit";
 import {
   createComponent,
+  createElement,
   createHook,
-  ProgressHTMLProps as ReakitProgressHTMLProps,
-  ProgressOptions as ReakitProgressOptions,
-  useProgress as useReakitProgress,
-} from "@renderlesskit/react";
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderPropType } from "../utils";
+import { tcm } from "../utils";
 
-import { PROGRESS_BAR_KEYS } from "./__keys";
-import { ProgressStateReturn } from "./ProgressState";
+import { ProgressUIProps } from "./ProgressProps";
 
-export type ProgressWrapperOptions = BoxOptions &
-  ReakitProgressOptions &
-  Pick<ProgressStateReturn, "baseId"> & {
-    label?: RenderPropType<ProgressStateReturn>;
-  };
-
-export type ProgressWrapperHTMLProps = BoxHTMLProps &
-  ReakitProgressHTMLProps & {
-    label?: RenderPropType<ProgressStateReturn>;
-  };
-
-export type ProgressWrapperProps = ProgressWrapperOptions &
-  ProgressWrapperHTMLProps;
-
-export const useProgressWrapper = createHook<
-  ProgressWrapperOptions,
-  ProgressWrapperHTMLProps
->({
-  name: "ProgressWrapper",
-  compose: [useBox, useReakitProgress],
-  keys: PROGRESS_BAR_KEYS,
-
-  useOptions(options, { label }) {
-    return { label, ...options };
-  },
-
-  useProps(options, htmlProps) {
-    const { baseId, label } = options;
-    const { className: htmlClassName, label: _, ...restHtmlProps } = htmlProps;
-
+export const useProgressWrapper = createHook<ProgressWrapperOptions>(
+  ({ state, size, label, hint, ...props }) => {
     const theme = useTheme("progress");
-    const className = cx(theme.wrapper, htmlClassName);
+    const className = tcm(theme.wrapper, props.className);
 
-    const ariaLabel = label
-      ? { "aria-labelledby": baseId }
-      : { "aria-label": "progress" };
+    props = { ...props, className };
+    props = useProgress({ state, ...props });
+    props = useGroup(props);
 
-    return { ...ariaLabel, className, ...restHtmlProps };
+    return props;
   },
-});
+);
 
-export const ProgressWrapper = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useProgressWrapper,
-});
+export const ProgressWrapper = createComponent<ProgressWrapperOptions>(
+  props => {
+    const htmlProps = useProgressWrapper(props);
+
+    return createElement("div", htmlProps);
+  },
+);
+
+export type ProgressWrapperOptions<T extends As = "div"> = GroupProps<T> &
+  ProgressOptions<T> &
+  Partial<ProgressUIProps> & {};
+
+export type ProgressWrapperProps<T extends As = "div"> = Props<
+  ProgressWrapperOptions<T>
+>;

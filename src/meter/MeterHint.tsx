@@ -1,44 +1,39 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { METER_HINT_KEYS } from "./__keys";
-import { MeterStateReturn } from "./MeterState";
+import { MeterUIProps } from "./MeterProps";
 
-export type MeterHintOptions = BoxOptions & Pick<MeterStateReturn, "size">;
-
-export type MeterHintHTMLProps = BoxHTMLProps;
-
-export type MeterHintProps = MeterHintOptions & MeterHintHTMLProps;
-
-export const useMeterHint = createHook<MeterHintOptions, MeterHintHTMLProps>({
-  name: "MeterHint",
-  compose: useBox,
-  keys: METER_HINT_KEYS,
-
-  useOptions(options, htmlProps) {
-    return options;
-  },
-
-  useProps(options, htmlProps) {
-    const { size } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useMeterHint = createHook<MeterHintOptions>(
+  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
     const theme = useTheme("meter");
     const className = cx(
       theme.hint.common,
-      theme.hint.size[size],
-      htmlClassName,
+      size ? theme.hint.size[size] : "",
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const MeterHint = createComponent<MeterHintOptions>(props => {
+  const htmlProps = useMeterHint(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const MeterHint = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useMeterHint,
-});
+export type MeterHintOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<MeterUIProps> & {};
+
+export type MeterHintProps<T extends As = "div"> = Props<MeterHintOptions<T>>;

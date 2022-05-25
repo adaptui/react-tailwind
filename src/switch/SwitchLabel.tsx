@@ -1,49 +1,52 @@
-import { createComponent, createHook } from "@renderlesskit/react";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { BoxHTMLProps, BoxOptions, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
-import { SWITCH_LABEL_KEYS } from "./__keys";
-import { SwitchProps } from "./Switch";
-import { SwitchStateReturn } from "./SwitchState";
+import { SwitchUIProps } from "./SwitchProps";
 
-export type SwitchLabelOptions = BoxOptions &
-  Pick<SwitchStateReturn, "size" | "description" | "label"> & {
-    disabled?: SwitchProps["disabled"];
-  };
-
-export type SwitchLabelHTMLProps = BoxHTMLProps;
-
-export type SwitchLabelProps = SwitchLabelOptions & SwitchLabelHTMLProps;
-
-export const useSwitchLabel = createHook<
-  SwitchLabelOptions,
-  SwitchLabelHTMLProps
->({
-  name: "SwitchLabel",
-  compose: useBox,
-  keys: SWITCH_LABEL_KEYS,
-
-  useProps(options, htmlProps) {
-    const { disabled, description, size, label } = options;
-    const { className: htmlClassName, ...restHtmlProps } = htmlProps;
-
+export const useSwitchLabel = createHook<SwitchLabelOptions>(
+  ({
+    state,
+    size,
+    isChecked,
+    icon,
+    label,
+    description,
+    disabled,
+    ...props
+  }) => {
     const theme = useTheme("switch");
     const className = cx(
       theme.label.common,
-      label && !description ? theme.label.size[size] : "",
+      size && label && !description ? theme.label.size[size] : "",
       label && !description ? (disabled ? "" : theme.label.only) : "",
       disabled ? theme.label.disabled : "",
-      htmlClassName,
+      props.className,
     );
 
-    return { className, ...restHtmlProps };
+    props = { ...props, className };
+    props = useBox(props);
+
+    return props;
   },
+);
+
+export const SwitchLabel = createComponent<SwitchLabelOptions>(props => {
+  const htmlProps = useSwitchLabel(props);
+
+  return createElement("label", htmlProps);
 });
 
-export const SwitchLabel = createComponent({
-  as: "label",
-  memo: true,
-  useHook: useSwitchLabel,
-});
+export type SwitchLabelOptions<T extends As = "label"> = BoxOptions<T> &
+  Partial<SwitchUIProps> & {};
+
+export type SwitchLabelProps<T extends As = "label"> = Props<
+  SwitchLabelOptions<T>
+>;

@@ -1,32 +1,23 @@
 import * as React from "react";
 
-import { RenderProp } from "../utils";
-
 import { SwitchDescription } from "./SwitchDescription";
 import { SwitchIcon } from "./SwitchIcon";
-import { SwitchInput, SwitchInputHTMLProps } from "./SwitchInput";
+import { SwitchInput } from "./SwitchInput";
 import { SwitchLabel } from "./SwitchLabel";
-import { useSwitchProps } from "./SwitchProps";
-import { SwitchInitialState, SwitchStateReturn } from "./SwitchState";
+import { SwitchProps, useSwitchProps } from "./SwitchProps";
 import { SwitchText } from "./SwitchText";
-
-export type SwitchOwnProps = SwitchInputHTMLProps & {};
-
-export type SwitchProps = SwitchInitialState &
-  SwitchOwnProps &
-  RenderProp<SwitchStateReturn>;
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   (props, ref) => {
     const {
-      label,
-      description,
       labelProps,
       inputProps,
       iconProps,
       textProps,
       descriptionProps,
+      uiProps,
     } = useSwitchProps(props);
+    const { label, description } = uiProps;
 
     return (
       <SwitchLabel {...labelProps}>
