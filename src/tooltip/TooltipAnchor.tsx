@@ -12,8 +12,9 @@ import { As, Props } from "ariakit-utils/types";
 import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipAnchor = createHook<TooltipAnchorOptions>(
-  ({ state, content, arrowIcon, withArrow, prefix, suffix, ...props }) => {
+  ({ state, content, withArrow, prefix, suffix, ...props }) => {
     props = useTooltipAnchorAriakit({ state, ...props });
+
     return props;
   },
 );

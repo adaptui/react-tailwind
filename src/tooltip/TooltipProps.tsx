@@ -2,28 +2,28 @@ import { TooltipState, TooltipStateProps, useTooltipState } from "ariakit";
 
 import {
   getComponentProps,
-  runIfFn,
   TooltipUIState,
   TooltipUIStateProps,
   useTooltipUIState,
 } from "../index";
-import { RenderProp, withIconA11y } from "../utils";
+import { RenderProp, runIfFn, withIconA11y } from "../utils";
 
 import { TooltipAnchorProps } from "./TooltipAnchor";
 import { TooltipArrowProps } from "./TooltipArrow";
+import { TooltipPrefixProps } from "./TooltipPrefix";
+import { TooltipSuffixProps } from "./TooltipSuffix";
 import { TooltipWrapperProps } from "./TooltipWrapper";
 
 const componentMap = {
   TooltipAnchor: "anchorProps",
   TooltipWrapper: "wrapperProps",
-  TooltipContent: "contentProps",
+  TooltipPrefix: "prefixProps",
+  TooltipSuffix: "suffixProps",
   TooltipArrow: "arrowProps",
-  TooltipArrowContent: "arrowContentProps",
 };
 
 export const useTooltipProps = ({
   content,
-  arrowIcon,
   prefix,
   suffix,
   withArrow,
@@ -70,7 +70,6 @@ export const useTooltipProps = ({
   });
   const uiState = useTooltipUIState({
     content,
-    arrowIcon,
     prefix,
     suffix,
     withArrow,
@@ -79,10 +78,13 @@ export const useTooltipProps = ({
 
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
-  const _arrowIcon: TooltipProps["arrowIcon"] =
-    componentProps?.arrowIconProps?.children || uiProps.arrowIcon;
+  const _prefix: TooltipProps["prefix"] =
+    componentProps?.prefixProps?.children || uiProps.prefix;
+  const _suffix: TooltipProps["suffix"] =
+    componentProps?.suffixProps?.children || uiProps.suffix;
+  const _content: TooltipProps["content"] = runIfFn(uiProps.content, uiProps);
 
-  uiProps = { ...uiProps, arrowIcon: _arrowIcon };
+  uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix, content: _content };
 
   const anchorProps: TooltipAnchorProps = {
     ...uiProps,
@@ -98,7 +100,18 @@ export const useTooltipProps = ({
   const arrowProps: TooltipArrowProps = {
     ...uiProps,
     ...componentProps.arrowProps,
-    children: withIconA11y(runIfFn(uiProps.arrowIcon, uiProps)),
+  };
+
+  const prefixProps: TooltipArrowProps = {
+    ...uiProps,
+    ...componentProps.prefixProps,
+    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
+  };
+
+  const suffixProps: TooltipArrowProps = {
+    ...uiProps,
+    ...componentProps.suffixProps,
+    children: withIconA11y(runIfFn(uiProps.suffix, uiProps)),
   };
 
   return {
@@ -106,6 +119,8 @@ export const useTooltipProps = ({
     anchorProps,
     wrapperProps,
     arrowProps,
+    prefixProps,
+    suffixProps,
   };
 };
 
@@ -123,5 +138,7 @@ export type TooltipPropsReturn = {
   anchorProps: TooltipAnchorProps;
   wrapperProps: TooltipWrapperProps;
   arrowProps: TooltipArrowProps;
+  prefixProps: TooltipPrefixProps;
+  suffixProps: TooltipSuffixProps;
   uiProps: TooltipUIProps;
 };
