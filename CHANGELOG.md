@@ -1,3 +1,42 @@
+
+
+### [0.0.1-alpha.39](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.38...v0.0.1-alpha.39) (2022-05-25)
+
+
+### Documentation Changes
+
+* **jsdoc:** 📝 update jsdoc typos ([9ff34af](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9ff34af3ef943d5a785b213d73817c2527468a48))
+
+
+### Code Refactors
+
+* **comps:** ♻️ update syntax for v2 ariakit ([#297](https://github.com/timelessco/renderlesskit-react-tailwind/issues/297)) ([bfabf13](https://github.com/timelessco/renderlesskit-react-tailwind/commit/bfabf13f12b456ad4261a4b5b8b4293c6cd889c5))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update actions/cache action to v3 ([#284](https://github.com/timelessco/renderlesskit-react-tailwind/issues/284)) ([b3eefaf](https://github.com/timelessco/renderlesskit-react-tailwind/commit/b3eefaf01b73f40509c02d96d8ede2a1a55a5548))
+* **deps:** ⬆️ update actions/checkout action to v3 ([#281](https://github.com/timelessco/renderlesskit-react-tailwind/issues/281)) ([f762ba5](https://github.com/timelessco/renderlesskit-react-tailwind/commit/f762ba5c375c5ebff2523654f4a631b1ec925885))
+* **deps:** ⬆️ update actions/setup-node action to v3 ([#280](https://github.com/timelessco/renderlesskit-react-tailwind/issues/280)) ([5dd1fe9](https://github.com/timelessco/renderlesskit-react-tailwind/commit/5dd1fe993eab202b25c8673134735d5d3da624ea))
+* **deps:** ⬆️ update dependency @types/react-dom to v17.0.16 ([#292](https://github.com/timelessco/renderlesskit-react-tailwind/issues/292)) ([0867d88](https://github.com/timelessco/renderlesskit-react-tailwind/commit/0867d88bfade3e6cb5c282e60fe9d65109e90bcb))
+* **deps:** ⬆️ update dependency pinst to v3 ([#277](https://github.com/timelessco/renderlesskit-react-tailwind/issues/277)) ([829f54b](https://github.com/timelessco/renderlesskit-react-tailwind/commit/829f54bbd47ab259a73c5e276edbe53149fb48df))
+* **deps:** ⬆️ update dev dependencies (major) (major) ([#283](https://github.com/timelessco/renderlesskit-react-tailwind/issues/283)) ([a21fca2](https://github.com/timelessco/renderlesskit-react-tailwind/commit/a21fca276b570c3d71c67fe61a65d90f1dddb3aa))
+* **deps:** ⬆️ update dev dependencies (major) (major) ([#288](https://github.com/timelessco/renderlesskit-react-tailwind/issues/288)) ([8515ad4](https://github.com/timelessco/renderlesskit-react-tailwind/commit/8515ad4924920dec1f99c42277432e7c41c8341e))
+* **deps:** ⬆️ update dev dependencies (minor) ([#274](https://github.com/timelessco/renderlesskit-react-tailwind/issues/274)) ([3c5f42c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/3c5f42c9ce5dc538354b0f30d1dbc74785a2c768))
+* **deps:** ⬆️ update dev dependencies (minor) ([#276](https://github.com/timelessco/renderlesskit-react-tailwind/issues/276)) ([93bd80e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/93bd80e7f482b72dcfd0d6b42b96e41226359303))
+* **deps:** ⬆️ update dev dependencies (minor) ([#278](https://github.com/timelessco/renderlesskit-react-tailwind/issues/278)) ([ff22aef](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ff22aef0b710942db7f5deb2c5663883c5a99944))
+* **deps:** ⬆️ update dev dependencies (minor) ([#279](https://github.com/timelessco/renderlesskit-react-tailwind/issues/279)) ([170938c](https://github.com/timelessco/renderlesskit-react-tailwind/commit/170938c5efb047d5cb6324239d08c93a8bb944e7))
+* **deps:** ⬆️ update dev dependencies (minor) ([#282](https://github.com/timelessco/renderlesskit-react-tailwind/issues/282)) ([22a0eb2](https://github.com/timelessco/renderlesskit-react-tailwind/commit/22a0eb23e1d282583ec8161c551be466c9e898df))
+* **deps:** ⬆️ update dev dependencies (minor) ([#285](https://github.com/timelessco/renderlesskit-react-tailwind/issues/285)) ([3c3d484](https://github.com/timelessco/renderlesskit-react-tailwind/commit/3c3d484be75172394e813c89c7d52e11ce746907))
+* **deps:** ⬆️ update dev dependencies (minor) ([#287](https://github.com/timelessco/renderlesskit-react-tailwind/issues/287)) ([adf9d16](https://github.com/timelessco/renderlesskit-react-tailwind/commit/adf9d1616ed6424921e7a40f19e77f0d4218e864))
+* **deps:** ⬆️ update dev dependencies (minor) ([#290](https://github.com/timelessco/renderlesskit-react-tailwind/issues/290)) ([9c22335](https://github.com/timelessco/renderlesskit-react-tailwind/commit/9c22335cafc14d85c37a7ae54c1de0280284383c))
+* **deps:** ⬆️ update dev dependencies (minor) ([#291](https://github.com/timelessco/renderlesskit-react-tailwind/issues/291)) ([6f03286](https://github.com/timelessco/renderlesskit-react-tailwind/commit/6f03286ab35233807e28ab6cca657801997d6df9))
+* **deps:** ⬆️ update dev dependencies (minor) ([#293](https://github.com/timelessco/renderlesskit-react-tailwind/issues/293)) ([ac16462](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ac16462077b7058d46588b506e35ae22233e7ee0))
+* **deps:** ⬆️ update dev dependencies (minor) ([#294](https://github.com/timelessco/renderlesskit-react-tailwind/issues/294)) ([77910a1](https://github.com/timelessco/renderlesskit-react-tailwind/commit/77910a115bc639661febc6fea90debf3baa04594))
+* **deps:** ⬆️ update react monorepo to v18 (major) ([#289](https://github.com/timelessco/renderlesskit-react-tailwind/issues/289)) ([ca0e9df](https://github.com/timelessco/renderlesskit-react-tailwind/commit/ca0e9df9c6238c275d5e17614c3dcacf6dadd2b7))
+* **packagejson:** 🏗️ remove keys scripts ([836e828](https://github.com/timelessco/renderlesskit-react-tailwind/commit/836e82876776ce5e597808db83e62a78543f08f9))
+* **sb:** ➕ update storybook 6.5.5 ([#299](https://github.com/timelessco/renderlesskit-react-tailwind/issues/299)) ([be0647e](https://github.com/timelessco/renderlesskit-react-tailwind/commit/be0647e921f7539230407c4e18ab6337f63443ae))
+
 ### [0.0.1-alpha.38](https://github.com/timelessco/renderlesskit-react-tailwind/compare/v0.0.1-alpha.37...v0.0.1-alpha.38) (2022-02-16)
 
 
