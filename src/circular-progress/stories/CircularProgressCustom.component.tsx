@@ -1,11 +1,6 @@
 import * as React from "react";
 
-import {
-  Button,
-  CircularProgress,
-  CircularProgressProps,
-  isNull,
-} from "../../index";
+import { Button, CircularProgress, CircularProgressProps } from "../../index";
 import { CircularProgressBar } from "../CircularProgressBar";
 import { CircularProgressHint } from "../CircularProgressHint";
 import { CircularProgressTrack } from "../CircularProgressTrack";

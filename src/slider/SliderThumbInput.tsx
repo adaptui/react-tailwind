@@ -15,7 +15,11 @@ import { SliderThumbUIProps } from "./SliderThumbProps";
 export const useSliderThumbInput = createHook<SliderThumbInputOptions>(
   ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
     const theme = useTheme("slider");
-    const className = cx(theme.thumb.input, props.className);
+    const className = cx(
+      theme.thumb.input.common,
+      size ? theme.thumb.input.size[size] : "",
+      props.className,
+    );
 
     props = { ...props, className };
     props = useSliderInput({ state, ...props });

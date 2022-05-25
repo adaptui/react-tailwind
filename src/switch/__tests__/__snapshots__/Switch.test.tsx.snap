@@ -8,6 +8,7 @@ exports[`Switch should render correctly 1`] = `
     <button
       aria-checked="false"
       class="peer sr-only"
+      data-command=""
       role="switch"
     />
     <span

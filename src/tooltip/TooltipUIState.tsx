@@ -5,13 +5,20 @@ import { TooltipUIProps } from "./TooltipProps";
 export function useTooltipUIState(
   props: TooltipUIStateProps = {},
 ): TooltipUIState {
-  const { content, withArrow = false, prefix, suffix } = props;
+  const {
+    content,
+    withArrow = false,
+    prefix,
+    suffix,
+    isDragging = false,
+  } = props;
 
   return {
     content,
     withArrow,
     prefix,
     suffix,
+    isDragging,
   };
 }
 
@@ -35,8 +42,16 @@ export type TooltipUIState = {
    * If `true`, Tooltip will render an arrow.
    */
   withArrow: boolean;
+
+  /**
+   * If `true`, Tooltip will also render when dragged outside .
+   */
+  isDragging: boolean;
 };
 
 export type TooltipUIStateProps = Partial<
-  Pick<TooltipUIState, "content" | "withArrow" | "prefix" | "suffix">
+  Pick<
+    TooltipUIState,
+    "content" | "withArrow" | "prefix" | "suffix" | "isDragging"
+  >
 >;

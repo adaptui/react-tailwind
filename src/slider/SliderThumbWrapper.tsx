@@ -13,9 +13,6 @@ import { SliderThumbUIProps } from "./SliderThumbProps";
 
 export const useSliderThumbWrapper = createHook<SliderThumbWrapperOptions>(
   ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
-    console.log("%csize", "color: #cc0036", size);
-    console.log("%cstate", "color: #d0bfff", state);
-    console.log("%cindex", "color: #00736b", index);
     const theme = useTheme("slider");
     const className = cx(theme.thumb.wrapper.common, props.className);
     const style = {
@@ -27,7 +24,7 @@ export const useSliderThumbWrapper = createHook<SliderThumbWrapperOptions>(
           : undefined,
       ...props.style,
     };
-    console.log("%cstyle", "color: #99614d", style);
+
     props = { ...props, className, style };
     props = useBox(props);
 

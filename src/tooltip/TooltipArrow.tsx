@@ -45,6 +45,7 @@ export const useTooltipArrow = createHook<TooltipArrowOptions>(
     withArrow,
     prefix,
     suffix,
+    isDragging,
     ...props
   }) => {
     const theme = useTheme("tooltip");

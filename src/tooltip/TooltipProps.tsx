@@ -27,10 +27,11 @@ export const useTooltipProps = ({
   prefix,
   suffix,
   withArrow,
+  isDragging,
   visible,
   defaultVisible,
   setVisible,
-  animated,
+  animated = true,
   placement,
   gutter,
   timeout,
@@ -46,6 +47,7 @@ export const useTooltipProps = ({
   overflowPadding,
   renderCallback,
   children,
+  as,
   ...restProps
 }: TooltipProps): TooltipPropsReturn => {
   const state = useTooltipState({
@@ -73,10 +75,15 @@ export const useTooltipProps = ({
     prefix,
     suffix,
     withArrow,
+    isDragging,
   });
   let uiProps: TooltipUIProps = { ...uiState, state };
 
-  const { componentProps } = getComponentProps(componentMap, children, uiProps);
+  const { componentProps, finalChildren } = getComponentProps(
+    componentMap,
+    children,
+    uiProps,
+  );
 
   const _prefix: TooltipProps["prefix"] =
     componentProps?.prefixProps?.children || uiProps.prefix;
@@ -88,6 +95,8 @@ export const useTooltipProps = ({
 
   const anchorProps: TooltipAnchorProps = {
     ...uiProps,
+    as,
+    children: finalChildren,
     ...componentProps.anchorProps,
   };
 
@@ -130,7 +139,8 @@ export type TooltipUIProps = TooltipUIState & {
 
 export type TooltipProps = TooltipStateProps &
   TooltipUIStateProps &
-  TooltipWrapperProps & {
+  Omit<TooltipWrapperProps, "as" | "state" | "children"> &
+  Pick<TooltipAnchorProps, "as"> & {
     children?: RenderProp<TooltipUIProps>;
   };
 

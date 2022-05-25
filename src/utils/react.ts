@@ -1,15 +1,9 @@
 import * as React from "react";
+import { AnyObject } from "ariakit-utils";
 
 import { isFunction } from "./assertions";
 import { cx } from "./tailwindMerge";
-import {
-  As,
-  Children,
-  ComponentWithAs,
-  Dict,
-  PropsWithAs,
-  RenderPropType,
-} from "./types";
+import { As, ComponentWithAs, Dict, PropsWithAs, RenderProp } from "./types";
 
 /**
  * @template Props Component Props
@@ -59,25 +53,28 @@ export function runIfFnChildren<T, U>(valueOrFn: T, ...args: U[]): T {
  *
  * @param children the children
  */
-export function getValidChildren<T extends any>(children: Children<T>) {
+export function getValidChildren<T extends any>(children: RenderProp<T>) {
   return React.Children.toArray(children as React.ReactNode).filter(child =>
     React.isValidElement(child),
   ) as React.ReactNode[];
 }
 
 // Merge library & user prop
-export const passProps = (component: RenderPropType, props?: Dict) => {
+export const passProps = <T extends AnyObject>(
+  component: RenderProp<T>,
+  props?: T,
+) => {
   return React.isValidElement(component)
     ? React.cloneElement(component, {
         ...props,
         ...component.props,
         className: cx(props?.className, component.props.className),
       })
-    : runIfFn(component, props);
+    : runIfFn(component, props as T);
 };
 
 // Add a11y to the icon passed
-export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
+export const withIconA11y = (icon: RenderProp, props?: Dict) => {
   return passProps(icon, {
     role: "img",
     focusable: false,
@@ -88,13 +85,13 @@ export const withIconA11y = (icon: RenderPropType, props?: Dict) => {
 
 export const getComponentProps = <T extends any, P>(
   componentMaps: Dict<string>,
-  children: Children<T>,
+  children: RenderProp<T>,
   props: P,
 ) => {
   const normalizedChildren = runIfFnChildren(children, props);
   const validChildren = getValidChildren(normalizedChildren);
   const componentProps: Dict = {};
-  const finalChildren: Children<T>[] = [];
+  const finalChildren: RenderProp<T>[] = [];
 
   if (validChildren.length > 0) {
     validChildren.forEach(function (child) {

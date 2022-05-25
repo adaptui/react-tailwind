@@ -69,8 +69,11 @@ export const useButton = createHook<ButtonOptions>(
         {(!prefix && !suffix) || iconOnly ? (
           loading ? (
             <ButtonFullWidthSpinner size={size} spinner={spinner}>
-              iconOnly ? withIconA11y(iconOnly) : props.children as
-              React.ReactNode
+              <>
+                {iconOnly
+                  ? withIconA11y(iconOnly)
+                  : (props.children as React.ReactNode)}
+              </>
             </ButtonFullWidthSpinner>
           ) : (
             <>{iconOnly ? withIconA11y(iconOnly) : props.children}</>

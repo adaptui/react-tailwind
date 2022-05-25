@@ -13,7 +13,7 @@ describe("Switch", () => {
   });
 
   it("should toggle switch state", () => {
-    render(<Switch defaultState={true} />);
+    render(<Switch defaultValue={true} />);
 
     expect(screen.getByRole("switch")).toBeChecked();
     fireEvent.click(screen.getByRole("switch"));
@@ -21,7 +21,7 @@ describe("Switch", () => {
   });
 
   it("can be disabled", () => {
-    render(<Switch disabled defaultState={true} />);
+    render(<Switch disabled defaultValue={true} />);
 
     expect(screen.getByRole("switch")).toBeDisabled();
     // toBeChecked is failing for this case

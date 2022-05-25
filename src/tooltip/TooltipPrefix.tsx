@@ -12,7 +12,7 @@ import { tcm } from "../utils";
 import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipPrefix = createHook<TooltipPrefixOptions>(
-  ({ state, content, withArrow, prefix, suffix, ...props }) => {
+  ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
     const theme = useTheme("tooltip");
     const className = tcm(theme.prefix, props.className);
 

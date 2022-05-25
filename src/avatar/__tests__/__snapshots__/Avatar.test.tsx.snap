@@ -65,11 +65,8 @@ exports[`<Avatar /> should render with AvatarStatusIndicator 1`] = `
       class="absolute flex items-center justify-center -bottom-px -right-px"
     >
       <svg
-        aria-hidden="true"
         class="w-[1em] h-[1em] inline-block shrink-0 align-middle text-green-500 ring-1.5 rounded-full text-[8px] bg-white ring-white"
         data-testid="testid-icon"
-        focusable="false"
-        role="img"
         viewBox="0 0 4 4"
       >
         <circle
