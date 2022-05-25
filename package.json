@@ -41,8 +41,7 @@
   ],
   "scripts": {
     "postinstall": "concurrently \"husky install\" \"patch-package\"",
-    "boot": "concurrently \"yarn keys\" \"yarn previews\"",
-    "keys": "node scripts/generateKeys",
+    "boot": "yarn previews",
     "previews": "node scripts/create-previews.js",
     "storybook": "yarn previews && start-storybook -p 6006",
     "test": "jest --config ./jest.config.ts --no-cache",
@@ -64,7 +63,7 @@
     "swc:esm": "swc src -d out/esm -C module.type=es6",
     "swc:types": "tsc --emitDeclarationOnly --project tsconfig.prod.json --declarationDir out/types",
     "check-types": "yarn swc:types && tsd",
-    "storybook-build": "yarn keys && yarn previews && build-storybook",
+    "storybook-build": "yarn previews && build-storybook",
     "prepublishOnly": "pinst --disable",
     "release": "release-it",
     "postpublish": "pinst --enable",
