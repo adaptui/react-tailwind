@@ -166,7 +166,7 @@
     "jest": "28.1.0",
     "jest-axe": "6.0.0",
     "jest-environment-jsdom": "28.1.0",
-    "lint-staged": "12.4.2",
+    "lint-staged": "12.4.3",
     "lodash": "4.17.21",
     "node-fetch": "2.6.1",
     "outdent": "0.8.0",
