@@ -1,5 +1,7 @@
-const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
+const lowColors = require("./low-level-tokens");
+const midColors = require("./mid-level-tokens");
+const highColors = require("./high-level-tokens");
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
@@ -28,7 +30,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        gray: colors.zinc,
+        ...lowColors,
+        ...midColors,
+        // ...highColors,
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
@@ -46,6 +50,7 @@ module.exports = {
       },
       ringWidth: {
         1.5: "1.5px",
+        3: "3px",
       },
       inset: {
         unset: "unset",

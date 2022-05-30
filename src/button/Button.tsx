@@ -46,7 +46,7 @@ export const useButton = createHook<ButtonOptions>(
             button.size.iconOnly.base[size],
             button.size.iconOnly.spinner[size],
           ),
-      button.variant.common[variant],
+      button.variant.default[variant],
       button.variant.hover[variant],
       button.variant.active[variant],
       button.variant.focus[variant],
@@ -128,7 +128,7 @@ export type ButtonOptions<T extends As = "button"> = Omit<
    *
    * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "common">;
+  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "default">;
 
   /**
    * If added, the button will only show an icon ignoring other childrens.

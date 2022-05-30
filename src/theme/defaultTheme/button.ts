@@ -6,39 +6,47 @@ export const button = {
       "translate-y-0 hover:-translate-y-px active:translate-y-0 will-change-transform",
   },
   variant: {
-    common: {
-      solid: "bg-gray-800 text-white border border-transparent",
-      subtle: "bg-gray-100 text-gray-600 border border-transparent",
-      outline: "bg-white text-gray-600 border border-gray-200",
-      ghost: "bg-white text-gray-600 border border-transparent",
+    default: {
+      solid:
+        "bg-base-solid-background-high-contrast-default text-base-solid-text-default border border-transparent",
+      subtle:
+        "bg-base-subtle-background-default text-base-sublte-text-default border border-transparent",
+      outline:
+        "bg-base-outline-background-default text-base-outline-text-default border border-base-outline-border-default",
+      ghost: "bg-white text-secondary-600 border border-transparent",
     },
     hover: {
-      solid: "hover:bg-gray-700 hover:z-10",
-      subtle: "hover:bg-gray-200 hover:z-10",
-      outline: "hover:border-gray-300 hover:shadow-sm hover:z-10",
-      ghost: "hover:bg-gray-100 hover:z-10",
+      solid: "hover:bg-base-solid-background-high-contrast-hover hover:z-10",
+      subtle: "hover:bg-base-subtle-background-hover hover:z-10",
+      outline:
+        "hover:border-base-outline-border-hover hover:shadow-sm hover:z-10",
+      ghost: "hover:bg-secondary-100 hover:z-10",
     },
     active: {
-      solid: "active:bg-gray-800",
-      subtle: "active:bg-gray-100",
-      outline: "active:bg-gray-100 active:border-gray-300",
-      ghost: "active:bg-gray-200",
+      solid: "active:bg-base-solid-background-high-contrast-active",
+      subtle: "active:bg-base-subtle-background-active",
+      outline:
+        "active:bg-base-outline-background-active active:border-base-outline-border-active",
+      ghost: "active:bg-secondary-200",
     },
     focus: {
       solid:
-        "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
+        "focus-visible:ring-3 focus-visible:ring-base-500 focus-visible:z-10",
       subtle:
-        "focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:z-10",
+        "focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:z-10",
       outline:
-        "focus-visible:border-gray-300 focus-visible:!border-r-[1px] focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
+        "focus-visible:border-secondary-300 focus-visible:!border-r-[1px] focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:z-10",
       ghost:
-        "focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:z-10",
+        "focus-visible:ring-2 focus-visible:ring-secondary-200 focus-visible:z-10",
     },
     disabled: {
-      solid: "disabled:bg-gray-100 disabled:text-gray-400",
-      subtle: "disabled:bg-gray-100 disabled:text-gray-400",
-      outline: "disabled:text-gray-400 disabled:border-gray-200",
-      ghost: "disabled:text-gray-400",
+      solid:
+        "disabled:bg-base-solid-background-high-contrast-disabled disabled:text-base-solid-text-disabled",
+      subtle:
+        "disabled:bg-base-subtle-background-disabled disabled:text-base-subtle-text-disabled",
+      outline:
+        "disabled:bg-base-outline-background-disabled disabled:border-secondary-200",
+      ghost: "disabled:text-secondary-400",
     },
   },
   size: {
