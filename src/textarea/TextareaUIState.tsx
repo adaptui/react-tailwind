@@ -44,14 +44,14 @@ export type TextareaUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"textarea", "base", "size">;
+  size: keyof AdaptUI.GetThemeValue<"textarea", "base", "size">;
 
   /**
    * How the textarea should look?
    *
    * @default outline
    */
-  variant: keyof Renderlesskit.GetThemeValue<"textarea", "base", "variant">;
+  variant: keyof AdaptUI.GetThemeValue<"textarea", "base", "variant">;
 
   /**
    * Minimum number of rows to be displayed.
@@ -68,7 +68,7 @@ export type TextareaUIState = {
   /**
    * Direction of the textarea in which it can be resized.
    */
-  resize: keyof Renderlesskit.GetThemeValue<"textarea", "base", "resize">;
+  resize: keyof AdaptUI.GetThemeValue<"textarea", "base", "resize">;
 
   /**
    * Whether the textarea should autosize on typing.

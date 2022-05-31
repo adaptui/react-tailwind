@@ -1,10 +1,10 @@
-import { SliderTrackOptions, useSliderTrack } from "@renderlesskit/react";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
+import { SliderTrackOptions, useSliderTrack } from "@adaptui/react";
 
 import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";

@@ -20,7 +20,7 @@ export type SliderThumbUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"slider", "track", "base", "size">;
+  size: keyof AdaptUI.GetThemeValue<"slider", "track", "base", "size">;
 
   /**
    * True, if your slider needs a tooltip.

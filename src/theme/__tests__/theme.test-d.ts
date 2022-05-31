@@ -2,25 +2,25 @@ import { expectAssignable, expectType } from "tsd";
 
 import theme from "../defaultTheme";
 
-// TODO: Test global renderlesskit namespace
+// TODO: Test global adaptui namespace
 
-expectType<Renderlesskit.Theme>({ components: theme });
+expectType<AdaptUI.Theme>({ components: theme });
 
 // GetThemeValue test
-expectAssignable<Renderlesskit.GetThemeValue<"button", "base">>("");
-expectType<Renderlesskit.GetThemeValue<"button", "variant", "default">>({
+expectAssignable<AdaptUI.GetThemeValue<"button", "base", "default">>("");
+expectType<AdaptUI.GetThemeValue<"button", "variant", "default">>({
   ghost: "",
   solid: "",
   subtle: "",
   outline: "",
 });
-expectType<Renderlesskit.GetThemeValue<"button", "size", "default">>({
+expectType<AdaptUI.GetThemeValue<"button", "size", "default">>({
   sm: "",
   md: "",
   lg: "",
   xl: "",
 });
-expectType<Renderlesskit.GetThemeValue<"switch", "icon">["size"]>({
+expectType<AdaptUI.GetThemeValue<"switch", "icon">["size"]>({
   sm: "",
   md: "",
   lg: "",
@@ -31,6 +31,6 @@ expectType<Renderlesskit.GetThemeValue<"switch", "icon">["size"]>({
 type TestTheme = { button: { size: { xl: "" } } };
 type UserTheme = { button: { size: { superlarge: "" } } };
 
-expectAssignable<Renderlesskit.MergeTheme<TestTheme, UserTheme>>({
+expectAssignable<AdaptUI.MergeTheme<TestTheme, UserTheme>>({
   button: { size: { superlarge: "", xl: "" } },
 });

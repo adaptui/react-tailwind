@@ -1,9 +1,5 @@
 import { useMemo } from "react";
-import {
-  MeterState,
-  MeterStateProps,
-  useMeterState,
-} from "@renderlesskit/react";
+import { MeterState, MeterStateProps, useMeterState } from "@adaptui/react";
 
 import { getComponentProps, RenderProp, runIfFn } from "../utils";
 

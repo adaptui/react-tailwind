@@ -1,13 +1,13 @@
 import {
-  DisclosureCollapsibleContentOptions,
-  useDisclosureCollapsibleContent,
-} from "@renderlesskit/react";
-import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
+import {
+  DisclosureCollapsibleContentOptions,
+  useDisclosureCollapsibleContent,
+} from "@adaptui/react";
 
 import { ShowMoreUIProps } from "./ShowMoreProps";
 

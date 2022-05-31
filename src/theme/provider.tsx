@@ -1,5 +1,4 @@
 import * as React from "react";
-import { unstable_IdProvider as IdProvider } from "reakit";
 
 import defaultTheme from "./defaultTheme";
 import {
@@ -21,7 +20,7 @@ export function useTheme<T extends ThemeKeys>(component?: T) {
 
   if (!context) {
     throw new Error(
-      "Seems you forgot to wrap `useTheme` within the `RenderlesskitProvider`",
+      "Seems you forgot to wrap `useTheme` within the `AdaptUIProvider`",
     );
   }
 
@@ -31,7 +30,7 @@ export function useTheme<T extends ThemeKeys>(component?: T) {
   return context;
 }
 
-export type RenderlesskitProviderProps = {
+export type AdaptUIProviderProps = {
   /**
    * Actual theme used by all the components.
    */
@@ -43,8 +42,8 @@ export type RenderlesskitProviderProps = {
   extend?: ExtendableDefaultTheme;
 };
 
-export const RenderlesskitProvider: React.FC<
-  React.PropsWithChildren<RenderlesskitProviderProps>
+export const AdaptUIProvider: React.FC<
+  React.PropsWithChildren<AdaptUIProviderProps>
 > = props => {
   const { children, theme = defaultTheme, extend } = props;
 
@@ -55,10 +54,6 @@ export const RenderlesskitProvider: React.FC<
   }
 
   return (
-    <IdProvider>
-      <ThemeContext.Provider value={finalTheme}>
-        {children}
-      </ThemeContext.Provider>
-    </IdProvider>
+    <ThemeContext.Provider value={finalTheme}>{children}</ThemeContext.Provider>
   );
 };

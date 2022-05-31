@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Group } from "reakit";
+import { Group } from "ariakit";
 
 import { Checkbox, CheckboxProps } from "../../index";
 

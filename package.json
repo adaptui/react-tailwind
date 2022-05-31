@@ -1,21 +1,20 @@
 {
-  "name": "@renderlesskit/react-tailwind",
+  "name": "@adaptui/react-tailwind",
   "version": "0.0.1-alpha.39",
   "description": "React UI built with renderleskit-react & tailwind",
   "keywords": [
     "react",
     "ui",
-    "renderlesskit",
-    "renderless",
+    "adaptui",
     "components",
     "typescript"
   ],
   "bugs": {
-    "url": "https://github.com/timelessco/renderlesskit-react-tailwind/issues"
+    "url": "https://github.com/adaptui/react-tailwind/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timelessco/renderlesskit-react-tailwind.git"
+    "url": "git+https://github.com/adaptui/react-tailwind.git"
   },
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",
@@ -98,13 +97,9 @@
   },
   "dependencies": {
     "@react-aria/live-announcer": "^3.0.6",
-    "@renderlesskit/react": "^1.0.0-2",
-    "ariakit": "^2.0.0-next.28",
-    "ariakit-utils": "^0.17.0-next.19",
-    "reakit": "^1.3.11",
-    "reakit-system": "^0.15.2",
-    "reakit-utils": "^0.15.2",
-    "reakit-warning": "^0.6.2",
+    "@adaptui/react": "^1.0.0-4",
+    "ariakit": "2.0.0-next.29",
+    "ariakit-utils": "0.17.0-next.20",
     "tailwind-merge": "^1.2.1"
   },
   "devDependencies": {
@@ -137,7 +132,7 @@
     "@testing-library/user-event": "14.2.0",
     "@types/jest": "27.5.1",
     "@types/jest-axe": "3.5.3",
-    "@types/node": "17.0.35",
+    "@types/node": "17.0.36",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
     "@types/tailwindcss": "3.0.10",
@@ -159,7 +154,6 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-storybook": "0.5.12",
     "focus-visible": "5.2.0",
-    "fs-extra": "10.1.0",
     "gacp": "3.0.2",
     "glob-fs": "0.1.7",
     "husky": "8.0.1",
@@ -167,7 +161,6 @@
     "jest-axe": "6.0.0",
     "jest-environment-jsdom": "28.1.0",
     "lint-staged": "12.4.3",
-    "lodash": "4.17.21",
     "node-fetch": "2.6.1",
     "outdent": "0.8.0",
     "patch-package": "6.4.7",
@@ -182,14 +175,12 @@
     "react-dom": "18.1.0",
     "react-hook-form": "7.31.3",
     "react-icons": "4.4.0",
-    "reakit-test-utils": "0.15.2",
     "release-it": "15.0.0",
     "rimraf": "3.0.2",
     "size-limit": "5.0.5",
     "sort-package-json": "1.57.0",
     "storybook-addon-preview": "2.2.0",
     "tailwindcss": "3.0.24",
-    "ts-morph": "15.0.0",
     "ts-node": "10.8.0",
     "tsd": "0.20.0",
     "tslib": "2.4.0",

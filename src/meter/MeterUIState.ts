@@ -20,7 +20,7 @@ export type MeterUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"meter", "track", "size">;
+  size: keyof AdaptUI.GetThemeValue<"meter", "track", "size">;
 
   /**
    * No of intervals for the meter.

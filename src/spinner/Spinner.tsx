@@ -52,14 +52,14 @@ export type SpinnerOptions<T extends As = "div"> = BoxOptions<T> & {
    *
    * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"spinner", "size">;
+  size?: keyof AdaptUI.GetThemeValue<"spinner", "size">;
 
   /**
    * How the spinner should be displayed?
    *
    * @default transparent
    */
-  stroke?: keyof Renderlesskit.GetThemeValue<"spinner", "stroke">;
+  stroke?: keyof AdaptUI.GetThemeValue<"spinner", "stroke">;
 };
 
 export type SpinnerProps<T extends As = "div"> = Props<SpinnerOptions<T>>;

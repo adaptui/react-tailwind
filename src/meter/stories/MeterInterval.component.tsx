@@ -6,7 +6,7 @@ import {
   NumberFieldLabel,
   useNumberFieldBaseState,
   useNumberFieldState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import { Button, Meter, MeterProps } from "../../index";
 

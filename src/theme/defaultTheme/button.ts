@@ -1,12 +1,12 @@
 export const button = {
   base: {
-    common:
+    default:
       "inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
     notCollapsed:
       "translate-y-0 hover:-translate-y-px active:translate-y-0 will-change-transform",
   },
   variant: {
-    common: {
+    default: {
       solid: "bg-gray-800 text-white border border-transparent",
       subtle: "bg-gray-100 text-gray-600 border border-transparent",
       outline: "bg-white text-gray-600 border border-gray-200",
@@ -42,7 +42,7 @@ export const button = {
     },
   },
   size: {
-    common: {
+    default: {
       sm: "min-h-[26px] w-auto min-w-[26px] pb-px px-2 rounded-lg text-cxs font-medium",
       md: "min-h-[30px] w-auto min-w-[30px] px-2.5 rounded-lg text-sm font-medium",
       lg: "min-h-9 w-auto min-w-9 px-3 rounded-[10px] text-sm font-medium",

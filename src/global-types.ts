@@ -50,7 +50,7 @@ interface _ComponentDefaultTheme {
 declare const _brand: unique symbol;
 
 declare global {
-  namespace Renderlesskit {
+  namespace AdaptUI {
     export interface Theme extends _ComponentDefaultTheme {}
     /**
      * @template T default theme
@@ -65,7 +65,7 @@ declare global {
 
     type Brand<Type, Name = "ThemeKey"> = Type & { [_brand]: Name };
 
-    type Comps = Renderlesskit.Theme["components"];
+    type Comps = AdaptUI.Theme["components"];
 
     /**
      * @template C component name

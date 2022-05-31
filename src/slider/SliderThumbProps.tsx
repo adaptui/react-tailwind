@@ -2,7 +2,7 @@ import {
   SliderThumbState,
   SliderThumbStateProps,
   useSliderThumbState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import { getComponentProps, RenderProp } from "../utils";
 

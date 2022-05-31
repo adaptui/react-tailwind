@@ -16,7 +16,7 @@ export type CheckboxGroupUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"checkbox", "icon", "size">;
 
   /**
    * Controls how the group of checkboxs are arranged

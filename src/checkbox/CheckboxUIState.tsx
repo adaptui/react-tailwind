@@ -59,7 +59,7 @@ export type CheckboxUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"checkbox", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"checkbox", "icon", "size">;
 
   /**
    * Provide custom icons as a replacement for the default ones.

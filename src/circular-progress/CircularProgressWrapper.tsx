@@ -1,4 +1,3 @@
-import { ProgressOptions, useProgress } from "@renderlesskit/react";
 import { GroupProps, useGroup } from "ariakit";
 import {
   createComponent,
@@ -6,6 +5,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
+import { ProgressOptions, useProgress } from "@adaptui/react";
 
 import { useTheme } from "../theme";
 import { tcm } from "../utils";

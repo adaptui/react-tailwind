@@ -14,8 +14,8 @@ const transpileTs = require("./utils/transpile-ts");
 
 const addPackageName = string =>
   string
-    .replace("../../index", "@renderlesskit/react-tailwind")
-    .replace("../../../index", "@renderlesskit/react-tailwind");
+    .replace("../../index", "@adaptui/react-tailwind")
+    .replace("../../../index", "@adaptui/react-tailwind");
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

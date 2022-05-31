@@ -7,8 +7,8 @@ import {
 import { RunOptions } from "axe-core";
 import { configureAxe } from "jest-axe";
 
-import theme from "../../renderlesskit.config";
-import { RenderlesskitProvider } from "../theme";
+import theme from "../../adaptui.config";
+import { AdaptUIProvider } from "../theme";
 
 export * from "@testing-library/react";
 
@@ -19,15 +19,13 @@ type Render = (
 
 export const render: Render = (children, options = {}) => {
   const result = RtlRender(
-    <RenderlesskitProvider extend={theme}>{children}</RenderlesskitProvider>,
+    <AdaptUIProvider extend={theme}>{children}</AdaptUIProvider>,
     options,
   );
 
   const _rerender = (rerenderUi: any) => {
     result.rerender(
-      <RenderlesskitProvider extend={theme}>
-        {rerenderUi}
-      </RenderlesskitProvider>,
+      <AdaptUIProvider extend={theme}>{rerenderUi}</AdaptUIProvider>,
     );
   };
 

@@ -1,3 +1,4 @@
+import { PartialDefaultTheme } from "../types";
 import { mergeExtensions, mergeThemes } from "../utils";
 
 describe("mergeThemes", () => {
@@ -11,9 +12,11 @@ describe("mergeThemes", () => {
   });
 
   test("merges two themes together without extend", () => {
-    const userTheme = { alert: { base: "bg-red-100" } };
-    const defaultTheme = {
-      alert: { base: "bg-green-100", sizes: {} },
+    const userTheme: PartialDefaultTheme = {
+      button: { variant: { default: { solid: "bg-red-100" } } },
+    };
+    const defaultTheme: PartialDefaultTheme = {
+      button: { variant: { default: { solid: "bg-green-100" } } },
     };
 
     const deepTheme = mergeThemes([userTheme, defaultTheme]);

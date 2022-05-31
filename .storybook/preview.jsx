@@ -1,8 +1,8 @@
 import "focus-visible";
 
 import "./tailwind.css";
-import theme from "../renderlesskit.config.ts";
-import { RenderlesskitProvider } from "../src/theme";
+import theme from "../adaptui.config.ts";
+import { AdaptUIProvider } from "../src/theme";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -19,9 +19,9 @@ export const decorators = [
     document.body.classList.add("antialiased");
 
     return (
-      <RenderlesskitProvider extend={theme}>
+      <AdaptUIProvider extend={theme}>
         <Story />
-      </RenderlesskitProvider>
+      </AdaptUIProvider>
     );
   },
 ];

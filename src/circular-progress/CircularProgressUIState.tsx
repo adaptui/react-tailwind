@@ -16,7 +16,7 @@ export type CircularProgressUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<
+  size: keyof AdaptUI.GetThemeValue<
     "circularProgress",
     "barWrapper",
     "common",

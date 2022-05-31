@@ -32,7 +32,7 @@ export type RadioUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"radio", "icon", "size">;
 
   /**
    * If true, Radio is checked.

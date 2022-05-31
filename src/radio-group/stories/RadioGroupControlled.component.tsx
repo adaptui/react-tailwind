@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Separator } from "reakit";
+import { Separator } from "ariakit";
 
 import { CheckboxGroupProps } from "../../checkbox-group";
 import { Checkbox, Radio, RadioGroup, RadioGroupProps } from "../../index";

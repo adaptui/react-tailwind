@@ -16,7 +16,7 @@ export type RadioGroupUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"radio", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"radio", "icon", "size">;
 
   /**
    * Controls how the group of radios are arranged

@@ -23,14 +23,14 @@ export type InputUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"input", "base", "size">;
+  size: keyof AdaptUI.GetThemeValue<"input", "base", "size">;
 
   /**
    * How the input should look?
    *
    * @default solid
    */
-  variant: keyof Renderlesskit.GetThemeValue<"input", "base", "variant">;
+  variant: keyof AdaptUI.GetThemeValue<"input", "base", "variant">;
 
   /**
    * Prefix for the Input.

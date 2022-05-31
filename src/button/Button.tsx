@@ -1,5 +1,4 @@
 import React from "react";
-import { announce } from "@react-aria/live-announcer";
 import {
   ButtonOptions as AriakitButtonOptions,
   useButton as useAriakitButton,
@@ -10,6 +9,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
+import { announce } from "@react-aria/live-announcer";
 
 import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
@@ -38,15 +38,15 @@ export const useButton = createHook<ButtonOptions>(
 
     const button = useTheme("button");
     const className = cx(
-      button.base.common,
+      button.base.default,
       groupcontext?.collapsed ? "" : button.base.notCollapsed,
       !iconOnly
-        ? button.size.common[size]
+        ? button.size.default[size]
         : tcm(
             button.size.iconOnly.base[size],
             button.size.iconOnly.spinner[size],
           ),
-      button.variant.common[variant],
+      button.variant.default[variant],
       button.variant.hover[variant],
       button.variant.active[variant],
       button.variant.focus[variant],
@@ -121,14 +121,14 @@ export type ButtonOptions<T extends As = "button"> = Omit<
    *
    * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"button", "size", "common">;
+  size?: keyof AdaptUI.GetThemeValue<"button", "size", "default">;
 
   /**
    * How the button should look?
    *
    * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"button", "variant", "common">;
+  variant?: keyof AdaptUI.GetThemeValue<"button", "variant", "default">;
 
   /**
    * If added, the button will only show an icon ignoring other childrens.

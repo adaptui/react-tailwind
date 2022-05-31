@@ -4,7 +4,7 @@ import {
   SliderStateProps,
   useSliderBaseState,
   useSliderState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import { getComponentProps, RenderProp } from "../utils";
 

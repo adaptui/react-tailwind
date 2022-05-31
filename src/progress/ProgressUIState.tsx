@@ -16,7 +16,7 @@ export type ProgressUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"progress", "track", "size">;
+  size: keyof AdaptUI.GetThemeValue<"progress", "track", "size">;
 
   /**
    * Label for the Progress.

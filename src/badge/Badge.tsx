@@ -55,21 +55,21 @@ export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
    *
    * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"badge", "size", "common">;
+  size?: keyof AdaptUI.GetThemeValue<"badge", "size", "common">;
 
   /**
    * How the badge should look?
    *
    * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"badge", "variant">;
+  variant?: keyof AdaptUI.GetThemeValue<"badge", "variant">;
 
   /**
    * How the badge should be themed?
    *
    * @default default
    */
-  themeColor?: keyof Renderlesskit.GetThemeValue<"badge", "variant", "solid">;
+  themeColor?: keyof AdaptUI.GetThemeValue<"badge", "variant", "solid">;
 
   /**
    * If added, the tag will show an icon before the tag's text.

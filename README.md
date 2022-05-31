@@ -1,10 +1,10 @@
-# Renderlesskit React Tailwind
+# AdaptUI React Tailwind
 
-React UI built with renderleskit-react & tailwind
+React UI built with @adaptui/react, ariakit & tailwind
 
 ## Get Started
 
-[Documentation & Getting Started](https://renderlesskit-react-tailwind-docs.vercel.app/docs/getting-started)
+[Documentation & Getting Started](https://react-tailwind-docs.vercel.app/docs/getting-started)
 
 ## Storybook
 

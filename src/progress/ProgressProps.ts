@@ -3,7 +3,7 @@ import {
   ProgressState,
   ProgressStateProps,
   useProgressState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import { getComponentProps, RenderProp, runIfFn } from "../utils";
 

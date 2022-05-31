@@ -1,10 +1,10 @@
-import { SliderInputOptions, useSliderInput } from "@renderlesskit/react";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
+import { SliderInputOptions, useSliderInput } from "@adaptui/react";
 
 import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";

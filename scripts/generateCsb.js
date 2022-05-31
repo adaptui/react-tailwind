@@ -34,7 +34,7 @@ const getSandboxShortURL = async templates => {
 
 const getSandboxContents = (files, extraDeps) => {
   const deps = {
-    "@renderlesskit/react-tailwind": "latest",
+    "@adaptui/react-tailwind": "latest",
     "deep-merge": "latest",
     next: "latest",
     react: "latest",
@@ -52,16 +52,16 @@ const getSandboxContents = (files, extraDeps) => {
       },
       "pages/_app.js": {
         content: outdent`
-          import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
+          import { AdaptUIProvider } from "@adaptui/react-tailwind";
 
           import "./styles.css";
-          import theme from "../renderlesskit.config";
+          import theme from "../adaptui.config";
 
           function MyApp({ Component, pageProps }) {
             return (
-              <RenderlesskitProvider extend={theme}>
+              <AdaptUIProvider extend={theme}>
                 <Component {...pageProps} />
-              </RenderlesskitProvider>
+              </AdaptUIProvider>
             );
           }
 
@@ -77,7 +77,7 @@ const getSandboxContents = (files, extraDeps) => {
             return (
               <div>
                 <Head>
-                  <title>Renderlesskit React Tailwind Example</title>
+                  <title>AdaptUI React Tailwind Example</title>
                   <link rel="icon" href="/favicon.ico" />
                 </Head>
 
@@ -96,9 +96,9 @@ const getSandboxContents = (files, extraDeps) => {
           @tailwind utilities;
       `,
       },
-      "renderlesskit.config.js": {
+      "adaptui.config.js": {
         content: outdent`
-          import { extendTheme } from "@renderlesskit/react-tailwind";
+          import { extendTheme } from "@adaptui/react-tailwind";
 
           export const theme = extendTheme({
             // This only affected the Storybook, doesn't go or merge when used this config as preset
@@ -126,15 +126,15 @@ const getSandboxContents = (files, extraDeps) => {
           const path = require("path");
           const defaultTheme = require("tailwindcss/defaultTheme");
 
-          const preset = require("@renderlesskit/react-tailwind/preset.js");
+          const preset = require("@adaptui/react-tailwind/preset.js");
 
           module.exports = preset({
             mode: "jit",
             purge: [
               path.resolve(__dirname, "./components/**/*"),
               path.resolve(__dirname, "./pages/**/*"),
-              path.resolve(__dirname, "./renderlesskit.config.ts"),
-              "node_modules/@renderlesskit/react-tailwind/src/theme.tsx",
+              path.resolve(__dirname, "./adaptui.config.ts"),
+              "node_modules/@adaptui/react-tailwind/src/theme.tsx",
             ],
 
             theme: {
@@ -157,7 +157,7 @@ const getSandboxContents = (files, extraDeps) => {
       },
       "package.json": {
         content: {
-          name: "renderlesskit-react-tailwind",
+          name: "react-tailwind",
           version: "1.0.0",
           private: true,
           scripts: {

@@ -119,7 +119,7 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@renderlesskit/react-tailwind": "0.0.1-alpha.33",
+      "@adaptui/react-tailwind": "0.0.1-alpha.33",
       next: "12.0.7",
       react: "17.0.2",
       "react-dom": "17.0.2",
@@ -133,11 +133,11 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
     },
     files: {
       "pages/_app.js":
-        'import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";\n\nimport "../styles/index.css";\nimport theme from "../renderlesskit.config";\n\nfunction MyApp({ Component, pageProps }) {\n  return (\n    <RenderlesskitProvider extend={theme}>\n      <Component {...pageProps} />\n    </RenderlesskitProvider>\n  );\n}\n\nexport default MyApp;\n',
+        'import { AdaptUIProvider } from "@adaptui/react-tailwind";\n\nimport "../styles/index.css";\nimport theme from "../adaptui.config";\n\nfunction MyApp({ Component, pageProps }) {\n  return (\n    <AdaptUIProvider extend={theme}>\n      <Component {...pageProps} />\n    </AdaptUIProvider>\n  );\n}\n\nexport default MyApp;\n',
       "pages/_document.js":
         "import Document, { Html, Head, Main, NextScript } from \"next/document\";\n\nclass MyDocument extends Document {\n  render() {\n    return (\n      <Html>\n        <Head>\n          <link href='https://rsms.me/inter/inter.css' rel='stylesheet' />\n        </Head>\n        <body>\n          <Main />\n          <NextScript />\n        </body>\n      </Html>\n    );\n  }\n}\n\nexport default MyDocument;\n",
       "pages/index.js":
-        "import Head from \"next/head\";\nimport Component from \"../components\";\n\nexport default function Home() {\n  return (\n    <div>\n      <Head>\n        <title>Renderlesskit React Tailwind Example</title>\n        <link rel='icon' href='/favicon.ico' />\n      </Head>\n\n      <main className='flex items-center justify-center min-h-screen'>\n        <Component />\n      </main>\n    </div>\n  );\n}\n",
+        "import Head from \"next/head\";\nimport Component from \"../components\";\n\nexport default function Home() {\n  return (\n    <div>\n      <Head>\n        <title>AdaptUI React Tailwind Example</title>\n        <link rel='icon' href='/favicon.ico' />\n      </Head>\n\n      <main className='flex items-center justify-center min-h-screen'>\n        <Component />\n      </main>\n    </div>\n  );\n}\n",
       "styles/index.css":
         "@tailwind base;\n@tailwind components;\n@tailwind utilities;",
       ".babelrc": '{\n  "presets": ["next/babel"]\n}\n',
@@ -148,10 +148,10 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
         '// If you want to use other PostCSS plugins, see the following:\n// https://tailwindcss.com/docs/using-with-preprocessors\nmodule.exports = {\n  plugins: ["tailwindcss", "autoprefixer"],\n};\n',
       "README.md":
         "# next-tailwind-jit\n\n[View on Vercel](https://next-tailwind-jit.vercel.app/)\n\n[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/next-tailwind-jit-evzkdg)\n",
-      "renderlesskit.config.js":
-        'import { extendTheme } from "@renderlesskit/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
+      "adaptui.config.js":
+        'import { extendTheme } from "@adaptui/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
       "tailwind.config.js":
-        'module.exports = {\n  presets: [require("@renderlesskit/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./renderlesskit.config.ts",\n    "node_modules/@renderlesskit/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
+        'module.exports = {\n  presets: [require("@adaptui/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./adaptui.config.ts",\n    "node_modules/@adaptui/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
       ...files,
     },
   };
@@ -170,7 +170,7 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@renderlesskit/react-tailwind": "0.0.1-alpha.33",
+      "@adaptui/react-tailwind": "0.0.1-alpha.33",
       next: "12.0.7",
       react: "17.0.2",
       "react-dom": "17.0.2",
@@ -188,7 +188,7 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
     },
     files: {
       "pages/_app.tsx":
-        'import type { AppProps } from "next/app";\nimport React from "react";\nimport { RenderlesskitProvider } from "@renderlesskit/react-tailwind";\n\nimport "../styles/index.css";\nimport theme from "../renderlesskit.config";\n\nfunction MyApp({ Component, pageProps }: AppProps) {\n  return (\n    <RenderlesskitProvider extend={theme}>\n      <Component {...pageProps} />\n    </RenderlesskitProvider>\n  );\n}\n\nexport default MyApp;\n',
+        'import type { AppProps } from "next/app";\nimport React from "react";\nimport { AdaptUIProvider } from "@adaptui/react-tailwind";\n\nimport "../styles/index.css";\nimport theme from "../adaptui.config";\n\nfunction MyApp({ Component, pageProps }: AppProps) {\n  return (\n    <AdaptUIProvider extend={theme}>\n      <Component {...pageProps} />\n    </AdaptUIProvider>\n  );\n}\n\nexport default MyApp;\n',
       "pages/_document.tsx":
         "import Document, { Html, Head, Main, NextScript } from \"next/document\";\n\nclass MyDocument extends Document {\n  render() {\n    return (\n      <Html>\n        <Head>\n          <link href='https://rsms.me/inter/inter.css' rel='stylesheet' />\n        </Head>\n        <body>\n          <Main />\n          <NextScript />\n        </body>\n      </Html>\n    );\n  }\n}\n\nexport default MyDocument;\n",
       "pages/index.tsx":
@@ -205,10 +205,10 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
         '// If you want to use other PostCSS plugins, see the following:\n// https://tailwindcss.com/docs/using-with-preprocessors\nmodule.exports = {\n  plugins: ["tailwindcss", "autoprefixer"],\n};\n',
       "README.md":
         "# next-tailwind-jit-ts\n\n[View on Vercel](https://next-tailwind-jit-ts.vercel.app/)\n\n[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/github-jntzof)\n",
-      "renderlesskit.config.js":
-        'import { extendTheme } from "@renderlesskit/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
+      "adaptui.config.js":
+        'import { extendTheme } from "@adaptui/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
       "tailwind.config.js":
-        'module.exports = {\n  presets: [require("@renderlesskit/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./renderlesskit.config.ts",\n    "node_modules/@renderlesskit/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
+        'module.exports = {\n  presets: [require("@adaptui/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./adaptui.config.ts",\n    "node_modules/@adaptui/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
       "tsconfig.json":
         '{\n  "compilerOptions": {\n    "target": "es5",\n    "lib": ["dom", "dom.iterable", "esnext"],\n    "allowJs": true,\n    "skipLibCheck": true,\n    "strict": true,\n    "forceConsistentCasingInFileNames": true,\n    "noEmit": true,\n    "esModuleInterop": true,\n    "module": "esnext",\n    "moduleResolution": "node",\n    "resolveJsonModule": true,\n    "isolatedModules": true,\n    "jsx": "preserve",\n    "incremental": true\n  },\n  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],\n  "exclude": ["node_modules"]\n}\n',
       ...files,

@@ -41,7 +41,7 @@ export type SwitchUIState = {
    *
    * @default md
    */
-  size: keyof Renderlesskit.GetThemeValue<"switch", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"switch", "icon", "size">;
 
   /**
    * Provide custom icons as a replacement for the default ones.

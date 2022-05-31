@@ -1,7 +1,7 @@
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   presets: [require("./preset")],
-  content: ["./src/**/*", "./renderlesskit.config.ts", "./.storybook/**/*"],
+  content: ["./src/**/*", "./adaptui.config.ts", "./.storybook/**/*"],
 
   theme: { extend: {} },
 

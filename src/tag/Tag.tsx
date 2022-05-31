@@ -68,14 +68,14 @@ export type TagOptions<T extends As = "button"> = BoxOptions<T> & {
    *
    * @default md
    */
-  size?: keyof Renderlesskit.GetThemeValue<"tag", "size", "default">;
+  size?: keyof AdaptUI.GetThemeValue<"tag", "size", "default">;
 
   /**
    * How the tag should look?
    *
    * @default solid
    */
-  variant?: keyof Renderlesskit.GetThemeValue<"tag", "variant", "default">;
+  variant?: keyof AdaptUI.GetThemeValue<"tag", "variant", "default">;
 
   /**
    * If added, the tag will show an icon before the tag's text.

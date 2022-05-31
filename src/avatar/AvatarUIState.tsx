@@ -84,7 +84,7 @@ export type AvatarUIState = {
    *
    * @default xl
    */
-  size: keyof Renderlesskit.GetThemeValue<"avatar", "wrapper", "size">;
+  size: keyof AdaptUI.GetThemeValue<"avatar", "wrapper", "size">;
 
   /**
    * Provide custom icons as a replacement for the default ones.
