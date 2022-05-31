@@ -1,5 +1,21 @@
 
 
+## [1.0.0-alpha.0](https://github.com/adaptui/react-tailwind/compare/v0.0.1-alpha.39...v1.0.0-alpha.0) (2022-05-31)
+
+
+### Maintanance Updates
+
+* **adaptui:** 🚚 move files to adaptui namespace ([91ece0a](https://github.com/adaptui/react-tailwind/commit/91ece0a186ea0e9a43810c47b0eda90946fa07ab))
+* **deps:** ⬆️ update dependency lint-staged to v12.4.3 ([#301](https://github.com/adaptui/react-tailwind/issues/301)) ([e1a742e](https://github.com/adaptui/react-tailwind/commit/e1a742e262d0e704237a28a74a940a1f08e53a9a))
+* **deps:** ⬆️ update dev dependencies (minor) ([#296](https://github.com/adaptui/react-tailwind/issues/296)) ([82a83da](https://github.com/adaptui/react-tailwind/commit/82a83da0a0f7cf7409e67ccf8d0a98950c5d8a94))
+* **deps:** ⬆️ update dev dependencies (minor) ([#300](https://github.com/adaptui/react-tailwind/issues/300)) ([316c22c](https://github.com/adaptui/react-tailwind/commit/316c22cb8b1b5da921ede400e30a4cba2a603e19))
+* **deps:** ⬆️ update dev dependencies (minor) ([#302](https://github.com/adaptui/react-tailwind/issues/302)) ([d7407b6](https://github.com/adaptui/react-tailwind/commit/d7407b63430e00a848bae084b65aa445d03f0167))
+
+
+### Test Updates
+
+* **mergeThemes:** ✅ update failing test ([5e2ff83](https://github.com/adaptui/react-tailwind/commit/5e2ff8324b90e6565fbe0e99496c0fa24048aee9))
+
 ### [0.0.1-alpha.39](https://github.com/adaptui/react-tailwind/compare/v0.0.1-alpha.38...v0.0.1-alpha.39) (2022-05-25)
 
 
