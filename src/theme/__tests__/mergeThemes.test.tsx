@@ -22,11 +22,11 @@ describe("mergeThemes", () => {
     const deepTheme = mergeThemes([userTheme, defaultTheme]);
 
     expect(deepTheme).toEqual({
-      alert: { base: "bg-red-100" },
+      button: { variant: { default: { solid: "bg-red-100" } } },
       extend: {},
     });
     expect(mergeExtensions(deepTheme)).toEqual({
-      alert: { base: "bg-red-100" },
+      button: { variant: { default: { solid: "bg-red-100" } } },
     });
   });
 
