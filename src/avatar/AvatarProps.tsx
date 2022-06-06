@@ -22,7 +22,7 @@ const componentMap = {
 };
 
 export const useAvatarProps = ({
-  circular,
+  squared,
   size,
   icon,
   statusIndicators,
@@ -44,7 +44,7 @@ export const useAvatarProps = ({
   ...restProps
 }: AvatarProps) => {
   const uiState = useAvatarUIState({
-    circular,
+    squared,
     size,
     icon,
     statusIndicators,

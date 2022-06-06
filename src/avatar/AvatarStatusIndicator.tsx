@@ -14,7 +14,7 @@ import { AvatarUIProps } from "./AvatarProps";
 export const useAvatarStatusIndicator =
   createHook<AvatarStatusIndicatorOptions>(
     ({
-      circular,
+      squared,
       size,
       icon,
       name,

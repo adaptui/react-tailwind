@@ -13,7 +13,7 @@ import { AvatarUIProps } from "./AvatarProps";
 
 export const useAvatarIcon = createHook<AvatarIconOptions>(
   ({
-    circular,
+    squared,
     size,
     icon,
     name,

@@ -9,7 +9,7 @@ import { AvatarUIProps } from "./AvatarProps";
 
 export function useAvatarUIState(props: AvatarUIStateProps): AvatarUIState {
   const {
-    circular = true,
+    squared = false,
     size = "xl",
     icon = <UserIcon />,
     statusIndicators = AvatarDefaultStatusIndicators,
@@ -33,7 +33,7 @@ export function useAvatarUIState(props: AvatarUIStateProps): AvatarUIState {
   const { status: imageStatus, showFallback } = useImage(props);
 
   return {
-    circular: contextState?.circular || circular,
+    squared: contextState?.squared || squared,
     size: contextState?.size || size,
     icon,
     name,
@@ -57,7 +57,7 @@ export type AvatarUIStateProps = UseImageProps &
       | "size"
       | "icon"
       | "name"
-      | "circular"
+      | "squared"
       | "status"
       | "statusIndicators"
       | "showRing"
@@ -77,7 +77,7 @@ export type AvatarUIState = {
    *
    * @default true
    */
-  circular: boolean;
+  squared: boolean;
 
   /**
    * How large should avatar be?

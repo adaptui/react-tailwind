@@ -13,7 +13,7 @@ import { AvatarUIProps } from "./AvatarProps";
 
 export const useAvatarWrapper = createHook<AvatarWrapperOptions>(
   ({
-    circular,
+    squared,
     size,
     icon,
     name,
@@ -32,7 +32,7 @@ export const useAvatarWrapper = createHook<AvatarWrapperOptions>(
     const theme = useTheme("avatar");
     const className = cx(
       theme.wrapper.common,
-      circular ? theme.wrapper.circular : "",
+      !squared ? theme.wrapper.circular : "",
       size ? theme.wrapper.size[size] : "",
       size && showRing ? theme.wrapper.border.size[size] : "",
       showRing && ringColor ? ringColor : "",

@@ -13,7 +13,7 @@ import { cx } from "../utils";
 import { AvatarGroupUIProps } from "./AvatarGroupProps";
 
 export const useAvatarGroupWrapper = createHook<AvatarGroupWrapperOptions>(
-  ({ size, circular, showRing, ringColor, max, ...props }) => {
+  ({ size, squared, showRing, ringColor, max, ...props }) => {
     const theme = useTheme("avatar");
     const className = cx(
       theme.group.common,

@@ -26,7 +26,7 @@ export default {
 export const Default: Story = {};
 
 export const Squared: Story = {
-  args: { circular: false },
+  args: { squared: true },
 };
 
 export const Name: Story = {
@@ -63,7 +63,7 @@ export const ActiveSquaredStatus: Story = {
   args: {
     src: "https://i.pravatar.cc/300??img=61",
     status: "active",
-    circular: false,
+    squared: true,
   },
 };
 
@@ -78,7 +78,7 @@ export const SleepSquaredStatus: Story = {
   args: {
     src: "https://i.pravatar.cc/300??img=61",
     status: "sleep",
-    circular: false,
+    squared: true,
   },
 };
 
@@ -93,7 +93,7 @@ export const AwaySquaredStatus: Story = {
   args: {
     src: "https://i.pravatar.cc/300??img=61",
     status: "away",
-    circular: false,
+    squared: true,
   },
 };
 
@@ -108,7 +108,7 @@ export const TypingSquaredStatus: Story = {
   args: {
     src: "https://i.pravatar.cc/300??img=61",
     status: "typing",
-    circular: false,
+    squared: true,
   },
 };
 
@@ -123,7 +123,7 @@ export const OrgSquaredStatus: Story = {
   args: {
     src: "https://i.pravatar.cc/300??img=61",
     status: "org",
-    circular: false,
+    squared: true,
   },
 };
 

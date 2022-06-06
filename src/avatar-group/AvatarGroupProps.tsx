@@ -9,7 +9,7 @@ import { AvatarGroupWrapperProps } from "./AvatarGroupWrapper";
 
 export const useAvatarGroupProps = ({
   size,
-  circular,
+  squared,
   showRing,
   ringColor,
   max,
@@ -18,7 +18,7 @@ export const useAvatarGroupProps = ({
 }: AvatarGroupProps) => {
   const uiState = useAvatarGroupUIState({
     size,
-    circular,
+    squared,
     showRing,
     ringColor,
     max,

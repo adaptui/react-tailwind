@@ -13,7 +13,7 @@ import { AvatarUIProps } from "./AvatarProps";
 
 export const useAvatarImage = createHook<AvatarImageOptions>(
   ({
-    circular,
+    squared,
     size,
     icon,
     name,
@@ -32,7 +32,7 @@ export const useAvatarImage = createHook<AvatarImageOptions>(
     const theme = useTheme("avatar");
     const className = cx(
       theme.image.common,
-      circular ? theme.image.circular : "",
+      !squared ? theme.image.circular : "",
       props.className,
     );
 

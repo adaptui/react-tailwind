@@ -4,7 +4,7 @@ export function useAvatarGroupUIState(
   props: AvatarGroupUIStateProps,
 ): AvatarGroupUIState {
   const {
-    circular = true,
+    squared = false,
     size = "xl",
     showRing = true,
     ringColor = "ring-white",
@@ -13,7 +13,7 @@ export function useAvatarGroupUIState(
 
   return {
     size,
-    circular,
+    squared,
     showRing,
     ringColor,
     max,
@@ -22,12 +22,12 @@ export function useAvatarGroupUIState(
 
 export type AvatarGroupUIState = Pick<
   AvatarUIState,
-  "size" | "circular" | "showRing" | "ringColor" | "max"
+  "size" | "squared" | "showRing" | "ringColor" | "max"
 >;
 
 export type AvatarGroupUIStateProps = Partial<
   Pick<
     AvatarGroupUIState,
-    "size" | "circular" | "showRing" | "ringColor" | "max"
+    "size" | "squared" | "showRing" | "ringColor" | "max"
   >
 >;

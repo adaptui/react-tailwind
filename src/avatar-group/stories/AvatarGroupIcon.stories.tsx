@@ -31,11 +31,11 @@ export const MaxCount: Story = {
 };
 
 export const Squared: Story = {
-  args: { size: "xl", circular: false },
+  args: { size: "xl", squared: true },
 };
 
 export const SquaredMaxCount: Story = {
-  args: { size: "xl", circular: false, max: 4 },
+  args: { size: "xl", squared: true, max: 4 },
 };
 
 export const ParentBackgroundMatch: Story = {

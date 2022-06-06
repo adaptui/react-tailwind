@@ -13,7 +13,7 @@ import { AvatarUIProps } from "./AvatarProps";
 
 export const useAvatarInitials = createHook<AvatarInitialsOptions>(
   ({
-    circular,
+    squared,
     size,
     icon,
     name,

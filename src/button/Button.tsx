@@ -11,6 +11,7 @@ import {
 import { As, Props } from "ariakit-utils/types";
 import { announce } from "@react-aria/live-announcer";
 
+import { useBox } from "../box";
 import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
@@ -101,6 +102,7 @@ export const useButton = createHook<ButtonOptions>(
     );
     props = { ...props, className, children, disabled };
     props = useAriakitButton(props);
+    props = useBox(props);
 
     return props;
   },
