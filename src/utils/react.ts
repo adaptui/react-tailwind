@@ -35,15 +35,15 @@ export function runIfFn<T, U>(
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
 
-export function runIfFnChildren<T, U>(valueOrFn: T, ...args: U[]): T {
-  if (!isFunction(valueOrFn)) return valueOrFn;
+export function runIfFnChildren<T, U>(
+  valueOrFn: T,
+  ...args: U[]
+): React.ReactNode | React.ReactNode[] {
+  if (!isFunction(valueOrFn)) return valueOrFn as unknown as React.ReactNode;
 
-  // @ts-ignore
   if (valueOrFn(...args).type.toString() !== "Symbol(react.fragment)")
-    // @ts-ignore
     return [valueOrFn(...args)];
 
-  // @ts-ignore
   return valueOrFn(...args).props.children;
 }
 
@@ -53,10 +53,12 @@ export function runIfFnChildren<T, U>(valueOrFn: T, ...args: U[]): T {
  *
  * @param children the children
  */
-export function getValidChildren<T extends any>(children: RenderProp<T>) {
+export function getValidChildren(
+  children: React.ReactNode | React.ReactNode[],
+) {
   return React.Children.toArray(children as React.ReactNode).filter(child =>
     React.isValidElement(child),
-  ) as React.ReactNode[];
+  );
 }
 
 // Merge library & user prop
@@ -91,7 +93,7 @@ export const getComponentProps = <T extends any, P>(
   const normalizedChildren = runIfFnChildren(children, props);
   const validChildren = getValidChildren(normalizedChildren);
   const componentProps: Dict = {};
-  const finalChildren: RenderProp<T>[] = [];
+  const finalChildren: React.ReactNode[] = [];
 
   if (validChildren.length > 0) {
     validChildren.forEach(function (child) {
