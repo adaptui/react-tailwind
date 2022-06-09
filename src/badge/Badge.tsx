@@ -13,19 +13,19 @@ export const useBadge = createHook<BadgeOptions>(
   ({
     size = "md",
     variant = "solid",
-    themeColor = "default",
+    themeColor = "base",
     prefix,
     ...props
   }) => {
-    const theme = useTheme("badge");
+    const badge = useTheme("badge");
     const className = cx(
-      theme.base,
-      theme.size.common[size],
-      theme.variant[variant][themeColor],
+      badge.base,
+      badge.size[size].base,
+      badge.themeColor[themeColor][variant],
       props.className,
     );
 
-    const prefixStyles = cx(theme.size.prefix[size]);
+    const prefixStyles = cx(badge.size[size].prefix);
 
     const children = (
       <>
@@ -55,24 +55,24 @@ export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
    *
    * @default md
    */
-  size?: keyof AdaptUI.GetThemeValue<"badge", "size", "common">;
+  size?: keyof AdaptUI.GetThemeValue<"badge", "size">;
+
+  /**
+   * How the badge should be themed?
+   *
+   * @default base
+   */
+  themeColor?: keyof AdaptUI.GetThemeValue<"badge", "themeColor">;
 
   /**
    * How the badge should look?
    *
    * @default solid
    */
-  variant?: keyof AdaptUI.GetThemeValue<"badge", "variant">;
+  variant?: keyof AdaptUI.GetThemeValue<"badge", "themeColor", "base">;
 
   /**
-   * How the badge should be themed?
-   *
-   * @default default
-   */
-  themeColor?: keyof AdaptUI.GetThemeValue<"badge", "variant", "solid">;
-
-  /**
-   * If added, the tag will show an icon before the tag's text.
+   * If added, the badge will show an icon before the badge's text.
    */
   prefix?: RenderProp;
 };

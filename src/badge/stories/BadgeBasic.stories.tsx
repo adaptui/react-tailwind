@@ -19,7 +19,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("badge", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    ignore: ["wrapElement", "as", "ref"],
   }),
 } as Meta;
 
@@ -27,7 +27,7 @@ export const Default: Story = {
   args: {
     size: "md",
     variant: "solid",
-    themeColor: "default",
+    themeColor: "base",
   },
 };
 
@@ -72,7 +72,7 @@ export const Prefix: Story = {
   args: {
     size: "md",
     variant: "solid",
-    themeColor: "default",
+    themeColor: "base",
     prefix: <SlotIcon />,
   },
 };

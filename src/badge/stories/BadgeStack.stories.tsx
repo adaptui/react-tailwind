@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { createPreviewTabs } from "../../../.storybook/utils";
 import { SlotIcon } from "../..";
 
 import js from "./templates/BadgeStackJsx";
@@ -13,19 +13,9 @@ type Story = ComponentStoryObj<typeof BadgeStack>;
 export default {
   title: "Primitives/Badge/Stack",
   component: BadgeStack,
-  argTypes: createControls(undefined, {
-    ignore: [
-      "unstable_system",
-      "unstable_clickOnEnter",
-      "unstable_clickOnSpace",
-      "wrapElement",
-      "focusable",
-      "as",
-    ],
-  }),
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
