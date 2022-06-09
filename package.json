@@ -46,7 +46,8 @@
     "test": "jest --config ./jest.config.ts --no-cache",
     "lint": "eslint --color --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
-    "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
+    "format": "prettier --check \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
+    "format:fix": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
     "format:package": "sort-package-json package.json",
     "build": "yarn swc",
     "prebabel": "rimraf dist",
@@ -61,7 +62,6 @@
     "swc:cjs": "swc src -d out/cjs -C module.type=commonjs",
     "swc:esm": "swc src -d out/esm -C module.type=es6",
     "swc:types": "tsc --emitDeclarationOnly --project tsconfig.prod.json --declarationDir out/types",
-    "check-types": "yarn swc:types && tsd",
     "storybook-build": "yarn previews && build-storybook",
     "prepublishOnly": "pinst --disable",
     "release": "release-it",
@@ -81,7 +81,7 @@
       "yarn lint:fix"
     ],
     "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
-      "yarn format"
+      "yarn format:fix"
     ]
   },
   "browserslist": {
@@ -182,7 +182,6 @@
     "storybook-addon-preview": "2.2.0",
     "tailwindcss": "3.0.24",
     "ts-node": "10.8.1",
-    "tsd": "0.20.0",
     "tslib": "2.4.0",
     "typescript": "4.7.3",
     "webpack": "5.73.0"
@@ -200,8 +199,5 @@
     "push": false,
     "emoji": "emoji",
     "editor": false
-  },
-  "tsd": {
-    "directory": "src/theme"
   }
 }
