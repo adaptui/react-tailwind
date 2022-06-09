@@ -1,4 +1,4 @@
-import { getValidChildren, RenderProp } from "../utils";
+import { getValidChildren, RenderProp, runIfFnChildren } from "../utils";
 
 import {
   AvatarGroupUIState,
@@ -27,7 +27,8 @@ export const useAvatarGroupProps = ({
   /**
    * Check if all the children are valid React components.
    */
-  const validChildren = getValidChildren(children);
+  const normalizedChildren = runIfFnChildren(children, uiState);
+  const validChildren = getValidChildren(normalizedChildren);
 
   /**
    * Get the avatars within the max
