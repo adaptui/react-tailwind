@@ -1,4 +1,4 @@
-const colors = require("tailwindcss/colors");
+const colors = require("./tailwind-utils/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
@@ -28,7 +28,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        gray: colors.zinc,
+        ...colors,
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
@@ -95,9 +95,9 @@ module.exports = {
     },
   },
   plugins: [
-    require("./tailwindPlugins/utilities"),
-    require("./tailwindPlugins/variantPlugin"),
-    require("./tailwindPlugins/animationDelay"),
-    require("./tailwindPlugins/animationDuration"),
+    require("./tailwind-utils/utilities"),
+    require("./tailwind-utils/variantPlugin"),
+    require("./tailwind-utils/animationDelay"),
+    require("./tailwind-utils/animationDuration"),
   ],
 };
