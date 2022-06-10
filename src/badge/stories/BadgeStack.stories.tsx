@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { SlotIcon } from "../..";
 
 import js from "./templates/BadgeStackJsx";
 import ts from "./templates/BadgeStackTsx";
@@ -11,7 +10,7 @@ type Meta = ComponentMeta<typeof BadgeStack>;
 type Story = ComponentStoryObj<typeof BadgeStack>;
 
 export default {
-  title: "Primitives/Badge/Stack",
+  title: "Primitives/Badge/Stack/Default",
   component: BadgeStack,
   parameters: {
     layout: "centered",
@@ -21,6 +20,3 @@ export default {
 } as Meta;
 
 export const Default: Story = {};
-export const Prefix: Story = {
-  args: { prefix: <SlotIcon /> },
-};
