@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Badge, BadgeProps } from "../../index";
 
-export type BadgeStackProps = Pick<BadgeProps, "prefix">;
+export type BadgeStackProps = BadgeProps;
 
 export const BadgeStack: React.FC<BadgeStackProps> = props => {
   return (

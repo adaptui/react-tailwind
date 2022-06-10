@@ -5,34 +5,35 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxOptions, useBox } from "../box";
+import { Box, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderProp, withIconA11y } from "../utils";
+import { cx, RenderProp, withIconA11yNew } from "../utils";
 
 export const useBadge = createHook<BadgeOptions>(
   ({
     size = "md",
-    variant = "solid",
     themeColor = "base",
+    variant = "solid",
     prefix,
     ...props
   }) => {
     const badge = useTheme("badge");
     const className = cx(
       badge.base,
-      badge.size[size].base,
-      badge.themeColor[themeColor][variant],
+      badge.size[size]?.base,
+      badge.themeColor[themeColor]?.[variant],
       props.className,
     );
 
-    const prefixStyles = cx(badge.size[size].prefix);
+    const prefixStyles = cx(badge.size[size]?.prefix);
+    const _prefix = prefix
+      ? withIconA11yNew(prefix, { className: prefixStyles })
+      : null;
 
     const children = (
       <>
-        {prefix ? (
-          <>{withIconA11y(prefix, { className: prefixStyles })}</>
-        ) : null}
-        <span>{props.children as React.ReactNode}</span>
+        {_prefix}
+        <Box as="span">{props.children}</Box>
       </>
     );
 
@@ -48,6 +49,8 @@ export const Badge = createComponent<BadgeOptions>(props => {
 
   return createElement("div", htmlProps);
 });
+
+export type BadgePrefixProps = { className?: string };
 
 export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
   /**
@@ -74,7 +77,7 @@ export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
   /**
    * If added, the badge will show an icon before the badge's text.
    */
-  prefix?: RenderProp;
+  prefix?: RenderProp<BadgePrefixProps>;
 };
 
 export type BadgeProps<T extends As = "div"> = Props<BadgeOptions<T>>;
