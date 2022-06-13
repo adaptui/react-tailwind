@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render properly 1`] = `
+<DocumentFragment>
+  <button
+    class="inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle translate-y-0 hover:-translate-y-px active:translate-y-0 will-change-transform min-h-[30px] min-w-[30px] w-auto px-2.5 border rounded-lg text-sm font-medium bg-gray-900 text-white-900 border-transparent enabled:hover:bg-gray-800 enabled:hover:z-10 enabled:active:bg-gray-700 focus-visible:ring-3 focus-visible:ring-gray-500 focus-visible:z-10 disabled:bg-gray-200 disabled:text-gray-500"
+    data-command=""
+    type="button"
+  >
+    Hello World
+  </button>
+</DocumentFragment>
+`;

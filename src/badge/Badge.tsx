@@ -14,7 +14,7 @@ export const useBadge = createHook<BadgeOptions>(
     size = "md",
     themeColor = "base",
     variant = "solid",
-    prefix,
+    prefix: _prefix,
     ...props
   }) => {
     const badge = useTheme("badge");
@@ -26,13 +26,13 @@ export const useBadge = createHook<BadgeOptions>(
     );
 
     const prefixStyles = cx(badge.size[size]?.prefix);
-    const _prefix = prefix
-      ? withIconA11yNew(prefix, { className: prefixStyles })
+    const prefix = _prefix
+      ? withIconA11yNew(_prefix, { className: prefixStyles })
       : null;
 
     const children = (
       <>
-        {_prefix}
+        {prefix}
         <Box as="span">{props.children}</Box>
       </>
     );
