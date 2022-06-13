@@ -23,7 +23,7 @@ export const useSpinner = createHook<SpinnerOptions>(
       theme.size[size],
       theme.themeColor[themeColor],
       track === "visible"
-        ? theme.track[track][themeColor]
+        ? theme.track[track]?.[themeColor]
         : theme.track.transparent,
       props.className,
     );

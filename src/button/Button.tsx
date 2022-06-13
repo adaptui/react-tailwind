@@ -11,24 +11,25 @@ import {
 import { As, Props } from "ariakit-utils/types";
 import { announce } from "@react-aria/live-announcer";
 
-import { useBox } from "../box";
+import { Box, useBox } from "../box";
 import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { cx, RenderProp, tcm, withIconA11y } from "../utils";
+import { cx, RenderProp, withIconA11yNew } from "../utils";
 
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
 export const useButton = createHook<ButtonOptions>(
   ({
     size: _size = "md",
+    themeColor: _themeColor = "base",
     variant: _variant = "solid",
-    prefix,
-    suffix,
-    iconOnly,
+    prefix: _prefix,
+    suffix: _suffix,
+    iconOnly: _iconOnly,
     loading = false,
-    spinner = <Spinner size="em" />,
+    spinner = <Spinner size="em" themeColor="current" />,
     ...props
   }) => {
     const disabled = props.disabled || loading;
@@ -41,21 +42,26 @@ export const useButton = createHook<ButtonOptions>(
     const className = cx(
       button.base.default,
       groupcontext?.collapsed ? "" : button.base.notCollapsed,
-      !iconOnly
-        ? button.size.default[size]
-        : tcm(
-            button.size.iconOnly.base[size],
-            button.size.iconOnly.spinner[size],
-          ),
-      button.variant.default[variant],
-      button.variant.hover[variant],
-      button.variant.active[variant],
-      button.variant.focus[variant],
-      button.variant.disabled[variant],
+      !_iconOnly ? button.size[size].base : button.size[size].iconOnly.base,
+      button.themeColor[_themeColor]?.[variant].default,
+      button.themeColor[_themeColor]?.[variant].hover,
+      button.themeColor[_themeColor]?.[variant].active,
+      button.themeColor[_themeColor]?.[variant].focus,
+      button.themeColor[_themeColor]?.[variant].disabled,
       props.className,
     );
-    const suffixStyles = cx(button.size.suffix[size]);
-    const prefixStyles = cx(button.size.prefix[size]);
+    const prefixStyles = cx(button.size[size].prefix);
+    const prefix = _prefix
+      ? withIconA11yNew(_prefix, { className: prefixStyles })
+      : null;
+    const suffixStyles = cx(button.size[size].suffix);
+    const suffix = _suffix
+      ? withIconA11yNew(_suffix, { className: suffixStyles })
+      : null;
+    const iconOnlyStyles = cx(button.size[size].iconOnly.icon);
+    const iconOnly = _iconOnly
+      ? withIconA11yNew(_iconOnly, { className: iconOnlyStyles })
+      : null;
 
     const prevLoading = usePrevious(loading);
 
@@ -70,30 +76,26 @@ export const useButton = createHook<ButtonOptions>(
         {(!prefix && !suffix) || iconOnly ? (
           loading ? (
             <ButtonFullWidthSpinner size={size} spinner={spinner}>
-              <>
-                {iconOnly
-                  ? withIconA11y(iconOnly)
-                  : (props.children as React.ReactNode)}
-              </>
+              <>{iconOnly || props.children}</>
             </ButtonFullWidthSpinner>
           ) : (
-            <>{iconOnly ? withIconA11y(iconOnly) : props.children}</>
+            <>{iconOnly || props.children}</>
           )
         ) : (
           <>
             {prefix ? (
               loading && !suffix ? (
-                <ButtonSpinner spinner={spinner} prefix={prefix} size={size} />
+                <ButtonSpinner size={size} spinner={spinner} prefix={prefix} />
               ) : (
-                <>{withIconA11y(prefix, { className: prefixStyles })}</>
+                <>{prefix}</>
               )
             ) : null}
-            <span>{props.children as React.ReactNode}</span>
+            <Box>{props.children}</Box>
             {suffix ? (
               loading ? (
                 <ButtonSpinner size={size} spinner={spinner} suffix={suffix} />
               ) : (
-                <>{withIconA11y(suffix, { className: suffixStyles })}</>
+                <>{suffix}</>
               )
             ) : null}
           </>
@@ -114,6 +116,11 @@ export const Button = createComponent<ButtonOptions>(props => {
   return createElement("button", htmlProps);
 });
 
+export type BadgePrefixProps = { className?: string };
+export type BadgeSuffixProps = { className?: string };
+export type BadgeIconOnlyProps = { className?: string };
+export type BadgeSpinnerProps = { className?: string };
+
 export type ButtonOptions<T extends As = "button"> = Omit<
   AriakitButtonOptions<T>,
   "size" | "prefix"
@@ -123,29 +130,36 @@ export type ButtonOptions<T extends As = "button"> = Omit<
    *
    * @default md
    */
-  size?: keyof AdaptUI.GetThemeValue<"button", "size", "default">;
+  size?: keyof AdaptUI.GetThemeValue<"button", "size">;
+
+  /**
+   * How the button should be themed?
+   *
+   * @default base
+   */
+  themeColor?: keyof AdaptUI.GetThemeValue<"button", "themeColor">;
 
   /**
    * How the button should look?
    *
    * @default solid
    */
-  variant?: keyof AdaptUI.GetThemeValue<"button", "variant", "default">;
+  variant?: keyof AdaptUI.GetThemeValue<"button", "themeColor", "base">;
+
+  /**
+   * If added, the button will show an icon before the button's text.
+   */
+  prefix?: RenderProp<BadgePrefixProps>;
+
+  /**
+   * If added, the button will show an icon before the button's text.
+   */
+  suffix?: RenderProp<BadgeSuffixProps>;
 
   /**
    * If added, the button will only show an icon ignoring other childrens.
    */
-  iconOnly?: RenderProp;
-
-  /**
-   * If added, the button will show an icon before the button's text.
-   */
-  suffix?: RenderProp;
-
-  /**
-   * If added, the button will show an icon before the button's text.
-   */
-  prefix?: RenderProp;
+  iconOnly?: RenderProp<BadgeIconOnlyProps>;
 
   /**
    * If `true`, the button will show a spinner.
@@ -159,7 +173,7 @@ export type ButtonOptions<T extends As = "button"> = Omit<
    *
    * @default Spinner Component
    */
-  spinner?: RenderProp;
+  spinner?: RenderProp<BadgeSpinnerProps>;
 };
 
 export type ButtonProps<T extends As = "button"> = Props<ButtonOptions<T>>;

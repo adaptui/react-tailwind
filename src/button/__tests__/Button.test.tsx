@@ -3,10 +3,11 @@ import { screen } from "@testing-library/react";
 import { render, testA11y } from "../../utils/testUtils";
 import { Button } from "../Button";
 
-describe("Testing Button", () => {
+describe("Button", () => {
   it("should render properly", () => {
-    render(<Button>Hello World</Button>);
+    const { asFragment } = render(<Button>Hello World</Button>);
 
+    expect(asFragment()).toMatchSnapshot();
     expect(screen.getByRole("button")).toHaveTextContent(/hello world/i);
   });
 
