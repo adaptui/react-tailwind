@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AnyObject } from "ariakit-utils";
+import { AnyObject, Options, Props } from "ariakit-utils";
 
 import { isFunction } from "./assertions";
 import { cx } from "./tailwindMerge";
@@ -110,4 +110,38 @@ export const getComponentProps = <T extends any, P>(
   }
 
   return { componentProps, finalChildren };
+};
+
+export function runRenderFn<T extends Props<Options<"div">> = AnyObject>(
+  component: RenderProp<T>,
+  props: T,
+): React.ReactNode {
+  return isFunction(component) ? component(props) : component;
+}
+
+// Merge library & user prop
+export const passPropsNew = <T extends Props<Options<"div">> = AnyObject>(
+  component: RenderProp<T>,
+  props: T,
+) => {
+  return React.isValidElement(component)
+    ? React.cloneElement(component, {
+        ...props,
+        ...component.props,
+        className: cx(props?.className, component.props.className),
+      })
+    : runRenderFn(component, props);
+};
+
+// Add a11y to the icon passed
+export const withIconA11yNew = <T extends Props<Options<"div">> = AnyObject>(
+  icon: RenderProp<T>,
+  props: T,
+) => {
+  return passProps(icon, {
+    role: "img",
+    focusable: false,
+    "aria-hidden": true,
+    ...props,
+  });
 };

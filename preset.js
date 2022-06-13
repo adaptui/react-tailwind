@@ -1,4 +1,4 @@
-const colors = require("tailwindcss/colors");
+const colors = require("./tailwind-utils/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
@@ -28,7 +28,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        gray: colors.zinc,
+        ...colors,
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
@@ -40,9 +40,21 @@ module.exports = {
         base: ["16px", "115%"],
         lg: ["18px", "115%"],
         xl: ["20px", "115%"],
+        cxl: ["22px", "115%"],
+        "2xl": ["24px", "115%"],
+        "3xl": ["30px", "115%"],
+        "4xl": ["36px", "115%"],
+        "5xl": ["48px", "115%"],
+        "6xl": ["60px", "115%"],
+        "7xl": ["72px", "115%"],
+        "8xl": ["96px", "115%"],
+        "9xl": ["128px", "115%"],
+        "paragraph-xs": ["12px", "150%"],
         "paragraph-cxs": ["13px", "150%"],
         "paragraph-sm": ["14px", "150%"],
-        "2base": ["32px", "115%"],
+        "paragraph-base": ["16px", "150%"],
+        "paragraph-lg": ["18px", "150%"],
+        "paragraph-xl": ["20px", "150%"],
       },
       ringWidth: {
         1.5: "1.5px",
@@ -95,9 +107,9 @@ module.exports = {
     },
   },
   plugins: [
-    require("./tailwindPlugins/utilities"),
-    require("./tailwindPlugins/variantPlugin"),
-    require("./tailwindPlugins/animationDelay"),
-    require("./tailwindPlugins/animationDuration"),
+    require("./tailwind-utils/utilities"),
+    require("./tailwind-utils/variantPlugin"),
+    require("./tailwind-utils/animationDelay"),
+    require("./tailwind-utils/animationDuration"),
   ],
 };
