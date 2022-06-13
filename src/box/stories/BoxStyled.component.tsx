@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Box, BoxProps, tcm } from "../../index";
+import { Box, BoxProps, cx } from "../../index";
 
 export type BoxStyledProps = BoxProps & {};
 
@@ -10,7 +10,7 @@ export const BoxStyled: React.FC<BoxStyledProps> = props => {
   return (
     <Box
       as="figure"
-      className={tcm("overflow-hidden rounded-xl bg-gray-100 p-8", className)}
+      className={cx("overflow-hidden rounded-xl bg-gray-100 p-8", className)}
       {...rest}
     >
       <Box

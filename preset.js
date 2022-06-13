@@ -59,6 +59,8 @@ module.exports = {
       },
       ringWidth: {
         1.5: "1.5px",
+        2: "2px",
+        3: "3px",
       },
       inset: {
         unset: "unset",

@@ -10,12 +10,21 @@ import { useTheme } from "../theme";
 import { cx } from "../utils";
 
 export const useSpinner = createHook<SpinnerOptions>(
-  ({ size = "md", label = "Loading...", stroke = "transparent", ...props }) => {
+  ({
+    size = "md",
+    themeColor = "base",
+    track = "transparent",
+    label = "Loading...",
+    ...props
+  }) => {
     const theme = useTheme("spinner");
     const className = cx(
       theme.base,
       theme.size[size],
-      theme.stroke[stroke],
+      theme.themeColor[themeColor],
+      track === "visible"
+        ? theme.track[track][themeColor]
+        : theme.track.transparent,
       props.className,
     );
 
@@ -38,15 +47,10 @@ export const Spinner = createComponent<SpinnerOptions>(props => {
   return createElement("div", htmlProps);
 });
 
-export type SpinnerOptions<T extends As = "div"> = BoxOptions<T> & {
-  /**
-   * For accessibility, it is important to add a fallback loading text.
-   * This text will be visible to screen readers.
-   *
-   * @default Loading...
-   */
-  label?: string;
-
+export type SpinnerOptions<T extends As = "div"> = Omit<
+  BoxOptions<T>,
+  "size"
+> & {
   /**
    * How large should the spinner be?
    *
@@ -55,11 +59,26 @@ export type SpinnerOptions<T extends As = "div"> = BoxOptions<T> & {
   size?: keyof AdaptUI.GetThemeValue<"spinner", "size">;
 
   /**
+   * How the spinner should be themed?
+   *
+   * @default base
+   */
+  themeColor?: keyof AdaptUI.GetThemeValue<"spinner", "themeColor">;
+
+  /**
    * How the spinner should be displayed?
    *
    * @default transparent
    */
-  stroke?: keyof AdaptUI.GetThemeValue<"spinner", "stroke">;
+  track?: keyof AdaptUI.GetThemeValue<"spinner", "track">;
+
+  /**
+   * For accessibility, it is important to add a fallback loading text.
+   * This text will be visible to screen readers.
+   *
+   * @default Loading...
+   */
+  label?: string;
 };
 
 export type SpinnerProps<T extends As = "div"> = Props<SpinnerOptions<T>>;

@@ -8,7 +8,7 @@ exports[`<Badge /> should render properly 1`] = `
     <span
       class=""
     >
-      Hello world
+      AdaptUI
     </span>
   </div>
 </DocumentFragment>
