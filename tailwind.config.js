@@ -1,4 +1,4 @@
-/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [require("./preset")],
   content: ["./src/**/*", "./adaptui.config.ts", "./.storybook/**/*"],

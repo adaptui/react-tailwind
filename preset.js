@@ -1,8 +1,9 @@
 const colors = require("./tailwind-utils/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  experimental: { matchVariant: true },
   theme: {
     animationDelay: {
       75: "75ms",
@@ -108,7 +109,7 @@ module.exports = {
   },
   plugins: [
     require("./tailwind-utils/utilities"),
-    require("./tailwind-utils/variantPlugin"),
+    require("./tailwind-utils/variants"),
     require("./tailwind-utils/animationDelay"),
     require("./tailwind-utils/animationDuration"),
   ],
