@@ -1,9 +1,9 @@
 import { render } from "../../utils/testUtils";
-import { Badge } from "../Badge";
+import { Box } from "../Box";
 
-describe("Badge", () => {
+describe("Box", () => {
   it("should render properly", () => {
-    const { asFragment } = render(<Badge>AdaptUI</Badge>);
+    const { asFragment } = render(<Box>AdaptUI</Box>);
 
     expect(asFragment()).toMatchSnapshot();
   });

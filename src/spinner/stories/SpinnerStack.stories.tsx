@@ -2,16 +2,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/BoxAsJsx";
-import ts from "./templates/BoxAsTsx";
-import { BoxAs } from "./BoxAs.component";
+import js from "./templates/SpinnerStackJsx";
+import ts from "./templates/SpinnerStackTsx";
+import { SpinnerStack } from "./SpinnerStack.component";
 
-type Meta = ComponentMeta<typeof BoxAs>;
-type Story = ComponentStoryObj<typeof BoxAs>;
+type Meta = ComponentMeta<typeof SpinnerStack>;
+type Story = ComponentStoryObj<typeof SpinnerStack>;
 
 export default {
-  title: "Primitives/Box/As",
-  component: BoxAs,
+  title: "Feedback/Spinner/Stack",
+  component: SpinnerStack,
   parameters: {
     layout: "centered",
     options: { showPanel: false },
@@ -22,4 +22,4 @@ export default {
   }),
 } as Meta;
 
-export const Default: Story = {};
+export const Stack: Story = {};

@@ -12,18 +12,19 @@ type Story = ComponentStoryObj<typeof SpinnerBasic>;
 export default {
   title: "Feedback/Spinner/Basic",
   component: SpinnerBasic,
-  argTypes: createControls("spinner", {
-    unions: ["size", "stroke"],
-    ignore: ["unstable_system", "wrapElement", "as", "state"],
-  }),
   parameters: {
+    layout: "centered",
     options: { showPanel: true },
     preview: createPreviewTabs({ js, ts }),
   },
+  argTypes: createControls("spinner", {
+    unions: ["size", "themeColor", "track"],
+    ignore: ["wrapElement", "as", "ref"],
+  }),
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", stroke: "transparent" },
+  args: { size: "md", themeColor: "base", track: "transparent" },
 };
 
 export const ExtraSmall: Story = {
@@ -42,8 +43,57 @@ export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
 };
-
-export const StrokeVisible: Story = {
+export const EmWithTextLG: Story = {
   ...Default,
-  args: { ...Default.args, size: "lg", stroke: "visible" },
+  args: { ...Default.args, size: "em", className: "text-lg" },
+};
+
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+export const Seconday: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "secondary" },
+};
+export const Success: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "success" },
+};
+export const Danger: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger" },
+};
+export const CurrentColor: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "current", className: "text-rose-800" },
+};
+
+export const BaseWithTrack: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base", track: "visible" },
+};
+export const PrimaryWithTrack: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary", track: "visible" },
+};
+export const SecondayWithTrack: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "secondary", track: "visible" },
+};
+export const SuccessWithTrack: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "success", track: "visible" },
+};
+export const DangerWithTrack: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger", track: "visible" },
+};
+export const WithoutTrack: Story = {
+  ...Default,
+  args: { ...Default.args, size: "lg", track: "transparent" },
 };

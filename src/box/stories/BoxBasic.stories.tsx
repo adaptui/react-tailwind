@@ -14,11 +14,11 @@ export default {
   component: BoxBasic,
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls(undefined, {
-    ignore: ["unstable_system", "wrapElement"],
+    ignore: ["wrapElement", "as", "ref"],
   }),
 } as Meta;
 
