@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner should render properly 1`] = `
+<DocumentFragment>
+  <div
+    class="inline-block animate-spin h-4 w-4 border-[1.5px] border-solid rounded-full text-gray-800 border-current border-b-transparent border-l-transparent"
+    data-testid="testid-spinner"
+  >
+    <span
+      class="sr-only"
+    >
+      Loading...
+    </span>
+  </div>
+</DocumentFragment>
+`;

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Badge /> should render properly 1`] = `
+exports[`Badge should render properly 1`] = `
 <DocumentFragment>
   <div
-    class="inline-flex items-center justify-center relative whitespace-nowrap align-middle transition-all max-h-5 px-1.5 py-[3px] border rounded-2xl text-xs font-medium bg-gray-900 text-white-900 border-transparent"
+    class="inline-flex items-center justify-center relative whitespace-nowrap align-middle transition-all min-h-5 min-w-5 w-auto px-1.5 py-[3px] border rounded-2xl text-xs font-medium bg-gray-900 text-white-900 border-transparent"
   >
     <span
       class=""
