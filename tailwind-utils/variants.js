@@ -1,8 +1,8 @@
 const plugin = require("tailwindcss/plugin");
 
 const variantPlugin = plugin(function ({ addVariant, config }) {
-  addVariant("data-enter", `[data-enter]`);
-  addVariant("data-leave", `[data-leave]`);
+  addVariant("data-enter", `&[data-enter]`);
+  addVariant("data-leave", `&[data-leave]`);
 
   let pseudoVariants = [
     // Positional
