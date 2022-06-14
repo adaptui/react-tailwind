@@ -2,7 +2,7 @@ import * as React from "react";
 import { AnyObject, Options, Props } from "ariakit-utils";
 
 import { isFunction } from "./assertions";
-import { cx } from "./tailwindMerge";
+import { tcm } from "./tailwindMerge";
 import { As, ComponentWithAs, Dict, PropsWithAs, RenderProp } from "./types";
 
 /**
@@ -70,7 +70,7 @@ export const passProps = <T extends AnyObject>(
     ? React.cloneElement(component, {
         ...props,
         ...component.props,
-        className: cx(props?.className, component.props.className),
+        className: tcm(props?.className, component.props.className),
       })
     : runIfFn(component, props as T);
 };
@@ -112,36 +112,47 @@ export const getComponentProps = <T extends any, P>(
   return { componentProps, finalChildren };
 };
 
-export function runRenderFn<T extends Props<Options<"div">> = AnyObject>(
-  component: RenderProp<T>,
-  props: T,
-): React.ReactNode {
+export function runRenderFn<
+  T extends Props<Options<"div">> & AnyObject = AnyObject,
+>(component: RenderProp<T>, props: T): React.ReactNode {
   return isFunction(component) ? component(props) : component;
 }
 
 // Merge library & user prop
-export const passPropsNew = <T extends Props<Options<"div">> = AnyObject>(
-  component: RenderProp<T>,
+export const passPropsNew = <
+  T extends Props<Options<"div"> & AnyObject> = AnyObject,
+  S = AnyObject,
+>(
+  component: RenderProp<T & S>,
   props: T,
+  stateProps?: S,
 ) => {
   return React.isValidElement(component)
     ? React.cloneElement(component, {
         ...props,
         ...component.props,
-        className: cx(props?.className, component.props.className),
+        className: tcm(props?.className, component.props.className),
       })
-    : runRenderFn(component, props);
+    : runRenderFn(component, { ...stateProps, ...props });
 };
 
 // Add a11y to the icon passed
-export const withIconA11yNew = <T extends Props<Options<"div">> = AnyObject>(
-  icon: RenderProp<T>,
+export const withIconA11yNew = <
+  T extends Props<Options<"div"> & AnyObject> = AnyObject,
+  S = AnyObject,
+>(
+  icon: RenderProp<T & S>,
   props: T,
+  stateProps?: S,
 ) => {
-  return passProps(icon, {
-    role: "img",
-    focusable: false,
-    "aria-hidden": true,
-    ...props,
-  });
+  return passPropsNew(
+    icon,
+    {
+      role: "img",
+      focusable: false,
+      "aria-hidden": true,
+      ...props,
+    },
+    stateProps,
+  );
 };

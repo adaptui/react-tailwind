@@ -10,7 +10,7 @@ type Meta = ComponentMeta<typeof BadgeStack>;
 type Story = ComponentStoryObj<typeof BadgeStack>;
 
 export default {
-  title: "Primitives/Badge/Stack/Default",
+  title: "Primitives/Badge/Stack",
   component: BadgeStack,
   parameters: {
     layout: "centered",
@@ -19,4 +19,4 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {};
+export const Stack: Story = {};

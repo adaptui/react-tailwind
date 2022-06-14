@@ -10,27 +10,33 @@ type Meta = ComponentMeta<typeof ButtonLoadingA11y>;
 type Story = ComponentStoryObj<typeof ButtonLoadingA11y>;
 
 export default {
-  title: "Primitives/Button/LoadingA11y",
+  title: "Primitives/Button/LoadingAlly",
   component: ButtonLoadingA11y,
   argTypes: createControls("button", {
     ignore: [
-      "unstable_system",
-      "unstable_clickOnEnter",
-      "unstable_clickOnSpace",
       "wrapElement",
-      "focusable",
       "as",
+      "ref",
+      "autoFocus",
+      "focusable",
+      "accessibleWhenDisabled",
+      "onFocusVisible",
+      "clickOnEnter",
+      "clickOnSpace",
+      "size",
+      "themeColor",
+      "variant",
+      "prefix",
+      "suffix",
       "iconOnly",
       "spinner",
-      "suffix",
-      "prefix",
     ],
   }),
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
 
-export const Default: Story = {};
+export const LoadingAlly: Story = {};

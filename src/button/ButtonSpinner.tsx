@@ -1,23 +1,20 @@
 import * as React from "react";
 
 import { Box } from "../box";
-import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
 import { cx, passPropsNew } from "../utils";
 
-import { ButtonProps } from "./Button";
+import { ButtonProps, ButtonState } from "./Button";
 
-export type ButtonSpinnerProps = Partial<
-  Pick<ButtonProps, "spinner" | "size" | "prefix" | "suffix" | "children">
->;
+export type ButtonSpinnerProps = Required<
+  Pick<ButtonProps, "size" | "spinner">
+> &
+  Pick<ButtonProps, "prefix" | "suffix"> & {
+    state: ButtonState;
+  };
 
 export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const {
-    size = "md",
-    spinner = <Spinner size="em" themeColor="current" />,
-    prefix,
-    suffix,
-  } = props;
+  const { size, spinner, prefix, suffix, state } = props;
 
   const button = useTheme("button");
   const spinnerStyles = cx(
@@ -28,23 +25,29 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
       : button.size[size].iconOnly.spinner,
   );
 
-  return <>{passPropsNew(spinner, { className: spinnerStyles })}</>;
+  return <>{passPropsNew(spinner, { className: spinnerStyles }, state)}</>;
 };
 
-export const ButtonFullWidthSpinner: React.FC<ButtonSpinnerProps> = props => {
-  const {
-    size = "md",
-    spinner = <Spinner size="em" themeColor="current" />,
-    children,
-  } = props;
+export type ButtonFullWidthSpinnerProps = Pick<
+  ButtonSpinnerProps,
+  "size" | "spinner" | "state"
+> &
+  Pick<ButtonProps, "children">;
+
+export const ButtonFullWidthSpinner: React.FC<
+  ButtonFullWidthSpinnerProps
+> = props => {
+  const { size, spinner, children, state } = props;
+
+  const button = useTheme("button");
 
   // This is only the grey area in button for now which user cannot customize
   return (
     <>
-      <div className="absolute flex items-center justify-center">
-        <ButtonSpinner spinner={spinner} size={size} />
+      <div className={button.loading.spinner}>
+        <ButtonSpinner spinner={spinner} size={size} state={state} />
       </div>
-      <Box className="opacity-0">{children}</Box>
+      <Box className={button.loading.children}>{children}</Box>
     </>
   );
 };

@@ -18,7 +18,7 @@ export const badge = {
     base: {
       solid: "bg-gray-900 text-white-900 border-transparent",
       subtle: "bg-gray-100 text-gray-800 border-transparent",
-      outline: "bg-white text-gray-800 border-gray-400",
+      outline: "bg-white-50 text-gray-800 border-gray-400",
     },
     primary: {
       solid: "bg-blue-600 text-white-900 border-transparent",
