@@ -11,7 +11,7 @@ export const button = {
       prefix: "text-[12px] mr-1.5",
       suffix: "text-[12px] ml-1.5",
       iconOnly: {
-        base: "h-[26px] w-[26px] text-[16px] rounded-lg",
+        base: "h-[26px] w-[26px] text-[16px] border rounded-lg",
         icon: "h-4 w-4",
         spinner: "text-[16px]",
       },
@@ -21,7 +21,7 @@ export const button = {
       prefix: "text-[12px] mr-1.5",
       suffix: "text-[12px] ml-1.5",
       iconOnly: {
-        base: "h-[30px] w-[30px] text-[16px] rounded-lg",
+        base: "h-[30px] w-[30px] text-[16px] border rounded-lg",
         icon: "h-4 w-4",
         spinner: "text-[16px]",
       },
@@ -31,7 +31,7 @@ export const button = {
       prefix: "text-[12px] mr-1.5",
       suffix: "text-[12px] ml-1.5",
       iconOnly: {
-        base: "h-9 w-9 text-[16px] rounded-[10px]",
+        base: "h-9 w-9 text-[16px] border rounded-[10px]",
         icon: "h-4 w-4",
         spinner: "text-[16px]",
       },
@@ -41,7 +41,7 @@ export const button = {
       prefix: "text-[16px] mr-2",
       suffix: "text-[16px] ml-2",
       iconOnly: {
-        base: "h-11 w-11 text-[20px] rounded-xl",
+        base: "h-11 w-11 text-[20px] border rounded-xl",
         icon: "h-5 w-5",
         spinner: "text-[20px]",
       },
@@ -228,5 +228,9 @@ export const button = {
         disabled: "disabled:text-red-500",
       },
     },
+  },
+  loading: {
+    spinner: "absolute flex items-center justify-center",
+    children: "opacity-0",
   },
 };

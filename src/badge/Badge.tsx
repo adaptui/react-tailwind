@@ -27,7 +27,11 @@ export const useBadge = createHook<BadgeOptions>(
 
     const prefixStyles = cx(badge.size[size]?.prefix);
     const prefix = _prefix
-      ? withIconA11yNew(_prefix, { className: prefixStyles })
+      ? withIconA11yNew<BadgeRenderProps, BadgeState>(
+          _prefix,
+          { className: prefixStyles },
+          { size, themeColor, variant, prefix: _prefix },
+        )
       : null;
 
     const children = (
@@ -50,34 +54,37 @@ export const Badge = createComponent<BadgeOptions>(props => {
   return createElement("div", htmlProps);
 });
 
-export type BadgePrefixProps = { className?: string };
-
-export type BadgeOptions<T extends As = "div"> = BoxOptions<T> & {
+export type BadgeState = {
   /**
    * How large should the badge be?
    *
    * @default md
    */
-  size?: keyof AdaptUI.GetThemeValue<"badge", "size">;
+  size: keyof AdaptUI.GetThemeValue<"badge", "size">;
 
   /**
    * How the badge should be themed?
    *
    * @default base
    */
-  themeColor?: keyof AdaptUI.GetThemeValue<"badge", "themeColor">;
+  themeColor: keyof AdaptUI.GetThemeValue<"badge", "themeColor">;
 
   /**
    * How the badge should look?
    *
    * @default solid
    */
-  variant?: keyof AdaptUI.GetThemeValue<"badge", "themeColor", "base">;
+  variant: keyof AdaptUI.GetThemeValue<"badge", "themeColor", "base">;
 
   /**
    * If added, the badge will show an icon before the badge's text.
    */
-  prefix?: RenderProp<BadgePrefixProps>;
+  prefix: RenderProp<BadgeRenderProps & BadgeState>;
 };
+
+export type BadgeRenderProps = Pick<BadgeProps, "className">;
+
+export type BadgeOptions<T extends As = "div"> = BoxOptions<T> &
+  Partial<BadgeState>;
 
 export type BadgeProps<T extends As = "div"> = Props<BadgeOptions<T>>;

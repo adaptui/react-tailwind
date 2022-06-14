@@ -80,7 +80,5 @@ export const Outline: Story = {
 
 export const Prefix: Story = {
   ...Default,
-  args: {
-    prefix: <SlotIcon className="text-blue-800" />,
-  },
+  args: { prefix: <SlotIcon /> },
 };

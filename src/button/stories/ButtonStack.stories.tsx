@@ -12,25 +12,31 @@ type Story = ComponentStoryObj<typeof ButtonStack>;
 export default {
   title: "Primitives/Button/Stack",
   component: ButtonStack,
-  argTypes: createControls(undefined, {
-    ignore: [
-      "unstable_system",
-      "unstable_clickOnEnter",
-      "unstable_clickOnSpace",
-      "wrapElement",
-      "focusable",
-      "as",
-      "iconOnly",
-      "spinner",
-      "suffix",
-      "prefix",
-    ],
-  }),
   parameters: {
     layout: "centered",
-    options: { showPanel: false },
+    options: { showPanel: true, panelPosition: "right" },
     preview: createPreviewTabs({ js, ts }),
   },
+  argTypes: createControls("button", {
+    ignore: [
+      "wrapElement",
+      "as",
+      "ref",
+      "autoFocus",
+      "focusable",
+      "accessibleWhenDisabled",
+      "onFocusVisible",
+      "clickOnEnter",
+      "clickOnSpace",
+      "size",
+      "themeColor",
+      "variant",
+      "prefix",
+      "suffix",
+      "iconOnly",
+      "spinner",
+    ],
+  }),
 } as Meta;
 
 export const Stack: Story = {};

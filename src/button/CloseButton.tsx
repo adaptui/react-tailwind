@@ -13,9 +13,7 @@ export const useCloseButton = createHook<CloseButtonOptions>(props => {
   props = { ...props, "aria-label": "close" };
   props = useButton({
     ...props,
-    iconOnly:
-      (props.children as React.ReactNode) ||
-      ((<CloseIcon />) as React.ReactNode),
+    iconOnly: (props.children as React.ReactNode) || <CloseIcon />,
   });
 
   return props;

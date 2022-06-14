@@ -14,16 +14,19 @@ export default {
   component: ButtonClose,
   argTypes: createControls("button", {
     ignore: [
-      "unstable_system",
-      "unstable_clickOnEnter",
-      "unstable_clickOnSpace",
       "wrapElement",
-      "focusable",
       "as",
+      "ref",
+      "autoFocus",
+      "focusable",
+      "accessibleWhenDisabled",
+      "onFocusVisible",
+      "clickOnEnter",
+      "clickOnSpace",
+      "prefix",
+      "suffix",
       "iconOnly",
       "spinner",
-      "suffix",
-      "prefix",
     ],
   }),
   parameters: {
@@ -34,7 +37,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", variant: "solid" },
+  args: { size: "md", variant: "solid", themeColor: "base" },
 };
 
 export const Small: Story = {
@@ -49,6 +52,27 @@ export const Large: Story = {
 export const ExtraLarge: Story = {
   ...Default,
   args: { ...Default.args, size: "xl" },
+};
+
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+export const Seconday: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "secondary" },
+};
+export const Success: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "success" },
+};
+export const Danger: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger" },
 };
 
 export const Solid: Story = { ...Default };
