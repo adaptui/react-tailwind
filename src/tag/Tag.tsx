@@ -1,3 +1,4 @@
+import { ButtonOptions, useButton } from "ariakit";
 import {
   createComponent,
   createElement,
@@ -5,52 +6,56 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxOptions, useBox } from "../box";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { cx, RenderProp, tcm, withIconA11y } from "../utils";
+import { cx, passPropsNew, RenderProp, tcm } from "../utils";
 
 export const useTag = createHook<TagOptions>(
   ({
     size = "md",
+    themeColor = "base",
     variant = "solid",
     closable = false,
-    prefix,
     suffix = closable ? <CloseIcon /> : null,
-    disabled,
+    prefix,
     ...props
   }) => {
     const theme = useTheme("tag");
-    const className = cx(
+    const className = tcm(
       theme.base,
-      theme.size.default[size],
-      theme.variant.default[variant],
-      disabled
-        ? theme.variant.disabled[variant]
-        : tcm(
-            theme.variant.hover[variant],
-            theme.variant.active[variant],
-            theme.variant.focus[variant],
-          ),
+      theme.size[size]?.default,
+      theme.themeColor[themeColor]?.[variant].default,
+      theme.themeColor[themeColor]?.[variant].hover,
+      theme.themeColor[themeColor]?.[variant].active,
+      theme.themeColor[themeColor]?.[variant].focus,
+      theme.themeColor[themeColor]?.[variant].disabled,
       props.className,
     );
-    const prefixStyles = cx(theme.size.prefix[size]);
-    const suffixStyles = cx(theme.size.suffix[size]);
+
+    const prefixStyles = cx(theme.size[size]?.prefix);
+    const suffixStyles = cx(theme.size[size]?.suffix);
+
+    const state = {
+      size,
+      themeColor,
+      variant,
+      suffix,
+    };
 
     const children = (
       <>
         {prefix ? (
-          <>{withIconA11y(prefix, { className: prefixStyles })}</>
+          <>{passPropsNew(prefix, { className: prefixStyles }, state)}</>
         ) : null}
         <span>{props.children as React.ReactNode}</span>
         {closable && suffix ? (
-          <>{withIconA11y(suffix, { className: suffixStyles })}</>
+          <>{passPropsNew(suffix, { className: suffixStyles }, state)}</>
         ) : null}
       </>
     );
 
     props = { ...props, className, children };
-    props = useBox(props);
+    props = useButton(props);
 
     return props;
   },
@@ -62,35 +67,50 @@ export const Tag = createComponent<TagOptions>(props => {
   return createElement("button", htmlProps);
 });
 
-export type TagOptions<T extends As = "button"> = BoxOptions<T> & {
+export type TagState = {
   /**
    * How large should the tag be?
    *
    * @default md
    */
-  size?: keyof AdaptUI.GetThemeValue<"tag", "size", "default">;
+  size?: keyof AdaptUI.GetThemeValue<"tag", "size">;
+
+  /**
+   * How the tag should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"tag", "themeColor">;
 
   /**
    * How the tag should look?
    *
    * @default solid
    */
-  variant?: keyof AdaptUI.GetThemeValue<"tag", "variant", "default">;
+  variant?: keyof AdaptUI.GetThemeValue<"tag", "themeColor", "base">;
 
   /**
-   * If added, the tag will show an icon before the tag's text.
+   * If added, the tag will show an icon after the tag's text.
    */
-  prefix?: RenderProp;
+  prefix?: RenderProp<TagRenderProps & TagState>;
+
+  /**
+   * If added, the tag will show an icon after the tag's text.
+   */
+  suffix?: RenderProp<TagRenderProps & TagState>;
 
   /**
    * If added, the tag will allow to show an icon before the tag's text.
    */
   closable?: boolean;
-
-  /**
-   * If added, the tag will show an icon after the tag's text.
-   */
-  suffix?: RenderProp;
 };
+
+export type TagRenderProps = Pick<TagProps, "className">;
+
+export type TagOptions<T extends As = "button"> = Omit<
+  ButtonOptions<T>,
+  "size"
+> &
+  Partial<TagState>;
 
 export type TagProps<T extends As = "button"> = Props<TagOptions<T>>;

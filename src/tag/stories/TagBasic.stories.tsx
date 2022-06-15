@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { SlotIcon } from "../../icons";
+import { SlotIcon } from "../../index";
 
 import js from "./templates/TagBasicJsx";
 import ts from "./templates/TagBasicTsx";
@@ -13,21 +13,31 @@ type Story = ComponentStoryObj<typeof TagBasic>;
 export default {
   title: "Primitives/Tag/Basic",
   component: TagBasic,
+  argTypes: createControls("tag", {
+    unions: ["themeColor"],
+    ignore: [
+      "wrapElement",
+      "as",
+      "ref",
+      "autoFocus",
+      "focusable",
+      "accessibleWhenDisabled",
+      "onFocusVisible",
+      "clickOnEnter",
+      "clickOnSpace",
+      "prefix",
+      "suffix",
+    ],
+  }),
   parameters: {
     layout: "centered",
     options: { showPanel: true },
     preview: createPreviewTabs({ js, ts }),
   },
-  argTypes: createControls("badge", {
-    ignore: ["unstable_system", "wrapElement", "as"],
-  }),
 } as Meta;
 
 export const Default: Story = {
-  args: {
-    size: "md",
-    variant: "solid",
-  },
+  args: { size: "md", variant: "solid", themeColor: "base" },
 };
 
 export const Small: Story = {
@@ -44,6 +54,15 @@ export const ExtraLarge: Story = {
   args: { ...Default.args, size: "xl" },
 };
 
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+
 export const Solid: Story = { ...Default };
 export const Subtle: Story = {
   ...Default,
@@ -53,28 +72,36 @@ export const Outline: Story = {
   ...Default,
   args: { ...Default.args, variant: "outline" },
 };
+export const Ghost: Story = {
+  ...Default,
+  args: { ...Default.args, variant: "ghost" },
+};
 
 export const Prefix: Story = {
-  args: {
-    size: "md",
-    variant: "solid",
-    prefix: <SlotIcon />,
-  },
+  ...Default,
+  args: { ...Default.args, prefix: <SlotIcon /> },
 };
 
 export const Closable: Story = {
+  ...Default,
   args: {
-    size: "md",
-    variant: "solid",
+    ...Default.args,
     closable: true,
   },
 };
 
+export const Suffix: Story = {
+  ...Default,
+  args: { ...Default.args, closable: true, suffix: <SlotIcon /> },
+};
+
 export const Disabled: Story = {
+  ...Default,
   args: {
-    size: "md",
-    variant: "solid",
-    closable: true,
+    ...Default.args,
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
     disabled: true,
+    closable: true,
   },
 };
