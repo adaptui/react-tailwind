@@ -1,8 +1,5 @@
 import { useState } from "react";
-
-import { isBrowser } from "../utils";
-
-import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
+import { canUseDOM, useSafeLayoutEffect } from "ariakit-utils";
 
 /**
  * React hook that tracks state of a CSS media query
@@ -11,7 +8,7 @@ import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
  */
 export function useMediaQuery(query: string | string[]): boolean[] {
   const queries = Array.isArray(query) ? query : [query];
-  const isSupported = isBrowser && "matchMedia" in window;
+  const isSupported = canUseDOM && "matchMedia" in window;
 
   const [matches, setMatches] = useState(
     queries.map(query =>

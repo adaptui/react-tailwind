@@ -133,7 +133,7 @@ export const passPropsNew = <
         ...component.props,
         className: tcm(props?.className, component.props.className),
       })
-    : runRenderFn(component, { ...stateProps, ...props });
+    : runRenderFn(component, { state: stateProps, ...props });
 };
 
 // Add a11y to the icon passed

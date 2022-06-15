@@ -1,3 +1,5 @@
+import { addDecorator } from "@storybook/react";
+import { withPropsTable } from "storybook-addon-react-docgen";
 import "focus-visible";
 
 import "./tailwind.css";
@@ -25,3 +27,5 @@ export const decorators = [
     );
   },
 ];
+
+addDecorator(withPropsTable);

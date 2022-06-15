@@ -5,8 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-
-import { useSafeLayoutEffect } from "./useSafeLayoutEffect";
+import { useSafeLayoutEffect } from "ariakit-utils";
 
 export type NativeImageProps = ImgHTMLAttributes<HTMLImageElement>;
 

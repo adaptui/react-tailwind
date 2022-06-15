@@ -13,6 +13,7 @@ import {
   DashIcon,
   EqualsIcon,
   ErrorIcon,
+  IconProps,
   SelectIcon,
   SleepStatusIcon,
   SlotIcon,
@@ -22,9 +23,9 @@ import {
   UserIcon,
 } from "../../index";
 
-export type IconProps = {};
+export type IconAllProps = IconProps & {};
 
-export const Icon: React.FC<IconProps> = props => {
+export const IconAll: React.FC<IconAllProps> = props => {
   return (
     <div className="inline-grid grid-cols-6 place-items-center gap-4 text-5xl">
       <SlotIcon />
@@ -50,4 +51,4 @@ export const Icon: React.FC<IconProps> = props => {
   );
 };
 
-export default Icon;
+export default IconAll;

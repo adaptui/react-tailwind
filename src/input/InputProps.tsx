@@ -1,6 +1,6 @@
 import * as React from "react";
+import { useSafeLayoutEffect } from "ariakit-utils";
 
-import { useSafeLayoutEffect } from "../hooks";
 import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
 
 import { InputBaseProps } from "./InputBase";

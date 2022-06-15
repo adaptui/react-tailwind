@@ -26,14 +26,3 @@ export const isObject = (value: any): value is Dict => {
 export function isFunction(value: any): value is Function {
   return typeof value === "function";
 }
-
-// SSR check
-export function canUseDOM() {
-  return !!(
-    typeof window !== "undefined" &&
-    window.document &&
-    window.document.createElement
-  );
-}
-
-export const isBrowser = canUseDOM();

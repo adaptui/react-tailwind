@@ -13,13 +13,13 @@ export default {
   title: "Primitives/Icons/ReactIcon",
   component: IconReactIcon,
   argTypes: createControls("icon", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    ignore: ["ref", "wrapElement", "as"],
   }),
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts, deps: ["react-icons"] }),
   },
 } as Meta;
 
-export const Default: Story = {};
+export const ReactIcon: Story = {};
