@@ -14,11 +14,17 @@ import { cx } from "../utils";
 import { ButtonGroupContextProvider } from "./__utils";
 
 export const useButtonGroup = createHook<ButtonGroupOptions>(
-  ({ collapsed = false, variant = "solid", size = "md", ...props }) => {
+  ({
+    type = "collapsed",
+    size = "md",
+    themeColor = "base",
+    variant = "solid",
+    ...props
+  }) => {
     const theme = useTheme("buttonGroup");
     const className = cx(
       theme.base,
-      collapsed ? theme.collapsed : theme.notCollapsed,
+      type === "collapsed" ? theme.collapsed : theme.group,
       props.className,
     );
 
@@ -28,14 +34,15 @@ export const useButtonGroup = createHook<ButtonGroupOptions>(
         return (
           <ButtonGroupContextProvider
             size={size}
+            themeColor={themeColor}
             variant={variant}
-            collapsed={collapsed}
+            type={type}
           >
             {element}
           </ButtonGroupContextProvider>
         );
       },
-      [size, variant, collapsed],
+      [size, variant, themeColor, type],
     );
 
     props = { ...props, className };
@@ -51,15 +58,13 @@ export const ButtonGroup = createComponent<ButtonGroupOptions>(props => {
   return createElement("div", htmlProps);
 });
 
-export type ButtonGroupOptions<T extends As = "div"> = BoxOptions<T> & {
-  size?: ButtonProps["size"];
-  variant?: ButtonProps["variant"];
-
-  /**
-   * Whether the button borders are collapsed or not.
-   */
-  collapsed?: boolean;
-};
+export type ButtonGroupOptions<T extends As = "div"> = BoxOptions<T> &
+  Pick<ButtonProps, "size" | "themeColor" | "variant"> & {
+    /**
+     * Whether the button borders are collapsed or not.
+     */
+    type?: "group" | "collapsed";
+  };
 
 export type ButtonGroupProps<T extends As = "div"> = Props<
   ButtonGroupOptions<T>
