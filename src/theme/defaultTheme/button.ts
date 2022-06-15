@@ -2,7 +2,7 @@ export const button = {
   base: {
     default:
       "inline-flex items-center justify-center relative transition-all disabled:cursor-not-allowed outline-none appearance-none select-none whitespace-nowrap align-middle",
-    notCollapsed:
+    group:
       "translate-y-0 hover:-translate-y-px active:translate-y-0 will-change-transform",
   },
   size: {
@@ -66,7 +66,7 @@ export const button = {
         disabled: "disabled:bg-gray-100 disabled:text-gray-500",
       },
       outline: {
-        default: "bg-white-50 text-gray-800 border-gray-400",
+        default: "bg-white-900 text-gray-800 border-gray-400",
         hover:
           "enabled:hover:border-gray-500 enabled:hover:shadow-sm enabled:hover:z-10",
         active: "enabled:active:bg-gray-300 active:border-gray-500",
@@ -102,7 +102,7 @@ export const button = {
         disabled: "disabled:bg-blue-100 disabled:text-blue-500",
       },
       outline: {
-        default: "bg-white-50 text-blue-800 border-blue-400",
+        default: "bg-white-900 text-blue-800 border-blue-400",
         hover:
           "enabled:hover:border-blue-500 enabled:hover:shadow-sm enabled:hover:z-10",
         active: "enabled:active:bg-blue-300 active:border-blue-500",
@@ -122,38 +122,38 @@ export const button = {
     },
     secondary: {
       solid: {
-        default: "bg-green-600 text-white-900 border-transparent",
-        hover: "enabled:hover:bg-green-700 enabled:hover:z-10",
-        active: "enabled:active:bg-green-800",
+        default: "bg-violet-600 text-white-900 border-transparent",
+        hover: "enabled:hover:bg-violet-700 enabled:hover:z-10",
+        active: "enabled:active:bg-violet-800",
         focus:
-          "focus-visible:ring-3 focus-visible:ring-green-500 focus-visible:z-10",
-        disabled: "disabled:bg-green-100 disabled:text-green-500",
+          "focus-visible:ring-3 focus-visible:ring-violet-500 focus-visible:z-10",
+        disabled: "disabled:bg-violet-100 disabled:text-violet-500",
       },
       subtle: {
-        default: "bg-green-100 text-green-800 border-transparent",
-        hover: "enabled:hover:bg-green-200 enabled:hover:z-10",
-        active: "enabled:active:bg-green-300",
+        default: "bg-violet-100 text-violet-800 border-transparent",
+        hover: "enabled:hover:bg-violet-200 enabled:hover:z-10",
+        active: "enabled:active:bg-violet-300",
         focus:
-          "focus-visible:ring-3 focus-visible:ring-green-500 focus-visible:z-10",
-        disabled: "disabled:bg-green-100 disabled:text-green-500",
+          "focus-visible:ring-3 focus-visible:ring-violet-500 focus-visible:z-10",
+        disabled: "disabled:bg-violet-100 disabled:text-violet-500",
       },
       outline: {
-        default: "bg-white-50 text-green-800 border-green-400",
+        default: "bg-white-900 text-violet-800 border-violet-400",
         hover:
-          "enabled:hover:border-green-500 enabled:hover:shadow-sm enabled:hover:z-10",
-        active: "enabled:active:bg-green-300 active:border-green-500",
+          "enabled:hover:border-violet-500 enabled:hover:shadow-sm enabled:hover:z-10",
+        active: "enabled:active:bg-violet-300 active:border-violet-500",
         focus:
-          "focus-visible:border-transparent focus-visible:ring-3 focus-visible:ring-green-500 focus-visible:z-10",
+          "focus-visible:border-transparent focus-visible:ring-3 focus-visible:ring-violet-500 focus-visible:z-10",
         disabled:
-          "disabled:bg-white-100 disabled:text-green-500 disabled:border-green-400",
+          "disabled:bg-white-100 disabled:text-violet-500 disabled:border-violet-400",
       },
       ghost: {
-        default: "bg-transparent text-green-800 border-transparent",
-        hover: "enabled:hover:bg-green-200 enabled:hover:z-10",
-        active: "enabled:active:bg-green-300",
+        default: "bg-transparent text-violet-800 border-transparent",
+        hover: "enabled:hover:bg-violet-200 enabled:hover:z-10",
+        active: "enabled:active:bg-violet-300",
         focus:
-          "focus-visible:bg-green-100 focus-visible:ring-3 focus-visible:ring-green-500 focus-visible:z-10",
-        disabled: "disabled:text-green-500",
+          "focus-visible:bg-violet-100 focus-visible:ring-3 focus-visible:ring-violet-500 focus-visible:z-10",
+        disabled: "disabled:text-violet-500",
       },
     },
     success: {
@@ -174,7 +174,7 @@ export const button = {
         disabled: "disabled:bg-green-100 disabled:text-green-500",
       },
       outline: {
-        default: "bg-white-50 text-green-800 border-green-400",
+        default: "bg-white-900 text-green-800 border-green-400",
         hover:
           "enabled:hover:border-green-500 enabled:hover:shadow-sm enabled:hover:z-10",
         active: "enabled:active:bg-green-300 active:border-green-500",
@@ -210,7 +210,7 @@ export const button = {
         disabled: "disabled:bg-red-100 disabled:text-red-500",
       },
       outline: {
-        default: "bg-white-50 text-red-800 border-red-400",
+        default: "bg-white-900 text-red-800 border-red-400",
         hover:
           "enabled:hover:border-red-500 enabled:hover:shadow-sm enabled:hover:z-10",
         active: "enabled:active:bg-red-300 active:border-red-500",

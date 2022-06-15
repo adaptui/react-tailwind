@@ -12,19 +12,8 @@ type Story = ComponentStoryObj<typeof ButtonGroupBasic>;
 export default {
   title: "Primitives/ButtonGroup/Basic",
   component: ButtonGroupBasic,
-  argTypes: createControls("button", {
-    ignore: [
-      "unstable_system",
-      "unstable_clickOnEnter",
-      "unstable_clickOnSpace",
-      "wrapElement",
-      "focusable",
-      "as",
-      "iconOnly",
-      "spinner",
-      "suffix",
-      "prefix",
-    ],
+  argTypes: createControls("buttonGroup", {
+    ignore: ["wrapElement", "as", "ref"],
   }),
   parameters: {
     layout: "centered",
@@ -34,7 +23,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { variant: "solid" },
+  args: { size: "md", themeColor: "base", variant: "solid", type: "collapsed" },
 };
 
 export const Small: Story = {
@@ -51,6 +40,27 @@ export const ExtraLarge: Story = {
   args: { ...Default.args, size: "xl" },
 };
 
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+export const Seconday: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "secondary" },
+};
+export const Success: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "success" },
+};
+export const Danger: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger" },
+};
+
 export const Solid: Story = { ...Default };
 export const Subtle: Story = {
   ...Default,
@@ -63,4 +73,12 @@ export const Outline: Story = {
 export const Ghost: Story = {
   ...Default,
   args: { ...Default.args, variant: "ghost" },
+};
+
+export const Group: Story = {
+  args: { size: "md", themeColor: "base", variant: "solid", type: "group" },
+};
+
+export const Collapsed: Story = {
+  args: { size: "md", themeColor: "base", variant: "solid", type: "collapsed" },
 };

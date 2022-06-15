@@ -34,13 +34,15 @@ export const useButton = createHook<ButtonOptions>(
   }) => {
     const disabled = props.disabled || loading;
 
-    const groupcontext = useButtonGroupContext();
-    const size = groupcontext?.size || _size;
-    const variant = groupcontext?.variant || _variant;
+    const group = useButtonGroupContext();
+
+    const size = group?.size || _size;
+    const variant = group?.variant || _variant;
+    const themeColor = group?.themeColor || _themeColor;
 
     const state = {
       size,
-      themeColor: _themeColor,
+      themeColor,
       variant,
       prefix: _prefix,
       suffix: _suffix,
@@ -52,20 +54,20 @@ export const useButton = createHook<ButtonOptions>(
     const button = useTheme("button");
     const className = tcm(
       button.base.default,
-      groupcontext?.collapsed ? "" : button.base.notCollapsed,
+      group?.type === "collapsed" ? "" : button.base.group,
       !_iconOnly ? button.size[size]?.base : button.size[size]?.iconOnly?.base,
-      button.themeColor[_themeColor]?.[variant]?.default,
-      button.themeColor[_themeColor]?.[variant]?.hover,
-      button.themeColor[_themeColor]?.[variant]?.active,
-      button.themeColor[_themeColor]?.[variant]?.focus,
-      button.themeColor[_themeColor]?.[variant]?.disabled,
+      button.themeColor[themeColor]?.[variant]?.default,
+      button.themeColor[themeColor]?.[variant]?.hover,
+      button.themeColor[themeColor]?.[variant]?.active,
+      button.themeColor[themeColor]?.[variant]?.focus,
+      button.themeColor[themeColor]?.[variant]?.disabled,
       props.className,
     );
 
     const buttonRenderProps = (className: string) => ({ className, disabled });
     const prefixStyles = cx(button.size[size]?.prefix);
     const prefix = _prefix
-      ? withIconA11yNew(_prefix, { className: prefixStyles, disabled }, state)
+      ? withIconA11yNew(_prefix, buttonRenderProps(prefixStyles), state)
       : null;
     const suffixStyles = cx(button.size[size]?.suffix);
     const suffix = _suffix
