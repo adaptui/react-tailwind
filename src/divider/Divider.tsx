@@ -9,27 +9,33 @@ import {
 import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
-import { cx, RenderProp, runIfFn } from "../utils";
+import { cx, RenderProp, runRenderFn } from "../utils";
 
 export const useDivider = createHook<DividerOptions>(
-  ({ label, orientation = "horizontal", ...props }) => {
+  ({
+    orientation = "horizontal",
+    label,
+    labelPosition = "center",
+    ...props
+  }) => {
     const theme = useTheme("divider");
     const className = cx(
       theme.base,
-      orientation === "horizontal" ? theme.horizontal : theme.vertical,
+      theme.orientation[orientation],
       props.className,
     );
-    const labelClassName = theme.label;
 
     props = useWrapElement(
       props,
       element => {
         if (label) {
+          const labelClassName = cx(theme.label[orientation]?.[labelPosition]);
+
           return (
             <div className="relative h-full w-full">
               {element}
               <span className={labelClassName}>
-                {runIfFn(label as React.ReactNode, { orientation })}
+                {runRenderFn(label, { orientation, label, labelPosition })}
               </span>
             </div>
           );
@@ -37,7 +43,7 @@ export const useDivider = createHook<DividerOptions>(
 
         return element;
       },
-      [label, labelClassName, orientation],
+      [label, orientation, labelPosition],
     );
 
     props = { ...props, className };
@@ -53,11 +59,20 @@ export const Divider = createComponent<DividerOptions>(props => {
   return createElement("hr", htmlProps);
 });
 
-export type DividerOptions<T extends As = "hr"> = SeparatorOptions<T> & {
+export type DividerState = {
+  orientation: SeparatorOptions["orientation"];
   /**
    * Provide a label to name the divider at the center to mark it as a section.
    */
-  label?: RenderProp<SeparatorOptions>;
+  label?: RenderProp<DividerState>;
+
+  /**
+   * Position of the given label.
+   */
+  labelPosition?: "start" | "center" | "end";
 };
+
+export type DividerOptions<T extends As = "hr"> = SeparatorOptions<T> &
+  Partial<DividerState>;
 
 export type DividerProps<T extends As = "hr"> = Props<DividerOptions<T>>;
