@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { Button } from "../../button";
 
 import js from "./templates/DividerVerticalJsx";
@@ -18,10 +18,34 @@ export default {
     options: { showPanel: true },
     preview: createPreviewTabs({ js, ts }),
   },
+  argTypes: createControls("divider", {
+    ignore: ["wrapElement", "as", "ref"],
+  }),
 } as Meta;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: { orientation: "vertical", labelPosition: "center" },
+};
 
-export const Label: Story = {
-  args: { label: <Button variant="outline">Continue</Button> },
+export const LabelCenter: Story = {
+  ...Default,
+  args: { ...Default.args, label: <Button variant="outline">Continue</Button> },
+};
+
+export const LabelStart: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label: <Button variant="outline">Continue</Button>,
+    labelPosition: "start",
+  },
+};
+
+export const LabelEnd: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label: <Button variant="outline">Continue</Button>,
+    labelPosition: "end",
+  },
 };
