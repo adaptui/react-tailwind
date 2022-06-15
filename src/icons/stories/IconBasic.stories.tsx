@@ -12,14 +12,14 @@ type Story = ComponentStoryObj<typeof IconBasic>;
 export default {
   title: "Primitives/Icons/Basic",
   component: IconBasic,
-  argTypes: createControls("icon", {
-    ignore: ["unstable_system", "wrapElement", "as"],
-  }),
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts }),
   },
+  argTypes: createControls("icon", {
+    ignore: ["ref", "wrapElement", "as"],
+  }),
 } as Meta;
 
-export const Default: Story = {};
+export const Basic: Story = {};

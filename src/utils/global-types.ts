@@ -1,4 +1,4 @@
-import { DefaultTheme } from "./theme";
+import { DefaultTheme } from "../theme";
 
 // https://stackoverflow.com/questions/60795256/typescript-type-merging
 // https://dev.to/svehla/typescript-how-to-deep-merge-170c

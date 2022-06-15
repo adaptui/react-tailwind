@@ -24,13 +24,7 @@ export type ComponentWithAs<Props, DefaultType extends As> = {
   displayName?: string;
 };
 
-export type AnyString = string & { ignore?: any };
-
 export type Dict<T = any> = Record<string, T>;
-
-export type Split<T, K extends string> = T extends `${infer P1}${K}${infer P2}`
-  ? [P1, ...Split<P2, K>]
-  : [T];
 
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;

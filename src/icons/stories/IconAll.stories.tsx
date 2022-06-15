@@ -4,22 +4,22 @@ import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/IconAllJsx";
 import ts from "./templates/IconAllTsx";
-import { Icon } from "./IconAll.component";
+import { IconAll } from "./IconAll.component";
 
-type Meta = ComponentMeta<typeof Icon>;
-type Story = ComponentStoryObj<typeof Icon>;
+type Meta = ComponentMeta<typeof IconAll>;
+type Story = ComponentStoryObj<typeof IconAll>;
 
 export default {
-  title: "Primitives/Icons/All",
-  component: Icon,
+  title: "Primitives/Icons/AllIcons",
+  component: IconAll,
   argTypes: createControls("icon", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    ignore: ["ref", "wrapElement", "as"],
   }),
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
 
-export const Default: Story = {};
+export const AllIcons: Story = {};

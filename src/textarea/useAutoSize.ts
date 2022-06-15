@@ -1,6 +1,6 @@
 import * as React from "react";
+import { useSafeLayoutEffect } from "ariakit-utils";
 
-import { useSafeLayoutEffect } from "../hooks";
 import { debounce } from "../utils";
 
 import { TextareaProps } from "./index";

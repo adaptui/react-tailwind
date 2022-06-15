@@ -22,5 +22,6 @@
     "declaration": true,
     "importHelpers": true,
     "sourceMap": true
-  }
+  },
+  "exclude": ["./out"]
 }
