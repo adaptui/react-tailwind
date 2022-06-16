@@ -58,3 +58,8 @@ export const Hint: Story = {
   ...Default,
   args: { ...Default.args, label: "Progress", hint: "50%" },
 };
+
+export const Indeterminate: Story = {
+  ...Default,
+  args: { ...Default.args, value: null },
+};

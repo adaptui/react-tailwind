@@ -29,13 +29,14 @@ const componentMap = {
 export function useCircularProgressProps(
   props: CircularProgressProps,
 ): CircularProgressPropsReturn {
-  let { value, min, max, size, hint, children, ...restProps } = props;
+  let { value, min, max, size, hint, themeColor, children, ...restProps } =
+    props;
   const state = useProgressState({
     value,
     min,
     max,
   });
-  const uiState = useCircularProgressUIState({ size, hint });
+  const uiState = useCircularProgressUIState({ size, hint, themeColor });
   let uiProps: CircularProgressUIProps = useMemo(
     () => ({
       state,

@@ -13,15 +13,16 @@ import { CircularProgressUIProps } from "./CircularProgressProps";
 
 export const useCircularProgressBarWrapper =
   createHook<CircularProgressBarWrapperOptions>(
-    ({ state, size, hint, ...props }) => {
+    ({ state, size, themeColor, hint, ...props }) => {
       const theme = useTheme("circularProgress");
       const className = cx(
+        theme.barWrapper.base,
+        state?.isIndeterminate ? theme.barWrapper.indeterminate : "",
         size
           ? hint
-            ? theme.barWrapper.hint.size[size]
-            : theme.barWrapper.common.size[size]
+            ? theme.size[size].barWrapper.hint
+            : theme.size[size].barWrapper.base
           : "",
-        state?.isIndeterminate ? theme.barWrapper.indeterminate : "",
         props.className,
       );
 

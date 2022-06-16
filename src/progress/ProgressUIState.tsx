@@ -23,7 +23,7 @@ export type ProgressUIState = {
    *
    * @default base
    */
-  themeColor: keyof AdaptUI.GetThemeValue<"button", "themeColor">;
+  themeColor: keyof AdaptUI.GetThemeValue<"progress", "themeColor">;
 
   /**
    * Label for the Progress.

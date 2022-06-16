@@ -13,9 +13,13 @@ import { CircularProgressUIProps } from "./CircularProgressProps";
 
 export const useCircularProgressTrack =
   createHook<CircularProgressTrackOptions>(
-    ({ state, size, hint, ...props }) => {
+    ({ state, size, themeColor, hint, ...props }) => {
       const theme = useTheme("circularProgress");
-      const className = cx(theme.track, props.className);
+      const className = cx(
+        theme.track,
+        themeColor ? theme.themeColor[themeColor].track : "",
+        props.className,
+      );
 
       props = {
         viewBox: "0 0 100 100",

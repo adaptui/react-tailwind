@@ -27,13 +27,23 @@ const componentMap = {
 };
 
 export function useProgressProps(props: ProgressProps): ProgressPropsReturn {
-  let { value, min, max, size, label, hint, children, ...restProps } = props;
+  let {
+    value,
+    min,
+    max,
+    size,
+    label,
+    themeColor,
+    hint,
+    children,
+    ...restProps
+  } = props;
   const state = useProgressState({
     value,
     min,
     max,
   });
-  const uiState = useProgressUIState({ size, label, hint });
+  const uiState = useProgressUIState({ size, label, hint, themeColor });
   let uiProps: ProgressUIProps = useMemo(
     () => ({
       state,

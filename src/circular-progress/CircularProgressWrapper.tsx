@@ -14,7 +14,7 @@ import { CircularProgressUIProps } from "./CircularProgressProps";
 
 export const useCircularProgressWrapper =
   createHook<CircularProgressWrapperOptions>(
-    ({ state, size, hint, ...props }) => {
+    ({ state, size, themeColor, hint, ...props }) => {
       const theme = useTheme("circularProgress");
       const className = tcm(theme.wrapper, props.className);
 
