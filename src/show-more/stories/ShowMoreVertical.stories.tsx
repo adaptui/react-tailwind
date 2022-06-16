@@ -19,6 +19,6 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
+export const Vertical: Story = {
   args: { direction: "vertical" },
 };

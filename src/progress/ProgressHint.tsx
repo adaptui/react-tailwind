@@ -12,11 +12,12 @@ import { cx } from "../utils";
 import { ProgressUIProps } from "./ProgressProps";
 
 export const useProgressHint = createHook<ProgressHintOptions>(
-  ({ state, size, label, hint, ...props }) => {
+  ({ state, size, themeColor, label, hint, ...props }) => {
     const theme = useTheme("progress");
     const className = cx(
-      theme.hint.common,
-      size ? theme.hint.size[size] : "",
+      theme.hint,
+      size ? theme.size[size]?.hint : "",
+      themeColor ? theme.themeColor[themeColor]?.hint : "",
       props.className,
     );
 

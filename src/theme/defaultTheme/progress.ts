@@ -1,35 +1,51 @@
 export const progress = {
   wrapper:
     "inline-flex flex-row flex-wrap justify-between items-center align-top w-full",
-  label: {
-    common: "flex-1 text-left mb-3 text-gray-700 font-medium",
-    size: {
-      sm: "text-cxs",
-      md: "text-sm",
-      lg: "text-sm",
-      xl: "text-sm",
+  size: {
+    sm: {
+      label: "mb-3 text-cxs font-medium",
+      hint: "ml-3 mb-3 text-cxs font-medium",
+      track: "w-full h-0.5 rounded-[20px] z-10",
+      bar: "h-full rounded-[20px]",
+    },
+    md: {
+      label: "mb-3 text-sm font-medium",
+      hint: "ml-3 mb-3 text-sm font-medium",
+      track: "w-full h-1 rounded-[20px] z-10",
+      bar: "h-full rounded-[20px]",
+    },
+    lg: {
+      label: "mb-3 text-sm font-medium",
+      hint: "ml-3 mb-3 text-sm font-medium",
+      track: "w-full h-2 rounded-[20px] z-10",
+      bar: "h-full rounded-[20px]",
+    },
+    xl: {
+      label: "mb-3 text-sm font-medium",
+      hint: "ml-3 mb-3 text-sm font-medium",
+      track: "w-full h-3 rounded-[20px] z-10",
+      bar: "h-full rounded-[20px]",
     },
   },
-  hint: {
-    common: "ml-3 mb-3 text-gray-500 font-normal",
-    size: {
-      sm: "text-cxs",
-      md: "text-sm",
-      lg: "text-sm",
-      xl: "text-sm",
+  themeColor: {
+    base: {
+      label: "text-gray-900",
+      hint: "text-gray-600",
+      bar: "bg-gray-900",
+      track: "bg-gray-100",
+    },
+    primary: {
+      label: "text-gray-900",
+      hint: "text-gray-600",
+      bar: "bg-blue-600",
+      track: "bg-blue-100",
     },
   },
-  track: {
-    common: "w-full overflow-hidden bg-gray-200 rounded-2xl z-10",
-    size: {
-      sm: "h-0.5",
-      md: "h-1",
-      lg: "h-2",
-      xl: "h-3",
-    },
-  },
+  label: "flex-1",
+  hint: "",
+  track: "overflow-hidden ",
   bar: {
-    common: "h-full bg-gray-800 rounded-2xl transition-all",
+    base: "transition-all",
     indeterminate: "min-w-[50%] animate-progress",
   },
 };

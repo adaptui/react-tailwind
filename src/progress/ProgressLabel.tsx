@@ -12,11 +12,12 @@ import { tcm } from "../utils";
 import { ProgressUIProps } from "./ProgressProps";
 
 export const useProgressLabel = createHook<ProgressLabelOptions>(
-  ({ state, size, label, hint, ...props }) => {
+  ({ state, size, themeColor, label, hint, ...props }) => {
     const theme = useTheme("progress");
     const className = tcm(
-      theme.label.common,
-      size ? theme.label.size[size] : "",
+      theme.label,
+      size ? theme.size[size]?.label : "",
+      themeColor ? theme.themeColor[themeColor]?.label : "",
       props.className,
     );
 
