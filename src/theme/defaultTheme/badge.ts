@@ -2,15 +2,15 @@ export const badge = {
   base: "inline-flex items-center justify-center relative whitespace-nowrap align-middle transition-all",
   size: {
     sm: {
-      base: "min-h-4 min-w-4 w-auto px-1.5 py-px border rounded-2xl text-xs font-medium",
+      base: "min-h-4 min-w-4 w-auto px-1.5 border rounded-2xl text-xs font-medium",
       prefix: "text-[8px] mr-1",
     },
     md: {
-      base: "min-h-5 min-w-5 w-auto px-1.5 py-[3px] border rounded-2xl text-xs font-medium",
+      base: "min-h-5 min-w-5 w-auto px-1.5 border rounded-2xl text-xs font-medium",
       prefix: "text-[10px] mr-1",
     },
     lg: {
-      base: "min-h-6 min-w-6 w-auto px-2 py-[4.5px] border rounded-2xl text-cxs font-medium",
+      base: "min-h-6 min-w-6 w-auto px-2 border rounded-2xl text-cxs font-medium",
       prefix: "text-[12px] mr-1",
     },
   },

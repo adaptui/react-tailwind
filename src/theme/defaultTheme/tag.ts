@@ -3,19 +3,19 @@ export const tag = {
   size: {
     sm: {
       default:
-        "min-h-5 min-w-5 w-auto px-1.5 py-[2.5px] border rounded-[5px] text-cxs font-medium",
+        "min-h-5 min-w-5 w-auto px-1.5 border rounded-[5px] text-cxs font-medium",
       prefix: "text-[12px] mr-1",
       suffix: "text-[12px] ml-1",
     },
     md: {
       default:
-        "min-h-6 min-w-6 w-auto px-2 py-[4.5px] border rounded-md text-cxs font-medium",
+        "min-h-6 min-w-6 w-auto px-2 border rounded-md text-cxs font-medium",
       prefix: "text-[12px] mr-1",
       suffix: "text-[12px] ml-1",
     },
     lg: {
       default:
-        "min-h-7 min-w-7 w-auto px-2 py-1.5 border rounded-md text-sm font-medium",
+        "min-h-7 min-w-7 w-auto px-2 border rounded-md text-sm font-medium",
       prefix: "text-[12px] mr-1",
       suffix: "text-[12px] ml-1",
     },

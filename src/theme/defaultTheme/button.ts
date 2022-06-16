@@ -7,7 +7,7 @@ export const button = {
   },
   size: {
     sm: {
-      base: "min-h-[26px] min-w-[26px] w-auto py-[5.5px] px-2 border rounded-lg text-cxs font-medium",
+      base: "min-h-[26px] min-w-[26px] w-auto px-2 border rounded-lg text-cxs font-medium",
       prefix: "text-[12px] mr-1.5",
       suffix: "text-[12px] ml-1.5",
       iconOnly: {
@@ -17,7 +17,7 @@ export const button = {
       },
     },
     md: {
-      base: "min-h-[30px] min-w-[30px] w-auto py-[7px] px-2.5 border rounded-lg text-sm font-medium",
+      base: "min-h-[30px] min-w-[30px] w-auto px-2.5 border rounded-lg text-sm font-medium",
       prefix: "text-[12px] mr-1.5",
       suffix: "text-[12px] ml-1.5",
       iconOnly: {
@@ -27,7 +27,7 @@ export const button = {
       },
     },
     lg: {
-      base: "min-h-9 min-w-9 w-auto py-2.5 px-3 border rounded-[10px] text-sm font-medium",
+      base: "min-h-9 min-w-9 w-auto px-3 border rounded-[10px] text-sm font-medium",
       prefix: "text-[12px] mr-1.5",
       suffix: "text-[12px] ml-1.5",
       iconOnly: {
@@ -37,7 +37,7 @@ export const button = {
       },
     },
     xl: {
-      base: "min-h-11 min-w-11 w-auto py-[13px] px-4 border rounded-xl text-base font-medium",
+      base: "min-h-11 min-w-11 w-auto px-4 border rounded-xl text-base font-medium",
       prefix: "text-[16px] mr-2",
       suffix: "text-[16px] ml-2",
       iconOnly: {
