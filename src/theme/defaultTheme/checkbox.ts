@@ -1,4 +1,92 @@
 export const checkbox = {
+  label: {
+    base: "relative inline-flex cursor-pointer align-top",
+    disabled: "pointer-events-none",
+    showMore: { vertical: "flex w-full", horizontal: "flex" },
+  },
+  input: "peer within sr-only",
+  icon: "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
+  text: "select-none",
+  description: "select-none",
+  size: {
+    sm: {
+      label: "min-h-[26px] px-2 py-[5.5px] rounded-lg",
+      icon: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
+      text: "text-cxs font-medium ml-1.5 ",
+      description: "text-cx font-normals mt-1 ml-1.5",
+    },
+    md: {
+      label: "min-h-[30px] px-2.5 py-[7px] rounded-lg",
+      icon: "w-4 h-4 text-[10px] border-[1.5px] rounded",
+      text: "text-sm font-medium ml-2",
+      description: "text-sm font-normal mt-1.5 ml-2",
+    },
+    lg: {
+      label: "min-h-9 px-3 py-2 rounded-[10px]",
+      icon: "w-5 h-5 text-[16px] border-[1.5px] rounded",
+      text: "text-base font-medium ml-2",
+      description: "text-sm font-normal mt-2 ml-2",
+    },
+  },
+  themeColor: {
+    base: {
+      default: {
+        label: "",
+        icon: {
+          unChecked: "bg-white-50 border-gray-500 text-current",
+          checked: "bg-gray-900 border-gray-900 text-white-900",
+          indeterminate: "bg-gray-900 border-gray-900 text-white-900",
+        },
+        text: "text-gray-800",
+        description: "text-gray-600",
+      },
+      hover: {
+        label: "hover:bg-gray-200",
+        icon: {
+          unChecked: "peer-hover:border-gray-600",
+          checked: "peer-hover:bg-gray-800 peer-hover:border-gray-800",
+          indeterminate: "peer-hover:bg-gray-800 peer-hover:border-gray-800",
+        },
+        text: "",
+        description: "",
+      },
+      active: {
+        label: "",
+        icon: {
+          unChecked: "peer-active:bg-gray-300 peer-active:border-gray-600",
+          checked: "peer-active:bg-gray-700 peer-active:border-gray-700",
+          indeterminate: "peer-active:bg-gray-700 peer-active:border-gray-700",
+        },
+        text: "",
+        description: "",
+      },
+      focus: {
+        label: "focus-within:bg-gray-100",
+        icon: {
+          unChecked:
+            "peer-focus-visible:ring-3 peer-focus-visible:ring-grayDark-600 peer-focus-visible:border-transparent",
+          checked:
+            "peer-focus-visible:ring-3 peer-focus-visible:ring-gray-500 ",
+          indeterminate:
+            "peer-focus-visible:ring-3 peer-focus-visible:ring-gray-500",
+        },
+        text: "",
+        description: "",
+      },
+      disabled: {
+        label: "",
+        icon: {
+          unChecked: "peer-disabled:bg-gray-100 peer-disabled:border-gray-400",
+          checked:
+            "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-500",
+          indeterminate:
+            "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-500",
+        },
+        text: "text-gray-500",
+        description: "",
+      },
+    },
+  },
   group: {
     vertical: {
       common: "flex flex-col items-start",
@@ -26,74 +114,6 @@ export const checkbox = {
         vertical: "flex flex-col space-y-2 w-full",
         horizontal: "flex flex-row space-x-2",
       },
-    },
-  },
-  label: {
-    common: "relative inline-flex cursor-pointer align-top",
-    only: "hover:bg-gray-100",
-    disabled: "pointer-events-none",
-    size: {
-      sm: "min-h-[26px] px-2 py-[6px] rounded-lg",
-      md: "min-h-[30px] px-2.5 py-[7px] rounded-lg",
-      lg: "min-h-9 px-3 py-2 rounded-[10px]",
-    },
-    showMore: { vertical: "flex w-full", horizontal: "flex" },
-  },
-  input: "peer sr-only",
-  icon: {
-    common:
-      "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
-    size: {
-      sm: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
-      md: "w-4 h-4 text-xs border-[1.5px] rounded",
-      lg: "w-5 h-5 text-base border-[1.5px] rounded",
-    },
-    unChecked: {
-      default: "bg-white border-gray-400 text-current",
-      hover: "peer-hover:border-gray-500 peer-hover:shadow",
-      active: "peer-active:border-gray-400",
-      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
-      disabled: "peer-disabled:bg-gray-200 peer-disabled:border-gray-300",
-      invalid:
-        "bg-white border-red-600 text-current peer-hover:border-red-700 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-300",
-    },
-    checked: {
-      default: "bg-gray-800 border-gray-800 text-white",
-      hover:
-        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
-      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
-      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
-      disabled:
-        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
-      invalid:
-        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
-    },
-    indeterminate: {
-      default: "bg-gray-800 border-gray-800 text-white",
-      hover:
-        "peer-hover:bg-gray-700 peer-hover:border-gray-700 peer-hover:shadow",
-      active: "peer-active:bg-gray-800 peer-active:border-gray-800",
-      focus: "peer-focus-visible:ring-2 peer-focus-visible:ring-gray-300",
-      disabled:
-        "peer-disabled:bg-gray-200 peer-disabled:border-gray-200 peer-disabled:text-gray-400",
-      invalid:
-        "bg-red-600 border-red-600 text-white peer-hover:bg-red-500 peer-hover:border-red-500 peer-active:bg-red-600 peer-active:border-red-600 peer-focus-visible:ring-2 peer-focus-visible:ring-red-300 peer-disabled:bg-red-200 peer-disabled:border-red-200 peer-disabled:text-red-400",
-    },
-  },
-  text: {
-    common: "text-gray-700 font-medium select-none",
-    size: {
-      sm: "text-cxs ml-1.5",
-      md: "text-sm ml-2",
-      lg: "text-base ml-2",
-    },
-  },
-  description: {
-    common: "text-gray-500 select-none",
-    size: {
-      sm: "text-cxs mt-1 ml-1.5",
-      md: "text-sm mt-1.5 ml-2",
-      lg: "text-sm mt-2 ml-2",
     },
   },
 };

@@ -1,3 +1,4 @@
+import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -7,7 +8,6 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
 
 import { CheckboxUIProps } from "./CheckboxProps";
 
@@ -15,6 +15,7 @@ export const useCheckboxDescription = createHook<CheckboxDescriptionOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     isIndeterminate,
     isUnchecked,
@@ -27,8 +28,17 @@ export const useCheckboxDescription = createHook<CheckboxDescriptionOptions>(
   }) => {
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.description.common,
-      size ? theme.description.size[size] : "",
+      theme.description,
+      size ? theme.size[size].description : "",
+      themeColor
+        ? cx(
+            theme.themeColor[themeColor].default.description,
+            theme.themeColor[themeColor].hover.description,
+            theme.themeColor[themeColor].active.description,
+            theme.themeColor[themeColor].focus.description,
+            theme.themeColor[themeColor].disabled.description,
+          )
+        : "",
       props.className,
     );
 

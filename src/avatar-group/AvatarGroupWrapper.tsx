@@ -1,4 +1,5 @@
 import { GroupProps, useGroup } from "ariakit";
+import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -8,7 +9,6 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
 
 import { AvatarGroupUIProps } from "./AvatarGroupProps";
 

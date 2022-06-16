@@ -1,3 +1,4 @@
+import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -7,7 +8,6 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
 
 import { CheckboxInputOptions } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
@@ -16,6 +16,7 @@ export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     isIndeterminate,
     isUnchecked,
@@ -27,12 +28,22 @@ export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
     maxVisibleItems,
     ...props
   }) => {
+    console.log("%cdisabled", "color: #00ff88", disabled);
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.label.common,
-      label && !description ? (size ? theme.label.size[size] : "") : "",
-      label && !description ? (disabled ? "" : theme.label.only) : "",
+      theme.label.base,
       disabled ? theme.label.disabled : "",
+      label && !description && size ? theme.size[size].label : "",
+      label && !description && themeColor
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.label,
+              theme.themeColor[themeColor].hover.label,
+              theme.themeColor[themeColor].active.label,
+              theme.themeColor[themeColor].focus.label,
+            )
+          : theme.themeColor[themeColor].disabled.label
+        : "",
       stack && maxVisibleItems != null ? theme.label.showMore[stack] : "",
       props.className,
     );
