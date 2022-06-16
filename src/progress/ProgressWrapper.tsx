@@ -13,7 +13,7 @@ import { tcm } from "../utils";
 import { ProgressUIProps } from "./ProgressProps";
 
 export const useProgressWrapper = createHook<ProgressWrapperOptions>(
-  ({ state, size, label, hint, ...props }) => {
+  ({ state, size, themeColor, label, hint, ...props }) => {
     const theme = useTheme("progress");
     const className = tcm(theme.wrapper, props.className);
 

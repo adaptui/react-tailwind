@@ -12,11 +12,13 @@ import { cx } from "../utils";
 import { ProgressUIProps } from "./ProgressProps";
 
 export const useProgressBar = createHook<ProgressBarOptions>(
-  ({ state, size, label, hint, ...props }) => {
+  ({ state, size, themeColor, label, hint, ...props }) => {
     const theme = useTheme("progress");
     const className = cx(
-      theme.bar.common,
+      theme.bar.base,
       state?.isIndeterminate ? theme.bar.indeterminate : "",
+      size ? theme.size[size]?.bar : "",
+      themeColor ? theme.themeColor[themeColor]?.bar : "",
       props.className,
     );
     const style = { width: `${state?.percent}%`, ...props.style };

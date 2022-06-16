@@ -15,7 +15,13 @@ export const ProgressCustom: React.FC<ProgressCustomProps> = props => {
 
   return (
     <div className="w-80">
-      <Progress value={value} {...props}>
+      <Progress
+        value={value}
+        label="Loading..."
+        hint={value === null ? undefined : `${value}%`}
+        {...props}
+      >
+        {" "}
         <ProgressTrack className="bg-red-300" />
         <ProgressBar className="bg-red-800" />
       </Progress>

@@ -11,9 +11,30 @@ import { ButtonOptions, useButton } from "../button";
 import { ShowMoreUIProps } from "./ShowMoreProps";
 
 export const useShowMoreButton = createHook<ShowMoreButtonOptions>(
-  ({ state, button, ...props }) => {
-    props = useButton(props);
-    // @ts-ignore
+  ({
+    state,
+    button,
+    size,
+    themeColor,
+    variant,
+    prefix,
+    suffix,
+    iconOnly,
+    loading,
+    spinner,
+    ...props
+  }) => {
+    props = useButton({
+      size,
+      themeColor,
+      variant,
+      prefix,
+      suffix,
+      iconOnly,
+      loading,
+      spinner,
+      ...props,
+    });
     props = useDisclosure({ state, ...props });
 
     return props;
