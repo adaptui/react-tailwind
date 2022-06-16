@@ -8,7 +8,7 @@ exports[`<Avatar /> should render Avatar 1`] = `
   >
     <span
       aria-label="avatar icon"
-      class="inline-flex items-center justify-center text-gray-600 text-base"
+      class="inline-flex items-center justify-center text-gray-800 text-base"
     >
       <svg
         aria-hidden="true"
@@ -26,10 +26,6 @@ exports[`<Avatar /> should render Avatar 1`] = `
         />
       </svg>
     </span>
-    <div
-      aria-label="avatar status indicator"
-      class="absolute flex items-center justify-center -bottom-px -right-px"
-    />
   </span>
 </DocumentFragment>
 `;
@@ -42,7 +38,7 @@ exports[`<Avatar /> should render with AvatarStatusIndicator 1`] = `
   >
     <span
       aria-label="avatar icon"
-      class="inline-flex items-center justify-center text-gray-600 text-base"
+      class="inline-flex items-center justify-center text-gray-800 text-base"
     >
       <svg
         aria-hidden="true"
@@ -65,7 +61,7 @@ exports[`<Avatar /> should render with AvatarStatusIndicator 1`] = `
       class="absolute flex items-center justify-center -bottom-px -right-px"
     >
       <svg
-        class="w-[1em] h-[1em] inline-block shrink-0 align-middle text-green-500 ring-1.5 rounded-full text-[8px] bg-white ring-white"
+        class="w-[1em] h-[1em] inline-block shrink-0 align-middle text-green-600 ring-1.5 rounded-full text-[8px] bg-white-900 ring-white-900"
         data-testid="testid-icon"
         viewBox="0 0 4 4"
       >

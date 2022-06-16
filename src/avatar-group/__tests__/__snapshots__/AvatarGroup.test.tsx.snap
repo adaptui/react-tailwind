@@ -8,12 +8,12 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
     role="group"
   >
     <span
-      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white-900"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="avatar icon"
-        class="inline-flex items-center justify-center text-gray-600 text-xs"
+        class="inline-flex items-center justify-center text-gray-800 text-xs"
       >
         <svg
           aria-hidden="true"
@@ -31,18 +31,14 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
           />
         </svg>
       </span>
-      <div
-        aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center -bottom-px -right-px"
-      />
     </span>
     <span
-      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white-900"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="avatar icon"
-        class="inline-flex items-center justify-center text-gray-600 text-xs"
+        class="inline-flex items-center justify-center text-gray-800 text-xs"
       >
         <svg
           aria-hidden="true"
@@ -60,10 +56,6 @@ exports[`<AvatarGroup /> should be able to overwrite specific avatar size 1`] = 
           />
         </svg>
       </span>
-      <div
-        aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center -bottom-px -right-px"
-      />
     </span>
   </div>
 </DocumentFragment>
@@ -77,12 +69,12 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
     role="group"
   >
     <span
-      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white-900"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="avatar icon"
-        class="inline-flex items-center justify-center text-gray-600 text-xs"
+        class="inline-flex items-center justify-center text-gray-800 text-xs"
       >
         <svg
           aria-hidden="true"
@@ -100,18 +92,14 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
           />
         </svg>
       </span>
-      <div
-        aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center -bottom-px -right-px"
-      />
     </span>
     <span
-      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white"
+      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-7 w-7 ring-2 ring-white-900"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="avatar icon"
-        class="inline-flex items-center justify-center text-gray-600 text-xs"
+        class="inline-flex items-center justify-center text-gray-800 text-xs"
       >
         <svg
           aria-hidden="true"
@@ -129,10 +117,6 @@ exports[`<AvatarGroup /> should pass the size to all avatars 1`] = `
           />
         </svg>
       </span>
-      <div
-        aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center -bottom-px -right-px"
-      />
     </span>
   </div>
 </DocumentFragment>
@@ -146,12 +130,12 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
     role="group"
   >
     <span
-      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-8 w-8 ring-2 ring-white"
+      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-8 w-8 ring-2 ring-white-900"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="avatar icon"
-        class="inline-flex items-center justify-center text-gray-600 text-base"
+        class="inline-flex items-center justify-center text-gray-800 text-base"
       >
         <svg
           aria-hidden="true"
@@ -169,18 +153,14 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
           />
         </svg>
       </span>
-      <div
-        aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center -bottom-px -right-px"
-      />
     </span>
     <span
-      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-8 w-8 ring-2 ring-white"
+      class="relative inline-flex items-center justify-center shrink-0 bg-gray-100 rounded-full h-8 w-8 ring-2 ring-white-900"
       data-testid="testid-avatar_children"
     >
       <span
         aria-label="avatar icon"
-        class="inline-flex items-center justify-center text-gray-600 text-base"
+        class="inline-flex items-center justify-center text-gray-800 text-base"
       >
         <svg
           aria-hidden="true"
@@ -198,10 +178,6 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
           />
         </svg>
       </span>
-      <div
-        aria-label="avatar status indicator"
-        class="absolute flex items-center justify-center -bottom-px -right-px"
-      />
     </span>
   </div>
 </DocumentFragment>

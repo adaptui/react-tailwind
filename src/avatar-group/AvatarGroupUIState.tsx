@@ -7,7 +7,7 @@ export function useAvatarGroupUIState(
     squared = false,
     size = "xl",
     showRing = true,
-    ringColor = "ring-white",
+    ringColor = "ring-white-900",
     max,
   } = props;
 

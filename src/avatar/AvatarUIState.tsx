@@ -15,7 +15,7 @@ export function useAvatarUIState(props: AvatarUIStateProps): AvatarUIState {
     statusIndicators = AvatarDefaultStatusIndicators,
     name = null,
     status = "none",
-    parentsBackground = ["bg-white", "ring-white"],
+    parentsBackground = ["bg-white-900", "ring-white-900"],
     getInitialsFromName = getInitialsFromNameDefault,
     showRing = false,
     ringColor = "ring-white",

@@ -17,7 +17,7 @@ export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
       imageProps,
       statusIndicatorProps,
     } = useAvatarProps(props);
-    const { showFallback, initials } = uiProps;
+    const { showFallback, initials, status } = uiProps;
 
     return (
       <AvatarWrapper ref={ref} {...wrapperProps}>
@@ -30,7 +30,9 @@ export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
         ) : (
           <AvatarImage {...imageProps} />
         )}
-        <AvatarStatusIndicator {...statusIndicatorProps} />
+        {status !== "none" ? (
+          <AvatarStatusIndicator {...statusIndicatorProps} />
+        ) : null}
       </AvatarWrapper>
     );
   },
