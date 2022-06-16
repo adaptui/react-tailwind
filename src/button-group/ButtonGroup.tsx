@@ -1,4 +1,4 @@
-import { useWrapElement } from "ariakit-utils";
+import { cx, useWrapElement } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -9,7 +9,6 @@ import { As, Props } from "ariakit-utils/types";
 import { BoxOptions, useBox } from "../box";
 import { ButtonProps } from "../button";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
 
 import { ButtonGroupContextProvider } from "./__utils";
 

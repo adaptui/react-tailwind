@@ -15,6 +15,7 @@ export const useCheckboxInput = createHook<CheckboxInputOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     isIndeterminate,
     isUnchecked,

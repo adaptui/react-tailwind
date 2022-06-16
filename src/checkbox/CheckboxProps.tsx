@@ -35,6 +35,7 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     setValue,
     inputValue,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -54,6 +55,7 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     state: finalState,
     inputValue,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -116,9 +118,10 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     () => ({
       ...uiProps,
       ...componentProps.textProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.label, uiProps),
     }),
-    [uiProps, componentProps.textProps],
+    [uiProps, restProps.disabled, componentProps.textProps],
   );
 
   const descriptionProps: CheckboxDescriptionProps = useMemo(

@@ -1,10 +1,16 @@
 export const useCheckboxGroupUIState = (
   props: CheckboxGroupUIStateProps,
 ): CheckboxGroupUIState => {
-  const { size = "md", stack = "vertical", maxVisibleItems = null } = props;
+  const {
+    size = "md",
+    themeColor = "base",
+    stack = "vertical",
+    maxVisibleItems = null,
+  } = props;
 
   return {
     size,
+    themeColor,
     stack,
     maxVisibleItems,
   };
@@ -12,11 +18,18 @@ export const useCheckboxGroupUIState = (
 
 export type CheckboxGroupUIState = {
   /**
-   * How large should the button be?
+   * How large should the checkbox be?
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"checkbox", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"checkbox", "size">;
+
+  /**
+   * How the checkbox should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"checkbox", "themeColor">;
 
   /**
    * Controls how the group of checkboxs are arranged
@@ -34,5 +47,8 @@ export type CheckboxGroupUIState = {
 };
 
 export type CheckboxGroupUIStateProps = Partial<
-  Pick<CheckboxGroupUIState, "size" | "stack" | "maxVisibleItems">
+  Pick<
+    CheckboxGroupUIState,
+    "size" | "stack" | "maxVisibleItems" | "themeColor"
+  >
 >;

@@ -1,3 +1,4 @@
+import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -7,7 +8,6 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
 
 import { CheckboxUIProps } from "./CheckboxProps";
 
@@ -15,6 +15,7 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     isIndeterminate,
     isUnchecked,
@@ -27,33 +28,35 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
   }) => {
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.icon.common,
-      size ? theme.icon.size[size] : "",
-      isUnchecked === true
+      theme.icon,
+      size ? theme.size[size].icon : "",
+      themeColor && isUnchecked === true
         ? cx(
-            theme.icon.unChecked.default,
-            theme.icon.unChecked.hover,
-            theme.icon.unChecked.active,
-            theme.icon.unChecked.focus,
-            theme.icon.unChecked.disabled,
+            theme.themeColor[themeColor].default.icon.unChecked,
+            theme.themeColor[themeColor].hover.icon.unChecked,
+            theme.themeColor[themeColor].active.icon.unChecked,
+            theme.themeColor[themeColor].focus.icon.unChecked,
+            theme.themeColor[themeColor].disabled.icon.unChecked,
           )
         : "",
-      isChecked === true
+      themeColor && isChecked === true
         ? cx(
-            theme.icon.checked.default,
-            theme.icon.checked.hover,
-            theme.icon.checked.active,
-            theme.icon.checked.focus,
-            theme.icon.checked.disabled,
+            theme.themeColor[themeColor].default.icon.checked,
+            theme.themeColor[themeColor].hover.icon.checked,
+            theme.themeColor[themeColor].active.icon.checked,
+            theme.themeColor[themeColor].focus.icon.checked,
+            theme.themeColor[themeColor].disabled.icon.checked,
           )
         : "",
-      isIndeterminate === true
+      themeColor && isIndeterminate === true
         ? cx(
-            theme.icon.checked.default,
-            theme.icon.indeterminate.hover,
-            theme.icon.indeterminate.active,
-            !label || description ? theme.icon.indeterminate.focus : "",
-            theme.icon.indeterminate.disabled,
+            theme.themeColor[themeColor].default.icon.indeterminate,
+            theme.themeColor[themeColor].hover.icon.indeterminate,
+            theme.themeColor[themeColor].active.icon.indeterminate,
+            !label || description
+              ? theme.themeColor[themeColor].focus.icon.indeterminate
+              : "",
+            theme.themeColor[themeColor].disabled.icon.indeterminate,
           )
         : "",
       props.className,

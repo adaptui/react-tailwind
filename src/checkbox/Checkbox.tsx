@@ -1,4 +1,5 @@
 import * as React from "react";
+import { cx } from "ariakit-utils";
 
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";
@@ -23,7 +24,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <CheckboxLabel {...labelProps}>
         <CheckboxInput ref={ref} {...inputProps} />
         <CheckboxIcon {...iconProps} />
-        <div>
+        <div className={cx(label && !description ? "flex items-center" : "")}>
           {label ? <CheckboxText {...textProps} /> : null}
           {label && description ? (
             <CheckboxDescription {...descriptionProps} />

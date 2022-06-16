@@ -13,6 +13,7 @@ export const useCheckboxUIState = (
     state,
     inputValue,
     size = "md",
+    themeColor = "base",
     icon = CheckboxDefaultIcon,
     label,
     description,
@@ -30,6 +31,7 @@ export const useCheckboxUIState = (
     isIndeterminate,
     isUnchecked,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -55,11 +57,18 @@ export type CheckboxUIState = {
   isUnchecked: boolean;
 
   /**
-   * How large should the button be?
+   * How large should the checkbox be?
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"checkbox", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"checkbox", "size">;
+
+  /**
+   * How the checkbox should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"checkbox", "themeColor">;
 
   /**
    * Provide custom icons as a replacement for the default ones.
@@ -80,7 +89,10 @@ export type CheckboxUIState = {
 };
 
 export type CheckboxUIStateProps = Partial<
-  Pick<CheckboxUIState, "icon" | "label" | "description" | "size">
+  Pick<
+    CheckboxUIState,
+    "icon" | "label" | "description" | "size" | "themeColor"
+  >
 > & {
   state?: CheckboxState;
   inputValue?: CheckboxInputProps["value"];

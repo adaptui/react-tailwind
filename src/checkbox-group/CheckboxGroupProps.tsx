@@ -23,6 +23,7 @@ export const useCheckboxGroupProps = ({
   value,
   setValue,
   size,
+  themeColor,
   stack,
   maxVisibleItems,
   children,
@@ -33,7 +34,12 @@ export const useCheckboxGroupProps = ({
     value,
     setValue,
   });
-  const uiState = useCheckboxGroupUIState({ size, stack, maxVisibleItems });
+  const uiState = useCheckboxGroupUIState({
+    size,
+    themeColor,
+    stack,
+    maxVisibleItems,
+  });
   const uiProps: CheckboxGroupUIProps = {
     state: withState ? state : undefined,
     ...uiState,
