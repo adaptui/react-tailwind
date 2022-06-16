@@ -9,7 +9,17 @@ export const MeterCustom: React.FC<MeterCustomProps> = props => {
 
   return (
     <div className="w-80">
-      <Meter value={value} max={100} {...props}>
+      <Meter
+        value={value}
+        max={100}
+        label="Charging..."
+        hint={props =>
+          props.state?.percent === null
+            ? undefined
+            : `${Math.ceil(props.state?.percent)}%`
+        }
+        {...props}
+      >
         <MeterTrack className="bg-red-300" />
         <MeterBar className="bg-red-800" />
       </Meter>
@@ -26,7 +36,7 @@ const useMeterState = (initialValue: number = 0) => {
   React.useEffect(() => {
     const clearId = setInterval(() => {
       setValue(prevValue => {
-        return prevValue + 50;
+        return prevValue + 5;
       });
     }, 500);
 

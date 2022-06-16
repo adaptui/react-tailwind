@@ -13,7 +13,16 @@ import { tcm } from "../utils";
 import { MeterUIProps } from "./MeterProps";
 
 export const useMeterWrapper = createHook<MeterWrapperOptions>(
-  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    intervals,
+    flatBorders,
+    label,
+    hint,
+    ...props
+  }) => {
     const theme = useTheme("meter");
     const className = tcm(theme.wrapper, props.className);
 

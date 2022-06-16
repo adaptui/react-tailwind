@@ -12,11 +12,21 @@ import { cx } from "../utils";
 import { MeterUIProps } from "./MeterProps";
 
 export const useMeterHint = createHook<MeterHintOptions>(
-  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    intervals,
+    flatBorders,
+    label,
+    hint,
+    ...props
+  }) => {
     const theme = useTheme("meter");
     const className = cx(
-      theme.hint.common,
-      size ? theme.hint.size[size] : "",
+      theme.hint,
+      size ? theme.size[size]?.hint : "",
+      themeColor ? theme.themeColor[themeColor]?.hint : "",
       props.className,
     );
 

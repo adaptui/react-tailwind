@@ -9,7 +9,7 @@ export const CircularProgressBasic: React.FC<
 > = props => {
   return (
     <div className="flex flex-col items-center">
-      <CircularProgress value={50} {...props} />
+      <CircularProgress {...props} />
     </div>
   );
 };
