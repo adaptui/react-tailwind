@@ -160,7 +160,7 @@
     "jest-axe": "6.0.0",
     "jest-environment-jsdom": "28.1.1",
     "lint-staged": "13.0.1",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "outdent": "0.8.0",
     "patch-package": "6.4.7",
     "pinst": "3.0.0",
