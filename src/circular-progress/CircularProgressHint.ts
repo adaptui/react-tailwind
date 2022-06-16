@@ -12,11 +12,12 @@ import { cx } from "../utils";
 import { CircularProgressUIProps } from "./CircularProgressProps";
 
 export const useCircularProgressHint = createHook<CircularProgressHintOptions>(
-  ({ state, size, hint, ...props }) => {
+  ({ state, size, themeColor, hint, ...props }) => {
     const theme = useTheme("circularProgress");
     const className = cx(
-      theme.hint.common,
-      size ? theme.hint.size[size] : "",
+      theme.hint,
+      size ? theme.size[size].hint : "",
+      themeColor ? theme.themeColor[themeColor].hint : "",
       props.className,
     );
 

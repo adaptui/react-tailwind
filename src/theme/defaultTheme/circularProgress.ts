@@ -1,37 +1,43 @@
 export const circularProgress = {
   wrapper: "relative inline-flex w-fit",
-  hint: {
-    common:
-      "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-medium text-gray-900",
-    size: {
-      sm: "text-xs",
-      md: "text-sm",
-      lg: "text-base",
-      xl: "text-xl",
+  size: {
+    sm: {
+      barWrapper: { base: "w-3.5 h-3.5", hint: " w-11 h-11" },
+      hint: "text-xs font-medium",
+    },
+    md: {
+      barWrapper: { base: "w-4 h-4", hint: " w-14 h-14" },
+      hint: "text-sm font-medium",
+    },
+    lg: {
+      barWrapper: { base: "w-5 h-5", hint: " w-16 h-16" },
+      hint: "text-base font-medium",
+    },
+    xl: {
+      barWrapper: { base: "w-7 h-7", hint: " w-20 h-20" },
+      hint: "text-xl font-medium",
+    },
+  },
+  themeColor: {
+    base: {
+      bar: "text-gray-900",
+      track: "text-gray-100",
+      hint: "text-gray-900",
+    },
+    primary: {
+      bar: "text-blue-600",
+      track: "text-blue-100",
+      hint: "text-gray-900",
     },
   },
   barWrapper: {
-    common: {
-      size: {
-        sm: "w-3.5 h-3.5",
-        md: "w-4 h-4",
-        lg: "w-5 h-5",
-        xl: "w-7 h-7",
-      },
-    },
-    hint: {
-      size: {
-        sm: "w-11 h-11",
-        md: "w-14 h-14",
-        lg: "w-16 h-16",
-        xl: "w-20 h-20",
-      },
-    },
+    base: "",
     indeterminate: "animate-spin",
   },
-  track: "text-gray-300",
+  track: "",
   bar: {
-    common: "text-gray-700 transition-all",
+    base: "transition-all",
     indeterminate: "animate-circularProgress",
   },
+  hint: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ",
 };

@@ -5,9 +5,9 @@ import { CircularProgressUIProps } from "./CircularProgressProps";
 export const useCircularProgressUIState = (
   props: CircularProgressUIStateProps,
 ): CircularProgressUIState => {
-  const { size = "md", hint } = props;
+  const { size = "md", themeColor = "base", hint } = props;
 
-  return { size, hint };
+  return { size, themeColor, hint };
 };
 
 export type CircularProgressUIState = {
@@ -16,12 +16,14 @@ export type CircularProgressUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<
-    "circularProgress",
-    "barWrapper",
-    "common",
-    "size"
-  >;
+  size: keyof AdaptUI.GetThemeValue<"circularProgress", "size">;
+
+  /**
+   * How the circular-progress should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"circularProgress", "themeColor">;
 
   /**
    * Hint for the CircularProgress.
@@ -30,5 +32,5 @@ export type CircularProgressUIState = {
 };
 
 export type CircularProgressUIStateProps = Partial<
-  Pick<CircularProgressUIState, "size" | "hint">
+  Pick<CircularProgressUIState, "size" | "hint" | "themeColor">
 > & {};

@@ -12,7 +12,7 @@ import { cx } from "../utils";
 import { CircularProgressUIProps } from "./CircularProgressProps";
 
 export const useCircularProgressBar = createHook<CircularProgressBarOptions>(
-  ({ state, size, hint, ...props }) => {
+  ({ state, size, themeColor, hint, ...props }) => {
     const determinant = state?.isIndeterminate
       ? undefined
       : (state?.percent ?? 0) * 2.7;
@@ -21,8 +21,9 @@ export const useCircularProgressBar = createHook<CircularProgressBarOptions>(
 
     const theme = useTheme("circularProgress");
     const className = cx(
-      theme.bar.common,
+      theme.bar.base,
       state?.isIndeterminate ? theme.bar.indeterminate : "",
+      themeColor ? theme.themeColor[themeColor].bar : "",
       props.className,
     );
 
