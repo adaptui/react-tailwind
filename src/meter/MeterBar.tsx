@@ -12,12 +12,26 @@ import { cx } from "../utils";
 import { MeterUIProps } from "./MeterProps";
 
 export const useMeterBar = createHook<MeterBarOptions>(
-  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
-    console.log("%cstate", "color: #408059", state);
+  ({
+    state,
+    size,
+    themeColor,
+    intervals,
+    flatBorders,
+    label,
+    hint,
+    ...props
+  }) => {
     const theme = useTheme("meter");
     const className = cx(
-      theme.bar.common,
-      flatBorders ? theme.bar.flatBorders : "",
+      theme.bar,
+      size
+        ? cx(
+            theme.size[size]?.bar.base,
+            !flatBorders ? theme.size[size]?.bar.roundedBorders : "",
+          )
+        : "",
+      themeColor ? theme.themeColor[themeColor]?.bar : "",
       props.className,
     );
     const style = { width: `${state?.percent}%`, ...props.style };

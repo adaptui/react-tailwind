@@ -31,19 +31,19 @@ export const progress = {
     base: {
       label: "text-gray-900",
       hint: "text-gray-600",
-      bar: "bg-gray-900",
       track: "bg-gray-100",
+      bar: "bg-gray-900",
     },
     primary: {
       label: "text-gray-900",
       hint: "text-gray-600",
-      bar: "bg-blue-600",
       track: "bg-blue-100",
+      bar: "bg-blue-600",
     },
   },
-  label: "flex-1",
+  label: "flex-1 text-left",
   hint: "",
-  track: "overflow-hidden ",
+  track: "relative overflow-hidden ",
   bar: {
     base: "transition-all",
     indeterminate: "min-w-[50%] animate-progress",

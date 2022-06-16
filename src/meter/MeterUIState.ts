@@ -3,10 +3,18 @@ import { RenderProp } from "../utils";
 import { MeterUIProps } from "./MeterProps";
 
 export const useMeterUIState = (props: MeterUIStateProps): MeterUIState => {
-  const { size = "md", intervals = 1, flatBorders = true, label, hint } = props;
+  const {
+    size = "md",
+    themeColor = "base",
+    intervals = 1,
+    flatBorders = true,
+    label,
+    hint,
+  } = props;
 
   return {
     size,
+    themeColor,
     intervals,
     flatBorders: intervals === 1 ? false : flatBorders,
     label,
@@ -20,7 +28,14 @@ export type MeterUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"meter", "track", "size">;
+  size: keyof AdaptUI.GetThemeValue<"meter", "size">;
+
+  /**
+   * How the progress should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"meter", "themeColor">;
 
   /**
    * No of intervals for the meter.
@@ -46,5 +61,8 @@ export type MeterUIState = {
 };
 
 export type MeterUIStateProps = Partial<
-  Pick<MeterUIState, "size" | "intervals" | "flatBorders" | "label" | "hint">
+  Pick<
+    MeterUIState,
+    "size" | "intervals" | "flatBorders" | "label" | "hint" | "themeColor"
+  >
 > & {};

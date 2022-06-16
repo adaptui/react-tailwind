@@ -7,7 +7,7 @@ export type ProgressBasicProps = ProgressProps & {};
 export const ProgressBasic: React.FC<ProgressBasicProps> = props => {
   return (
     <div className="w-80">
-      <Progress value={50} {...props} />
+      <Progress {...props} />
     </div>
   );
 };

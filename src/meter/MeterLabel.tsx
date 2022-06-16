@@ -12,11 +12,21 @@ import { tcm } from "../utils";
 import { MeterUIProps } from "./MeterProps";
 
 export const useMeterLabel = createHook<MeterLabelOptions>(
-  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    intervals,
+    flatBorders,
+    label,
+    hint,
+    ...props
+  }) => {
     const theme = useTheme("meter");
     const className = tcm(
-      theme.label.common,
-      size ? theme.label.size[size] : "",
+      theme.label,
+      size ? theme.size[size]?.label : "",
+      themeColor ? theme.themeColor[themeColor]?.label : "",
       props.className,
     );
 

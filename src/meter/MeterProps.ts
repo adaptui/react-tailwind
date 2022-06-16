@@ -30,6 +30,7 @@ export function useMeterProps(props: MeterProps): MeterPropsReturn {
     min,
     max,
     size,
+    themeColor,
     intervals,
     flatBorders,
     label,
@@ -44,6 +45,7 @@ export function useMeterProps(props: MeterProps): MeterPropsReturn {
   });
   const uiState = useMeterUIState({
     size,
+    themeColor,
     flatBorders,
     intervals,
     label,
@@ -98,7 +100,7 @@ export function useMeterProps(props: MeterProps): MeterPropsReturn {
 
   const hintProps: MeterHintProps = {
     ...uiProps,
-    ...componentProps.trackProps,
+    ...componentProps.hintProps,
     children: runIfFn(_hint, uiProps),
   };
 

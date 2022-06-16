@@ -12,10 +12,20 @@ import { cx } from "../utils";
 import { MeterUIProps } from "./MeterProps";
 
 export const useMeterBarWrapper = createHook<MeterBarWrapperOptions>(
-  ({ state, size, intervals, flatBorders, label, hint, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    intervals,
+    flatBorders,
+    label,
+    hint,
+    ...props
+  }) => {
     const theme = useTheme("meter");
     const className = cx(
-      theme.barWrapper.common,
+      theme.barWrapper.base,
+      size ? theme.size[size]?.barWrapper : "",
       flatBorders ? theme.barWrapper.flatBorders : "",
       props.className,
     );
