@@ -16,7 +16,7 @@ export const useAvatarGroupWrapper = createHook<AvatarGroupWrapperOptions>(
   ({ size, squared, showRing, ringColor, max, ...props }) => {
     const theme = useTheme("avatar");
     const className = cx(
-      theme.group.common,
+      theme.group.base,
       size ? theme.group.size[size] : "",
       props.className,
     );

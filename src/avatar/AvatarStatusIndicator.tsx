@@ -27,10 +27,11 @@ export const useAvatarStatusIndicator =
       statusIndicators,
       showRing,
       ringColor,
+      max,
       ...props
     }) => {
       const theme = useTheme("avatar");
-      const className = cx(theme.statusIndicator.common, props.className);
+      const className = cx(theme.statusIndicator.base, props.className);
 
       props = { "aria-label": "avatar status indicator", ...props, className };
       props = useBox(props);

@@ -31,7 +31,7 @@ export const useAvatarWrapper = createHook<AvatarWrapperOptions>(
   }) => {
     const theme = useTheme("avatar");
     const className = cx(
-      theme.wrapper.common,
+      theme.wrapper.base,
       !squared ? theme.wrapper.circular : "",
       size ? theme.wrapper.size[size] : "",
       size && showRing ? theme.wrapper.border.size[size] : "",

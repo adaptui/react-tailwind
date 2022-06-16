@@ -31,7 +31,7 @@ export const useAvatarInitials = createHook<AvatarInitialsOptions>(
   }) => {
     const theme = useTheme("avatar");
     const className = cx(
-      theme.initials.common,
+      theme.initials.base,
       size ? theme.initials.size[size] : "",
       props.className,
     );

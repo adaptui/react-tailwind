@@ -31,7 +31,7 @@ export const useAvatarIcon = createHook<AvatarIconOptions>(
   }) => {
     const theme = useTheme("avatar");
     const className = cx(
-      theme.icon.common,
+      theme.icon.base,
       size ? theme.icon.size[size] : "",
       props.className,
     );

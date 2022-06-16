@@ -18,7 +18,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("avatar", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    ignore: ["ref", "wrapElement", "as"],
   }),
 } as Meta;
 
@@ -38,13 +38,13 @@ export const SquaredMaxCount: Story = {
 
 export const ParentBackgroundMatch: Story = {
   args: {
-    ringColor: "ring-red-200",
+    ringColor: "ring-red-300",
   },
 
   decorators: [
     Story => {
       return (
-        <div className="flex h-80 w-80 items-center justify-center bg-red-200">
+        <div className="flex h-80 w-80 items-center justify-center bg-red-300">
           <Story />
         </div>
       );

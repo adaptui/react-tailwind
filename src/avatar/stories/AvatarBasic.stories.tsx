@@ -19,7 +19,23 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("avatar", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    ignore: [
+      "ref",
+      "wrapElement",
+      "as",
+      "icon",
+      "imageStatus",
+      "showFallback",
+      "statusIndicators",
+      "parentsBackground",
+      "getInitialsFromName",
+      "max",
+      "srcSet",
+      "sizes",
+      "ignoreFallback",
+      "crossOrigin",
+      "loading",
+    ],
   }),
 } as Meta;
 

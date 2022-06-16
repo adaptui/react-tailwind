@@ -130,13 +130,13 @@ export const OrgSquaredStatus: Story = {
 export const ParentBackgroundMatch: Story = {
   args: {
     status: "sleep",
-    parentsBackground: ["bg-green-200", "ring-green-200"],
+    parentsBackground: ["bg-green-300", "ring-green-300"],
   },
 
   decorators: [
     Story => {
       return (
-        <div className="flex h-80 w-80 items-center justify-center bg-green-200">
+        <div className="flex h-80 w-80 items-center justify-center bg-green-300">
           <Story />
         </div>
       );

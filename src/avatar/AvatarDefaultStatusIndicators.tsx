@@ -18,7 +18,7 @@ export const AvatarDefaultStatusIndicators = (props: AvatarUIProps) => {
 
   const theme = useTheme("avatar");
   const className = tcm(
-    theme.statusIndicators[status].common,
+    theme.statusIndicators[status].base,
     theme.statusIndicators[status].size[size],
     ...parentsBackground,
   );
@@ -38,13 +38,13 @@ export const StatusIndicators: React.FC<StatusIndicatorsProps> = props => {
   if (status === "away") return <AwayStatusIcon className={className} />;
 
   if (status === "typing")
-    return ["xs", "sm", "md"].includes(size) ? (
+    return ["xs", "sm", "md", "lg"].includes(size) ? (
       <TypingSmallStatusIcon className={className} />
     ) : (
       <TypingLargeStatusIcon className={className} />
     );
 
-  if (status === "org") return <TimelessIcon />;
+  if (status === "org") return <TimelessIcon className={className} />;
 
   return null;
 };

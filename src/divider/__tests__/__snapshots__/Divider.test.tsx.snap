@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider should render properly 1`] = `
+<DocumentFragment>
+  <div
+    class="w-80"
+  >
+    <hr
+      aria-orientation="horizontal"
+      class="border-gray-300 w-full"
+      role="separator"
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -31,7 +31,7 @@ export const useAvatarImage = createHook<AvatarImageOptions>(
   }) => {
     const theme = useTheme("avatar");
     const className = cx(
-      theme.image.common,
+      theme.image.base,
       !squared ? theme.image.circular : "",
       props.className,
     );
