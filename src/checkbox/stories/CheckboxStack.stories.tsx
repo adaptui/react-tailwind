@@ -43,6 +43,7 @@ export default {
         "label",
         "description",
         "themeColor",
+        "size",
       ],
     }),
   },

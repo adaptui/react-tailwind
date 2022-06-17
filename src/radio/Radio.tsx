@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cx } from "ariakit-utils";
+
+import { cx } from "../utils";
 
 import { RadioDescription } from "./RadioDescription";
 import { RadioIcon } from "./RadioIcon";

@@ -9,12 +9,14 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { SwitchInputOptions } from "./SwitchInput";
 import { SwitchUIProps } from "./SwitchProps";
 
 export const useSwitchText = createHook<SwitchTextOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     icon,
     label,
@@ -24,8 +26,18 @@ export const useSwitchText = createHook<SwitchTextOptions>(
   }) => {
     const theme = useTheme("switch");
     const className = cx(
-      theme.text.common,
-      size ? theme.text.size[size] : "",
+      theme.text,
+      size ? theme.size[size].text : "",
+      themeColor
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.text,
+              theme.themeColor[themeColor].hover.text,
+              theme.themeColor[themeColor].active.text,
+              theme.themeColor[themeColor].focus.text,
+            )
+          : theme.themeColor[themeColor].disabled.text
+        : "",
       props.className,
     );
 
@@ -43,6 +55,7 @@ export const SwitchText = createComponent<SwitchTextOptions>(props => {
 });
 
 export type SwitchTextOptions<T extends As = "div"> = BoxOptions<T> &
+  Pick<SwitchInputOptions, "disabled"> &
   Partial<SwitchUIProps> & {};
 
 export type SwitchTextProps<T extends As = "div"> = Props<SwitchTextOptions<T>>;

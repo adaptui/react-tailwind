@@ -12,7 +12,7 @@ export const checkbox = {
     sm: {
       label: "min-h-[26px] px-2 py-[5.5px] rounded-lg",
       icon: "w-3.5 h-3.5 text-[10px] border-[1.5px] rounded",
-      text: "text-cxs font-medium ml-1.5 ",
+      text: "text-cxs font-medium ml-1.5",
       description: "text-paragraph-cxs font-normals mt-1 ml-1.5",
     },
     md: {

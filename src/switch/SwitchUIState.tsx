@@ -11,6 +11,7 @@ export const useSwitchUIState = (props: SwitchUIStateProps): SwitchUIState => {
     state,
     inputValue,
     size = "md",
+    themeColor = "base",
     icon = SwitchDefaultIcon,
     label,
     description,
@@ -24,6 +25,7 @@ export const useSwitchUIState = (props: SwitchUIStateProps): SwitchUIState => {
   return {
     isChecked,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -41,7 +43,14 @@ export type SwitchUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"switch", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"switch", "size">;
+
+  /**
+   * How the switch should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"switch", "themeColor">;
 
   /**
    * Provide custom icons as a replacement for the default ones.
@@ -62,7 +71,7 @@ export type SwitchUIState = {
 };
 
 export type SwitchUIStateProps = Partial<
-  Pick<SwitchUIState, "icon" | "label" | "description" | "size">
+  Pick<SwitchUIState, "icon" | "label" | "description" | "size" | "themeColor">
 > & {
   state?: CheckboxState;
   inputValue?: SwitchInputProps["value"];

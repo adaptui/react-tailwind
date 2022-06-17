@@ -31,6 +31,7 @@ export function useSwitchProps(props: SwitchProps): SwitchPropsReturn {
     setValue,
     inputValue,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -49,6 +50,7 @@ export function useSwitchProps(props: SwitchProps): SwitchPropsReturn {
     state: finalState,
     inputValue,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -102,27 +104,30 @@ export function useSwitchProps(props: SwitchProps): SwitchPropsReturn {
     () => ({
       ...uiProps,
       ...componentProps.iconProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.icon, uiProps),
     }),
-    [uiProps, componentProps.iconProps],
+    [uiProps, restProps.disabled, componentProps.iconProps],
   );
 
   const textProps: SwitchTextProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.textProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.label, uiProps),
     }),
-    [uiProps, componentProps.textProps],
+    [uiProps, restProps.disabled, componentProps.textProps],
   );
 
   const descriptionProps: SwitchDescriptionProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.descriptionProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.description, uiProps),
     }),
-    [uiProps, componentProps.descriptionProps],
+    [uiProps, restProps.disabled, componentProps.descriptionProps],
   );
 
   const compoundedProps = useMemo(

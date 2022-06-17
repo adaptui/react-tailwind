@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { cx } from "../utils";
+
 import { SwitchDescription } from "./SwitchDescription";
 import { SwitchIcon } from "./SwitchIcon";
 import { SwitchInput } from "./SwitchInput";
@@ -24,7 +26,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         <SwitchInput as="button" ref={ref} {...inputProps} />
         {label && !description ? <SwitchText {...textProps} /> : null}
         {label && description ? (
-          <div>
+          <div className={cx(label && !description ? "flex items-center" : "")}>
             <SwitchText {...textProps} />
             <SwitchDescription {...descriptionProps} />
           </div>

@@ -9,12 +9,14 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { SwitchInputOptions } from "./SwitchInput";
 import { SwitchUIProps } from "./SwitchProps";
 
 export const useSwitchDescription = createHook<SwitchDescriptionOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     icon,
     label,
@@ -24,8 +26,18 @@ export const useSwitchDescription = createHook<SwitchDescriptionOptions>(
   }) => {
     const theme = useTheme("switch");
     const className = cx(
-      theme.description.common,
-      size ? theme.description.size[size] : "",
+      theme.description,
+      size ? theme.size[size].description : "",
+      themeColor
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.description,
+              theme.themeColor[themeColor].hover.description,
+              theme.themeColor[themeColor].active.description,
+              theme.themeColor[themeColor].focus.description,
+            )
+          : theme.themeColor[themeColor].disabled.description
+        : "",
       props.className,
     );
 
@@ -45,7 +57,8 @@ export const SwitchDescription = createComponent<SwitchDescriptionOptions>(
 );
 
 export type SwitchDescriptionOptions<T extends As = "div"> = BoxOptions<T> &
-  Partial<SwitchUIProps> & {};
+  Partial<SwitchUIProps> &
+  Pick<SwitchInputOptions, "disabled"> & {};
 
 export type SwitchDescriptionProps<T extends As = "div"> = Props<
   SwitchDescriptionOptions<T>
