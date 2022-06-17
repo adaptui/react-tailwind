@@ -1,5 +1,4 @@
 import { GroupOptions, useGroup } from "ariakit";
-import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -8,6 +7,7 @@ import {
 import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { CheckboxGroupUIProps } from "./CheckboxGroupProps";
 

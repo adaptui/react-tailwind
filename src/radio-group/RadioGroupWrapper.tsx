@@ -1,5 +1,4 @@
 import { RadioGroupOptions, useRadioGroup } from "ariakit";
-import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -8,11 +7,12 @@ import {
 import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { RadioGroupUIProps } from "./RadioGroupProps";
 
 export const useRadioGroupWrapper = createHook<RadioGroupWrapperOptions>(
-  ({ state, size, themeColor, stack, maxVisibleItems, prefix, ...props }) => {
+  ({ state, size, stack, maxVisibleItems, prefix, ...props }) => {
     const theme = useTheme("radio");
     const className = cx(
       stack ? theme.group[stack].common : "",
