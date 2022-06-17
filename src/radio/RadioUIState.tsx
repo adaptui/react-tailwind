@@ -11,6 +11,7 @@ export const useRadioUIState = (props: RadioUIStateProps): RadioUIState => {
     state,
     inputValue,
     size = "md",
+    themeColor = "base",
     icon = RadioDefaultIcon,
     label,
     description,
@@ -20,6 +21,7 @@ export const useRadioUIState = (props: RadioUIStateProps): RadioUIState => {
   return {
     isChecked,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -32,7 +34,14 @@ export type RadioUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"radio", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"radio", "size">;
+
+  /**
+   * How the radio should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"radio", "themeColor">;
 
   /**
    * If true, Radio is checked.
@@ -58,7 +67,7 @@ export type RadioUIState = {
 };
 
 export type RadioUIStateProps = Partial<
-  Pick<RadioUIState, "size" | "icon" | "label" | "description">
+  Pick<RadioUIState, "size" | "icon" | "label" | "description" | "themeColor">
 > & {
   state?: RadioState;
   inputValue?: RadioInputProps["value"];

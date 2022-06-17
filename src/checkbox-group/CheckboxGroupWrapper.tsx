@@ -15,8 +15,8 @@ export const useCheckboxGroupWrapper = createHook<CheckboxGroupWrapperOptions>(
   ({ state, size, themeColor, stack, maxVisibleItems, prefix, ...props }) => {
     const theme = useTheme("checkbox");
     const className = cx(
-      stack ? theme.group[stack].common : "",
-      stack && size ? theme.group[stack].size[size] : "",
+      stack ? theme.group[stack] : "",
+      stack && size ? theme.group.size[size]?.[stack] : "",
       props.className,
     );
 

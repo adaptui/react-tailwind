@@ -4,7 +4,7 @@ import { Radio, RadioGroup, RadioGroupProps } from "../../index";
 
 export const RadioGroupDescription: React.FC<RadioGroupProps> = props => {
   return (
-    <RadioGroup aria-label="fruits" className="w-[70rem]" {...props}>
+    <RadioGroup aria-label="fruits" className="w-80" {...props}>
       <Radio
         inputValue="apple"
         label="Apple"

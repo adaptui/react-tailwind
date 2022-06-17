@@ -9,24 +9,37 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { RadioInputOptions } from "./RadioInput";
 import { RadioUIProps } from "./RadioProps";
 
 export const useRadioDescription = createHook<RadioDescriptionOptions>(
   ({
     state,
-    isChecked,
     size,
+    themeColor,
+    isChecked,
     icon,
     label,
     description,
     stack,
     maxVisibleItems,
+    disabled,
     ...props
   }) => {
     const theme = useTheme("radio");
     const className = cx(
-      theme.description.common,
-      size ? theme.description.size[size] : "",
+      theme.description,
+      size ? theme.size[size].description : "",
+      themeColor
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.description,
+              theme.themeColor[themeColor].hover.description,
+              theme.themeColor[themeColor].active.description,
+              theme.themeColor[themeColor].focus.description,
+            )
+          : theme.themeColor[themeColor].disabled.description
+        : "",
       props.className,
     );
 
@@ -46,7 +59,8 @@ export const RadioDescription = createComponent<RadioDescriptionOptions>(
 );
 
 export type RadioDescriptionOptions<T extends As = "div"> = BoxOptions<T> &
-  Partial<RadioUIProps> & {};
+  Partial<RadioUIProps> &
+  Pick<RadioInputOptions, "disabled"> & {};
 
 export type RadioDescriptionProps<T extends As = "div"> = Props<
   RadioDescriptionOptions<T>

@@ -9,40 +9,46 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { RadioInputOptions } from "./RadioInput";
 import { RadioUIProps } from "./RadioProps";
 
 export const useRadioIcon = createHook<RadioIconOptions>(
   ({
     state,
-    isChecked,
     size,
+    themeColor,
+    isChecked,
     icon,
     label,
     description,
     stack,
     maxVisibleItems,
+    disabled,
     ...props
   }) => {
     const theme = useTheme("radio");
     const className = cx(
-      theme.icon.common,
-      description ? theme.icon.description : "",
-      size ? theme.icon.size[size] : "",
-      isChecked
-        ? cx(
-            theme.icon.checked.default,
-            theme.icon.checked.hover,
-            theme.icon.checked.active,
-            theme.icon.checked.focus,
-            theme.icon.checked.disabled,
-          )
-        : cx(
-            theme.icon.unChecked.default,
-            theme.icon.unChecked.hover,
-            theme.icon.unChecked.active,
-            theme.icon.unChecked.focus,
-            theme.icon.unChecked.disabled,
-          ),
+      theme.icon,
+      size ? theme.size[size].icon : "",
+      themeColor
+        ? isChecked === true
+          ? !disabled
+            ? cx(
+                theme.themeColor[themeColor].default.icon.checked,
+                theme.themeColor[themeColor].hover.icon.checked,
+                theme.themeColor[themeColor].active.icon.checked,
+                theme.themeColor[themeColor].focus.icon.checked,
+              )
+            : theme.themeColor[themeColor].disabled.icon.checked
+          : !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.icon.unChecked,
+              theme.themeColor[themeColor].hover.icon.unChecked,
+              theme.themeColor[themeColor].active.icon.unChecked,
+              theme.themeColor[themeColor].focus.icon.unChecked,
+            )
+          : theme.themeColor[themeColor].disabled.icon.unChecked
+        : "",
       props.className,
     );
 
@@ -60,6 +66,7 @@ export const RadioIcon = createComponent<RadioIconOptions>(props => {
 });
 
 export type RadioIconOptions<T extends As = "span"> = BoxOptions<T> &
-  Partial<RadioUIProps> & {};
+  Partial<RadioUIProps> &
+  Pick<RadioInputOptions, "disabled"> & {};
 
 export type RadioIconProps<T extends As = "span"> = Props<RadioIconOptions<T>>;

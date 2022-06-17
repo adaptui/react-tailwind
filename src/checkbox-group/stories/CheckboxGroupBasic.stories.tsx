@@ -84,13 +84,16 @@ export const Danger: Story = {
 };
 
 export const ShowMoreDefault: Story = {
-  args: { maxVisibleItems: 3 },
+  ...Default,
+  args: { ...Default.args, maxVisibleItems: 3 },
 };
 
 export const Horizontal: Story = {
-  args: { stack: "horizontal" },
+  ...Default,
+  args: { ...Default.args, stack: "horizontal" },
 };
 
 export const ShowMoreHorizontal: Story = {
-  args: { stack: "horizontal", maxVisibleItems: 3 },
+  ...Default,
+  args: { ...Default.args, stack: "horizontal", maxVisibleItems: 3 },
 };

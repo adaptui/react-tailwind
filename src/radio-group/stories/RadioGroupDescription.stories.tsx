@@ -45,7 +45,12 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", stack: "vertical" },
+  args: { size: "md", themeColor: "base", maxVisibleItems: null },
+};
+
+export const WithDefaultState: Story = {
+  ...Default,
+  args: { ...Default.args, defaultValue: "orange" },
 };
 
 export const Small: Story = {
@@ -61,15 +66,20 @@ export const Large: Story = {
   args: { ...Default.args, size: "lg" },
 };
 
-export const Stack: Story = {
-  args: { size: "md", stack: "horizontal" },
-  parameters: { options: { showPanel: true } },
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+export const Danger: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger" },
 };
 
-export const WithDefaultState: Story = {
+export const Horizontal: Story = {
   ...Default,
-  args: { ...Default.args, defaultValue: "orange" },
-  argTypes: {
-    ...Default.argTypes,
-  },
+  args: { ...Default.args, stack: "horizontal" },
 };
