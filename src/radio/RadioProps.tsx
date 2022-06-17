@@ -46,6 +46,7 @@ export function useRadioProps(props: RadioProps): RadioPropsReturn {
     setItems,
     inputValue,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -79,6 +80,7 @@ export function useRadioProps(props: RadioProps): RadioPropsReturn {
     state: finalState,
     inputValue,
     size,
+    themeColor,
     icon,
     label,
     description,
@@ -132,27 +134,30 @@ export function useRadioProps(props: RadioProps): RadioPropsReturn {
     () => ({
       ...uiProps,
       ...componentProps.iconProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.icon, uiProps),
     }),
-    [uiProps, componentProps.iconProps],
+    [uiProps, restProps.disabled, componentProps.iconProps],
   );
 
   const textProps: RadioTextProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.textProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.label, uiProps),
     }),
-    [uiProps, componentProps.textProps],
+    [uiProps, restProps.disabled, componentProps.textProps],
   );
 
   const descriptionProps: RadioDescriptionProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.descriptionProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.description, uiProps),
     }),
-    [uiProps, componentProps.descriptionProps],
+    [uiProps, restProps.disabled, componentProps.descriptionProps],
   );
 
   const compoundedProps = useMemo(

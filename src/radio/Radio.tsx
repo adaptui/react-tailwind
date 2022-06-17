@@ -1,4 +1,5 @@
 import * as React from "react";
+import { cx } from "ariakit-utils";
 
 import { RadioDescription } from "./RadioDescription";
 import { RadioIcon } from "./RadioIcon";
@@ -23,7 +24,8 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       <RadioLabel {...labelProps}>
         <RadioInput ref={ref} {...inputProps} />
         <RadioIcon {...iconProps} />
-        <div>
+        {/* TODO: Create a new component & check for shadows */}
+        <div className={cx(label && !description ? "flex items-center" : "")}>
           {label ? <RadioText {...textProps} /> : null}
           {label && description ? (
             <RadioDescription {...descriptionProps} />

@@ -15,8 +15,9 @@ import { RadioUIProps } from "./RadioProps";
 export const useRadioLabel = createHook<RadioLabelOptions>(
   ({
     state,
-    isChecked,
     size,
+    themeColor,
+    isChecked,
     icon,
     label,
     description,
@@ -27,11 +28,20 @@ export const useRadioLabel = createHook<RadioLabelOptions>(
   }) => {
     const theme = useTheme("radio");
     const className = cx(
-      theme.label.common,
-      size && label && !description ? theme.label.size[size] : "",
-      label && !description ? (disabled ? "" : theme.label.only) : "",
+      theme.label.base,
       disabled ? theme.label.disabled : "",
-      // maxVisibleItems != null ? theme.label.showMore[stack] : "",
+      label && !description && size ? theme.size[size].label : "",
+      label && !description && themeColor
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.label,
+              theme.themeColor[themeColor].hover.label,
+              theme.themeColor[themeColor].active.label,
+              theme.themeColor[themeColor].focus.label,
+            )
+          : theme.themeColor[themeColor].disabled.label
+        : "",
+      stack && maxVisibleItems != null ? theme.label.showMore[stack] : "",
       props.className,
     );
 
@@ -49,8 +59,8 @@ export const RadioLabel = createComponent<RadioLabelOptions>(props => {
 });
 
 export type RadioLabelOptions<T extends As = "label"> = BoxOptions<T> &
-  Partial<RadioUIProps> &
-  Pick<RadioInputOptions, "disabled"> & {};
+  Pick<RadioInputOptions, "disabled"> &
+  Partial<RadioUIProps> & {};
 
 export type RadioLabelProps<T extends As = "label"> = Props<
   RadioLabelOptions<T>

@@ -4,7 +4,7 @@ export const checkbox = {
     disabled: "pointer-events-none",
     showMore: { vertical: "flex w-full", horizontal: "flex" },
   },
-  input: "peer within sr-only",
+  input: "peer sr-only",
   icon: "inline-flex items-center justify-center shrink-0 align-top select-none transition-all",
   text: "select-none",
   description: "select-none",
@@ -98,7 +98,7 @@ export const checkbox = {
         description: "text-gray-600",
       },
       hover: {
-        label: "hover:bg-gray-200",
+        label: "hover:bg-blue-200",
         icon: {
           unChecked: "peer-hover:border-blue-600",
           checked: "peer-hover:bg-blue-700 peer-hover:border-blue-700",
@@ -118,7 +118,7 @@ export const checkbox = {
         description: "",
       },
       focus: {
-        label: "focus-within:bg-gray-100",
+        label: "focus-within:bg-blue-100",
         icon: {
           unChecked:
             "peer-focus-visible:ring-3 peer-focus-visible:ring-blue-600 peer-focus-visible:border-transparent",
@@ -155,7 +155,7 @@ export const checkbox = {
         description: "text-gray-600",
       },
       hover: {
-        label: "hover:bg-gray-200",
+        label: "hover:bg-red-200",
         icon: {
           unChecked: "peer-hover:border-red-600",
           checked: "peer-hover:bg-red-700 peer-hover:border-red-700",
@@ -175,7 +175,7 @@ export const checkbox = {
         description: "",
       },
       focus: {
-        label: "focus-within:bg-gray-100",
+        label: "focus-within:bg-red-100",
         icon: {
           unChecked:
             "peer-focus-visible:ring-3 peer-focus-visible:ring-red-600 peer-focus-visible:border-transparent",
@@ -201,22 +201,22 @@ export const checkbox = {
     },
   },
   group: {
-    vertical: {
-      common: "flex flex-col items-start",
-      size: {
-        sm: "space-y-1",
-        md: "space-y-1",
-        lg: "space-y-1",
+    size: {
+      sm: {
+        vertical: "space-y-1",
+        horizontal: "space-x-1",
+      },
+      md: {
+        vertical: "space-y-1",
+        horizontal: "space-x-1",
+      },
+      lg: {
+        vertical: "space-y-1",
+        horizontal: "space-x-1",
       },
     },
-    horizontal: {
-      common: "flex flex-row w-fit",
-      size: {
-        sm: "space-x-1",
-        md: "space-x-1",
-        lg: "space-x-1",
-      },
-    },
+    vertical: "flex flex-col items-start",
+    horizontal: "flex flex-row w-fit",
     showMore: {
       button: {
         common: { vertical: "justify-start w-full", horizontal: "min-w-max" },

@@ -37,6 +37,7 @@ export const useRadioGroupProps = ({
   items,
   setItems,
   size,
+  themeColor,
   stack,
   maxVisibleItems,
   children,
@@ -47,7 +48,12 @@ export const useRadioGroupProps = ({
     value,
     setValue,
   });
-  const uiState = useRadioGroupUIState({ size, stack, maxVisibleItems });
+  const uiState = useRadioGroupUIState({
+    size,
+    themeColor,
+    stack,
+    maxVisibleItems,
+  });
   const uiProps: RadioGroupUIProps = {
     state: withState ? state : undefined,
     ...uiState,

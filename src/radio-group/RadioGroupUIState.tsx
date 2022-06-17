@@ -1,10 +1,16 @@
 export const useRadioGroupUIState = (
   props: RadioGroupUIStateProps,
 ): RadioGroupUIState => {
-  const { size = "md", stack = "vertical", maxVisibleItems = null } = props;
+  const {
+    size = "md",
+    stack = "vertical",
+    themeColor = "base",
+    maxVisibleItems = null,
+  } = props;
 
   return {
     size,
+    themeColor,
     stack,
     maxVisibleItems,
   };
@@ -16,7 +22,14 @@ export type RadioGroupUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"radio", "icon", "size">;
+  size: keyof AdaptUI.GetThemeValue<"radio", "size">;
+
+  /**
+   * How the radio should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"radio", "themeColor">;
 
   /**
    * Controls how the group of radios are arranged
@@ -34,5 +47,5 @@ export type RadioGroupUIState = {
 };
 
 export type RadioGroupUIStateProps = Partial<
-  Pick<RadioGroupUIState, "size" | "stack" | "maxVisibleItems">
+  Pick<RadioGroupUIState, "size" | "themeColor" | "stack" | "maxVisibleItems">
 >;

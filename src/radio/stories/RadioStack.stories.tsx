@@ -15,25 +15,55 @@ export default {
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
-    ...createControls(undefined, {
+    ...createControls("radio", {
+      unions: ["themeColor"],
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
+        "ref",
+        "defaultValue",
+        "setValue",
         "value",
-        "defaultState",
         "state",
-        "onStateChange",
+        "inputValue",
+        "onChange",
         "icon",
+        "defaultChecked",
+        "checked",
+        "focusable",
+        "autoFocus",
+        "onFocusVisible",
+        "accessibleWhenDisabled",
+        "clickOnEnter",
+        "clickOnSpace",
+        "isChecked",
+        "isIndeterminate",
+        "stack",
+        "maxVisibleItems",
+        "items",
+        "setItems",
+        "orientation",
+        "virtualFocus",
+        "rtl",
+        "focusLoop",
+        "focusWrap",
+        "focusShift",
+        "moves",
+        "includesBaseElement",
+        "activeId",
+        "defaultActiveId",
+        "setMoves",
+        "setActiveId",
+        "shouldRegisterItem",
+        "getItem",
+        "rowId",
+        "preventScrollOnKeyDown",
+        "size",
+        "label",
+        "description",
+        "themeColor",
       ],
     }),
-    disabled: { table: { disable: false } },
-    size: { table: { disable: true } },
   },
   parameters: {
     layout: "centered",
@@ -45,12 +75,12 @@ export default {
 export const Default: Story = {};
 
 export const Label: Story = {
-  args: { label: "Apple" },
+  args: { label: "Radio" },
 };
 
 export const Description: Story = {
   args: {
-    label: "Apple",
+    label: "Radio",
     description:
       "Used when the radio is selected and will use its value for the form submission.",
   },
@@ -61,14 +91,14 @@ export const DisabledStack: Story = {
 };
 
 export const DisabledLabel: Story = {
-  args: { disabled: true, label: "Apple" },
+  args: { disabled: true, label: "Radio" },
 };
 
 export const DisabledDescription: Story = {
   args: {
     disabled: true,
-    label: "Apple",
+    label: "Radio",
     description:
-      "Used when the Radio is selected and will use its value for the form submission.",
+      "Used when the radio is selected and will use its value for the form submission.",
   },
 };

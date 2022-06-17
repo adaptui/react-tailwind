@@ -16,6 +16,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       uiProps,
     } = useRadioGroupProps(props);
 
+    //  TODO: Fix focus when show more is clicked while inside the content
     return (
       <RadioGroupWrapper ref={ref} {...wrapperProps}>
         <RadioGroupContextProvider {...uiProps}>

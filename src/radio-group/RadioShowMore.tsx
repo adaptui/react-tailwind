@@ -22,14 +22,13 @@ export type RadioShowMoreProps = {
 
 export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
   const { contentProps, moreChildren, buttonProps, uiProps } = props;
-  const { stack, size } = uiProps;
+  const { stack, size, themeColor } = uiProps;
 
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
 
   const theme = useTheme("radio");
   const buttonClassName = cx(
     theme.group.showMore.button.common[stack],
-    size === "lg" ? theme.group.showMore.button.lg : "",
     hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
   );
   const contentClassName = cx(theme.group.showMore.content[stack]);
@@ -50,6 +49,7 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
       <ShowMoreButton
         variant="ghost"
         size={size}
+        themeColor={themeColor}
         prefix={<PlusIcon />}
         className={buttonClassName}
         {...buttonProps}
