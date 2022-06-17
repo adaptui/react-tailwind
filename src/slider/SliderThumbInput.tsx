@@ -13,11 +13,20 @@ import { cx } from "../utils";
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
 export const useSliderThumbInput = createHook<SliderThumbInputOptions>(
-  ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+    index,
+    isDisabled,
+    ...props
+  }) => {
     const theme = useTheme("slider");
     const className = cx(
-      theme.thumb.input.common,
-      size ? theme.thumb.input.size[size] : "",
+      theme.input,
+      size ? theme.size[size]?.input : "",
       props.className,
     );
 
@@ -37,7 +46,10 @@ export const SliderThumbInput = createComponent<SliderThumbInputOptions>(
   },
 );
 
-export type SliderThumbInputOptions<T extends As = "input"> = BoxProps<T> &
+export type SliderThumbInputOptions<T extends As = "input"> = Omit<
+  BoxProps<T>,
+  "size"
+> &
   SliderInputOptions<T> &
   Partial<SliderThumbUIProps> & {};
 

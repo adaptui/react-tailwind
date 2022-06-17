@@ -13,19 +13,38 @@ import { cx } from "../utils";
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
 export const useSliderThumbContainer = createHook<SliderThumbContainerOptions>(
-  ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+    index,
+    isDisabled,
+    ...props
+  }) => {
     const theme = useTheme("slider");
     const className = cx(
-      theme.thumb.container.base.common,
-      size ? theme.thumb.container.base.size[size] : "",
-      isDisabled
-        ? theme.thumb.container.disabled
-        : theme.thumb.container.common,
+      theme.thumbContainer.default,
+      isDisabled ? theme.thumbContainer.disabled : "",
+      size ? theme.size[size]?.thumbContainer : "",
+      !isDisabled
+        ? themeColor
+          ? cx(
+              theme.themeColor[themeColor]?.thumbContainer?.default,
+              theme.themeColor[themeColor]?.thumbContainer?.hover,
+              theme.themeColor[themeColor]?.thumbContainer?.active,
+              theme.themeColor[themeColor]?.thumbContainer?.focus,
+            )
+          : ""
+        : themeColor
+        ? theme.themeColor[themeColor]?.thumbContainer?.disabled
+        : "",
       props.className,
     );
 
     props = { ...props, className };
-    props = useSliderThumb({ state, ...props });
+    props = useSliderThumb({ state, ...props, children: null });
     props = useBox(props);
 
     return props;

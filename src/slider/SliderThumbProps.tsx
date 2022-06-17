@@ -23,6 +23,7 @@ const componentMap = {
 
 export const useSliderThumbProps = ({
   size,
+  themeColor,
   knobIcon,
   tooltip,
   index,
@@ -74,7 +75,12 @@ export const useSliderThumbProps = ({
     onBlur,
     onFocusChange,
   });
-  const uiState = useSliderThumbUIState({ size, knobIcon, tooltip });
+  const uiState = useSliderThumbUIState({
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+  });
   const uiProps: SliderThumbUIProps = {
     ...uiState,
     index,

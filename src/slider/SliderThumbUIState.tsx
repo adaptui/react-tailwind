@@ -1,27 +1,22 @@
 import { RenderProp } from "../utils";
 
 import { SliderThumbUIProps } from "./SliderThumbProps";
+import { SliderUIState } from "./SliderUIState";
 
 export function useSliderThumbUIState(
   props: SliderThumbUIStateProps,
 ): SliderThumbUIState {
-  const { size = "md", tooltip = true, knobIcon } = props;
+  const { size = "md", themeColor = "base", tooltip = true, knobIcon } = props;
 
   return {
     size,
+    themeColor,
     knobIcon,
     tooltip,
   };
 }
 
-export type SliderThumbUIState = {
-  /**
-   * How large should the button be?
-   *
-   * @default md
-   */
-  size: keyof AdaptUI.GetThemeValue<"slider", "track", "base", "size">;
-
+export type SliderThumbUIState = Pick<SliderUIState, "size" | "themeColor"> & {
   /**
    * True, if your slider needs a tooltip.
    */
@@ -34,5 +29,5 @@ export type SliderThumbUIState = {
 };
 
 export type SliderThumbUIStateProps = Partial<
-  Pick<SliderThumbUIState, "size" | "knobIcon" | "tooltip">
+  Pick<SliderThumbUIState, "size" | "themeColor" | "knobIcon" | "tooltip">
 > & {};

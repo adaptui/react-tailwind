@@ -4,11 +4,18 @@ import { SliderThumbUIProps } from "..";
 import { SliderUIProps } from "./SliderProps";
 
 export function useSliderUIState(props: SliderUIStateProps): SliderUIState {
-  const { range = false, size = "md", tooltip = true, knobIcon } = props;
+  const {
+    range = false,
+    size = "md",
+    themeColor = "base",
+    tooltip = true,
+    knobIcon,
+  } = props;
 
   return {
     range,
     size,
+    themeColor,
     knobIcon,
     tooltip,
   };
@@ -20,7 +27,14 @@ export type SliderUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"slider", "track", "base", "size">;
+  size: keyof AdaptUI.GetThemeValue<"slider", "size">;
+
+  /**
+   * How the slider should be themed?
+   *
+   * @default base
+   */
+  themeColor: keyof AdaptUI.GetThemeValue<"slider", "themeColor">;
 
   /**
    * True, if you need a range slider.
@@ -39,5 +53,5 @@ export type SliderUIState = {
 };
 
 export type SliderUIStateProps = Partial<
-  Pick<SliderUIState, "range" | "size" | "knobIcon" | "tooltip">
+  Pick<SliderUIState, "range" | "size" | "themeColor" | "knobIcon" | "tooltip">
 > & {};

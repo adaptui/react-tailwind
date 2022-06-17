@@ -27,30 +27,33 @@ export const SliderThumb = React.forwardRef<HTMLInputElement, SliderThumbProps>(
               {props => {
                 const { onMouseEnter, onMouseLeave, ...restProps } = props;
                 return (
-                  <SliderThumbContainer
-                    {...containerProps}
-                    tabIndex={-1}
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
-                  >
+                  <label>
                     <SliderThumbInput
                       ref={ref}
                       {...inputProps}
                       {...restProps}
                     />
-                    {uiProps.knobIcon
-                      ? withIconA11y(runIfFn(uiProps.knobIcon, uiProps))
-                      : null}
-                  </SliderThumbContainer>
+                    <SliderThumbContainer
+                      {...containerProps}
+                      onMouseEnter={onMouseEnter}
+                      onMouseLeave={onMouseLeave}
+                    >
+                      {uiProps.knobIcon
+                        ? withIconA11y(runIfFn(uiProps.knobIcon, uiProps))
+                        : null}
+                    </SliderThumbContainer>
+                  </label>
                 );
               }}
             </TooltipAnchor>
           </Tooltip>
         ) : (
-          <SliderThumbContainer {...containerProps} tabIndex={-1}>
+          <label>
             <SliderThumbInput ref={ref} {...inputProps} />
-            {knobIcon ? withIconA11y(runIfFn(knobIcon, uiProps)) : null}
-          </SliderThumbContainer>
+            <SliderThumbContainer {...containerProps} tabIndex={-1}>
+              {knobIcon ? withIconA11y(runIfFn(knobIcon, uiProps)) : null}
+            </SliderThumbContainer>
+          </label>
         )}
       </SliderThumbWrapper>
     );

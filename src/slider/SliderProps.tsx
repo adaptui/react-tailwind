@@ -29,6 +29,7 @@ const componentMap = {
 export const useSliderProps = ({
   range,
   size,
+  themeColor,
   knobIcon,
   tooltip,
   children,
@@ -80,14 +81,21 @@ export const useSliderProps = ({
     "aria-describedby": ariaDescribedBy,
     "aria-details": ariaDetails,
   });
-  const uiState = useSliderUIState({ range, size, knobIcon, tooltip });
-  let uiProps: SliderUIProps = { ...uiState, state };
+  const uiState = useSliderUIState({
+    range,
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+  });
+  let uiProps: SliderUIProps = { ...uiState, isDisabled, state };
 
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   const wrapperProps: SliderWrapperProps = {
     ...uiProps,
     ...restProps,
+    isDisabled,
     ...componentProps.wrapperProps,
   };
 
@@ -127,9 +135,10 @@ export const useSliderProps = ({
   };
 };
 
-export type SliderUIProps = SliderUIState & {
-  state: SliderState;
-};
+export type SliderUIProps = SliderUIState &
+  Pick<SliderStateProps, "isDisabled"> & {
+    state: SliderState;
+  };
 
 export type SliderProps = Omit<SliderStateProps, "state"> &
   Pick<SliderBaseStateProps, "formatOptions"> &

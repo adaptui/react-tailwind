@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adaptui/react@^1.0.0-alpha.6":
-  version "1.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@adaptui/react/-/react-1.0.0-alpha.6.tgz#dfe731a05f602e0419b4b6d9aff6adac0f8e2ca6"
-  integrity sha512-utfrdcKaW/Isw3hd+69krswwjvCnlI/IpdtzS2e8EgFvVB9WlHGEae0pFrNd2aJ7DlQ9WguvvbqC1Z2+JHufsg==
+"@adaptui/react@^1.0.0-alpha.7":
+  version "1.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@adaptui/react/-/react-1.0.0-alpha.7.tgz#e5090f26a37d266218975672bd89dfe124d97833"
+  integrity sha512-cdgdAbLXII+g2CzD80400yt1s0H+g3rWSmJzkUXrSz416duUv+HHxaFT6hejZ1sI1Iv+DY2HkBJm+GlOWN4oVA==
   dependencies:
     "@chakra-ui/react-utils" "^2.0.1"
     "@chakra-ui/utils" "^2.0.2"
