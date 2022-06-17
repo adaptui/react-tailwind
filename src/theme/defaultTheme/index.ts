@@ -16,7 +16,6 @@ import { spinner } from "./spinner";
 import { _switch } from "./switch";
 import { tag } from "./tag";
 import { textarea } from "./textarea";
-import { toast } from "./toast";
 import { tooltip } from "./tooltip";
 
 export const theme = {
@@ -39,7 +38,6 @@ export const theme = {
   tag,
   textarea,
   tooltip,
-  toast,
 };
 
 export default theme;

@@ -15,25 +15,33 @@ export default {
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
-    ...createControls(undefined, {
+    ...createControls("Switch", {
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
+        "ref",
+        "defaultValue",
+        "setValue",
         "state",
-        "onStateChange",
+        "inputValue",
+        "onChange",
         "icon",
+        "defaultChecked",
+        "checked",
+        "focusable",
+        "autoFocus",
+        "onFocusVisible",
+        "accessibleWhenDisabled",
+        "clickOnEnter",
+        "clickOnSpace",
+        "isChecked",
+        "value",
+        "label",
+        "description",
+        "themeColor",
+        "size",
       ],
     }),
-    disabled: { table: { disable: false } },
-    size: { table: { disable: true } },
   },
   parameters: {
     layout: "centered",
@@ -52,7 +60,7 @@ export const Description: Story = {
   args: {
     label: "Switch",
     description:
-      "Used when the checkbox is selected and will use its value for the form submission.",
+      "Used when the switch is selected and will use its value for the form submission.",
   },
 };
 
@@ -69,6 +77,6 @@ export const DisabledDescription: Story = {
     disabled: true,
     label: "Switch",
     description:
-      "Used when the checkbox is selected and will use its value for the form submission.",
+      "Used when the switch is selected and will use its value for the form submission.",
   },
 };

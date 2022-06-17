@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { SlotIcon } from "../../icons";
 
 import js from "./templates/TooltipBasicJsx";
@@ -11,8 +11,41 @@ type Meta = ComponentMeta<typeof TooltipBasic>;
 type Story = ComponentStoryObj<typeof TooltipBasic>;
 
 export default {
-  title: "Popups/Tooltip/Basic",
+  title: "Popups/Tooltip",
   component: TooltipBasic,
+  argTypes: createControls("tooltip", {
+    ignore: [
+      "wrapElement",
+      "as",
+      "ref",
+      "prefix",
+      "suffix",
+      "content",
+      "isDragging",
+      "visible",
+      "defaultVisible",
+      "setVisible",
+      "animated",
+      "gutter",
+      "timeout",
+      "getAnchorRect",
+      "fixed",
+      "shift",
+      "flip",
+      "slide",
+      "overlap",
+      "sameWidth",
+      "fitViewport",
+      "arrowPadding",
+      "overflowPadding",
+      "renderCallback",
+      "wrapperProps",
+      "portalElement",
+      "portalRef",
+      "hideOnEscape",
+      "hideOnControl",
+    ],
+  }),
   parameters: {
     layout: "centered",
     options: { showPanel: true },

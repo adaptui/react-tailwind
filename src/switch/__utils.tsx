@@ -1,24 +1,39 @@
 import { Box } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { cx, tcm } from "../utils";
 
 import { SwitchUIProps } from "./SwitchProps";
 
 export const SwitchDefaultIcon = (props: SwitchUIProps) => {
-  const { size, isChecked, disabled } = props;
+  const { size, themeColor, isChecked, disabled } = props;
 
   const theme = useTheme("switch");
   const switchIconContentStyles = tcm(
-    theme.icon.children.common,
-    theme.icon.children.size.default[size],
-    isChecked
-      ? theme.icon.children.size.checked[size]
-      : theme.icon.children.size.unChecked[size],
-    disabled
-      ? tcm(
-          theme.icon.children.disabled,
-          theme.icon.children.size.disabled[size],
-        )
+    theme.icon?.children,
+    size ? theme.size[size]?.icon?.children?.default : "",
+    size
+      ? isChecked === true
+        ? theme.size[size]?.icon?.children?.checked
+        : theme.size[size]?.icon?.children?.unChecked
+      : "",
+    themeColor
+      ? isChecked === true
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor]?.default?.icon?.children?.checked,
+              theme.themeColor[themeColor]?.hover?.icon?.children?.checked,
+              theme.themeColor[themeColor]?.active?.icon?.children?.checked,
+              theme.themeColor[themeColor]?.focus?.icon?.children?.checked,
+            )
+          : theme.themeColor[themeColor]?.disabled?.icon?.children?.checked
+        : !disabled
+        ? cx(
+            theme.themeColor[themeColor]?.default?.icon?.children?.unChecked,
+            theme.themeColor[themeColor]?.hover?.icon?.children?.unChecked,
+            theme.themeColor[themeColor]?.active?.icon?.children?.unChecked,
+            theme.themeColor[themeColor]?.focus?.icon?.children?.unChecked,
+          )
+        : theme.themeColor[themeColor]?.disabled?.icon?.children?.unChecked
       : "",
   );
 

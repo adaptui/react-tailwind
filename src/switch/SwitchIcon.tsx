@@ -9,12 +9,14 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { SwitchInputOptions } from "./SwitchInput";
 import { SwitchUIProps } from "./SwitchProps";
 
 export const useSwitchIcon = createHook<SwitchIconOptions>(
   ({
     state,
     size,
+    themeColor,
     isChecked,
     icon,
     label,
@@ -24,28 +26,31 @@ export const useSwitchIcon = createHook<SwitchIconOptions>(
   }) => {
     const theme = useTheme("switch");
     const className = cx(
-      theme.icon.common,
-      size ? theme.icon.size[size] : "",
-      description ? theme.icon.description : "",
-      isChecked
-        ? cx(
-            theme.icon.checked.default,
-            theme.icon.checked.hover,
-            theme.icon.checked.active,
-            theme.icon.checked.focus,
-            theme.icon.checked.disabled,
-          )
-        : cx(
-            theme.icon.unChecked.default,
-            theme.icon.unChecked.hover,
-            theme.icon.unChecked.active,
-            theme.icon.unChecked.focus,
-            theme.icon.unChecked.disabled,
-          ),
+      theme.icon?.base,
+      size ? theme.size[size]?.icon?.base : "",
+      themeColor
+        ? isChecked === true
+          ? !disabled
+            ? cx(
+                theme.themeColor[themeColor]?.default?.icon?.base?.checked,
+                theme.themeColor[themeColor]?.hover?.icon?.base?.checked,
+                theme.themeColor[themeColor]?.active?.icon?.base?.checked,
+                theme.themeColor[themeColor]?.focus?.icon?.base?.checked,
+              )
+            : theme.themeColor[themeColor]?.disabled?.icon?.base?.checked
+          : !disabled
+          ? cx(
+              theme.themeColor[themeColor]?.default?.icon?.base?.unChecked,
+              theme.themeColor[themeColor]?.hover?.icon?.base?.unChecked,
+              theme.themeColor[themeColor]?.active?.icon?.base?.unChecked,
+              theme.themeColor[themeColor]?.focus?.icon?.base?.unChecked,
+            )
+          : theme.themeColor[themeColor]?.disabled?.icon?.base?.unChecked
+        : "",
       props.className,
     );
 
-    props = { role: "img", "aria-hidden": true, ...props, className };
+    props = { ...props, className };
     props = useBox(props);
 
     return props;
@@ -59,7 +64,8 @@ export const SwitchIcon = createComponent<SwitchIconOptions>(props => {
 });
 
 export type SwitchIconOptions<T extends As = "span"> = BoxOptions<T> &
-  Partial<SwitchUIProps> & {};
+  Partial<SwitchUIProps> &
+  Pick<SwitchInputOptions, "disabled"> & {};
 
 export type SwitchIconProps<T extends As = "span"> = Props<
   SwitchIconOptions<T>

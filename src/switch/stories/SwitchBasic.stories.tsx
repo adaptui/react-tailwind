@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { Switch, SwitchText } from "../index";
 
 import js from "./templates/SwitchBasicJsx";
 import ts from "./templates/SwitchBasicTsx";
@@ -16,21 +15,27 @@ export default {
   argTypes: {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
-    ...createControls(undefined, {
+    ...createControls("switch", {
+      unions: ["themeColor"],
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
+        "ref",
         "defaultValue",
+        "setValue",
         "state",
-        "onStateChange",
+        "inputValue",
+        "onChange",
         "icon",
+        "defaultChecked",
+        "checked",
+        "focusable",
+        "autoFocus",
+        "onFocusVisible",
+        "accessibleWhenDisabled",
+        "clickOnEnter",
+        "clickOnSpace",
+        "isChecked",
       ],
     }),
   },
@@ -42,21 +47,29 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", defaultValue: false },
+  args: { size: "md", themeColor: "base", defaultValue: false },
 };
 
 export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
 };
-export const Medium: Story = {};
+export const Medium: Story = {
+  ...Default,
+  args: { ...Default.args, size: "md" },
+};
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
 };
-export const ExtraLarge: Story = {
+
+export const Base: Story = {
   ...Default,
-  args: { ...Default.args, size: "xl" },
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
 };
 
 export const UnChecked: Story = { ...Default };
@@ -64,50 +77,53 @@ export const Checked: Story = {
   ...Default,
   args: { ...Default.args, defaultValue: true },
 };
+export const Indeterminate: Story = {
+  ...Default,
+  args: { ...Default.args, defaultValue: "mixed" },
+};
 
 export const Label: Story = {
-  args: { label: "Switch" },
+  ...Default,
+  args: { ...Default.args, label: "Switchs" },
+};
+
+export const MultilineLabel: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    label:
+      "Used when the Switch is selected and will use its value for the form submission.",
+    className: "w-72",
+  },
 };
 
 export const Description: Story = {
+  ...Default,
   args: {
+    ...Default.args,
     label: "Switch",
     description:
-      "Used when the checkbox is selected and will use its value for the form submission.",
+      "Used when the Switch is selected and will use its value for the form submission.",
   },
 };
 
 export const Disabled: Story = {
-  args: { disabled: true },
+  ...Default,
+  args: { ...Default.args, disabled: true },
 };
 
 export const DisabledLabel: Story = {
-  args: { disabled: true, label: "Switch" },
+  ...Default,
+  args: { ...Default.args, label: "Switch", disabled: true },
 };
 
 export const DisabledDescription: Story = {
+  ...Default,
   args: {
-    disabled: true,
+    ...Default.args,
     label: "Switch",
+    disabled: true,
     description:
-      "Used when the checkbox is selected and will use its value for the form submission.",
+      "Used when the switch is selected and will use its value for the form submission.",
   },
-};
-
-export const Custom = () => {
-  const DARK_MODE = "Dark Mode";
-  const LIGHT_MODE = "Light Mode";
-  return (
-    <Switch defaultValue={true}>
-      {({ isChecked }) => {
-        return (
-          <>
-            <SwitchText data-testid="testid-mode">
-              {isChecked ? DARK_MODE : LIGHT_MODE}
-            </SwitchText>
-          </>
-        );
-      }}
-    </Switch>
-  );
 };
