@@ -12,11 +12,21 @@ import { tcm } from "../utils";
 import { SliderUIProps } from "./SliderProps";
 
 export const useSliderFilledTrack = createHook<SliderFilledTrackOptions>(
-  ({ state, range, size, knobIcon, tooltip, ...props }) => {
+  ({
+    state,
+    range,
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+    isDisabled,
+    ...props
+  }) => {
     const theme = useTheme("slider");
     const className = tcm(
-      theme.track.filled.common,
-      size ? theme.track.filled.size[size] : "",
+      theme.filledTrack,
+      size ? theme.size[size].filledTrack : "",
+      themeColor ? theme.themeColor[themeColor]?.filledTrack : "",
       props.className,
     );
     const style = {

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
-import { SliderDefaultKnobIcon } from "../__utils";
+import { SliderDefaultKnobIcon } from "../..";
 
 import js from "./templates/SliderRangeJsx";
 import ts from "./templates/SliderRangeTsx";
@@ -19,51 +19,79 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("slider", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    unions: ["themeColor"],
+    ignore: [
+      "ref",
+      "wrapElement",
+      "as",
+      "formatOptions",
+      "knobIcon",
+      "defaultValue",
+      "range",
+    ],
   }),
 } as Meta;
 
+export const Default: Story = {
+  args: { size: "md", themeColor: "base", defaultValue: [25, 75] },
+};
+
 export const Small: Story = {
-  args: { size: "sm", defaultValue: [25, 75] },
+  ...Default,
+  args: { ...Default.args, size: "sm" },
 };
-
 export const Medium: Story = {
-  args: { size: "md", defaultValue: [25, 75] },
+  ...Default,
+  args: { ...Default.args, size: "md" },
 };
-
 export const Large: Story = {
-  args: { size: "lg", defaultValue: [25, 75] },
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+};
+export const ExtraLarge: Story = {
+  ...Default,
+  args: { ...Default.args, size: "xl" },
 };
 
-export const ExtraLarge: Story = {
-  args: { size: "xl", defaultValue: [25, 75] },
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
 };
 
 export const KnobIcon: Story = {
-  args: { size: "md", defaultValue: [25, 75], knobIcon: SliderDefaultKnobIcon },
+  ...Default,
+  args: { ...Default.args, size: "md", knobIcon: SliderDefaultKnobIcon },
+};
+
+export const WithoutTooltip: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    size: "md",
+    knobIcon: SliderDefaultKnobIcon,
+    tooltip: false,
+  },
 };
 
 export const MinMax = {
-  args: {
-    size: "md",
-    defaultValue: [25, 75],
-    minValue: 20,
-    maxValue: 80,
-  },
+  ...Default,
+  args: { ...Default.args, size: "md", minValue: 20, maxValue: 80 },
 };
 
 export const Step = {
-  args: {
-    size: "md",
-    defaultValue: [25, 75],
-    step: 10,
-  },
+  ...Default,
+  args: { ...Default.args, size: "md", step: 10 },
 };
 
 export const FormatOptions = {
+  ...Default,
   args: {
+    ...Default.args,
     size: "md",
-    defaultValue: [25, 75],
     formatOptions: {
       style: "unit",
       unit: "celsius",
@@ -73,5 +101,6 @@ export const FormatOptions = {
 };
 
 export const IsDisabled: Story = {
-  args: { size: "md", defaultValue: [25, 75], isDisabled: true },
+  ...Default,
+  args: { ...Default.args, isDisabled: true },
 };

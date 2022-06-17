@@ -12,14 +12,23 @@ import { cx } from "../utils";
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
 export const useSliderThumbWrapper = createHook<SliderThumbWrapperOptions>(
-  ({ state, size, knobIcon, tooltip, index, isDisabled, ...props }) => {
+  ({
+    state,
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+    index,
+    isDisabled,
+    ...props
+  }) => {
     const theme = useTheme("slider");
-    const className = cx(theme.thumb.wrapper.common, props.className);
+    const className = cx(theme.thumbWrapper, props.className);
     const style = {
       left:
         state && index != null && size
           ? `calc(${state.baseState.getThumbPercent(index) * 100}% - ${
-              theme.thumb.wrapper.size[size]
+              theme.size[size]?.thumbWrapper
             })`
           : undefined,
       ...props.style,

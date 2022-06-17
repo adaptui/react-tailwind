@@ -13,9 +13,22 @@ import { tcm } from "../utils";
 import { SliderUIProps } from "./SliderProps";
 
 export const useSliderWrapper = createHook<SliderWrapperOptions>(
-  ({ state, range, size, knobIcon, tooltip, ...props }) => {
+  ({
+    state,
+    range,
+    size,
+    themeColor,
+    knobIcon,
+    tooltip,
+    isDisabled,
+    ...props
+  }) => {
     const theme = useTheme("slider");
-    const className = tcm(theme.wrapper, props.className);
+    const className = tcm(
+      theme.wrapper.default,
+      isDisabled ? theme.wrapper.disabled : " ",
+      props.className,
+    );
 
     props = { ...props, className };
     props = useSlider({ state, ...props });

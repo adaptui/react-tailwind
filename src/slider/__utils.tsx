@@ -7,7 +7,7 @@ import { SliderUIProps } from "./SliderProps";
 export const SliderDefaultKnobIcon = (props: SliderUIProps) => {
   const { size } = props;
   const theme = useTheme("slider");
-  const className = theme.icon.size[size];
+  const className = theme.size[size]?.knobIcon;
 
   return <EqualsIcon className={className} />;
 };
