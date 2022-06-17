@@ -16,24 +16,35 @@ export default {
     label: { control: { type: "text" } },
     description: { control: { type: "text" } },
     ...createControls("checkbox", {
+      unions: ["themeColor"],
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
+        "ref",
+        "focusable",
+        "defaultValue",
+        "setValue",
         "state",
-        "onStateChange",
+        "defaultChecked",
+        "checked",
+        "onChange",
         "icon",
+        "autoFocus",
+        "accessibleWhenDisabled",
+        "onFocusVisible",
+        "isChecked",
+        "isUnchecked",
+        "isIndeterminate",
+        "clickOnEnter",
+        "clickOnSpace",
+        "inputValue",
+        "withState",
+        "label",
+        "description",
+        "value",
+        "stack",
       ],
     }),
-    disabled: { table: { disable: false } },
-    size: { table: { disable: true } },
   },
   parameters: {
     layout: "centered",
@@ -42,7 +53,35 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: { size: "md", themeColor: "base", maxVisibleItems: null },
+};
+
+export const Small: Story = {
+  ...Default,
+  args: { ...Default.args, size: "sm" },
+};
+export const Medium: Story = {
+  ...Default,
+  args: { ...Default.args, size: "md" },
+};
+export const Large: Story = {
+  ...Default,
+  args: { ...Default.args, size: "lg" },
+};
+
+export const Base: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "base" },
+};
+export const Primary: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "primary" },
+};
+export const Danger: Story = {
+  ...Default,
+  args: { ...Default.args, themeColor: "danger" },
+};
 
 export const ShowMoreDefault: Story = {
   args: { maxVisibleItems: 3 },

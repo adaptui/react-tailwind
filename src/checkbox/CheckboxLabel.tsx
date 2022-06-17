@@ -28,7 +28,6 @@ export const useCheckboxLabel = createHook<CheckboxLabelOptions>(
     maxVisibleItems,
     ...props
   }) => {
-    console.log("%cdisabled", "color: #00ff88", disabled);
     const theme = useTheme("checkbox");
     const className = cx(
       theme.label.base,
