@@ -1,4 +1,3 @@
-import { cx } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -9,6 +8,7 @@ import { SliderInputOptions, useSliderInput } from "@adaptui/react";
 
 import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
+import { cx } from "../utils";
 
 import { SliderThumbUIProps } from "./SliderThumbProps";
 

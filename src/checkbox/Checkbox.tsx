@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cx } from "ariakit-utils";
+
+import { cx } from "../utils";
 
 import { CheckboxDescription } from "./CheckboxDescription";
 import { CheckboxIcon } from "./CheckboxIcon";
