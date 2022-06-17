@@ -17,23 +17,33 @@ export default {
     description: { control: { type: "text" } },
     ...createControls("checkbox", {
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
+        "ref",
+        "focusable",
+        "defaultValue",
+        "setValue",
         "state",
-        "onStateChange",
+        "defaultChecked",
+        "checked",
+        "onChange",
         "icon",
+        "autoFocus",
+        "accessibleWhenDisabled",
+        "onFocusVisible",
+        "maxVisibleItems",
+        "isChecked",
+        "isUnchecked",
+        "isIndeterminate",
+        "stack",
+        "clickOnEnter",
+        "clickOnSpace",
+        "inputValue",
+        "size",
+        "value",
+        "themeColor",
       ],
     }),
-    disabled: { table: { disable: false } },
-    size: { table: { disable: true } },
   },
   parameters: {
     layout: "centered",
@@ -56,18 +66,18 @@ export const Description: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const DisabledStack: Story = {
   args: { disabled: true },
 };
 
 export const DisabledLabel: Story = {
-  args: { label: "Checkbox", disabled: true },
+  args: { disabled: true, label: "Checkbox" },
 };
 
 export const DisabledDescription: Story = {
   args: {
-    label: "Checkbox",
     disabled: true,
+    label: "Checkbox",
     description:
       "Used when the checkbox is selected and will use its value for the form submission.",
   },

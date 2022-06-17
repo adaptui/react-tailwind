@@ -16,7 +16,6 @@ export const CheckboxCustomAdvanced: React.FC<
   CheckboxCustomAdvancedProps
 > = () => {
   const state = useCheckboxState<string[]>({ defaultValue: [] });
-  console.log("%cstate", "color: #408059", state);
 
   return (
     <>

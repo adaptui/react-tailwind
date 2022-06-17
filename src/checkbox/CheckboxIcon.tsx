@@ -9,6 +9,7 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { CheckboxInputOptions } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
 
 export const useCheckboxIcon = createHook<CheckboxIconOptions>(
@@ -24,6 +25,7 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
     description,
     stack,
     maxVisibleItems,
+    disabled,
     ...props
   }) => {
     const theme = useTheme("checkbox");
@@ -31,33 +33,36 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
       theme.icon,
       size ? theme.size[size].icon : "",
       themeColor && isUnchecked === true
-        ? cx(
-            theme.themeColor[themeColor].default.icon.unChecked,
-            theme.themeColor[themeColor].hover.icon.unChecked,
-            theme.themeColor[themeColor].active.icon.unChecked,
-            theme.themeColor[themeColor].focus.icon.unChecked,
-            theme.themeColor[themeColor].disabled.icon.unChecked,
-          )
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.icon.unChecked,
+              theme.themeColor[themeColor].hover.icon.unChecked,
+              theme.themeColor[themeColor].active.icon.unChecked,
+              theme.themeColor[themeColor].focus.icon.unChecked,
+            )
+          : theme.themeColor[themeColor].disabled.icon.unChecked
         : "",
       themeColor && isChecked === true
-        ? cx(
-            theme.themeColor[themeColor].default.icon.checked,
-            theme.themeColor[themeColor].hover.icon.checked,
-            theme.themeColor[themeColor].active.icon.checked,
-            theme.themeColor[themeColor].focus.icon.checked,
-            theme.themeColor[themeColor].disabled.icon.checked,
-          )
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.icon.checked,
+              theme.themeColor[themeColor].hover.icon.checked,
+              theme.themeColor[themeColor].active.icon.checked,
+              theme.themeColor[themeColor].focus.icon.checked,
+            )
+          : theme.themeColor[themeColor].disabled.icon.checked
         : "",
       themeColor && isIndeterminate === true
-        ? cx(
-            theme.themeColor[themeColor].default.icon.indeterminate,
-            theme.themeColor[themeColor].hover.icon.indeterminate,
-            theme.themeColor[themeColor].active.icon.indeterminate,
-            !label || description
-              ? theme.themeColor[themeColor].focus.icon.indeterminate
-              : "",
-            theme.themeColor[themeColor].disabled.icon.indeterminate,
-          )
+        ? !disabled
+          ? cx(
+              theme.themeColor[themeColor].default.icon.indeterminate,
+              theme.themeColor[themeColor].hover.icon.indeterminate,
+              theme.themeColor[themeColor].active.icon.indeterminate,
+              !label || description
+                ? theme.themeColor[themeColor].focus.icon.indeterminate
+                : "",
+            )
+          : theme.themeColor[themeColor].disabled.icon.indeterminate
         : "",
       props.className,
     );
@@ -76,7 +81,8 @@ export const CheckboxIcon = createComponent<CheckboxIconOptions>(props => {
 });
 
 export type CheckboxIconOptions<T extends As = "span"> = BoxOptions<T> &
-  Partial<CheckboxUIProps> & {};
+  Partial<CheckboxUIProps> &
+  Pick<CheckboxInputOptions, "disabled"> & {};
 
 export type CheckboxIconProps<T extends As = "span"> = Props<
   CheckboxIconOptions<T>

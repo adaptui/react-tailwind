@@ -109,9 +109,10 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     () => ({
       ...uiProps,
       ...componentProps.iconProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.icon, uiProps),
     }),
-    [uiProps, componentProps.iconProps],
+    [uiProps, restProps.disabled, componentProps.iconProps],
   );
 
   const textProps: CheckboxTextProps = useMemo(
@@ -128,9 +129,10 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     () => ({
       ...uiProps,
       ...componentProps.descriptionProps,
+      disabled: restProps.disabled,
       children: runIfFn(uiProps.description, uiProps),
     }),
-    [uiProps, componentProps.descriptionProps],
+    [uiProps, restProps.disabled, componentProps.descriptionProps],
   );
 
   const compoundedProps = useMemo(

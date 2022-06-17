@@ -51,22 +51,14 @@ export const Default: Story = {
 export const Small: Story = {
   ...Default,
   args: { ...Default.args, size: "sm" },
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
 export const Medium: Story = {
   ...Default,
-  argTypes: {
-    ...Default.argTypes,
-  },
+  args: { ...Default.args, size: "md" },
 };
 export const Large: Story = {
   ...Default,
   args: { ...Default.args, size: "lg" },
-  argTypes: {
-    ...Default.argTypes,
-  },
 };
 
 export const Stack: Story = {

@@ -42,7 +42,6 @@ export const CheckboxGroupTriBoolState: React.FC<
         <Checkbox
           value={checkedItems[0]}
           setValue={value => {
-            console.log("%cvalue", "color: #9c66cc", value);
             setCheckedItems([
               value as boolean,
               checkedItems[1],
