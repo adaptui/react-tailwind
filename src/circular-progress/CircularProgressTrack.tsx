@@ -18,11 +18,11 @@ export const useCircularProgressTrack =
       const className = cx(
         theme.track,
         themeColor ? theme.themeColor[themeColor].track : "",
+        "text-red-600",
         props.className,
       );
 
       props = {
-        viewBox: "0 0 100 100",
         cx: 50,
         cy: 50,
         r: 44,

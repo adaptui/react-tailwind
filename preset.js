@@ -96,16 +96,16 @@ module.exports = {
         },
         circularProgress: {
           "0%": {
-            strokeDasharray: "1, 400",
+            strokeDasharray: "0, 276",
             strokeDashoffset: "0",
           },
           "50%": {
-            strokeDasharray: "400, 400",
-            strokeDashoffset: "-100",
+            strokeDasharray: "276, 276",
+            strokeDashoffset: "-138",
           },
           "100%": {
-            strokeDasharray: "400, 400",
-            strokeDashoffset: "-260",
+            strokeDasharray: "276, 276",
+            strokeDashoffset: "-276",
           },
         },
       },

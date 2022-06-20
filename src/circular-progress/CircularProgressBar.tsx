@@ -13,11 +13,11 @@ import { CircularProgressUIProps } from "./CircularProgressProps";
 
 export const useCircularProgressBar = createHook<CircularProgressBarOptions>(
   ({ state, size, themeColor, hint, ...props }) => {
-    const determinant = state?.isIndeterminate
+    const dash = state?.isIndeterminate
       ? undefined
-      : (state?.percent ?? 0) * 2.7;
-    const strokeDasharray =
-      determinant == null ? undefined : `${determinant} ${270 - determinant}`;
+      : // Circle Circumference -> 2 * Math.PI * 44 = 276
+        ((state?.percent ?? 0) / 100) * 276;
+    const gap = dash == null ? undefined : 276 - dash;
 
     const theme = useTheme("circularProgress");
     const className = cx(
@@ -28,15 +28,13 @@ export const useCircularProgressBar = createHook<CircularProgressBarOptions>(
     );
 
     props = {
-      viewBox: "0 0 100 100",
       cx: 50,
       cy: 50,
       r: 44,
       fill: "transparent",
       stroke: "currentColor",
       strokeWidth: hint ? "5px" : "10px",
-      strokeDashoffset: "62",
-      strokeDasharray: strokeDasharray,
+      strokeDasharray: `${dash} ${gap}`,
       strokeLinecap: "round",
       ...props,
       className,
