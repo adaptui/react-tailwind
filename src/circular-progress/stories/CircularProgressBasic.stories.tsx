@@ -24,7 +24,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { size: "md", themeColor: "base", value: 50 },
+  args: { size: "md", themeColor: "base", value: 1 },
 };
 
 export const Small: Story = {

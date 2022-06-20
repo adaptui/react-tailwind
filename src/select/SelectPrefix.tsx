@@ -24,17 +24,23 @@ export const useSelectPrefix = createHook<SelectPrefixOptions>(
     disabled,
     ...props
   }) => {
-    const theme = useTheme("input");
+    const theme = useTheme("select");
     const className = cx(
-      theme.prefix.common,
-      size ? theme.prefix.size[size] : "",
-      variant ? theme.prefix.variant[variant].common : "",
+      theme.prefix,
+      size ? theme.size[size].prefix : "",
+      variant ? theme.variant[variant].default : "",
       disabled || invalid
         ? ""
         : variant
-        ? theme.prefix.variant[variant].interactions
+        ? cx(
+            theme.variant[variant].default.prefix,
+            theme.variant[variant].hover.prefix,
+            theme.variant[variant].active.prefix,
+            theme.variant[variant].focus.prefix,
+          )
         : "",
-      variant && disabled ? theme.prefix.variant[variant].disabled : "",
+      variant && disabled ? theme.variant[variant].disabled.prefix : "",
+      variant && invalid ? theme.variant[variant].invalid.prefix : "",
       props.className,
     );
 

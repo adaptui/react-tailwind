@@ -13,7 +13,7 @@ import { SelectUIProps } from "./SelectProps";
 
 export const useSelectWrapper = createHook<SelectWrapperOptions>(
   ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
-    const theme = useTheme("input");
+    const theme = useTheme("select");
     const className = cx(theme.wrapper, props.className);
 
     props = { ...props, className };

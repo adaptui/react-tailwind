@@ -26,16 +26,21 @@ export const useInputSuffix = createHook<InputSuffixOptions>(
   }) => {
     const theme = useTheme("input");
     const className = cx(
-      theme.suffix.common,
-      size ? theme.suffix.size[size] : "",
-      variant ? theme.suffix.variant[variant].common : "",
+      theme.suffix,
+      size ? theme.size[size].suffix : "",
+      variant ? theme.variant[variant].default : "",
       disabled || invalid
         ? ""
         : variant
-        ? theme.suffix.variant[variant].interactions
+        ? cx(
+            theme.variant[variant].default.suffix,
+            theme.variant[variant].hover.suffix,
+            theme.variant[variant].active.suffix,
+            theme.variant[variant].focus.suffix,
+          )
         : "",
-      variant && disabled ? theme.suffix.variant[variant].disabled : "",
-      variant && invalid ? theme.suffix.variant[variant].invalid : "",
+      variant && disabled ? theme.variant[variant].disabled.suffix : "",
+      variant && invalid ? theme.variant[variant].invalid.suffix : "",
       props.className,
     );
 

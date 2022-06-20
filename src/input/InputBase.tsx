@@ -16,17 +16,22 @@ export const useInputBase = createHook<InputBaseOptions>(
   ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
     const theme = useTheme("input");
     const className = cx(
-      theme.base.common,
-      size ? theme.base.size[size].common : "",
-      variant ? theme.base.variant[variant].common : "",
-      size && (!prefix || !suffix) ? theme.base.size[size].withoutAddon : "",
+      theme.base,
+      size ? theme.size[size].base.default : "",
+      size && (!prefix || !suffix) ? theme.size[size].base.withoutAddon : "",
+      variant ? theme.variant[variant].default : "",
       props.disabled || invalid
         ? ""
         : variant
-        ? theme.base.variant[variant].interactions
+        ? cx(
+            theme.variant[variant].default.base,
+            theme.variant[variant].hover.base,
+            theme.variant[variant].active.base,
+            theme.variant[variant].focus.base,
+          )
         : "",
-      variant && props.disabled ? theme.base.variant[variant].disabled : "",
-      variant && invalid ? theme.base.variant[variant].invalid : "",
+      variant && props.disabled ? theme.variant[variant].disabled.base : "",
+      variant && invalid ? theme.variant[variant].invalid.base : "",
       props.className,
     );
 

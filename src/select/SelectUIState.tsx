@@ -1,3 +1,4 @@
+import { SelectIcon } from "../icons";
 import { RenderProp } from "../utils";
 
 import { DefaultSelectSpinner } from "./__utils";
@@ -6,7 +7,7 @@ import { SelectUIProps } from "./SelectProps";
 export function useSelectUIState(props: SelectUIStateProps): SelectUIState {
   const {
     prefix,
-    suffix,
+    suffix = <SelectIcon />,
     size = "md",
     variant = "outline",
     invalid = false,
@@ -19,18 +20,18 @@ export function useSelectUIState(props: SelectUIStateProps): SelectUIState {
 
 export type SelectUIState = {
   /**
-   * How large should the input be?
+   * How large should the select be?
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"input", "base", "size">;
+  size: keyof AdaptUI.GetThemeValue<"select", "size">;
 
   /**
-   * How the input should look?
+   * How the select should look?
    *
    * @default solid
    */
-  variant: keyof AdaptUI.GetThemeValue<"input", "base", "variant">;
+  variant: keyof AdaptUI.GetThemeValue<"select", "variant">;
 
   /**
    * Prefix for the Select.
@@ -39,16 +40,17 @@ export type SelectUIState = {
 
   /**
    * Suffix for the Select.
+   * @default <SelectIcon />
    */
   suffix: RenderProp<SelectUIProps>;
 
   /**
-   * True, if the value of the input is invalid.
+   * True, if the value of the select is invalid.
    */
   invalid: boolean;
 
   /**
-   * True, if the input is loading.
+   * True, if the select is loading.
    */
   loading: boolean;
 
