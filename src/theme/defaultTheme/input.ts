@@ -5,53 +5,54 @@ export const input = {
       "peer w-full inline-flex items-center justify-center font-normal appearance-none outline-none disabled:cursor-not-allowed disabled:select-none transition",
     size: {
       sm: {
-        common: "h-[26px] text-cxs rounded-lg",
+        common: "h-[26px] text-cxs font-normal rounded-lg",
         withoutAddon: "px-2",
       },
       md: {
-        common: "h-[30px] text-sm rounded-lg",
+        common: "h-[30px] text-sm font-normal rounded-lg",
         withoutAddon: "px-2.5",
       },
       lg: {
-        common: "h-9 text-sm rounded-[10px]",
+        common: "h-9 text-sm font-normal rounded-[10px]",
         withoutAddon: "px-3",
       },
       xl: {
-        common: "h-11 text-base rounded-xl",
+        common: "h-11 text-base font-normal rounded-xl",
         withoutAddon: "px-3",
       },
     },
     variant: {
       outline: {
         common:
-          "bg-white border border-gray-200 text-gray-700 placeholder:text-gray-500 ",
+          "bg-white-900 border border-gray-400 text-gray-800 placeholder:text-gray-600",
         interactions:
-          "hover:shadow-sm hover:border-gray-300 active:border-gray-400 focus-visible:border-gray-400 focus-visible:ring-2 focus-visible:ring-gray-200",
-        disabled: "bg-gray-50",
-        invalid: "border-red-300",
+          "hover:border-gray-500 hover:placeholder:text-gray-700 hover:shadow-sm active:border-gray-500 active:text-gray-800 active:shadow-sm focus-visible:border-transparent focus-visible:ring-3 focus-visible:ring-gray-500",
+        disabled: "bg-gray-100 border-gray-400 text-gray-500",
+        invalid: "border-red-400",
       },
       subtle: {
         common:
-          "bg-gray-100 text-gray-700 border border-transparent placeholder:text-gray-500 ",
+          "bg-gray-100 border border-transparent text-gray-800 placeholder:text-gray-600",
         interactions:
-          "hover:bg-gray-200 active:bg-transparent active:border-gray-300 active:shadow-sm focus-visible:bg-transparent focus-visible:border-gray-400 focus-visible:ring-2 focus-visible:ring-gray-200",
-        disabled: "bg-gray-50 border-gray-200",
+          "hover:bg-gray-200 hover:placeholder:text-gray-700 active:shadow-sm active:text-gray-800 active:bg-white-900 focus-visible:bg-white-900 focus-visible:border-transparent focus-visible:ring-3 focus-visible:ring-gray-500",
+        disabled: "bg-gray-100",
         invalid: "bg-red-50",
       },
       underline: {
         common:
-          "px-0.5 bg-white rounded-none text-gray-700 placeholder:text-gray-500 shadow-input-underline shadow-gray-200 ",
+          "px-0.5 bg-white-900 border border-x-transparent border-t-transparent rounded-none  border-b-gray-400 text-gray-800 placeholder:text-gray-600",
         interactions:
-          "hover:shadow-gray-300 active:shadow-gray-400 focus-visible:shadow-gray-400",
-        disabled: "placeholder:text-gray-400 shadow-gray-200",
-        invalid: "shadow-red-300",
+          "hover:border-b-gray-500 hover:placeholder:text-gray-700 active:border-b-gray-600 active:text-gray-800 focus-visible:border-b-gray-600",
+        disabled: "bg-gray-100 text-gray-500 border-b-gray-400",
+        invalid: "border-b-red-500",
       },
       ghost: {
-        common: "bg-white text-gray-700 placeholder:text-gray-400",
+        common:
+          "bg-white-900 text-gray-800 placeholder:text-gray-600 border border-transparent",
         interactions:
-          "hover:bg-gray-100 hover:placeholder:text-gray-500 active:bg-gray-100 active:placeholder:text-gray-500 focus-visible:bg-gray-100 focus-visible:placeholder:text-gray-500",
-        disabled: "bg-white placeholder:text-gray-500",
-        invalid: "bg-red-50",
+          "hover:bg-gray-100 hover:placeholder:text-gray-700 active:text-gray-800 focus-visible:bg-gray-100 focus-visible:ring-3 focus-visible:ring-gray-500",
+        disabled: "text-gray-500 placeholder:text-gray-500",
+        invalid: "",
       },
     },
   },
@@ -66,28 +67,32 @@ export const input = {
     },
     variant: {
       outline: {
-        common: "text-gray-500",
+        common: "text-gray-600",
         interactions:
-          "peer-active:text-gray-600 peer-focus-visible:text-gray-600 peer-disabled:text-gray-400",
-        disabled: "text-gray-400",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
       subtle: {
-        common: "text-gray-500",
+        common: "text-gray-600",
         interactions:
-          "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
-        disabled: "text-gray-400",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
       underline: {
-        common: "pl-0.5 text-gray-500",
+        common: "pl-0.5 text-gray-600",
         interactions:
-          "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
-        disabled: "text-gray-400",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
       ghost: {
-        common: "text-gray-400",
+        common: "text-gray-600",
         interactions:
-          "peer-hover:text-gray-500 peer-active:text-gray-500  peer-focus-visible:text-gray-500",
-        disabled: "text-gray-400",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
     },
   },
@@ -102,32 +107,32 @@ export const input = {
     },
     variant: {
       outline: {
-        common: "text-gray-500",
+        common: "text-gray-600",
         interactions:
-          "peer-active:text-gray-600 peer-focus-visible:text-gray-600 peer-disabled:text-gray-400",
-        disabled: "text-gray-400",
-        invalid: "text-red-500",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
       subtle: {
-        common: "text-gray-500",
+        common: "text-gray-600",
         interactions:
-          "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
-        disabled: "text-gray-400",
-        invalid: "text-red-500",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
       underline: {
-        common: "pr-0.5 text-gray-500",
+        common: "pr-0.5 text-gray-600",
         interactions:
-          "peer-active:text-gray-600 peer-focus-visible:text-gray-600",
-        disabled: "text-gray-400",
-        invalid: "text-red-500",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
       ghost: {
-        common: "text-gray-400",
+        common: "text-gray-600",
         interactions:
-          "peer-hover:text-gray-500 peer-active:text-gray-500  peer-focus-visible:text-gray-500",
-        disabled: "text-gray-400",
-        invalid: "text-red-500",
+          "peer-hover:text-gray-700 peer-active:text-gray-800 peer-focus-visible:text-gray-800",
+        disabled: "text-gray-500",
+        invalid: "text-red-800",
       },
     },
   },
