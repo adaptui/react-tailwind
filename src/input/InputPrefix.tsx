@@ -35,6 +35,7 @@ export const useInputPrefix = createHook<InputPrefixOptions>(
         ? theme.prefix.variant[variant].interactions
         : "",
       variant && disabled ? theme.prefix.variant[variant].disabled : "",
+      variant && invalid ? theme.suffix.variant[variant].invalid : "",
       props.className,
     );
 
