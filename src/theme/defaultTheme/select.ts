@@ -1,4 +1,4 @@
-export const input = {
+export const select = {
   wrapper: "relative inline-flex",
   base: "peer w-full inline-flex items-center justify-center appearance-none outline-none disabled:cursor-not-allowed disabled:select-none transition",
   prefix:

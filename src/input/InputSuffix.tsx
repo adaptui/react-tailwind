@@ -28,8 +28,7 @@ export const useInputSuffix = createHook<InputSuffixOptions>(
     const className = cx(
       theme.suffix,
       size ? theme.size[size].suffix : "",
-      variant ? theme.variant[variant].default : "",
-      disabled || invalid
+      disabled
         ? ""
         : variant
         ? cx(
@@ -37,10 +36,10 @@ export const useInputSuffix = createHook<InputSuffixOptions>(
             theme.variant[variant].hover.suffix,
             theme.variant[variant].active.suffix,
             theme.variant[variant].focus.suffix,
+            invalid ? theme.variant[variant].invalid.suffix : "",
           )
         : "",
       variant && disabled ? theme.variant[variant].disabled.suffix : "",
-      variant && invalid ? theme.variant[variant].invalid.suffix : "",
       props.className,
     );
 

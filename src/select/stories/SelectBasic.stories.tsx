@@ -14,23 +14,20 @@ export default {
   title: "Forms/Select/Basic",
   component: SelectBasic,
   argTypes: {
-    label: { control: { type: "text" } },
-    description: { control: { type: "text" } },
-    ...createControls(undefined, {
+    ...createControls("select", {
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
+        "ref",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
-        "state",
-        "onStateChange",
-        "icon",
+        "prefix",
+        "suffix",
+        "spinner",
+        "autoFocus",
+        "focusable",
+        "accessibleWhenDisabled",
+        "onFocusVisible",
+        "clickOnEnter",
+        "clickOnSpace",
       ],
     }),
   },
@@ -42,55 +39,85 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: {},
+  args: { size: "md", variant: "outline" },
+};
+
+export const WithPlaceholder: Story = {
+  ...Default,
+  args: { ...Default.args, placeholder: "Search" },
 };
 
 export const Small: Story = {
-  args: { size: "sm" },
+  ...Default,
+  args: { ...Default.args, size: "sm", placeholder: "Search" },
 };
 
 export const Medium: Story = {
-  args: { size: "md" },
+  ...Default,
+  args: { ...Default.args, size: "md", placeholder: "Search" },
 };
 
 export const Large: Story = {
-  args: { size: "lg" },
+  ...Default,
+  args: { ...Default.args, size: "lg", placeholder: "Search" },
 };
 
 export const ExtraLarge: Story = {
-  args: { size: "xl" },
+  ...Default,
+  args: { ...Default.args, size: "xl", placeholder: "Search" },
 };
 
 export const Outline: Story = {
-  args: { variant: "outline" },
+  ...Default,
+  args: { ...Default.args, variant: "outline", placeholder: "Search" },
 };
 
 export const Subtle: Story = {
-  args: { variant: "subtle" },
+  ...Default,
+  args: { ...Default.args, variant: "subtle", placeholder: "Search" },
 };
 
 export const Underline: Story = {
-  args: { variant: "underline" },
+  ...Default,
+  args: { ...Default.args, variant: "underline", placeholder: "Search" },
 };
 
 export const Ghost: Story = {
-  args: { variant: "ghost" },
+  ...Default,
+  args: { ...Default.args, variant: "ghost", placeholder: "Search" },
 };
 
 export const Disabled: Story = {
-  args: { disabled: true },
+  ...Default,
+  args: { ...Default.args, placeholder: "Search", disabled: true },
 };
 
 export const Invalid: Story = {
-  args: { invalid: true },
+  ...Default,
+  args: { ...Default.args, placeholder: "Search", invalid: true },
 };
 
 export const Prefix: Story = {
+  ...Default,
+  args: { ...Default.args, placeholder: "Search", prefix: <SlotIcon /> },
+};
+
+export const Suffix: Story = {
+  ...Default,
+  args: { ...Default.args, placeholder: "Search", suffix: <SlotIcon /> },
+};
+
+export const PrefixSuffix: Story = {
+  ...Default,
   args: {
+    ...Default.args,
+    placeholder: "Search",
     prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
   },
 };
 
 export const Loading: Story = {
-  args: { loading: true, prefix: <SlotIcon /> },
+  ...Default,
+  args: { ...Default.args, placeholder: "Search", loading: true },
 };
