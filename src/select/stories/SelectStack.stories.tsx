@@ -14,23 +14,22 @@ export default {
   title: "Forms/Select/Stack",
   component: SelectStack,
   argTypes: {
-    label: { control: { type: "text" } },
-    description: { control: { type: "text" } },
-    ...createControls(undefined, {
+    ...createControls("select", {
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
+        "ref",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
-        "state",
-        "onStateChange",
-        "icon",
+        "prefix",
+        "suffix",
+        "spinner",
+        "autoFocus",
+        "focusable",
+        "accessibleWhenDisabled",
+        "onFocusVisible",
+        "clickOnEnter",
+        "clickOnSpace",
+        "size",
+        "variant",
       ],
     }),
   },
@@ -42,29 +41,23 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: {},
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
+  args: { placeholder: "Search" },
 };
 
 export const Invalid: Story = {
-  args: { invalid: true },
-};
-
-export const Loading: Story = {
-  args: { loading: true },
+  args: { placeholder: "Search", invalid: true },
 };
 
 export const Prefix: Story = {
   args: {
+    placeholder: "Search",
     prefix: <SlotIcon />,
   },
 };
 
 export const PrefixDisabled: Story = {
   args: {
+    placeholder: "Search",
     prefix: <SlotIcon />,
     disabled: true,
   },
@@ -72,14 +65,67 @@ export const PrefixDisabled: Story = {
 
 export const PrefixInvalid: Story = {
   args: {
+    placeholder: "Search",
     prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
     invalid: true,
   },
 };
 
-export const PrefixLoading: Story = {
+export const Suffix: Story = {
   args: {
+    placeholder: "Search",
+    suffix: <SlotIcon />,
+  },
+};
+
+export const SuffixDisabled: Story = {
+  args: {
+    placeholder: "Search",
+    suffix: <SlotIcon />,
+    disabled: true,
+  },
+};
+
+export const SuffixInvalid: Story = {
+  args: {
+    placeholder: "Search",
+    suffix: <SlotIcon />,
+    invalid: true,
+  },
+};
+
+export const PrefixSuffix: Story = {
+  args: {
+    placeholder: "Search",
     prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
+  },
+};
+
+export const PrefixSuffixDisabled: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
+    disabled: true,
+  },
+};
+
+export const PrefixSuffixInvalid: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
+    invalid: true,
+  },
+};
+
+export const PrefixSuffixLoading: Story = {
+  args: {
+    placeholder: "Search",
+    prefix: <SlotIcon />,
+    suffix: <SlotIcon />,
     loading: true,
   },
 };

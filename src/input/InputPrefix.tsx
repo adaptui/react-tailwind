@@ -28,8 +28,7 @@ export const useInputPrefix = createHook<InputPrefixOptions>(
     const className = cx(
       theme.prefix,
       size ? theme.size[size].prefix : "",
-      variant ? theme.variant[variant].default : "",
-      disabled || invalid
+      disabled
         ? ""
         : variant
         ? cx(
@@ -37,10 +36,10 @@ export const useInputPrefix = createHook<InputPrefixOptions>(
             theme.variant[variant].hover.prefix,
             theme.variant[variant].active.prefix,
             theme.variant[variant].focus.prefix,
+            invalid ? theme.variant[variant].invalid.prefix : "",
           )
         : "",
       variant && disabled ? theme.variant[variant].disabled.prefix : "",
-      variant && invalid ? theme.variant[variant].invalid.prefix : "",
       props.className,
     );
 
