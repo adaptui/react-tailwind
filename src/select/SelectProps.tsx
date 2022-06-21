@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSafeLayoutEffect } from "ariakit-utils";
+import { useForkRef, useSafeLayoutEffect } from "ariakit-utils";
 
 import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
 
@@ -67,8 +67,16 @@ export const useSelectProps = ({
   uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix };
 
   const selectInlineStyles = React.useRef<Record<string, any>>({});
-  const prefixRef = React.useRef<HTMLElement>(null);
-  const suffixRef = React.useRef<HTMLElement>(null);
+  let prefixRef = React.useRef<HTMLElement>(null);
+  let suffixRef = React.useRef<HTMLElement>(null);
+  prefixRef = useForkRef(
+    prefixRef,
+    componentProps?.prefixProps?.ref,
+  ) as unknown as React.RefObject<HTMLElement>;
+  suffixRef = useForkRef(
+    suffixRef,
+    componentProps?.suffixProps?.ref,
+  ) as unknown as React.RefObject<HTMLElement>;
 
   useSafeLayoutEffect(() => {
     let key = "";
@@ -94,38 +102,49 @@ export const useSelectProps = ({
     setHasPaddingCalculated(true);
   }, [uiProps.prefix, uiProps.suffix]);
 
-  const wrapperProps: SelectWrapperProps = {
-    ...uiProps,
-    className,
-    style,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: SelectWrapperProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      className,
+      style,
+      ...componentProps.wrapperProps,
+    }),
+    [className, componentProps.wrapperProps, style, uiProps],
+  );
 
-  const baseProps: SelectBaseProps = {
-    ...uiProps,
-    disabled,
-    ...restProps,
-    style: { ...selectInlineStyles.current },
-    children: finalChildren,
-    ...componentProps.baseProps,
-  };
+  const baseProps: SelectBaseProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...restProps,
+      style: { ...selectInlineStyles.current },
+      ...componentProps.baseProps,
+      children: finalChildren,
+    }),
+    [componentProps.baseProps, disabled, finalChildren, restProps, uiProps],
+  );
 
-  const prefixProps: SelectPrefixProps = {
-    ...uiProps,
-    disabled,
-    ...componentProps.prefixProps,
-    ref: prefixRef,
-    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
-  };
+  const prefixProps: SelectPrefixProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...componentProps.prefixProps,
+      ref: prefixRef,
+      children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
+    }),
+    [componentProps.prefixProps, disabled, uiProps],
+  );
 
-  const suffixProps: SelectSuffixProps = {
-    ...uiProps,
-    disabled,
-    ...componentProps.suffixProps,
-    ref: suffixRef,
-    children: uiProps.suffix,
-  };
-
+  const suffixProps: SelectSuffixProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...componentProps.suffixProps,
+      ref: suffixRef,
+      children: uiProps.suffix,
+    }),
+    [componentProps.suffixProps, disabled, uiProps],
+  );
   return {
     uiProps,
     wrapperProps,

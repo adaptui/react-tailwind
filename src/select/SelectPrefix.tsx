@@ -27,19 +27,19 @@ export const useSelectPrefix = createHook<SelectPrefixOptions>(
     const theme = useTheme("select");
     const className = cx(
       theme.prefix,
-      size ? theme.size[size].prefix : "",
+      size ? theme.size[size]?.prefix : "",
       disabled
         ? ""
         : variant
         ? cx(
-            theme.variant[variant].default.prefix,
-            theme.variant[variant].hover.prefix,
-            theme.variant[variant].active.prefix,
-            theme.variant[variant].focus.prefix,
-            invalid ? theme.variant[variant].invalid.prefix : "",
+            theme.variant[variant]?.default?.prefix,
+            theme.variant[variant]?.hover?.prefix,
+            theme.variant[variant]?.active?.prefix,
+            theme.variant[variant]?.focus?.prefix,
+            invalid ? theme.variant[variant]?.invalid?.prefix : "",
           )
         : "",
-      variant && disabled ? theme.variant[variant].disabled.prefix : "",
+      variant && disabled ? theme.variant[variant]?.disabled?.prefix : "",
       props.className,
     );
 
