@@ -9,6 +9,7 @@ import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { cx } from "../utils";
 
+import { TextareaBaseProps } from "./TextareaBase";
 import { TextareaUIProps } from "./TextareaProps";
 
 export const useTextareaIcon = createHook<TextareaIconOptions>(
@@ -21,6 +22,7 @@ export const useTextareaIcon = createHook<TextareaIconOptions>(
     rowsMin,
     invalid,
     loading,
+    disabled,
     icon,
     spinner,
     autoSizeOnChange,
@@ -31,10 +33,21 @@ export const useTextareaIcon = createHook<TextareaIconOptions>(
   }) => {
     const theme = useTheme("textarea");
     const className = cx(
-      theme.icon.common,
-      autoSize ? theme.icon.normal : "",
-      size ? theme.icon.size[size] : "",
-      invalid ? theme.icon.invalid : "",
+      theme.icon.base,
+      autoSize ? theme.icon.autoSize : "",
+      size ? theme.size[size]?.icon : "",
+      disabled
+        ? ""
+        : variant
+        ? cx(
+            theme.variant[variant]?.default?.icon,
+            theme.variant[variant]?.hover?.icon,
+            theme.variant[variant]?.active?.icon,
+            theme.variant[variant]?.focus?.icon,
+            invalid ? theme.variant[variant]?.invalid?.icon : "",
+          )
+        : "",
+      variant && disabled ? theme.variant[variant]?.disabled?.icon : "",
       props.className,
     );
 
@@ -52,7 +65,8 @@ export const TextareaIcon = createComponent<TextareaIconOptions>(props => {
 });
 
 export type TextareaIconOptions<T extends As = "div"> = BoxOptions<T> &
-  Partial<TextareaUIProps> & {};
+  Partial<TextareaUIProps> &
+  Pick<TextareaBaseProps, "disabled"> & {};
 
 export type TextareaIconProps<T extends As = "div"> = Props<
   TextareaIconOptions<T>

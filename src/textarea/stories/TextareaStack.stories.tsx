@@ -14,23 +14,25 @@ export default {
   title: "Forms/Textarea/Stack",
   component: TextareaStack,
   argTypes: {
-    label: { control: { type: "text" } },
-    description: { control: { type: "text" } },
-    ...createControls(undefined, {
+    ...createControls("textarea", {
       ignore: [
-        "unstable_system",
-        "unstable_clickOnEnter",
-        "unstable_clickOnSpace",
+        "ref",
         "wrapElement",
-        "focusable",
         "as",
-        "setState",
-        "checked",
-        "value",
-        "defaultState",
-        "state",
-        "onStateChange",
         "icon",
+        "spinner",
+        "inputRef",
+        "ghostRef",
+        "inputStyles",
+        "autoSizeOnChange",
+        "autoFocus",
+        "focusable",
+        "accessibleWhenDisabled",
+        "onFocusVisible",
+        "clickOnEnter",
+        "clickOnSpace",
+        "size",
+        "variant",
       ],
     }),
   },
@@ -42,15 +44,23 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { placeholder: "Search" },
+  args: {
+    placeholder: "Search",
+    autoSize: false,
+    disabled: false,
+    invalid: false,
+    loading: false,
+    resize: "none",
+  },
 };
 
 export const Disabled: Story = {
-  args: { placeholder: "Search", disabled: true },
+  args: { ...Default.args, placeholder: "Search", disabled: true },
 };
 
 export const Autosize: Story = {
   args: {
+    ...Default.args,
     placeholder: "Search",
     autoSize: true,
     defaultValue: "Velit voluptatem a veritatis nam ducimus ut corporis.",
@@ -59,6 +69,7 @@ export const Autosize: Story = {
 
 export const Invalid: Story = {
   args: {
+    ...Default.args,
     placeholder: "Search",
     invalid: true,
     icon: <SlotIcon />,
@@ -67,5 +78,10 @@ export const Invalid: Story = {
 };
 
 export const Loading: Story = {
-  args: { placeholder: "Search", autoSize: true, loading: true },
+  args: {
+    ...Default.args,
+    placeholder: "Search",
+    autoSize: true,
+    loading: true,
+  },
 };
