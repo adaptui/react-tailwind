@@ -12,14 +12,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const { wrapperProps, baseProps, iconProps, ghostProps, uiProps } =
       useTextareaProps(props);
-    const { loading, invalid, spinner } = uiProps;
+    const { loading, icon, spinner } = uiProps;
 
     return (
       <TextareaWrapper {...wrapperProps}>
         <TextareaBase ref={ref} {...baseProps} />
         {loading ? (
           runIfFn(spinner, uiProps)
-        ) : invalid ? (
+        ) : icon ? (
           <TextareaIcon {...iconProps} />
         ) : null}
         <TextareaGhost {...ghostProps} />

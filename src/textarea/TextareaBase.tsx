@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { FocusableOptions, useFocusable } from "ariakit";
 import { cx, useEvent, useForkRef } from "ariakit-utils";
 import {
   createComponent,
@@ -7,8 +8,8 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
 
 import { TextareaUIProps } from "./TextareaProps";
 
@@ -31,18 +32,22 @@ export const useTextareaBase = createHook<TextareaBaseOptions>(
     ...props
   }) => {
     const theme = useTheme("textarea");
-    const className = cx(
-      theme.base.common,
-      size ? theme.base.size[size] : "",
-      variant ? theme.base.variant[variant].common : "",
-      props.disabled || invalid
+    const className = tcm(
+      theme.base.default,
+      resize ? theme.base.resize[resize] : "",
+      size ? theme.size[size]?.base : "",
+      props.disabled
         ? ""
         : variant
-        ? theme.base.variant[variant].interactions
+        ? cx(
+            theme.variant[variant]?.default?.base,
+            theme.variant[variant]?.hover?.base,
+            theme.variant[variant]?.active?.base,
+            theme.variant[variant]?.focus?.base,
+            invalid ? theme.variant[variant]?.invalid?.base : "",
+          )
         : "",
-      variant && props.disabled ? theme.base.variant[variant].disabled : "",
-      variant && invalid ? theme.base.variant[variant].invalid : "",
-      resize ? theme.base.resize[resize] : "",
+      variant && props.disabled ? theme.variant[variant]?.disabled?.base : "",
       props.className,
     );
 
@@ -64,7 +69,7 @@ export const useTextareaBase = createHook<TextareaBaseOptions>(
       className,
       style: { ...inputStyles, ...props.style },
     };
-    props = useBox(props);
+    props = useFocusable(props);
 
     return props;
   },
@@ -76,8 +81,8 @@ export const TextareaBase = createComponent<TextareaBaseOptions>(props => {
   return createElement("textarea", htmlProps);
 });
 
-export type TextareaBaseOptions<T extends As = "textarea"> = BoxOptions<T> &
-  Partial<TextareaUIProps> & {};
+export type TextareaBaseOptions<T extends As = "textarea"> =
+  FocusableOptions<T> & Partial<TextareaUIProps> & {};
 
 export type TextareaBaseProps<T extends As = "textarea"> = Props<
   TextareaBaseOptions<T>

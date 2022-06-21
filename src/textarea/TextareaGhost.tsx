@@ -1,3 +1,4 @@
+import { FocusableOptions, useFocusable } from "ariakit";
 import { cx, useForkRef } from "ariakit-utils";
 import {
   createComponent,
@@ -6,8 +7,8 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
+import { tcm } from "../utils";
 
 import { TextareaUIProps } from "./TextareaProps";
 
@@ -30,18 +31,22 @@ export const useTextareaGhost = createHook<TextareaGhostOptions>(
     ...props
   }) => {
     const theme = useTheme("textarea");
-    const className = cx(
-      theme.base.common,
-      size ? theme.base.size[size] : "",
-      variant ? theme.base.variant[variant].common : "",
-      props.disabled || invalid
+    const className = tcm(
+      theme.base.default,
+      resize ? theme.base.resize[resize] : "",
+      size ? theme.size[size]?.base : "",
+      props.disabled
         ? ""
         : variant
-        ? theme.base.variant[variant].interactions
+        ? cx(
+            theme.variant[variant]?.default?.base,
+            theme.variant[variant]?.hover?.base,
+            theme.variant[variant]?.active?.base,
+            theme.variant[variant]?.focus?.base,
+            invalid ? theme.variant[variant]?.invalid?.base : "",
+          )
         : "",
-      variant && props.disabled ? theme.base.variant[variant].disabled : "",
-      variant && invalid ? theme.base.variant[variant].invalid : "",
-      resize ? theme.base.resize[resize] : "",
+      variant && props.disabled ? theme.variant[variant]?.disabled?.base : "",
       theme.ghost,
       props.className,
     );
@@ -52,7 +57,7 @@ export const useTextareaGhost = createHook<TextareaGhostOptions>(
       className,
       ref: useForkRef(ghostRef, props.ref),
     };
-    props = useBox(props);
+    props = useFocusable(props);
 
     return props;
   },
@@ -64,8 +69,8 @@ export const TextareaGhost = createComponent<TextareaGhostOptions>(props => {
   return createElement("textarea", htmlProps);
 });
 
-export type TextareaGhostOptions<T extends As = "textarea"> = BoxOptions<T> &
-  Partial<TextareaUIProps> & {};
+export type TextareaGhostOptions<T extends As = "textarea"> =
+  FocusableOptions<T> & Partial<TextareaUIProps> & {};
 
 export type TextareaGhostProps<T extends As = "textarea"> = Props<
   TextareaGhostOptions<T>

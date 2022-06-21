@@ -34,6 +34,7 @@ export const useTextareaProps = ({
   className,
   style,
   children,
+  disabled,
   ...restProps
 }: TextareaProps): TextareaPropsReturn => {
   const uiState = useTextareaUIState({
@@ -69,20 +70,23 @@ export const useTextareaProps = ({
     ...uiProps,
     placeholder,
     value,
+    disabled,
     ...restProps,
     ...componentProps.baseProps,
   };
 
-  const iconProps: TextareaIconProps = {
-    ...uiProps,
-    ...componentProps.iconProps,
-    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
-  };
-
   const ghostProps: TextareaGhostProps = {
     ...uiProps,
+    disabled,
     ...restProps,
     ...componentProps.ghostProps,
+  };
+
+  const iconProps: TextareaIconProps = {
+    ...uiProps,
+    disabled,
+    ...componentProps.iconProps,
+    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
   };
 
   return {

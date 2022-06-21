@@ -17,7 +17,7 @@ export function useTextareaUIState(
     rowsMin = 1,
     invalid = false,
     loading = false,
-    icon = <SlotIcon />,
+    icon = invalid ? <SlotIcon /> : null,
     spinner = DefaultTextareaSpinner,
   } = props;
 
@@ -44,14 +44,14 @@ export type TextareaUIState = {
    *
    * @default md
    */
-  size: keyof AdaptUI.GetThemeValue<"textarea", "base", "size">;
+  size: keyof AdaptUI.GetThemeValue<"textarea", "size">;
 
   /**
    * How the textarea should look?
    *
    * @default outline
    */
-  variant: keyof AdaptUI.GetThemeValue<"textarea", "base", "variant">;
+  variant: keyof AdaptUI.GetThemeValue<"textarea", "variant">;
 
   /**
    * Minimum number of rows to be displayed.

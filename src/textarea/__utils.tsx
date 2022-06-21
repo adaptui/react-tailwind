@@ -10,7 +10,7 @@ export const DefaultTextareaSpinner = (props: TextareaUIProps) => {
 
   return (
     <Spinner
-      className={tcm(theme.icon.common, autoSize ? theme.icon.normal : "")}
+      className={tcm(theme.icon.base, autoSize ? theme.icon.autoSize : "")}
       size={size !== "xl" ? "xs" : "md"}
     />
   );
