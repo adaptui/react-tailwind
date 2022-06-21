@@ -104,15 +104,11 @@ export const useTextareaProps = ({
     [componentProps.spinnerProps, disabled, uiProps],
   );
 
-  const iconProps: TextareaIconProps = React.useMemo(
-    () => ({
-      ...uiProps,
-      disabled,
-      ...componentProps.iconProps,
-      children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
-    }),
-    [componentProps.iconProps, disabled, uiProps],
-  );
+  const iconProps: TextareaIconProps = {
+    ...uiProps,
+    ...componentProps.iconProps,
+    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
+  };
 
   const ghostProps: TextareaGhostProps = React.useMemo(
     () => ({
