@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSafeLayoutEffect } from "ariakit-utils";
+import { useForkRef, useSafeLayoutEffect } from "ariakit-utils";
 
 import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
 
@@ -63,9 +63,16 @@ export const useInputProps = ({
   uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix };
 
   const inputInlineStyles = React.useRef<Record<string, any>>({});
-  const prefixRef = React.useRef<HTMLElement>(null);
-  const suffixRef = React.useRef<HTMLElement>(null);
-
+  let prefixRef = React.useRef<HTMLElement>(null);
+  let suffixRef = React.useRef<HTMLElement>(null);
+  prefixRef = useForkRef(
+    prefixRef,
+    componentProps?.prefixProps?.ref,
+  ) as unknown as React.RefObject<HTMLElement>;
+  suffixRef = useForkRef(
+    suffixRef,
+    componentProps?.suffixProps?.ref,
+  ) as unknown as React.RefObject<HTMLElement>;
   useSafeLayoutEffect(() => {
     let key = "";
 
@@ -90,36 +97,48 @@ export const useInputProps = ({
     setHasPaddingCalculated(true);
   }, [uiProps.prefix, uiProps.suffix]);
 
-  const wrapperProps: InputWrapperProps = {
-    ...uiProps,
-    className,
-    style,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: InputWrapperProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      className,
+      style,
+      ...componentProps.wrapperProps,
+    }),
+    [className, componentProps.wrapperProps, style, uiProps],
+  );
 
-  const baseProps: InputBaseProps = {
-    ...uiProps,
-    disabled,
-    ...restProps,
-    style: { ...inputInlineStyles.current },
-    ...componentProps.baseProps,
-  };
+  const baseProps: InputBaseProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...restProps,
+      style: { ...inputInlineStyles.current },
+      ...componentProps.baseProps,
+    }),
+    [componentProps.baseProps, disabled, restProps, uiProps],
+  );
 
-  const prefixProps: InputPrefixProps = {
-    ...uiProps,
-    disabled,
-    ...componentProps.prefixProps,
-    ref: prefixRef,
-    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
-  };
+  const prefixProps: InputPrefixProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...componentProps.prefixProps,
+      ref: prefixRef,
+      children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
+    }),
+    [componentProps.prefixProps, disabled, uiProps],
+  );
 
-  const suffixProps: InputSuffixProps = {
-    ...uiProps,
-    disabled,
-    ...componentProps.suffixProps,
-    ref: suffixRef,
-    children: uiProps.suffix,
-  };
+  const suffixProps: InputSuffixProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...componentProps.suffixProps,
+      ref: suffixRef,
+      children: uiProps.suffix,
+    }),
+    [componentProps.suffixProps, disabled, uiProps],
+  );
 
   return {
     uiProps,
