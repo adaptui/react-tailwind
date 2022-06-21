@@ -12,7 +12,7 @@ import { cx } from "../utils";
 import { CheckboxInputOptions } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
 
-export const useCheckboxText = createHook<CheckboxTextOptions>(
+export const useCheckboxTextWrapper = createHook<CheckboxTextWrapperOptions>(
   ({
     state,
     size,
@@ -30,18 +30,7 @@ export const useCheckboxText = createHook<CheckboxTextOptions>(
   }) => {
     const theme = useTheme("checkbox");
     const className = cx(
-      theme.text,
-      size ? theme.size[size]?.text : "",
-      themeColor
-        ? !disabled
-          ? cx(
-              theme.themeColor[themeColor]?.default?.text,
-              theme.themeColor[themeColor]?.hover?.text,
-              theme.themeColor[themeColor]?.active?.text,
-              theme.themeColor[themeColor]?.focus?.text,
-            )
-          : theme.themeColor[themeColor]?.disabled?.text
-        : "",
+      label && !description ? theme.textWrapper : "",
       props.className,
     );
 
@@ -52,16 +41,18 @@ export const useCheckboxText = createHook<CheckboxTextOptions>(
   },
 );
 
-export const CheckboxText = createComponent<CheckboxTextOptions>(props => {
-  const htmlProps = useCheckboxText(props);
+export const CheckboxTextWrapper = createComponent<CheckboxTextWrapperOptions>(
+  props => {
+    const htmlProps = useCheckboxTextWrapper(props);
 
-  return createElement("div", htmlProps);
-});
+    return createElement("div", htmlProps);
+  },
+);
 
-export type CheckboxTextOptions<T extends As = "div"> = BoxOptions<T> &
+export type CheckboxTextWrapperOptions<T extends As = "div"> = BoxOptions<T> &
   Pick<CheckboxInputOptions, "disabled"> &
   Partial<CheckboxUIProps> & {};
 
-export type CheckboxTextProps<T extends As = "div"> = Props<
-  CheckboxTextOptions<T>
+export type CheckboxTextWrapperProps<T extends As = "div"> = Props<
+  CheckboxTextWrapperOptions<T>
 >;

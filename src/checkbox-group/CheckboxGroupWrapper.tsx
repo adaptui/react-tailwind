@@ -13,10 +13,10 @@ import { CheckboxGroupUIProps } from "./CheckboxGroupProps";
 
 export const useCheckboxGroupWrapper = createHook<CheckboxGroupWrapperOptions>(
   ({ state, size, themeColor, stack, maxVisibleItems, prefix, ...props }) => {
-    const theme = useTheme("checkbox");
+    const theme = useTheme("checkboxGroup");
     const className = cx(
-      stack ? theme.group[stack] : "",
-      stack && size ? theme.group.size[size]?.[stack] : "",
+      stack ? theme[stack] : "",
+      stack && size ? theme.size[size]?.[stack] : "",
       props.className,
     );
 

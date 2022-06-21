@@ -1,7 +1,6 @@
 import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
 
 import { CheckboxUIProps, Value } from "../checkbox";
-import { ShowMoreButtonProps, ShowMoreContentProps } from "../show-more";
 import { getComponentProps, RenderProp } from "../utils";
 
 import {
@@ -10,11 +9,11 @@ import {
   useCheckboxGroupUIState,
 } from "./CheckboxGroupUIState";
 import { CheckboxGroupWrapperProps } from "./CheckboxGroupWrapper";
+import { CheckboxShowMoreProps } from "./CheckboxShowMore";
 
 const componentMap = {
   CheckboxGroupWrapper: "wrapperProps",
-  ShowMoreContent: "contentProps",
-  ShowMoreButton: "buttonProps",
+  CheckboxShowMore: "showMoreProps",
 };
 
 export const useCheckboxGroupProps = ({
@@ -67,12 +66,11 @@ export const useCheckboxGroupProps = ({
     ...componentProps?.wrapperProps,
   };
 
-  const buttonProps: ShowMoreButtonProps = {
-    ...componentProps?.buttonProps,
-  };
-
-  const contentProps: ShowMoreContentProps = {
-    ...componentProps?.contentProps,
+  const showMoreProps: CheckboxShowMoreProps = {
+    ...uiProps,
+    direction: uiProps.stack,
+    ...componentProps?.showMoreProps,
+    children: moreChildren,
   };
 
   return {
@@ -80,8 +78,7 @@ export const useCheckboxGroupProps = ({
     visibleChildren,
     moreChildren,
     wrapperProps,
-    buttonProps,
-    contentProps,
+    showMoreProps,
   };
 };
 
@@ -98,9 +95,8 @@ export type CheckboxGroupUIProps = CheckboxGroupUIState & {
 
 export type CheckboxGroupPropsReturn = {
   wrapperProps: CheckboxGroupWrapperProps;
-  contentProps: ShowMoreContentProps;
-  buttonProps: ShowMoreButtonProps;
   uiProps: CheckboxGroupUIProps;
   visibleChildren: React.ReactNode;
   moreChildren: React.ReactNode;
+  showMoreProps: CheckboxShowMoreProps;
 };

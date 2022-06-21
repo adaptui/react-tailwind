@@ -31,38 +31,38 @@ export const useCheckboxIcon = createHook<CheckboxIconOptions>(
     const theme = useTheme("checkbox");
     const className = cx(
       theme.icon,
-      size ? theme.size[size].icon : "",
+      size ? theme.size[size]?.icon : "",
       themeColor && isUnchecked === true
         ? !disabled
           ? cx(
-              theme.themeColor[themeColor].default.icon.unChecked,
-              theme.themeColor[themeColor].hover.icon.unChecked,
-              theme.themeColor[themeColor].active.icon.unChecked,
-              theme.themeColor[themeColor].focus.icon.unChecked,
+              theme.themeColor[themeColor]?.default?.icon?.unChecked,
+              theme.themeColor[themeColor]?.hover?.icon?.unChecked,
+              theme.themeColor[themeColor]?.active?.icon?.unChecked,
+              theme.themeColor[themeColor]?.focus?.icon?.unChecked,
             )
-          : theme.themeColor[themeColor].disabled.icon.unChecked
+          : theme.themeColor[themeColor]?.disabled?.icon?.unChecked
         : "",
       themeColor && isChecked === true
         ? !disabled
           ? cx(
-              theme.themeColor[themeColor].default.icon.checked,
-              theme.themeColor[themeColor].hover.icon.checked,
-              theme.themeColor[themeColor].active.icon.checked,
-              theme.themeColor[themeColor].focus.icon.checked,
+              theme.themeColor[themeColor]?.default?.icon?.checked,
+              theme.themeColor[themeColor]?.hover?.icon?.checked,
+              theme.themeColor[themeColor]?.active?.icon?.checked,
+              theme.themeColor[themeColor]?.focus?.icon?.checked,
             )
-          : theme.themeColor[themeColor].disabled.icon.checked
+          : theme.themeColor[themeColor]?.disabled?.icon?.checked
         : "",
       themeColor && isIndeterminate === true
         ? !disabled
           ? cx(
-              theme.themeColor[themeColor].default.icon.indeterminate,
-              theme.themeColor[themeColor].hover.icon.indeterminate,
-              theme.themeColor[themeColor].active.icon.indeterminate,
+              theme.themeColor[themeColor]?.default?.icon?.indeterminate,
+              theme.themeColor[themeColor]?.hover?.icon?.indeterminate,
+              theme.themeColor[themeColor]?.active?.icon?.indeterminate,
               !label || description
-                ? theme.themeColor[themeColor].focus.icon.indeterminate
+                ? theme.themeColor[themeColor]?.focus?.icon?.indeterminate
                 : "",
             )
-          : theme.themeColor[themeColor].disabled.icon.indeterminate
+          : theme.themeColor[themeColor]?.disabled?.icon?.indeterminate
         : "",
       props.className,
     );

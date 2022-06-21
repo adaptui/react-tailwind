@@ -1,5 +1,5 @@
 export const spinner = {
-  base: "inline-block border-current animate-spin",
+  base: "inline-block animate-spin",
   size: {
     xs: "h-3 w-3 border-[1.5px] border-solid rounded-full",
     sm: "h-3.5 w-3.5 border-[1.5px] border-solid rounded-full",
