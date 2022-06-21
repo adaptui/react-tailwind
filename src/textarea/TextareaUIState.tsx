@@ -1,3 +1,5 @@
+import React from "react";
+
 import { SlotIcon } from "../icons";
 import { RenderProp } from "../utils";
 
@@ -12,30 +14,53 @@ export function useTextareaUIState(
     size = "md",
     variant = "outline",
     autoSize = false,
-    resize = autoSize ? "none" : "horizontal",
+    resize,
     rowsMax = Infinity,
     rowsMin = 1,
     invalid = false,
     loading = false,
-    icon = invalid ? <SlotIcon /> : null,
+    icon,
     spinner = DefaultTextareaSpinner,
   } = props;
 
+  const _resize = autoSize ? "none" : resize ?? "horizontal";
+  const _icon = React.useMemo(
+    () => (invalid ? <SlotIcon /> : icon),
+    [icon, invalid],
+  );
+
   const autoSizeState = useAutoSize(props);
 
-  return {
-    size,
-    variant,
-    autoSize,
-    resize,
-    rowsMax,
-    rowsMin,
-    invalid,
-    loading,
-    icon,
-    spinner,
-    ...autoSizeState,
-  };
+  const uiState = React.useMemo(
+    () => ({
+      size,
+      variant,
+      autoSize,
+      resize: _resize,
+      rowsMax,
+      rowsMin,
+      invalid,
+      loading,
+      icon: _icon,
+      spinner,
+      ...autoSizeState,
+    }),
+    [
+      autoSize,
+      autoSizeState,
+      _icon,
+      invalid,
+      loading,
+      _resize,
+      rowsMax,
+      rowsMin,
+      size,
+      spinner,
+      variant,
+    ],
+  );
+
+  return uiState;
 }
 
 export type TextareaUIState = {

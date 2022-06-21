@@ -1,9 +1,12 @@
+import React from "react";
+
 import { getComponentProps } from "../index";
 import { RenderProp, runIfFn, withIconA11y } from "../utils";
 
 import { TextareaBaseProps } from "./TextareaBase";
 import { TextareaGhostProps } from "./TextareaGhost";
 import { TextareaIconProps } from "./TextareaIcon";
+import { TextareaSpinnerProps } from "./TextareaSpinner";
 import {
   TextareaUIState,
   TextareaUIStateProps,
@@ -14,6 +17,7 @@ import { TextareaWrapperProps } from "./TextareaWrapper";
 const componentMap = {
   TextareaWrapper: "wrapperProps",
   TextareaBase: "baseProps",
+  TextareaSpinner: "spinnerProps",
   TextareaIcon: "iconProps",
   TextareaGhost: "ghostProps",
 };
@@ -55,44 +59,76 @@ export const useTextareaProps = ({
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   const _icon: TextareaProps["icon"] =
-    componentProps?.iconProps?.children || icon;
+    componentProps?.iconProps?.children || uiProps.icon;
+  const _spinner: TextareaProps["spinner"] =
+    componentProps?.spinnerProps?.children || uiProps.spinner;
 
-  uiProps = { ...uiProps, icon: _icon };
+  uiProps = { ...uiProps, spinner: _spinner, icon: _icon };
 
-  const wrapperProps: TextareaWrapperProps = {
-    ...uiProps,
-    className,
-    style,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: TextareaWrapperProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      className,
+      style,
+      ...componentProps.wrapperProps,
+    }),
+    [className, componentProps.wrapperProps, style, uiProps],
+  );
 
-  const baseProps: TextareaBaseProps = {
-    ...uiProps,
-    placeholder,
-    value,
-    disabled,
-    ...restProps,
-    ...componentProps.baseProps,
-  };
+  const baseProps: TextareaBaseProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      placeholder,
+      value,
+      disabled,
+      ...restProps,
+      ...componentProps.baseProps,
+    }),
+    [
+      componentProps.baseProps,
+      disabled,
+      placeholder,
+      restProps,
+      uiProps,
+      value,
+    ],
+  );
 
-  const ghostProps: TextareaGhostProps = {
-    ...uiProps,
-    disabled,
-    ...restProps,
-    ...componentProps.ghostProps,
-  };
+  const spinnerProps: TextareaSpinnerProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...componentProps.spinnerProps,
+      children: runIfFn(uiProps.spinner, uiProps),
+    }),
+    [componentProps.spinnerProps, disabled, uiProps],
+  );
 
-  const iconProps: TextareaIconProps = {
-    ...uiProps,
-    disabled,
-    ...componentProps.iconProps,
-    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
-  };
+  const iconProps: TextareaIconProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...componentProps.iconProps,
+      children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
+    }),
+    [componentProps.iconProps, disabled, uiProps],
+  );
+
+  const ghostProps: TextareaGhostProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      disabled,
+      ...restProps,
+      ...componentProps.ghostProps,
+    }),
+    [componentProps.ghostProps, disabled, restProps, uiProps],
+  );
 
   return {
     uiProps,
     wrapperProps,
     baseProps,
+    spinnerProps,
     iconProps,
     ghostProps,
   };
@@ -108,7 +144,8 @@ export type TextareaProps = Omit<TextareaBaseProps, "children"> &
 export type TextareaPropsReturn = {
   wrapperProps: TextareaWrapperProps;
   baseProps: TextareaBaseProps;
-  ghostProps: TextareaGhostProps;
+  spinnerProps: TextareaSpinnerProps;
   iconProps: TextareaIconProps;
+  ghostProps: TextareaGhostProps;
   uiProps: TextareaUIProps;
 };

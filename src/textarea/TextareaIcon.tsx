@@ -34,7 +34,7 @@ export const useTextareaIcon = createHook<TextareaIconOptions>(
     const theme = useTheme("textarea");
     const className = cx(
       theme.icon.base,
-      autoSize ? theme.icon.autoSize : "",
+      autoSize || resize === "none" ? theme.icon.autoSize : "",
       size ? theme.size[size]?.icon : "",
       disabled
         ? ""
