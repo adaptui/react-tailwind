@@ -1,13 +1,12 @@
 import * as React from "react";
 
-import { cx } from "../utils";
-
 import { RadioDescription } from "./RadioDescription";
 import { RadioIcon } from "./RadioIcon";
 import { RadioInput } from "./RadioInput";
 import { RadioLabel } from "./RadioLabel";
 import { RadioProps, useRadioProps } from "./RadioProps";
 import { RadioText } from "./RadioText";
+import { RadioTextWrapper } from "./RadioTextWrapper";
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   (props, ref) => {
@@ -15,6 +14,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       labelProps,
       inputProps,
       iconProps,
+      textWrapperProps,
       textProps,
       descriptionProps,
       uiProps,
@@ -25,13 +25,12 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       <RadioLabel {...labelProps}>
         <RadioInput ref={ref} {...inputProps} />
         <RadioIcon {...iconProps} />
-        {/* TODO: Create a new component & check for shadows */}
-        <div className={cx(label && !description ? "flex items-center" : "")}>
+        <RadioTextWrapper {...textWrapperProps}>
           {label ? <RadioText {...textProps} /> : null}
           {label && description ? (
             <RadioDescription {...descriptionProps} />
           ) : null}
-        </div>
+        </RadioTextWrapper>
       </RadioLabel>
     );
   },

@@ -1,3 +1,4 @@
+import React from "react";
 import { CheckboxState, CheckboxStateProps, useCheckboxState } from "ariakit";
 
 import { CheckboxUIProps, Value } from "../checkbox";
@@ -39,10 +40,13 @@ export const useCheckboxGroupProps = ({
     stack,
     maxVisibleItems,
   });
-  const uiProps: CheckboxGroupUIProps = {
-    state: withState ? state : undefined,
-    ...uiState,
-  };
+  const uiProps: CheckboxGroupUIProps = React.useMemo(
+    () => ({
+      state: withState ? state : undefined,
+      ...uiState,
+    }),
+    [state, uiState, withState],
+  );
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
@@ -60,18 +64,24 @@ export const useCheckboxGroupProps = ({
       ? null
       : (finalChildren.slice(uiProps.maxVisibleItems) as React.ReactNode);
 
-  const wrapperProps: CheckboxGroupWrapperProps = {
-    ...uiProps,
-    ...restProps,
-    ...componentProps?.wrapperProps,
-  };
+  const wrapperProps: CheckboxGroupWrapperProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps?.wrapperProps,
+    }),
+    [componentProps?.wrapperProps, restProps, uiProps],
+  );
 
-  const showMoreProps: CheckboxShowMoreProps = {
-    ...uiProps,
-    direction: uiProps.stack,
-    ...componentProps?.showMoreProps,
-    children: moreChildren,
-  };
+  const showMoreProps: CheckboxShowMoreProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      direction: uiProps.stack,
+      ...componentProps?.showMoreProps,
+      children: moreChildren,
+    }),
+    [componentProps?.showMoreProps, moreChildren, uiProps],
+  );
 
   return {
     uiProps,
@@ -94,9 +104,9 @@ export type CheckboxGroupUIProps = CheckboxGroupUIState & {
 };
 
 export type CheckboxGroupPropsReturn = {
-  wrapperProps: CheckboxGroupWrapperProps;
   uiProps: CheckboxGroupUIProps;
   visibleChildren: React.ReactNode;
   moreChildren: React.ReactNode;
+  wrapperProps: CheckboxGroupWrapperProps;
   showMoreProps: CheckboxShowMoreProps;
 };

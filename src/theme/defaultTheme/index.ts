@@ -11,6 +11,7 @@ import { input } from "./input";
 import { meter } from "./meter";
 import { progress } from "./progress";
 import { radio } from "./radio";
+import { radioGroup } from "./radioGroup";
 import { select } from "./select";
 import { slider } from "./slider";
 import { spinner } from "./spinner";
@@ -34,6 +35,7 @@ export const theme = {
   meter,
   progress,
   radio,
+  radioGroup,
   slider,
   spinner,
   switch: _switch,

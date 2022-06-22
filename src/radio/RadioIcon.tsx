@@ -29,25 +29,25 @@ export const useRadioIcon = createHook<RadioIconOptions>(
     const theme = useTheme("radio");
     const className = cx(
       theme.icon,
-      size ? theme.size[size].icon : "",
+      size ? theme.size[size]?.icon : "",
       themeColor
         ? isChecked === true
           ? !disabled
             ? cx(
-                theme.themeColor[themeColor].default.icon.checked,
-                theme.themeColor[themeColor].hover.icon.checked,
-                theme.themeColor[themeColor].active.icon.checked,
-                theme.themeColor[themeColor].focus.icon.checked,
+                theme.themeColor[themeColor]?.default?.icon?.checked,
+                theme.themeColor[themeColor]?.hover?.icon?.checked,
+                theme.themeColor[themeColor]?.active?.icon?.checked,
+                theme.themeColor[themeColor]?.focus?.icon?.checked,
               )
-            : theme.themeColor[themeColor].disabled.icon.checked
+            : theme.themeColor[themeColor]?.disabled?.icon?.checked
           : !disabled
           ? cx(
-              theme.themeColor[themeColor].default.icon.unChecked,
-              theme.themeColor[themeColor].hover.icon.unChecked,
-              theme.themeColor[themeColor].active.icon.unChecked,
-              theme.themeColor[themeColor].focus.icon.unChecked,
+              theme.themeColor[themeColor]?.default?.icon?.unChecked,
+              theme.themeColor[themeColor]?.hover?.icon?.unChecked,
+              theme.themeColor[themeColor]?.active?.icon?.unChecked,
+              theme.themeColor[themeColor]?.focus?.icon?.unChecked,
             )
-          : theme.themeColor[themeColor].disabled.icon.unChecked
+          : theme.themeColor[themeColor]?.disabled?.icon?.unChecked
         : "",
       props.className,
     );

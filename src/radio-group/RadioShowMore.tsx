@@ -2,49 +2,51 @@ import * as React from "react";
 
 import { PlusIcon } from "../icons";
 import {
-  ShowMore,
   ShowMoreButton,
-  ShowMoreButtonProps,
   ShowMoreContent,
-  ShowMoreContentProps,
+  ShowMoreProps,
+  useShowMoreProps,
 } from "../show-more";
 import { useTheme } from "../theme";
 import { cx, passProps } from "../utils";
 
 import { RadioGroupUIProps } from "./RadioGroupProps";
 
-export type RadioShowMoreProps = {
-  contentProps: ShowMoreContentProps;
-  buttonProps: ShowMoreButtonProps;
-  uiProps: RadioGroupUIProps;
-  moreChildren: React.ReactNode;
-};
+export type RadioShowMoreProps = ShowMoreProps &
+  Partial<RadioGroupUIProps> & {};
 
-export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
-  const { contentProps, moreChildren, buttonProps, uiProps } = props;
-  const { stack, size, themeColor } = uiProps;
+export const RadioShowMore: React.FC<RadioShowMoreProps> = ({
+  state,
+  size,
+  themeColor,
+  stack = "horizontal",
+  maxVisibleItems,
+  prefix,
+  ...props
+}) => {
+  const { buttonProps, contentProps } = useShowMoreProps(props);
+  const children = contentProps.children as React.ReactNode;
 
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
-
-  const theme = useTheme("radio");
-  const buttonClassName = cx(
-    theme.group.showMore.button.common[stack],
-    hasExpandStarted ? "" : theme.group.showMore.button.expanded[stack],
-  );
-  const contentClassName = cx(theme.group.showMore.content[stack]);
-
-  const finalChildren = React.Children.map(moreChildren, child => {
+  const finalChildren = React.Children.map(children, child => {
     return passProps(child, { disabled: hasExpandStarted ? false : true });
   });
 
+  const theme = useTheme("radioGroup");
+  const buttonClassName = cx(
+    theme.showMore.button.common[stack],
+    hasExpandStarted ? "" : theme.showMore.button.expanded[stack],
+  );
+  const contentClassName = cx(theme.showMore.content[stack]);
+
   return (
-    <ShowMore direction={stack}>
-      {finalChildren}
+    <>
       <ShowMoreContent
         className={contentClassName}
         onExpandStart={() => setHasExpandStarted(true)}
         onCollapseStart={() => setHasExpandStarted(false)}
         {...contentProps}
+        children={finalChildren}
       />
       <ShowMoreButton
         variant="ghost"
@@ -54,7 +56,7 @@ export const RadioShowMore: React.FC<RadioShowMoreProps> = props => {
         className={buttonClassName}
         {...buttonProps}
       />
-    </ShowMore>
+    </>
   );
 };
 

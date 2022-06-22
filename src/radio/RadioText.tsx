@@ -29,16 +29,16 @@ export const useRadioText = createHook<RadioTextOptions>(
     const theme = useTheme("radio");
     const className = cx(
       theme.text,
-      size ? theme.size[size].text : "",
+      size ? theme.size[size]?.text : "",
       themeColor
         ? !disabled
           ? cx(
-              theme.themeColor[themeColor].default.text,
-              theme.themeColor[themeColor].hover.text,
-              theme.themeColor[themeColor].active.text,
-              theme.themeColor[themeColor].focus.text,
+              theme.themeColor[themeColor]?.default?.text,
+              theme.themeColor[themeColor]?.hover?.text,
+              theme.themeColor[themeColor]?.active?.text,
+              theme.themeColor[themeColor]?.focus?.text,
             )
-          : theme.themeColor[themeColor].disabled.text
+          : theme.themeColor[themeColor]?.disabled?.text
         : "",
       props.className,
     );

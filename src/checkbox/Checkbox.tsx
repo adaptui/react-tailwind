@@ -14,6 +14,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       labelProps,
       inputProps,
       iconProps,
+      textWrapperProps,
       textProps,
       descriptionProps,
       uiProps,
@@ -24,7 +25,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <CheckboxLabel {...labelProps}>
         <CheckboxInput ref={ref} {...inputProps} />
         <CheckboxIcon {...iconProps} />
-        <CheckboxTextWrapper>
+        <CheckboxTextWrapper {...textWrapperProps}>
           {label ? <CheckboxText {...textProps} /> : null}
           {label && description ? (
             <CheckboxDescription {...descriptionProps} />

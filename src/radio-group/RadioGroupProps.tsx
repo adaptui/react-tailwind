@@ -1,7 +1,7 @@
+import React from "react";
 import { RadioState, RadioStateProps, useRadioState } from "ariakit";
 
 import { RadioUIProps } from "../radio/RadioProps";
-import { ShowMoreButtonProps, ShowMoreContentProps } from "../show-more";
 import { getComponentProps, RenderProp } from "../utils";
 
 import {
@@ -10,11 +10,11 @@ import {
   useRadioGroupUIState,
 } from "./RadioGroupUIState";
 import { RadioGroupWrapperProps } from "./RadioGroupWrapper";
+import { RadioShowMoreProps } from "./RadioShowMore";
 
 const componentMap = {
   RadioGroupWrapper: "wrapperProps",
-  ShowMoreContent: "contentProps",
-  ShowMoreButton: "buttonProps",
+  RadioShowMore: "showMoreProps",
 };
 
 export const useRadioGroupProps = ({
@@ -54,10 +54,13 @@ export const useRadioGroupProps = ({
     stack,
     maxVisibleItems,
   });
-  const uiProps: RadioGroupUIProps = {
-    state: withState ? state : undefined,
-    ...uiState,
-  };
+  const uiProps: RadioGroupUIProps = React.useMemo(
+    () => ({
+      state: withState ? state : undefined,
+      ...uiState,
+    }),
+    [state, uiState, withState],
+  );
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
@@ -75,27 +78,30 @@ export const useRadioGroupProps = ({
       ? null
       : (finalChildren.slice(uiProps.maxVisibleItems) as React.ReactNode);
 
-  const wrapperProps: RadioGroupWrapperProps = {
-    ...uiProps,
-    ...restProps,
-    ...componentProps?.wrapperProps,
-  };
+  const wrapperProps: RadioGroupWrapperProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps?.wrapperProps,
+    }),
+    [componentProps?.wrapperProps, restProps, uiProps],
+  );
 
-  const buttonProps: ShowMoreButtonProps = {
-    ...componentProps?.buttonProps,
-  };
-
-  const contentProps: ShowMoreContentProps = {
-    ...componentProps?.contentProps,
-  };
-
+  const showMoreProps: RadioShowMoreProps = React.useMemo(
+    () => ({
+      ...uiProps,
+      direction: uiProps.stack,
+      ...componentProps?.showMoreProps,
+      children: moreChildren,
+    }),
+    [componentProps?.showMoreProps, moreChildren, uiProps],
+  );
   return {
     uiProps,
     visibleChildren,
     moreChildren,
     wrapperProps,
-    buttonProps,
-    contentProps,
+    showMoreProps,
   };
 };
 
@@ -111,10 +117,9 @@ export type RadioGroupUIProps = RadioGroupUIState & {
 };
 
 export type RadioGroupPropsReturn = {
-  wrapperProps: RadioGroupWrapperProps;
-  contentProps: ShowMoreContentProps;
-  buttonProps: ShowMoreButtonProps;
   uiProps: RadioGroupUIProps;
   visibleChildren: React.ReactNode;
   moreChildren: React.ReactNode;
+  wrapperProps: RadioGroupWrapperProps;
+  showMoreProps: RadioShowMoreProps;
 };
