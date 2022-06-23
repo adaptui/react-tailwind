@@ -4,6 +4,7 @@ import { RadioState, RadioStateProps, useRadioState } from "ariakit";
 import { RadioUIProps } from "../radio/RadioProps";
 import { getComponentProps, RenderProp } from "../utils";
 
+import { getIndexOfActiveItem } from "./__utils";
 import {
   RadioGroupUIState,
   RadioGroupUIStateProps,
@@ -18,7 +19,6 @@ const componentMap = {
 };
 
 export const useRadioGroupProps = ({
-  withState = true,
   value,
   defaultValue,
   setValue,
@@ -44,9 +44,23 @@ export const useRadioGroupProps = ({
   ...restProps
 }: RadioGroupProps): RadioGroupPropsReturn => {
   const state = useRadioState({
-    defaultValue,
     value,
+    defaultValue,
     setValue,
+    virtualFocus,
+    orientation,
+    rtl,
+    focusLoop,
+    focusWrap,
+    focusShift,
+    moves,
+    setMoves,
+    includesBaseElement,
+    activeId,
+    defaultActiveId,
+    setActiveId,
+    items,
+    setItems,
   });
   const uiState = useRadioGroupUIState({
     size,
@@ -56,27 +70,16 @@ export const useRadioGroupProps = ({
   });
   const uiProps: RadioGroupUIProps = React.useMemo(
     () => ({
-      state: withState ? state : undefined,
+      state,
       ...uiState,
     }),
-    [state, uiState, withState],
+    [state, uiState],
   );
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
     children,
     uiProps,
   );
-
-  const visibleChildren: React.ReactNode =
-    uiProps.maxVisibleItems == null
-      ? (finalChildren as React.ReactNode)
-      : (finalChildren.slice(0, uiProps.maxVisibleItems) as React.ReactNode);
-
-  const moreChildren: React.ReactNode =
-    uiProps.maxVisibleItems == null ||
-    finalChildren.length <= uiProps.maxVisibleItems
-      ? null
-      : (finalChildren.slice(uiProps.maxVisibleItems) as React.ReactNode);
 
   const wrapperProps: RadioGroupWrapperProps = React.useMemo(
     () => ({
@@ -87,14 +90,48 @@ export const useRadioGroupProps = ({
     [componentProps?.wrapperProps, restProps, uiProps],
   );
 
+  const [itemsInternal, setItemsInternal] = React.useState(finalChildren);
+
+  const visibleChildren =
+    uiProps.maxVisibleItems == null
+      ? itemsInternal
+      : itemsInternal.slice(0, uiProps.maxVisibleItems);
+
+  const moreChildren =
+    uiProps.maxVisibleItems == null ||
+    itemsInternal.length <= uiProps.maxVisibleItems
+      ? null
+      : itemsInternal.slice(uiProps.maxVisibleItems);
+
+  const onCollapseStart = React.useCallback(() => {
+    componentProps?.showMoreProps?.onCollapseStart?.();
+
+    const indexOfActiveItem = getIndexOfActiveItem(state.items, state.activeId);
+    if (maxVisibleItems != null && indexOfActiveItem >= maxVisibleItems) {
+      // Swap the radios to the end of the VisibleChildren
+      const activeChildren = itemsInternal[indexOfActiveItem];
+      itemsInternal[indexOfActiveItem] = itemsInternal[maxVisibleItems - 1];
+      itemsInternal[maxVisibleItems - 1] = activeChildren;
+
+      setItemsInternal(itemsInternal);
+    }
+  }, [
+    componentProps?.showMoreProps,
+    itemsInternal,
+    maxVisibleItems,
+    state.activeId,
+    state.items,
+  ]);
+
   const showMoreProps: RadioShowMoreProps = React.useMemo(
     () => ({
       ...uiProps,
       direction: uiProps.stack,
       ...componentProps?.showMoreProps,
+      onCollapseStart: onCollapseStart,
       children: moreChildren,
     }),
-    [componentProps?.showMoreProps, moreChildren, uiProps],
+    [componentProps?.showMoreProps, moreChildren, onCollapseStart, uiProps],
   );
   return {
     uiProps,
@@ -108,12 +145,11 @@ export const useRadioGroupProps = ({
 export type RadioGroupProps = RadioStateProps &
   Omit<RadioGroupWrapperProps, "state" | "size" | "children" | "defaultValue"> &
   RadioGroupUIStateProps & {
-    withState?: boolean;
     children?: RenderProp<RadioUIProps>;
   };
 
 export type RadioGroupUIProps = RadioGroupUIState & {
-  state?: RadioState;
+  state: RadioState;
 };
 
 export type RadioGroupPropsReturn = {
