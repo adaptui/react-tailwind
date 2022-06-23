@@ -16,6 +16,7 @@ export const useRadioInput = createHook<RadioInputOptions>(
     state,
     isChecked,
     size,
+    themeColor,
     icon,
     label,
     description,
