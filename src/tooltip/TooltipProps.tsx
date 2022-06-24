@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { TooltipState, TooltipStateProps, useTooltipState } from "ariakit";
 
 import {
@@ -77,7 +78,10 @@ export const useTooltipProps = ({
     withArrow,
     isDragging,
   });
-  let uiProps: TooltipUIProps = { ...uiState, state };
+  let uiProps: TooltipUIProps = useMemo(
+    () => ({ ...uiState, state }),
+    [state, uiState],
+  );
 
   const { componentProps, finalChildren } = getComponentProps(
     componentMap,
@@ -93,35 +97,50 @@ export const useTooltipProps = ({
 
   uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix, content: _content };
 
-  const anchorProps: TooltipAnchorProps = {
-    ...uiProps,
-    as,
-    children: finalChildren,
-    ...componentProps.anchorProps,
-  };
+  const anchorProps: TooltipAnchorProps = useMemo(
+    () => ({
+      ...uiProps,
+      as,
+      children: finalChildren,
+      ...componentProps.anchorProps,
+    }),
+    [as, componentProps.anchorProps, finalChildren, uiProps],
+  );
 
-  const wrapperProps: TooltipWrapperProps = {
-    ...uiProps,
-    ...restProps,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: TooltipWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps.wrapperProps,
+    }),
+    [componentProps.wrapperProps, restProps, uiProps],
+  );
 
-  const arrowProps: TooltipArrowProps = {
-    ...uiProps,
-    ...componentProps.arrowProps,
-  };
+  const arrowProps: TooltipArrowProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.arrowProps,
+    }),
+    [componentProps.arrowProps, uiProps],
+  );
 
-  const prefixProps: TooltipArrowProps = {
-    ...uiProps,
-    ...componentProps.prefixProps,
-    children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
-  };
+  const prefixProps: TooltipArrowProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.prefixProps,
+      children: withIconA11y(uiProps.prefix, uiProps),
+    }),
+    [componentProps.prefixProps, uiProps],
+  );
 
-  const suffixProps: TooltipArrowProps = {
-    ...uiProps,
-    ...componentProps.suffixProps,
-    children: withIconA11y(runIfFn(uiProps.suffix, uiProps)),
-  };
+  const suffixProps: TooltipArrowProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.suffixProps,
+      children: withIconA11y(uiProps.suffix, uiProps),
+    }),
+    [componentProps.suffixProps, uiProps],
+  );
 
   return {
     uiProps,

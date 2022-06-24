@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   SliderThumbState,
   SliderThumbStateProps,
@@ -8,6 +9,7 @@ import { getComponentProps, RenderProp } from "../utils";
 
 import { SliderThumbContainerProps } from "./SliderThumbContainer";
 import { SliderThumbInputProps } from "./SliderThumbInput";
+import { SliderThumbLabelProps } from "./SliderThumbLabel";
 import {
   SliderThumbUIState,
   SliderThumbUIStateProps,
@@ -17,8 +19,9 @@ import { SliderThumbWrapperProps } from "./SliderThumbWrapper";
 
 const componentMap = {
   SliderThumbWrapper: "wrapperProps",
-  SliderThumbContainer: "containerProps",
+  SliderThumbLabel: "labelProps",
   SliderThumbInput: "inputProps",
+  SliderThumbContainer: "containerProps",
 };
 
 export const useSliderThumbProps = ({
@@ -81,36 +84,57 @@ export const useSliderThumbProps = ({
     knobIcon,
     tooltip,
   });
-  const uiProps: SliderThumbUIProps = {
-    ...uiState,
-    index,
-    isDisabled,
-    state: _state,
-  };
+  const uiProps: SliderThumbUIProps = useMemo(
+    () => ({
+      ...uiState,
+      index,
+      isDisabled,
+      state: _state,
+    }),
+    [_state, index, isDisabled, uiState],
+  );
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
-  const wrapperProps: SliderThumbWrapperProps = {
-    ...uiProps,
-    className,
-    style,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: SliderThumbWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      className,
+      style,
+      ...componentProps.wrapperProps,
+    }),
+    [className, componentProps.wrapperProps, style, uiProps],
+  );
 
-  const containerProps: SliderThumbContainerProps = {
-    ...uiProps,
-    ...componentProps.containerProps,
-  };
+  const labelProps: SliderThumbLabelProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.labelWrapper,
+    }),
+    [componentProps.labelWrapper, uiProps],
+  );
 
-  const inputProps: SliderThumbInputProps = {
-    ...uiProps,
-    ...restProps,
-    ...componentProps.inputProps,
-  };
+  const inputProps: SliderThumbInputProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps.inputProps,
+    }),
+    [componentProps.inputProps, restProps, uiProps],
+  );
+
+  const containerProps: SliderThumbContainerProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.containerProps,
+    }),
+    [componentProps.containerProps, uiProps],
+  );
 
   return {
     wrapperProps,
-    containerProps,
+    labelProps,
     inputProps,
+    containerProps,
     uiProps,
   };
 };
@@ -128,6 +152,7 @@ export type SliderThumbProps = SliderThumbStateProps &
 
 export type SliderThumbPropsReturn = {
   wrapperProps: SliderThumbWrapperProps;
+  labelProps: SliderThumbLabelProps;
   containerProps: SliderThumbContainerProps;
   inputProps: SliderThumbInputProps;
   uiProps: SliderThumbUIProps;

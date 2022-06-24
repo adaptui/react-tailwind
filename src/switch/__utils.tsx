@@ -4,7 +4,7 @@ import { cx, tcm } from "../utils";
 
 import { SwitchUIProps } from "./SwitchProps";
 
-export const SwitchDefaultIcon = (props: SwitchUIProps) => {
+export const SwitchDefaultIcon: SwitchUIProps["icon"] = props => {
   const { size, themeColor, isChecked, disabled } = props;
 
   const theme = useTheme("switch");

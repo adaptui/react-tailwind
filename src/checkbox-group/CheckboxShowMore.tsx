@@ -29,7 +29,7 @@ export const CheckboxShowMore: React.FC<CheckboxShowMoreProps> = ({
 
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
   const finalChildren = React.Children.map(children, child => {
-    return passProps(child, { disabled: hasExpandStarted ? false : true });
+    return passProps(child, {}, { disabled: hasExpandStarted ? false : true });
   });
 
   const theme = useTheme("checkboxGroup");

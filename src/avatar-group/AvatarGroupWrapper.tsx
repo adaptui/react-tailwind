@@ -6,23 +6,22 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxOptions, useBox } from "../box";
+import { BoxOptions } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
 import { AvatarGroupUIProps } from "./AvatarGroupProps";
 
 export const useAvatarGroupWrapper = createHook<AvatarGroupWrapperOptions>(
   ({ size, squared, showRing, ringColor, max, ...props }) => {
     const theme = useTheme("avatar");
-    const className = cx(
+    const className = tcm(
       theme.group.base,
       size ? theme.group.size[size] : "",
       props.className,
     );
 
     props = { "aria-label": "avatar group", ...props, className };
-    props = useBox(props);
     props = useGroup(props);
 
     return props;

@@ -7,14 +7,14 @@ import {
 import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
 import { CheckboxGroupUIProps } from "./CheckboxGroupProps";
 
 export const useCheckboxGroupWrapper = createHook<CheckboxGroupWrapperOptions>(
   ({ state, size, themeColor, stack, maxVisibleItems, prefix, ...props }) => {
     const theme = useTheme("checkboxGroup");
-    const className = cx(
+    const className = tcm(
       stack ? theme[stack] : "",
       stack && size ? theme.size[size]?.[stack] : "",
       props.className,

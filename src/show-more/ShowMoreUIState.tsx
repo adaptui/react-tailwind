@@ -6,9 +6,9 @@ import { ShowMoreUIProps } from "./ShowMoreProps";
 
 export const useShowMoreUIState = ({
   state,
-  ...props
+  button,
 }: ShowMoreUIStateProps): ShowMoreUIState => {
-  const { button = !state.visible ? "Show more" : "Show less" } = props;
+  button = button || !state.visible ? "Show more" : "Show less";
 
   return { button };
 };

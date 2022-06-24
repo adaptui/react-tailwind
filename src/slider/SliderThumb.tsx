@@ -1,16 +1,17 @@
 import * as React from "react";
 
 import { Tooltip, TooltipAnchor } from "../tooltip";
-import { runIfFn, withIconA11y } from "../utils";
+import { withIconA11y } from "../utils";
 
 import { SliderThumbContainer } from "./SliderThumbContainer";
 import { SliderThumbInput } from "./SliderThumbInput";
+import { SliderThumbLabel } from "./SliderThumbLabel";
 import { SliderThumbProps, useSliderThumbProps } from "./SliderThumbProps";
 import { SliderThumbWrapper } from "./SliderThumbWrapper";
 
 export const SliderThumb = React.forwardRef<HTMLInputElement, SliderThumbProps>(
   (props, ref) => {
-    const { wrapperProps, containerProps, inputProps, uiProps } =
+    const { wrapperProps, labelProps, containerProps, inputProps, uiProps } =
       useSliderThumbProps(props);
     const { index, state, tooltip, isDisabled, knobIcon } = uiProps;
     const { isThumbDragging, getThumbValueLabel } = state.baseState;
@@ -19,41 +20,30 @@ export const SliderThumb = React.forwardRef<HTMLInputElement, SliderThumbProps>(
       <SliderThumbWrapper {...wrapperProps}>
         {tooltip && !isDisabled ? (
           <Tooltip
-            content={getThumbValueLabel(uiProps.index)}
+            content={getThumbValueLabel(index)}
             isDragging={isThumbDragging(index)}
             withArrow={true}
           >
             <TooltipAnchor described>
               {props => {
-                const { onMouseEnter, onMouseLeave, ...restProps } = props;
                 return (
-                  <label>
-                    <SliderThumbInput
-                      ref={ref}
-                      {...inputProps}
-                      {...restProps}
-                    />
-                    <SliderThumbContainer
-                      {...containerProps}
-                      onMouseEnter={onMouseEnter}
-                      onMouseLeave={onMouseLeave}
-                    >
-                      {uiProps.knobIcon
-                        ? withIconA11y(runIfFn(uiProps.knobIcon, uiProps))
-                        : null}
+                  <SliderThumbLabel {...labelProps} {...props}>
+                    <SliderThumbInput ref={ref} {...inputProps} />
+                    <SliderThumbContainer {...containerProps}>
+                      {knobIcon ? withIconA11y(knobIcon, uiProps) : null}
                     </SliderThumbContainer>
-                  </label>
+                  </SliderThumbLabel>
                 );
               }}
             </TooltipAnchor>
           </Tooltip>
         ) : (
-          <label>
+          <SliderThumbLabel {...labelProps}>
             <SliderThumbInput ref={ref} {...inputProps} />
-            <SliderThumbContainer {...containerProps} tabIndex={-1}>
-              {knobIcon ? withIconA11y(runIfFn(knobIcon, uiProps)) : null}
+            <SliderThumbContainer {...containerProps}>
+              {knobIcon ? withIconA11y(knobIcon, uiProps) : null}
             </SliderThumbContainer>
-          </label>
+          </SliderThumbLabel>
         )}
       </SliderThumbWrapper>
     );

@@ -109,7 +109,7 @@ export const useTextareaProps = ({
       ...uiProps,
       disabled,
       ...componentProps.iconProps,
-      children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
+      children: withIconA11y(uiProps.icon, uiProps),
     }),
     [componentProps.iconProps, disabled, uiProps],
   );

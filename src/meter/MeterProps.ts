@@ -71,38 +71,56 @@ export function useMeterProps(props: MeterProps): MeterPropsReturn {
     hint: _hint,
   };
 
-  const wrapperProps: MeterWrapperProps = {
-    ...uiProps,
-    ...restProps,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: MeterWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps.wrapperProps,
+    }),
+    [componentProps.wrapperProps, restProps, uiProps],
+  );
 
-  const barProps: MeterBarProps = {
-    ...uiProps,
-    ...componentProps.barProps,
-  };
+  const barProps: MeterBarProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.barProps,
+    }),
+    [componentProps.barProps, uiProps],
+  );
 
-  const barWrapperProps: MeterBarWrapperProps = {
-    ...uiProps,
-    ...componentProps.barWrapperProps,
-  };
+  const barWrapperProps: MeterBarWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.barWrapperProps,
+    }),
+    [componentProps.barWrapperProps, uiProps],
+  );
 
-  const trackProps: MeterTrackProps = {
-    ...uiProps,
-    ...componentProps.trackProps,
-  };
+  const trackProps: MeterTrackProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.trackProps,
+    }),
+    [componentProps.trackProps, uiProps],
+  );
 
-  const labelProps: MeterLabelProps = {
-    ...uiProps,
-    ...componentProps.labelProps,
-    children: runIfFn(_label, uiProps),
-  };
+  const labelProps: MeterLabelProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.labelProps,
+      children: runIfFn(_label, uiProps),
+    }),
+    [_label, componentProps.labelProps, uiProps],
+  );
 
-  const hintProps: MeterHintProps = {
-    ...uiProps,
-    ...componentProps.hintProps,
-    children: runIfFn(_hint, uiProps),
-  };
+  const hintProps: MeterHintProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.hintProps,
+      children: runIfFn(_hint, uiProps),
+    }),
+    [_hint, componentProps.hintProps, uiProps],
+  );
 
   return {
     uiProps,

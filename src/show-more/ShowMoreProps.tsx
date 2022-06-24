@@ -49,18 +49,24 @@ export const useShowMoreProps = ({
 
   uiProps = { ...uiProps, button: _button };
 
-  const contentProps: ShowMoreContentProps = {
-    ...uiProps,
-    ...props,
-    ...componentProps.contentProps,
-    children: runIfFn(_content, uiProps),
-  };
+  const contentProps: ShowMoreContentProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...props,
+      ...componentProps.contentProps,
+      children: runIfFn(_content, uiProps),
+    }),
+    [_content, componentProps.contentProps, props, uiProps],
+  );
 
-  const buttonProps: ShowMoreButtonProps = {
-    ...uiProps,
-    ...componentProps.buttonProps,
-    children: runIfFn(_button, uiProps),
-  };
+  const buttonProps: ShowMoreButtonProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.buttonProps,
+      children: runIfFn(_button, uiProps),
+    }),
+    [_button, componentProps.buttonProps, uiProps],
+  );
 
   return {
     uiProps,

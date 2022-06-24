@@ -27,16 +27,16 @@ export const useSwitchDescription = createHook<SwitchDescriptionOptions>(
     const theme = useTheme("switch");
     const className = cx(
       theme.description,
-      size ? theme.size[size].description : "",
+      size ? theme.size[size]?.description : "",
       themeColor
         ? !disabled
           ? cx(
-              theme.themeColor[themeColor].default.description,
-              theme.themeColor[themeColor].hover.description,
-              theme.themeColor[themeColor].active.description,
-              theme.themeColor[themeColor].focus.description,
+              theme.themeColor[themeColor]?.default?.description,
+              theme.themeColor[themeColor]?.hover?.description,
+              theme.themeColor[themeColor]?.active?.description,
+              theme.themeColor[themeColor]?.focus?.description,
             )
-          : theme.themeColor[themeColor].disabled.description
+          : theme.themeColor[themeColor]?.disabled?.description
         : "",
       props.className,
     );

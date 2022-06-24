@@ -28,8 +28,10 @@ export const CheckboxCustomMedium: React.FC<CheckboxCustomMediumProps> = () => {
               }
             >
               <>
-                {uiProps.isUnchecked ? withIconA11y(<EyeClose />) : null}
-                {uiProps.isChecked ? withIconA11y(<EyeOpen />) : null}
+                {uiProps.isUnchecked
+                  ? withIconA11y(<EyeClose />, {}, {})
+                  : null}
+                {uiProps.isChecked ? withIconA11y(<EyeOpen />, {}, {}) : null}
               </>
             </CheckboxIcon>
             <CheckboxText className="text-green-500">

@@ -2,22 +2,20 @@ import { RenderProp } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
-export function useTooltipUIState(
-  props: TooltipUIStateProps = {},
-): TooltipUIState {
+export function useTooltipUIState(props: TooltipUIStateProps): TooltipUIState {
   const {
     content,
-    withArrow = false,
     prefix,
     suffix,
+    withArrow = false,
     isDragging = false,
   } = props;
 
   return {
     content,
-    withArrow,
     prefix,
     suffix,
+    withArrow,
     isDragging,
   };
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AnyObject, Options, Props } from "ariakit-utils";
+import { AnyObject } from "ariakit-utils";
 
 import { isFunction } from "./assertions";
 import { tcm } from "./tailwindMerge";
@@ -25,14 +25,6 @@ export function forwardRefWithAs<
     Props,
     DefaultType
   >;
-}
-
-// From Chakra Utils
-export function runIfFn<T, U>(
-  valueOrFn: T | ((...fnArgs: U[]) => T),
-  ...args: U[]
-): T {
-  return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
 
 export function runIfFnChildren<T, U>(
@@ -61,30 +53,6 @@ export function getValidChildren(
   );
 }
 
-// Merge library & user prop
-export const passProps = <T extends AnyObject>(
-  component: RenderProp<T>,
-  props?: T,
-) => {
-  return React.isValidElement(component)
-    ? React.cloneElement(component, {
-        ...props,
-        ...component.props,
-        className: tcm(props?.className, component.props.className),
-      })
-    : runIfFn(component, props as T);
-};
-
-// Add a11y to the icon passed
-export const withIconA11y = (icon: RenderProp, props?: Dict) => {
-  return passProps(icon, {
-    role: "img",
-    focusable: false,
-    "aria-hidden": true,
-    ...props,
-  });
-};
-
 export const getComponentProps = <T extends any, P>(
   componentMaps: Dict<string>,
   children: RenderProp<T>,
@@ -112,20 +80,18 @@ export const getComponentProps = <T extends any, P>(
   return { componentProps, finalChildren };
 };
 
-export function runRenderFn<
-  T extends Props<Options<"div">> & AnyObject = AnyObject,
->(component: RenderProp<T>, props: T): React.ReactNode {
-  return isFunction(component) ? component(props) : component;
+export function runIfFn<T extends AnyObject = AnyObject>(
+  component: RenderProp<T>,
+  props: T,
+): React.ReactNode {
+  return isFunction(component) ? component({ ...props }) : component;
 }
 
 // Merge library & user prop
-export const passPropsNew = <
-  T extends Props<Options<"div"> & AnyObject> = AnyObject,
-  S = AnyObject,
->(
-  component: RenderProp<T & S>,
-  props: T,
-  stateProps?: S,
+export const passProps = <T extends AnyObject = AnyObject, S = AnyObject>(
+  component: RenderProp<S>,
+  stateProps: S,
+  props?: T,
 ) => {
   return React.isValidElement(component)
     ? React.cloneElement(component, {
@@ -133,26 +99,19 @@ export const passPropsNew = <
         ...component.props,
         className: tcm(props?.className, component.props.className),
       })
-    : runRenderFn(component, { state: stateProps, ...props });
+    : runIfFn(component, { ...stateProps, ...props });
 };
 
 // Add a11y to the icon passed
-export const withIconA11yNew = <
-  T extends Props<Options<"div"> & AnyObject> = AnyObject,
-  S = AnyObject,
->(
-  icon: RenderProp<T & S>,
-  props: T,
-  stateProps?: S,
+export const withIconA11y = <T extends AnyObject = AnyObject, S = AnyObject>(
+  icon: RenderProp<S>,
+  stateProps: S,
+  props?: T,
 ) => {
-  return passPropsNew(
-    icon,
-    {
-      role: "img",
-      focusable: false,
-      "aria-hidden": true,
-      ...props,
-    },
-    stateProps,
-  );
+  return passProps(icon, stateProps, {
+    role: "img",
+    focusable: false,
+    "aria-hidden": true,
+    ...props,
+  });
 };

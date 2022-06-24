@@ -7,14 +7,14 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { cx } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipSuffix = createHook<TooltipSuffixOptions>(
   ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
     const theme = useTheme("tooltip");
-    const className = tcm(theme.suffix, props.className);
+    const className = cx(theme.suffix, props.className);
 
     props = { ...props, className };
     props = useBox(props);

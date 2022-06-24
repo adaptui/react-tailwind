@@ -122,7 +122,6 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
       ...uiProps,
       ...componentProps.textWrapperProps,
       disabled: restProps.disabled,
-      children: runIfFn(uiProps.label, uiProps),
     }),
     [uiProps, restProps.disabled, componentProps.textWrapperProps],
   );

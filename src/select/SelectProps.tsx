@@ -61,7 +61,7 @@ export const useSelectProps = ({
   const _suffix: SelectProps["suffix"] = React.useMemo(() => {
     return uiProps.loading
       ? runIfFn(uiProps.spinner, uiProps)
-      : withIconA11y(runIfFn(__suffix, uiProps));
+      : withIconA11y(__suffix, uiProps);
   }, [uiProps, __suffix]);
 
   uiProps = { ...uiProps, prefix: _prefix, suffix: _suffix };
@@ -130,7 +130,7 @@ export const useSelectProps = ({
       disabled,
       ...componentProps.prefixProps,
       ref: prefixRef,
-      children: withIconA11y(runIfFn(uiProps.prefix, uiProps)),
+      children: withIconA11y(uiProps.prefix, uiProps),
     }),
     [componentProps.prefixProps, disabled, uiProps],
   );

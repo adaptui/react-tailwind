@@ -16,7 +16,7 @@ import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { cx, RenderProp, tcm, withIconA11yNew } from "../utils";
+import { cx, RenderProp, tcm, withIconA11y } from "../utils";
 
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
@@ -67,15 +67,15 @@ export const useButton = createHook<ButtonOptions>(
     const buttonRenderProps = (className: string) => ({ className, disabled });
     const prefixStyles = cx(button.size[size]?.prefix);
     const prefix = _prefix
-      ? withIconA11yNew(_prefix, buttonRenderProps(prefixStyles), state)
+      ? withIconA11y(_prefix, state, buttonRenderProps(prefixStyles))
       : null;
     const suffixStyles = cx(button.size[size]?.suffix);
     const suffix = _suffix
-      ? withIconA11yNew(_suffix, buttonRenderProps(suffixStyles), state)
+      ? withIconA11y(_suffix, state, buttonRenderProps(suffixStyles))
       : null;
     const iconOnlyStyles = cx(button.size[size]?.iconOnly?.icon);
     const iconOnly = _iconOnly
-      ? withIconA11yNew(_iconOnly, buttonRenderProps(iconOnlyStyles), state)
+      ? withIconA11y(_iconOnly, state, buttonRenderProps(iconOnlyStyles))
       : null;
 
     const prevLoading = usePrevious(loading);

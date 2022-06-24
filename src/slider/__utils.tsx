@@ -3,8 +3,9 @@ import { useTheme } from "../theme";
 import { createContext } from "../utils";
 
 import { SliderUIProps } from "./SliderProps";
+import { SliderThumbUIProps } from "./SliderThumbProps";
 
-export const SliderDefaultKnobIcon = (props: SliderUIProps) => {
+export const SliderDefaultKnobIcon: SliderThumbUIProps["knobIcon"] = props => {
   const { size } = props;
   const theme = useTheme("slider");
   const className = theme.size[size]?.knobIcon;

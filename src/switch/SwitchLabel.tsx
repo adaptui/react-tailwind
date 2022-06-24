@@ -28,16 +28,16 @@ export const useSwitchLabel = createHook<SwitchLabelOptions>(
     const className = cx(
       theme.label.base,
       disabled ? theme.label.disabled : "",
-      label && !description && size ? theme.size[size].label : "",
+      label && !description && size ? theme.size[size]?.label : "",
       label && !description && themeColor
         ? !disabled
           ? cx(
-              theme.themeColor[themeColor].default.label,
-              theme.themeColor[themeColor].hover.label,
-              theme.themeColor[themeColor].active.label,
-              theme.themeColor[themeColor].focus.label,
+              theme.themeColor[themeColor]?.default?.label,
+              theme.themeColor[themeColor]?.hover?.label,
+              theme.themeColor[themeColor]?.active?.label,
+              theme.themeColor[themeColor]?.focus?.label,
             )
-          : theme.themeColor[themeColor].disabled.label
+          : theme.themeColor[themeColor]?.disabled?.label
         : "",
       props.className,
     );

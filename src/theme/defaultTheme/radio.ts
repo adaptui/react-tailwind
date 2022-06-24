@@ -43,8 +43,9 @@ export const radio = {
       hover: {
         label: "hover:bg-gray-200",
         icon: {
-          unChecked: "peer-hover:border-gray-600",
-          checked: "peer-hover:bg-gray-800 peer-hover:border-gray-800",
+          unChecked: "peer-hover:border-gray-600 peer-hover:shadow",
+          checked:
+            "peer-hover:bg-gray-800 peer-hover:border-gray-800 peer-hover:shadow",
         },
         text: "",
         description: "",
