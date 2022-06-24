@@ -13,10 +13,10 @@ import { RadioGroupUIProps } from "./RadioGroupProps";
 
 export const useRadioGroupWrapper = createHook<RadioGroupWrapperOptions>(
   ({ state, size, themeColor, stack, maxVisibleItems, prefix, ...props }) => {
-    const theme = useTheme("radio");
+    const theme = useTheme("radioGroup");
     const className = cx(
-      stack ? theme.group[stack] : "",
-      stack && size ? theme.group.size[size]?.[stack] : "",
+      stack ? theme[stack] : "",
+      stack && size ? theme.size[size]?.[stack] : "",
       props.className,
     );
 

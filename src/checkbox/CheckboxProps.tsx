@@ -12,6 +12,7 @@ import { CheckboxIconProps } from "./CheckboxIcon";
 import { CheckboxInputProps } from "./CheckboxInput";
 import { CheckboxLabelProps } from "./CheckboxLabel";
 import { CheckboxTextProps } from "./CheckboxText";
+import { CheckboxTextWrapperProps } from "./CheckboxTextWrapper";
 import {
   CheckboxUIState,
   CheckboxUIStateProps,
@@ -23,6 +24,7 @@ const componentMap = {
   CheckboxLabel: "labelProps",
   CheckboxInput: "inputProps",
   CheckboxIcon: "iconProps",
+  CheckboxTextWrapper: "textWrapperProps",
   CheckboxText: "textProps",
   CheckboxDescription: "descriptionProps",
 };
@@ -115,6 +117,16 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
     [uiProps, restProps.disabled, componentProps.iconProps],
   );
 
+  const textWrapperProps: CheckboxTextWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.textWrapperProps,
+      disabled: restProps.disabled,
+      children: runIfFn(uiProps.label, uiProps),
+    }),
+    [uiProps, restProps.disabled, componentProps.textWrapperProps],
+  );
+
   const textProps: CheckboxTextProps = useMemo(
     () => ({
       ...uiProps,
@@ -140,11 +152,20 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
       labelProps,
       inputProps,
       iconProps,
+      textWrapperProps,
       textProps,
       descriptionProps,
       uiProps,
     }),
-    [labelProps, inputProps, iconProps, textProps, descriptionProps, uiProps],
+    [
+      labelProps,
+      inputProps,
+      iconProps,
+      textWrapperProps,
+      textProps,
+      descriptionProps,
+      uiProps,
+    ],
   );
   return compoundedProps;
 }
@@ -162,6 +183,7 @@ export type CheckboxPropsReturn = {
   labelProps: CheckboxLabelProps;
   inputProps: CheckboxInputProps;
   iconProps: CheckboxIconProps;
+  textWrapperProps: CheckboxTextWrapperProps;
   textProps: CheckboxTextProps;
   descriptionProps: CheckboxDescriptionProps;
   uiProps: CheckboxUIProps;

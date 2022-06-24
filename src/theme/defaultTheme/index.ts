@@ -3,6 +3,7 @@ import { badge } from "./badge";
 import { button } from "./button";
 import { buttonGroup } from "./buttonGroup";
 import { checkbox } from "./checkbox";
+import { checkboxGroup } from "./checkboxGroup";
 import { circularProgress } from "./circularProgress";
 import { divider } from "./divider";
 import { icon } from "./icon";
@@ -10,6 +11,7 @@ import { input } from "./input";
 import { meter } from "./meter";
 import { progress } from "./progress";
 import { radio } from "./radio";
+import { radioGroup } from "./radioGroup";
 import { select } from "./select";
 import { slider } from "./slider";
 import { spinner } from "./spinner";
@@ -25,6 +27,7 @@ export const theme = {
   buttonGroup,
   divider,
   checkbox,
+  checkboxGroup,
   circularProgress,
   icon,
   input,
@@ -32,6 +35,7 @@ export const theme = {
   meter,
   progress,
   radio,
+  radioGroup,
   slider,
   spinner,
   switch: _switch,

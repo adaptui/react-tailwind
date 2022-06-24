@@ -6,16 +6,15 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { cx, tcm } from "../utils";
 
 import { InputUIProps } from "./InputProps";
 
 export const useInputBase = createHook<InputBaseOptions>(
   ({ prefix, suffix, size, variant, invalid, loading, spinner, ...props }) => {
     const theme = useTheme("input");
-    const className = cx(
+    const className = tcm(
       theme.base,
       size ? theme.size[size]?.base?.default : "",
       size && (!prefix || !suffix) ? theme.size[size]?.base?.withoutAddon : "",
@@ -35,7 +34,6 @@ export const useInputBase = createHook<InputBaseOptions>(
     );
 
     props = { "aria-invalid": invalid, ...props, className };
-    props = useBox(props);
     props = useFocusable(props);
 
     return props;
@@ -48,8 +46,7 @@ export const InputBase = createComponent<InputBaseOptions>(props => {
   return createElement("input", htmlProps);
 });
 
-export type InputBaseOptions<T extends As = "input"> = BoxOptions<T> &
-  FocusableOptions<T> &
+export type InputBaseOptions<T extends As = "input"> = FocusableOptions<T> &
   Partial<InputUIProps> & {};
 
 export type InputBaseProps<T extends As = "input"> = Props<InputBaseOptions<T>>;

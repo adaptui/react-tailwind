@@ -16,8 +16,7 @@ export const CheckboxGroup = React.forwardRef<
     visibleChildren,
     moreChildren,
     wrapperProps,
-    buttonProps,
-    contentProps,
+    showMoreProps,
     uiProps,
   } = useCheckboxGroupProps(props);
 
@@ -25,14 +24,7 @@ export const CheckboxGroup = React.forwardRef<
     <CheckboxGroupWrapper ref={ref} {...wrapperProps}>
       <CheckboxGroupContextProvider {...uiProps}>
         {visibleChildren}
-        {moreChildren ? (
-          <CheckboxShowMore
-            moreChildren={moreChildren}
-            buttonProps={buttonProps}
-            contentProps={contentProps}
-            uiProps={uiProps}
-          />
-        ) : null}
+        {moreChildren ? <CheckboxShowMore {...showMoreProps} /> : null}
       </CheckboxGroupContextProvider>
     </CheckboxGroupWrapper>
   );

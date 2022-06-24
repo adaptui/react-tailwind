@@ -38,7 +38,6 @@ export default {
         "clickOnSpace",
         "isChecked",
         "stack",
-        "maxVisibleItems",
         "items",
         "setItems",
         "orientation",

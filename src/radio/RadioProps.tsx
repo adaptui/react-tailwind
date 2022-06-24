@@ -10,6 +10,7 @@ import { RadioIconProps } from "./RadioIcon";
 import { RadioInputProps } from "./RadioInput";
 import { RadioLabelProps } from "./RadioLabel";
 import { RadioTextProps } from "./RadioText";
+import { RadioTextWrapperProps } from "./RadioTextWrapper";
 import {
   RadioUIState,
   RadioUIStateProps,
@@ -20,6 +21,7 @@ const componentMap = {
   RadioLabel: "labelProps",
   RadioInput: "inputProps",
   RadioIcon: "iconProps",
+  RadioTextWrapper: "textWrapperProps",
   RadioText: "textProps",
   RadioDescription: "descriptionProps",
 };
@@ -140,6 +142,16 @@ export function useRadioProps(props: RadioProps): RadioPropsReturn {
     [uiProps, restProps.disabled, componentProps.iconProps],
   );
 
+  const textWrapperProps: RadioTextWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.textWrapperProps,
+      disabled: restProps.disabled,
+      children: runIfFn(uiProps.label, uiProps),
+    }),
+    [uiProps, restProps.disabled, componentProps.textWrapperProps],
+  );
+
   const textProps: RadioTextProps = useMemo(
     () => ({
       ...uiProps,
@@ -165,11 +177,20 @@ export function useRadioProps(props: RadioProps): RadioPropsReturn {
       labelProps,
       inputProps,
       iconProps,
+      textWrapperProps,
       textProps,
       descriptionProps,
       uiProps,
     }),
-    [labelProps, inputProps, iconProps, textProps, descriptionProps, uiProps],
+    [
+      labelProps,
+      inputProps,
+      iconProps,
+      textWrapperProps,
+      textProps,
+      descriptionProps,
+      uiProps,
+    ],
   );
   return compoundedProps;
 }
@@ -187,6 +208,7 @@ export type RadioPropsReturn = {
   labelProps: RadioLabelProps;
   inputProps: RadioInputProps;
   iconProps: RadioIconProps;
+  textWrapperProps: RadioTextWrapperProps;
   textProps: RadioTextProps;
   descriptionProps: RadioDescriptionProps;
   uiProps: RadioUIProps;

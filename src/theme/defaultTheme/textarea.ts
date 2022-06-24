@@ -10,11 +10,15 @@ export const textarea = {
       none: "resize-none",
     },
   },
-  ghost: "invisible absolute overflow-hidden h-0 top-0 left-0 transform-gpu",
+  spinner: {
+    base: "flex items-center justify-center absolute bottom-2.5 right-1 bg-transparent pointer-events-none",
+    autoSize: "bottom-1",
+  },
   icon: {
     base: "flex items-center justify-center absolute bottom-2.5 right-1 bg-transparent pointer-events-none",
     autoSize: "bottom-1",
   },
+  ghost: "invisible absolute overflow-hidden h-0 top-0 left-0 transform-gpu",
   size: {
     sm: {
       base: "text-paragraph-cxs-cxs font-normal rounded-lg px-2 py-[5.5px]",

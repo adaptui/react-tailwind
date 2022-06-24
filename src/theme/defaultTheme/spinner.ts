@@ -22,6 +22,7 @@ export const spinner = {
       secondary: "border-b-violet-400 border-l-violet-400",
       success: "border-b-green-400 border-l-green-400",
       danger: "border-b-red-400 border-l-red-400",
+      current: "border-b-gray-400 border-l-gray-400",
     },
     transparent: "border-b-transparent border-l-transparent",
   },
