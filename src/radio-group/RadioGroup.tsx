@@ -16,7 +16,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
     } = useRadioGroupProps(props);
 
     //  TODO: Disabled state for Text & Description
-    //  TODO: Ask usage of js for active state across all components
+    //  TODO: Adopt active state across all components
     return (
       <RadioGroupWrapper ref={ref} {...wrapperProps}>
         <RadioGroupContextProvider {...uiProps}>

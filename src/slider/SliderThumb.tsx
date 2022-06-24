@@ -27,7 +27,7 @@ export const SliderThumb = React.forwardRef<HTMLInputElement, SliderThumbProps>(
             <TooltipAnchor described>
               {props => {
                 return (
-                  <SliderThumbLabel {...labelProps} {...props}>
+                  <SliderThumbLabel {...labelProps} {...props} tabIndex={-1}>
                     <SliderThumbInput ref={ref} {...inputProps} />
                     <SliderThumbContainer {...containerProps}>
                       {knobIcon ? withIconA11y(knobIcon, uiProps) : null}
