@@ -44,7 +44,7 @@ export const Default: Story = {
 };
 
 export const Squared: Story = {
-  args: { size: "xl", squared: false },
+  args: { size: "xl", squared: true },
 };
 
 export const Name: Story = {
