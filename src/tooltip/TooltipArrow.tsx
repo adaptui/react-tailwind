@@ -9,7 +9,7 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { cx } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
@@ -49,7 +49,7 @@ export const useTooltipArrow = createHook<TooltipArrowOptions>(
     ...props
   }) => {
     const theme = useTheme("tooltip");
-    const className = tcm(theme.arrow, props.className);
+    const className = cx(theme.arrow, props.className);
 
     props = { ...props, className };
     props = useBox(props);

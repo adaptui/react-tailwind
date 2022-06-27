@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Box } from "../box";
 import { useTheme } from "../theme";
-import { cx, passPropsNew } from "../utils";
+import { cx, passProps } from "../utils";
 
 import { ButtonProps, ButtonState } from "./Button";
 
@@ -19,13 +19,13 @@ export const ButtonSpinner: React.FC<ButtonSpinnerProps> = props => {
   const button = useTheme("button");
   const spinnerStyles = cx(
     prefix
-      ? button.size[size].prefix
+      ? button.size[size]?.prefix
       : suffix
-      ? button.size[size].suffix
-      : button.size[size].iconOnly.spinner,
+      ? button.size[size]?.suffix
+      : button.size[size]?.iconOnly?.spinner,
   );
 
-  return <>{passPropsNew(spinner, { className: spinnerStyles }, state)}</>;
+  return <>{passProps(spinner, state, { className: spinnerStyles })}</>;
 };
 
 export type ButtonFullWidthSpinnerProps = Pick<

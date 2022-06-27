@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   SliderBaseStateProps,
   SliderState,
@@ -88,42 +89,69 @@ export const useSliderProps = ({
     knobIcon,
     tooltip,
   });
-  let uiProps: SliderUIProps = { ...uiState, isDisabled, state };
+  let uiProps: SliderUIProps = useMemo(
+    () => ({ ...uiState, isDisabled, state }),
+    [isDisabled, state, uiState],
+  );
 
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
-  const wrapperProps: SliderWrapperProps = {
-    ...uiProps,
-    ...restProps,
-    isDisabled,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: SliderWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      isDisabled,
+      ...componentProps.wrapperProps,
+    }),
+    [componentProps.wrapperProps, isDisabled, restProps, uiProps],
+  );
 
-  const trackWrapperProps: SliderTrackWrapperProps = {
-    ...uiProps,
-    ...componentProps.trackWrapperProps,
-  };
+  const trackWrapperProps: SliderTrackWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.trackWrapperProps,
+    }),
+    [componentProps.trackWrapperProps, uiProps],
+  );
 
-  const trackProps: SliderTrackProps = {
-    ...uiProps,
-    ...componentProps.trackProps,
-  };
+  const trackProps: SliderTrackProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.trackProps,
+    }),
+    [componentProps.trackProps, uiProps],
+  );
 
-  const filledTrackProps: SliderFilledTrackProps = {
-    ...uiProps,
-    ...componentProps.filledTrackProps,
-  };
+  const filledTrackProps: SliderFilledTrackProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.filledTrackProps,
+    }),
+    [componentProps.filledTrackProps, uiProps],
+  );
 
-  const thumbProps: SliderThumbProps = {
-    size,
-    knobIcon,
-    tooltip,
-    state: state.baseState,
-    trackRef: state.trackRef,
-    orientation,
-    isDisabled,
-    ...componentProps.thumbProps,
-  };
+  const thumbProps: SliderThumbProps = useMemo(
+    () => ({
+      size,
+      knobIcon,
+      tooltip,
+      state: state.baseState,
+      trackRef: state.trackRef,
+      orientation,
+      isDisabled,
+      ...componentProps.thumbProps,
+    }),
+    [
+      componentProps.thumbProps,
+      isDisabled,
+      knobIcon,
+      orientation,
+      size,
+      state.baseState,
+      state.trackRef,
+      tooltip,
+    ],
+  );
 
   return {
     uiProps,

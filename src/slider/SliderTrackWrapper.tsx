@@ -6,7 +6,7 @@ import {
 import { As, Props } from "ariakit-utils/types";
 import { SliderTrackOptions, useSliderTrack } from "@adaptui/react";
 
-import { BoxProps, useBox } from "../box";
+import { BoxProps } from "../box";
 import { useTheme } from "../theme";
 import { tcm } from "../utils";
 
@@ -28,7 +28,6 @@ export const useSliderTrackWrapper = createHook<SliderTrackWrapperOptions>(
 
     props = { ...props, className };
     props = useSliderTrack({ state, ...props });
-    props = useBox(props);
 
     return props;
   },

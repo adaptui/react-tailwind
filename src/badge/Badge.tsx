@@ -7,7 +7,7 @@ import { As, Props } from "ariakit-utils/types";
 
 import { Box, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderProp, withIconA11yNew } from "../utils";
+import { cx, RenderProp, withIconA11y } from "../utils";
 
 export const useBadge = createHook<BadgeOptions>(
   ({
@@ -27,10 +27,10 @@ export const useBadge = createHook<BadgeOptions>(
 
     const prefixStyles = cx(badge.size[size]?.prefix);
     const prefix = _prefix
-      ? withIconA11yNew<BadgeRenderProps, BadgeState>(
+      ? withIconA11y(
           _prefix,
-          { className: prefixStyles },
           { size, themeColor, variant, prefix: _prefix },
+          { className: prefixStyles },
         )
       : null;
 

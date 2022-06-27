@@ -6,9 +6,9 @@ import {
 import { As, Props } from "ariakit-utils/types";
 import { SliderThumbOptions, useSliderThumb } from "@adaptui/react";
 
-import { BoxProps, useBox } from "../box";
+import { BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { cx, tcm } from "../utils";
 
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
@@ -24,7 +24,7 @@ export const useSliderThumbContainer = createHook<SliderThumbContainerOptions>(
     ...props
   }) => {
     const theme = useTheme("slider");
-    const className = cx(
+    const className = tcm(
       theme.thumbContainer.default,
       isDisabled ? theme.thumbContainer.disabled : "",
       size ? theme.size[size]?.thumbContainer : "",
@@ -45,7 +45,6 @@ export const useSliderThumbContainer = createHook<SliderThumbContainerOptions>(
 
     props = { ...props, className };
     props = useSliderThumb({ state, ...props, children: null });
-    props = useBox(props);
 
     return props;
   },

@@ -1,5 +1,3 @@
-import { runIfFn } from "@chakra-ui/utils";
-
 import {
   ActiveStatusIcon,
   AwayStatusIcon,
@@ -13,18 +11,19 @@ import { passProps, tcm } from "../utils";
 
 import { AvatarUIProps } from "./AvatarProps";
 
-export const AvatarDefaultStatusIndicators = (props: AvatarUIProps) => {
-  const { size, status, parentsBackground } = props;
+export const AvatarDefaultStatusIndicators: AvatarUIProps["statusIndicators"] =
+  props => {
+    const { size, status, parentsBackground } = props;
 
-  const theme = useTheme("avatar");
-  const className = tcm(
-    theme.statusIndicators[status].base,
-    theme.statusIndicators[status].size[size],
-    ...parentsBackground,
-  );
+    const theme = useTheme("avatar");
+    const className = tcm(
+      theme.statusIndicators[status].base,
+      theme.statusIndicators[status].size[size],
+      ...parentsBackground,
+    );
 
-  return passProps(runIfFn(<StatusIndicators {...props} />), { className });
-};
+    return passProps(<StatusIndicators {...props} />, props, { className });
+  };
 
 export type StatusIndicatorsProps = AvatarUIProps & {
   className?: string;

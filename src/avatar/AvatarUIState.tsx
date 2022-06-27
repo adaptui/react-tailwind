@@ -18,7 +18,7 @@ export function useAvatarUIState(props: AvatarUIStateProps): AvatarUIState {
     parentsBackground = ["bg-white-900", "ring-white-900"],
     getInitialsFromName = getInitialsFromNameDefault,
     showRing = false,
-    ringColor = "ring-white",
+    ringColor = "ring-white-900",
   } = props;
 
   const initials = getInitialsFromName(name, size);
@@ -73,7 +73,7 @@ export type AvatarUIStateProps = UseImageProps &
 
 export type AvatarUIState = {
   /**
-   * If `true`, Avatar looks like a round.
+   * If `true`, Avatar looks like a squared.
    *
    * @default true
    */
@@ -127,7 +127,7 @@ export type AvatarUIState = {
   /**
    * StatusIndicator's Background Color & StatusIndicator Ring Color.
    *
-   * @default ["bg-white", "ring-white"]"
+   * @default ["bg-white-900", "ring-white-900"]"
    */
   parentsBackground: string[];
 
@@ -143,7 +143,7 @@ export type AvatarUIState = {
   /**
    * Color of the `border` to match it's parent background.
    *
-   * @default ring-white
+   * @default ring-white-900
    */
   ringColor: string;
 

@@ -48,7 +48,7 @@ export const FallbackIcon: Story = {
   args: {
     src: "https://i.pravatar.c/300??img=61",
     icon: <CircledCheckIcon />,
-    onError: () => console.log("Provide a valid src url"),
+    onError: () => console.warn("Provide a valid src url"),
   },
 };
 

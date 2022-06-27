@@ -140,10 +140,10 @@ export const DisabledDescription: Story = {
   },
 };
 
-const CustomIconElement = (props: CheckboxUIProps) => (
+const CustomIconElement: CheckboxUIProps["icon"] = props => (
   <>
-    {props.isUnchecked ? withIconA11y(<EyeClose />) : null}
-    {props.isChecked ? withIconA11y(<EyeOpen />) : null}
+    {props.isUnchecked ? withIconA11y(<EyeClose />, {}, {}) : null}
+    {props.isChecked ? withIconA11y(<EyeOpen />, {}, {}) : null}
   </>
 );
 

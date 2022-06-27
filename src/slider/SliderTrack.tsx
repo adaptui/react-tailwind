@@ -7,7 +7,7 @@ import { As, Props } from "ariakit-utils/types";
 
 import { BoxProps, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { cx } from "../utils";
 
 import { SliderUIProps } from "./SliderProps";
 
@@ -23,7 +23,7 @@ export const useSliderTrack = createHook<SliderTrackOptions>(
     ...props
   }) => {
     const theme = useTheme("slider");
-    const className = tcm(
+    const className = cx(
       theme.track,
       size ? theme.size[size]?.track : "",
       themeColor ? theme.themeColor[themeColor]?.track : "",

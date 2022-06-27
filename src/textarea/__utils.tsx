@@ -2,7 +2,7 @@ import { Spinner } from "../spinner";
 
 import { TextareaUIProps } from "./TextareaProps";
 
-export const DefaultTextareaSpinner = (props: TextareaUIProps) => {
+export const DefaultTextareaSpinner: TextareaUIProps["spinner"] = props => {
   const { size } = props;
 
   return (

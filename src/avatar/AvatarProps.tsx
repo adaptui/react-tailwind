@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { getComponentProps, RenderProp, runIfFn, withIconA11y } from "../utils";
+import { getComponentProps, RenderProp, withIconA11y } from "../utils";
 
 import { AvatarIconProps } from "./AvatarIcon";
 import { AvatarImageProps } from "./AvatarImage";
@@ -77,41 +77,66 @@ export const useAvatarProps = ({
     statusIndicators: _statusIndicators,
   };
 
-  const wrapperProps: AvatarWrapperProps = {
-    ...uiProps,
-    ...restProps,
-    ...componentProps.wrapperProps,
-  };
+  const wrapperProps: AvatarWrapperProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...restProps,
+      ...componentProps.wrapperProps,
+    }),
+    [componentProps.wrapperProps, restProps, uiProps],
+  );
 
-  const iconProps: AvatarIconProps = {
-    ...uiProps,
-    ...componentProps.iconProps,
-    children: withIconA11y(runIfFn(uiProps.icon, uiProps)),
-  };
+  const iconProps: AvatarIconProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.iconProps,
+      children: withIconA11y(uiProps.icon, uiProps),
+    }),
+    [componentProps.iconProps, uiProps],
+  );
 
-  const initialsProps: AvatarInitialsProps = {
-    ...uiProps,
-    ...componentProps.initialsProps,
-    children: uiProps.initials,
-  };
+  const initialsProps: AvatarInitialsProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.initialsProps,
+      children: uiProps.initials,
+    }),
+    [componentProps.initialsProps, uiProps],
+  );
 
-  const imageProps: AvatarImageProps = {
-    ...uiProps,
-    src,
-    srcSet,
-    sizes,
-    loading,
-    crossOrigin,
-    onLoad,
-    onError,
-    ...componentProps.imageProps,
-  };
+  const imageProps: AvatarImageProps = useMemo(
+    () => ({
+      ...uiProps,
+      src,
+      srcSet,
+      sizes,
+      loading,
+      crossOrigin,
+      onLoad,
+      onError,
+      ...componentProps.imageProps,
+    }),
+    [
+      componentProps.imageProps,
+      crossOrigin,
+      loading,
+      onError,
+      onLoad,
+      sizes,
+      src,
+      srcSet,
+      uiProps,
+    ],
+  );
 
-  const statusIndicatorProps: AvatarStatusIndicatorProps = {
-    ...uiProps,
-    ...componentProps.statusIndicatorProps,
-    children: withIconA11y(runIfFn(uiProps.statusIndicators, uiProps)),
-  };
+  const statusIndicatorProps: AvatarStatusIndicatorProps = useMemo(
+    () => ({
+      ...uiProps,
+      ...componentProps.statusIndicatorProps,
+      children: withIconA11y(uiProps.statusIndicators, uiProps),
+    }),
+    [componentProps.statusIndicatorProps, uiProps],
+  );
 
   return {
     uiProps,

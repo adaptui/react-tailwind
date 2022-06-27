@@ -9,7 +9,7 @@ import {
 import { As, Props } from "ariakit-utils/types";
 
 import { useTheme } from "../theme";
-import { cx, RenderProp, runRenderFn } from "../utils";
+import { cx, RenderProp, runIfFn, tcm } from "../utils";
 
 export const useDivider = createHook<DividerOptions>(
   ({
@@ -19,7 +19,7 @@ export const useDivider = createHook<DividerOptions>(
     ...props
   }) => {
     const theme = useTheme("divider");
-    const className = cx(
+    const className = tcm(
       theme.base,
       theme.orientation[orientation],
       props.className,
@@ -35,7 +35,7 @@ export const useDivider = createHook<DividerOptions>(
             <div className="relative h-full w-full">
               {element}
               <span className={labelClassName}>
-                {runRenderFn(label, { orientation, label, labelPosition })}
+                {runIfFn(label, { orientation, label, labelPosition })}
               </span>
             </div>
           );

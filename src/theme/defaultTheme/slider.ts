@@ -9,6 +9,7 @@ export const slider = {
   filledTrack: "absolute -translate-y-1/2 rounded-2xl top-1/2",
   thumbWrapper:
     "absolute top-0 flex flex-col items-center z-10 focus-within:z-20",
+  thumbLabel: "",
   thumbContainer: {
     default:
       "flex items-center justify-center rounded-full select-none touch-none cursor-pointer transition-all",

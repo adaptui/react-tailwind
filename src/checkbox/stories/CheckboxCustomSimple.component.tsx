@@ -38,7 +38,7 @@ export default CheckboxCustomSimple;
 
 const CustomIconElement = (props: CheckboxUIProps) => (
   <>
-    {props.isUnchecked ? withIconA11y(<EyeClose />) : null}
-    {props.isChecked ? withIconA11y(<EyeOpen />) : null}
+    {props.isUnchecked ? withIconA11y(<EyeClose />, {}, {}) : null}
+    {props.isChecked ? withIconA11y(<EyeOpen />, {}, {}) : null}
   </>
 );

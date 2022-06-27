@@ -6,9 +6,9 @@ import {
 import { As, Props } from "ariakit-utils/types";
 import { SliderInputOptions, useSliderInput } from "@adaptui/react";
 
-import { BoxProps, useBox } from "../box";
+import { BoxProps } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { tcm } from "../utils";
 
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
@@ -24,7 +24,7 @@ export const useSliderThumbInput = createHook<SliderThumbInputOptions>(
     ...props
   }) => {
     const theme = useTheme("slider");
-    const className = cx(
+    const className = tcm(
       theme.input,
       size ? theme.size[size]?.input : "",
       props.className,
@@ -32,7 +32,6 @@ export const useSliderThumbInput = createHook<SliderThumbInputOptions>(
 
     props = { ...props, className };
     props = useSliderInput({ state, ...props });
-    props = useBox(props);
 
     return props;
   },

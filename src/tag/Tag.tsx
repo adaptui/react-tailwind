@@ -8,7 +8,7 @@ import { As, Props } from "ariakit-utils/types";
 
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { cx, passPropsNew, RenderProp, tcm } from "../utils";
+import { cx, RenderProp, tcm, withIconA11y } from "../utils";
 
 export const useTag = createHook<TagOptions>(
   ({
@@ -24,17 +24,16 @@ export const useTag = createHook<TagOptions>(
     const className = tcm(
       theme.base,
       theme.size[size]?.default,
-      theme.themeColor[themeColor]?.[variant].default,
-      theme.themeColor[themeColor]?.[variant].hover,
-      theme.themeColor[themeColor]?.[variant].active,
-      theme.themeColor[themeColor]?.[variant].focus,
-      theme.themeColor[themeColor]?.[variant].disabled,
+      theme.themeColor[themeColor]?.[variant]?.default,
+      theme.themeColor[themeColor]?.[variant]?.hover,
+      theme.themeColor[themeColor]?.[variant]?.active,
+      theme.themeColor[themeColor]?.[variant]?.focus,
+      theme.themeColor[themeColor]?.[variant]?.disabled,
       props.className,
     );
 
     const prefixStyles = cx(theme.size[size]?.prefix);
     const suffixStyles = cx(theme.size[size]?.suffix);
-
     const state = {
       size,
       themeColor,
@@ -45,11 +44,11 @@ export const useTag = createHook<TagOptions>(
     const children = (
       <>
         {prefix ? (
-          <>{passPropsNew(prefix, { className: prefixStyles }, state)}</>
+          <>{withIconA11y(prefix, state, { className: prefixStyles })}</>
         ) : null}
         <span>{props.children as React.ReactNode}</span>
         {closable && suffix ? (
-          <>{passPropsNew(suffix, { className: suffixStyles }, state)}</>
+          <>{withIconA11y(suffix, state, { className: suffixStyles })}</>
         ) : null}
       </>
     );

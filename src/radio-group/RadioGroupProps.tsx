@@ -133,6 +133,7 @@ export const useRadioGroupProps = ({
     }),
     [componentProps?.showMoreProps, moreChildren, onCollapseStart, uiProps],
   );
+
   return {
     uiProps,
     visibleChildren,

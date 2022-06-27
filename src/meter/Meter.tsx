@@ -32,11 +32,9 @@ export const Meter = React.forwardRef<HTMLDivElement, MeterProps>(
       trackProps,
     } = useMeterProps(props);
     const { state, label, hint, intervals } = uiProps;
-    console.log("%cintervals", "color: #ffcc00", intervals);
     const { value, max } = state;
     const maxMultiplier = max / intervals;
     const intervalValue = value / maxMultiplier;
-    console.log("%cintervalValue", "color: #e5de73", intervalValue);
 
     return (
       <MeterWrapper ref={ref} {...wrapperProps}>
@@ -48,7 +46,6 @@ export const Meter = React.forwardRef<HTMLDivElement, MeterProps>(
                 .fill(0)
                 .map((_, i) => {
                   const interval = i + 1;
-                  console.log("%cinterval", "color: #33cc99", interval);
 
                   return (
                     <MeterTrack key={`interval-${interval}`} {...trackProps}>
