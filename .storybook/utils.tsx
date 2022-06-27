@@ -150,7 +150,7 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
       "README.md":
         "# next-tailwind-jit\n\n[View on Vercel](https://next-tailwind-jit.vercel.app/)\n\n[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/next-tailwind-jit-evzkdg)\n",
       "adaptui.config.js":
-        'import { extendTheme } from "@adaptui/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
+        'import { extendTheme } from "@adaptui/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white-900",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
       "tailwind.config.js":
         'module.exports = {\n  presets: [require("@adaptui/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./adaptui.config.ts",\n    "node_modules/@adaptui/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
       ...files,
@@ -207,7 +207,7 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
       "README.md":
         "# next-tailwind-jit-ts\n\n[View on Vercel](https://next-tailwind-jit-ts.vercel.app/)\n\n[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/github-jntzof)\n",
       "adaptui.config.js":
-        'import { extendTheme } from "@adaptui/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
+        'import { extendTheme } from "@adaptui/react-tailwind";\n\nexport const theme = extendTheme({\n  // This only affected the Storybook, doesn\'t go or merge when used this config as preset\n  extend: {\n    button: {\n      variant: {\n        default: {\n          tertiary: "bg-purple-600 text-white-900",\n        },\n      },\n      size: {\n        default: {\n          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",\n        },\n      },\n    },\n  },\n});\n\nexport default theme;\n',
       "tailwind.config.js":
         'module.exports = {\n  presets: [require("@adaptui/react-tailwind/preset")],\n  content: [\n    "./components/**/*",\n    "./pages/**/*",\n    "./adaptui.config.ts",\n    "node_modules/@adaptui/react-tailwind/**/*",\n  ],\n  theme: {},\n  variants: {},\n  plugins: [],\n};\n',
       "tsconfig.json":
