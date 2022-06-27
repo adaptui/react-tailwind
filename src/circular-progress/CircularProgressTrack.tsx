@@ -18,7 +18,6 @@ export const useCircularProgressTrack =
       const className = cx(
         theme.track,
         themeColor ? theme.themeColor[themeColor].track : "",
-        "text-red-600",
         props.className,
       );
 
