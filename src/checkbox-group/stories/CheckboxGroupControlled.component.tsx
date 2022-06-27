@@ -32,7 +32,6 @@ export const CheckboxGroupControlled: React.FC<
   };
 
   const radioState = getRadioState();
-  console.log("%cradioState", "color: #bfffc8", radioState);
 
   return (
     <div className="flex w-96 flex-col items-center space-y-4">
