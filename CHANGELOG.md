@@ -1,5 +1,98 @@
 
 
+## [1.0.0-alpha.1](https://github.com/adaptui/react-tailwind/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* **avatar-group:** 🐛 run children with runIfFnChildren ([d15aeeb](https://github.com/adaptui/react-tailwind/commit/d15aeeb6bd8dc72ab21b90ea4c68e5c72e9797b8))
+* **circular-progress:** 🔥 remove track color ([cf0f219](https://github.com/adaptui/react-tailwind/commit/cf0f219a33300d9040016833074f77302458a020))
+* **react-utils:** 🩹 types for passprops for render props ([34f994b](https://github.com/adaptui/react-tailwind/commit/34f994b6111bb898fc9239600caa5635f68386df))
+* **slider:** 🩹 focus behaviour on thumb ([4fa6fb9](https://github.com/adaptui/react-tailwind/commit/4fa6fb959b7786913ef031183c13b937a5ee296d))
+
+
+### Documentation Changes
+
+* **preview:** 👷 update next js sb csb example ([a55fec4](https://github.com/adaptui/react-tailwind/commit/a55fec413a42a1bfa1383051c70a8d60d2d59e2e))
+
+
+### CI Changes
+
+* **actions:** 👷 update run names ([92447ec](https://github.com/adaptui/react-tailwind/commit/92447ec0fee61549b0ef66d0a8232728375ba3fe))
+* **renovate:** 👷 use chore for all renovate pr ([e87e010](https://github.com/adaptui/react-tailwind/commit/e87e01095143eeb082531731f1b0f1073d0feb2d))
+
+
+### Test Updates
+
+* **primitives:** 📸 update snapshots ([a0cd49e](https://github.com/adaptui/react-tailwind/commit/a0cd49e6d7cc887660491b0e55e45887cead91c7))
+* **spinner:** ✅ add snapshot test ([ef68573](https://github.com/adaptui/react-tailwind/commit/ef68573a500f1ad274bcd6f687ddc16d7fa229d4))
+
+
+### Feature Updates
+
+* **avatars:** ✨ finish avatars component ([1c475d4](https://github.com/adaptui/react-tailwind/commit/1c475d4f4e6ab7e96dd1642401c56176f3cc1767))
+* **badge:** ✨ finish badge component ([5c2c094](https://github.com/adaptui/react-tailwind/commit/5c2c0942220ca86e95830a79e3b140a4125fcabd))
+* **badge:** ✨ finish badge component ([42fd6a2](https://github.com/adaptui/react-tailwind/commit/42fd6a2759e878bc4e42ddd7ebb5ffef4204d75f))
+* **button-group:** ✨ finish button group ([bd7067b](https://github.com/adaptui/react-tailwind/commit/bd7067b6c52828620ca9c80402472e257b3f2d20))
+* **button:** ✨ finish button & around components ([e255fb6](https://github.com/adaptui/react-tailwind/commit/e255fb6f622530037a123b339aeb8575c44bb2af))
+* **button:** ✨ finish button theming ([3cb557b](https://github.com/adaptui/react-tailwind/commit/3cb557bfe0608771bf90c91c793400836c217f92))
+* **checkbox-group:** ✨ finish theming & stories ([f7becca](https://github.com/adaptui/react-tailwind/commit/f7becca0408afc460c6f13bb8eccae1b916ce5ce))
+* **checkbox:** ✨ finish checkbox base ([0050fd3](https://github.com/adaptui/react-tailwind/commit/0050fd32325aa0086f4a041eb71a7888cb606a3e))
+* **circular-progress:** ✨ finish circular progress comp ([6fc2713](https://github.com/adaptui/react-tailwind/commit/6fc271324dca91e9484ec2e3406dd38f7febe939))
+* **colors:** ✨ add design token colors to tailwind ([4a0f025](https://github.com/adaptui/react-tailwind/commit/4a0f0252ca6980b839769d73dc6255763bb748e7))
+* **divider:** ✨ finish divider component ([64342e3](https://github.com/adaptui/react-tailwind/commit/64342e321dbc8943100b790291c868201a1046fa))
+* **input:** ✨ add input theme ([af3b699](https://github.com/adaptui/react-tailwind/commit/af3b6993179348372b9187a767ac7134aa283df7))
+* **input:** ✨ update stories ([c060d35](https://github.com/adaptui/react-tailwind/commit/c060d3513535dce1a44e864690ac25ce4e21ca9d))
+* **meter:** ✨ finish meter component ([61f4ec1](https://github.com/adaptui/react-tailwind/commit/61f4ec15ddc6b27167cc9a4c4d9247d5287e1fbf))
+* **progress:** ✨ finish progress ([d756046](https://github.com/adaptui/react-tailwind/commit/d75604645c5aa7b8fb3e63728934bfe4319c642f))
+* **radio:** ✨ finish theming & stories along with its group ([e02da24](https://github.com/adaptui/react-tailwind/commit/e02da24a837248070ffd13882a1d391d18a365d6))
+* **radio:** ✨ make the selected radio in group always visible ([de17901](https://github.com/adaptui/react-tailwind/commit/de17901902b7bbc331ae4fbae17fd0cc4195ffee))
+* **select:** ✨ finish component ([6b63c17](https://github.com/adaptui/react-tailwind/commit/6b63c170c54a4452d814478dc3d49d697dca646f))
+* **slider:** ✨ finish component & stories ([10f587d](https://github.com/adaptui/react-tailwind/commit/10f587d5fc9cb85a70408c30c261d79b66acafac))
+* **spinner:** ✨ finish spinner theming ([22b8f21](https://github.com/adaptui/react-tailwind/commit/22b8f2115f48a41b683b734dc2e4fabf988577e9))
+* **tag:** ✨ finish tag component ([a05b70d](https://github.com/adaptui/react-tailwind/commit/a05b70d4bd82895d262a2d20c5d39bf076e32967))
+* **textarea:** ✨ finish theming & stories ([714f71d](https://github.com/adaptui/react-tailwind/commit/714f71d8be77b609aaa7ce2346a85be45deeb764))
+* **textarea:** ✨ finish theming & stories ([#319](https://github.com/adaptui/react-tailwind/issues/319)) ([1a341a1](https://github.com/adaptui/react-tailwind/commit/1a341a15c798ed21986284be8c5584a9cfadb4e2))
+* **tooltip:** ✨ finish component & stories ([9075318](https://github.com/adaptui/react-tailwind/commit/907531846709213b4d1e0bc2eea2c2710062e2a2))
+
+
+### Code Refactors
+
+* **avatar:** ♻️ change ring color and squared jsdoc ([#324](https://github.com/adaptui/react-tailwind/issues/324)) ([c3b30be](https://github.com/adaptui/react-tailwind/commit/c3b30bee713847ff911a123e7667ea76a133dfbf))
+* **checkbox:** ♻️ separate checkbox group & improve showmore logic ([1af8f32](https://github.com/adaptui/react-tailwind/commit/1af8f32ffb3421fb57d48045be7e6932f21cf6af))
+* **components:** ♻️ migrate to new renderFn utils & memoize & improve overall ([704c370](https://github.com/adaptui/react-tailwind/commit/704c370fb8a31fe6878e81f5217f1d3e73f3173e))
+* **cx:** ♻️ reuse internal cx function ([cc06b20](https://github.com/adaptui/react-tailwind/commit/cc06b202dd390e625d0bb6613ab77526f4d5f517))
+* **input:** ♻️ add optional chain & memoize ([a4bcb6f](https://github.com/adaptui/react-tailwind/commit/a4bcb6f4cf98ec2a2189c70064064b12f4b89a84))
+* **primitives:** 💄 remove py from badge button & tag ([58bc940](https://github.com/adaptui/react-tailwind/commit/58bc940b2670b08882fbd5188aa4200ab149bf34))
+* **radio:** ♻️ remove themeColor getting passed to dom ([cd2aa45](https://github.com/adaptui/react-tailwind/commit/cd2aa45897f8da50cc30a557aa3df77fab1abf07))
+* **radio:** ✨ add optional chain, memo & separate group ([c2c0305](https://github.com/adaptui/react-tailwind/commit/c2c0305eed766877aa82b38538b4cf2148429c20))
+* **react-utils:** 🏷️ update children types ([05ebbf4](https://github.com/adaptui/react-tailwind/commit/05ebbf4f581f229f3a33427912f83b5e0fd7a051))
+* **select:** ♻️ add optional chain & memoize ([a514b25](https://github.com/adaptui/react-tailwind/commit/a514b25cd10f9249e96dca802d85ad2af0649640))
+* **spinner:** ♻️ add current theme for track visible ([7a06761](https://github.com/adaptui/react-tailwind/commit/7a06761ce3b58fefcf5a0003a298332ba4bcaa2c))
+* **src:** ♻️ update hooks, types, utils & sb ([4fe3a2c](https://github.com/adaptui/react-tailwind/commit/4fe3a2cd9f376df79cc4aaeaa603338ef8a03da3))
+* **textarea:** ♻️ add  memoize & fix theme ([f6ae956](https://github.com/adaptui/react-tailwind/commit/f6ae956be078164c4e1f77ee7083de28d03c4666))
+* **textarea:** ♻️ update spinner & memoize ([57e2230](https://github.com/adaptui/react-tailwind/commit/57e22305456e4e79c27db493933fc31b2fe1d840))
+
+
+### Maintanance Updates
+
+* **avatar:** 🚚 circular to squared & deps updates ([ba525a2](https://github.com/adaptui/react-tailwind/commit/ba525a2ab15e45d7c3ac4dd3403421dade4a9678))
+* **deps:** ➖ remove tsd tests ([ac36a4b](https://github.com/adaptui/react-tailwind/commit/ac36a4bbadd1d7a3ee0e7393e7644fab91f11df9))
+* **deps:** ⬆️ update @types/node ([4c68d76](https://github.com/adaptui/react-tailwind/commit/4c68d76c5b262408238426f1a72fbe4a58832826))
+* **deps:** ⬆️ update dependency @testing-library/dom to v8.14.0 ([4ac4bb5](https://github.com/adaptui/react-tailwind/commit/4ac4bb5101a285970d2ff827e8d89798df196d8b))
+* **deps:** ⬆️ update dependency eslint-plugin-prettier to v4.1.0 ([8935593](https://github.com/adaptui/react-tailwind/commit/8935593db461a134ab1a647fa864a8659ac47d69))
+* **deps:** ⬆️ update dev dependencies (minor) ([6f8c797](https://github.com/adaptui/react-tailwind/commit/6f8c797b24aa01c36392460650296545d8e2aede))
+* **deps:** ⬆️ update dev dependencies (minor) ([b5720fb](https://github.com/adaptui/react-tailwind/commit/b5720fb4b7dcbcb88f15b03d377f7a50a3f07077))
+* **deps:** ⬆️ update dev dependencies (minor) ([#303](https://github.com/adaptui/react-tailwind/issues/303)) ([df313e8](https://github.com/adaptui/react-tailwind/commit/df313e89a16c5c7daf800211f7362f5e72c5e589))
+* **deps:** ⬆️ update dev dependencies (minor) ([#306](https://github.com/adaptui/react-tailwind/issues/306)) ([6f04aa4](https://github.com/adaptui/react-tailwind/commit/6f04aa43bc9273e2440b04671a97c38de97f17bd))
+* **deps:** ⬆️ update dev deps ([319ee01](https://github.com/adaptui/react-tailwind/commit/319ee016d330a66c761b645083e811ffc4f4081b))
+* **deps:** ⬆️ update dev deps ([1d2b508](https://github.com/adaptui/react-tailwind/commit/1d2b508fa2f283fa57070235ddcc429a63ea364b))
+* **deps:** pin dependency storybook-addon-react-docgen to 1.2.42 ([44812ab](https://github.com/adaptui/react-tailwind/commit/44812ab862e997ae1953464bd72974b2a77e1fd0))
+* **logs:** 🔥 remove console.logs lines ([6d85ddd](https://github.com/adaptui/react-tailwind/commit/6d85ddd96f9e8f266d3d84c5bbcfc2edbb8e7507))
+* **sb:** 🔧 update sb hmr issue ([54e70b2](https://github.com/adaptui/react-tailwind/commit/54e70b2ef6f9bca371716b8d5cc47eb7139d94d3))
+* **vscode:** 🔧 add branch protection to commit for main ([495df3a](https://github.com/adaptui/react-tailwind/commit/495df3ae60147826d740b8a7f9d3d8f100c844c6))
+* **vscode:** 🧑‍💻 add conventional commits ext recommendations ([837ce7f](https://github.com/adaptui/react-tailwind/commit/837ce7f205b9cfcea6770f1fa9477e7d4d42143c))
+
 ## [1.0.0-alpha.0](https://github.com/adaptui/react-tailwind/compare/v0.0.1-alpha.39...v1.0.0-alpha.0) (2022-05-31)
 
 
