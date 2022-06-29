@@ -17,7 +17,6 @@ const config = {
         },
       },
     },
-    "storybook-addon-turbo-build",
   ],
 };
 
