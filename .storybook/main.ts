@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   framework: "@storybook/react",
   core: { builder: "webpack5" },
   // storyStoreV7 removes the circular dependency issue with Webpack 5
@@ -19,3 +19,5 @@ module.exports = {
     },
   ],
 };
+
+module.exports = config;
