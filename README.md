@@ -57,8 +57,9 @@ Thanks goes to these wonderful people
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://navinmoorthy.me/"><img src="https://avatars.githubusercontent.com/u/39694575?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Navin Moorthy</b></sub></a><br /><a href="https://github.com/navin@timeless.co/react-components-template/commits?author=navin-moorthy" title="Code">💻</a></td>
-    <td align="center"><a href="https://anuraghazra.github.io/"><img src="https://avatars.githubusercontent.com/u/35374649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anurag Hazra</b></sub></a><br /><a href="https://github.com/navin@timeless.co/react-components-template/commits?author=anuraghazra" title="Code">💻</a></td>
+    <td align="center"><a href="https://navinmoorthy.me/"><img src="https://avatars.githubusercontent.com/u/39694575?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Navin Moorthy</b></sub></a><br /><a href="https://github.com/hello@timeless.co/@adaptui/react-tailwind/commits?author=navin-moorthy" title="Code">💻</a></td>
+    <td align="center"><a href="https://anuraghazra.github.io/"><img src="https://avatars.githubusercontent.com/u/35374649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anurag Hazra</b></sub></a><br /><a href="https://github.com/hello@timeless.co/@adaptui/react-tailwind/commits?author=anuraghazra" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mcnaveen"><img src="https://avatars.githubusercontent.com/u/8493007?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MC Naveen</b></sub></a><br /><a href="https://github.com/hello@timeless.co/@adaptui/react-tailwind/commits?author=mcnaveen" title="Code">💻</a></td>
   </tr>
 </table>
 
