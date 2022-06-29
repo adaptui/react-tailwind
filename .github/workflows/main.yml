@@ -140,7 +140,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        run: yarn --frozen-lockfile
 
       - name: Test
         run: yarn test -- --maxWorkers 2 --shard ${{ matrix.shard }}
