@@ -37,7 +37,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        run: yarn --frozen-lockfile
 
   lint:
     name: Lint
@@ -68,7 +68,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        run: yarn --frozen-lockfile
 
       - name: Lint
         run: yarn lint
@@ -102,7 +102,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        run: yarn --frozen-lockfile
 
       - name: Built
         run: yarn build
