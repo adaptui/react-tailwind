@@ -59,7 +59,7 @@ export const createControls = (
     const allowedControls = (options?.allow || []).reduce((cur, key) => {
       return {
         ...cur,
-        [key]: { table: { disable: true } },
+        [key]: { table: { disable: false } },
       };
     }, {});
 
