@@ -1,8 +1,12 @@
 {
-  "env": { "coreJs": 3.22 },
+  "env": {
+    "coreJs": 3
+  },
   "exclude": [
     "fileMock.js$",
     "styleMock.js$",
+    ".test-d.ts$",
+    ".test.tsx$",
     ".component.tsx$",
     ".stories.tsx$",
     "Jsx.ts$",
