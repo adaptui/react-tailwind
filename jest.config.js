@@ -6,7 +6,7 @@ const { join } = require("path");
 const pkg = require("./package.json");
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {
+module.exports = {
   rootDir: __dirname,
   displayName: pkg.name,
   testEnvironment: "jsdom",
@@ -20,4 +20,7 @@ export default {
   },
   coveragePathIgnorePatterns: ["node_modules", "__mocks__", "stories"],
   clearMocks: true,
+  transform: {
+    "^.+\\.(t|j)sx?$": ["@swc/jest"],
+  },
 };

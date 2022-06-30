@@ -27,7 +27,9 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('yarn-lock.json') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -52,7 +54,9 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('yarn-lock.json') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -80,7 +84,9 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('yarn-lock.json') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -112,7 +118,9 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('yarn-lock.json') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'

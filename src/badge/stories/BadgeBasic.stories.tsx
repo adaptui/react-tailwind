@@ -19,7 +19,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("badge", {
-    ignore: ["wrapElement", "as", "ref"],
+    ignore: ["wrapElement", "as", "ref", "prefix"],
   }),
 } as Meta;
 
@@ -80,5 +80,5 @@ export const Outline: Story = {
 
 export const Prefix: Story = {
   ...Default,
-  args: { prefix: <SlotIcon /> },
+  args: { ...Default.args, prefix: <SlotIcon /> },
 };
