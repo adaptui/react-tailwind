@@ -80,5 +80,5 @@ export const Outline: Story = {
 
 export const Prefix: Story = {
   ...Default,
-  args: { prefix: <SlotIcon /> },
+  args: { ...Default.args, prefix: <SlotIcon /> },
 };

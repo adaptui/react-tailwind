@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/BadgeStackJsx";
 import ts from "./templates/BadgeStackTsx";
@@ -12,6 +12,9 @@ type Story = ComponentStoryObj<typeof BadgeStack>;
 export default {
   title: "Primitives/Badge/Stack",
   component: BadgeStack,
+  argTypes: createControls("badge", {
+    ignore: ["wrapElement", "as", "ref", "prefix"],
+  }),
   parameters: {
     layout: "centered",
     options: { showPanel: false },
