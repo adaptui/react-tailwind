@@ -19,7 +19,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("badge", {
-    ignore: ["wrapElement", "as", "ref"],
+    ignore: ["wrapElement", "as", "ref", "prefix"],
   }),
 } as Meta;
 
