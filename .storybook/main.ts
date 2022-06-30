@@ -2,7 +2,10 @@ const { mergeConfig } = require("vite");
 
 const config = {
   framework: "@storybook/react",
-  core: { builder: "@storybook/builder-vite" },
+  core: {
+    builder: "@storybook/builder-vite",
+    disableTelemetry: true,
+  },
   async viteFinal(config: any, options: any) {
     return mergeConfig(config, {
       // customize the Vite config here
@@ -15,8 +18,8 @@ const config = {
 
   // storyStoreV7 removes the circular dependency issue with Webpack 5
   // So, we added ThemeProvider in preview.jsx and so src/theme should work for HMR
-  // features: { storyStoreV7: true, babelModeV7: true },
-  stories: ["../src/*/stories/*.stories.@(ts|tsx)"],
+  features: { storyStoreV7: true },
+  stories: ["../**/*.stories.@(ts|tsx)"],
   addons: [
     // "storybook-addon-preview",
     "@storybook/addon-essentials",
