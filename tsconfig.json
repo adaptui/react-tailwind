@@ -23,5 +23,6 @@
     "importHelpers": true,
     "sourceMap": true
   },
+  "include": ["custom.d.ts"],
   "exclude": ["./out"]
 }
