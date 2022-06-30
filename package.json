@@ -148,7 +148,7 @@
     "patch-package": "6.4.7",
     "pinst": "3.0.0",
     "postcss": "8.4.14",
-    "postcss-cli": "9.1.0",
+    "postcss-cli": "10.0.0",
     "postcss-focus-visible": "6.0.4",
     "postcss-selector-parser": "6.0.10",
     "prettier": "2.7.1",
