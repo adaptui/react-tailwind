@@ -27,7 +27,7 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('**/yarn-lock.json') }}
+          key: modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             modules-
 
@@ -54,7 +54,7 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('**/yarn-lock.json') }}
+          key: modules-${{ hashFiles('**/yarn-lock') }}
           restore-keys: |
             modules-
 
@@ -84,7 +84,7 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('**/yarn-lock.json') }}
+          key: modules-${{ hashFiles('**/yarn-lock') }}
           restore-keys: |
             modules-
 
@@ -118,7 +118,7 @@ jobs:
         id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
           path: node_modules
-          key: modules-${{ hashFiles('**/yarn-lock.json') }}
+          key: modules-${{ hashFiles('**/yarn-lock') }}
           restore-keys: |
             modules-
 
