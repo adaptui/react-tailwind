@@ -1,8 +1,9 @@
-name: Build
+name: main
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -21,22 +22,16 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - name: Cache node_modules
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        uses: actions/cache@v3
+        id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: node_modules
+          key: modules-${{ hashFiles('yarn-lock.json') }}
 
       - name: Install Dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
 
   lint:
     name: Lint
@@ -53,17 +48,15 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Cache node_modules
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        uses: actions/cache@v3
+        id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: node_modules
+          key: modules-${{ hashFiles('yarn-lock.json') }}
 
       - name: Install Dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
 
       - name: Lint
         run: yarn lint
@@ -83,17 +76,15 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Cache node_modules
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        uses: actions/cache@v3
+        id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: node_modules
+          key: modules-${{ hashFiles('yarn-lock.json') }}
 
       - name: Install Dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
 
       - name: Built
         run: yarn build
@@ -117,17 +108,15 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Cache node_modules
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        uses: actions/cache@v3
+        id: cache-node-modules # use this to check for `cache-hit` (`steps.cache-node-modules.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: node_modules
+          key: modules-${{ hashFiles('yarn-lock.json') }}
 
       - name: Install Dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline --frozen-lockfile
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
 
       - name: Test
         run: yarn test -- --maxWorkers 2 --shard ${{ matrix.shard }}
