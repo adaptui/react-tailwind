@@ -55,3 +55,4 @@ yarn.lock
 dist
 CHANGELOG.md
 templates
+*.svg

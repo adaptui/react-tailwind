@@ -13,7 +13,7 @@
   "prettier.enable": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.addMissingImports": true,
+    "source.addMissingImports": true
     // "source.organizeImports": true,
     // "source.sortImports": true,
     // "source.fixAll": true
