@@ -63,7 +63,8 @@ export const useAvatarProps = ({
     crossOrigin,
     loading,
   });
-  let uiProps: AvatarUIProps = useMemo(() => ({ ...uiState }), [uiState]);
+  let uiProps: AvatarUIProps = uiState;
+
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
 
   const _icon: AvatarUIState["icon"] =
@@ -129,13 +130,14 @@ export const useAvatarProps = ({
     ],
   );
 
+  const finalStatusIndicators = withIconA11y(uiProps.statusIndicators, uiProps);
   const statusIndicatorProps: AvatarStatusIndicatorProps = useMemo(
     () => ({
       ...uiProps,
       ...componentProps.statusIndicatorProps,
-      children: withIconA11y(uiProps.statusIndicators, uiProps),
+      children: finalStatusIndicators,
     }),
-    [componentProps.statusIndicatorProps, uiProps],
+    [componentProps.statusIndicatorProps, finalStatusIndicators, uiProps],
   );
 
   return {
