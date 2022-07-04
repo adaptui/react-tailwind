@@ -92,7 +92,7 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
-      - name: Built
+      - name: Build
         run: yarn build
 
   test:
