@@ -5,10 +5,10 @@ export const CaretRightIcon = createIcon({
   viewBox: "0 0 12 12",
   path: (
     <path
-      fill="currentColor"
       fillRule="evenodd"
       clipRule="evenodd"
-      d="M4.026 1.805a.65.65 0 0 1 .919-.03l4 3.75a.65.65 0 0 1 0 .95l-4 3.75a.65.65 0 0 1-.89-.95L7.55 6 4.056 2.724a.65.65 0 0 1-.03-.919Z"
+      d="M4.027 1.807a.65.65 0 0 1 .92-.03l4 3.75a.65.65 0 0 1 0 .949l-4 3.75a.65.65 0 0 1-.89-.949l3.494-3.275-3.494-3.276a.65.65 0 0 1-.03-.919Z"
+      fill="currentColor"
     />
   ),
 });

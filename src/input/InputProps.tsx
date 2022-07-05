@@ -65,19 +65,14 @@ export const useInputProps = ({
   const inputInlineStyles = React.useRef<Record<string, any>>({});
   let prefixRef = React.useRef<HTMLElement>(null);
   let suffixRef = React.useRef<HTMLElement>(null);
-  prefixRef = useForkRef(
-    prefixRef,
-    componentProps?.prefixProps?.ref,
-  ) as unknown as React.RefObject<HTMLElement>;
-  suffixRef = useForkRef(
-    suffixRef,
-    componentProps?.suffixProps?.ref,
-  ) as unknown as React.RefObject<HTMLElement>;
+
   useSafeLayoutEffect(() => {
     let key = "";
 
     const prefixElement = prefixRef.current;
+    console.log("%cprefixElement", "color: #007300", prefixElement);
     const suffixElement = suffixRef.current;
+    console.log("%csuffixElement", "color: #006dcc", suffixElement);
     if (uiProps.prefix && prefixElement) {
       key = "paddingLeft";
 
@@ -118,26 +113,34 @@ export const useInputProps = ({
     [componentProps.baseProps, disabled, restProps, uiProps],
   );
 
+  const _prefixRef = useForkRef(
+    prefixRef,
+    componentProps?.prefixProps?.ref,
+  ) as unknown as React.RefObject<HTMLElement>;
   const prefixProps: InputPrefixProps = React.useMemo(
     () => ({
       ...uiProps,
       disabled,
       ...componentProps.prefixProps,
-      ref: prefixRef,
+      ref: _prefixRef,
       children: withIconA11y(uiProps.prefix, uiProps),
     }),
-    [componentProps.prefixProps, disabled, uiProps],
+    [_prefixRef, componentProps.prefixProps, disabled, uiProps],
   );
 
+  const _suffixRef = useForkRef(
+    suffixRef,
+    componentProps?.suffixProps?.ref,
+  ) as unknown as React.RefObject<HTMLElement>;
   const suffixProps: InputSuffixProps = React.useMemo(
     () => ({
       ...uiProps,
       disabled,
       ...componentProps.suffixProps,
-      ref: suffixRef,
+      ref: _suffixRef,
       children: uiProps.suffix,
     }),
-    [componentProps.suffixProps, disabled, uiProps],
+    [componentProps.suffixProps, _suffixRef, disabled, uiProps],
   );
 
   return {

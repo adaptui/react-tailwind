@@ -106,9 +106,9 @@ export const input = {
     },
     underline: {
       default: {
-        base: "text-gray-800 placeholder:text-gray-600 border border-x-transparent border-t-transparent border-b-gray-400 rounded-none px-0.5",
-        prefix: "text-gray-600",
-        suffix: "text-gray-600",
+        base: "text-gray-800 placeholder:text-gray-600 border border-x-transparent border-t-transparent border-b-gray-400 rounded-none",
+        prefix: "text-gray-600 pl-0",
+        suffix: "text-gray-600 pr-0",
       },
       hover: {
         base: "hover:placeholder:text-gray-700 hover:border-b-gray-500",
