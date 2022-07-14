@@ -70,9 +70,8 @@ export const useInputProps = ({
     let key = "";
 
     const prefixElement = prefixRef.current;
-    console.log("%cprefixElement", "color: #007300", prefixElement);
     const suffixElement = suffixRef.current;
-    console.log("%csuffixElement", "color: #006dcc", suffixElement);
+
     if (uiProps.prefix && prefixElement) {
       key = "paddingLeft";
 
