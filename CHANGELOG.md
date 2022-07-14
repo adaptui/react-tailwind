@@ -1,5 +1,73 @@
 
 
+## [0.1.0-alpha.0](https://github.com/adaptui/react-tailwind/compare/v1.0.0-alpha.1...v0.1.0-alpha.0) (2022-07-14)
+
+
+### Bug Fixes
+
+* **avatar:** 🩹 fix calling hooks inside hooks bug ([#337](https://github.com/adaptui/react-tailwind/issues/337)) ([d770ab4](https://github.com/adaptui/react-tailwind/commit/d770ab4af567adbf6a2f4f570c82fc5cf720b527))
+* **checkbox:** 🩹 use separate variable for input ([f5c3bf8](https://github.com/adaptui/react-tailwind/commit/f5c3bf8ac70de371c86c79282a57b647b8c1ec60))
+
+
+### Documentation Changes
+
+* add [@mcnaveen](https://github.com/mcnaveen) as a contributor ([1a8511e](https://github.com/adaptui/react-tailwind/commit/1a8511e2cc63324d46c28e57ab1677d66a7afdf0))
+
+
+### Other Changes
+
+* **logo:** 🍱  show adaptui logo instead of storybook logo ([7fe4f8a](https://github.com/adaptui/react-tailwind/commit/7fe4f8adeab32c9a9ea6dfc75c37441facd14464))
+
+
+### Code Refactors
+
+* **badge:** ♻️  remove badge prefix from storybook args ([c726956](https://github.com/adaptui/react-tailwind/commit/c72695607397fe6f88e44bf25fdd9b4d6a223145))
+* **logo:** ♻️  include global.d.ts in tsconfig ([8d410e8](https://github.com/adaptui/react-tailwind/commit/8d410e8e5029033d7be7f9fbceb65aaa29b78646))
+* **logo:** ♻️  rename custom.d.ts to global.d.ts ([3beed11](https://github.com/adaptui/react-tailwind/commit/3beed11da4543e9858b51ba9f565fe3328688d1a))
+
+
+### Build Updates
+
+* **kodiak:** 🏗️ change rebase to merge method in kodiak ([cae0378](https://github.com/adaptui/react-tailwind/commit/cae0378820161841af31fcf3e9fd753e76690499))
+* **sb:** 👷 bring back webpack, babel & fix logo ([#336](https://github.com/adaptui/react-tailwind/issues/336)) ([9a50de2](https://github.com/adaptui/react-tailwind/commit/9a50de2b09aeef5f2567bc3f750c387b125fff36))
+* **sb:** 👷 remove telementry ([dce4478](https://github.com/adaptui/react-tailwind/commit/dce4478dc93d2b1fb025eb12c1b1959966c93fa6))
+* **sb:** 👷 update sb build to vite & remove babel build ([d5c9ac2](https://github.com/adaptui/react-tailwind/commit/d5c9ac2d1b939f2ecdafb2b2ed76097d9535ed5d))
+* **sb:** 💚 move from js to ts config ([66b1859](https://github.com/adaptui/react-tailwind/commit/66b1859426d63733a2b8191c88a9aac9364eadb2))
+* **sb:** 💚 remove the optmisation since affecting preview ([d7f8e84](https://github.com/adaptui/react-tailwind/commit/d7f8e846e8cacc7d42c633d95d4ca4b3df56bf5a))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([74eba91](https://github.com/adaptui/react-tailwind/commit/74eba912341a8dec17a0f916736718c08af0cf00))
+* **deps:** ⬆️ update dev dependencies (minor) ([5f79a75](https://github.com/adaptui/react-tailwind/commit/5f79a75060a60d189e6911bfbc6fc0ec1f8e686a))
+* **deps:** ⬆️ update dev dependencies (minor) ([8fc7055](https://github.com/adaptui/react-tailwind/commit/8fc705549d19ecfda04da7fbc2232e041fac4111))
+* **sb:** 👷 update allow controls ([f78805d](https://github.com/adaptui/react-tailwind/commit/f78805dbd636d6a26720b8efc11740a416a9e316))
+* **vscode:** 🔧 update settings error ([c4a4db4](https://github.com/adaptui/react-tailwind/commit/c4a4db486e3b3b1a70fa1ef302518b298d792864))
+
+
+### CI Changes
+
+* **actions:** 👷 add yarn cache dir path ([ad35246](https://github.com/adaptui/react-tailwind/commit/ad352468249d8aa026c39fb49817b377ba78a059))
+* **actions:** 👷 cache node_modules ([472dc43](https://github.com/adaptui/react-tailwind/commit/472dc43c17be53d8a1469bb0e2ad9d8b6dabf1a2))
+* **actions:** 👷 remove restore keys ([706513f](https://github.com/adaptui/react-tailwind/commit/706513f251e8df1d5ffeac32834fcf62600bb52a))
+* **actions:** 👷 update action name ([6c12f41](https://github.com/adaptui/react-tailwind/commit/6c12f41cad8d0c97588648594d01ec90bbce2f42))
+* **actions:** 👷 update the keys for main ([20442e0](https://github.com/adaptui/react-tailwind/commit/20442e0a10351a9e611dc61ad99d7b921fc7862a))
+* **actions:** 👷 update yarn lock file cache ([9c45ab5](https://github.com/adaptui/react-tailwind/commit/9c45ab59904674de0a4f44cfcc28f4b4c1b12db0))
+* **actions:** 👷 update yarn lock path ([d23144a](https://github.com/adaptui/react-tailwind/commit/d23144aa4e6e8a0a5860ab24223b7a88e98b2a31))
+* **actions:** 💚 add only checkout ([6bbc89f](https://github.com/adaptui/react-tailwind/commit/6bbc89f58467fc47fddb4f0500afc1bf2c77b50b))
+* **actions:** 💚 add only install action ([9698aa6](https://github.com/adaptui/react-tailwind/commit/9698aa6ee39b5df1c19497f115517827ba5b6f9d))
+* **actions:** 💚 fix the key uses in step ([af1b7cd](https://github.com/adaptui/react-tailwind/commit/af1b7cdafa61eb94e4ddb57a2daf0374663c7610))
+* **actions:** 💚 remove prefer offline in all jobs ([8a35761](https://github.com/adaptui/react-tailwind/commit/8a35761c6141845ea1551a2fe274e80921594735))
+* **actions:** 💚 remove yarn offline access ([e3d7258](https://github.com/adaptui/react-tailwind/commit/e3d72586ec422e4bf4dc70c37eaf2de6ff569896))
+* **actions:** 💚 setup node ([c04c2b1](https://github.com/adaptui/react-tailwind/commit/c04c2b1bb700bb4088d283ea647ae420b1b23257))
+* **perf:** 👷 add perf improvements to ci builds ([bc6e02c](https://github.com/adaptui/react-tailwind/commit/bc6e02c6bf744fbea9bcf10083d4f2a1e868f4b0))
+* **yarn:** 👷 update yarn lock file ([1478d0f](https://github.com/adaptui/react-tailwind/commit/1478d0f3161321c026cdfafff71ac1f7ceaac257))
+
+
+### Updates Reverted
+
+* **input:** ⏪️ remove console logs ([72d3516](https://github.com/adaptui/react-tailwind/commit/72d3516a3b544e3003268364f0b779f1c7a3b037))
+
 ## [1.0.0-alpha.1](https://github.com/adaptui/react-tailwind/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2022-06-27)
 
 
