@@ -1,5 +1,22 @@
 
 
+## [0.1.0-alpha.2](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2022-07-14)
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([25966df](https://github.com/adaptui/react-tailwind/commit/25966df6195e94d02ed6fcee72dac04f56753dd6))
+
+
+### Documentation Changes
+
+* **readme:** 📝 update docs site url ([1239aa3](https://github.com/adaptui/react-tailwind/commit/1239aa301e7582bef79fcb4ca27e2bb45ab92a35))
+
+
+### Code Refactors
+
+* **tooltip:** ♻️ update types for state ([ef5603e](https://github.com/adaptui/react-tailwind/commit/ef5603e22213746394af8c0be7b1ae6ad904fe36))
+
 ## [0.1.0-alpha.1](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.0...v0.1.0-alpha.1) (2022-07-14)
 
 
