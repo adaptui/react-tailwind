@@ -4,7 +4,7 @@ React UI built with @adaptui/react, ariakit & tailwind
 
 ## Get Started
 
-[Documentation & Getting Started](https://react-tailwind-docs.vercel.app/docs/getting-started)
+[Documentation & Getting Started](https://adaptui-react-docs.vercel.app/docs/getting-started)
 
 ## Storybook
 
