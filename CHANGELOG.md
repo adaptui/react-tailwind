@@ -1,5 +1,12 @@
 
 
+## [0.1.0-alpha.1](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.0...v0.1.0-alpha.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* **select:** 🩹 update fork ref declaration ([3b41c70](https://github.com/adaptui/react-tailwind/commit/3b41c7005a8c5e98633e61ac6f4ee6a7b7986798))
+
 ## [0.1.0-alpha.0](https://github.com/adaptui/react-tailwind/compare/v1.0.0-alpha.1...v0.1.0-alpha.0) (2022-07-14)
 
 
