@@ -13,10 +13,13 @@ import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipWrapper = createHook<TooltipWrapperOptions>(
   ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
+    if (!state) return props;
+
     const theme = useTheme("tooltip");
     const className = tcm(theme.content, props.className);
 
     props = { ...props, className };
+
     props = useTooltip({ state, ...props });
     return props;
   },
@@ -27,7 +30,10 @@ export const TooltipWrapper = createComponent<TooltipWrapperOptions>(props => {
   return createElement("div", htmlProps);
 });
 
-export type TooltipWrapperOptions<T extends As = "div"> = TooltipOptions<T> &
+export type TooltipWrapperOptions<T extends As = "div"> = Omit<
+  TooltipOptions<T>,
+  "state"
+> &
   Partial<TooltipUIProps> & {};
 
 export type TooltipWrapperProps<T extends As = "div"> = Props<
