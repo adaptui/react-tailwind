@@ -1,5 +1,12 @@
 
 
+## [0.1.0-alpha.3](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.2...v0.1.0-alpha.3) (2022-07-15)
+
+
+### Bug Fixes
+
+* **ssr:** 🐛 use defaultProps for composition ([b3007d7](https://github.com/adaptui/react-tailwind/commit/b3007d79b375fa241a46c8fb48705f938127592c))
+
 ## [0.1.0-alpha.2](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2022-07-14)
 
 
