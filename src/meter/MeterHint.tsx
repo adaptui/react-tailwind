@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { MeterUIProps } from "./MeterProps";
 
@@ -41,7 +37,7 @@ export const MeterHint = createComponent<MeterHintOptions>(props => {
   const htmlProps = useMeterHint(props);
 
   return createElement("div", htmlProps);
-});
+}, "MeterHint");
 
 export type MeterHintOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<MeterUIProps> & {};

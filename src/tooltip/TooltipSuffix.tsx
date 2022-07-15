@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
@@ -24,8 +20,9 @@ export const useTooltipSuffix = createHook<TooltipSuffixOptions>(
 
 export const TooltipSuffix = createComponent<TooltipSuffixOptions>(props => {
   const htmlProps = useTooltipSuffix(props);
+
   return createElement("div", htmlProps);
-});
+}, "TooltipSuffix");
 
 export type TooltipSuffixOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<TooltipUIProps> & {};

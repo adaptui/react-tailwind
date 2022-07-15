@@ -1,12 +1,10 @@
 import { DisclosureOptions, useDisclosure } from "ariakit";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { ButtonOptions, useButton } from "../button";
+import { createComponent } from "../utils";
 
 import { ShowMoreUIProps } from "./ShowMoreProps";
 
@@ -36,6 +34,7 @@ export const useShowMoreButton = createHook<ShowMoreButtonOptions>(
       ...props,
     });
     props = useDisclosure({ state, ...props });
+    props = useBox(props);
 
     return props;
   },
@@ -45,10 +44,12 @@ export const ShowMoreButton = createComponent<ShowMoreButtonOptions>(props => {
   const htmlProps = useShowMoreButton(props);
 
   return createElement("button", htmlProps);
-});
+}, "ShowMoreButton");
 
-export type ShowMoreButtonOptions<T extends As = "button"> =
-  DisclosureOptions<T> & ButtonOptions<T> & Partial<ShowMoreUIProps> & {};
+export type ShowMoreButtonOptions<T extends As = "button"> = BoxOptions<T> &
+  DisclosureOptions<T> &
+  ButtonOptions<T> &
+  Partial<ShowMoreUIProps> & {};
 
 export type ShowMoreButtonProps<T extends As = "button"> = Props<
   ShowMoreButtonOptions<T>

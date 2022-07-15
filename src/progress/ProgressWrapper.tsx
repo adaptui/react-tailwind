@@ -1,14 +1,11 @@
-import { GroupProps, useGroup } from "ariakit";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { GroupOptions, useGroup } from "ariakit";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 import { ProgressOptions, useProgress } from "@adaptui/react";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { createComponent, tcm } from "../utils";
 
 import { ProgressUIProps } from "./ProgressProps";
 
@@ -20,6 +17,7 @@ export const useProgressWrapper = createHook<ProgressWrapperOptions>(
     props = { ...props, className };
     props = useProgress({ state, ...props });
     props = useGroup(props);
+    props = useBox(props);
 
     return props;
   },
@@ -31,9 +29,11 @@ export const ProgressWrapper = createComponent<ProgressWrapperOptions>(
 
     return createElement("div", htmlProps);
   },
+  "ProgressWrapper",
 );
 
-export type ProgressWrapperOptions<T extends As = "div"> = GroupProps<T> &
+export type ProgressWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  GroupOptions<T> &
   ProgressOptions<T> &
   Partial<ProgressUIProps> & {};
 

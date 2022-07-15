@@ -1,14 +1,11 @@
 import { ButtonOptions, useButton } from "ariakit";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { CloseIcon } from "../icons";
 import { useTheme } from "../theme";
-import { cx, RenderProp, tcm, withIconA11y } from "../utils";
+import { createComponent, cx, RenderProp, withIconA11y } from "../utils";
 
 export const useTag = createHook<TagOptions>(
   ({
@@ -21,7 +18,7 @@ export const useTag = createHook<TagOptions>(
     ...props
   }) => {
     const theme = useTheme("tag");
-    const className = tcm(
+    const className = cx(
       theme.base,
       theme.size[size]?.default,
       theme.themeColor[themeColor]?.[variant]?.default,
@@ -55,6 +52,7 @@ export const useTag = createHook<TagOptions>(
 
     props = { ...props, className, children };
     props = useButton(props);
+    props = useBox(props);
 
     return props;
   },
@@ -64,7 +62,7 @@ export const Tag = createComponent<TagOptions>(props => {
   const htmlProps = useTag(props);
 
   return createElement("button", htmlProps);
-});
+}, "Tag");
 
 export type TagState = {
   /**
@@ -106,10 +104,8 @@ export type TagState = {
 
 export type TagRenderProps = Pick<TagProps, "className">;
 
-export type TagOptions<T extends As = "button"> = Omit<
-  ButtonOptions<T>,
-  "size"
-> &
+export type TagOptions<T extends As = "button"> = BoxOptions<T> &
+  Omit<ButtonOptions<T>, "size"> &
   Partial<TagState>;
 
 export type TagProps<T extends As = "button"> = Props<TagOptions<T>>;

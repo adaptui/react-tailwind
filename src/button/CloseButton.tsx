@@ -1,11 +1,8 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { CloseIcon } from "../icons";
+import { createComponent } from "../utils";
 
 import { ButtonOptions, useButton } from "./Button";
 
@@ -23,7 +20,7 @@ export const CloseButton = createComponent<CloseButtonOptions>(props => {
   const htmlProps = useCloseButton(props);
 
   return createElement("button", htmlProps);
-});
+}, "CloseButton");
 
 export type CloseButtonOptions<T extends As = "button"> = ButtonOptions<T> & {};
 

@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { CheckboxInputOptions } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
@@ -78,7 +74,7 @@ export const CheckboxIcon = createComponent<CheckboxIconOptions>(props => {
   const htmlProps = useCheckboxIcon(props);
 
   return createElement("span", htmlProps);
-});
+}, "CheckboxIcon");
 
 export type CheckboxIconOptions<T extends As = "span"> = BoxOptions<T> &
   Partial<CheckboxUIProps> &

@@ -3,20 +3,16 @@ import {
   ButtonOptions as AriakitButtonOptions,
   useButton as useAriakitButton,
 } from "ariakit";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 import { announce } from "@react-aria/live-announcer";
 
-import { Box } from "../box";
+import { Box, BoxOptions, useBox } from "../box";
 import { useButtonGroupContext } from "../button-group";
 import { usePrevious } from "../hooks";
 import { Spinner } from "../spinner";
 import { useTheme } from "../theme";
-import { cx, RenderProp, tcm, withIconA11y } from "../utils";
+import { createComponent, cx, RenderProp, tcm, withIconA11y } from "../utils";
 
 import { ButtonFullWidthSpinner, ButtonSpinner } from "./ButtonSpinner";
 
@@ -130,6 +126,7 @@ export const useButton = createHook<ButtonOptions>(
     );
     props = { ...props, className, children, disabled };
     props = useAriakitButton(props);
+    props = useBox(props);
 
     return props;
   },
@@ -139,7 +136,7 @@ export const Button = createComponent<ButtonOptions>(props => {
   const htmlProps = useButton(props);
 
   return createElement("button", htmlProps);
-});
+}, "Button");
 
 export type ButtonState = {
   /**
@@ -195,10 +192,8 @@ export type ButtonState = {
 
 export type ButtonRenderProps = Pick<ButtonProps, "className" | "disabled">;
 
-export type ButtonOptions<T extends As = "button"> = Omit<
-  AriakitButtonOptions<T>,
-  "size" | "prefix"
-> &
+export type ButtonOptions<T extends As = "button"> = BoxOptions<T> &
+  Omit<AriakitButtonOptions<T>, "size" | "prefix"> &
   Partial<ButtonState>;
 
 export type ButtonProps<T extends As = "button"> = Props<ButtonOptions<T>>;

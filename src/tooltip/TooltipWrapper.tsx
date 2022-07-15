@@ -1,13 +1,10 @@
 import { TooltipOptions, useTooltip } from "ariakit";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
@@ -16,11 +13,13 @@ export const useTooltipWrapper = createHook<TooltipWrapperOptions>(
     if (!state) return props;
 
     const theme = useTheme("tooltip");
-    const className = tcm(theme.content, props.className);
+    const className = cx(theme.content, props.className);
 
     props = { ...props, className };
 
     props = useTooltip({ state, ...props });
+    props = useBox(props);
+
     return props;
   },
 );
@@ -28,12 +27,10 @@ export const useTooltipWrapper = createHook<TooltipWrapperOptions>(
 export const TooltipWrapper = createComponent<TooltipWrapperOptions>(props => {
   const htmlProps = useTooltipWrapper(props);
   return createElement("div", htmlProps);
-});
+}, "TooltipWrapper");
 
-export type TooltipWrapperOptions<T extends As = "div"> = Omit<
-  TooltipOptions<T>,
-  "state"
-> &
+export type TooltipWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  Omit<TooltipOptions<T>, "state"> &
   Partial<TooltipUIProps> & {};
 
 export type TooltipWrapperProps<T extends As = "div"> = Props<

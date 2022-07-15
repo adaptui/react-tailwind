@@ -6,6 +6,7 @@ import {
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
 import { tcm } from "../utils";
 
@@ -22,6 +23,7 @@ export const useCheckboxGroupWrapper = createHook<CheckboxGroupWrapperOptions>(
 
     props = { ...props, className };
     props = useGroup(props);
+    props = useBox(props);
 
     return props;
   },
@@ -34,8 +36,9 @@ export const CheckboxGroupWrapper =
     return createElement("div", htmlProps);
   });
 
-export type CheckboxGroupWrapperOptions<T extends As = "div"> =
-  GroupOptions<T> & Partial<CheckboxGroupUIProps> & {};
+export type CheckboxGroupWrapperOptions<T extends As = "div"> = BoxOptions<T> &
+  GroupOptions<T> &
+  Partial<CheckboxGroupUIProps> & {};
 
 export type CheckboxGroupWrapperProps<T extends As = "div"> = Props<
   CheckboxGroupWrapperOptions<T>

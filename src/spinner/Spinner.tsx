@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 export const useSpinner = createHook<SpinnerOptions>(
   ({
@@ -45,7 +41,7 @@ export const Spinner = createComponent<SpinnerOptions>(props => {
   const htmlProps = useSpinner(props);
 
   return createElement("div", htmlProps);
-});
+}, "Spinner");
 
 export type SpinnerOptions<T extends As = "div"> = Omit<
   BoxOptions<T>,

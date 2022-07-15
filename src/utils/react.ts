@@ -1,5 +1,7 @@
 import * as React from "react";
-import { AnyObject } from "ariakit-utils";
+import { AnyObject, Component, Options, Props } from "ariakit-utils";
+
+import { CheckboxDescriptionOptions } from "../checkbox";
 
 import { isFunction } from "./assertions";
 import { tcm } from "./tailwindMerge";
@@ -26,6 +28,44 @@ export function forwardRefWithAs<
     DefaultType
   >;
 }
+
+/**
+ * Creates a type-safe component with the `as` prop and `React.forwardRef`.
+ *
+ * @example
+ * import { createComponent } from "@adaptui/react";
+ *
+ * type Props = {
+ *   as?: "div";
+ *   customProp?: boolean;
+ * };
+ *
+ * const Component = createComponent<Props>(({ customProp, ...props }) => {
+ *   return <div {...props} />;
+ * });
+ *
+ * <Component as="button" customProp />
+ */
+export function createComponent<O extends ComponentOptions>(
+  render: (props: Props<O>) => React.ReactElement,
+  type: string,
+) {
+  const Role = (props: Props<O>, ref: React.Ref<any>) =>
+    render({ ref, ...props, __TYPE__: type });
+
+  const Component = React.forwardRef(Role) as unknown as ComponentProps<O>;
+  Component.defaultProps = { __TYPE__: type };
+
+  return Component;
+}
+
+export type ComponentProps<O> = Component<O> & {
+  defaultProps?: CheckboxDescriptionOptions<"div"> & { __TYPE__: string };
+};
+
+export type ComponentOptions<T extends As = any> = Options<T> & {
+  __TYPE__?: string;
+};
 
 export function runIfFnChildren<T, U>(
   valueOrFn: T,
@@ -66,9 +106,9 @@ export const getComponentProps = <T extends any, P>(
   if (validChildren.length > 0) {
     validChildren.forEach(function (child) {
       // @ts-ignore
-      if (componentMaps[child?.type?.displayName]) {
+      if (componentMaps[child?.props?.__TYPE__]) {
         // @ts-ignore
-        componentProps[componentMaps[child?.type?.displayName]] = child.props;
+        componentProps[componentMaps[child?.props?.__TYPE__]] = child.props;
       } else {
         finalChildren.push(child);
       }

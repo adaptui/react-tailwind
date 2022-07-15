@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { fallbackIcon } from "./__utils";
 
@@ -40,7 +36,7 @@ export const Icon = createComponent<IconOptions>(props => {
   const htmlProps = useIcon(props);
 
   return createElement("svg", htmlProps);
-});
+}, "Icon");
 
 export type IconOptions<T extends As = "svg"> = BoxOptions<T> & {};
 

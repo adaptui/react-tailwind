@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { CheckboxInputOptions } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
@@ -58,6 +54,7 @@ export const CheckboxDescription = createComponent<CheckboxDescriptionOptions>(
 
     return createElement("div", htmlProps);
   },
+  "CheckboxDescription",
 );
 
 export type CheckboxDescriptionOptions<T extends As = "div"> = BoxOptions<T> &

@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SwitchInputOptions } from "./SwitchInput";
 import { SwitchUIProps } from "./SwitchProps";
@@ -61,7 +57,7 @@ export const SwitchIcon = createComponent<SwitchIconOptions>(props => {
   const htmlProps = useSwitchIcon(props);
 
   return createElement("span", htmlProps);
-});
+}, "SwitchIcon");
 
 export type SwitchIconOptions<T extends As = "span"> = BoxOptions<T> &
   Partial<SwitchUIProps> &

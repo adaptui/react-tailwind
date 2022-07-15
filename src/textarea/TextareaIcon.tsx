@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { TextareaBaseProps } from "./TextareaBase";
 import { TextareaUIProps } from "./TextareaProps";
@@ -62,7 +58,7 @@ export const TextareaIcon = createComponent<TextareaIconOptions>(props => {
   const htmlProps = useTextareaIcon(props);
 
   return createElement("div", htmlProps);
-});
+}, "TextareaIcon");
 
 export type TextareaIconOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<TextareaUIProps> &

@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { MeterUIProps } from "./MeterProps";
 
@@ -47,7 +43,7 @@ export const MeterBar = createComponent<MeterBarOptions>(props => {
   const htmlProps = useMeterBar(props);
 
   return createElement("div", htmlProps);
-});
+}, "MeterBar");
 
 export type MeterBarOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<MeterUIProps> & {};

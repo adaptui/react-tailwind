@@ -1,15 +1,11 @@
-import React from "react";
 import { SeparatorOptions, useSeparator } from "ariakit";
 import { useWrapElement } from "ariakit-utils";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderProp, runIfFn, tcm } from "../utils";
+import { createComponent, cx, RenderProp, runIfFn, tcm } from "../utils";
 
 export const useDivider = createHook<DividerOptions>(
   ({
@@ -48,6 +44,7 @@ export const useDivider = createHook<DividerOptions>(
 
     props = { ...props, className };
     props = useSeparator({ ...props, orientation });
+    props = useBox(props);
 
     return props;
   },
@@ -57,7 +54,7 @@ export const Divider = createComponent<DividerOptions>(props => {
   const htmlProps = useDivider(props);
 
   return createElement("hr", htmlProps);
-});
+}, "Divider");
 
 export type DividerState = {
   orientation: SeparatorOptions["orientation"];
@@ -72,7 +69,8 @@ export type DividerState = {
   labelPosition?: "start" | "center" | "end";
 };
 
-export type DividerOptions<T extends As = "hr"> = SeparatorOptions<T> &
+export type DividerOptions<T extends As = "hr"> = BoxOptions<T> &
+  SeparatorOptions<T> &
   Partial<DividerState>;
 
 export type DividerProps<T extends As = "hr"> = Props<DividerOptions<T>>;

@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxProps, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { CircularProgressUIProps } from "./CircularProgressProps";
 
@@ -51,10 +47,11 @@ export const CircularProgressBar = createComponent<CircularProgressBarOptions>(
 
     return createElement("circle", htmlProps);
   },
+  "CircularProgressBar",
 );
 
-export type CircularProgressBarOptions<T extends As = "circle"> = BoxProps<T> &
-  Partial<CircularProgressUIProps> & {};
+export type CircularProgressBarOptions<T extends As = "circle"> =
+  BoxOptions<T> & Partial<CircularProgressUIProps> & {};
 
 export type CircularProgressBarProps<T extends As = "circle"> = Props<
   CircularProgressBarOptions<T>

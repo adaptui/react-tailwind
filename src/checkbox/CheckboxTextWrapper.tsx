@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { CheckboxInputOptions } from "./CheckboxInput";
 import { CheckboxUIProps } from "./CheckboxProps";
@@ -47,6 +43,7 @@ export const CheckboxTextWrapper = createComponent<CheckboxTextWrapperOptions>(
 
     return createElement("div", htmlProps);
   },
+  "CheckboxTextWrapper",
 );
 
 export type CheckboxTextWrapperOptions<T extends As = "div"> = BoxOptions<T> &

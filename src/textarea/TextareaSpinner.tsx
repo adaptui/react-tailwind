@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { TextareaBaseProps } from "./TextareaBase";
 import { TextareaUIProps } from "./TextareaProps";
@@ -51,6 +47,7 @@ export const TextareaSpinner = createComponent<TextareaSpinnerOptions>(
 
     return createElement("div", htmlProps);
   },
+  "TextareaSpinner",
 );
 
 export type TextareaSpinnerOptions<T extends As = "div"> = BoxOptions<T> &

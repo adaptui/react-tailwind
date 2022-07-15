@@ -1,14 +1,11 @@
 import { cx, useWrapElement } from "ariakit-utils";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { ButtonProps } from "../button";
 import { useTheme } from "../theme";
+import { createComponent } from "../utils";
 
 import { ButtonGroupContextProvider } from "./__utils";
 
@@ -55,7 +52,7 @@ export const ButtonGroup = createComponent<ButtonGroupOptions>(props => {
   const htmlProps = useButtonGroup(props);
 
   return createElement("div", htmlProps);
-});
+}, "ButtonGroup");
 
 export type ButtonGroupOptions<T extends As = "div"> = BoxOptions<T> &
   Pick<ButtonProps, "size" | "themeColor" | "variant"> & {

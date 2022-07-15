@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { CircularProgressUIProps } from "./CircularProgressProps";
 
@@ -33,7 +29,7 @@ export const CircularProgressHint =
     const htmlProps = useCircularProgressHint(props);
 
     return createElement("span", htmlProps);
-  });
+  }, "CircularProgressHint");
 
 export type CircularProgressHintOptions<T extends As = "span"> = BoxOptions<T> &
   Partial<CircularProgressUIProps> & {};

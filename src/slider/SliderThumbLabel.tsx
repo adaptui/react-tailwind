@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxProps, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
@@ -38,9 +34,10 @@ export const SliderThumbLabel = createComponent<SliderThumbLabelOptions>(
 
     return createElement("label", htmlProps);
   },
+  "SliderThumbLabel",
 );
 
-export type SliderThumbLabelOptions<T extends As = "label"> = BoxProps<T> &
+export type SliderThumbLabelOptions<T extends As = "label"> = BoxOptions<T> &
   Partial<SliderThumbUIProps> & {};
 
 export type SliderThumbLabelProps<T extends As = "label"> = Props<

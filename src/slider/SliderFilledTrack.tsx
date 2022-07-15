@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { BoxProps, useBox } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SliderUIProps } from "./SliderProps";
 
@@ -61,9 +57,10 @@ export const SliderFilledTrack = createComponent<SliderFilledTrackOptions>(
 
     return createElement("div", htmlProps);
   },
+  "SliderFilledTrack",
 );
 
-export type SliderFilledTrackOptions<T extends As = "div"> = BoxProps<T> &
+export type SliderFilledTrackOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<SliderUIProps> & {};
 
 export type SliderFilledTrackProps<T extends As = "div"> = Props<

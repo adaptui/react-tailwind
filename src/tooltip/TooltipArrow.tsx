@@ -1,15 +1,11 @@
 import { useMemo, useState } from "react";
 import { getWindow, useForkRef, useSafeLayoutEffect } from "ariakit-utils";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
@@ -99,8 +95,9 @@ export const useTooltipArrow = createHook<TooltipArrowOptions>(
 
 export const TooltipArrow = createComponent<TooltipArrowOptions>(props => {
   const htmlProps = useTooltipArrow(props);
+
   return createElement("div", htmlProps);
-});
+}, "TooltipArrow");
 
 export type TooltipArrowOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<TooltipUIProps> & {

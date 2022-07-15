@@ -4,14 +4,12 @@ import {
   useTooltipAnchor as useTooltipAnchorAriakit,
 } from "ariakit";
 import { useEvent } from "ariakit-utils";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useMediaQuery, usePrevious } from "../hooks";
+import { createComponent } from "../utils";
 
 import { TooltipUIProps } from "./TooltipProps";
 
@@ -55,6 +53,7 @@ export const useTooltipAnchor = createHook<TooltipAnchorOptions>(
 
     props = { ...props, onMouseEnter, onMouseLeave };
     props = useTooltipAnchorAriakit({ state, ...props });
+    props = useBox(props);
 
     return props;
   },
@@ -62,13 +61,12 @@ export const useTooltipAnchor = createHook<TooltipAnchorOptions>(
 
 export const TooltipAnchor = createComponent<TooltipAnchorOptions>(props => {
   const htmlProps = useTooltipAnchor(props);
-  return createElement("div", htmlProps);
-});
 
-export type TooltipAnchorOptions<T extends As = any> = Omit<
-  TooltipAnchorAriakitOptions<T>,
-  "state"
-> &
+  return createElement("div", htmlProps);
+}, "TooltipAnchor");
+
+export type TooltipAnchorOptions<T extends As = any> = BoxOptions<T> &
+  Omit<TooltipAnchorAriakitOptions<T>, "state"> &
   Partial<TooltipUIProps> & {};
 
 export type TooltipAnchorProps<T extends As = any> = Props<

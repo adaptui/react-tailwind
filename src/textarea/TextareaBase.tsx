@@ -1,15 +1,12 @@
 import { ChangeEvent } from "react";
 import { FocusableOptions, useFocusable } from "ariakit";
-import { cx, useEvent, useForkRef } from "ariakit-utils";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { useEvent, useForkRef } from "ariakit-utils";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { TextareaUIProps } from "./TextareaProps";
 
@@ -32,7 +29,7 @@ export const useTextareaBase = createHook<TextareaBaseOptions>(
     ...props
   }) => {
     const theme = useTheme("textarea");
-    const className = tcm(
+    const className = cx(
       theme.base.default,
       resize ? theme.base.resize[resize] : "",
       size ? theme.size[size]?.base : "",
@@ -70,6 +67,7 @@ export const useTextareaBase = createHook<TextareaBaseOptions>(
       style: { ...inputStyles, ...props.style },
     };
     props = useFocusable(props);
+    props = useBox(props);
 
     return props;
   },
@@ -79,10 +77,11 @@ export const TextareaBase = createComponent<TextareaBaseOptions>(props => {
   const htmlProps = useTextareaBase(props);
 
   return createElement("textarea", htmlProps);
-});
+}, "TextareaBase");
 
-export type TextareaBaseOptions<T extends As = "textarea"> =
-  FocusableOptions<T> & Partial<TextareaUIProps> & {};
+export type TextareaBaseOptions<T extends As = "textarea"> = BoxOptions<T> &
+  FocusableOptions<T> &
+  Partial<TextareaUIProps> & {};
 
 export type TextareaBaseProps<T extends As = "textarea"> = Props<
   TextareaBaseOptions<T>

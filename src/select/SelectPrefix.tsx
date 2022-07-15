@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SelectBaseProps } from "./SelectBase";
 import { SelectUIProps } from "./SelectProps";
@@ -54,7 +50,7 @@ export const SelectPrefix = createComponent<SelectPrefixOptions>(props => {
   const htmlProps = useSelectPrefix(props);
 
   return createElement("div", htmlProps);
-});
+}, "SelectPrefix");
 
 export type SelectPrefixOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<SelectUIProps> &

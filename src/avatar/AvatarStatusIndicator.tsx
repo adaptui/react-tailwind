@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { AvatarUIProps } from "./AvatarProps";
 
@@ -45,7 +41,7 @@ export const AvatarStatusIndicator =
     const htmlProps = useAvatarStatusIndicator(props);
 
     return createElement("div", htmlProps);
-  });
+  }, "AvatarStatusIndicator");
 
 export type AvatarStatusIndicatorOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<AvatarUIProps> & {};

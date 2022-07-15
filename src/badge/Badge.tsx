@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { Box, BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, RenderProp, withIconA11y } from "../utils";
+import { createComponent, cx, RenderProp, withIconA11y } from "../utils";
 
 export const useBadge = createHook<BadgeOptions>(
   ({
@@ -52,7 +48,7 @@ export const Badge = createComponent<BadgeOptions>(props => {
   const htmlProps = useBadge(props);
 
   return createElement("div", htmlProps);
-});
+}, "Badge");
 
 export type BadgeState = {
   /**

@@ -1,14 +1,10 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 import { SliderThumbOptions, useSliderThumb } from "@adaptui/react";
 
-import { BoxProps } from "../box";
+import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx, tcm } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SliderThumbUIProps } from "./SliderThumbProps";
 
@@ -24,7 +20,7 @@ export const useSliderThumbContainer = createHook<SliderThumbContainerOptions>(
     ...props
   }) => {
     const theme = useTheme("slider");
-    const className = tcm(
+    const className = cx(
       theme.thumbContainer.default,
       isDisabled ? theme.thumbContainer.disabled : "",
       size ? theme.size[size]?.thumbContainer : "",
@@ -45,6 +41,7 @@ export const useSliderThumbContainer = createHook<SliderThumbContainerOptions>(
 
     props = { ...props, className };
     props = useSliderThumb({ state, ...props, children: null });
+    props = useBox(props);
 
     return props;
   },
@@ -55,9 +52,9 @@ export const SliderThumbContainer =
     const htmlProps = useSliderThumbContainer(props);
 
     return createElement("div", htmlProps);
-  });
+  }, "SliderThumbContainer");
 
-export type SliderThumbContainerOptions<T extends As = "div"> = BoxProps<T> &
+export type SliderThumbContainerOptions<T extends As = "div"> = BoxOptions<T> &
   SliderThumbOptions<T> &
   Partial<SliderThumbUIProps> & {};
 

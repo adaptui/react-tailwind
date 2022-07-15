@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { AvatarUIProps } from "./AvatarProps";
 
@@ -51,7 +47,7 @@ export const AvatarIcon = createComponent<AvatarIconOptions>(props => {
   const htmlProps = useAvatarIcon(props);
 
   return createElement("span", htmlProps);
-});
+}, "AvatarIcon");
 
 export type AvatarIconOptions<T extends As = "span"> = BoxOptions<T> &
   Partial<AvatarUIProps> & {};

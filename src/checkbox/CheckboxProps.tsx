@@ -72,6 +72,7 @@ export function useCheckboxProps(props: CheckboxProps): CheckboxPropsReturn {
   );
 
   const { componentProps } = getComponentProps(componentMap, children, uiProps);
+
   const _icon: RenderProp<CheckboxUIProps> =
     componentProps?.iconProps?.children || uiProps.icon;
   const _label: CheckboxProps["label"] =

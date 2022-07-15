@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { InputBaseProps } from "./InputBase";
 import { InputUIProps } from "./InputProps";
@@ -54,7 +50,7 @@ export const InputPrefix = createComponent<InputPrefixOptions>(props => {
   const htmlProps = useInputPrefix(props);
 
   return createElement("div", htmlProps);
-});
+}, "InputPrefix");
 
 export type InputPrefixOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<InputUIProps> &

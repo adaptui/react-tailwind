@@ -1,13 +1,10 @@
 import { RadioOptions, RadioProps, useRadio } from "ariakit";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
+import { useBox } from "../box";
 import { useTheme } from "../theme";
-import { tcm } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { RadioUIProps } from "./RadioProps";
 
@@ -25,10 +22,11 @@ export const useRadioInput = createHook<RadioInputOptions>(
     ...props
   }) => {
     const theme = useTheme("radio");
-    const className = tcm(theme.input, props.className);
+    const className = cx(theme.input, props.className);
 
     props = { ...props, className };
     props = useRadio({ state, ...props }) as RadioProps;
+    props = useBox(props) as RadioProps;
 
     return props;
   },
@@ -38,7 +36,7 @@ export const RadioInput = createComponent<RadioInputOptions>(props => {
   const htmlProps = useRadioInput(props);
 
   return createElement("input", htmlProps);
-});
+}, "RadioInput");
 
 export type RadioInputOptions<T extends As = "input"> = RadioOptions<T> &
   Partial<RadioUIProps> & {};

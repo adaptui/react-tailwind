@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SelectUIProps } from "./SelectProps";
 
@@ -27,7 +23,7 @@ export const SelectWrapper = createComponent<SelectWrapperOptions>(props => {
   const htmlProps = useSelectWrapper(props);
 
   return createElement("div", htmlProps);
-});
+}, "SelectWrapper");
 
 export type SelectWrapperOptions<T extends As = "div"> = BoxOptions<T> &
   Partial<SelectUIProps> & {};

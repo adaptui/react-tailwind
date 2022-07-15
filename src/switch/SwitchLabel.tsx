@@ -1,13 +1,9 @@
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
+import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
 import { BoxOptions, useBox } from "../box";
 import { useTheme } from "../theme";
-import { cx } from "../utils";
+import { createComponent, cx } from "../utils";
 
 import { SwitchInputOptions } from "./SwitchInput";
 import { SwitchUIProps } from "./SwitchProps";
@@ -53,7 +49,7 @@ export const SwitchLabel = createComponent<SwitchLabelOptions>(props => {
   const htmlProps = useSwitchLabel(props);
 
   return createElement("label", htmlProps);
-});
+}, "SwitchLabel");
 
 export type SwitchLabelOptions<T extends As = "label"> = BoxOptions<T> &
   Pick<SwitchInputOptions, "disabled"> &
