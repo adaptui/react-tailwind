@@ -14181,12 +14181,12 @@ postcss-flexbugs-fixes@^4.2.1:
   dependencies:
     postcss "^7.0.26"
 
-postcss-focus-visible@6.0.4:
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/postcss-focus-visible/-/postcss-focus-visible-6.0.4.tgz#50c9ea9afa0ee657fb75635fabad25e18d76bf9e"
-  integrity sha512-QcKuUU/dgNsstIK6HELFRT5Y3lbrMLEOwG+A4s5cA+fx3A3y/JTq3X9LaOj3OC3ALH0XqyrgQIgey/MIZ8Wczw==
+postcss-focus-visible@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-focus-visible/-/postcss-focus-visible-7.0.0.tgz#80b135af6caab0e47b21f1b8f08e2d6b04e52643"
+  integrity sha512-wlbgbeQmCLFl/L6BLzvqhegeaaGwyaQX6rz1Vmd/YlDFd6uHyUK7wflbDKP7w4Njc0Tog4s2duvq1jf7phor1w==
   dependencies:
-    postcss-selector-parser "^6.0.9"
+    postcss-selector-parser "^6.0.10"
 
 postcss-import@^14.1.0:
   version "14.1.0"
