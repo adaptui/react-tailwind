@@ -73,10 +73,6 @@ export const Outline: Story = {
   ...Default,
   args: { ...Default.args, variant: "outline" },
 };
-export const Ghost: Story = {
-  ...Default,
-  args: { ...Default.args, variant: "ghost" },
-};
 
 export const Prefix: Story = {
   ...Default,

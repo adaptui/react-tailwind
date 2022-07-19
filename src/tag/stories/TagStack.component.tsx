@@ -19,9 +19,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             <Tag size="sm" themeColor="base" variant="outline" {...props}>
               Location
             </Tag>
-            <Tag size="sm" themeColor="base" variant="ghost" {...props}>
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag size="md" themeColor="base" variant="solid" {...props}>
@@ -31,9 +28,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               Location
             </Tag>
             <Tag size="md" themeColor="base" variant="outline" {...props}>
-              Location
-            </Tag>
-            <Tag size="md" themeColor="base" variant="ghost" {...props}>
               Location
             </Tag>
           </div>
@@ -47,9 +41,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             <Tag size="lg" themeColor="base" variant="outline" {...props}>
               Location
             </Tag>
-            <Tag size="lg" themeColor="base" variant="ghost" {...props}>
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag size="xl" themeColor="base" variant="solid" {...props}>
@@ -59,9 +50,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               Location
             </Tag>
             <Tag size="xl" themeColor="base" variant="outline" {...props}>
-              Location
-            </Tag>
-            <Tag size="xl" themeColor="base" variant="ghost" {...props}>
               Location
             </Tag>
           </div>
@@ -77,9 +65,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             <Tag size="sm" themeColor="primary" variant="outline" {...props}>
               Location
             </Tag>
-            <Tag size="sm" themeColor="primary" variant="ghost" {...props}>
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag size="md" themeColor="primary" variant="solid" {...props}>
@@ -89,9 +74,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               Location
             </Tag>
             <Tag size="md" themeColor="primary" variant="outline" {...props}>
-              Location
-            </Tag>
-            <Tag size="md" themeColor="primary" variant="ghost" {...props}>
               Location
             </Tag>
           </div>
@@ -105,9 +87,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             <Tag size="lg" themeColor="primary" variant="outline" {...props}>
               Location
             </Tag>
-            <Tag size="lg" themeColor="primary" variant="ghost" {...props}>
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag size="xl" themeColor="primary" variant="solid" {...props}>
@@ -119,9 +98,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             <Tag size="xl" themeColor="primary" variant="outline" {...props}>
               Location
             </Tag>
-            <Tag size="xl" themeColor="primary" variant="ghost" {...props}>
-              Location
-            </Tag>
           </div>
         </div>
       </div>
@@ -155,15 +131,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="sm"
-              themeColor="base"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -188,15 +155,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="md"
               themeColor="base"
               variant="outline"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="md"
-              themeColor="base"
-              variant="ghost"
               prefix={<SlotIcon />}
               {...props}
             >
@@ -231,15 +189,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="lg"
-              themeColor="base"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -264,15 +213,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="xl"
               themeColor="base"
               variant="outline"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="base"
-              variant="ghost"
               prefix={<SlotIcon />}
               {...props}
             >
@@ -309,15 +249,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="sm"
-              themeColor="primary"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -342,15 +273,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="md"
               themeColor="primary"
               variant="outline"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="md"
-              themeColor="primary"
-              variant="ghost"
               prefix={<SlotIcon />}
               {...props}
             >
@@ -385,15 +307,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="lg"
-              themeColor="primary"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -418,15 +331,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="xl"
               themeColor="primary"
               variant="outline"
-              prefix={<SlotIcon />}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="primary"
-              variant="ghost"
               prefix={<SlotIcon />}
               {...props}
             >
@@ -465,15 +369,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="sm"
-              themeColor="base"
-              variant="ghost"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -498,15 +393,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="md"
               themeColor="base"
               variant="outline"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="md"
-              themeColor="base"
-              variant="ghost"
               closable={true}
               {...props}
             >
@@ -541,15 +427,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="lg"
-              themeColor="base"
-              variant="ghost"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -574,15 +451,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="xl"
               themeColor="base"
               variant="outline"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="base"
-              variant="ghost"
               closable={true}
               {...props}
             >
@@ -619,15 +487,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="sm"
-              themeColor="primary"
-              variant="ghost"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -652,15 +511,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="md"
               themeColor="primary"
               variant="outline"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="md"
-              themeColor="primary"
-              variant="ghost"
               closable={true}
               {...props}
             >
@@ -695,15 +545,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="lg"
-              themeColor="primary"
-              variant="ghost"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -728,15 +569,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="xl"
               themeColor="primary"
               variant="outline"
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="primary"
-              variant="ghost"
               closable={true}
               {...props}
             >
@@ -778,16 +610,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="sm"
-              themeColor="base"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -814,16 +636,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="md"
               themeColor="base"
               variant="outline"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="md"
-              themeColor="base"
-              variant="ghost"
               prefix={<SlotIcon />}
               closable={true}
               {...props}
@@ -862,16 +674,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="lg"
-              themeColor="base"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -898,16 +700,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="xl"
               themeColor="base"
               variant="outline"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="base"
-              variant="ghost"
               prefix={<SlotIcon />}
               closable={true}
               {...props}
@@ -948,16 +740,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="sm"
-              themeColor="primary"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -984,16 +766,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="md"
               themeColor="primary"
               variant="outline"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="md"
-              themeColor="primary"
-              variant="ghost"
               prefix={<SlotIcon />}
               closable={true}
               {...props}
@@ -1032,16 +804,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
             >
               Location
             </Tag>
-            <Tag
-              size="lg"
-              themeColor="primary"
-              variant="ghost"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
           </div>
           <div className="space-x-2">
             <Tag
@@ -1058,26 +820,6 @@ export const TagStack: React.FC<TagStackProps> = props => {
               size="xl"
               themeColor="primary"
               variant="subtle"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="primary"
-              variant="outline"
-              prefix={<SlotIcon />}
-              closable={true}
-              {...props}
-            >
-              Location
-            </Tag>
-            <Tag
-              size="xl"
-              themeColor="primary"
-              variant="ghost"
               prefix={<SlotIcon />}
               closable={true}
               {...props}

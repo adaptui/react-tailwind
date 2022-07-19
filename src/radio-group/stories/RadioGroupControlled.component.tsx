@@ -1,8 +1,13 @@
 import * as React from "react";
 import { Separator } from "ariakit";
 
-import { CheckboxGroupProps } from "../../checkbox-group";
-import { Checkbox, Radio, RadioGroup, RadioGroupProps } from "../../index";
+import {
+  Checkbox,
+  CheckboxGroupProps,
+  Radio,
+  RadioGroup,
+  RadioGroupProps,
+} from "../../index";
 
 export type RadioGroupControlledProps = {};
 
