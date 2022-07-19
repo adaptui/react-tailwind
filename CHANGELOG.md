@@ -1,5 +1,18 @@
 
 
+## [0.1.0-alpha.4](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.3...v0.1.0-alpha.4) (2022-07-19)
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency postcss-focus-visible to v7 ([6ab0155](https://github.com/adaptui/react-tailwind/commit/6ab0155462dfbbb4f2930a8a9f3315dde022f23d))
+* **deps:** ⬆️ update dev dependencies (minor) ([5c60234](https://github.com/adaptui/react-tailwind/commit/5c602348a5f6a5fe98a097b3eab25df2076ebfd6))
+
+
+### Feature Updates
+
+* **tooltip:** ✨ add anchor prop to provide renderPropable element ([#342](https://github.com/adaptui/react-tailwind/issues/342)) ([6dba0a1](https://github.com/adaptui/react-tailwind/commit/6dba0a19c6daf6ca4a7701a839701fd0cd342006))
+
 ## [0.1.0-alpha.3](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.2...v0.1.0-alpha.3) (2022-07-15)
 
 
