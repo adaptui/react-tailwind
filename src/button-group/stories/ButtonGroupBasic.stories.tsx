@@ -13,7 +13,7 @@ export default {
   title: "Primitives/ButtonGroup/Basic",
   component: ButtonGroupBasic,
   argTypes: createControls("buttonGroup", {
-    ignore: ["wrapElement", "as", "ref"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref"],
   }),
   parameters: {
     layout: "centered",

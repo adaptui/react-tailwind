@@ -15,6 +15,7 @@ export default {
   component: ButtonBasic,
   argTypes: createControls("button", {
     ignore: [
+      "__TYPE__",
       "wrapElement",
       "as",
       "ref",

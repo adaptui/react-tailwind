@@ -18,6 +18,7 @@ export default {
     ...createControls("checkbox", {
       unions: ["themeColor"],
       ignore: [
+        "__TYPE__",
         "wrapElement",
         "as",
         "ref",

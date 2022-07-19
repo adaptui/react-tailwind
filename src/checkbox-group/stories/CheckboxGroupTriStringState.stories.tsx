@@ -14,7 +14,7 @@ export default {
   component: CheckboxGroupTriStringState,
   parameters: {
     layout: "centered",
-    options: { showPanel: true },
+    options: { showPanel: false },
     preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;

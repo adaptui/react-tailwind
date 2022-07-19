@@ -19,6 +19,7 @@ export default {
   },
   argTypes: createControls("tag", {
     ignore: [
+      "__TYPE__",
       "wrapElement",
       "as",
       "ref",

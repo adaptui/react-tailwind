@@ -16,6 +16,7 @@ export default {
   argTypes: createControls("tag", {
     unions: ["themeColor"],
     ignore: [
+      "__TYPE__",
       "wrapElement",
       "as",
       "ref",

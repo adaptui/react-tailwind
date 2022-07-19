@@ -15,6 +15,7 @@ export default {
   component: TooltipAnchor,
   argTypes: createControls("tooltip", {
     ignore: [
+      "__TYPE__",
       "wrapElement",
       "as",
       "ref",

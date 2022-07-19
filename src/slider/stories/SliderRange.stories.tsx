@@ -21,6 +21,7 @@ export default {
   argTypes: createControls("slider", {
     unions: ["themeColor"],
     ignore: [
+      "__TYPE__",
       "ref",
       "wrapElement",
       "as",

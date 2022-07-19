@@ -19,7 +19,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("avatar", {
-    ignore: ["unstable_system", "wrapElement", "as"],
+    ignore: ["__TYPE__", "unstable_system", "wrapElement", "as"],
   }),
 } as Meta;
 

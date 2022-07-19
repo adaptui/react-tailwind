@@ -18,7 +18,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls(undefined, {
-    ignore: ["wrapElement", "as", "ref"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref"],
   }),
 } as Meta;
 

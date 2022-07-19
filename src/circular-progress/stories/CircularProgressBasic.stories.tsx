@@ -14,7 +14,7 @@ export default {
   component: CircularProgressBasic,
   argTypes: createControls("circularProgress", {
     unions: ["themeColor"],
-    ignore: ["wrapElement", "as", "ref", "hint"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref", "hint"],
   }),
   parameters: {
     layout: "centered",
