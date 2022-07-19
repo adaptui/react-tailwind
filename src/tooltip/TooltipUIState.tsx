@@ -4,6 +4,7 @@ import { TooltipUIProps } from "./TooltipProps";
 
 export function useTooltipUIState(props: TooltipUIStateProps): TooltipUIState {
   const {
+    anchor,
     content,
     prefix,
     suffix,
@@ -12,6 +13,7 @@ export function useTooltipUIState(props: TooltipUIStateProps): TooltipUIState {
   } = props;
 
   return {
+    anchor,
     content,
     prefix,
     suffix,
@@ -21,6 +23,7 @@ export function useTooltipUIState(props: TooltipUIStateProps): TooltipUIState {
 }
 
 export type TooltipUIState = {
+  anchor: RenderProp<React.HTMLAttributes<any> & React.RefAttributes<any>>;
   /**
    * Label for the Tooltip.
    */
@@ -50,6 +53,6 @@ export type TooltipUIState = {
 export type TooltipUIStateProps = Partial<
   Pick<
     TooltipUIState,
-    "content" | "withArrow" | "prefix" | "suffix" | "isDragging"
+    "anchor" | "content" | "withArrow" | "prefix" | "suffix" | "isDragging"
   >
 >;

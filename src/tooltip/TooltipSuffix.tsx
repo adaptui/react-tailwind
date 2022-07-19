@@ -8,7 +8,16 @@ import { createComponent, cx } from "../utils";
 import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipSuffix = createHook<TooltipSuffixOptions>(
-  ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
+  ({
+    state,
+    anchor,
+    content,
+    withArrow,
+    prefix,
+    suffix,
+    isDragging,
+    ...props
+  }) => {
     const theme = useTheme("tooltip");
     const className = cx(theme.suffix, props.className);
 
