@@ -24,6 +24,7 @@ const componentMap = {
 };
 
 export const useTooltipProps = ({
+  anchor,
   content,
   prefix,
   suffix,
@@ -72,6 +73,7 @@ export const useTooltipProps = ({
     renderCallback,
   });
   const uiState = useTooltipUIState({
+    anchor,
     content,
     prefix,
     suffix,

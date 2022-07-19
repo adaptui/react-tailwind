@@ -3,16 +3,16 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 import { SlotIcon } from "../../icons";
 
-import js from "./templates/TooltipBasicJsx";
-import ts from "./templates/TooltipBasicTsx";
-import TooltipBasic from "./TooltipBasic.component";
+import js from "./templates/TooltipAnchorJsx";
+import ts from "./templates/TooltipAnchorTsx";
+import TooltipAnchor from "./TooltipAnchor.component";
 
-type Meta = ComponentMeta<typeof TooltipBasic>;
-type Story = ComponentStoryObj<typeof TooltipBasic>;
+type Meta = ComponentMeta<typeof TooltipAnchor>;
+type Story = ComponentStoryObj<typeof TooltipAnchor>;
 
 export default {
-  title: "Popups/Tooltip/Basic",
-  component: TooltipBasic,
+  title: "Popups/Tooltip/Anchor",
+  component: TooltipAnchor,
   argTypes: createControls("tooltip", {
     ignore: [
       "wrapElement",

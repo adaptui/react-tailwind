@@ -37,6 +37,7 @@ export const useTooltipArrow = createHook<TooltipArrowOptions>(
   ({
     state,
     size = defaultSize,
+    anchor,
     content,
     withArrow,
     prefix,

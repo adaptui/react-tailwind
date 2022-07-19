@@ -14,7 +14,16 @@ import { createComponent } from "../utils";
 import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipAnchor = createHook<TooltipAnchorOptions>(
-  ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
+  ({
+    state,
+    anchor,
+    content,
+    withArrow,
+    prefix,
+    suffix,
+    isDragging,
+    ...props
+  }) => {
     if (!state) return props;
 
     const { visible, hide, show } = state;

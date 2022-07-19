@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { passProps } from "../utils";
+
 import { TooltipAnchor } from "./TooltipAnchor";
 import { TooltipArrow } from "./TooltipArrow";
 import { TooltipPrefix } from "./TooltipPrefix";
@@ -17,11 +19,17 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       prefixProps,
       suffixProps,
     } = useTooltipProps(props);
-    const { prefix, content, suffix, withArrow } = uiProps;
+    const { anchor, prefix, content, suffix, withArrow } = uiProps;
 
     return (
       <>
-        <TooltipAnchor {...anchorProps} />
+        {anchor ? (
+          <TooltipAnchor {...anchorProps}>
+            {props => passProps(anchor, {}, props)}
+          </TooltipAnchor>
+        ) : (
+          <TooltipAnchor {...anchorProps} />
+        )}
         <TooltipWrapper ref={ref} {...wrapperProps}>
           <>
             {prefix ? <TooltipPrefix {...prefixProps} /> : null}

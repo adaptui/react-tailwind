@@ -9,7 +9,16 @@ import { createComponent, cx } from "../utils";
 import { TooltipUIProps } from "./TooltipProps";
 
 export const useTooltipWrapper = createHook<TooltipWrapperOptions>(
-  ({ state, content, withArrow, prefix, suffix, isDragging, ...props }) => {
+  ({
+    state,
+    anchor,
+    content,
+    withArrow,
+    prefix,
+    suffix,
+    isDragging,
+    ...props
+  }) => {
     if (!state) return props;
 
     const theme = useTheme("tooltip");
