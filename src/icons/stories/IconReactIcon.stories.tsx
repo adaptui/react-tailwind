@@ -13,7 +13,7 @@ export default {
   title: "Primitives/Icons/ReactIcon",
   component: IconReactIcon,
   argTypes: createControls("icon", {
-    ignore: ["ref", "wrapElement", "as"],
+    ignore: ["__TYPE__", "ref", "wrapElement", "as"],
   }),
   parameters: {
     layout: "centered",

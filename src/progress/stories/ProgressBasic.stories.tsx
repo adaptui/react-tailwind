@@ -13,7 +13,7 @@ export default {
   title: "Feedback/Progress/Basic",
   component: ProgressBasic,
   argTypes: createControls("progress", {
-    ignore: ["wrapElement", "as", "ref", "label", "hint"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref", "label", "hint"],
   }),
   parameters: {
     layout: "centered",

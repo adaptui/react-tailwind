@@ -16,6 +16,7 @@ export default {
   argTypes: createControls("tag", {
     unions: ["themeColor"],
     ignore: [
+      "__TYPE__",
       "wrapElement",
       "as",
       "ref",
@@ -71,10 +72,6 @@ export const Subtle: Story = {
 export const Outline: Story = {
   ...Default,
   args: { ...Default.args, variant: "outline" },
-};
-export const Ghost: Story = {
-  ...Default,
-  args: { ...Default.args, variant: "ghost" },
 };
 
 export const Prefix: Story = {

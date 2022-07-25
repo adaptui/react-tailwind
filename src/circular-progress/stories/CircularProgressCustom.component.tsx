@@ -1,9 +1,13 @@
 import * as React from "react";
 
-import { Button, CircularProgress, CircularProgressProps } from "../../index";
-import { CircularProgressBar } from "../CircularProgressBar";
-import { CircularProgressHint } from "../CircularProgressHint";
-import { CircularProgressTrack } from "../CircularProgressTrack";
+import {
+  Button,
+  CircularProgress,
+  CircularProgressBar,
+  CircularProgressHint,
+  CircularProgressProps,
+  CircularProgressTrack,
+} from "../../index";
 
 export type CircularProgressCustomProps = CircularProgressProps & {};
 

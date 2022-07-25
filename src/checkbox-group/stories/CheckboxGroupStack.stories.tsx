@@ -17,6 +17,7 @@ export default {
     description: { control: { type: "text" } },
     ...createControls("checkbox", {
       ignore: [
+        "__TYPE__",
         "wrapElement",
         "as",
         "ref",

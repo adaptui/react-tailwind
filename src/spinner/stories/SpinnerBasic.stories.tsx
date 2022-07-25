@@ -19,7 +19,7 @@ export default {
   },
   argTypes: createControls("spinner", {
     unions: ["size", "themeColor", "track"],
-    ignore: ["wrapElement", "as", "ref"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref"],
   }),
 } as Meta;
 

@@ -13,7 +13,7 @@ export default {
   title: "Primitives/Icons/AllIcons",
   component: IconAll,
   argTypes: createControls("icon", {
-    ignore: ["ref", "wrapElement", "as"],
+    ignore: ["__TYPE__", "ref", "wrapElement", "as"],
   }),
   parameters: {
     layout: "centered",

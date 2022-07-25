@@ -20,6 +20,7 @@ export default {
   },
   argTypes: createControls("avatar", {
     ignore: [
+      "__TYPE__",
       "ref",
       "wrapElement",
       "as",

@@ -13,7 +13,7 @@ export default {
   title: "Primitives/Icons/Path",
   component: IconPath,
   argTypes: createControls("icon", {
-    ignore: ["ref", "wrapElement", "as"],
+    ignore: ["__TYPE__", "ref", "wrapElement", "as"],
   }),
   parameters: {
     layout: "centered",

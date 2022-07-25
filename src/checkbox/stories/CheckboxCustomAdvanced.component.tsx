@@ -5,10 +5,11 @@ import {
   CheckboxIcon,
   CheckboxInput,
   CheckboxLabel,
+  CheckboxProps,
+  CheckboxUIProps,
   tcm,
   useCheckboxUIState,
 } from "../../index";
-import { CheckboxProps, CheckboxUIProps } from "../CheckboxProps";
 
 export type CheckboxCustomAdvancedProps = {};
 

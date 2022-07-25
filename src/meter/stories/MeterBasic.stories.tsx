@@ -13,7 +13,7 @@ export default {
   title: "Feedback/Meter/Basic",
   component: MeterBasic,
   argTypes: createControls("meter", {
-    ignore: ["wrapElement", "as", "ref", "label", "hint"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref", "label", "hint"],
   }),
   parameters: {
     layout: "centered",

@@ -13,7 +13,7 @@ export default {
   title: "Primitives/Badge/Stack",
   component: BadgeStack,
   argTypes: createControls("badge", {
-    ignore: ["wrapElement", "as", "ref", "prefix"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref", "prefix"],
   }),
   parameters: {
     layout: "centered",

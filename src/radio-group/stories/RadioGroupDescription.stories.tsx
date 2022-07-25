@@ -20,6 +20,7 @@ export default {
     size: createUnionControl(["sm", "md", "lg"]),
     ...createControls(undefined, {
       ignore: [
+        "__TYPE__",
         "baseId",
         "unstable_virtual",
         "rtl",

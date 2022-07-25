@@ -14,6 +14,7 @@ export default {
   component: ButtonLoadingA11y,
   argTypes: createControls("button", {
     ignore: [
+      "__TYPE__",
       "wrapElement",
       "as",
       "ref",

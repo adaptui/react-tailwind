@@ -19,7 +19,7 @@ export default {
     preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls("divider", {
-    ignore: ["wrapElement", "as", "ref"],
+    ignore: ["__TYPE__", "wrapElement", "as", "ref"],
   }),
 } as Meta;
 

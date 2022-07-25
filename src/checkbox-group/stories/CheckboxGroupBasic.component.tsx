@@ -1,7 +1,11 @@
 import * as React from "react";
 
-import { Value } from "../../checkbox/CheckboxUIState";
-import { Checkbox, CheckboxGroup, CheckboxGroupProps } from "../../index";
+import {
+  Checkbox,
+  CheckboxGroup,
+  CheckboxGroupProps,
+  Value,
+} from "../../index";
 
 export type CheckboxGroupBasicProps = CheckboxGroupProps & {};
 

@@ -16,6 +16,7 @@ export default {
   argTypes: {
     ...createControls("input", {
       ignore: [
+        "__TYPE__",
         "ref",
         "wrapElement",
         "as",

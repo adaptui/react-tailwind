@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { Button } from "../../button";
-import { Tooltip, TooltipProps } from "../../index";
+import { Button, Tooltip, TooltipProps } from "../../index";
 
 export type TooltipAnchorProps = TooltipProps & {};
 
