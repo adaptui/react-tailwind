@@ -8,7 +8,7 @@ export const useShowMoreUIState = ({
   state,
   button,
 }: ShowMoreUIStateProps): ShowMoreUIState => {
-  button = button || !state.visible ? "Show more" : "Show less";
+  button = button || !state.open ? "Show more" : "Show less";
 
   return { button };
 };

@@ -17,18 +17,18 @@ const componentMap = {
 };
 
 export const useShowMoreProps = ({
-  visible,
-  defaultVisible,
-  setVisible,
+  defaultOpen,
+  open,
+  setOpen,
   animated,
   button,
   children,
   ...props
 }: ShowMoreProps): ShowMorePropsReturn => {
   const state = useDisclosureState({
-    visible,
-    defaultVisible,
-    setVisible,
+    defaultOpen,
+    open,
+    setOpen,
     animated,
   });
   const uiState = useShowMoreUIState({ state, button });

@@ -30,9 +30,9 @@ export const useTooltipProps = ({
   suffix,
   withArrow,
   isDragging,
-  visible,
-  defaultVisible,
-  setVisible,
+  defaultOpen,
+  open,
+  setOpen,
   animated = true,
   placement,
   gutter,
@@ -53,9 +53,9 @@ export const useTooltipProps = ({
   ...restProps
 }: TooltipProps): TooltipPropsReturn => {
   const state = useTooltipState({
-    visible,
-    defaultVisible,
-    setVisible,
+    defaultOpen,
+    open,
+    setOpen,
     animated,
     placement,
     gutter,

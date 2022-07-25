@@ -26,20 +26,20 @@ export const useTooltipAnchor = createHook<TooltipAnchorOptions>(
   }) => {
     if (!state) return props;
 
-    const { visible, hide, show } = state;
+    const { open, hide, show } = state;
     const [isMobile] = useMediaQuery("(max-width: 640px)");
     const [hasMouseLeft, setHasMouseLeft] = React.useState(false);
     const wasDragging = usePrevious(isDragging);
 
     React.useEffect(() => {
       if (isMobile) {
-        if (!isDragging && wasDragging && visible) hide();
+        if (!isDragging && wasDragging && open) hide();
       } else {
-        if (hasMouseLeft && !isDragging && wasDragging && visible) hide();
+        if (hasMouseLeft && !isDragging && wasDragging && open) hide();
       }
 
-      if (isDragging && !visible) show();
-    }, [hide, wasDragging, isDragging, hasMouseLeft, visible, isMobile, show]);
+      if (isDragging && !open) show();
+    }, [hide, wasDragging, isDragging, hasMouseLeft, open, isMobile, show]);
 
     const onMouseEnterProp = props.onMouseEnter;
 
