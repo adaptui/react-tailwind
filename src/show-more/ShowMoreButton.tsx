@@ -33,6 +33,7 @@ export const useShowMoreButton = createHook<ShowMoreButtonOptions>(
       spinner,
       ...props,
     });
+    console.log("%cstate", "color: #e5de73", state);
     props = useDisclosure({ state, ...props });
     props = useBox(props);
 
