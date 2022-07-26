@@ -29,6 +29,7 @@ export const useCircularProgressBar = createHook<CircularProgressBarOptions>(
       r: 44,
       fill: "transparent",
       stroke: "currentColor",
+      strokeDashoffset: "69",
       strokeWidth: hint ? "5px" : "10px",
       strokeDasharray: `${dash} ${gap}`,
       strokeLinecap: "round",
