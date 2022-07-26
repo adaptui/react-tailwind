@@ -1,5 +1,25 @@
 
 
+## [0.1.0-alpha.5](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.4...v0.1.0-alpha.5) (2022-07-26)
+
+
+### Bug Fixes
+
+* **ariakit:** 🩹 fix new props for disclosure in core & ui ([7f434e3](https://github.com/adaptui/react-tailwind/commit/7f434e3807ebd428a62f6c761eb1acda2d9458af))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([#344](https://github.com/adaptui/react-tailwind/issues/344)) ([c2bcafd](https://github.com/adaptui/react-tailwind/commit/c2bcafd5448cbbb31ff4af5324e16491177b4e27))
+* **deps:** ⬆️ update prod dependencies (minor) ([367492e](https://github.com/adaptui/react-tailwind/commit/367492ef3405c45b0c35889ed815ba6158e90974))
+
+
+### Code Refactors
+
+* **circular-progress:** ♻️ add strokedashoffset ([ede7e3c](https://github.com/adaptui/react-tailwind/commit/ede7e3c8c8f6cd11661ea7c43b1dda6ec972215f))
+* **storybook:** ♻️ ignore __TYPE__ prop from props table ([2634204](https://github.com/adaptui/react-tailwind/commit/26342047d383a7745edc80f52a790c5928db9ef0))
+* **storybook:** ♻️ remove ghost variant ex from tag ([3fa9059](https://github.com/adaptui/react-tailwind/commit/3fa90595869ac5d9d8df72e3c1b4e3184a06652e))
+
 ## [0.1.0-alpha.4](https://github.com/adaptui/react-tailwind/compare/v0.1.0-alpha.3...v0.1.0-alpha.4) (2022-07-19)
 
 

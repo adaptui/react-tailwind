@@ -1,6 +1,6 @@
 {
   "name": "@adaptui/react-tailwind",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "React UI built with renderleskit-react & tailwind",
   "keywords": [
     "react",
