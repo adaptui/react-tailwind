@@ -1,8 +1,6 @@
 import * as React from "react";
 import { AnyObject, Component, Options, Props } from "ariakit-utils";
 
-import { CheckboxDescriptionOptions } from "../checkbox";
-
 import { isFunction } from "./assertions";
 import { tcm } from "./tailwindMerge";
 import { As, ComponentWithAs, Dict, PropsWithAs, RenderProp } from "./types";
@@ -60,7 +58,7 @@ export function createComponent<O extends ComponentOptions>(
 }
 
 export type ComponentProps<O> = Component<O> & {
-  defaultProps?: CheckboxDescriptionOptions<"div"> & { __TYPE__: string };
+  defaultProps?: { __TYPE__: string };
 };
 
 export type ComponentOptions<T extends As = any> = Options<T> & {
