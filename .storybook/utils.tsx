@@ -120,7 +120,7 @@ const NEXT_JS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@adaptui/react-tailwind": "1.0.0-alpha.0",
+      "@adaptui/react-tailwind": "0.1.0-alpha.5",
       next: "12.1.6",
       react: "18.1.0",
       "react-dom": "18.1.0",
@@ -171,7 +171,7 @@ const NEXT_TS_CODESANDBOX: CodeSandboxTemplate = (
       lint: "next lint",
     },
     dependencies: {
-      "@adaptui/react-tailwind": "1.0.0-alpha.0",
+      "@adaptui/react-tailwind": "0.1.0-alpha.5",
       next: "12.1.6",
       react: "18.1.0",
       "react-dom": "18.1.0",
