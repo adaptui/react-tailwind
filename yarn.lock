@@ -2662,7 +2662,14 @@
     "@react-types/label" "^3.6.1"
     "@react-types/shared" "^3.13.1"
 
-"@react-aria/live-announcer@3.1.0", "@react-aria/live-announcer@^3.1.0":
+"@react-aria/live-announcer@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@react-aria/live-announcer/-/live-announcer-3.1.1.tgz#40f340f6794fca42682fb308fe750ff56bf7c07f"
+  integrity sha512-e7b+dRh1SUTla42vzjdbhGYkeLD7E6wIYjYaHW9zZ37rBkSqLHUhTigh3eT3k5NxFlDD/uRxTYuwaFnWQgR+4g==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
+"@react-aria/live-announcer@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-aria/live-announcer/-/live-announcer-3.1.0.tgz#06cfce35f6a9bcff266ab0ceab97f2fe6e487975"
   integrity sha512-YEaGJh1ELho3G9zvUZGOsKsSNEqHsm0fb3Ngvj9z0tjZCXa0867h8YWKuiyTA9BG7WhH8eeJq07WN4nDvYU7fg==
@@ -5374,6 +5381,11 @@ ariakit-utils@0.17.0-next.23:
   resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.23.tgz#b9c5f638e5cc7a3ddc2e3256f23d42718e3af47b"
   integrity sha512-r6a8rvjTBNbdNVWhGm4XL8hTlpIlP0G+yJf3No48kK6QpR1JN9QinLI/wMwWwJnxDYfwnBhkbcROCqF7iT/4ig==
 
+ariakit-utils@0.17.0-next.24:
+  version "0.17.0-next.24"
+  resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.24.tgz#d63119854a1d428134aeff43344222d7498233da"
+  integrity sha512-X8qwmY8erXY7A2BSnWdeONNOXkmAWSt3jBr8OpSgbvwE09uWoOsz3WGvZWb7+G1ca9+9DnN0Ji2xpJcCFFioGQ==
+
 ariakit@2.0.0-next.36:
   version "2.0.0-next.36"
   resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.36.tgz#74b93cc839cfd9e8350c4cc961b06b8f70f16e14"
@@ -5381,6 +5393,14 @@ ariakit@2.0.0-next.36:
   dependencies:
     "@floating-ui/dom" "^1.0.0"
     ariakit-utils "0.17.0-next.23"
+
+ariakit@2.0.0-next.37:
+  version "2.0.0-next.37"
+  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.37.tgz#6a86d9b38659a8a99306becb878dbd90df6e10c6"
+  integrity sha512-z0OrXGHAcWdnKJveRmaPOUZiaNxY8Lq4dV3pN5oFoY3870igPU3CiWcygOj5qlJuFlO9tCXi+1cCOSTuz2mv0g==
+  dependencies:
+    "@floating-ui/dom" "^1.0.0"
+    ariakit-utils "0.17.0-next.24"
 
 arr-diff@^1.0.1:
   version "1.1.0"
