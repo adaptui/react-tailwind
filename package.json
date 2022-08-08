@@ -99,7 +99,7 @@
   "dependencies": {
     "@adaptui/react": "1.0.0-alpha.9",
     "@react-aria/live-announcer": "3.1.1",
-    "ariakit": "2.0.0-next.37",
+    "ariakit": "2.0.0-next.38",
     "ariakit-utils": "0.17.0-next.24",
     "tailwind-merge": "1.5.1"
   },
