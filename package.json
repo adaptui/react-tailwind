@@ -98,10 +98,10 @@
   },
   "dependencies": {
     "@adaptui/react": "1.0.0-alpha.9",
-    "@react-aria/live-announcer": "3.1.1",
-    "ariakit": "2.0.0-next.38",
-    "ariakit-utils": "0.17.0-next.24",
-    "tailwind-merge": "1.5.1"
+    "@react-aria/live-announcer": "3.3.1",
+    "ariakit": "2.0.0-next.44",
+    "ariakit-utils": "0.17.0-next.27",
+    "tailwind-merge": "1.14.0"
   },
   "devDependencies": {
     "@babel/cli": "7.18.10",
